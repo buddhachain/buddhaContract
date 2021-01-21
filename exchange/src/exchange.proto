@@ -1,0 +1,14 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package exchange;
+
+message Product {
+    string  id = 1;     //产品编号
+    string  name = 2;   //产品名称
+    string  desc = 3;   //产品描述
+    string  price = 5;  //产品价格
+    string  amount = 6; //产品数量
+    string  time = 7;   //产品最后修改的时间
+}
+
