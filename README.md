@@ -28,7 +28,7 @@ xdev build
 
 xchain-cli wasm deploy --account XC1234567890111111@xuper --cname exchange --fee 5000000 --runtime c ../buddhaContract/exchange/exchange.wasm
 
-xchain-cli wasm invoke --fee 1000000 exchange --method find -a '{"id":"1"}'
+xchain-cli wasm invoke --fee 1000000 exchange --method find -a '{"id":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 exchange --method scan -a '{"id":"1"}'
 xchain-cli wasm invoke --fee 1000000 exchange --method add -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "amount":"6","time":"7"}'
 xchain-cli wasm invoke --fee 1000000 exchange --method del -a '{"id": "1"}'
@@ -36,4 +36,18 @@ xchain-cli wasm invoke --fee 1000000 exchange --method count
 
 
 xchain-cli wasm upgrade --account XC1234567890111111@xuper --cname exchange --fee 5000000 ../buddhaContract/exchange/exchange.wasm
+
+
+xchain-cli wasm invoke --fee 1000000 exchange --method find -a '{"id":"1"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 exchange --method scan -a '{"id":"1"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 exchange --method add -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "amount":"6","time":"7"}' --account XC1234567890111111@xuper 
+xchain-cli wasm invoke --fee 1000000 exchange --method del -a '{"id": "1"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 exchange --method count
+
+xchain-cli wasm invoke --fee 1000000 exchange --method find -a '{"id":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 exchange --method scan -a '{"id":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 exchange --method add -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "amount":"6","time":"7"}' --account XC1234567890222222@xuper 
+xchain-cli wasm invoke --fee 1000000 exchange --method del -a '{"id": "1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 exchange --method count
+
 ```

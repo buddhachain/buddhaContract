@@ -28,11 +28,25 @@ public:
 //初始化
 DEFINE_METHOD(Product, initialize) {
     xchain::Context* ctx = self.context();
-    ctx->ok(ctx->initiator());
+    ctx->put_object("deployer", ctx->initiator());
+    ctx->emit_event("initialize", ctx->initiator());
+    ctx->ok("deployer=" + ctx->initiator());
 }
 
 DEFINE_METHOD(Product, find) {
     xchain::Context* ctx = self.context();
+
+    std::string deployer;
+    if (!ctx->get_object("deployer", &deployer)) {
+        ctx->error("contrace error, unknown deplory");
+        return ;
+    }
+
+    if (deployer != ctx->initiator() ) {
+        ctx->error("deployer=" + deployer + ", caller=" + ctx->initiator());
+        return ;
+    }
+
     const std::string& id = ctx->arg("id");
     Product::entity ent;
     if (!self.get_entity().find({{"id", id}}, &ent))  {
@@ -57,6 +71,18 @@ DEFINE_METHOD(Product, find) {
 
 DEFINE_METHOD(Product, add) {
     xchain::Context* ctx = self.context();
+
+    std::string deployer;
+    if (!ctx->get_object("deployer", &deployer)) {
+        ctx->error("contrace error, unknown deplory");
+        return ;
+    }
+
+    if (deployer != ctx->initiator() ) {
+        ctx->error("deployer=" + deployer + ", caller=" + ctx->initiator());
+        return ;
+    }
+
     const std::string& id= ctx->arg("id");
     const std::string& name = ctx->arg("name");
     const std::string& desc = ctx->arg("desc");
@@ -89,7 +115,19 @@ DEFINE_METHOD(Product, add) {
 }
 
 DEFINE_METHOD(Product, del) {
-    xchain::Context* ctx = self.context();    
+    xchain::Context* ctx = self.context();
+
+    std::string deployer;
+    if (!ctx->get_object("deployer", &deployer)) {
+        ctx->error("contrace error, unknown deplory");
+        return ;
+    }
+
+    if (deployer != ctx->initiator() ) {
+        ctx->error("deployer=" + deployer + ", caller=" + ctx->initiator());
+        return ;
+    }
+
     const std::string& id = ctx->arg("id");
     Product::entity ent;
     if (!self.get_entity().find({{"id", id}}, &ent))  {
@@ -115,6 +153,18 @@ DEFINE_METHOD(Product, del) {
 
 DEFINE_METHOD(Product, scan) {
     xchain::Context* ctx = self.context();
+
+    std::string deployer;
+    if (!ctx->get_object("deployer", &deployer)) {
+        ctx->error("contrace error, unknown deplory");
+        return ;
+    }
+
+    if (deployer != ctx->initiator() ) {
+        ctx->error("deployer=" + deployer + ", caller=" + ctx->initiator());
+        return ;
+    }
+
     const std::string& id = ctx->arg("id");
     
     auto it = self.get_entity().scan({{"id",id}});
