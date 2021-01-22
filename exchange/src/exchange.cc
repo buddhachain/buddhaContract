@@ -28,7 +28,7 @@ public:
 //初始化
 DEFINE_METHOD(Product, initialize) {
     xchain::Context* ctx = self.context();
-    ctx->ok("initialize succeed");
+    ctx->ok(ctx->initiator());
 }
 
 DEFINE_METHOD(Product, find) {
@@ -51,7 +51,7 @@ DEFINE_METHOD(Product, find) {
         re += ent.time() + ",";
         re += "}";
     }
-    ctx->ok(re);
+    ctx->ok("ok -> " + re);
 }
 
 
