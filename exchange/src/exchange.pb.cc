@@ -13,7 +13,7 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-namespace exchange {
+namespace myexchange {
 class ProductDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Product> _instance;
@@ -26,16 +26,16 @@ class ExchangeDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Exchange> _instance;
 } _Exchange_default_instance_;
-}  // namespace exchange
+}  // namespace myexchange
 static void InitDefaultsProduct_exchange_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::exchange::_Product_default_instance_;
-    new (ptr) ::exchange::Product();
+    void* ptr = &::myexchange::_Product_default_instance_;
+    new (ptr) ::myexchange::Product();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::exchange::Product::InitAsDefaultInstance();
+  ::myexchange::Product::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Product_exchange_2eproto =
@@ -45,11 +45,11 @@ static void InitDefaultsOrder_exchange_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::exchange::_Order_default_instance_;
-    new (ptr) ::exchange::Order();
+    void* ptr = &::myexchange::_Order_default_instance_;
+    new (ptr) ::myexchange::Order();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::exchange::Order::InitAsDefaultInstance();
+  ::myexchange::Order::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Order_exchange_2eproto =
@@ -59,17 +59,17 @@ static void InitDefaultsExchange_exchange_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::exchange::_Exchange_default_instance_;
-    new (ptr) ::exchange::Exchange();
+    void* ptr = &::myexchange::_Exchange_default_instance_;
+    new (ptr) ::myexchange::Exchange();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::exchange::Exchange::InitAsDefaultInstance();
+  ::myexchange::Exchange::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Exchange_exchange_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsExchange_exchange_2eproto}, {}};
 
-namespace exchange {
+namespace myexchange {
 
 // ===================================================================
 
@@ -91,7 +91,7 @@ const int Product::kTimeFieldNumber;
 Product::Product()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:exchange.Product)
+  // @@protoc_insertion_point(constructor:myexchange.Product)
 }
 Product::Product(const Product& from)
   : ::google::protobuf::MessageLite(),
@@ -121,7 +121,7 @@ Product::Product(const Product& from)
   if (from.time().size() > 0) {
     time_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.time_);
   }
-  // @@protoc_insertion_point(copy_constructor:exchange.Product)
+  // @@protoc_insertion_point(copy_constructor:myexchange.Product)
 }
 
 void Product::SharedCtor() {
@@ -136,7 +136,7 @@ void Product::SharedCtor() {
 }
 
 Product::~Product() {
-  // @@protoc_insertion_point(destructor:exchange.Product)
+  // @@protoc_insertion_point(destructor:myexchange.Product)
   SharedDtor();
 }
 
@@ -159,7 +159,7 @@ const Product& Product::default_instance() {
 
 
 void Product::Clear() {
-// @@protoc_insertion_point(message_clear_start:exchange.Product)
+// @@protoc_insertion_point(message_clear_start:myexchange.Product)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -316,7 +316,7 @@ bool Product::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:exchange.Product)
+  // @@protoc_insertion_point(parse_start:myexchange.Product)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -330,7 +330,7 @@ bool Product::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Product.id"));
+            "myexchange.Product.id"));
         } else {
           goto handle_unusual;
         }
@@ -345,7 +345,7 @@ bool Product::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->name().data(), static_cast<int>(this->name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Product.name"));
+            "myexchange.Product.name"));
         } else {
           goto handle_unusual;
         }
@@ -360,7 +360,7 @@ bool Product::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->desc().data(), static_cast<int>(this->desc().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Product.desc"));
+            "myexchange.Product.desc"));
         } else {
           goto handle_unusual;
         }
@@ -375,7 +375,7 @@ bool Product::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->price().data(), static_cast<int>(this->price().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Product.price"));
+            "myexchange.Product.price"));
         } else {
           goto handle_unusual;
         }
@@ -390,7 +390,7 @@ bool Product::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->amount().data(), static_cast<int>(this->amount().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Product.amount"));
+            "myexchange.Product.amount"));
         } else {
           goto handle_unusual;
         }
@@ -405,7 +405,7 @@ bool Product::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->time().data(), static_cast<int>(this->time().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Product.time"));
+            "myexchange.Product.time"));
         } else {
           goto handle_unusual;
         }
@@ -424,10 +424,10 @@ bool Product::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:exchange.Product)
+  // @@protoc_insertion_point(parse_success:myexchange.Product)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:exchange.Product)
+  // @@protoc_insertion_point(parse_failure:myexchange.Product)
   return false;
 #undef DO_
 }
@@ -435,7 +435,7 @@ failure:
 
 void Product::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:exchange.Product)
+  // @@protoc_insertion_point(serialize_start:myexchange.Product)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -444,7 +444,7 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Product.id");
+      "myexchange.Product.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -454,7 +454,7 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Product.name");
+      "myexchange.Product.name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->name(), output);
   }
@@ -464,7 +464,7 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->desc().data(), static_cast<int>(this->desc().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Product.desc");
+      "myexchange.Product.desc");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->desc(), output);
   }
@@ -474,7 +474,7 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->price().data(), static_cast<int>(this->price().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Product.price");
+      "myexchange.Product.price");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->price(), output);
   }
@@ -484,7 +484,7 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->amount().data(), static_cast<int>(this->amount().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Product.amount");
+      "myexchange.Product.amount");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->amount(), output);
   }
@@ -494,18 +494,18 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->time().data(), static_cast<int>(this->time().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Product.time");
+      "myexchange.Product.time");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       7, this->time(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:exchange.Product)
+  // @@protoc_insertion_point(serialize_end:myexchange.Product)
 }
 
 size_t Product::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:exchange.Product)
+// @@protoc_insertion_point(message_byte_size_start:myexchange.Product)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -567,7 +567,7 @@ void Product::CheckTypeAndMergeFrom(
 }
 
 void Product::MergeFrom(const Product& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:exchange.Product)
+// @@protoc_insertion_point(class_specific_merge_from_start:myexchange.Product)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -600,7 +600,7 @@ void Product::MergeFrom(const Product& from) {
 }
 
 void Product::CopyFrom(const Product& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:exchange.Product)
+// @@protoc_insertion_point(class_specific_copy_from_start:myexchange.Product)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -632,7 +632,7 @@ void Product::InternalSwap(Product* other) {
 }
 
 ::std::string Product::GetTypeName() const {
-  return "exchange.Product";
+  return "myexchange.Product";
 }
 
 
@@ -655,7 +655,7 @@ const int Order::kProductpriceFieldNumber;
 Order::Order()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:exchange.Order)
+  // @@protoc_insertion_point(constructor:myexchange.Order)
 }
 Order::Order(const Order& from)
   : ::google::protobuf::MessageLite(),
@@ -681,7 +681,7 @@ Order::Order(const Order& from)
   if (from.productprice().size() > 0) {
     productprice_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.productprice_);
   }
-  // @@protoc_insertion_point(copy_constructor:exchange.Order)
+  // @@protoc_insertion_point(copy_constructor:myexchange.Order)
 }
 
 void Order::SharedCtor() {
@@ -695,7 +695,7 @@ void Order::SharedCtor() {
 }
 
 Order::~Order() {
-  // @@protoc_insertion_point(destructor:exchange.Order)
+  // @@protoc_insertion_point(destructor:myexchange.Order)
   SharedDtor();
 }
 
@@ -717,7 +717,7 @@ const Order& Order::default_instance() {
 
 
 void Order::Clear() {
-// @@protoc_insertion_point(message_clear_start:exchange.Order)
+// @@protoc_insertion_point(message_clear_start:myexchange.Order)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -857,7 +857,7 @@ bool Order::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:exchange.Order)
+  // @@protoc_insertion_point(parse_start:myexchange.Order)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -871,7 +871,7 @@ bool Order::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Order.id"));
+            "myexchange.Order.id"));
         } else {
           goto handle_unusual;
         }
@@ -886,7 +886,7 @@ bool Order::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->productid().data(), static_cast<int>(this->productid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Order.productid"));
+            "myexchange.Order.productid"));
         } else {
           goto handle_unusual;
         }
@@ -901,7 +901,7 @@ bool Order::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->productname().data(), static_cast<int>(this->productname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Order.productname"));
+            "myexchange.Order.productname"));
         } else {
           goto handle_unusual;
         }
@@ -916,7 +916,7 @@ bool Order::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->productdesc().data(), static_cast<int>(this->productdesc().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Order.productdesc"));
+            "myexchange.Order.productdesc"));
         } else {
           goto handle_unusual;
         }
@@ -931,7 +931,7 @@ bool Order::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->productprice().data(), static_cast<int>(this->productprice().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Order.productprice"));
+            "myexchange.Order.productprice"));
         } else {
           goto handle_unusual;
         }
@@ -950,10 +950,10 @@ bool Order::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:exchange.Order)
+  // @@protoc_insertion_point(parse_success:myexchange.Order)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:exchange.Order)
+  // @@protoc_insertion_point(parse_failure:myexchange.Order)
   return false;
 #undef DO_
 }
@@ -961,7 +961,7 @@ failure:
 
 void Order::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:exchange.Order)
+  // @@protoc_insertion_point(serialize_start:myexchange.Order)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -970,7 +970,7 @@ void Order::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Order.id");
+      "myexchange.Order.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -980,7 +980,7 @@ void Order::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->productid().data(), static_cast<int>(this->productid().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Order.productid");
+      "myexchange.Order.productid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->productid(), output);
   }
@@ -990,7 +990,7 @@ void Order::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->productname().data(), static_cast<int>(this->productname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Order.productname");
+      "myexchange.Order.productname");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->productname(), output);
   }
@@ -1000,7 +1000,7 @@ void Order::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->productdesc().data(), static_cast<int>(this->productdesc().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Order.productdesc");
+      "myexchange.Order.productdesc");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->productdesc(), output);
   }
@@ -1010,18 +1010,18 @@ void Order::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->productprice().data(), static_cast<int>(this->productprice().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Order.productprice");
+      "myexchange.Order.productprice");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->productprice(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:exchange.Order)
+  // @@protoc_insertion_point(serialize_end:myexchange.Order)
 }
 
 size_t Order::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:exchange.Order)
+// @@protoc_insertion_point(message_byte_size_start:myexchange.Order)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -1076,7 +1076,7 @@ void Order::CheckTypeAndMergeFrom(
 }
 
 void Order::MergeFrom(const Order& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:exchange.Order)
+// @@protoc_insertion_point(class_specific_merge_from_start:myexchange.Order)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -1105,7 +1105,7 @@ void Order::MergeFrom(const Order& from) {
 }
 
 void Order::CopyFrom(const Order& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:exchange.Order)
+// @@protoc_insertion_point(class_specific_copy_from_start:myexchange.Order)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1135,7 +1135,7 @@ void Order::InternalSwap(Order* other) {
 }
 
 ::std::string Order::GetTypeName() const {
-  return "exchange.Order";
+  return "myexchange.Order";
 }
 
 
@@ -1150,13 +1150,14 @@ class Exchange::HasBitSetters {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Exchange::kOrderidFieldNumber;
 const int Exchange::kProductsizeFieldNumber;
+const int Exchange::kProductsFieldNumber;
 const int Exchange::kTimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Exchange::Exchange()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:exchange.Exchange)
+  // @@protoc_insertion_point(constructor:myexchange.Exchange)
 }
 Exchange::Exchange(const Exchange& from)
   : ::google::protobuf::MessageLite(),
@@ -1170,11 +1171,15 @@ Exchange::Exchange(const Exchange& from)
   if (from.productsize().size() > 0) {
     productsize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.productsize_);
   }
+  products_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.products().size() > 0) {
+    products_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.products_);
+  }
   time_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.time().size() > 0) {
     time_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.time_);
   }
-  // @@protoc_insertion_point(copy_constructor:exchange.Exchange)
+  // @@protoc_insertion_point(copy_constructor:myexchange.Exchange)
 }
 
 void Exchange::SharedCtor() {
@@ -1182,17 +1187,19 @@ void Exchange::SharedCtor() {
       &scc_info_Exchange_exchange_2eproto.base);
   orderid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   productsize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  products_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   time_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Exchange::~Exchange() {
-  // @@protoc_insertion_point(destructor:exchange.Exchange)
+  // @@protoc_insertion_point(destructor:myexchange.Exchange)
   SharedDtor();
 }
 
 void Exchange::SharedDtor() {
   orderid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   productsize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  products_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   time_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -1206,13 +1213,14 @@ const Exchange& Exchange::default_instance() {
 
 
 void Exchange::Clear() {
-// @@protoc_insertion_point(message_clear_start:exchange.Exchange)
+// @@protoc_insertion_point(message_clear_start:myexchange.Exchange)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   orderid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   productsize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  products_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
@@ -1262,9 +1270,25 @@ const char* Exchange::_InternalParse(const char* begin, const char* end, void* o
         ptr += size;
         break;
       }
-      // string time = 3;
+      // string products = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_products();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string time = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
@@ -1312,7 +1336,7 @@ bool Exchange::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:exchange.Exchange)
+  // @@protoc_insertion_point(parse_start:myexchange.Exchange)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -1326,7 +1350,7 @@ bool Exchange::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->orderid().data(), static_cast<int>(this->orderid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Exchange.orderid"));
+            "myexchange.Exchange.orderid"));
         } else {
           goto handle_unusual;
         }
@@ -1341,22 +1365,37 @@ bool Exchange::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->productsize().data(), static_cast<int>(this->productsize().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Exchange.productsize"));
+            "myexchange.Exchange.productsize"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string time = 3;
+      // string products = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_products()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->products().data(), static_cast<int>(this->products().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "myexchange.Exchange.products"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string time = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_time()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->time().data(), static_cast<int>(this->time().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "exchange.Exchange.time"));
+            "myexchange.Exchange.time"));
         } else {
           goto handle_unusual;
         }
@@ -1375,10 +1414,10 @@ bool Exchange::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:exchange.Exchange)
+  // @@protoc_insertion_point(parse_success:myexchange.Exchange)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:exchange.Exchange)
+  // @@protoc_insertion_point(parse_failure:myexchange.Exchange)
   return false;
 #undef DO_
 }
@@ -1386,7 +1425,7 @@ failure:
 
 void Exchange::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:exchange.Exchange)
+  // @@protoc_insertion_point(serialize_start:myexchange.Exchange)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1395,7 +1434,7 @@ void Exchange::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->orderid().data(), static_cast<int>(this->orderid().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Exchange.orderid");
+      "myexchange.Exchange.orderid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->orderid(), output);
   }
@@ -1405,28 +1444,38 @@ void Exchange::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->productsize().data(), static_cast<int>(this->productsize().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Exchange.productsize");
+      "myexchange.Exchange.productsize");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->productsize(), output);
   }
 
-  // string time = 3;
+  // string products = 3;
+  if (this->products().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->products().data(), static_cast<int>(this->products().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "myexchange.Exchange.products");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->products(), output);
+  }
+
+  // string time = 4;
   if (this->time().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->time().data(), static_cast<int>(this->time().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "exchange.Exchange.time");
+      "myexchange.Exchange.time");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->time(), output);
+      4, this->time(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:exchange.Exchange)
+  // @@protoc_insertion_point(serialize_end:myexchange.Exchange)
 }
 
 size_t Exchange::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:exchange.Exchange)
+// @@protoc_insertion_point(message_byte_size_start:myexchange.Exchange)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -1449,7 +1498,14 @@ size_t Exchange::ByteSizeLong() const {
         this->productsize());
   }
 
-  // string time = 3;
+  // string products = 3;
+  if (this->products().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->products());
+  }
+
+  // string time = 4;
   if (this->time().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1467,7 +1523,7 @@ void Exchange::CheckTypeAndMergeFrom(
 }
 
 void Exchange::MergeFrom(const Exchange& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:exchange.Exchange)
+// @@protoc_insertion_point(class_specific_merge_from_start:myexchange.Exchange)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -1481,6 +1537,10 @@ void Exchange::MergeFrom(const Exchange& from) {
 
     productsize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.productsize_);
   }
+  if (from.products().size() > 0) {
+
+    products_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.products_);
+  }
   if (from.time().size() > 0) {
 
     time_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.time_);
@@ -1488,7 +1548,7 @@ void Exchange::MergeFrom(const Exchange& from) {
 }
 
 void Exchange::CopyFrom(const Exchange& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:exchange.Exchange)
+// @@protoc_insertion_point(class_specific_copy_from_start:myexchange.Exchange)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1509,27 +1569,29 @@ void Exchange::InternalSwap(Exchange* other) {
     GetArenaNoVirtual());
   productsize_.Swap(&other->productsize_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  products_.Swap(&other->products_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   time_.Swap(&other->time_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
 }
 
 ::std::string Exchange::GetTypeName() const {
-  return "exchange.Exchange";
+  return "myexchange.Exchange";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace exchange
+}  // namespace myexchange
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::exchange::Product* Arena::CreateMaybeMessage< ::exchange::Product >(Arena* arena) {
-  return Arena::CreateInternal< ::exchange::Product >(arena);
+template<> PROTOBUF_NOINLINE ::myexchange::Product* Arena::CreateMaybeMessage< ::myexchange::Product >(Arena* arena) {
+  return Arena::CreateInternal< ::myexchange::Product >(arena);
 }
-template<> PROTOBUF_NOINLINE ::exchange::Order* Arena::CreateMaybeMessage< ::exchange::Order >(Arena* arena) {
-  return Arena::CreateInternal< ::exchange::Order >(arena);
+template<> PROTOBUF_NOINLINE ::myexchange::Order* Arena::CreateMaybeMessage< ::myexchange::Order >(Arena* arena) {
+  return Arena::CreateInternal< ::myexchange::Order >(arena);
 }
-template<> PROTOBUF_NOINLINE ::exchange::Exchange* Arena::CreateMaybeMessage< ::exchange::Exchange >(Arena* arena) {
-  return Arena::CreateInternal< ::exchange::Exchange >(arena);
+template<> PROTOBUF_NOINLINE ::myexchange::Exchange* Arena::CreateMaybeMessage< ::myexchange::Exchange >(Arena* arena) {
+  return Arena::CreateInternal< ::myexchange::Exchange >(arena);
 }
 }  // namespace protobuf
 }  // namespace google
