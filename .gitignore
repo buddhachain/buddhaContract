@@ -1,1 +1,5 @@
 .vscode
+.idea
+exchange/build
+build
+exchange/CMakeLists.txt

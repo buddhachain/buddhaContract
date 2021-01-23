@@ -40,19 +40,27 @@ struct TableStruct_exchange_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[1]
+  static const ::google::protobuf::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
 namespace exchange {
+class Exchange;
+class ExchangeDefaultTypeInternal;
+extern ExchangeDefaultTypeInternal _Exchange_default_instance_;
+class Order;
+class OrderDefaultTypeInternal;
+extern OrderDefaultTypeInternal _Order_default_instance_;
 class Product;
 class ProductDefaultTypeInternal;
 extern ProductDefaultTypeInternal _Product_default_instance_;
 }  // namespace exchange
 namespace google {
 namespace protobuf {
+template<> ::exchange::Exchange* Arena::CreateMaybeMessage<::exchange::Exchange>(Arena*);
+template<> ::exchange::Order* Arena::CreateMaybeMessage<::exchange::Order>(Arena*);
 template<> ::exchange::Product* Arena::CreateMaybeMessage<::exchange::Product>(Arena*);
 }  // namespace protobuf
 }  // namespace google
@@ -245,6 +253,328 @@ class Product :
   ::google::protobuf::internal::ArenaStringPtr desc_;
   ::google::protobuf::internal::ArenaStringPtr price_;
   ::google::protobuf::internal::ArenaStringPtr amount_;
+  ::google::protobuf::internal::ArenaStringPtr time_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_exchange_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Order :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:exchange.Order) */ {
+ public:
+  Order();
+  virtual ~Order();
+
+  Order(const Order& from);
+
+  inline Order& operator=(const Order& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Order(Order&& from) noexcept
+    : Order() {
+    *this = ::std::move(from);
+  }
+
+  inline Order& operator=(Order&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const Order& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Order* internal_default_instance() {
+    return reinterpret_cast<const Order*>(
+               &_Order_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  void Swap(Order* other);
+  friend void swap(Order& a, Order& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Order* New() const final {
+    return CreateMaybeMessage<Order>(nullptr);
+  }
+
+  Order* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Order>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const Order& from);
+  void MergeFrom(const Order& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Order* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_id(::std::string&& value);
+  #endif
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // string productid = 2;
+  void clear_productid();
+  static const int kProductidFieldNumber = 2;
+  const ::std::string& productid() const;
+  void set_productid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_productid(::std::string&& value);
+  #endif
+  void set_productid(const char* value);
+  void set_productid(const char* value, size_t size);
+  ::std::string* mutable_productid();
+  ::std::string* release_productid();
+  void set_allocated_productid(::std::string* productid);
+
+  // string productname = 3;
+  void clear_productname();
+  static const int kProductnameFieldNumber = 3;
+  const ::std::string& productname() const;
+  void set_productname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_productname(::std::string&& value);
+  #endif
+  void set_productname(const char* value);
+  void set_productname(const char* value, size_t size);
+  ::std::string* mutable_productname();
+  ::std::string* release_productname();
+  void set_allocated_productname(::std::string* productname);
+
+  // string productdesc = 4;
+  void clear_productdesc();
+  static const int kProductdescFieldNumber = 4;
+  const ::std::string& productdesc() const;
+  void set_productdesc(const ::std::string& value);
+  #if LANG_CXX11
+  void set_productdesc(::std::string&& value);
+  #endif
+  void set_productdesc(const char* value);
+  void set_productdesc(const char* value, size_t size);
+  ::std::string* mutable_productdesc();
+  ::std::string* release_productdesc();
+  void set_allocated_productdesc(::std::string* productdesc);
+
+  // string productprice = 5;
+  void clear_productprice();
+  static const int kProductpriceFieldNumber = 5;
+  const ::std::string& productprice() const;
+  void set_productprice(const ::std::string& value);
+  #if LANG_CXX11
+  void set_productprice(::std::string&& value);
+  #endif
+  void set_productprice(const char* value);
+  void set_productprice(const char* value, size_t size);
+  ::std::string* mutable_productprice();
+  ::std::string* release_productprice();
+  void set_allocated_productprice(::std::string* productprice);
+
+  // @@protoc_insertion_point(class_scope:exchange.Order)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr productid_;
+  ::google::protobuf::internal::ArenaStringPtr productname_;
+  ::google::protobuf::internal::ArenaStringPtr productdesc_;
+  ::google::protobuf::internal::ArenaStringPtr productprice_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_exchange_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Exchange :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:exchange.Exchange) */ {
+ public:
+  Exchange();
+  virtual ~Exchange();
+
+  Exchange(const Exchange& from);
+
+  inline Exchange& operator=(const Exchange& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Exchange(Exchange&& from) noexcept
+    : Exchange() {
+    *this = ::std::move(from);
+  }
+
+  inline Exchange& operator=(Exchange&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const Exchange& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Exchange* internal_default_instance() {
+    return reinterpret_cast<const Exchange*>(
+               &_Exchange_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(Exchange* other);
+  friend void swap(Exchange& a, Exchange& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Exchange* New() const final {
+    return CreateMaybeMessage<Exchange>(nullptr);
+  }
+
+  Exchange* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Exchange>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const Exchange& from);
+  void MergeFrom(const Exchange& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Exchange* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string orderid = 1;
+  void clear_orderid();
+  static const int kOrderidFieldNumber = 1;
+  const ::std::string& orderid() const;
+  void set_orderid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_orderid(::std::string&& value);
+  #endif
+  void set_orderid(const char* value);
+  void set_orderid(const char* value, size_t size);
+  ::std::string* mutable_orderid();
+  ::std::string* release_orderid();
+  void set_allocated_orderid(::std::string* orderid);
+
+  // string productsize = 2;
+  void clear_productsize();
+  static const int kProductsizeFieldNumber = 2;
+  const ::std::string& productsize() const;
+  void set_productsize(const ::std::string& value);
+  #if LANG_CXX11
+  void set_productsize(::std::string&& value);
+  #endif
+  void set_productsize(const char* value);
+  void set_productsize(const char* value, size_t size);
+  ::std::string* mutable_productsize();
+  ::std::string* release_productsize();
+  void set_allocated_productsize(::std::string* productsize);
+
+  // string time = 3;
+  void clear_time();
+  static const int kTimeFieldNumber = 3;
+  const ::std::string& time() const;
+  void set_time(const ::std::string& value);
+  #if LANG_CXX11
+  void set_time(::std::string&& value);
+  #endif
+  void set_time(const char* value);
+  void set_time(const char* value, size_t size);
+  ::std::string* mutable_time();
+  ::std::string* release_time();
+  void set_allocated_time(::std::string* time);
+
+  // @@protoc_insertion_point(class_scope:exchange.Exchange)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr orderid_;
+  ::google::protobuf::internal::ArenaStringPtr productsize_;
   ::google::protobuf::internal::ArenaStringPtr time_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_exchange_2eproto;
@@ -578,9 +908,445 @@ inline void Product::set_allocated_time(::std::string* time) {
   // @@protoc_insertion_point(field_set_allocated:exchange.Product.time)
 }
 
+// -------------------------------------------------------------------
+
+// Order
+
+// string id = 1;
+inline void Order::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::id() const {
+  // @@protoc_insertion_point(field_get:exchange.Order.id)
+  return id_.GetNoArena();
+}
+inline void Order::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Order.id)
+}
+#if LANG_CXX11
+inline void Order::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Order.id)
+}
+#endif
+inline void Order::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Order.id)
+}
+inline void Order::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Order.id)
+}
+inline ::std::string* Order::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Order.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_id() {
+  // @@protoc_insertion_point(field_release:exchange.Order.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Order.id)
+}
+
+// string productid = 2;
+inline void Order::clear_productid() {
+  productid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::productid() const {
+  // @@protoc_insertion_point(field_get:exchange.Order.productid)
+  return productid_.GetNoArena();
+}
+inline void Order::set_productid(const ::std::string& value) {
+  
+  productid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Order.productid)
+}
+#if LANG_CXX11
+inline void Order::set_productid(::std::string&& value) {
+  
+  productid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Order.productid)
+}
+#endif
+inline void Order::set_productid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  productid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Order.productid)
+}
+inline void Order::set_productid(const char* value, size_t size) {
+  
+  productid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Order.productid)
+}
+inline ::std::string* Order::mutable_productid() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Order.productid)
+  return productid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_productid() {
+  // @@protoc_insertion_point(field_release:exchange.Order.productid)
+  
+  return productid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_productid(::std::string* productid) {
+  if (productid != nullptr) {
+    
+  } else {
+    
+  }
+  productid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productid);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Order.productid)
+}
+
+// string productname = 3;
+inline void Order::clear_productname() {
+  productname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::productname() const {
+  // @@protoc_insertion_point(field_get:exchange.Order.productname)
+  return productname_.GetNoArena();
+}
+inline void Order::set_productname(const ::std::string& value) {
+  
+  productname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Order.productname)
+}
+#if LANG_CXX11
+inline void Order::set_productname(::std::string&& value) {
+  
+  productname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Order.productname)
+}
+#endif
+inline void Order::set_productname(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  productname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Order.productname)
+}
+inline void Order::set_productname(const char* value, size_t size) {
+  
+  productname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Order.productname)
+}
+inline ::std::string* Order::mutable_productname() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Order.productname)
+  return productname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_productname() {
+  // @@protoc_insertion_point(field_release:exchange.Order.productname)
+  
+  return productname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_productname(::std::string* productname) {
+  if (productname != nullptr) {
+    
+  } else {
+    
+  }
+  productname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productname);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Order.productname)
+}
+
+// string productdesc = 4;
+inline void Order::clear_productdesc() {
+  productdesc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::productdesc() const {
+  // @@protoc_insertion_point(field_get:exchange.Order.productdesc)
+  return productdesc_.GetNoArena();
+}
+inline void Order::set_productdesc(const ::std::string& value) {
+  
+  productdesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Order.productdesc)
+}
+#if LANG_CXX11
+inline void Order::set_productdesc(::std::string&& value) {
+  
+  productdesc_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Order.productdesc)
+}
+#endif
+inline void Order::set_productdesc(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  productdesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Order.productdesc)
+}
+inline void Order::set_productdesc(const char* value, size_t size) {
+  
+  productdesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Order.productdesc)
+}
+inline ::std::string* Order::mutable_productdesc() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Order.productdesc)
+  return productdesc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_productdesc() {
+  // @@protoc_insertion_point(field_release:exchange.Order.productdesc)
+  
+  return productdesc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_productdesc(::std::string* productdesc) {
+  if (productdesc != nullptr) {
+    
+  } else {
+    
+  }
+  productdesc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productdesc);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Order.productdesc)
+}
+
+// string productprice = 5;
+inline void Order::clear_productprice() {
+  productprice_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::productprice() const {
+  // @@protoc_insertion_point(field_get:exchange.Order.productprice)
+  return productprice_.GetNoArena();
+}
+inline void Order::set_productprice(const ::std::string& value) {
+  
+  productprice_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Order.productprice)
+}
+#if LANG_CXX11
+inline void Order::set_productprice(::std::string&& value) {
+  
+  productprice_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Order.productprice)
+}
+#endif
+inline void Order::set_productprice(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  productprice_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Order.productprice)
+}
+inline void Order::set_productprice(const char* value, size_t size) {
+  
+  productprice_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Order.productprice)
+}
+inline ::std::string* Order::mutable_productprice() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Order.productprice)
+  return productprice_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_productprice() {
+  // @@protoc_insertion_point(field_release:exchange.Order.productprice)
+  
+  return productprice_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_productprice(::std::string* productprice) {
+  if (productprice != nullptr) {
+    
+  } else {
+    
+  }
+  productprice_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productprice);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Order.productprice)
+}
+
+// -------------------------------------------------------------------
+
+// Exchange
+
+// string orderid = 1;
+inline void Exchange::clear_orderid() {
+  orderid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Exchange::orderid() const {
+  // @@protoc_insertion_point(field_get:exchange.Exchange.orderid)
+  return orderid_.GetNoArena();
+}
+inline void Exchange::set_orderid(const ::std::string& value) {
+  
+  orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Exchange.orderid)
+}
+#if LANG_CXX11
+inline void Exchange::set_orderid(::std::string&& value) {
+  
+  orderid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Exchange.orderid)
+}
+#endif
+inline void Exchange::set_orderid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Exchange.orderid)
+}
+inline void Exchange::set_orderid(const char* value, size_t size) {
+  
+  orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Exchange.orderid)
+}
+inline ::std::string* Exchange::mutable_orderid() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Exchange.orderid)
+  return orderid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Exchange::release_orderid() {
+  // @@protoc_insertion_point(field_release:exchange.Exchange.orderid)
+  
+  return orderid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Exchange::set_allocated_orderid(::std::string* orderid) {
+  if (orderid != nullptr) {
+    
+  } else {
+    
+  }
+  orderid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), orderid);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Exchange.orderid)
+}
+
+// string productsize = 2;
+inline void Exchange::clear_productsize() {
+  productsize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Exchange::productsize() const {
+  // @@protoc_insertion_point(field_get:exchange.Exchange.productsize)
+  return productsize_.GetNoArena();
+}
+inline void Exchange::set_productsize(const ::std::string& value) {
+  
+  productsize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Exchange.productsize)
+}
+#if LANG_CXX11
+inline void Exchange::set_productsize(::std::string&& value) {
+  
+  productsize_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Exchange.productsize)
+}
+#endif
+inline void Exchange::set_productsize(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  productsize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Exchange.productsize)
+}
+inline void Exchange::set_productsize(const char* value, size_t size) {
+  
+  productsize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Exchange.productsize)
+}
+inline ::std::string* Exchange::mutable_productsize() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Exchange.productsize)
+  return productsize_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Exchange::release_productsize() {
+  // @@protoc_insertion_point(field_release:exchange.Exchange.productsize)
+  
+  return productsize_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Exchange::set_allocated_productsize(::std::string* productsize) {
+  if (productsize != nullptr) {
+    
+  } else {
+    
+  }
+  productsize_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productsize);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Exchange.productsize)
+}
+
+// string time = 3;
+inline void Exchange::clear_time() {
+  time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Exchange::time() const {
+  // @@protoc_insertion_point(field_get:exchange.Exchange.time)
+  return time_.GetNoArena();
+}
+inline void Exchange::set_time(const ::std::string& value) {
+  
+  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:exchange.Exchange.time)
+}
+#if LANG_CXX11
+inline void Exchange::set_time(::std::string&& value) {
+  
+  time_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:exchange.Exchange.time)
+}
+#endif
+inline void Exchange::set_time(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:exchange.Exchange.time)
+}
+inline void Exchange::set_time(const char* value, size_t size) {
+  
+  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:exchange.Exchange.time)
+}
+inline ::std::string* Exchange::mutable_time() {
+  
+  // @@protoc_insertion_point(field_mutable:exchange.Exchange.time)
+  return time_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Exchange::release_time() {
+  // @@protoc_insertion_point(field_release:exchange.Exchange.time)
+  
+  return time_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Exchange::set_allocated_time(::std::string* time) {
+  if (time != nullptr) {
+    
+  } else {
+    
+  }
+  time_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), time);
+  // @@protoc_insertion_point(field_set_allocated:exchange.Exchange.time)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
