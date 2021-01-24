@@ -253,13 +253,9 @@ void Exchange::buy() {
     const std::string& order_id = ctx->arg("id");
     const std::string& product_size = ctx->arg("product_size");
     const std::string& products = ctx->arg("products");
+    const double& price = std::stod(ctx->arg("price"));
 
-    //设置exchange对象
-    exchange ex;
-    ex.set_orderid(order_id.c_str());
-    ex.set_products(products.c_str());
 
-    //设置order对象
     auto productids = xchain::json::parse(products);
  
     if (!productids.is_array()) {
@@ -272,34 +268,63 @@ void Exchange::buy() {
         return;
     }
     
+    //计算总价格及设置orders对象    
     double total_price = 0;
-    // std::vector<order> ods;
+    std::vector<order> ods;
     std::string re ;
     for(int i = 0 ; i < productids.size() ; i++) {
         std::string id = productids.at(i)["id"].template get<std::string>();
         int64_t count = std::stoll(productids.at(i)["count"].template get<std::string>());
 
-        // re += id + "|" + std::to_string(count) + " ";
-        // product ent;
-        // if (!is_product_exist(id, ent))  {
-        //     ctx->error("product " + id + " not exist .");
-        //     return ;
-        // }
+        product ent;
+        if (!is_product_exist(id, ent))  {
+            ctx->error("product " + id + " not exist .");
+            return ;
+        }
 
-        // order od;
-        // od.set_id(order_id.c_str());
-        // od.set_productid(ent.id().c_str());
-        // od.set_productname(ent.name().c_str());
-        // od.set_productdesc(ent.desc().c_str());
-        // od.set_productprice(ent.price());
-        // od.set_productcount(count);
+        order od;
+        od.set_id(order_id.c_str());
+        od.set_productid(ent.id().c_str());
+        od.set_productname(ent.name().c_str());
+        od.set_productdesc(ent.desc().c_str());
+        od.set_productprice(ent.price());
+        od.set_productcount(count);
 
-        // total_price += ent.price() * count ;
+        total_price += ent.price() * count ;
 
-        // ods.push_back(od);
+        ods.push_back(od);
     }
 
-    // ex.set_price(total_price);
+    //判断总价格是否跟表中的计算价格相同
+
+    double c = total_price-price;
+    if(abs(c)>0.000001){
+        ctx->error("delive price " + std::to_string(price) + ", real price=" + std::to_string(total_price));
+        return;
+    }
+
+
+    // for(int i = 0 ; i < productids.size() ; i++) {
+
+    // }
+
+    // get_product().del(ent);
+
+    // ent.set_id(id.c_str());
+    // ent.set_name(ctx->arg("name").c_str());
+    // ent.set_desc(ctx->arg("desc").c_str());
+    // ent.set_price(std::stod(ctx->arg("price")));
+    // ent.set_amount(std::stoll(ctx->arg("amount")));
+    // ent.set_time(ctx->arg("time").c_str());
+
+    // get_product().put(ent);
+
+
+    //设置exchange对象
+    exchange ex;
+    ex.set_orderid(order_id.c_str());
+    ex.set_products(products.c_str());
+    ex.set_price(total_price);
     
     ctx->ok("ok -> " + re + " " + std::to_string(total_price));
 }
