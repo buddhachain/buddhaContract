@@ -8,8 +8,8 @@ message Product {
     string id      = 1; //产品编号
     string name    = 2; //产品名称
     string desc    = 3; //产品描述
-    string price   = 5; //产品价格
-    string amount  = 6; //产品数量
+    double price   = 5; //产品价格
+    int64  amount  = 6; //产品数量
     string time    = 7; //产品最后修改的时间
 }
 
@@ -21,14 +21,15 @@ message Order {
     string productid       = 2; //对应的产品id
     string productname     = 3; //对应的产品名称
     string productdesc     = 4; //对应的产品描述
-    string productprice    = 5; //对应的产品价格
+    double productprice    = 5; //对应的产品价格
+    int64  productcount    = 6; //这个产品的个数
 }
 
 //描述交易信息
 message Exchange {
     string orderid       = 1; //订单编号
-    string productsize   = 2; //订单中产品的个数
-    string products      = 3; //产品id {aaa,bbb,ccc} 
+    string products      = 2; //产品id {aaa,bbb,ccc} 
+    double price         = 3; //产品总价格
     string time          = 4; //交易时间
 }
 

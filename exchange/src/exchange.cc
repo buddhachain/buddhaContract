@@ -7,12 +7,12 @@
 
 class Exchange : public xchain::Contract {
 public:
-    Exchange(): _product(context(), "product"),
-                _order(context(), "order"),
+    Exchange(): _product(context(),  "product"),
+                _order(context(),    "order"),
                 _exchange(context(), "exchange") {}
 
     // 1. rowkey can not be same with index
-    struct product: public myexchange::Product {
+    class product: public myexchange::Product {
         DEFINE_ROWKEY(id);
         DEFINE_INDEX_BEGIN(1)
             DEFINE_INDEX_ADD(0, id)
@@ -24,22 +24,29 @@ public:
             str += id() + ",";
             str += name() + ",";
             str += desc() + ",";
-            str += price() + ",";
-            str += amount() + ",";
+            str += std::to_string(price()) + ",";
+            str += std::to_string(amount()) + ",";
             str += time() + ",";
             str += "}";
             return str;
         }
+
+        void find();
+        void add();
+        void del();
+        void update();
+        void scan();
+
     };
 
-    struct order: public myexchange::Order {
+    class order: public myexchange::Order {
         DEFINE_ROWKEY(id);
         DEFINE_INDEX_BEGIN(1)
             DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_END();
     };
 
-    struct exchange: public myexchange::Exchange {
+    class exchange: public myexchange::Exchange {
         DEFINE_ROWKEY(orderid);
         DEFINE_INDEX_BEGIN(1)
             DEFINE_INDEX_ADD(0, orderid)
@@ -64,227 +71,245 @@ public:
         return _exchange;
     }
 
-    // void initialize();
+    void initialize();
 
     //处理产品
-    // void productfind();
-    // void productadd();
-    // void productdel();
-    // void productupdate();
-    // void productscan();
+    void productfind();
+    void productadd();
+    void productdel();
+    void productupdate();
+    void productscan();
 
     //操作订单
 
     //对外接口
-    // void buy();
+    void buy();
 
 private:
-    //  bool is_deployer_operate(xchain::Context* ctx);
-    //  bool is_product_exist(const xchain::Context* ctx,
-    //                        const std::string& id,
-    //                        product& ent);
+     bool is_deployer_operate(xchain::Context* ctx);
+     bool is_product_exist(const std::string& id,product& ent);
 
 };
 
-// bool Exchange::is_deployer_operate(xchain::Context* ctx) {
-//     std::string deployer;
-//     if (!ctx->get_object("deployer", &deployer)) {
-//         ctx->error("contrace error, unknown deplory");
-//         return false;
-//     }
+bool Exchange::is_deployer_operate(xchain::Context* ctx) {
+    std::string deployer;
+    if (!ctx->get_object("deployer", &deployer)) {
+        ctx->error("contrace error, unknown deplory");
+        return false;
+    }
 
-//     if (deployer != ctx->initiator() ) {
-//         ctx->error("deployer=" + deployer + ", caller=" + ctx->initiator());
-//         return false;
-//     }
+    if (deployer != ctx->initiator() ) {
+        ctx->error("deployer=" + deployer + ", caller=" + ctx->initiator());
+        return false;
+    }
 
-//     return true ;
-// }
-
-
-// bool Exchange::is_product_exist(const xchain::Context* ctx,
-//                                 const std::string& id,
-//                                 product& ent) {
-
-//     if (!get_product().find({{"id", id}}, &ent))
-//         return false;
-
-//     return true;
-// }
-
-// void Exchange::initialize() {
-//     xchain::Context* ctx = context();
-//     ctx->put_object("deployer", ctx->initiator());
-//     ctx->emit_event("initialize", ctx->initiator());
-//     ctx->ok("deployer=" + ctx->initiator());
-// }
-
-DEFINE_METHOD(Exchange, productfind) {
-
-// void Exchange::productfind() {
-    xchain::Context* ctx = context();
-
-    // if(!is_deployer_operate(ctx))
-    //     return ;
-
-    // const std::string& id = ctx->arg("id");
-    // product ent;
-    // if (!is_product_exist(ctx, id, ent))  {
-    //     ctx->ok("product " + id + " not exist .");
-    //     return ;
-    // }
-
-    ctx->ok("ok -> ");// + ent.to_string());
+    return true ;
 }
 
-// void Exchange::productadd() {
-//     xchain::Context* ctx = context();
 
-//     if(!is_deployer_operate(ctx))
-//         return ;
+bool Exchange::is_product_exist(const std::string& id,product& ent) {
 
-//     const std::string& id = ctx->arg("id");
+    if (!get_product().find({{"id", id}}, &ent))
+        return false;
 
+    return true;
+}
 
-//     //加锁
-//     product ent;
-//     if (is_product_exist(ctx, id, ent))  {
-//         ctx->error("product " + ctx->arg("id") + "," + ctx->arg("name") + " exist .");
-//         return ;
-//     }
+void Exchange::initialize() {
+    xchain::Context* ctx = context();
+    ctx->put_object("deployer", ctx->initiator());
+    ctx->emit_event("initialize", ctx->initiator());
+    ctx->ok("deployer=" + ctx->initiator());
+}
 
-//     ent.set_id(ctx->arg("id").c_str());
-//     ent.set_name(ctx->arg("name").c_str());
-//     ent.set_desc(ctx->arg("desc").c_str());
-//     ent.set_price(ctx->arg("price").c_str());
-//     ent.set_amount(ctx->arg("amount").c_str());
-//     ent.set_time(ctx->arg("time").c_str());
+void Exchange::productfind() {
+    xchain::Context* ctx = context();
 
-//     get_product().put(ent);
-//     //解锁
+    if(!is_deployer_operate(ctx))
+        return ;
 
-//     ctx->ok(ent.to_string());
-// }
+    const std::string& id = ctx->arg("id");
+    product ent;
+    if (!is_product_exist(id, ent))  {
+        ctx->ok("product " + id + " not exist .");
+        return ;
+    }
 
-// void Exchange::productdel() {
-//     xchain::Context* ctx = context();
+    ctx->ok("ok -> " + ent.to_string());
+}
 
-//     if(!is_deployer_operate(ctx))
-//         return ;
+void Exchange::productadd() {
+    xchain::Context* ctx = context();
 
-//     const std::string& id = ctx->arg("id");
+    if(!is_deployer_operate(ctx))
+        return ;
 
-//     //加锁
-//     product ent;
-//     if (!is_product_exist(ctx, id, ent))  {
-//         ctx->error("product " + id + " not exist .");
-//         return ;
-//     }
-
-//     get_product().del(ent);
-//     //解锁
+    const std::string& id = ctx->arg("id");
 
 
-//     ctx->ok(ent.to_string());
-// }
+    //加锁
+    product ent;
+    if (is_product_exist(id, ent))  {
+        ctx->error("product " + id + "," + ctx->arg("name") + " exist .");
+        return ;
+    }
 
-// void Exchange::productupdate() {
-//     xchain::Context* ctx = context();
+    ent.set_id(id.c_str());
+    ent.set_name(ctx->arg("name").c_str());
+    ent.set_desc(ctx->arg("desc").c_str());
+    ent.set_price(std::stod(ctx->arg("price")));
+    ent.set_amount(std::stoll(ctx->arg("amount")));
+    ent.set_time(ctx->arg("time").c_str());
 
-//     if(!is_deployer_operate(ctx))
-//         return ;
+    get_product().put(ent);
+    //解锁
 
-//     const std::string& id = ctx->arg("id");
+    ctx->ok(ent.to_string());
+}
 
-//     //加锁
-//     product ent;
-//     if (!is_product_exist(ctx, id, ent))  {
-//          ctx->error("product " + id + " not exist .");
-//         return ;
-//     }
+void Exchange::productdel() {
+    xchain::Context* ctx = context();
 
-//     get_product().del(ent);
+    if(!is_deployer_operate(ctx))
+        return ;
 
-//     ent.set_id(ctx->arg("id").c_str());
-//     ent.set_name(ctx->arg("name").c_str());
-//     ent.set_desc(ctx->arg("desc").c_str());
-//     ent.set_price(ctx->arg("price").c_str());
-//     ent.set_amount(ctx->arg("amount").c_str());
-//     ent.set_time(ctx->arg("time").c_str());
+    const std::string& id = ctx->arg("id");
 
-//     get_product().put(ent);
-//     //解锁
+    //加锁
+    product ent;
+    if (!is_product_exist(id, ent))  {
+        ctx->error("product " + id + " not exist .");
+        return ;
+    }
 
-//     ctx->ok(ent.to_string() + "update success");
-// }
+    get_product().del(ent);
+    //解锁
 
-// void Exchange::productscan() {
-//     xchain::Context* ctx = context();
 
-//     if(!is_deployer_operate(ctx))
-//         return ;
+    ctx->ok(ent.to_string());
+}
 
-//     const std::string& id = ctx->arg("id");
+void Exchange::productupdate() {
+    xchain::Context* ctx = context();
 
-//     auto it = get_product().scan({{"id",id}});
-//     int i = 0;
-//     std::string re ;
-//     while(it->next()) {
-//         Exchange::product ent;
-//         if (!it->get(&ent))
-//             break;
+    if(!is_deployer_operate(ctx))
+        return ;
 
-//         re += ent.to_string();
-//         i += 1;
-//     }
+    const std::string& id = ctx->arg("id");
 
-//     if (it->error()) {
-//         ctx->ok(it->error(true));
-//         return ;
-//     }
+    //加锁
+    product ent;
+    if (!is_product_exist(id, ent))  {
+         ctx->error("product " + id + " not exist .");
+        return ;
+    }
 
-//     ctx->ok(std::to_string(i) + " -> " + re + " > " + it->error(true));
-// }
+    get_product().del(ent);
 
-// void Exchange::buy() {
-//     xchain::Context* ctx = context();
+    ent.set_id(id.c_str());
+    ent.set_name(ctx->arg("name").c_str());
+    ent.set_desc(ctx->arg("desc").c_str());
+    ent.set_price(std::stod(ctx->arg("price")));
+    ent.set_amount(std::stoll(ctx->arg("amount")));
+    ent.set_time(ctx->arg("time").c_str());
 
-//     const std::string& order_id = ctx->arg("id");
-//     // const std::string& product_size = ctx->arg("product_size");
-//     // const std::string& products = ctx->arg("products");
-//     ctx->ok("ok -> " + order_id);
+    get_product().put(ent);
+    //解锁
 
-//     //设置exchange对象
-//     // exchange ex;
-//     // ex.set_orderid(order_id.c_str());
-//     // ex.set_productsize(product_size.c_str());
-//     // ex.set_products(products.c_str());
+    ctx->ok(ent.to_string() + "update success");
+}
 
-//     //设置order对象
-//     // std::string re ;
-//     // auto j = xchain::json::parse(products);
+void Exchange::productscan() {
+    xchain::Context* ctx = context();
+
+    if(!is_deployer_operate(ctx))
+        return ;
+
+    const std::string& id = ctx->arg("id");
+
+    auto it = get_product().scan({{"id",id}});
+    int i = 0;
+    std::string re ;
+    while(it->next()) {
+        Exchange::product ent;
+        if (!it->get(&ent))
+            break;
+
+        re += ent.to_string();
+        i += 1;
+    }
+
+    if (it->error()) {
+        ctx->ok(it->error(true));
+        return ;
+    }
+
+    ctx->ok(std::to_string(i) + " -> " + re + " > " + it->error(true));
+}
+
+void Exchange::buy() {
+    xchain::Context* ctx = context();
+
+    const std::string& order_id = ctx->arg("id");
+    const std::string& product_size = ctx->arg("product_size");
+    const std::string& products = ctx->arg("products");
+
+    //设置exchange对象
+    exchange ex;
+    ex.set_orderid(order_id.c_str());
+    ex.set_products(products.c_str());
+
+    //设置order对象
+    auto productids = xchain::json::parse(products);
+ 
+    if (!productids.is_array()) {
+        ctx->error("field 'products' need to be array .");
+        return;
+    }
     
-//     // for(int i = 0 ; i < j.size() ; i++) {
-//     //     re += j[i];
-//     // }
+    if ( productids.empty() || !productids.size()) {
+        ctx->error("filed 'products' empty .");
+        return;
+    }
+    
+    double total_price = 0;
+    // std::vector<order> ods;
+    std::string re ;
+    for(int i = 0 ; i < productids.size() ; i++) {
+        std::string id = productids.at(i)["id"].template get<std::string>();
+        int64_t count = std::stoll(productids.at(i)["count"].template get<std::string>());
 
-//     //设置产品对象
-//     // product ent;
-//     // if (!is_product_exist(ctx, id, ent))  {
-//     //     ctx->error("product " + id + " not exist .");
-//     //     return ;
-//     // }
+        // re += id + "|" + std::to_string(count) + " ";
+        // product ent;
+        // if (!is_product_exist(id, ent))  {
+        //     ctx->error("product " + id + " not exist .");
+        //     return ;
+        // }
 
-//     // ctx->ok("ok -> " + std::to_string(j.size()));
-//     ctx->ok("ok -> " + order_id);
-// }
+        // order od;
+        // od.set_id(order_id.c_str());
+        // od.set_productid(ent.id().c_str());
+        // od.set_productname(ent.name().c_str());
+        // od.set_productdesc(ent.desc().c_str());
+        // od.set_productprice(ent.price());
+        // od.set_productcount(count);
+
+        // total_price += ent.price() * count ;
+
+        // ods.push_back(od);
+    }
+
+    // ex.set_price(total_price);
+    
+    ctx->ok("ok -> " + re + " " + std::to_string(total_price));
+}
 
 
 //初始化
-// DEFINE_METHOD(Exchange, initialize) { initialize(); }
-// DEFINE_METHOD(Exchange, productfind) { productfind(); }
-// DEFINE_METHOD(Exchange, productadd) { productadd(); }
-// DEFINE_METHOD(Exchange, productdel) { productdel(); }
-// DEFINE_METHOD(Exchange, productupdate) { productupdate(); }
-// DEFINE_METHOD(Exchange, productscan) { productscan(); }
-// DEFINE_METHOD(Exchange, buy) { buy(); }
+DEFINE_METHOD(Exchange, initialize)    { self.initialize();    }
+DEFINE_METHOD(Exchange, productfind)   { self.productfind();   }
+DEFINE_METHOD(Exchange, productadd)    { self.productadd();    }
+DEFINE_METHOD(Exchange, productdel)    { self.productdel();    }
+DEFINE_METHOD(Exchange, productupdate) { self.productupdate(); }
+DEFINE_METHOD(Exchange, productscan)   { self.productscan();   }
+DEFINE_METHOD(Exchange, buy)           { self.buy();           }
