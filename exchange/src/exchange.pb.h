@@ -348,59 +348,59 @@ class Order :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // string productid = 2;
-  void clear_productid();
-  static const int kProductidFieldNumber = 2;
-  const ::std::string& productid() const;
-  void set_productid(const ::std::string& value);
+  // string product_id = 2;
+  void clear_product_id();
+  static const int kProductIdFieldNumber = 2;
+  const ::std::string& product_id() const;
+  void set_product_id(const ::std::string& value);
   #if LANG_CXX11
-  void set_productid(::std::string&& value);
+  void set_product_id(::std::string&& value);
   #endif
-  void set_productid(const char* value);
-  void set_productid(const char* value, size_t size);
-  ::std::string* mutable_productid();
-  ::std::string* release_productid();
-  void set_allocated_productid(::std::string* productid);
+  void set_product_id(const char* value);
+  void set_product_id(const char* value, size_t size);
+  ::std::string* mutable_product_id();
+  ::std::string* release_product_id();
+  void set_allocated_product_id(::std::string* product_id);
 
-  // string productname = 3;
-  void clear_productname();
-  static const int kProductnameFieldNumber = 3;
-  const ::std::string& productname() const;
-  void set_productname(const ::std::string& value);
+  // string product_name = 3;
+  void clear_product_name();
+  static const int kProductNameFieldNumber = 3;
+  const ::std::string& product_name() const;
+  void set_product_name(const ::std::string& value);
   #if LANG_CXX11
-  void set_productname(::std::string&& value);
+  void set_product_name(::std::string&& value);
   #endif
-  void set_productname(const char* value);
-  void set_productname(const char* value, size_t size);
-  ::std::string* mutable_productname();
-  ::std::string* release_productname();
-  void set_allocated_productname(::std::string* productname);
+  void set_product_name(const char* value);
+  void set_product_name(const char* value, size_t size);
+  ::std::string* mutable_product_name();
+  ::std::string* release_product_name();
+  void set_allocated_product_name(::std::string* product_name);
 
-  // string productdesc = 4;
-  void clear_productdesc();
-  static const int kProductdescFieldNumber = 4;
-  const ::std::string& productdesc() const;
-  void set_productdesc(const ::std::string& value);
+  // string product_desc = 4;
+  void clear_product_desc();
+  static const int kProductDescFieldNumber = 4;
+  const ::std::string& product_desc() const;
+  void set_product_desc(const ::std::string& value);
   #if LANG_CXX11
-  void set_productdesc(::std::string&& value);
+  void set_product_desc(::std::string&& value);
   #endif
-  void set_productdesc(const char* value);
-  void set_productdesc(const char* value, size_t size);
-  ::std::string* mutable_productdesc();
-  ::std::string* release_productdesc();
-  void set_allocated_productdesc(::std::string* productdesc);
+  void set_product_desc(const char* value);
+  void set_product_desc(const char* value, size_t size);
+  ::std::string* mutable_product_desc();
+  ::std::string* release_product_desc();
+  void set_allocated_product_desc(::std::string* product_desc);
 
-  // double productprice = 5;
-  void clear_productprice();
-  static const int kProductpriceFieldNumber = 5;
-  double productprice() const;
-  void set_productprice(double value);
+  // double product_price = 5;
+  void clear_product_price();
+  static const int kProductPriceFieldNumber = 5;
+  double product_price() const;
+  void set_product_price(double value);
 
-  // int64 productcount = 6;
-  void clear_productcount();
-  static const int kProductcountFieldNumber = 6;
-  ::google::protobuf::int64 productcount() const;
-  void set_productcount(::google::protobuf::int64 value);
+  // int64 product_count = 6;
+  void clear_product_count();
+  static const int kProductCountFieldNumber = 6;
+  ::google::protobuf::int64 product_count() const;
+  void set_product_count(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:myexchange.Order)
  private:
@@ -408,11 +408,11 @@ class Order :
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
-  ::google::protobuf::internal::ArenaStringPtr productid_;
-  ::google::protobuf::internal::ArenaStringPtr productname_;
-  ::google::protobuf::internal::ArenaStringPtr productdesc_;
-  double productprice_;
-  ::google::protobuf::int64 productcount_;
+  ::google::protobuf::internal::ArenaStringPtr product_id_;
+  ::google::protobuf::internal::ArenaStringPtr product_name_;
+  ::google::protobuf::internal::ArenaStringPtr product_desc_;
+  double product_price_;
+  ::google::protobuf::int64 product_count_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_exchange_2eproto;
 };
@@ -509,19 +509,19 @@ class Exchange :
 
   // accessors -------------------------------------------------------
 
-  // string orderid = 1;
-  void clear_orderid();
-  static const int kOrderidFieldNumber = 1;
-  const ::std::string& orderid() const;
-  void set_orderid(const ::std::string& value);
+  // string order_id = 1;
+  void clear_order_id();
+  static const int kOrderIdFieldNumber = 1;
+  const ::std::string& order_id() const;
+  void set_order_id(const ::std::string& value);
   #if LANG_CXX11
-  void set_orderid(::std::string&& value);
+  void set_order_id(::std::string&& value);
   #endif
-  void set_orderid(const char* value);
-  void set_orderid(const char* value, size_t size);
-  ::std::string* mutable_orderid();
-  ::std::string* release_orderid();
-  void set_allocated_orderid(::std::string* orderid);
+  void set_order_id(const char* value);
+  void set_order_id(const char* value, size_t size);
+  ::std::string* mutable_order_id();
+  ::std::string* release_order_id();
+  void set_allocated_order_id(::std::string* order_id);
 
   // string products = 2;
   void clear_products();
@@ -537,19 +537,19 @@ class Exchange :
   ::std::string* release_products();
   void set_allocated_products(::std::string* products);
 
-  // string time = 4;
-  void clear_time();
-  static const int kTimeFieldNumber = 4;
-  const ::std::string& time() const;
-  void set_time(const ::std::string& value);
+  // string timestamp = 4;
+  void clear_timestamp();
+  static const int kTimestampFieldNumber = 4;
+  const ::std::string& timestamp() const;
+  void set_timestamp(const ::std::string& value);
   #if LANG_CXX11
-  void set_time(::std::string&& value);
+  void set_timestamp(::std::string&& value);
   #endif
-  void set_time(const char* value);
-  void set_time(const char* value, size_t size);
-  ::std::string* mutable_time();
-  ::std::string* release_time();
-  void set_allocated_time(::std::string* time);
+  void set_timestamp(const char* value);
+  void set_timestamp(const char* value, size_t size);
+  ::std::string* mutable_timestamp();
+  ::std::string* release_timestamp();
+  void set_allocated_timestamp(::std::string* timestamp);
 
   // double price = 3;
   void clear_price();
@@ -562,9 +562,9 @@ class Exchange :
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr orderid_;
+  ::google::protobuf::internal::ArenaStringPtr order_id_;
   ::google::protobuf::internal::ArenaStringPtr products_;
-  ::google::protobuf::internal::ArenaStringPtr time_;
+  ::google::protobuf::internal::ArenaStringPtr timestamp_;
   double price_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_exchange_2eproto;
@@ -877,248 +877,248 @@ inline void Order::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:myexchange.Order.id)
 }
 
-// string productid = 2;
-inline void Order::clear_productid() {
-  productid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string product_id = 2;
+inline void Order::clear_product_id() {
+  product_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Order::productid() const {
-  // @@protoc_insertion_point(field_get:myexchange.Order.productid)
-  return productid_.GetNoArena();
+inline const ::std::string& Order::product_id() const {
+  // @@protoc_insertion_point(field_get:myexchange.Order.product_id)
+  return product_id_.GetNoArena();
 }
-inline void Order::set_productid(const ::std::string& value) {
+inline void Order::set_product_id(const ::std::string& value) {
   
-  productid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:myexchange.Order.productid)
+  product_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:myexchange.Order.product_id)
 }
 #if LANG_CXX11
-inline void Order::set_productid(::std::string&& value) {
+inline void Order::set_product_id(::std::string&& value) {
   
-  productid_.SetNoArena(
+  product_id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:myexchange.Order.productid)
+  // @@protoc_insertion_point(field_set_rvalue:myexchange.Order.product_id)
 }
 #endif
-inline void Order::set_productid(const char* value) {
+inline void Order::set_product_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  productid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:myexchange.Order.productid)
+  product_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:myexchange.Order.product_id)
 }
-inline void Order::set_productid(const char* value, size_t size) {
+inline void Order::set_product_id(const char* value, size_t size) {
   
-  productid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  product_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:myexchange.Order.productid)
+  // @@protoc_insertion_point(field_set_pointer:myexchange.Order.product_id)
 }
-inline ::std::string* Order::mutable_productid() {
+inline ::std::string* Order::mutable_product_id() {
   
-  // @@protoc_insertion_point(field_mutable:myexchange.Order.productid)
-  return productid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:myexchange.Order.product_id)
+  return product_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Order::release_productid() {
-  // @@protoc_insertion_point(field_release:myexchange.Order.productid)
+inline ::std::string* Order::release_product_id() {
+  // @@protoc_insertion_point(field_release:myexchange.Order.product_id)
   
-  return productid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return product_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Order::set_allocated_productid(::std::string* productid) {
-  if (productid != nullptr) {
+inline void Order::set_allocated_product_id(::std::string* product_id) {
+  if (product_id != nullptr) {
     
   } else {
     
   }
-  productid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productid);
-  // @@protoc_insertion_point(field_set_allocated:myexchange.Order.productid)
+  product_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), product_id);
+  // @@protoc_insertion_point(field_set_allocated:myexchange.Order.product_id)
 }
 
-// string productname = 3;
-inline void Order::clear_productname() {
-  productname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string product_name = 3;
+inline void Order::clear_product_name() {
+  product_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Order::productname() const {
-  // @@protoc_insertion_point(field_get:myexchange.Order.productname)
-  return productname_.GetNoArena();
+inline const ::std::string& Order::product_name() const {
+  // @@protoc_insertion_point(field_get:myexchange.Order.product_name)
+  return product_name_.GetNoArena();
 }
-inline void Order::set_productname(const ::std::string& value) {
+inline void Order::set_product_name(const ::std::string& value) {
   
-  productname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:myexchange.Order.productname)
+  product_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:myexchange.Order.product_name)
 }
 #if LANG_CXX11
-inline void Order::set_productname(::std::string&& value) {
+inline void Order::set_product_name(::std::string&& value) {
   
-  productname_.SetNoArena(
+  product_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:myexchange.Order.productname)
+  // @@protoc_insertion_point(field_set_rvalue:myexchange.Order.product_name)
 }
 #endif
-inline void Order::set_productname(const char* value) {
+inline void Order::set_product_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  productname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:myexchange.Order.productname)
+  product_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:myexchange.Order.product_name)
 }
-inline void Order::set_productname(const char* value, size_t size) {
+inline void Order::set_product_name(const char* value, size_t size) {
   
-  productname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  product_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:myexchange.Order.productname)
+  // @@protoc_insertion_point(field_set_pointer:myexchange.Order.product_name)
 }
-inline ::std::string* Order::mutable_productname() {
+inline ::std::string* Order::mutable_product_name() {
   
-  // @@protoc_insertion_point(field_mutable:myexchange.Order.productname)
-  return productname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:myexchange.Order.product_name)
+  return product_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Order::release_productname() {
-  // @@protoc_insertion_point(field_release:myexchange.Order.productname)
+inline ::std::string* Order::release_product_name() {
+  // @@protoc_insertion_point(field_release:myexchange.Order.product_name)
   
-  return productname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return product_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Order::set_allocated_productname(::std::string* productname) {
-  if (productname != nullptr) {
+inline void Order::set_allocated_product_name(::std::string* product_name) {
+  if (product_name != nullptr) {
     
   } else {
     
   }
-  productname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productname);
-  // @@protoc_insertion_point(field_set_allocated:myexchange.Order.productname)
+  product_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), product_name);
+  // @@protoc_insertion_point(field_set_allocated:myexchange.Order.product_name)
 }
 
-// string productdesc = 4;
-inline void Order::clear_productdesc() {
-  productdesc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string product_desc = 4;
+inline void Order::clear_product_desc() {
+  product_desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Order::productdesc() const {
-  // @@protoc_insertion_point(field_get:myexchange.Order.productdesc)
-  return productdesc_.GetNoArena();
+inline const ::std::string& Order::product_desc() const {
+  // @@protoc_insertion_point(field_get:myexchange.Order.product_desc)
+  return product_desc_.GetNoArena();
 }
-inline void Order::set_productdesc(const ::std::string& value) {
+inline void Order::set_product_desc(const ::std::string& value) {
   
-  productdesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:myexchange.Order.productdesc)
+  product_desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:myexchange.Order.product_desc)
 }
 #if LANG_CXX11
-inline void Order::set_productdesc(::std::string&& value) {
+inline void Order::set_product_desc(::std::string&& value) {
   
-  productdesc_.SetNoArena(
+  product_desc_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:myexchange.Order.productdesc)
+  // @@protoc_insertion_point(field_set_rvalue:myexchange.Order.product_desc)
 }
 #endif
-inline void Order::set_productdesc(const char* value) {
+inline void Order::set_product_desc(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  productdesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:myexchange.Order.productdesc)
+  product_desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:myexchange.Order.product_desc)
 }
-inline void Order::set_productdesc(const char* value, size_t size) {
+inline void Order::set_product_desc(const char* value, size_t size) {
   
-  productdesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  product_desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:myexchange.Order.productdesc)
+  // @@protoc_insertion_point(field_set_pointer:myexchange.Order.product_desc)
 }
-inline ::std::string* Order::mutable_productdesc() {
+inline ::std::string* Order::mutable_product_desc() {
   
-  // @@protoc_insertion_point(field_mutable:myexchange.Order.productdesc)
-  return productdesc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:myexchange.Order.product_desc)
+  return product_desc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Order::release_productdesc() {
-  // @@protoc_insertion_point(field_release:myexchange.Order.productdesc)
+inline ::std::string* Order::release_product_desc() {
+  // @@protoc_insertion_point(field_release:myexchange.Order.product_desc)
   
-  return productdesc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return product_desc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Order::set_allocated_productdesc(::std::string* productdesc) {
-  if (productdesc != nullptr) {
+inline void Order::set_allocated_product_desc(::std::string* product_desc) {
+  if (product_desc != nullptr) {
     
   } else {
     
   }
-  productdesc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), productdesc);
-  // @@protoc_insertion_point(field_set_allocated:myexchange.Order.productdesc)
+  product_desc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), product_desc);
+  // @@protoc_insertion_point(field_set_allocated:myexchange.Order.product_desc)
 }
 
-// double productprice = 5;
-inline void Order::clear_productprice() {
-  productprice_ = 0;
+// double product_price = 5;
+inline void Order::clear_product_price() {
+  product_price_ = 0;
 }
-inline double Order::productprice() const {
-  // @@protoc_insertion_point(field_get:myexchange.Order.productprice)
-  return productprice_;
+inline double Order::product_price() const {
+  // @@protoc_insertion_point(field_get:myexchange.Order.product_price)
+  return product_price_;
 }
-inline void Order::set_productprice(double value) {
+inline void Order::set_product_price(double value) {
   
-  productprice_ = value;
-  // @@protoc_insertion_point(field_set:myexchange.Order.productprice)
+  product_price_ = value;
+  // @@protoc_insertion_point(field_set:myexchange.Order.product_price)
 }
 
-// int64 productcount = 6;
-inline void Order::clear_productcount() {
-  productcount_ = PROTOBUF_LONGLONG(0);
+// int64 product_count = 6;
+inline void Order::clear_product_count() {
+  product_count_ = PROTOBUF_LONGLONG(0);
 }
-inline ::google::protobuf::int64 Order::productcount() const {
-  // @@protoc_insertion_point(field_get:myexchange.Order.productcount)
-  return productcount_;
+inline ::google::protobuf::int64 Order::product_count() const {
+  // @@protoc_insertion_point(field_get:myexchange.Order.product_count)
+  return product_count_;
 }
-inline void Order::set_productcount(::google::protobuf::int64 value) {
+inline void Order::set_product_count(::google::protobuf::int64 value) {
   
-  productcount_ = value;
-  // @@protoc_insertion_point(field_set:myexchange.Order.productcount)
+  product_count_ = value;
+  // @@protoc_insertion_point(field_set:myexchange.Order.product_count)
 }
 
 // -------------------------------------------------------------------
 
 // Exchange
 
-// string orderid = 1;
-inline void Exchange::clear_orderid() {
-  orderid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string order_id = 1;
+inline void Exchange::clear_order_id() {
+  order_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Exchange::orderid() const {
-  // @@protoc_insertion_point(field_get:myexchange.Exchange.orderid)
-  return orderid_.GetNoArena();
+inline const ::std::string& Exchange::order_id() const {
+  // @@protoc_insertion_point(field_get:myexchange.Exchange.order_id)
+  return order_id_.GetNoArena();
 }
-inline void Exchange::set_orderid(const ::std::string& value) {
+inline void Exchange::set_order_id(const ::std::string& value) {
   
-  orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:myexchange.Exchange.orderid)
+  order_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:myexchange.Exchange.order_id)
 }
 #if LANG_CXX11
-inline void Exchange::set_orderid(::std::string&& value) {
+inline void Exchange::set_order_id(::std::string&& value) {
   
-  orderid_.SetNoArena(
+  order_id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:myexchange.Exchange.orderid)
+  // @@protoc_insertion_point(field_set_rvalue:myexchange.Exchange.order_id)
 }
 #endif
-inline void Exchange::set_orderid(const char* value) {
+inline void Exchange::set_order_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:myexchange.Exchange.orderid)
+  order_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:myexchange.Exchange.order_id)
 }
-inline void Exchange::set_orderid(const char* value, size_t size) {
+inline void Exchange::set_order_id(const char* value, size_t size) {
   
-  orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  order_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:myexchange.Exchange.orderid)
+  // @@protoc_insertion_point(field_set_pointer:myexchange.Exchange.order_id)
 }
-inline ::std::string* Exchange::mutable_orderid() {
+inline ::std::string* Exchange::mutable_order_id() {
   
-  // @@protoc_insertion_point(field_mutable:myexchange.Exchange.orderid)
-  return orderid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:myexchange.Exchange.order_id)
+  return order_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Exchange::release_orderid() {
-  // @@protoc_insertion_point(field_release:myexchange.Exchange.orderid)
+inline ::std::string* Exchange::release_order_id() {
+  // @@protoc_insertion_point(field_release:myexchange.Exchange.order_id)
   
-  return orderid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return order_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Exchange::set_allocated_orderid(::std::string* orderid) {
-  if (orderid != nullptr) {
+inline void Exchange::set_allocated_order_id(::std::string* order_id) {
+  if (order_id != nullptr) {
     
   } else {
     
   }
-  orderid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), orderid);
-  // @@protoc_insertion_point(field_set_allocated:myexchange.Exchange.orderid)
+  order_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), order_id);
+  // @@protoc_insertion_point(field_set_allocated:myexchange.Exchange.order_id)
 }
 
 // string products = 2;
@@ -1188,57 +1188,57 @@ inline void Exchange::set_price(double value) {
   // @@protoc_insertion_point(field_set:myexchange.Exchange.price)
 }
 
-// string time = 4;
-inline void Exchange::clear_time() {
-  time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string timestamp = 4;
+inline void Exchange::clear_timestamp() {
+  timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Exchange::time() const {
-  // @@protoc_insertion_point(field_get:myexchange.Exchange.time)
-  return time_.GetNoArena();
+inline const ::std::string& Exchange::timestamp() const {
+  // @@protoc_insertion_point(field_get:myexchange.Exchange.timestamp)
+  return timestamp_.GetNoArena();
 }
-inline void Exchange::set_time(const ::std::string& value) {
+inline void Exchange::set_timestamp(const ::std::string& value) {
   
-  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:myexchange.Exchange.time)
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:myexchange.Exchange.timestamp)
 }
 #if LANG_CXX11
-inline void Exchange::set_time(::std::string&& value) {
+inline void Exchange::set_timestamp(::std::string&& value) {
   
-  time_.SetNoArena(
+  timestamp_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:myexchange.Exchange.time)
+  // @@protoc_insertion_point(field_set_rvalue:myexchange.Exchange.timestamp)
 }
 #endif
-inline void Exchange::set_time(const char* value) {
+inline void Exchange::set_timestamp(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:myexchange.Exchange.time)
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:myexchange.Exchange.timestamp)
 }
-inline void Exchange::set_time(const char* value, size_t size) {
+inline void Exchange::set_timestamp(const char* value, size_t size) {
   
-  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:myexchange.Exchange.time)
+  // @@protoc_insertion_point(field_set_pointer:myexchange.Exchange.timestamp)
 }
-inline ::std::string* Exchange::mutable_time() {
+inline ::std::string* Exchange::mutable_timestamp() {
   
-  // @@protoc_insertion_point(field_mutable:myexchange.Exchange.time)
-  return time_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:myexchange.Exchange.timestamp)
+  return timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Exchange::release_time() {
-  // @@protoc_insertion_point(field_release:myexchange.Exchange.time)
+inline ::std::string* Exchange::release_timestamp() {
+  // @@protoc_insertion_point(field_release:myexchange.Exchange.timestamp)
   
-  return time_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Exchange::set_allocated_time(::std::string* time) {
-  if (time != nullptr) {
+inline void Exchange::set_allocated_timestamp(::std::string* timestamp) {
+  if (timestamp != nullptr) {
     
   } else {
     
   }
-  time_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), time);
-  // @@protoc_insertion_point(field_set_allocated:myexchange.Exchange.time)
+  timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), timestamp);
+  // @@protoc_insertion_point(field_set_allocated:myexchange.Exchange.timestamp)
 }
 
 #ifdef __GNUC__

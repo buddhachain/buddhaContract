@@ -18,18 +18,18 @@ message Product {
 //又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
 message Order {
     string id              = 1; //订单编号
-    string productid       = 2; //对应的产品id
-    string productname     = 3; //对应的产品名称
-    string productdesc     = 4; //对应的产品描述
-    double productprice    = 5; //对应的产品价格
-    int64  productcount    = 6; //这个产品的个数
+    string product_id       = 2; //对应的产品id
+    string product_name     = 3; //对应的产品名称
+    string product_desc     = 4; //对应的产品描述
+    double product_price    = 5; //对应的产品价格
+    int64  product_count    = 6; //这个产品的个数
 }
 
 //描述交易信息
 message Exchange {
-    string orderid       = 1; //订单编号
+    string order_id      = 1; //订单编号
     string products      = 2; //产品id {aaa,bbb,ccc} 
     double price         = 3; //产品总价格
-    string time          = 4; //交易时间
+    string timestamp     = 4; //订单生成时间
 }
 
