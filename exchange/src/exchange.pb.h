@@ -201,19 +201,19 @@ class Product :
   ::std::string* release_desc();
   void set_allocated_desc(::std::string* desc);
 
-  // string time = 7;
-  void clear_time();
-  static const int kTimeFieldNumber = 7;
-  const ::std::string& time() const;
-  void set_time(const ::std::string& value);
+  // string lasttime = 7;
+  void clear_lasttime();
+  static const int kLasttimeFieldNumber = 7;
+  const ::std::string& lasttime() const;
+  void set_lasttime(const ::std::string& value);
   #if LANG_CXX11
-  void set_time(::std::string&& value);
+  void set_lasttime(::std::string&& value);
   #endif
-  void set_time(const char* value);
-  void set_time(const char* value, size_t size);
-  ::std::string* mutable_time();
-  ::std::string* release_time();
-  void set_allocated_time(::std::string* time);
+  void set_lasttime(const char* value);
+  void set_lasttime(const char* value, size_t size);
+  ::std::string* mutable_lasttime();
+  ::std::string* release_lasttime();
+  void set_allocated_lasttime(::std::string* lasttime);
 
   // double price = 5;
   void clear_price();
@@ -221,11 +221,11 @@ class Product :
   double price() const;
   void set_price(double value);
 
-  // int64 amount = 6;
-  void clear_amount();
-  static const int kAmountFieldNumber = 6;
-  ::google::protobuf::int64 amount() const;
-  void set_amount(::google::protobuf::int64 value);
+  // int64 count = 6;
+  void clear_count();
+  static const int kCountFieldNumber = 6;
+  ::google::protobuf::int64 count() const;
+  void set_count(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:myexchange.Product)
  private:
@@ -235,9 +235,9 @@ class Product :
   ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
-  ::google::protobuf::internal::ArenaStringPtr time_;
+  ::google::protobuf::internal::ArenaStringPtr lasttime_;
   double price_;
-  ::google::protobuf::int64 amount_;
+  ::google::protobuf::int64 count_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_exchange_2eproto;
 };
@@ -551,11 +551,11 @@ class Exchange :
   ::std::string* release_timestamp();
   void set_allocated_timestamp(::std::string* timestamp);
 
-  // double price = 3;
-  void clear_price();
-  static const int kPriceFieldNumber = 3;
-  double price() const;
-  void set_price(double value);
+  // double amount = 3;
+  void clear_amount();
+  static const int kAmountFieldNumber = 3;
+  double amount() const;
+  void set_amount(double value);
 
   // @@protoc_insertion_point(class_scope:myexchange.Exchange)
  private:
@@ -565,7 +565,7 @@ class Exchange :
   ::google::protobuf::internal::ArenaStringPtr order_id_;
   ::google::protobuf::internal::ArenaStringPtr products_;
   ::google::protobuf::internal::ArenaStringPtr timestamp_;
-  double price_;
+  double amount_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_exchange_2eproto;
 };
@@ -753,71 +753,71 @@ inline void Product::set_price(double value) {
   // @@protoc_insertion_point(field_set:myexchange.Product.price)
 }
 
-// int64 amount = 6;
-inline void Product::clear_amount() {
-  amount_ = PROTOBUF_LONGLONG(0);
+// int64 count = 6;
+inline void Product::clear_count() {
+  count_ = PROTOBUF_LONGLONG(0);
 }
-inline ::google::protobuf::int64 Product::amount() const {
-  // @@protoc_insertion_point(field_get:myexchange.Product.amount)
-  return amount_;
+inline ::google::protobuf::int64 Product::count() const {
+  // @@protoc_insertion_point(field_get:myexchange.Product.count)
+  return count_;
 }
-inline void Product::set_amount(::google::protobuf::int64 value) {
+inline void Product::set_count(::google::protobuf::int64 value) {
   
-  amount_ = value;
-  // @@protoc_insertion_point(field_set:myexchange.Product.amount)
+  count_ = value;
+  // @@protoc_insertion_point(field_set:myexchange.Product.count)
 }
 
-// string time = 7;
-inline void Product::clear_time() {
-  time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string lasttime = 7;
+inline void Product::clear_lasttime() {
+  lasttime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Product::time() const {
-  // @@protoc_insertion_point(field_get:myexchange.Product.time)
-  return time_.GetNoArena();
+inline const ::std::string& Product::lasttime() const {
+  // @@protoc_insertion_point(field_get:myexchange.Product.lasttime)
+  return lasttime_.GetNoArena();
 }
-inline void Product::set_time(const ::std::string& value) {
+inline void Product::set_lasttime(const ::std::string& value) {
   
-  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:myexchange.Product.time)
+  lasttime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:myexchange.Product.lasttime)
 }
 #if LANG_CXX11
-inline void Product::set_time(::std::string&& value) {
+inline void Product::set_lasttime(::std::string&& value) {
   
-  time_.SetNoArena(
+  lasttime_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:myexchange.Product.time)
+  // @@protoc_insertion_point(field_set_rvalue:myexchange.Product.lasttime)
 }
 #endif
-inline void Product::set_time(const char* value) {
+inline void Product::set_lasttime(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:myexchange.Product.time)
+  lasttime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:myexchange.Product.lasttime)
 }
-inline void Product::set_time(const char* value, size_t size) {
+inline void Product::set_lasttime(const char* value, size_t size) {
   
-  time_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  lasttime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:myexchange.Product.time)
+  // @@protoc_insertion_point(field_set_pointer:myexchange.Product.lasttime)
 }
-inline ::std::string* Product::mutable_time() {
+inline ::std::string* Product::mutable_lasttime() {
   
-  // @@protoc_insertion_point(field_mutable:myexchange.Product.time)
-  return time_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:myexchange.Product.lasttime)
+  return lasttime_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Product::release_time() {
-  // @@protoc_insertion_point(field_release:myexchange.Product.time)
+inline ::std::string* Product::release_lasttime() {
+  // @@protoc_insertion_point(field_release:myexchange.Product.lasttime)
   
-  return time_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return lasttime_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Product::set_allocated_time(::std::string* time) {
-  if (time != nullptr) {
+inline void Product::set_allocated_lasttime(::std::string* lasttime) {
+  if (lasttime != nullptr) {
     
   } else {
     
   }
-  time_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), time);
-  // @@protoc_insertion_point(field_set_allocated:myexchange.Product.time)
+  lasttime_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), lasttime);
+  // @@protoc_insertion_point(field_set_allocated:myexchange.Product.lasttime)
 }
 
 // -------------------------------------------------------------------
@@ -1174,18 +1174,18 @@ inline void Exchange::set_allocated_products(::std::string* products) {
   // @@protoc_insertion_point(field_set_allocated:myexchange.Exchange.products)
 }
 
-// double price = 3;
-inline void Exchange::clear_price() {
-  price_ = 0;
+// double amount = 3;
+inline void Exchange::clear_amount() {
+  amount_ = 0;
 }
-inline double Exchange::price() const {
-  // @@protoc_insertion_point(field_get:myexchange.Exchange.price)
-  return price_;
+inline double Exchange::amount() const {
+  // @@protoc_insertion_point(field_get:myexchange.Exchange.amount)
+  return amount_;
 }
-inline void Exchange::set_price(double value) {
+inline void Exchange::set_amount(double value) {
   
-  price_ = value;
-  // @@protoc_insertion_point(field_set:myexchange.Exchange.price)
+  amount_ = value;
+  // @@protoc_insertion_point(field_set:myexchange.Exchange.amount)
 }
 
 // string timestamp = 4;

@@ -84,8 +84,8 @@ const int Product::kIdFieldNumber;
 const int Product::kNameFieldNumber;
 const int Product::kDescFieldNumber;
 const int Product::kPriceFieldNumber;
-const int Product::kAmountFieldNumber;
-const int Product::kTimeFieldNumber;
+const int Product::kCountFieldNumber;
+const int Product::kLasttimeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Product::Product()
@@ -109,13 +109,13 @@ Product::Product(const Product& from)
   if (from.desc().size() > 0) {
     desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
   }
-  time_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.time().size() > 0) {
-    time_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.time_);
+  lasttime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.lasttime().size() > 0) {
+    lasttime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.lasttime_);
   }
   ::memcpy(&price_, &from.price_,
-    static_cast<size_t>(reinterpret_cast<char*>(&amount_) -
-    reinterpret_cast<char*>(&price_)) + sizeof(amount_));
+    static_cast<size_t>(reinterpret_cast<char*>(&count_) -
+    reinterpret_cast<char*>(&price_)) + sizeof(count_));
   // @@protoc_insertion_point(copy_constructor:myexchange.Product)
 }
 
@@ -125,10 +125,10 @@ void Product::SharedCtor() {
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  time_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  lasttime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&price_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&amount_) -
-      reinterpret_cast<char*>(&price_)) + sizeof(amount_));
+      reinterpret_cast<char*>(&count_) -
+      reinterpret_cast<char*>(&price_)) + sizeof(count_));
 }
 
 Product::~Product() {
@@ -140,7 +140,7 @@ void Product::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  time_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  lasttime_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Product::SetCachedSize(int size) const {
@@ -161,10 +161,10 @@ void Product::Clear() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  lasttime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&price_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&amount_) -
-      reinterpret_cast<char*>(&price_)) + sizeof(amount_));
+      reinterpret_cast<char*>(&count_) -
+      reinterpret_cast<char*>(&price_)) + sizeof(count_));
   _internal_metadata_.Clear();
 }
 
@@ -236,20 +236,20 @@ const char* Product::_InternalParse(const char* begin, const char* end, void* ob
         ptr += sizeof(double);
         break;
       }
-      // int64 amount = 6;
+      // int64 count = 6;
       case 6: {
         if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
-        msg->set_amount(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_count(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // string time = 7;
+      // string lasttime = 7;
       case 7: {
         if (static_cast<::google::protobuf::uint8>(tag) != 58) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_time();
+        object = msg->mutable_lasttime();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -357,28 +357,28 @@ bool Product::MergePartialFromCodedStream(
         break;
       }
 
-      // int64 amount = 6;
+      // int64 count = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &amount_)));
+                 input, &count_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string time = 7;
+      // string lasttime = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_time()));
+                input, this->mutable_lasttime()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->time().data(), static_cast<int>(this->time().length()),
+            this->lasttime().data(), static_cast<int>(this->lasttime().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "myexchange.Product.time"));
+            "myexchange.Product.lasttime"));
         } else {
           goto handle_unusual;
         }
@@ -447,19 +447,19 @@ void Product::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->price(), output);
   }
 
-  // int64 amount = 6;
-  if (this->amount() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->amount(), output);
+  // int64 count = 6;
+  if (this->count() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->count(), output);
   }
 
-  // string time = 7;
-  if (this->time().size() > 0) {
+  // string lasttime = 7;
+  if (this->lasttime().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->time().data(), static_cast<int>(this->time().length()),
+      this->lasttime().data(), static_cast<int>(this->lasttime().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "myexchange.Product.time");
+      "myexchange.Product.lasttime");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      7, this->time(), output);
+      7, this->lasttime(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -498,11 +498,11 @@ size_t Product::ByteSizeLong() const {
         this->desc());
   }
 
-  // string time = 7;
-  if (this->time().size() > 0) {
+  // string lasttime = 7;
+  if (this->lasttime().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->time());
+        this->lasttime());
   }
 
   // double price = 5;
@@ -510,11 +510,11 @@ size_t Product::ByteSizeLong() const {
     total_size += 1 + 8;
   }
 
-  // int64 amount = 6;
-  if (this->amount() != 0) {
+  // int64 count = 6;
+  if (this->count() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->amount());
+        this->count());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -546,15 +546,15 @@ void Product::MergeFrom(const Product& from) {
 
     desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
   }
-  if (from.time().size() > 0) {
+  if (from.lasttime().size() > 0) {
 
-    time_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.time_);
+    lasttime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.lasttime_);
   }
   if (from.price() != 0) {
     set_price(from.price());
   }
-  if (from.amount() != 0) {
-    set_amount(from.amount());
+  if (from.count() != 0) {
+    set_count(from.count());
   }
 }
 
@@ -582,10 +582,10 @@ void Product::InternalSwap(Product* other) {
     GetArenaNoVirtual());
   desc_.Swap(&other->desc_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  time_.Swap(&other->time_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  lasttime_.Swap(&other->lasttime_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(price_, other->price_);
-  swap(amount_, other->amount_);
+  swap(count_, other->count_);
 }
 
 ::std::string Product::GetTypeName() const {
@@ -1126,7 +1126,7 @@ class Exchange::HasBitSetters {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Exchange::kOrderIdFieldNumber;
 const int Exchange::kProductsFieldNumber;
-const int Exchange::kPriceFieldNumber;
+const int Exchange::kAmountFieldNumber;
 const int Exchange::kTimestampFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -1151,7 +1151,7 @@ Exchange::Exchange(const Exchange& from)
   if (from.timestamp().size() > 0) {
     timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.timestamp_);
   }
-  price_ = from.price_;
+  amount_ = from.amount_;
   // @@protoc_insertion_point(copy_constructor:myexchange.Exchange)
 }
 
@@ -1161,7 +1161,7 @@ void Exchange::SharedCtor() {
   order_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   products_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  price_ = 0;
+  amount_ = 0;
 }
 
 Exchange::~Exchange() {
@@ -1193,7 +1193,7 @@ void Exchange::Clear() {
   order_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   products_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  price_ = 0;
+  amount_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -1242,10 +1242,10 @@ const char* Exchange::_InternalParse(const char* begin, const char* end, void* o
         ptr += size;
         break;
       }
-      // double price = 3;
+      // double amount = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 25) goto handle_unusual;
-        msg->set_price(::google::protobuf::io::UnalignedLoad<double>(ptr));
+        msg->set_amount(::google::protobuf::io::UnalignedLoad<double>(ptr));
         ptr += sizeof(double);
         break;
       }
@@ -1335,13 +1335,13 @@ bool Exchange::MergePartialFromCodedStream(
         break;
       }
 
-      // double price = 3;
+      // double amount = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (25 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &price_)));
+                 input, &amount_)));
         } else {
           goto handle_unusual;
         }
@@ -1410,9 +1410,9 @@ void Exchange::SerializeWithCachedSizes(
       2, this->products(), output);
   }
 
-  // double price = 3;
-  if (this->price() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->price(), output);
+  // double amount = 3;
+  if (this->amount() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->amount(), output);
   }
 
   // string timestamp = 4;
@@ -1461,8 +1461,8 @@ size_t Exchange::ByteSizeLong() const {
         this->timestamp());
   }
 
-  // double price = 3;
-  if (this->price() != 0) {
+  // double amount = 3;
+  if (this->amount() != 0) {
     total_size += 1 + 8;
   }
 
@@ -1495,8 +1495,8 @@ void Exchange::MergeFrom(const Exchange& from) {
 
     timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.timestamp_);
   }
-  if (from.price() != 0) {
-    set_price(from.price());
+  if (from.amount() != 0) {
+    set_amount(from.amount());
   }
 }
 
@@ -1524,7 +1524,7 @@ void Exchange::InternalSwap(Exchange* other) {
     GetArenaNoVirtual());
   timestamp_.Swap(&other->timestamp_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(price_, other->price_);
+  swap(amount_, other->amount_);
 }
 
 ::std::string Exchange::GetTypeName() const {

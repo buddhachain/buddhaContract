@@ -5,19 +5,19 @@ package myexchange;
 
 //描述产品信息。
 message Product {
-    string id      = 1; //产品编号
-    string name    = 2; //产品名称
-    string desc    = 3; //产品描述
-    double price   = 5; //产品价格
-    int64  amount  = 6; //产品数量
-    string time    = 7; //产品最后修改的时间
+    string id       = 1; //产品编号
+    string name     = 2; //产品名称
+    string desc     = 3; //产品描述
+    double price    = 5; //产品价格
+    int64  count    = 6; //产品数量
+    string lasttime = 7; //产品最后修改的时间
 }
 
 //描述订单信息。订单与产品的关系。
 //由于订单里可以有多个产品，并且产品的描述未必与当前的产品表中的内容一致。
 //又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
 message Order {
-    string id              = 1; //订单编号
+    string id               = 1; //订单编号
     string product_id       = 2; //对应的产品id
     string product_name     = 3; //对应的产品名称
     string product_desc     = 4; //对应的产品描述
@@ -29,7 +29,7 @@ message Order {
 message Exchange {
     string order_id      = 1; //订单编号
     string products      = 2; //产品id {aaa,bbb,ccc} 
-    double price         = 3; //产品总价格
+    double amount        = 3; //产品总价格
     string timestamp     = 4; //订单生成时间
 }
 
