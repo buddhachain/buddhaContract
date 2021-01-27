@@ -20,27 +20,27 @@ xchain-cli transfer --to XC1234567890222222@xuper --amount 10000000000000 --keys
 ```bash
 #生成协议源文件
 cd src/
-protoc --cpp_out=. exchange.proto
+protoc --cpp_out=. buddha.proto
 
 cd ..
 xdev build
 
 
-xchain-cli wasm deploy --account XC1234567890111111@xuper --cname exchange --fee 5000000 --runtime c ../buddhaContract/exchange/exchange.wasm
+xchain-cli wasm deploy --account XC1234567890111111@xuper --cname buddha --fee 5000000 --runtime c ../buddhaContract/buddha/buddha.wasm
 
-xchain-cli wasm upgrade --account XC1234567890111111@xuper --cname exchange --fee 5000000 ../buddhaContract/exchange/exchange.wasm
+xchain-cli wasm upgrade --account XC1234567890111111@xuper --cname buddha --fee 5000000 ../buddhaContract/buddha/buddha.wasm
 
 
-xchain-cli wasm invoke --fee 1000000 exchange --method product_find -a '{"id":"1"}' --account XC1234567890111111@xuper
-xchain-cli wasm invoke --fee 1000000 exchange --method product_scan -a '{"id":"1"}' --account XC1234567890111111@xuper
-xchain-cli wasm invoke --fee 1000000 exchange --method product_add -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "count":"6","lasttime":"123456"}' --account XC1234567890111111@xuper
-xchain-cli wasm invoke --fee 1000000 exchange --method product_update -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "count":"6","lasttime":"123456"}' --account XC1234567890111111@xuper
-xchain-cli wasm invoke --fee 1000000 exchange --method product_del -a '{"id": "1"}'  --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method product_find -a '{"id":"1"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method product_scan -a '{"id":"1"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method product_add -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "count":"6","lasttime":"123456"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method product_update -a '{"id": "1", "name":"prodname","desc":"proddesc","price":"5", "count":"6","lasttime":"123456"}' --account XC1234567890111111@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method product_del -a '{"id": "1"}'  --account XC1234567890111111@xuper
 
 xchain-cli account balance XC1234567890111111@xuper
 xchain-cli account balance XC1234567890222222@xuper
-xchain-cli wasm invoke --fee 1000000 exchange --method buy -a '{"id": "1","products":"[{\"id\":\"1\",\"count\":\"1\"},{\"id\":\"1\",\"count\":\"2\"},{\"id\":\"1\",\"count\":\"3\"}]","amount":"30","timestamp":"11111"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method buy -a '{"id": "1","products":"[{\"id\":\"1\",\"count\":\"1\"},{\"id\":\"1\",\"count\":\"2\"},{\"id\":\"1\",\"count\":\"3\"}]","amount":"30","timestamp":"11111"}' --account XC1234567890222222@xuper
 
-xchain-cli wasm invoke --fee 1000000 exchange --method product_find -a '{"id":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method product_find -a '{"id":"1"}' --account XC1234567890222222@xuper
 
 ```

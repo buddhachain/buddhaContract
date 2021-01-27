@@ -6,19 +6,19 @@
 #include "xchain/table/table.tpl.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "exchange.pb.h"
+#include "buddha.pb.h"
 
 namespace pb = xchain::contract::sdk;
 
-class Exchange : public xchain::Contract {
+class Buddha : public xchain::Contract {
 public:
-    Exchange(): _product(context(),  "product"),
+    Buddha(): _product(context(),  "product"),
                 _order(context(),    "order"),
                 _exchange(context(), "exchange"),
                 ctx(context()) {}
 
     // 1. rowkey can not be same with index
-    class product: public myexchange::Product {
+    class product: public buddha::Product {
         DEFINE_ROWKEY(id);
         DEFINE_INDEX_BEGIN(1)
             DEFINE_INDEX_ADD(0, id)
@@ -45,14 +45,14 @@ public:
 
     };
 
-    class order: public myexchange::Order {
+    class order: public buddha::Order {
         DEFINE_ROWKEY(id);
         DEFINE_INDEX_BEGIN(1)
             DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_END();
     };
 
-    class exchange: public myexchange::Exchange {
+    class exchange: public buddha::Exchange {
         DEFINE_ROWKEY(order_id);
         DEFINE_INDEX_BEGIN(1)
             DEFINE_INDEX_ADD(0, order_id)
@@ -99,7 +99,7 @@ private:
 
 };
 
-bool Exchange::is_deployer_operate() {
+bool Buddha::is_deployer_operate() {
     std::string deployer;
     if (!ctx->get_object("deployer", &deployer)) {
         ctx->error("contrace error, unknown deployer");
@@ -115,34 +115,34 @@ bool Exchange::is_deployer_operate() {
 }
 
 
-bool Exchange::is_product_exist(const std::string& id,product& ent) {
+bool Buddha::is_product_exist(const std::string& id,product& ent) {
     if (!get_product().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Exchange::is_order_exist(const std::string& id,order& ent) {
+bool Buddha::is_order_exist(const std::string& id,order& ent) {
     if (!get_order().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Exchange::is_exchange_exist(const std::string& id,exchange& ent) {
+bool Buddha::is_exchange_exist(const std::string& id,exchange& ent) {
     if (!get_exchange().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-void Exchange::initialize() {
+void Buddha::initialize() {
     ctx->put_object("deployer", ctx->initiator());
     ctx->emit_event("initialize", ctx->initiator());
     ctx->ok("deployer=" + ctx->initiator());
 }
 
-void Exchange::product_find() {
+void Buddha::product_find() {
     if(!is_deployer_operate())
         return ;
 
@@ -156,7 +156,7 @@ void Exchange::product_find() {
     ctx->ok("ok -> " + ent.to_string());
 }
 
-void Exchange::product_add() {
+void Buddha::product_add() {
     if(!is_deployer_operate())
         return ;
 
@@ -182,7 +182,7 @@ void Exchange::product_add() {
     ctx->ok(ent.to_string());
 }
 
-void Exchange::product_del() {
+void Buddha::product_del() {
     if(!is_deployer_operate())
         return ;
 
@@ -202,7 +202,7 @@ void Exchange::product_del() {
     ctx->ok(ent.to_string());
 }
 
-void Exchange::product_update() {
+void Buddha::product_update() {
     if(!is_deployer_operate())
         return ;
 
@@ -230,7 +230,7 @@ void Exchange::product_update() {
     ctx->ok(ent.to_string() + "update success");
 }
 
-void Exchange::product_scan() {
+void Buddha::product_scan() {
     if(!is_deployer_operate())
         return ;
 
@@ -240,7 +240,7 @@ void Exchange::product_scan() {
     int i = 0;
     std::string re ;
     while(it->next()) {
-        Exchange::product ent;
+        Buddha::product ent;
         if (!it->get(&ent))
             break;
 
@@ -256,7 +256,7 @@ void Exchange::product_scan() {
     ctx->ok(std::to_string(i) + " -> " + re + " > " + it->error(true));
 }
 
-void Exchange::buy() {
+void Buddha::buy() {
 
     //判断订单是不是已经存在
     const std::string& order_id = ctx->arg("id");
@@ -353,7 +353,7 @@ void Exchange::buy() {
     ctx->ok("ok -> " + std::to_string(calced_amount));
 }
 
-void Exchange::repeal_buy() {
+void Buddha::repeal_buy() {
     //判断订单是不是已经存在
     const std::string& order_id = ctx->arg("id");
     order od;
@@ -450,11 +450,11 @@ void Exchange::repeal_buy() {
 }
 
 //初始化
-DEFINE_METHOD(Exchange, initialize)     { self.initialize();     }
-DEFINE_METHOD(Exchange, product_find)   { self.product_find();   }
-DEFINE_METHOD(Exchange, product_add)    { self.product_add();    }
-DEFINE_METHOD(Exchange, product_del)    { self.product_del();    }
-DEFINE_METHOD(Exchange, product_update) { self.product_update(); }
-DEFINE_METHOD(Exchange, product_scan)   { self.product_scan();   }
-DEFINE_METHOD(Exchange, buy)            { self.buy();            }
-DEFINE_METHOD(Exchange, repeal_buy)     { self.repeal_buy();     }
+DEFINE_METHOD(Buddha, initialize)     { self.initialize();     }
+DEFINE_METHOD(Buddha, product_find)   { self.product_find();   }
+DEFINE_METHOD(Buddha, product_add)    { self.product_add();    }
+DEFINE_METHOD(Buddha, product_del)    { self.product_del();    }
+DEFINE_METHOD(Buddha, product_update) { self.product_update(); }
+DEFINE_METHOD(Buddha, product_scan)   { self.product_scan();   }
+DEFINE_METHOD(Buddha, buy)            { self.buy();            }
+DEFINE_METHOD(Buddha, repeal_buy)     { self.repeal_buy();     }

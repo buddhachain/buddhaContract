@@ -1,7 +1,7 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-package myexchange;
+package buddha;
 
 //描述产品信息。
 message Product {
