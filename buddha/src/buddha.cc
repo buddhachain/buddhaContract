@@ -257,11 +257,37 @@ void Buddha::product_scan() {
 }
 
 void Buddha::buy() {
-
-    //判断订单是不是已经存在
     const std::string& order_id = ctx->arg("id");
+
+    //判断订单是不是存在
+    while(true) {
+        exchange ex;
+        if (!is_exchange_exist(order_id, ex))  {
+            ctx->error("exchange " + order_id + " not exist .");
+            ctx->logf("exchange " + order_id + " not exist .");
+            break;
+        }
+        //删除exchange中的这个笔订单记录
+        get_exchange().del(ex);
+    }
+
+    //判断订单是不是存在
+    while(true) {
+        if (!is_order_exist(order_id, od)) {
+
+        }
+        else {
+            ctx->error("order " + order_id + " exist .");
+            //解锁
+            return ;
+        }
+
+    }
     order od;
-    if (is_order_exist(order_id, od))  {
+    if (is_order_exist(order_id, od)) {
+
+    }
+    else {
         ctx->error("order " + order_id + " exist .");
         //解锁
         return ;
