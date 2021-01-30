@@ -3,8 +3,17 @@ option optimize_for = LITE_RUNTIME;
 
 package buddha;
 
+
+//描述基金会信息。
+message Founder {
+    string name    = 1; //基金会名称
+    string desc    = 2; //基金会描述
+    int64  amount  = 3; //抵押数量
+    bool   flag    = 4; //是否已经是基金会成员
+}
+
 //描述产品信息。
-message Product {
+message Kinddeed {
     string id       = 1; //产品编号
     string name     = 2; //产品名称
     string desc     = 3; //产品描述
