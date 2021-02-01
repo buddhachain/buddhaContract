@@ -21,7 +21,7 @@ class founder: public buddha::Founder {
         str += "{" ;
         str += name() + ",";
         str += desc() + ",";
-        str += std::to_string(amount()) + ",";
+        str += std::to_string(guaranty()) + ",";
         str += std::to_string(isyet());
         str += "}";
         return str;
@@ -74,6 +74,7 @@ class kinddeed: public buddha::Kinddeed {
         str += "{" ;
         str += id() + ",";
         str += name() + ",";
+        str += mastername() + ",";
         str += desc() + ",";
         str += std::to_string(price()) + ",";
         str += std::to_string(count()) + ",";
@@ -397,7 +398,7 @@ void Buddha::authorize_founder() {
     }
 
     if(is_founder(name)) {
-        ctx->ok(name + " is founder already.");
+        ctx->ok(name + " is already founder .");
         return ;
     }
 
@@ -420,16 +421,13 @@ void Buddha::recusal_founder() {
         return ;
     }
 
-    founder ent;
-    if(!is_founder_exist(name,ent)) {
-        ctx->error("founder " + name + " not exist .");
+    if(!is_founder(name)) {
+        ctx->error(name + " is not founder .");
         return ;
     }
 
-    if(is_founder(name)) {
-        ctx->error(name + " is founder already .");
-        return ;
-    }
+    founder ent;
+    is_founder_exist(name,ent);
 
     ent.set_isyet(false);
     get_founder_table().del(ent);
@@ -459,12 +457,12 @@ void Buddha::authorize_master() {
     }
 
     if(is_master(name)) {
-        ctx->ok(name + " is master already.");
+        ctx->ok(name + " is already master .");
         return ;
     }
 
-    ent.set_isyet(true);
     get_master_table().del(ent);
+    ent.set_isyet(true);
     get_master_table().put(ent);
 
     ctx->ok("authorize master "+ name + " success .");
@@ -493,8 +491,8 @@ void Buddha::recusal_master() {
         return ;
     }
 
-    ent.set_isyet(false);
     get_master_table().del(ent);
+    ent.set_isyet(false);
     get_master_table().put(ent);
 
     ctx->ok("recusal master "+ name + " success .");
@@ -520,7 +518,7 @@ void Buddha::authorize_online_kinddeed() {
     }
 
     get_kinddeed_table().del(ent);
-    ent.set_isonline(true);
+    ent.set_onlinestat(1);
     get_kinddeed_table().put(ent);
 
     ctx->ok("authorize kinddeed "+ ent.to_string() + " online success .");
@@ -545,7 +543,7 @@ void Buddha::authorize_offline_kinddeed() {
     }
 
     get_kinddeed_table().del(ent);
-    ent.set_isonline(false);
+    ent.set_onlinestate(2);
     get_kinddeed_table().put(ent);
 
     ctx->ok("authorize kinddeed "+ ent.to_string() + " offline success .");
@@ -555,18 +553,6 @@ void Buddha::authorize_kinddeed_proof() {
     const std::string& order_id = ctx->arg("orderid");
     if(order_id.empty()) {
         ctx->error("kinddeed proof orderid is empty");
-        return ;
-    }
-
-    const std::string& proof = ctx->arg("proof");
-    if(proof.empty()) {
-        ctx->error("kinddeed proof hash is empty");
-        return ;
-    }
-
-    const std::string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
-        ctx->error("kinddeed proof timestamp is empty");
         return ;
     }
 
@@ -589,9 +575,8 @@ void Buddha::authorize_kinddeed_proof() {
         return ;
     }
 
-    ent.set_orderid(order_id.c_str());
-    ent.set_proof(proof.c_str());
-    ent.set_timestamp(timestamp.c_str());
+    get_kinddeed_proof_table().del(ent);
+    ent.set_stat(1);
     get_kinddeed_proof_table().put(ent);
 
     ctx->ok("authorize kinddeed "+ ent.to_string() + " proof success .");
@@ -610,13 +595,54 @@ void Buddha::apply_online_kinddeed() {
         return ;
     }
     
+    kinddeed ent;
+    if (!is_kinddeed_exist(id, ent))  {
+        ctx->error("kinddeed " + id + " not exist .");
+        return ;
+    }
+
+    //正在申请上线的状态
+    if(ent.onlinestat() == 1) {
+        ctx->ok("kinddeed " + ent.to_string() + " is apply online stat, please wait for authorize .");
+        return ;
+    }
+
+    get_kinddeed_table().del(ent);
+    ent.set_onlinestat(1);
+    get_kinddeed_table().put(ent);
+
+    ctx->ok("kinddeed " + ent.to_string() + " apply online over, please wait for authorize .");
 }
 
 void Buddha::apply_offline_kinddeed() {
-    if(!is_master()) {
-        ctx->error(ctx->initiator() + " is not master, has no authority to apply offline kinddeed .");
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("kinddeed id is empty");
         return ;
     }
+
+    if(!is_master()) {
+        ctx->error(ctx->initiator() + " is not master, has no authority to apply online kinddeed .");
+        return ;
+    }
+    
+    kinddeed ent;
+    if (!is_kinddeed_exist(id, ent))  {
+        ctx->error("kinddeed " + id + " not exist .");
+        return ;
+    }
+
+    //正在申请下线的状态
+    if(ent.onlinestat() == 2) {
+        ctx->ok("kinddeed " + ent.to_string() + " is apply offline stat, please wait for authorize .");
+        return ;
+    }
+
+    get_kinddeed_table().del(ent);
+    ent.set_onlinestat(2);
+    get_kinddeed_table().put(ent);
+
+    ctx->ok("kinddeed " + ent.to_string() + " apply offline over, please wait for authorize .");
 }
 
 void Buddha::upload_kinddeed_proof() {
@@ -624,34 +650,89 @@ void Buddha::upload_kinddeed_proof() {
         ctx->error(ctx->initiator() + " is not master, has no authority to upload kinddeed proof .");
         return ;
     }
+
+    const std::string& order_id = ctx->arg("orderid");
+    if(order_id.empty()) {
+        ctx->error("kinddeed proof orderid is empty");
+        return ;
+    }
+
+    const std::string& proof = ctx->arg("proof");
+    if(proof.empty()) {
+        ctx->error("kinddeed proof hash is empty");
+        return ;
+    }
+
+    const std::string& timestamp = ctx->arg("timestamp");
+    if(timestamp.empty()) {
+        ctx->error("kinddeed proof timestamp is empty");
+        return ;
+    }
+
+    kinddeedproof ent;
+    if (is_kinddeed_proof_exist(order_id, ent))  {
+        ctx->ok("kinddeed proof " + order_id + " is exist .");
+        return ;
+    }
+
+    sync_exchange_order(order_id);
+
+    order od;
+    if (!is_order_exist(order_id, od))  {
+        ctx->error("order " + order_id + " is not exist .");
+        return ;
+    }
+
+    ent.set_orderid(order_id.c_str());
+    ent.set_proof(proof.c_str());
+    ent.set_timestamp(timestamp.c_str());
+    ent.set_stat(0);
+    get_kinddeed_proof_table().put(ent);
+
+    ctx->ok("apply kinddeed "+ ent.to_string() + " proof over, please wait for authorize .");
 }
 
 
 namespace ruler_user{}
 
 void Buddha::apply_tobe_master(){
-
+    if(is_master()) {
+        ctx->ok(ctx->initiator() + " is already master .");
+        return ;
+    }
     
     if(!is_user()) {
         ctx->error(ctx->initiator() + " is not common user, has no authority to apply tobe master .");
         return ;
     }
-}
 
-void Buddha::buy_kinddeed() {
-    if(!is_user()) {
-        ctx->error(ctx->initiator() + " is not common user, has no authority to buy kinddeed .");
+    const std::string& desc = ctx->arg("desc");
+    if(desc.empty()) {
+        ctx->error("desc is empty");
         return ;
     }
 
+    master ent;
+    ent.set_name(ctx->initiator().c_str());
+    ent.set_desc(desc.c_str());
+    ent.set_isyet(false);
+    get_master_table().put(ent);
+
+    ctx->ok(name + " apply tobe master over, please wait for authorize .");
+}
+
+void Buddha::buy_kinddeed() {
+    //应该是任何人都可以购买。
+
+    // if(!is_user()) {
+    //     ctx->error(ctx->initiator() + " is not common user, has no authority to buy kinddeed .");
+    //     return ;
+    // }
+
     //判断订单是不是已经存在
     const std::string& order_id = ctx->arg("id");
-
-    sync_exchange_order(order_id);
-         
-    order od;
-    if (!is_order_exist(order_id, od))  {
-        ctx->error("order " + order_id + " is not exist .");
+    if(desc.empty()) {
+        ctx->error("desc is empty");
         return ;
     }
 
@@ -669,10 +750,20 @@ void Buddha::buy_kinddeed() {
         ctx->error("filed 'kinddeeds' empty .");
         return;
     }
-    
+
+    const double& amount = std::stod(ctx->arg("amount"));
+    if(amount.empty()) {
+        ctx->error("amount is empty");
+        return ;
+    }
+
+    const double& timestamp = std::stod(ctx->arg("timestamp"));
+    if(timestamp.empty()) {
+        ctx->error("timestamp is empty");
+        return ;
+    }
 
     //判断总价格是否跟表中的计算价格相同
-    const double& amount = std::stod(ctx->arg("amount"));
     double calced_amount = 0;
     for(int i = 0 ; i < kinddeed_ids.size() ; i++) {
         std::string id = kinddeed_ids.at(i)["id"].template get<std::string>();
@@ -693,6 +784,15 @@ void Buddha::buy_kinddeed() {
                    + ", real amount=" + std::to_string(calced_amount));
         return;
     }
+
+    sync_exchange_order(order_id);
+         
+    order od;
+    if (!is_order_exist(order_id, od))  {
+        ctx->error("order " + order_id + " is not exist .");
+        return ;
+    }
+
 
     //处理 order 和 kinddeed
     for(int i = 0 ; i < kinddeed_ids.size() ; i++) {
@@ -727,7 +827,7 @@ void Buddha::buy_kinddeed() {
     ex.set_orderid(order_id.c_str());
     ex.set_kinddeeds(kinddeeds.c_str());
     ex.set_amount(calced_amount);
-    ex.set_timestamp(ctx->arg("timestamp"));
+    ex.set_timestamp(timestamp.c_str());
     get_exchange_table().put(ex);
     
     //外部转账    
@@ -737,10 +837,36 @@ void Buddha::buy_kinddeed() {
 
 namespace ruler_master_user{}
 void Buddha::apply_tobe_founder(){
-    if(is_user()) {
-        ctx->error(ctx->initiator() + " is not master, has no authority to apply tobe founder .");
+    if(is_founder()) {
+        ctx->ok(ctx->initiator() + " is already founder .");
         return ;
     }
+
+    const std::string& desc = ctx->arg("desc");
+    if(desc.empty()) {
+        ctx->error("desc is empty");
+        return ;
+    }
+
+    if(!is_user() && !is_master() ) {
+        ctx->error(ctx->initiator() + " is not user and master, has no authority to apply tobe founder .");
+        return ;
+    }
+
+    const std::string& guaranty = ctx->transfer_amount();
+    if(guaranty.empty()) {
+        ctx->error("guaranty is empty");
+        return ;
+    }
+
+    founder ent;
+    ent.set_name(ctx->initiator().c_str());
+    ent.set_desc(desc.c_str());
+    ent.set_guaranty(guaranty);
+    ent.set_isyet(false);
+    get_founder_table().put(ent);
+
+    ctx->ok(ctx->initiator() + " apply tobe founder over, please wait for authorize .");
 }
 
 
@@ -755,40 +881,90 @@ void Buddha::find_kinddeed() {
         return ;
     }
 
-    ctx->ok("ok -> " + ent.to_string());
+    ctx->ok("find kinddeed ok -> " + ent.to_string());
 }
 
 namespace ruler_founder_master{}
 
 void Buddha::add_kinddeed() {
-    if(!is_deployer())
+    if(!is_master() && !is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder and master, has no authority to add kinddeed .");
         return ;
+    }
 
     const std::string& id = ctx->arg("id");
+    const std::string& name = ctx->arg("name");
+    const std::string& desc = ctx->arg("desc");
+    const std::string& price = ctx->arg("price");
+    const std::string& count = ctx->arg("count");
+    const std::string& lasttime = ctx->arg("lasttime");
+    const std::string& onlinestat = ctx->arg("onlinestat");
+    if(id.empty()) {
+        ctx->error("kinddeed id is empty");
+        return ;
+    }
+
+    if(name.empty()) {
+        ctx->error("kinddeed name is empty");
+        return ;
+    }
+
+    if(desc.empty()) {
+        ctx->error("kinddeed desc is empty");
+        return ;
+    }
+
+    if(price.empty()) {
+        ctx->error("kinddeed price is empty");
+        return ;
+    }
+
+    if(count.empty()) {
+        ctx->error("kinddeed count is empty");
+        return ;
+    }
+
+    if(lasttime.empty()) {
+        ctx->error("kinddeed lasttime is empty");
+        return ;
+    }
+
+    if(onlinestat.empty()) {
+        ctx->error("kinddeed onlinestat is empty");
+        return ;
+    }
 
     kinddeed ent;
     if (is_kinddeed_exist(id, ent))  {
-        ctx->error("kinddeed " + id + "," + ctx->arg("name") + " exist .");
+        ctx->error("kinddeed " + ent.to_string() + " exist .");
         return ;
     }
 
     ent.set_id(id.c_str());
-    ent.set_name(ctx->arg("name").c_str());
-    ent.set_desc(ctx->arg("desc").c_str());
-    ent.set_price(std::stod(ctx->arg("price")));
-    ent.set_count(std::stoll(ctx->arg("count")));
-    ent.set_lasttime(ctx->arg("lasttime").c_str());
+    ent.set_name(name.c_str());
+    ent.set_name(ctx->initiator().c_str());
+    ent.set_desc(desc.c_str());
+    ent.set_price(std::stod(price));
+    ent.set_count(std::stoll(count));
+    ent.set_lasttime(lasttime.c_str());
+    ent.set_onlinestat(std::stoll(onlinestat));
 
     get_kinddeed_table().put(ent);
 
-    ctx->ok(ent.to_string());
+    ctx->ok("add kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_kinddeed() {
-    if(!is_deployer())
+    if(!is_master() && !is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder and master, has no authority to delete kinddeed .");
         return ;
+    }
 
     const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("kinddeed id is empty");
+        return ;
+    }
 
     kinddeed ent;
     if (!is_kinddeed_exist(id, ent))  {
@@ -798,15 +974,56 @@ void Buddha::delete_kinddeed() {
 
     get_kinddeed_table().del(ent);
 
-
-    ctx->ok(ent.to_string());
+    ctx->ok("delete kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::update_kinddeed() {
-    if(!is_deployer())
+    if(!is_master() && !is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder and master, has no authority to update kinddeed .");
         return ;
+    }
 
     const std::string& id = ctx->arg("id");
+    const std::string& name = ctx->arg("name");
+    const std::string& desc = ctx->arg("desc");
+    const std::string& price = ctx->arg("price");
+    const std::string& count = ctx->arg("count");
+    const std::string& lasttime = ctx->arg("lasttime");
+    const std::string& onlinestat = ctx->arg("onlinestat");
+    if(id.empty()) {
+        ctx->error("kinddeed id is empty");
+        return ;
+    }
+
+    if(name.empty()) {
+        ctx->error("kinddeed name is empty");
+        return ;
+    }
+
+    if(desc.empty()) {
+        ctx->error("kinddeed desc is empty");
+        return ;
+    }
+
+    if(price.empty()) {
+        ctx->error("kinddeed price is empty");
+        return ;
+    }
+
+    if(count.empty()) {
+        ctx->error("kinddeed count is empty");
+        return ;
+    }
+
+    if(lasttime.empty()) {
+        ctx->error("kinddeed lasttime is empty");
+        return ;
+    }
+
+    if(onlinestat.empty()) {
+        ctx->error("kinddeed onlinestat is empty");
+        return ;
+    }
 
     kinddeed ent;
     if (!is_kinddeed_exist(id, ent))  {
@@ -816,14 +1033,16 @@ void Buddha::update_kinddeed() {
 
     get_kinddeed_table().del(ent);
     ent.set_id(id.c_str());
-    ent.set_name(ctx->arg("name").c_str());
-    ent.set_desc(ctx->arg("desc").c_str());
-    ent.set_price(std::stod(ctx->arg("price")));
-    ent.set_count(std::stoll(ctx->arg("count")));
-    ent.set_lasttime(ctx->arg("lasttime").c_str());
+    ent.set_name(name.c_str());
+    ent.set_name(ctx->initiator().c_str());
+    ent.set_desc(desc.c_str());
+    ent.set_price(std::stod(price));
+    ent.set_count(std::stoll(count));
+    ent.set_lasttime(lasttime.c_str());
+    ent.set_onlinestat(std::stoll(onlinestat));
     get_kinddeed_table().put(ent);
 
-    ctx->ok(ent.to_string() + "update success");
+    ctx->ok("update kinddeed " + ent.to_string() + " success .");
 }
 
 
