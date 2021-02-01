@@ -9,7 +9,7 @@ message Founder {
     string name    = 1; //基金会名称
     string desc    = 2; //基金会描述
     int64  guaranty= 3; //抵押数量
-    bool   isYet   = 4; //是否已经是基金会成员
+    int64  aaplystat = 4; //0非基金会成员，1已申请
 }
 
 //描述寺院法师信息。
