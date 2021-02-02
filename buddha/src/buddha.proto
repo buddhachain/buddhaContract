@@ -9,34 +9,35 @@ message Founder {
     string name    = 1; //基金会名称
     string desc    = 2; //基金会描述
     int64  guaranty= 3; //抵押数量
-    int64  aaplystat = 4; //0非基金会成员，1已申请
+    bool   is     = 4;  //是否已经是
 }
 
 //描述寺院法师信息。
 message Master {
     string name    = 1; //寺院法师名称
     string desc    = 2; //寺院法师描述
-    bool   isYet   = 3; //是否已经是寺院法师
+    bool   is     = 3; //是否已经是
 }
 
 //描述善举凭证信息。
 message KinddeedProof {
-    string orderId  = 1; //善举订单编号
+    string orderid  = 1; //善举订单编号
     string proof    = 2; //善举hash
     string timestamp     = 3; //法师或寺院尽心善举时的时间
-    int64  stat = 4; //认证状态，0为授权，1已授权
+    bool   approved = 4; //批准状态
 }
 
 //描述善举信息。
 message Kinddeed {
     string id       = 1; //善举编号
     string name     = 2; //善举名称
-    string mastername = 3; //哪位法师添加的当前的善举
+    string owner    = 3; //哪位法师或基金会成员添加的此善举
     string desc     = 4; //善举描述
     double price    = 5; //善举价格
     int64  count    = 6; //善举数量
     string lasttime = 7; //善举最后修改的时间
-    int64  onlineStat = 8; //上线状态，0未上线，1已申请上线，2已申请下线, 3已上线
+    bool   applied = 8; //是否已申请上线
+    bool   online= 9; //是否已经是上线
 }
 
 //描述订单信息。订单与善举的关系。
@@ -44,16 +45,16 @@ message Kinddeed {
 //又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
 message Order {
     string id               = 1; //订单编号
-    string kinddeedId       = 2; //对应的善举id
-    string kinddeedName     = 3; //对应的善举名称
-    string kinddeedDesc     = 4; //对应的善举描述
-    double kinddeedPrice    = 5; //对应的善举价格
-    int64  kinddeedCount    = 6; //这个善举的个数
+    string kinddeedid       = 2; //对应的善举id
+    string kinddeedname     = 3; //对应的善举名称
+    string kinddeeddesc     = 4; //对应的善举描述
+    double kinddeedprice    = 5; //对应的善举价格
+    int64  kinddeedcount    = 6; //这个善举的个数
 }
 
 //描述交易信息
 message Exchange {
-    string orderId      = 1; //订单编号
+    string orderid      = 1; //订单编号
     string kinddeeds      = 2; //善举id {aaa,bbb,ccc} 
     double amount        = 3; //善举总价格
     string timestamp     = 4; //订单生成时间

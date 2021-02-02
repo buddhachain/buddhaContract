@@ -205,11 +205,11 @@ class Founder :
   ::google::protobuf::int64 guaranty() const;
   void set_guaranty(::google::protobuf::int64 value);
 
-  // bool isYet = 4;
-  void clear_isyet();
-  static const int kIsYetFieldNumber = 4;
-  bool isyet() const;
-  void set_isyet(bool value);
+  // bool is = 4;
+  void clear_is();
+  static const int kIsFieldNumber = 4;
+  bool is() const;
+  void set_is(bool value);
 
   // @@protoc_insertion_point(class_scope:buddha.Founder)
  private:
@@ -219,7 +219,7 @@ class Founder :
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
   ::google::protobuf::int64 guaranty_;
-  bool isyet_;
+  bool is_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -344,11 +344,11 @@ class Master :
   ::std::string* release_desc();
   void set_allocated_desc(::std::string* desc);
 
-  // bool isYet = 3;
-  void clear_isyet();
-  static const int kIsYetFieldNumber = 3;
-  bool isyet() const;
-  void set_isyet(bool value);
+  // bool is = 3;
+  void clear_is();
+  static const int kIsFieldNumber = 3;
+  bool is() const;
+  void set_is(bool value);
 
   // @@protoc_insertion_point(class_scope:buddha.Master)
  private:
@@ -357,7 +357,7 @@ class Master :
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
-  bool isyet_;
+  bool is_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -454,9 +454,9 @@ class KinddeedProof :
 
   // accessors -------------------------------------------------------
 
-  // string orderId = 1;
+  // string orderid = 1;
   void clear_orderid();
-  static const int kOrderIdFieldNumber = 1;
+  static const int kOrderidFieldNumber = 1;
   const ::std::string& orderid() const;
   void set_orderid(const ::std::string& value);
   #if LANG_CXX11
@@ -496,11 +496,11 @@ class KinddeedProof :
   ::std::string* release_timestamp();
   void set_allocated_timestamp(::std::string* timestamp);
 
-  // int64 stat = 4;
-  void clear_stat();
-  static const int kStatFieldNumber = 4;
-  ::google::protobuf::int64 stat() const;
-  void set_stat(::google::protobuf::int64 value);
+  // bool approved = 4;
+  void clear_approved();
+  static const int kApprovedFieldNumber = 4;
+  bool approved() const;
+  void set_approved(bool value);
 
   // @@protoc_insertion_point(class_scope:buddha.KinddeedProof)
  private:
@@ -510,7 +510,7 @@ class KinddeedProof :
   ::google::protobuf::internal::ArenaStringPtr orderid_;
   ::google::protobuf::internal::ArenaStringPtr proof_;
   ::google::protobuf::internal::ArenaStringPtr timestamp_;
-  ::google::protobuf::int64 stat_;
+  bool approved_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -635,19 +635,19 @@ class Kinddeed :
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // string mastername = 3;
-  void clear_mastername();
-  static const int kMasternameFieldNumber = 3;
-  const ::std::string& mastername() const;
-  void set_mastername(const ::std::string& value);
+  // string owner = 3;
+  void clear_owner();
+  static const int kOwnerFieldNumber = 3;
+  const ::std::string& owner() const;
+  void set_owner(const ::std::string& value);
   #if LANG_CXX11
-  void set_mastername(::std::string&& value);
+  void set_owner(::std::string&& value);
   #endif
-  void set_mastername(const char* value);
-  void set_mastername(const char* value, size_t size);
-  ::std::string* mutable_mastername();
-  ::std::string* release_mastername();
-  void set_allocated_mastername(::std::string* mastername);
+  void set_owner(const char* value);
+  void set_owner(const char* value, size_t size);
+  ::std::string* mutable_owner();
+  ::std::string* release_owner();
+  void set_allocated_owner(::std::string* owner);
 
   // string desc = 4;
   void clear_desc();
@@ -689,11 +689,17 @@ class Kinddeed :
   ::google::protobuf::int64 count() const;
   void set_count(::google::protobuf::int64 value);
 
-  // int64 onlineStat = 8;
-  void clear_onlinestat();
-  static const int kOnlineStatFieldNumber = 8;
-  ::google::protobuf::int64 onlinestat() const;
-  void set_onlinestat(::google::protobuf::int64 value);
+  // bool applied = 8;
+  void clear_applied();
+  static const int kAppliedFieldNumber = 8;
+  bool applied() const;
+  void set_applied(bool value);
+
+  // bool online = 9;
+  void clear_online();
+  static const int kOnlineFieldNumber = 9;
+  bool online() const;
+  void set_online(bool value);
 
   // @@protoc_insertion_point(class_scope:buddha.Kinddeed)
  private:
@@ -702,12 +708,13 @@ class Kinddeed :
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr name_;
-  ::google::protobuf::internal::ArenaStringPtr mastername_;
+  ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
   ::google::protobuf::internal::ArenaStringPtr lasttime_;
   double price_;
   ::google::protobuf::int64 count_;
-  ::google::protobuf::int64 onlinestat_;
+  bool applied_;
+  bool online_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -818,9 +825,9 @@ class Order :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // string kinddeedId = 2;
+  // string kinddeedid = 2;
   void clear_kinddeedid();
-  static const int kKinddeedIdFieldNumber = 2;
+  static const int kKinddeedidFieldNumber = 2;
   const ::std::string& kinddeedid() const;
   void set_kinddeedid(const ::std::string& value);
   #if LANG_CXX11
@@ -832,9 +839,9 @@ class Order :
   ::std::string* release_kinddeedid();
   void set_allocated_kinddeedid(::std::string* kinddeedid);
 
-  // string kinddeedName = 3;
+  // string kinddeedname = 3;
   void clear_kinddeedname();
-  static const int kKinddeedNameFieldNumber = 3;
+  static const int kKinddeednameFieldNumber = 3;
   const ::std::string& kinddeedname() const;
   void set_kinddeedname(const ::std::string& value);
   #if LANG_CXX11
@@ -846,9 +853,9 @@ class Order :
   ::std::string* release_kinddeedname();
   void set_allocated_kinddeedname(::std::string* kinddeedname);
 
-  // string kinddeedDesc = 4;
+  // string kinddeeddesc = 4;
   void clear_kinddeeddesc();
-  static const int kKinddeedDescFieldNumber = 4;
+  static const int kKinddeeddescFieldNumber = 4;
   const ::std::string& kinddeeddesc() const;
   void set_kinddeeddesc(const ::std::string& value);
   #if LANG_CXX11
@@ -860,15 +867,15 @@ class Order :
   ::std::string* release_kinddeeddesc();
   void set_allocated_kinddeeddesc(::std::string* kinddeeddesc);
 
-  // double kinddeedPrice = 5;
+  // double kinddeedprice = 5;
   void clear_kinddeedprice();
-  static const int kKinddeedPriceFieldNumber = 5;
+  static const int kKinddeedpriceFieldNumber = 5;
   double kinddeedprice() const;
   void set_kinddeedprice(double value);
 
-  // int64 kinddeedCount = 6;
+  // int64 kinddeedcount = 6;
   void clear_kinddeedcount();
-  static const int kKinddeedCountFieldNumber = 6;
+  static const int kKinddeedcountFieldNumber = 6;
   ::google::protobuf::int64 kinddeedcount() const;
   void set_kinddeedcount(::google::protobuf::int64 value);
 
@@ -979,9 +986,9 @@ class Exchange :
 
   // accessors -------------------------------------------------------
 
-  // string orderId = 1;
+  // string orderid = 1;
   void clear_orderid();
-  static const int kOrderIdFieldNumber = 1;
+  static const int kOrderidFieldNumber = 1;
   const ::std::string& orderid() const;
   void set_orderid(const ::std::string& value);
   #if LANG_CXX11
@@ -1170,18 +1177,18 @@ inline void Founder::set_guaranty(::google::protobuf::int64 value) {
   // @@protoc_insertion_point(field_set:buddha.Founder.guaranty)
 }
 
-// bool isYet = 4;
-inline void Founder::clear_isyet() {
-  isyet_ = false;
+// bool is = 4;
+inline void Founder::clear_is() {
+  is_ = false;
 }
-inline bool Founder::isyet() const {
-  // @@protoc_insertion_point(field_get:buddha.Founder.isYet)
-  return isyet_;
+inline bool Founder::is() const {
+  // @@protoc_insertion_point(field_get:buddha.Founder.is)
+  return is_;
 }
-inline void Founder::set_isyet(bool value) {
+inline void Founder::set_is(bool value) {
   
-  isyet_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Founder.isYet)
+  is_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Founder.is)
 }
 
 // -------------------------------------------------------------------
@@ -1294,64 +1301,64 @@ inline void Master::set_allocated_desc(::std::string* desc) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Master.desc)
 }
 
-// bool isYet = 3;
-inline void Master::clear_isyet() {
-  isyet_ = false;
+// bool is = 3;
+inline void Master::clear_is() {
+  is_ = false;
 }
-inline bool Master::isyet() const {
-  // @@protoc_insertion_point(field_get:buddha.Master.isYet)
-  return isyet_;
+inline bool Master::is() const {
+  // @@protoc_insertion_point(field_get:buddha.Master.is)
+  return is_;
 }
-inline void Master::set_isyet(bool value) {
+inline void Master::set_is(bool value) {
   
-  isyet_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Master.isYet)
+  is_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Master.is)
 }
 
 // -------------------------------------------------------------------
 
 // KinddeedProof
 
-// string orderId = 1;
+// string orderid = 1;
 inline void KinddeedProof::clear_orderid() {
   orderid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& KinddeedProof::orderid() const {
-  // @@protoc_insertion_point(field_get:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_get:buddha.KinddeedProof.orderid)
   return orderid_.GetNoArena();
 }
 inline void KinddeedProof::set_orderid(const ::std::string& value) {
   
   orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_set:buddha.KinddeedProof.orderid)
 }
 #if LANG_CXX11
 inline void KinddeedProof::set_orderid(::std::string&& value) {
   
   orderid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.KinddeedProof.orderid)
 }
 #endif
 inline void KinddeedProof::set_orderid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_set_char:buddha.KinddeedProof.orderid)
 }
 inline void KinddeedProof::set_orderid(const char* value, size_t size) {
   
   orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_set_pointer:buddha.KinddeedProof.orderid)
 }
 inline ::std::string* KinddeedProof::mutable_orderid() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_mutable:buddha.KinddeedProof.orderid)
   return orderid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* KinddeedProof::release_orderid() {
-  // @@protoc_insertion_point(field_release:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_release:buddha.KinddeedProof.orderid)
   
   return orderid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1362,7 +1369,7 @@ inline void KinddeedProof::set_allocated_orderid(::std::string* orderid) {
     
   }
   orderid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), orderid);
-  // @@protoc_insertion_point(field_set_allocated:buddha.KinddeedProof.orderId)
+  // @@protoc_insertion_point(field_set_allocated:buddha.KinddeedProof.orderid)
 }
 
 // string proof = 2;
@@ -1471,18 +1478,18 @@ inline void KinddeedProof::set_allocated_timestamp(::std::string* timestamp) {
   // @@protoc_insertion_point(field_set_allocated:buddha.KinddeedProof.timestamp)
 }
 
-// int64 stat = 4;
-inline void KinddeedProof::clear_stat() {
-  stat_ = PROTOBUF_LONGLONG(0);
+// bool approved = 4;
+inline void KinddeedProof::clear_approved() {
+  approved_ = false;
 }
-inline ::google::protobuf::int64 KinddeedProof::stat() const {
-  // @@protoc_insertion_point(field_get:buddha.KinddeedProof.stat)
-  return stat_;
+inline bool KinddeedProof::approved() const {
+  // @@protoc_insertion_point(field_get:buddha.KinddeedProof.approved)
+  return approved_;
 }
-inline void KinddeedProof::set_stat(::google::protobuf::int64 value) {
+inline void KinddeedProof::set_approved(bool value) {
   
-  stat_ = value;
-  // @@protoc_insertion_point(field_set:buddha.KinddeedProof.stat)
+  approved_ = value;
+  // @@protoc_insertion_point(field_set:buddha.KinddeedProof.approved)
 }
 
 // -------------------------------------------------------------------
@@ -1595,57 +1602,57 @@ inline void Kinddeed::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Kinddeed.name)
 }
 
-// string mastername = 3;
-inline void Kinddeed::clear_mastername() {
-  mastername_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string owner = 3;
+inline void Kinddeed::clear_owner() {
+  owner_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Kinddeed::mastername() const {
-  // @@protoc_insertion_point(field_get:buddha.Kinddeed.mastername)
-  return mastername_.GetNoArena();
+inline const ::std::string& Kinddeed::owner() const {
+  // @@protoc_insertion_point(field_get:buddha.Kinddeed.owner)
+  return owner_.GetNoArena();
 }
-inline void Kinddeed::set_mastername(const ::std::string& value) {
+inline void Kinddeed::set_owner(const ::std::string& value) {
   
-  mastername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.Kinddeed.mastername)
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Kinddeed.owner)
 }
 #if LANG_CXX11
-inline void Kinddeed::set_mastername(::std::string&& value) {
+inline void Kinddeed::set_owner(::std::string&& value) {
   
-  mastername_.SetNoArena(
+  owner_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.Kinddeed.mastername)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Kinddeed.owner)
 }
 #endif
-inline void Kinddeed::set_mastername(const char* value) {
+inline void Kinddeed::set_owner(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  mastername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.Kinddeed.mastername)
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Kinddeed.owner)
 }
-inline void Kinddeed::set_mastername(const char* value, size_t size) {
+inline void Kinddeed::set_owner(const char* value, size_t size) {
   
-  mastername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.Kinddeed.mastername)
+  // @@protoc_insertion_point(field_set_pointer:buddha.Kinddeed.owner)
 }
-inline ::std::string* Kinddeed::mutable_mastername() {
+inline ::std::string* Kinddeed::mutable_owner() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.Kinddeed.mastername)
-  return mastername_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:buddha.Kinddeed.owner)
+  return owner_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Kinddeed::release_mastername() {
-  // @@protoc_insertion_point(field_release:buddha.Kinddeed.mastername)
+inline ::std::string* Kinddeed::release_owner() {
+  // @@protoc_insertion_point(field_release:buddha.Kinddeed.owner)
   
-  return mastername_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return owner_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Kinddeed::set_allocated_mastername(::std::string* mastername) {
-  if (mastername != nullptr) {
+inline void Kinddeed::set_allocated_owner(::std::string* owner) {
+  if (owner != nullptr) {
     
   } else {
     
   }
-  mastername_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), mastername);
-  // @@protoc_insertion_point(field_set_allocated:buddha.Kinddeed.mastername)
+  owner_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), owner);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Kinddeed.owner)
 }
 
 // string desc = 4;
@@ -1782,18 +1789,32 @@ inline void Kinddeed::set_allocated_lasttime(::std::string* lasttime) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Kinddeed.lasttime)
 }
 
-// int64 onlineStat = 8;
-inline void Kinddeed::clear_onlinestat() {
-  onlinestat_ = PROTOBUF_LONGLONG(0);
+// bool applied = 8;
+inline void Kinddeed::clear_applied() {
+  applied_ = false;
 }
-inline ::google::protobuf::int64 Kinddeed::onlinestat() const {
-  // @@protoc_insertion_point(field_get:buddha.Kinddeed.onlineStat)
-  return onlinestat_;
+inline bool Kinddeed::applied() const {
+  // @@protoc_insertion_point(field_get:buddha.Kinddeed.applied)
+  return applied_;
 }
-inline void Kinddeed::set_onlinestat(::google::protobuf::int64 value) {
+inline void Kinddeed::set_applied(bool value) {
   
-  onlinestat_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Kinddeed.onlineStat)
+  applied_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Kinddeed.applied)
+}
+
+// bool online = 9;
+inline void Kinddeed::clear_online() {
+  online_ = false;
+}
+inline bool Kinddeed::online() const {
+  // @@protoc_insertion_point(field_get:buddha.Kinddeed.online)
+  return online_;
+}
+inline void Kinddeed::set_online(bool value) {
+  
+  online_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Kinddeed.online)
 }
 
 // -------------------------------------------------------------------
@@ -1853,46 +1874,46 @@ inline void Order::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Order.id)
 }
 
-// string kinddeedId = 2;
+// string kinddeedid = 2;
 inline void Order::clear_kinddeedid() {
   kinddeedid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Order::kinddeedid() const {
-  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedid)
   return kinddeedid_.GetNoArena();
 }
 inline void Order::set_kinddeedid(const ::std::string& value) {
   
   kinddeedid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedid)
 }
 #if LANG_CXX11
 inline void Order::set_kinddeedid(::std::string&& value) {
   
   kinddeedid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Order.kinddeedid)
 }
 #endif
 inline void Order::set_kinddeedid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   kinddeedid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_set_char:buddha.Order.kinddeedid)
 }
 inline void Order::set_kinddeedid(const char* value, size_t size) {
   
   kinddeedid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_set_pointer:buddha.Order.kinddeedid)
 }
 inline ::std::string* Order::mutable_kinddeedid() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_mutable:buddha.Order.kinddeedid)
   return kinddeedid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Order::release_kinddeedid() {
-  // @@protoc_insertion_point(field_release:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_release:buddha.Order.kinddeedid)
   
   return kinddeedid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1903,49 +1924,49 @@ inline void Order::set_allocated_kinddeedid(::std::string* kinddeedid) {
     
   }
   kinddeedid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), kinddeedid);
-  // @@protoc_insertion_point(field_set_allocated:buddha.Order.kinddeedId)
+  // @@protoc_insertion_point(field_set_allocated:buddha.Order.kinddeedid)
 }
 
-// string kinddeedName = 3;
+// string kinddeedname = 3;
 inline void Order::clear_kinddeedname() {
   kinddeedname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Order::kinddeedname() const {
-  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedname)
   return kinddeedname_.GetNoArena();
 }
 inline void Order::set_kinddeedname(const ::std::string& value) {
   
   kinddeedname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedname)
 }
 #if LANG_CXX11
 inline void Order::set_kinddeedname(::std::string&& value) {
   
   kinddeedname_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Order.kinddeedname)
 }
 #endif
 inline void Order::set_kinddeedname(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   kinddeedname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_set_char:buddha.Order.kinddeedname)
 }
 inline void Order::set_kinddeedname(const char* value, size_t size) {
   
   kinddeedname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_set_pointer:buddha.Order.kinddeedname)
 }
 inline ::std::string* Order::mutable_kinddeedname() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_mutable:buddha.Order.kinddeedname)
   return kinddeedname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Order::release_kinddeedname() {
-  // @@protoc_insertion_point(field_release:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_release:buddha.Order.kinddeedname)
   
   return kinddeedname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1956,49 +1977,49 @@ inline void Order::set_allocated_kinddeedname(::std::string* kinddeedname) {
     
   }
   kinddeedname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), kinddeedname);
-  // @@protoc_insertion_point(field_set_allocated:buddha.Order.kinddeedName)
+  // @@protoc_insertion_point(field_set_allocated:buddha.Order.kinddeedname)
 }
 
-// string kinddeedDesc = 4;
+// string kinddeeddesc = 4;
 inline void Order::clear_kinddeeddesc() {
   kinddeeddesc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Order::kinddeeddesc() const {
-  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_get:buddha.Order.kinddeeddesc)
   return kinddeeddesc_.GetNoArena();
 }
 inline void Order::set_kinddeeddesc(const ::std::string& value) {
   
   kinddeeddesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_set:buddha.Order.kinddeeddesc)
 }
 #if LANG_CXX11
 inline void Order::set_kinddeeddesc(::std::string&& value) {
   
   kinddeeddesc_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Order.kinddeeddesc)
 }
 #endif
 inline void Order::set_kinddeeddesc(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   kinddeeddesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_set_char:buddha.Order.kinddeeddesc)
 }
 inline void Order::set_kinddeeddesc(const char* value, size_t size) {
   
   kinddeeddesc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_set_pointer:buddha.Order.kinddeeddesc)
 }
 inline ::std::string* Order::mutable_kinddeeddesc() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_mutable:buddha.Order.kinddeeddesc)
   return kinddeeddesc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Order::release_kinddeeddesc() {
-  // @@protoc_insertion_point(field_release:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_release:buddha.Order.kinddeeddesc)
   
   return kinddeeddesc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -2009,81 +2030,81 @@ inline void Order::set_allocated_kinddeeddesc(::std::string* kinddeeddesc) {
     
   }
   kinddeeddesc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), kinddeeddesc);
-  // @@protoc_insertion_point(field_set_allocated:buddha.Order.kinddeedDesc)
+  // @@protoc_insertion_point(field_set_allocated:buddha.Order.kinddeeddesc)
 }
 
-// double kinddeedPrice = 5;
+// double kinddeedprice = 5;
 inline void Order::clear_kinddeedprice() {
   kinddeedprice_ = 0;
 }
 inline double Order::kinddeedprice() const {
-  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedPrice)
+  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedprice)
   return kinddeedprice_;
 }
 inline void Order::set_kinddeedprice(double value) {
   
   kinddeedprice_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedPrice)
+  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedprice)
 }
 
-// int64 kinddeedCount = 6;
+// int64 kinddeedcount = 6;
 inline void Order::clear_kinddeedcount() {
   kinddeedcount_ = PROTOBUF_LONGLONG(0);
 }
 inline ::google::protobuf::int64 Order::kinddeedcount() const {
-  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedCount)
+  // @@protoc_insertion_point(field_get:buddha.Order.kinddeedcount)
   return kinddeedcount_;
 }
 inline void Order::set_kinddeedcount(::google::protobuf::int64 value) {
   
   kinddeedcount_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedCount)
+  // @@protoc_insertion_point(field_set:buddha.Order.kinddeedcount)
 }
 
 // -------------------------------------------------------------------
 
 // Exchange
 
-// string orderId = 1;
+// string orderid = 1;
 inline void Exchange::clear_orderid() {
   orderid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Exchange::orderid() const {
-  // @@protoc_insertion_point(field_get:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_get:buddha.Exchange.orderid)
   return orderid_.GetNoArena();
 }
 inline void Exchange::set_orderid(const ::std::string& value) {
   
   orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_set:buddha.Exchange.orderid)
 }
 #if LANG_CXX11
 inline void Exchange::set_orderid(::std::string&& value) {
   
   orderid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Exchange.orderid)
 }
 #endif
 inline void Exchange::set_orderid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_set_char:buddha.Exchange.orderid)
 }
 inline void Exchange::set_orderid(const char* value, size_t size) {
   
   orderid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_set_pointer:buddha.Exchange.orderid)
 }
 inline ::std::string* Exchange::mutable_orderid() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_mutable:buddha.Exchange.orderid)
   return orderid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Exchange::release_orderid() {
-  // @@protoc_insertion_point(field_release:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_release:buddha.Exchange.orderid)
   
   return orderid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -2094,7 +2115,7 @@ inline void Exchange::set_allocated_orderid(::std::string* orderid) {
     
   }
   orderid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), orderid);
-  // @@protoc_insertion_point(field_set_allocated:buddha.Exchange.orderId)
+  // @@protoc_insertion_point(field_set_allocated:buddha.Exchange.orderid)
 }
 
 // string kinddeeds = 2;

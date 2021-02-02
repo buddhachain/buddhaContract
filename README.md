@@ -38,7 +38,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method del_kinddeed -a '{"id": "1"
 
 xchain-cli account balance XC1234567890111111@xuper
 xchain-cli account balance XC1234567890222222@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method buy -a '{"id": "1","kinddeeds":"[{\"id\":\"1\",\"count\":\"1\"},{\"id\":\"1\",\"count\":\"2\"},{\"id\":\"1\",\"count\":\"3\"}]","amount":"30","timestamp":"11111"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1","kinddeeds":"[{\"id\":\"1\",\"count\":\"1\"},{\"id\":\"1\",\"count\":\"2\"},{\"id\":\"1\",\"count\":\"3\"}]","amount":"30","timestamp":"11111"}' --account XC1234567890222222@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 
