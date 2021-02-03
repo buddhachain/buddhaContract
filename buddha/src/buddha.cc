@@ -198,8 +198,6 @@ private:
     void delete_order_record(const std::string& orderid);
     void delete_exchange_record(const std::string& orderid);
 
-    void sync_exchange_order(const std::string& orderid);
-
     bool refund(const std::string& name,
                 const std::string& amount);
 
@@ -426,20 +424,6 @@ void Buddha::delete_exchange_record(const std::string& orderid) {
     }
 }
 
-void Buddha::sync_exchange_order(const std::string& id) {
-    exchange ex;
-    order od;
-    kinddeedproof kp;
-    if (!is_order_exist(id, od) && 
-        !is_exchange_exist(id, ex) &&
-        !is_kinddeed_proof_exist(id,kp))
-        return ;
-
-    delete_exchange_record(id);
-    delete_order_record(id);
-    delete_kinddeed_proof_record(id);
-}
-
 bool Buddha::refund(const std::string& name,
                     const std::string& amount){
     //将抵押退还
@@ -655,8 +639,15 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
-    //交易表中没有此笔交易的情况下，删除当前的善举凭证
-    sync_exchange_order(orderid);
+    exchange ex;
+    order od;
+    if (!is_order_exist(orderid, od) || !is_exchange_exist(orderid, ex)) {
+        delete_exchange_record(orderid);
+        delete_order_record(orderid);
+        delete_kinddeed_proof_record(orderid);
+        ctx->error("exchange and order lost, kinddeed proof " + orderid + " be delete .");
+        return ;
+    }
 
     kinddeedproof ent;
     if (!is_kinddeed_proof_exist(orderid, ent))  {
@@ -766,16 +757,19 @@ void Buddha::upload_kinddeed_proof() {
         return ;
     }
 
-    kinddeedproof ent;
-    if (is_kinddeed_proof_exist(orderid, ent))  {
-        ctx->ok("kinddeed proof " + orderid + " is exist .");
+    exchange ex;
+    order od;
+    if (!is_order_exist(orderid, od) || !is_exchange_exist(orderid, ex)) {
+        delete_exchange_record(orderid);
+        delete_order_record(orderid);
+        delete_kinddeed_proof_record(orderid);
+        ctx->error("exchange and order lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
 
-    sync_exchange_order(orderid);
-
+    kinddeedproof ent;
     if (is_kinddeed_proof_exist(orderid, ent))  {
-        ctx->ok("kinddeed proof " + orderid + " is exist .");
+        ctx->error("kinddeed proof " + orderid + " is exist .");
         return ;
     }
 
@@ -875,21 +869,24 @@ void Buddha::pray_kinddeed() {
     }
 
     //由于可能存在善举价格浮动，实际价格可能高于或低于开始制作订单的总价格。
-    if(calced_amount > std::stod(amount)){
+    if(calced_amount != std::stod(amount)){ //这个浮点数计算这个地方可能有bug，也可能没有
         ctx->error("delive amount " + amount
                    + ", real amount=" + std::to_string(calced_amount));
         return;
     }
 
-    exchange ent;
-    if (is_exchange_exist(orderid,ent))  {
-        ctx->error("exchange " + orderid + " is exist .");
-        return ;
+    //如果exchange和order表有一个不存在此记录。则删除另外一个表的这个记录。
+    exchange ex;
+    order od;
+    if (!is_order_exist(orderid, od) || !is_exchange_exist(orderid, ex)) {
+        delete_exchange_record(orderid);
+        delete_order_record(orderid);
     }
 
-    sync_exchange_order(orderid);
-
-    if (is_exchange_exist(orderid,ex))  {
+    //如果都存在，直接返回。
+    exchange ex1;
+    order od1;
+    if (is_exchange_exist(orderid,ex1) && is_order_exist(orderid, od1))  {
         ctx->error("exchange " + orderid + " is exist .");
         return ;
     }
@@ -922,11 +919,12 @@ void Buddha::pray_kinddeed() {
     }
 
     //存储exchange记录
-    ex.set_orderid(orderid.c_str());
-    ex.set_kinddeeds(kinddeeds.c_str());
-    ex.set_amount(calced_amount);
-    ex.set_timestamp(timestamp.c_str());
-    get_exchange_table().put(ex);
+    exchange ent;
+    ent.set_orderid(orderid.c_str());
+    ent.set_kinddeeds(kinddeeds.c_str());
+    ent.set_amount(calced_amount);
+    ent.set_timestamp(timestamp.c_str());
+    get_exchange_table().put(ent);
     
     ctx->ok("pray kinddeed " + std::to_string(calced_amount) + " success .");
 }
