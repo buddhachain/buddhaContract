@@ -87,7 +87,7 @@ class kinddeed: public buddha::Kinddeed {
     }
 };
 
-class order: public buddha::Order {
+class suborder: public buddha::SubOrder {
     DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, id)
@@ -97,6 +97,7 @@ class order: public buddha::Order {
         std::string str ;
         str += "{" ;
         str += id() + ",";
+        str += orderid() + ",";        
         str += kinddeedid() + ",";
         str += kinddeedname() + ",";
         str += kinddeeddesc() + ",";
@@ -107,17 +108,17 @@ class order: public buddha::Order {
     }
 };
 
-class exchange: public buddha::Exchange {
-    DEFINE_ROWKEY(orderid);
+class order: public buddha::Order {
+    DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, orderid)
+        DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
     std::string to_string() {
         std::string str ;
         str += "{" ;
-        str += orderid() + ",";
-        str += kinddeeds() + ",";
+        str += id() + ",";
+        str += suborderids() + ",";
         str += std::to_string(amount()) + ",";
         str += timestamp() ;
         str += "}";
@@ -132,8 +133,8 @@ public:
                 _master_table(context(),  "master"),
                 _kinddeed_proof_table(context(),  "kinddeed_proof"),
                 _kinddeed_table(context(),  "kinddeed"),
-                _order_table(context(),    "order"),
-                _exchange_table(context(), "exchange"),
+                _suborder_table(context(),    "suborder"),
+                _order_table(context(), "order"),
                 ctx(context()) {}
 
 private:
@@ -141,8 +142,8 @@ private:
     xchain::cdt::Table<master>  _master_table;
     xchain::cdt::Table<kinddeedproof>  _kinddeed_proof_table;
     xchain::cdt::Table<kinddeed>  _kinddeed_table;
-    xchain::cdt::Table<order>    _order_table;
-    xchain::cdt::Table<exchange> _exchange_table;
+    xchain::cdt::Table<suborder>    _suborder_table;
+    xchain::cdt::Table<order> _order_table;
     xchain::Context* ctx;
 
 public:
@@ -162,12 +163,12 @@ public:
         return _kinddeed_table;
     }
 
-    decltype(_order_table)& get_order_table() {
-        return _order_table;
+    decltype(_suborder_table)& get_suborder_table() {
+        return _suborder_table;
     }
 
-    decltype(_exchange_table)& get_exchange_table() {
-        return _exchange_table;
+    decltype(_order_table)& get_order_table() {
+        return _order_table;
     }
 
 private:
@@ -177,8 +178,8 @@ private:
 
     bool is_kinddeed_proof_exist(const std::string& id,kinddeedproof& ent);
     bool is_kinddeed_exist(const std::string& id,kinddeed& ent);
+    bool is_suborder_exist(const std::string& id,const std::string& orderid,suborder& ent);
     bool is_order_exist(const std::string& id,order& ent);
-    bool is_exchange_exist(const std::string& id,exchange& ent);
 
     bool is_deployer(const std::string& name);
     bool is_founder(const std::string& name);
@@ -195,8 +196,8 @@ private:
     void delete_master_record(const std::string& name);
     void delete_kinddeed_proof_record(const std::string& orderid);   
     void delete_kinddeed_record(const std::string& id);
-    void delete_order_record(const std::string& orderid);
-    void delete_exchange_record(const std::string& orderid);
+    void delete_suborder_record(const std::string& id,const std::string& orderid);
+    void delete_order_record(const std::string& id);
 
     bool refund(const std::string& name,
                 const std::string& amount);
@@ -214,6 +215,7 @@ public:
     void approve_online_kinddeed();
     void approve_offline_kinddeed();
     void approve_kinddeed_proof();
+    void refuse_kinddeed_proof();
 
 
     //法师
@@ -268,16 +270,43 @@ bool Buddha::is_kinddeed_exist(const std::string& id,kinddeed& ent) {
     return true;
 }
 
-bool Buddha::is_order_exist(const std::string& id,order& ent) {
-    if (!get_order_table().find({{"id", id}}, &ent))
+bool Buddha::is_suborder_exist(const std::string& id,
+                                const std::string& orderid, 
+                                suborder& ent) {
+    if (!get_suborder_table().find({{"id", id},{"orderid", orderid}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::is_exchange_exist(const std::string& id,exchange& ent) {
-    if (!get_exchange_table().find({{"id", id}}, &ent))
+bool Buddha::is_order_exist(const std::string& id,order& ent) {
+    if (!get_order_table().find({{"id", id}}, &ent))
         return false;
+
+    //删除子订单表中的子订单
+    xchain::json suborderids = xchain::json::parse(ent.suborderids());
+
+    if (!suborderids.is_array()) {
+        ctx->error("field 'suborderids' need to be array .");
+        get_order_table().del(ent);
+        return false;
+    }
+    
+    if ( suborderids.empty() || suborderids.size() == 0) {
+        ctx->error("filed 'suborderids' empty .");
+        get_order_table().del(ent);
+        return false;
+    }
+
+    for(int i = 0 ; i < suborderids.size() ; i++) {
+        std::string suborderid = suborderids.at(i).template get<std::string>();
+        suborder sod;
+        if( !is_suborder_exist(suborderid, id, sod) ) {
+            ctx->error("order("+id+") suborderid("+suborderid+") not exist .");
+            get_order_table().del(ent);
+            return false;
+        }
+    }
 
     return true;
 }
@@ -398,28 +427,47 @@ void Buddha::delete_kinddeed_record(const std::string& id) {
 }
 
 
+void Buddha::delete_suborder_record(const std::string& id,
+                                    const std::string& orderid) {
+    while(true) {
+        suborder ent;
+        if(!is_suborder_exist(id, orderid, ent))
+            break;
+
+        get_suborder_table().del(ent);
+        std::string str ;
+        str += "delete suborder " + ent.to_string() ;
+        ctx->logf(str.c_str());
+    }
+}
+
 void Buddha::delete_order_record(const std::string& orderid) {
     while(true) {
         order ent;
         if(!is_order_exist(orderid, ent))
             break;
 
+        //删除子订单表中的子订单
+        xchain::json suborderids = xchain::json::parse(ent.suborderids());
+ 
+        if (!suborderids.is_array()) {
+            ctx->error("field 'suborderids' need to be array .");
+            return;
+        }
+        
+        if ( suborderids.empty() || suborderids.size() == 0) {
+            ctx->error("filed 'suborderids' empty .");
+            return;
+        }
+
+        for(int i = 0 ; i < suborderids.size() ; i++) {
+            std::string id = suborderids.at(i).template get<std::string>();
+            delete_suborder_record(id, orderid);
+        }
+
         get_order_table().del(ent);
         std::string str ;
         str += "delete order " + ent.to_string() ;
-        ctx->logf(str.c_str());
-    }
-}
-
-void Buddha::delete_exchange_record(const std::string& orderid) {
-    while(true) {
-        exchange ent;
-        if(!is_exchange_exist(orderid, ent))
-            break;
-
-        get_exchange_table().del(ent);
-        std::string str ;
-        str += "delete exchange " + ent.to_string() ;
         ctx->logf(str.c_str());
     }
 }
@@ -639,13 +687,98 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
-    exchange ex;
     order od;
-    if (!is_order_exist(orderid, od) || !is_exchange_exist(orderid, ex)) {
-        delete_exchange_record(orderid);
-        delete_order_record(orderid);
+    if (!is_order_exist(orderid, od)) {
         delete_kinddeed_proof_record(orderid);
-        ctx->error("exchange and order lost, kinddeed proof " + orderid + " be delete .");
+        ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
+        return ;
+    }
+
+    kinddeedproof ent;
+    if (!is_kinddeed_proof_exist(orderid, ent))  {
+        ctx->ok("kinddeed proof " + orderid + " is not exist .");
+        return ;
+    }
+
+    while(true) {
+        order ent;
+        if(!is_order_exist(orderid, ent))
+            break;
+
+        //删除子订单表中的子订单
+        xchain::json suborderids = xchain::json::parse(ent.suborderids());
+ 
+        if (!suborderids.is_array()) {
+            ctx->error("field 'suborderids' need to be array .");
+            return;
+        }
+        
+        if ( suborderids.empty() || suborderids.size() == 0) {
+            ctx->error("filed 'suborderids' empty .");
+            return;
+        }
+
+        for(int i = 0 ; i < suborderids.size() ; i++) {
+            std::string id = suborderids.at(i)["id"].template get<std::string>();
+            int64_t count = std::stoll(suborderids.at(i)["count"].template get<std::string>());
+
+            suborder ent;
+            if(!is_suborder_exist(id, orderid, ent))
+                break;
+
+            kinddeed kd;
+            if(!is_kinddeed_exist(ent.kinddeedid(), kd)) {
+                ctx->error("the order(" + orderid 
+                            + ") suborder(" + id 
+                            + ") kinddeed(" + ent.kinddeedid() 
+                            + ") not exist .");
+                return;
+            }
+
+            //kinddeed产品个数减去count个
+            delete_kinddeed_record(ent.kinddeedid());
+            int64_t c = kd.count()-count;
+            if(c < 0 ) {
+                ctx->error("the order(" + orderid 
+                            + ") suborder(" + id 
+                            + ") kinddeed(" + ent.kinddeedid() 
+                            + ") size(" + std::to_string(kd.count())
+                            + "-" + std::to_string(count)
+                            + "=" + std::to_string(c)
+                            + ") < 0, error .");
+                return ;
+            }
+
+            kd.set_count(c);
+            get_kinddeed_table().put(kd);
+            ctx->logf("order(%s) suborder(%s) kinddeed(%s) count(%d-%d=%d)",
+                        orderid.c_str(),id.c_str(),ent.kinddeedid().c_str(),kd.count(),count,c);
+        }
+    }
+
+    delete_kinddeed_proof_record(orderid);
+    ent.set_approved(true);
+    get_kinddeed_proof_table().put(ent);
+
+    ctx->ok("approve kinddeed "+ ent.to_string() + " proof success .");
+}
+
+void Buddha::refuse_kinddeed_proof() {
+    const std::string& orderid = ctx->arg("orderid");
+    if(orderid.empty()) {
+        ctx->error("kinddeed proof orderid is empty");
+        return ;
+    }
+
+    if(!is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder, has no authority to approve kinddeed proof .");
+        return ;
+    }
+
+    order od;
+    if (!is_order_exist(orderid, od)) {
+        delete_kinddeed_proof_record(orderid);
+        ctx->error("order lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
 
@@ -656,10 +789,8 @@ void Buddha::approve_kinddeed_proof() {
     }
 
     delete_kinddeed_proof_record(orderid);
-    ent.set_approved(true);
-    get_kinddeed_proof_table().put(ent);
 
-    ctx->ok("approve kinddeed "+ ent.to_string() + " proof success .");
+    ctx->ok("refuse kinddeed "+ ent.to_string() + " proof success .");
 }
 
 namespace ruler_master{}
@@ -757,13 +888,10 @@ void Buddha::upload_kinddeed_proof() {
         return ;
     }
 
-    exchange ex;
     order od;
-    if (!is_order_exist(orderid, od) || !is_exchange_exist(orderid, ex)) {
-        delete_exchange_record(orderid);
-        delete_order_record(orderid);
+    if (!is_order_exist(orderid, od)) {
         delete_kinddeed_proof_record(orderid);
-        ctx->error("exchange and order lost, kinddeed proof " + orderid + " be delete .");
+        ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
 
@@ -819,7 +947,6 @@ void Buddha::pray_kinddeed() {
     //     return ;
     // }
 
-    //判断订单是不是已经存在
     const std::string& orderid = ctx->arg("id");
     if(orderid.empty()) {
         ctx->error("orderid is empty");
@@ -827,17 +954,15 @@ void Buddha::pray_kinddeed() {
     }
 
     //判断订单中的产品部分是否是数组，是否数组为空
-    const std::string& kinddeeds = ctx->arg("kinddeeds");
-
-    auto kinddeed_ids = xchain::json::parse(kinddeeds);
+    auto suborders = xchain::json::parse(ctx->arg("suborders"));
  
-    if (!kinddeed_ids.is_array()) {
-        ctx->error("field 'kinddeeds' need to be array .");
+    if (!suborders.is_array()) {
+        ctx->error("field 'suborders' need to be array .");
         return;
     }
     
-    if ( kinddeed_ids.empty() || kinddeed_ids.size() == 0) {
-        ctx->error("filed 'kinddeeds' empty .");
+    if ( suborders.empty() || suborders.size() == 0) {
+        ctx->error("filed 'suborders' empty .");
         return;
     }
 
@@ -853,15 +978,21 @@ void Buddha::pray_kinddeed() {
         return ;
     }
 
+    order od;
+    if (is_order_exist(orderid,od))  {
+        ctx->error("order " + orderid + " is exist .");
+        return ;
+    }
+
     //判断总价格是否跟表中的计算价格相同
     double calced_amount = 0;
-    for(int i = 0 ; i < kinddeed_ids.size() ; i++) {
-        std::string id = kinddeed_ids.at(i)["id"].template get<std::string>();
-        int64_t count = std::stoll(kinddeed_ids.at(i)["count"].template get<std::string>());
+    for(int i = 0 ; i < suborders.size() ; i++) {
+        std::string kdid = suborders.at(i)["kdid"].template get<std::string>();
+        int64_t count = std::stoll(suborders.at(i)["count"].template get<std::string>());
 
         kinddeed ent;
-        if (!is_kinddeed_exist(id, ent))  {
-            ctx->error("kinddeed " + id + " is not exist .");
+        if (!is_kinddeed_exist(kdid, ent))  {
+            ctx->error("kinddeed " + kdid + " is not exist .");
             return ;
         }
 
@@ -875,56 +1006,41 @@ void Buddha::pray_kinddeed() {
         return;
     }
 
-    //如果exchange和order表有一个不存在此记录。则删除另外一个表的这个记录。
-    exchange ex;
-    order od;
-    if (!is_order_exist(orderid, od) || !is_exchange_exist(orderid, ex)) {
-        delete_exchange_record(orderid);
-        delete_order_record(orderid);
-    }
+    //子订单数组
+    xchain::json suborderidArray = xchain::json::array();
+    
+    //处理 suborder 和 kinddeed
+    for(int i = 0 ; i < suborders.size() ; i++) {
+        std::string id = suborders.at(i)["id"].template get<std::string>();
+        std::string kdid = suborders.at(i)["kdid"].template get<std::string>();
+        int64_t count = std::stoll(suborders.at(i)["count"].template get<std::string>());
 
-    //如果都存在，直接返回。
-    exchange ex1;
-    order od1;
-    if (is_exchange_exist(orderid,ex1) && is_order_exist(orderid, od1))  {
-        ctx->error("exchange " + orderid + " is exist .");
-        return ;
-    }
-
-    //处理 order 和 kinddeed
-    for(int i = 0 ; i < kinddeed_ids.size() ; i++) {
-        std::string id = kinddeed_ids.at(i)["id"].template get<std::string>();
-        int64_t count = std::stoll(kinddeed_ids.at(i)["count"].template get<std::string>());
-
-        kinddeed prod;
-        if (!is_kinddeed_exist(id, prod))  {
-            ctx->error("kinddeed " + id + " is not exist .");
+        kinddeed kd;
+        if (!is_kinddeed_exist(kdid, kd))  {
+            ctx->error("kinddeed " + kdid + " is not exist .");
             return ;
         }
 
-        //kinddeed产品个数减去count个
-        delete_kinddeed_record(id);
-        prod.set_count(prod.count()-count);
-        get_kinddeed_table().put(prod);
+        suborderidArray.push_back(id);
 
-
-        order od;
-        od.set_id(orderid.c_str());
-        od.set_kinddeedid(prod.id().c_str());
-        od.set_kinddeedname(prod.name().c_str());
-        od.set_kinddeeddesc(prod.desc().c_str());
-        od.set_kinddeedprice(prod.price());
+        suborder od;
+        od.set_id(id.c_str());
+        od.set_orderid(orderid.c_str());
+        od.set_kinddeedid(kd.id().c_str());
+        od.set_kinddeedname(kd.name().c_str());
+        od.set_kinddeeddesc(kd.desc().c_str());
+        od.set_kinddeedprice(kd.price());
         od.set_kinddeedcount(count);
-        get_order_table().put(od);
+        get_suborder_table().put(od);
     }
 
-    //存储exchange记录
-    exchange ent;
-    ent.set_orderid(orderid.c_str());
-    ent.set_kinddeeds(kinddeeds.c_str());
+    //存储order记录
+    order ent;
+    ent.set_id(orderid.c_str());
+    ent.set_suborderids(suborderidArray.dump().c_str());
     ent.set_amount(calced_amount);
     ent.set_timestamp(timestamp.c_str());
-    get_exchange_table().put(ent);
+    get_order_table().put(ent);
     
     ctx->ok("pray kinddeed " + std::to_string(calced_amount) + " success .");
 }
@@ -1157,6 +1273,8 @@ DEFINE_METHOD(Buddha, recusal_master)    { self.recusal_master();    }
 DEFINE_METHOD(Buddha, approve_online_kinddeed) { self.approve_online_kinddeed(); }
 DEFINE_METHOD(Buddha, approve_offline_kinddeed)   { self.approve_offline_kinddeed();   }
 DEFINE_METHOD(Buddha, approve_kinddeed_proof)   { self.approve_kinddeed_proof();   }
+DEFINE_METHOD(Buddha, refuse_kinddeed_proof)   { self.refuse_kinddeed_proof();   }
+
 
 // 法师或寺院
 DEFINE_METHOD(Buddha, apply_online_kinddeed)   { self.apply_online_kinddeed();   }

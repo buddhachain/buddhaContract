@@ -40,23 +40,24 @@ message Kinddeed {
     bool   online= 9; //是否已经是上线
 }
 
-//描述订单信息。订单与善举的关系。
+//描述大订单中的针对某个商品的子订单。
 //由于订单里可以有多个善举，并且善举的描述未必与当前的善举表中的内容一致。
 //又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
-message Order {
-    string id               = 1; //订单编号
-    string kinddeedid       = 2; //对应的善举id
-    string kinddeedname     = 3; //对应的善举名称
-    string kinddeeddesc     = 4; //对应的善举描述
-    double kinddeedprice    = 5; //对应的善举价格
-    int64  kinddeedcount    = 6; //这个善举的个数
+message SubOrder {
+    string id               = 1; //子订单编号
+    string orderid          = 2; //大订单编号
+    string kinddeedid       = 3; //对应的善举id
+    string kinddeedname     = 4; //对应的善举名称
+    string kinddeeddesc     = 5; //对应的善举描述
+    double kinddeedprice    = 6; //对应的善举价格
+    int64  kinddeedcount    = 7; //这个善举的个数
 }
 
-//描述交易信息
-message Exchange {
-    string orderid      = 1; //订单编号
-    string kinddeeds      = 2; //善举id {aaa,bbb,ccc} 
-    double amount        = 3; //善举总价格
-    string timestamp     = 4; //订单生成时间
+//描述大订单信息
+message Order {
+    string id           = 1; //大订单编号
+    string suborderids    = 2; //子订单id集合 {aaa,bbb,ccc} 
+    double amount       = 3; //善举总价格
+    string timestamp    = 4; //订单生成时间
 }
 
