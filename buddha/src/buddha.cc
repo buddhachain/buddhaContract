@@ -129,13 +129,7 @@ class order: public buddha::Order {
 
 class Buddha : public xchain::Contract {
 public:
-    Buddha(): _founder_table(context(),  "founder"),
-                _master_table(context(),  "master"),
-                _kinddeed_proof_table(context(),  "kinddeed_proof"),
-                _kinddeed_table(context(),  "kinddeed"),
-                _suborder_table(context(),    "suborder"),
-                _order_table(context(), "order"),
-                ctx(context()) {}
+    Buddha();
 
 private:
     xchain::cdt::Table<founder>  _founder_table;
@@ -186,12 +180,6 @@ private:
     bool is_master(const std::string& name);
     bool is_user(const std::string& name);
 
-    bool is_deployer();
-    bool is_founder();
-    bool is_master();
-    bool is_user();
-
-
     void delete_founder_record(const std::string& name);
     void delete_master_record(const std::string& name);
     void delete_kinddeed_proof_record(const std::string& orderid);   
@@ -203,8 +191,16 @@ private:
                 const std::string& amount);
 
 public:
+    //对外的辅助接口
+    bool is_deployer();
+    bool is_founder();
+    bool is_master();
+    bool is_user();
+
     //部署者
     void initialize();
+    void get_deployer();
+
     //update无对应函数
     void approve_founder();
     void recusal_founder();
@@ -241,6 +237,18 @@ public:
 };
 
 namespace helpers{}
+
+Buddha::Buddha() :
+    _founder_table(context(), "founder"),
+    _master_table(context(), "master"),
+    _kinddeed_proof_table(context(), "kinddeed_proof"),
+    _kinddeed_table(context(), "kinddeed"),
+    _suborder_table(context(), "suborder"),
+    _order_table(context(), "order"),
+    ctx(context())
+{
+
+}
 
 bool Buddha::is_founder_exist(const std::string& name,founder& ent) {
     if (!get_founder_table().find({{"name", name}}, &ent))
@@ -359,19 +367,47 @@ bool Buddha::is_user(const std::string& name) {
 }
 
 bool Buddha::is_deployer() {
-    return is_deployer(ctx->initiator());
+    bool ret = is_deployer(ctx->initiator());
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is deployer .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not deployer .") ;
+    return false;
 }
 
 bool Buddha::is_founder() {
-    return is_founder(ctx->initiator());
+    bool ret = is_founder(ctx->initiator());
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is founder .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not founder .") ;
+    return false;
 }
 
 bool Buddha::is_master() {
-    return is_master(ctx->initiator());
+    bool ret = is_master(ctx->initiator());
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is master .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not master .") ;
+    return false;
 }
 
 bool Buddha::is_user() {
-    return is_user(ctx->initiator());
+    bool ret = is_user(ctx->initiator());
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is user .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not user .") ;
+    return false;
 }
 
 void Buddha::delete_founder_record(const std::string& name) {
@@ -489,6 +525,16 @@ void Buddha::initialize() {
     ctx->ok("deployer=" + ctx->initiator() + " success");
 }
 
+void Buddha::get_deployer() {
+    std::string deployer;
+    if (!ctx->get_object("deployer", &deployer)) {
+        ctx->ok("deployer unknown");
+        return ;
+    }       
+
+    ctx->ok("deployer=" + deployer);
+}
+
 void Buddha::approve_founder() {
     const std::string& name = ctx->arg("name");
     if(name.empty()) {
@@ -508,7 +554,7 @@ void Buddha::approve_founder() {
     }
 
     if(is_founder(name)) {
-        ctx->ok(ent.to_string() + " is already founder .");
+        ctx->error(ent.to_string() + " is already founder .");
         return ;
     }
 
@@ -569,7 +615,7 @@ void Buddha::approve_master() {
     }
 
     if(is_master(name)) {
-        ctx->ok(ent.to_string() + " is already master .");
+        ctx->error(ent.to_string() + " is already master .");
         return ;
     }
 
@@ -682,24 +728,28 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
+    ctx->logf("%d", __LINE__);
     if(!is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, has no authority to approve kinddeed proof .");
         return ;
     }
 
+    ctx->logf("%d", __LINE__);
     order od;
     if (!is_order_exist(orderid, od)) {
         delete_kinddeed_proof_record(orderid);
         ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
+    ctx->logf("%d", __LINE__);
 
     kinddeedproof ent;
     if (!is_kinddeed_proof_exist(orderid, ent))  {
-        ctx->ok("kinddeed proof " + orderid + " is not exist .");
+        ctx->error("kinddeed proof " + orderid + " is not exist .");
         return ;
     }
 
+    ctx->logf("%d", __LINE__);
     while(true) {
         order ent;
         if(!is_order_exist(orderid, ent))
@@ -755,10 +805,12 @@ void Buddha::approve_kinddeed_proof() {
                         orderid.c_str(),id.c_str(),ent.kinddeedid().c_str(),kd.count(),count,c);
         }
     }
+    ctx->logf("%d", __LINE__);
 
     delete_kinddeed_proof_record(orderid);
     ent.set_approved(true);
     get_kinddeed_proof_table().put(ent);
+    ctx->logf("%d", __LINE__);
 
     ctx->ok("approve kinddeed "+ ent.to_string() + " proof success .");
 }
@@ -784,7 +836,7 @@ void Buddha::refuse_kinddeed_proof() {
 
     kinddeedproof ent;
     if (!is_kinddeed_proof_exist(orderid, ent))  {
-        ctx->ok("kinddeed proof " + orderid + " is not exist .");
+        ctx->error("kinddeed proof " + orderid + " is not exist .");
         return ;
     }
 
@@ -920,7 +972,7 @@ void Buddha::apply_master(){
     }
 
     if(is_master()) {
-        ctx->ok(ctx->initiator() + " is already master .");
+        ctx->error(ctx->initiator() + " is already master .");
         return ;
     }
     
@@ -985,7 +1037,7 @@ void Buddha::pray_kinddeed() {
     }
 
     //判断总价格是否跟表中的计算价格相同
-    double calced_amount = 0;
+    int64_t calced_amount = 0;
     for(int i = 0 ; i < suborders.size() ; i++) {
         std::string kdid = suborders.at(i)["kdid"].template get<std::string>();
         int64_t count = std::stoll(suborders.at(i)["count"].template get<std::string>());
@@ -996,7 +1048,7 @@ void Buddha::pray_kinddeed() {
             return ;
         }
 
-        calced_amount += ent.price() * count ;
+        calced_amount += int64_t(ent.price()*1000000 * count) ;
     }
 
     //由于可能存在善举价格浮动，实际价格可能高于或低于开始制作订单的总价格。
@@ -1065,7 +1117,7 @@ void Buddha::apply_founder(){
     }
 
     if(is_founder()) {
-        ctx->ok(ctx->initiator() + " is already founder .");
+        ctx->error(ctx->initiator() + " is already founder .");
         return ;
     }
 
@@ -1288,10 +1340,14 @@ DEFINE_METHOD(Buddha, pray_kinddeed)            { self.pray_kinddeed();         
 // 用户和法师
 DEFINE_METHOD(Buddha, apply_founder)      { self.apply_founder();            }
 
-// 基金会成员 和 法师或寺院 和 用户
-DEFINE_METHOD(Buddha, find_kinddeed)   { self.find_kinddeed();   }
-
 // 基金会成员 和 法师或寺院
 DEFINE_METHOD(Buddha, add_kinddeed)    { self.add_kinddeed();    }
 DEFINE_METHOD(Buddha, delete_kinddeed)    { self.delete_kinddeed();    }
 DEFINE_METHOD(Buddha, update_kinddeed) { self.update_kinddeed(); }
+
+// 所有角色
+DEFINE_METHOD(Buddha, find_kinddeed)   { self.find_kinddeed();   }
+DEFINE_METHOD(Buddha, is_deployer)     { self.is_deployer();     }
+DEFINE_METHOD(Buddha, is_founder)     { self.is_founder();     }
+DEFINE_METHOD(Buddha, is_master)     { self.is_master();     }
+DEFINE_METHOD(Buddha, is_user)     { self.is_user();     }
