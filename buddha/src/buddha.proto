@@ -33,7 +33,7 @@ message Kinddeed {
     string name     = 2; //善举名称
     string owner    = 3; //哪位法师或基金会成员添加的此善举
     string desc     = 4; //善举描述
-    double price    = 5; //善举价格
+    int64  price    = 5; //善举价格
     int64  count    = 6; //善举数量
     string lasttime = 7; //善举最后修改的时间
     bool   applied = 8; //是否已申请上线
@@ -44,20 +44,22 @@ message Kinddeed {
 //由于订单里可以有多个善举，并且善举的描述未必与当前的善举表中的内容一致。
 //又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
 message SubOrder {
-    string id               = 1; //子订单编号
-    string orderid          = 2; //大订单编号
-    string kinddeedid       = 3; //对应的善举id
-    string kinddeedname     = 4; //对应的善举名称
-    string kinddeeddesc     = 5; //对应的善举描述
-    double kinddeedprice    = 6; //对应的善举价格
-    int64  kinddeedcount    = 7; //这个善举的个数
+    string id         = 1; //子订单编号
+    string orderid    = 2; //大订单编号
+    string kdid       = 3; //对应的善举id
+    string kdname     = 4; //对应的善举名称
+    string kddesc     = 5; //对应的善举描述
+    int64  kdprice    = 6; //对应的善举价格
+    int64  kdcount    = 7; //这个善举的个数
 }
 
 //描述大订单信息
 message Order {
     string id           = 1; //大订单编号
-    string suborderids    = 2; //子订单id集合 {aaa,bbb,ccc} 
-    double amount       = 3; //善举总价格
-    string timestamp    = 4; //订单生成时间
+    string owner        = 2; //订单所有者
+    string mastername   = 3; //指定
+    string suborderids  = 4; //子订单id集合 {aaa,bbb,ccc} 
+    int64  amount       = 5; //善举总价格
+    string timestamp    = 6; //订单生成时间
 }
 

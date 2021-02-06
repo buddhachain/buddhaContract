@@ -17,39 +17,40 @@ xdev build
 ```bash
 cd ~/output/
 
+#允许升级
+vim conf/xchain.yaml
+   enableUpgrade: true
+
 #关闭原来的链
 pkill xchain
 rm -rvf data/blockchain/
 
-#运行升级
-vim conf/xchain.yaml
-   enableUpgrade: true
-
 #创建链，后台启动链
 xchain-cli createChain
 nohup xchain --vm ixvm &
+
 ```
 
 ## 3. 创建测试用的角色
 
 ```bash
 # 创建合约部署者 1234567890111111
-xchain-cli account new --account XC1234567890111111 --fee 1000
+xchain-cli account new --account 1234567890111111 --fee 1000
 xchain-cli transfer --to XC1234567890111111@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890111111@xuper
 
 # 创建基金会成员 1234567890222222
-xchain-cli account new --account XC1234567890222222 --fee 1000
+xchain-cli account new --account 1234567890222222 --fee 1000
 xchain-cli transfer --to XC1234567890222222@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890222222@xuper
 
 # 创建法师 1234567890333333
-xchain-cli account new --account XC1234567890333333 --fee 1000
+xchain-cli account new --account 1234567890333333 --fee 1000
 xchain-cli transfer --to XC1234567890333333@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890333333@xuper
 
 # 创建用户 123456789044444
-xchain-cli account new --account XC1234567890444444 --fee 1000
+xchain-cli account new --account 1234567890444444 --fee 1000
 xchain-cli transfer --to XC1234567890444444@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890444444@xuper
 ```
@@ -97,7 +98,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC12345
 #### 3.3.1 添加删除修改善举
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeed -a '{"id":"1", "name":"kd1", "desc":"kd1", "price":"10.000", "count":"100", "lasttime":"xxxxxx" }' --account XC1234567890333333@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeed -a '{"id":"1", "name":"kd1", "desc":"kd1", "price":"10", "count":"100", "lasttime":"xxxxxx" }' --account XC1234567890333333@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method delete_kinddeed -a '{"id":"1"}' --account XC1234567890333333@xuper
 
@@ -122,37 +123,31 @@ xchain-cli wasm invoke --fee 1000000 buddha --method approve_offline_kinddeed -a
 ```bash
 xchain-cli account balance XC1234567890444444@xuper
 
-xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1","suborders":"[{\"id\":\"1\",\"kdid\":\"1\",\"count\":\"1\"},{\"id\":\"1\",\"kdid\":\"1\",\"count\":\"2\"}]","timestamp":"11111"}' --account XC1234567890444444@xuper --amount 300000000
+xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1","suborders":"[{\"id\":\"1\",\"kdid\":\"1\",\"count\":\"1\"},{\"id\":\"2\",\"kdid\":\"1\",\"count\":\"2\"}]","timestamp":"11111"}' --account XC1234567890444444@xuper --amount 30
+
+xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
+
 ```
 
 ### 5.5 基金会成员授权法师或寺院上传的善举凭证
 
 ```bash
+xchain-cli account balance XC1234567890333333@xuper
+
 xchain-cli wasm invoke --fee 1000000 buddha --method upload_kinddeed_proof -a '{"orderid":"1", "proof":"xxxxx", "timestamp":"xxxxxx"}' --account XC1234567890333333@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method refuse_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
-```
-
-
-```bash
-xchain-cli account balance XC1234567890111111@xuper
-
 ```
 
 ## 6. 其他接口测试
 
 ```bash
 
-DEFINE_METHOD(Buddha, find_kinddeed)   { self.find_kinddeed();   }
-DEFINE_METHOD(Buddha, is_deployer)     { self.is_deployer();     }
-DEFINE_METHOD(Buddha, is_founder)     { self.is_founder();     }
-DEFINE_METHOD(Buddha, is_master)     { self.is_master();     }
-DEFINE_METHOD(Buddha, is_user)     { self.is_user();     }
-
 xchain-cli wasm invoke --fee 1000000 buddha --method is_deployer --account XC1234567890111111@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method is_founder --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC1234567890333333@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method is_user --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
 
 ```
