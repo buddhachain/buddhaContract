@@ -1,7 +1,7 @@
 # task
 
-2021-02-05
-工时：2h
+2021-02-06
+工时：5h
 1. 测试添加及判断当前用户角色，is_deployer, is_founder, is_master, is_user, 测试通过。
 2. 测试申请成为基金会成员 apply_founder, 批准资格 approve_founder, 取消资格 recusel_fonder, 抵押金退还等，测试通过。
 3. 测试申请成为法师或寺院 apply_master, 批准资格 approve_master, 取消资格 recusel_master, 测试通过。
@@ -21,4 +21,9 @@
 问题：
 1. 拒绝成为基金会成员时，直接删除表项，表中无法记录拒绝的原因。
 2. 拒绝成为法师时，直接删除表项，表中无法记录拒绝的原因。
- 
+
+后续任务：
+1. 正常流程联调
+2. 调研平行链
+3. 修改合约bug
+4. 主链合约性能测试

@@ -1039,13 +1039,13 @@ void Buddha::pray_kinddeed() {
             return ;
         }
 
-        // //判断子订单id在数组中是否重复
-        // for(int j=0; j< sodidArray.size() ; j++) {
-        //     if( sodidArray[i] == sodid ) {
-        //         ctx->error("suborder has repeat .");
-        //         return ;
-        //     }  
-        // }
+        //判断子订单id在数组中是否重复
+        for(int j=0; j< sodidArray.size() ; j++) {
+            if( sodidArray[j] == sodid ) {
+                ctx->error("suborder has repeat .");
+                return ;
+            }  
+        }
 
         //获取所有的子订单id，存如数组，方便后面写入大订单表时使用
         sodidArray.push_back(sodid);
