@@ -26,7 +26,7 @@ class founder: public buddha::Founder {
         str += name() + ",";
         str += desc() + ",";
         str += std::to_string(guaranty()) + ",";
-        str += std::to_string(is());
+        str += std::to_string(approved());
         str += "}";
         return str;
     }
@@ -43,7 +43,7 @@ class master: public buddha::Master {
         str += "{" ;
         str += name() + ",";
         str += desc() + ",";
-        str += std::to_string(is());
+        str += std::to_string(approved());
         str += "}";
         return str;
     }
@@ -188,12 +188,12 @@ private:
     bool is_master(const std::string& name);
     bool is_user(const std::string& name);
 
-    void delete_founder_record(const std::string& name);
-    void delete_master_record(const std::string& name);
-    void delete_kinddeed_proof_record(const std::string& orderid);   
-    void delete_kinddeed_record(const std::string& id);
-    void delete_suborder_record(const std::string& id);
-    void delete_order_record(const std::string& id);
+    bool delete_founder_record(const std::string& name);
+    bool delete_master_record(const std::string& name);
+    bool delete_kinddeed_proof_record(const std::string& orderid);   
+    bool delete_kinddeed_record(const std::string& id);
+    bool delete_suborder_record(const std::string& id);
+    bool delete_order_record(const std::string& id);
 
     bool transfer(const std::string& name,
                 const std::string& amount);
@@ -372,7 +372,7 @@ bool Buddha::is_founder(const std::string& name) {
     if (!is_founder_exist(name, ent))
         return false;
     
-    if( ent.is() != true ) 
+    if( ent.approved() != true ) 
         return false;
 
     return true;
@@ -383,7 +383,7 @@ bool Buddha::is_master(const std::string& name) {
     if (!is_master_exist(name, ent))
         return false;
     
-    if( ent.is() != true ) 
+    if( ent.approved() != true ) 
         return false;
 
     return true ;
@@ -447,90 +447,94 @@ bool Buddha::is_user() {
     return false;
 }
 
-void Buddha::delete_founder_record(const std::string& name) {
-    while(true) {
-        founder ent;
-        if(!is_founder_exist(name, ent))
-            break;
-
-        get_founder_table().del(ent);
-
-        mycout << "delete founder " << ent.to_string() << endl ;
+bool Buddha::delete_founder_record(const std::string& name) {
+    founder ent;
+    if( !get_founder_table().del(ent) ) {
+        mycout << "delete founder " << ent.to_string() << " failure ." << endl ;
+        return false;
     }
+
+    mycout << "delete founder " << ent.to_string() << " success ." << endl ;
+    return true;
 }
 
-void Buddha::delete_master_record(const std::string& name) {
-    while(true) {
-        master ent;
-        if(!is_master_exist(name, ent))
-            break;
-
-        get_master_table().del(ent);
-        mycout << "delete master " << ent.to_string() << endl ;
+bool Buddha::delete_master_record(const std::string& name) {
+    master ent;
+    if( !get_master_table().del(ent) ) {
+        mycout << "delete master " << ent.to_string() << " failure ." << endl ;
+        return false;
     }
+
+    mycout << "delete master " << ent.to_string() << " success ." << endl ;
+    return true;
 }
 
-void Buddha::delete_kinddeed_proof_record(const std::string& orderid) {
-    while(true) {
-        kinddeedproof ent;
-        if(!is_kinddeed_proof_exist(orderid, ent))
-            break;
-
-        get_kinddeed_proof_table().del(ent);
-        mycout << "delete kinddeed_proof " << ent.to_string() << endl ;
+bool Buddha::delete_kinddeed_proof_record(const std::string& orderid) {
+    kinddeedproof ent;
+    if( !get_kinddeed_proof_table().del(ent) ) {
+        mycout << "delete kinddeek proof " << ent.to_string() << " failure ." << endl ;
+        return false;
     }
+
+    mycout << "delete kinddeek proof " << ent.to_string() << " success ." << endl ;
+    return true;
 }
 
-void Buddha::delete_kinddeed_record(const std::string& id) {
-    while(true) {
-        kinddeed ent;
-        if(!is_kinddeed_exist(id, ent))
-            break;
-
-        get_kinddeed_table().del(ent);
-        mycout << "delete kinddeed " << ent.to_string() << endl ;
+bool Buddha::delete_kinddeed_record(const std::string& id) {
+    kinddeed ent;
+    if( !get_kinddeed_table().del(ent) ) {
+        mycout << "delete kinddeek " << ent.to_string() << " failure ." << endl ;
+        return false;
     }
+
+    mycout << "delete kinddeek " << ent.to_string() << " success ." << endl ;
+    return true;
 }
 
 
-void Buddha::delete_suborder_record(const std::string& id) {
-    while(true) {
-        suborder ent;
-        if(!is_suborder_exist(id, ent))
-            break;
-
-        get_suborder_table().del(ent);
-        mycout << "delete suborder " << ent.to_string() << endl ;
+bool Buddha::delete_suborder_record(const std::string& id) {
+    suborder ent;
+    if( !get_suborder_table().del(ent) ) {
+        mycout << "delete suborder " << ent.to_string() << " failure ." << endl ;
+        return false;
     }
+
+    mycout << "delete suborder " << ent.to_string() << " success ." << endl ;
+    return true;
 }
 
-void Buddha::delete_order_record(const std::string& orderid) {
-    while(true) {
-        order ent;
-        if(!is_order_exist(orderid, ent))
-            break;
-
-        //删除子订单表中的子订单
-        xchain::json suborderids = xchain::json::parse(ent.suborderids());
- 
-        if (!suborderids.is_array()) {
-            ctx->error("field 'suborderids' need to be array .");
-            return;
-        }
-        
-        if ( suborderids.empty() || suborderids.size() == 0) {
-            ctx->error("filed 'suborderids' empty .");
-            return;
-        }
-
-        for(int i = 0 ; i < suborderids.size() ; i++) {
-            std::string id = suborderids.at(i).template get<std::string>();
-            delete_suborder_record(id);
-        }
-
-        get_order_table().del(ent);
-        mycout << "delete order " << ent.to_string() << endl ;
+bool Buddha::delete_order_record(const std::string& orderid) {
+    order ent;
+    if(!is_order_exist(orderid, ent)){
+        mycout << "order " << orderid << " is not exist ." << endl ;
+        return false;
     }
+
+    //删除子订单表中的子订单
+    xchain::json suborderids = xchain::json::parse(ent.suborderids());
+
+    if (!suborderids.is_array()) {
+        ctx->error("field 'suborderids' need to be array .");
+        return false;
+    }
+    
+    if ( suborderids.empty() || suborderids.size() == 0) {
+        ctx->error("filed 'suborderids' empty .");
+        return false;
+    }
+
+    for(int i = 0 ; i < suborderids.size() ; i++) {
+        std::string id = suborderids.at(i).template get<std::string>();
+        delete_suborder_record(id);
+    }
+
+    if( !get_order_table().del(ent)) {
+        mycout << "delete order " << ent.to_string() << " failure ." << endl ;
+        return false;
+    }
+
+    mycout << "delete order " << ent.to_string() << " success ." << endl ;
+    return true;
 }
 
 bool Buddha::transfer(const std::string& name,
@@ -583,9 +587,17 @@ void Buddha::approve_founder() {
         return ;
     }
 
-    delete_founder_record(name);        
-    ent.set_is(true);
-    get_founder_table().put(ent);
+    if( !delete_founder_record(name) ) {
+        ctx->error("delete founder "+ ent.to_string() + " failure .");
+        return;
+    }
+
+    ent.set_approved(true);
+    if (!get_founder_table().put(ent)) {
+        ctx->error("founder table put "+ ent.to_string() + " error .");
+        return;
+    }
+
     ctx->ok("audit "+ ent.to_string() + " to be founder .");
 }
 
@@ -614,7 +626,10 @@ void Buddha::recusal_founder() {
         return ;
     }
 
-    delete_founder_record(name);
+    if( !delete_founder_record(name) ) {
+        ctx->error("delete founder "+ ent.to_string() + " failure .");
+        return;
+    }
 
     ctx->ok("recusal founder "+ name + " success , guaranty " + guaranty + " has refund, please check balance.");
 }
@@ -644,9 +659,16 @@ void Buddha::approve_master() {
         return ;
     }
 
-    delete_master_record(name);
-    ent.set_is(true);
-    get_master_table().put(ent);
+    if( !delete_master_record(name) ) {
+        ctx->error("delete master "+ ent.to_string() + " failure .");
+        return;
+    }
+
+    ent.set_approved(true);
+    if (!get_master_table().put(ent)) {
+        ctx->error("master table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("approve master "+ ent.to_string() + " success .");
 }
@@ -669,7 +691,10 @@ void Buddha::recusal_master() {
         return ;
     }
 
-    delete_master_record(name);
+    if( !delete_master_record(name) ) {
+        ctx->error("delete master "+ ent.to_string() + " failure .");
+        return;
+    }
 
     ctx->ok("recusal master "+ ent.to_string() + " success .");
 }
@@ -702,10 +727,17 @@ void Buddha::approve_online_kinddeed() {
         return ;
     }
 
-    delete_kinddeed_record(id);
+    if( !delete_kinddeed_record(id) ) {
+        ctx->error("delete kinddeed "+ ent.to_string() + " failure .");
+        return;
+    }
+
     ent.set_applied(false);
     ent.set_online(true);
-    get_kinddeed_table().put(ent);
+    if (!get_kinddeed_table().put(ent)) {
+        ctx->error("kinddeed table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("approve kinddeed "+ ent.to_string() + " online success .");
 }
@@ -738,10 +770,17 @@ void Buddha::approve_offline_kinddeed() {
         return ;
     }
 
-    delete_kinddeed_record(id);
+    if( !delete_kinddeed_record(id) ) {
+        ctx->error("delete kinddeed "+ ent.to_string() + " failure .");
+        return;
+    }
+
     ent.set_applied(false);
     ent.set_online(false);
-    get_kinddeed_table().put(ent);
+    if (!get_kinddeed_table().put(ent)) {
+        ctx->error("kinddeed table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("approve kinddeed "+ ent.to_string() + " offline success .");
 }
@@ -781,9 +820,16 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
-    delete_kinddeed_proof_record(orderid);
+    if( !delete_kinddeed_proof_record(orderid) ) {
+        ctx->error("delete kinddeed proof "+ ent.to_string() + " failure .");
+        return;
+    }
+
     ent.set_approved(true);
-    get_kinddeed_proof_table().put(ent);
+    if (!get_kinddeed_proof_table().put(ent)) {
+        ctx->error("kinddeed proof table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("approve kinddeed "+ ent.to_string() + " proof success .");
 }
@@ -818,7 +864,10 @@ void Buddha::refuse_kinddeed_proof() {
         return ;
     }
 
-    delete_kinddeed_proof_record(orderid);
+    if( !delete_kinddeed_proof_record(orderid) ) {
+        ctx->error("delete kinddeed proof "+ ent.to_string() + " failure .");
+        return;
+    }
 
     ctx->ok("refuse kinddeed "+ ent.to_string() + " proof success .");
 }
@@ -852,9 +901,16 @@ void Buddha::apply_online_kinddeed() {
         return ;
     }
 
-    delete_kinddeed_record(id);
+    if( !delete_kinddeed_record(id) ) {
+        ctx->error("delete kinddeed "+ ent.to_string() + " failure .");
+        return;
+    }
+
     ent.set_applied(true);
-    get_kinddeed_table().put(ent);
+    if (!get_kinddeed_table().put(ent)) {
+        ctx->error("kinddeed table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("kinddeed " + ent.to_string() + " apply online over, please wait for approve .");
 }
@@ -887,9 +943,16 @@ void Buddha::apply_offline_kinddeed() {
         return ;
     }
 
-    delete_kinddeed_record(id);
+    if( !delete_kinddeed_record(id) ) {
+        ctx->error("delete kinddeed "+ ent.to_string() + " failure .");
+        return;
+    }
+
     ent.set_applied(true);
-    get_kinddeed_table().put(ent);
+    if (!get_kinddeed_table().put(ent)) {
+        ctx->error("kinddeed table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("kinddeed " + ent.to_string() + " apply offline over, please wait for approve .");
 }
@@ -936,7 +999,10 @@ void Buddha::upload_kinddeed_proof() {
     ent.set_proof(proof.c_str());
     ent.set_timestamp(timestamp.c_str());
     ent.set_approved(false);
-    get_kinddeed_proof_table().put(ent);
+    if (!get_kinddeed_proof_table().put(ent)) {
+        ctx->error("kinddeed proof table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("apply kinddeed "+ ent.to_string() + " proof over, please wait for approve .");
 }
@@ -964,8 +1030,11 @@ void Buddha::apply_master(){
     master ent;
     ent.set_name(ctx->initiator().c_str());
     ent.set_desc(desc.c_str());
-    ent.set_is(false);
-    get_master_table().put(ent);
+    ent.set_approved(false);
+    if (!get_master_table().put(ent)) {
+        ctx->error("master table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok(ent.to_string() + " apply tobe master over, please wait for approve .");
 }
@@ -1108,14 +1177,24 @@ void Buddha::pray_kinddeed() {
         od.set_kddesc(kd.desc().c_str());
         od.set_kdprice(kd.price());
         od.set_kdcount(count);
-        get_suborder_table().put(od);
+        if (!get_suborder_table().put(od)) {
+            ctx->error("suborder table put "+ od.to_string() + " error .");
+            return;
+        }
 
-        int64_t c = kd.count()-count;
-        delete_kinddeed_record(kdid);
-        kd.set_count(c);
-        get_kinddeed_table().put(kd);
+        if( !delete_kinddeed_record(kdid) ) {
+            ctx->error("delete kinddeed "+ kd.to_string() + " failure .");
+            return;
+        }
 
-        mycout << "order[" << orderid << "] suborder[" << sodid << "] kinddeed[" << kdid << "] count(" << kd.count() << "-" << count << "=" << c << ")" << endl ;
+        kd.set_count(kd.count()-count);
+
+        if (!get_kinddeed_table().put(kd)) {
+            ctx->error("kinddeed table put "+ kd.to_string() + " error .");
+            return;
+        }
+
+        mycout << "order[" << orderid << "] suborder[" << sodid << "] kinddeed[" << kdid << "] count(" << kd.count() << "-" << count << "=" << kd.count()-count << ")" << endl ;
     }
 
     //存储大订单表
@@ -1126,7 +1205,10 @@ void Buddha::pray_kinddeed() {
     ent.set_suborderids(sodidArray.dump().c_str());
     ent.set_amount(calced_amount);
     ent.set_timestamp(timestamp.c_str());
-    get_order_table().put(ent);
+    if (!get_order_table().put(ent)) {
+        ctx->error("order table put "+ ent.to_string() + " error .");
+        return;
+    }
     
     ctx->ok("pray kinddeed " + std::to_string(calced_amount) + " success .");
 }
@@ -1155,15 +1237,20 @@ void Buddha::apply_founder(){
         return ;
     }
 
-    founder ent;
-    if(is_founder_exist(ctx->initiator(),ent))
-        delete_founder_record(ctx->initiator());
+    if( !delete_founder_record(ctx->initiator()) ) {
+        ctx->error("delete founder "+ ctx->initiator() + " failure .");
+        return;
+    }
 
+    founder ent;
     ent.set_name(ctx->initiator().c_str());
     ent.set_desc(desc.c_str());
     ent.set_guaranty(ent.guaranty() + std::stoll(guaranty));
-    ent.set_is(false);
-    get_founder_table().put(ent);
+    ent.set_approved(false);
+    if (!get_founder_table().put(ent)) {
+        ctx->error("founder table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok(ent.to_string() + " apply tobe founder over, please wait for approve .");
 }
@@ -1228,7 +1315,10 @@ void Buddha::add_kinddeed() {
     ent.set_applied(false);
     ent.set_online(false);
 
-    get_kinddeed_table().put(ent);
+    if (!get_kinddeed_table().put(ent)) {
+        ctx->error("kinddeed table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("add kinddeed " + ent.to_string() + " success .");
 }
@@ -1256,7 +1346,10 @@ void Buddha::delete_kinddeed() {
         return ;
     }
 
-    delete_kinddeed_record(id);
+    if( !delete_kinddeed_record(id) ) {
+        ctx->error("delete kinddeed "+ ent.to_string() + " failure .");
+        return;
+    }
 
     ctx->ok("delete kinddeed " + ent.to_string() + " success .");
 }
@@ -1314,7 +1407,11 @@ void Buddha::update_kinddeed() {
         return ;
     }
 
-    delete_kinddeed_record(id);
+    if( !delete_kinddeed_record(id) ) {
+        ctx->error("delete kinddeed "+ ent.to_string() + " failure .");
+        return;
+    }
+
     ent.set_id(id.c_str());
     ent.set_name(name.c_str());
     // ent.set_owner(ctx->initiator().c_str());
@@ -1324,7 +1421,10 @@ void Buddha::update_kinddeed() {
     ent.set_lasttime(lasttime.c_str());
     // ent.set_applied(false);
     // ent.set_online(false);
-    get_kinddeed_table().put(ent);
+    if (!get_kinddeed_table().put(ent)) {
+        ctx->error("kinddeed table put "+ ent.to_string() + " error .");
+        return;
+    }
 
     ctx->ok("update kinddeed " + ent.to_string() + " success .");
 }

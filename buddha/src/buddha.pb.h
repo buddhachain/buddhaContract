@@ -205,11 +205,11 @@ class Founder :
   ::google::protobuf::int64 guaranty() const;
   void set_guaranty(::google::protobuf::int64 value);
 
-  // bool is = 4;
-  void clear_is();
-  static const int kIsFieldNumber = 4;
-  bool is() const;
-  void set_is(bool value);
+  // bool approved = 4;
+  void clear_approved();
+  static const int kApprovedFieldNumber = 4;
+  bool approved() const;
+  void set_approved(bool value);
 
   // @@protoc_insertion_point(class_scope:buddha.Founder)
  private:
@@ -219,7 +219,7 @@ class Founder :
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
   ::google::protobuf::int64 guaranty_;
-  bool is_;
+  bool approved_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -344,11 +344,11 @@ class Master :
   ::std::string* release_desc();
   void set_allocated_desc(::std::string* desc);
 
-  // bool is = 3;
-  void clear_is();
-  static const int kIsFieldNumber = 3;
-  bool is() const;
-  void set_is(bool value);
+  // bool approved = 3;
+  void clear_approved();
+  static const int kApprovedFieldNumber = 3;
+  bool approved() const;
+  void set_approved(bool value);
 
   // @@protoc_insertion_point(class_scope:buddha.Master)
  private:
@@ -357,7 +357,7 @@ class Master :
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
-  bool is_;
+  bool approved_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -1222,18 +1222,18 @@ inline void Founder::set_guaranty(::google::protobuf::int64 value) {
   // @@protoc_insertion_point(field_set:buddha.Founder.guaranty)
 }
 
-// bool is = 4;
-inline void Founder::clear_is() {
-  is_ = false;
+// bool approved = 4;
+inline void Founder::clear_approved() {
+  approved_ = false;
 }
-inline bool Founder::is() const {
-  // @@protoc_insertion_point(field_get:buddha.Founder.is)
-  return is_;
+inline bool Founder::approved() const {
+  // @@protoc_insertion_point(field_get:buddha.Founder.approved)
+  return approved_;
 }
-inline void Founder::set_is(bool value) {
+inline void Founder::set_approved(bool value) {
   
-  is_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Founder.is)
+  approved_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Founder.approved)
 }
 
 // -------------------------------------------------------------------
@@ -1346,18 +1346,18 @@ inline void Master::set_allocated_desc(::std::string* desc) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Master.desc)
 }
 
-// bool is = 3;
-inline void Master::clear_is() {
-  is_ = false;
+// bool approved = 3;
+inline void Master::clear_approved() {
+  approved_ = false;
 }
-inline bool Master::is() const {
-  // @@protoc_insertion_point(field_get:buddha.Master.is)
-  return is_;
+inline bool Master::approved() const {
+  // @@protoc_insertion_point(field_get:buddha.Master.approved)
+  return approved_;
 }
-inline void Master::set_is(bool value) {
+inline void Master::set_approved(bool value) {
   
-  is_ = value;
-  // @@protoc_insertion_point(field_set:buddha.Master.is)
+  approved_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Master.approved)
 }
 
 // -------------------------------------------------------------------

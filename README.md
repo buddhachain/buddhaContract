@@ -49,7 +49,7 @@ xchain-cli account new --account 1234567890333333 --fee 1000
 xchain-cli transfer --to XC1234567890333333@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890333333@xuper
 
-# 创建用户 123456789044444
+# 创建用户 1234567890444444
 xchain-cli account new --account 1234567890444444 --fee 1000
 xchain-cli transfer --to XC1234567890444444@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890444444@xuper
@@ -71,7 +71,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method is_deployer --account XC123
 ### 5.1 申请成为基金会成员
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_founder -a '{"desc":"I am 1234567890222222"}' --account XC1234567890222222@xuper --amount 100000
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_founder -a '{"desc":"apply to be founder"}' --account XC1234567890222222@xuper --amount 100000
 
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_founder -a '{"name":"XC1234567890222222@xuper"}' --account XC1234567890111111@xuper
 
@@ -83,7 +83,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method is_founder --account XC1234
 ### 5.2 申请成为法师或寺院
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_master -a '{"desc":"1234567890333333 apply to be master"}' --account XC1234567890333333@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_master -a '{"desc":"apply to be master"}' --account XC1234567890333333@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_master -a '{"name":"XC1234567890333333@xuper"}' --account XC1234567890222222@xuper
 
@@ -149,5 +149,12 @@ xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC12345
 xchain-cli wasm invoke --fee 1000000 buddha --method is_user --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
+
+
+
+xchain-cli transfer --to gbRjavZajSVuv6oKRbBqH9RaNCsjhetbr --amount 1000000 --keys data/keys
+
+xchain-cli wasm invoke --fee 1000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --keys data/testuser
+
 
 ```

@@ -137,7 +137,7 @@ class Founder::HasBitSetters {
 const int Founder::kNameFieldNumber;
 const int Founder::kDescFieldNumber;
 const int Founder::kGuarantyFieldNumber;
-const int Founder::kIsFieldNumber;
+const int Founder::kApprovedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Founder::Founder()
@@ -158,8 +158,8 @@ Founder::Founder(const Founder& from)
     desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
   }
   ::memcpy(&guaranty_, &from.guaranty_,
-    static_cast<size_t>(reinterpret_cast<char*>(&is_) -
-    reinterpret_cast<char*>(&guaranty_)) + sizeof(is_));
+    static_cast<size_t>(reinterpret_cast<char*>(&approved_) -
+    reinterpret_cast<char*>(&guaranty_)) + sizeof(approved_));
   // @@protoc_insertion_point(copy_constructor:buddha.Founder)
 }
 
@@ -169,8 +169,8 @@ void Founder::SharedCtor() {
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&guaranty_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&is_) -
-      reinterpret_cast<char*>(&guaranty_)) + sizeof(is_));
+      reinterpret_cast<char*>(&approved_) -
+      reinterpret_cast<char*>(&guaranty_)) + sizeof(approved_));
 }
 
 Founder::~Founder() {
@@ -201,8 +201,8 @@ void Founder::Clear() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&guaranty_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&is_) -
-      reinterpret_cast<char*>(&guaranty_)) + sizeof(is_));
+      reinterpret_cast<char*>(&approved_) -
+      reinterpret_cast<char*>(&guaranty_)) + sizeof(approved_));
   _internal_metadata_.Clear();
 }
 
@@ -258,10 +258,10 @@ const char* Founder::_InternalParse(const char* begin, const char* end, void* ob
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // bool is = 4;
+      // bool approved = 4;
       case 4: {
         if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
-        msg->set_is(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_approved(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -348,13 +348,13 @@ bool Founder::MergePartialFromCodedStream(
         break;
       }
 
-      // bool is = 4;
+      // bool approved = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &is_)));
+                 input, &approved_)));
         } else {
           goto handle_unusual;
         }
@@ -413,9 +413,9 @@ void Founder::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->guaranty(), output);
   }
 
-  // bool is = 4;
-  if (this->is() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->is(), output);
+  // bool approved = 4;
+  if (this->approved() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->approved(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -454,8 +454,8 @@ size_t Founder::ByteSizeLong() const {
         this->guaranty());
   }
 
-  // bool is = 4;
-  if (this->is() != 0) {
+  // bool approved = 4;
+  if (this->approved() != 0) {
     total_size += 1 + 1;
   }
 
@@ -487,8 +487,8 @@ void Founder::MergeFrom(const Founder& from) {
   if (from.guaranty() != 0) {
     set_guaranty(from.guaranty());
   }
-  if (from.is() != 0) {
-    set_is(from.is());
+  if (from.approved() != 0) {
+    set_approved(from.approved());
   }
 }
 
@@ -515,7 +515,7 @@ void Founder::InternalSwap(Founder* other) {
   desc_.Swap(&other->desc_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(guaranty_, other->guaranty_);
-  swap(is_, other->is_);
+  swap(approved_, other->approved_);
 }
 
 ::std::string Founder::GetTypeName() const {
@@ -534,7 +534,7 @@ class Master::HasBitSetters {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Master::kNameFieldNumber;
 const int Master::kDescFieldNumber;
-const int Master::kIsFieldNumber;
+const int Master::kApprovedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Master::Master()
@@ -554,7 +554,7 @@ Master::Master(const Master& from)
   if (from.desc().size() > 0) {
     desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
   }
-  is_ = from.is_;
+  approved_ = from.approved_;
   // @@protoc_insertion_point(copy_constructor:buddha.Master)
 }
 
@@ -563,7 +563,7 @@ void Master::SharedCtor() {
       &scc_info_Master_buddha_2eproto.base);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  is_ = false;
+  approved_ = false;
 }
 
 Master::~Master() {
@@ -593,7 +593,7 @@ void Master::Clear() {
 
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  is_ = false;
+  approved_ = false;
   _internal_metadata_.Clear();
 }
 
@@ -642,10 +642,10 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // bool is = 3;
+      // bool approved = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        msg->set_is(::google::protobuf::internal::ReadVarint(&ptr));
+        msg->set_approved(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -719,13 +719,13 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // bool is = 3;
+      // bool approved = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &is_)));
+                 input, &approved_)));
         } else {
           goto handle_unusual;
         }
@@ -779,9 +779,9 @@ void Master::SerializeWithCachedSizes(
       2, this->desc(), output);
   }
 
-  // bool is = 3;
-  if (this->is() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->is(), output);
+  // bool approved = 3;
+  if (this->approved() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->approved(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -813,8 +813,8 @@ size_t Master::ByteSizeLong() const {
         this->desc());
   }
 
-  // bool is = 3;
-  if (this->is() != 0) {
+  // bool approved = 3;
+  if (this->approved() != 0) {
     total_size += 1 + 1;
   }
 
@@ -843,8 +843,8 @@ void Master::MergeFrom(const Master& from) {
 
     desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
   }
-  if (from.is() != 0) {
-    set_is(from.is());
+  if (from.approved() != 0) {
+    set_approved(from.approved());
   }
 }
 
@@ -870,7 +870,7 @@ void Master::InternalSwap(Master* other) {
     GetArenaNoVirtual());
   desc_.Swap(&other->desc_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(is_, other->is_);
+  swap(approved_, other->approved_);
 }
 
 ::std::string Master::GetTypeName() const {

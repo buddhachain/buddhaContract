@@ -6,56 +6,56 @@ package buddha;
 
 //描述基金会信息。
 message Founder {
-    string name    = 1; //基金会名称
-    string desc    = 2; //基金会描述
-    int64  guaranty= 3; //抵押数量
-    bool   is     = 4;  //是否已经是
+    string name         = 1; //基金会名称，唯一主键
+    string desc         = 2; //基金会描述
+    int64  guaranty     = 3; //抵押数量
+    bool   approved     = 4; //是否已经批准是基金会成员，0尚未批准，1已经批准
 }
 
 //描述寺院法师信息。
 message Master {
-    string name    = 1; //寺院法师名称
-    string desc    = 2; //寺院法师描述
-    bool   is     = 3; //是否已经是
+    string name         = 1; //寺院法师名称，唯一主键
+    string desc         = 2; //寺院法师描述
+    bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
 }
 
 //描述善举凭证信息。
 message KinddeedProof {
-    string orderid  = 1; //善举订单编号
-    string proof    = 2; //善举hash
-    string timestamp     = 3; //法师或寺院尽心善举时的时间
-    bool   approved = 4; //批准状态
+    string orderid      = 1; //善举订单编号，对应Order表中的唯一主键，唯一主键
+    string proof        = 2; //善举hash，唯一主键
+    string timestamp    = 3; //法师或寺院尽心善举时的时间
+    bool   approved     = 4; //是否已经批准此善举凭证，0尚未批准，1已经批准
 }
 
 //描述善举信息。
 message Kinddeed {
-    string id       = 1; //善举编号
-    string name     = 2; //善举名称
-    string owner    = 3; //哪位法师或基金会成员添加的此善举
-    string desc     = 4; //善举描述
-    int64  price    = 5; //善举价格
-    int64  count    = 6; //善举数量
-    string lasttime = 7; //善举最后修改的时间
-    bool   applied = 8; //是否已申请上线
-    bool   online= 9; //是否已经是上线
+    string id           = 1; //善举编号，唯一主键
+    string name         = 2; //善举名称
+    string owner        = 3; //哪位法师或基金会成员添加的此善举
+    string desc         = 4; //善举描述
+    int64  price        = 5; //善举价格
+    int64  count        = 6; //善举数量
+    string lasttime     = 7; //善举最后修改的时间
+    bool   applied      = 8; //是否是申请状态，0为非申请状态，1为申请状态
+    bool   online       = 9; //是否已经是上线，0为下线状态，1为上线状态
 }
 
 //描述大订单中的针对某个商品的子订单。
 //由于订单里可以有多个善举，并且善举的描述未必与当前的善举表中的内容一致。
 //又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
 message SubOrder {
-    string id         = 1; //子订单编号
-    string orderid    = 2; //大订单编号
-    string kdid       = 3; //对应的善举id
-    string kdname     = 4; //对应的善举名称
-    string kddesc     = 5; //对应的善举描述
-    int64  kdprice    = 6; //对应的善举价格
-    int64  kdcount    = 7; //这个善举的个数
+    string id           = 1; //子订单编号，唯一主键
+    string orderid      = 2; //大订单编号
+    string kdid         = 3; //对应的善举id
+    string kdname       = 4; //对应的善举名称
+    string kddesc       = 5; //对应的善举描述
+    int64  kdprice      = 6; //对应的善举价格
+    int64  kdcount      = 7; //这个善举的个数
 }
 
 //描述大订单信息
 message Order {
-    string id           = 1; //大订单编号
+    string id           = 1; //大订单编号，唯一主键
     string owner        = 2; //订单所有者
     string mastername   = 3; //指定
     string suborderids  = 4; //子订单id集合 {aaa,bbb,ccc} 
