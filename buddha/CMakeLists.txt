@@ -1,5 +1,0 @@
-# cmake_minimum_required(VERSION <specify CMake version here>)
-project(exchange.wasm)
-cmake_minimum_required(VERSION 3.5)
-include_directories("/root/xuperchain/core/contractsdk/cpp/src")
-add_custom_target(exchange.wasm)

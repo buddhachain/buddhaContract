@@ -78,6 +78,8 @@ xchain-cli wasm invoke --fee 1000000 buddha --method approve_founder -a '{"name"
 xchain-cli wasm invoke --fee 1000000 buddha --method recusal_founder -a '{"name":"XC1234567890222222@xuper"}' --account XC1234567890111111@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method is_founder --account XC1234567890222222@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method list_founder --account XC1234567890222222@xuper
 ```
 
 ### 5.2 申请成为法师或寺院
@@ -90,6 +92,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method approve_master -a '{"name":
 xchain-cli wasm invoke --fee 1000000 buddha --method recusal_master -a '{"name":"XC1234567890333333@xuper"}' --account XC1234567890222222@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC1234567890333333@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method list_master --account XC1234567890222222@xuper
+
 
 ```
 
@@ -105,6 +110,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method delete_kinddeed -a '{"id":"
 xchain-cli wasm invoke --fee 1000000 buddha --method update_kinddeed -a '{"id":"1", "name":"kd111", "desc":"kd111", "price":"100.000", "count":"1000", "lasttime":"yyyyy" }' --account XC1234567890333333@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed --account XC1234567890222222@xuper
+
 ```
 
 #### 5.3.2 申请善举上架下架
@@ -127,6 +135,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1
 
 xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
 
+xchain-cli wasm invoke --fee 1000000 buddha --method list_order --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method list_suborder --account XC1234567890222222@xuper
+
 ```
 
 ### 5.5 基金会成员授权法师或寺院上传的善举凭证
@@ -137,6 +148,9 @@ xchain-cli account balance XC1234567890333333@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method upload_kinddeed_proof -a '{"orderid":"1", "proof":"xxxxx", "timestamp":"xxxxxx"}' --account XC1234567890333333@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method refuse_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed_proof --account XC1234567890222222@xuper
+
 ```
 
 ## 6. 其他接口测试

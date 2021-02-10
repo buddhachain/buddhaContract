@@ -242,6 +242,14 @@ public:
     //所有用户
     void find_kinddeed();
     void find_pray_kinddeed();
+
+    //查找所有
+    void list_founder();
+    void list_master();
+    void list_kinddeed_proof();
+    void list_kinddeed();
+    void list_suborder();
+    void list_order();
  };
 
 namespace helpers{}
@@ -449,6 +457,11 @@ bool Buddha::is_user() {
 
 bool Buddha::delete_founder_record(const std::string& name) {
     founder ent;
+    if (!is_founder_exist(name, ent)){
+        mycout << "founder " << name << " is not exist ." << endl ;
+        return false;
+    }
+
     if( !get_founder_table().del(ent) ) {
         mycout << "delete founder " << ent.to_string() << " failure ." << endl ;
         return false;
@@ -460,6 +473,11 @@ bool Buddha::delete_founder_record(const std::string& name) {
 
 bool Buddha::delete_master_record(const std::string& name) {
     master ent;
+    if (!is_master_exist(name, ent)){
+        mycout << "master " << name << " is not exist ." << endl ;
+        return false;
+    }
+
     if( !get_master_table().del(ent) ) {
         mycout << "delete master " << ent.to_string() << " failure ." << endl ;
         return false;
@@ -471,6 +489,11 @@ bool Buddha::delete_master_record(const std::string& name) {
 
 bool Buddha::delete_kinddeed_proof_record(const std::string& orderid) {
     kinddeedproof ent;
+    if (!is_kinddeed_proof_exist(orderid, ent)){
+        mycout << "kinddeed proof " << orderid << " is not exist ." << endl ;
+        return false;
+    }
+
     if( !get_kinddeed_proof_table().del(ent) ) {
         mycout << "delete kinddeek proof " << ent.to_string() << " failure ." << endl ;
         return false;
@@ -482,6 +505,11 @@ bool Buddha::delete_kinddeed_proof_record(const std::string& orderid) {
 
 bool Buddha::delete_kinddeed_record(const std::string& id) {
     kinddeed ent;
+    if (!is_kinddeed_exist(id, ent)){
+        mycout << "kinddeed " << id << " is not exist ." << endl ;
+        return false;
+    }
+
     if( !get_kinddeed_table().del(ent) ) {
         mycout << "delete kinddeek " << ent.to_string() << " failure ." << endl ;
         return false;
@@ -494,6 +522,11 @@ bool Buddha::delete_kinddeed_record(const std::string& id) {
 
 bool Buddha::delete_suborder_record(const std::string& id) {
     suborder ent;
+    if (!is_suborder_exist(id, ent)){
+        mycout << "suborder " << id << " is not exist ." << endl ;
+        return false;
+    }
+
     if( !get_suborder_table().del(ent) ) {
         mycout << "delete suborder " << ent.to_string() << " failure ." << endl ;
         return false;
@@ -1505,6 +1538,137 @@ void Buddha::find_pray_kinddeed() {
 }
 
 
+
+void Buddha::list_founder() {
+    if(!is_deployer()&&!is_founder()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list founder .");
+        return ;
+    }
+
+    auto it = get_founder_table().scan({{"name",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        founder ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+void Buddha::list_master() {
+    if(!is_deployer()&&!is_founder()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list master .");
+        return ;
+    }
+
+    auto it = get_master_table().scan({{"name",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        master ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+
+void Buddha::list_kinddeed_proof() {
+    if(!is_deployer()&&!is_founder()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list kinddeed proof .");
+        return ;
+    }
+
+    auto it = get_kinddeed_proof_table().scan({{"orderid",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        kinddeedproof ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+
+void Buddha::list_kinddeed() {
+    if(!is_deployer() && !is_founder() && !is_master()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list kinddeed .");
+        return ;
+    }
+
+    auto it = get_kinddeed_table().scan({{"id",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        kinddeed ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+
+void Buddha::list_suborder() {
+    if(!is_deployer() && !is_founder() && !is_master()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list suborder .");
+        return ;
+    }
+
+    auto it = get_suborder_table().scan({{"id",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        suborder ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+
+void Buddha::list_order() {
+    if(!is_deployer() && !is_founder() && !is_master()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list order .");
+        return ;
+    }
+
+    auto it = get_order_table().scan({{"id",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        order ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
 // ---------- 对外接口 -------------
 
 // 合约部署者
@@ -1545,3 +1709,11 @@ DEFINE_METHOD(Buddha, is_deployer)     { self.is_deployer();     }
 DEFINE_METHOD(Buddha, is_founder)     { self.is_founder();     }
 DEFINE_METHOD(Buddha, is_master)     { self.is_master();     }
 DEFINE_METHOD(Buddha, is_user)     { self.is_user();     }
+
+//查询所有接口
+DEFINE_METHOD(Buddha, list_founder)     { self.list_founder();     }
+DEFINE_METHOD(Buddha, list_master)     { self.list_master();     }
+DEFINE_METHOD(Buddha, list_kinddeed_proof)     { self.list_kinddeed_proof();     }
+DEFINE_METHOD(Buddha, list_kinddeed)     { self.list_kinddeed();     }
+DEFINE_METHOD(Buddha, list_suborder)     { self.list_suborder();     }
+DEFINE_METHOD(Buddha, list_order)     { self.list_order();     }
