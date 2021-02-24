@@ -14,9 +14,13 @@ message Founder {
 
 //描述寺院法师信息。
 message Master {
-    string name         = 1; //寺院法师名称，唯一主键
-    string desc         = 2; //寺院法师描述
-    bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
+    string name         = 1; //寺院法师名称，唯一主键，负责人姓名
+    string unit         = 2; //寺院单位名称
+    string creditcode   = 3; //社会信用代码，登记编号
+    string address      = 4; //寺院地址
+    string deedproof    = 5; //宗教活动场所登记证hash
+    bool   approved     = 6; //是否已经批准法师，0尚未批准，1已经批准
+    string approvedproof= 7; //授权凭证
 }
 
 //描述善举凭证信息。
@@ -25,6 +29,7 @@ message KinddeedProof {
     string proof        = 2; //善举hash，唯一主键
     string timestamp    = 3; //法师或寺院尽心善举时的时间
     bool   approved     = 4; //是否已经批准此善举凭证，0尚未批准，1已经批准
+    string approvedproof= 5; //授权凭证
 }
 
 //描述善举信息。
@@ -32,13 +37,39 @@ message Kinddeed {
     string id           = 1; //善举编号，唯一主键
     string name         = 2; //善举名称
     string owner        = 3; //哪位法师或基金会成员添加的此善举
-    string desc         = 4; //善举描述
-    int64  price        = 5; //善举价格
-    int64  count        = 6; //善举数量
-    string lasttime     = 7; //善举最后修改的时间
-    bool   applied      = 8; //是否是申请状态，0为非申请状态，1为申请状态
-    bool   online       = 9; //是否已经是上线，0为下线状态，1为上线状态
+    string lasttime     = 4; //善举最后修改的时间
+    bool   applied      = 5; //是否是申请状态，0为非申请状态，1为申请状态
+    bool   online       = 6; //是否已经是上线，0为下线状态，1为上线状态
 }
+
+//善举规格表
+//全局共同使用此一张表，再善举下线后，删除此表中的对应的善举id表项
+message KinddeedSpec {
+    string kdid         = 1;    //善举id
+    string kdspecid     = 2;    //善举规格id
+    string desc         = 3;    //善举规格描述
+    int64  price        = 4;    //价格
+}
+
+//善行评论标签表，全局统一
+//处理及时，超越期望，... ...等等
+message CommentLabel {
+    string id           = 1;    //标签id
+    string desc         = 2;    //标签内容
+}
+
+
+
+善举点评表，任何人都可以参与，包括购买者和非购买者
+昵称 满意度(很赞，满意，体验不佳)   体验标签(此处是个多选，以数组的形式存在)
+
+善举动态评论表，
+昵称 所选规则 价格 评论日期 评论内容
+
+
+进展动态是做什么的
+
+
 
 //描述大订单中的针对某个商品的子订单。
 //由于订单里可以有多个善举，并且善举的描述未必与当前的善举表中的内容一致。
