@@ -49,7 +49,7 @@ xchain-cli account new --account 1234567890333333 --fee 1000
 xchain-cli transfer --to XC1234567890333333@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890333333@xuper
 
-# 创建用户 1234567890444444
+# 创建会员 1234567890444444
 xchain-cli account new --account 1234567890444444 --fee 1000
 xchain-cli transfer --to XC1234567890444444@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890444444@xuper
@@ -95,7 +95,6 @@ xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC12345
 
 xchain-cli wasm invoke --fee 1000000 buddha --method list_master --account XC1234567890222222@xuper
 
-
 ```
 
 ### 5.3 申请善举上架下架
@@ -126,7 +125,19 @@ xchain-cli wasm invoke --fee 1000000 buddha --method apply_offline_kinddeed -a '
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_offline_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 ```
 
-### 5.4 用户祈求善举
+
+### 5.4 注册会员
+
+```bash
+xchain-cli account balance XC1234567890444444@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_member -a '{"desc":"apply to be member"}' --account XC1234567890444444@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method is_member --account XC1234567890444444@xuper
+
+```
+
+### 5.5 会员祈求善举
 
 ```bash
 xchain-cli account balance XC1234567890444444@xuper
@@ -136,11 +147,10 @@ xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1
 xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
 
 xchain-cli wasm invoke --fee 1000000 buddha --method list_order --account XC1234567890222222@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method list_suborder --account XC1234567890222222@xuper
 
 ```
 
-### 5.5 基金会成员授权法师或寺院上传的善举凭证
+### 5.6 基金会成员授权法师或寺院上传的善举凭证
 
 ```bash
 xchain-cli account balance XC1234567890333333@xuper
@@ -156,19 +166,11 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed_proof --accou
 ## 6. 其他接口测试
 
 ```bash
-
-xchain-cli wasm invoke --fee 1000000 buddha --method is_deployer --account XC1234567890111111@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method is_founder --account XC1234567890222222@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC1234567890333333@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method is_user --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
-
-
 
 xchain-cli transfer --to gbRjavZajSVuv6oKRbBqH9RaNCsjhetbr --amount 1000000 --keys data/keys
 
 xchain-cli wasm invoke --fee 1000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --keys data/testuser
-
 
 ```

@@ -6,7 +6,7 @@ package buddha;
 
 //描述基金会信息。
 message Founder {
-    string name         = 1; //基金会名称，唯一主键
+    string id           = 1; //基金会名称，唯一
     string desc         = 2; //基金会描述
     int64  guaranty     = 3; //抵押数量
     bool   approved     = 4; //是否已经批准是基金会成员，0尚未批准，1已经批准
@@ -14,27 +14,28 @@ message Founder {
 
 //描述寺院法师信息。
 message Master {
-    string name         = 1; //寺院法师名称，唯一主键，负责人姓名
-    string unit         = 2; //寺院单位名称
-    string creditcode   = 3; //社会信用代码，登记编号
-    string address      = 4; //寺院地址
-    string deedproof    = 5; //宗教活动场所登记证hash
+    string id           = 1; //寺院法师名称，唯一，负责人姓名
+    string unit         = 2; //寺院单位名称，唯一
+    string creditcode   = 3; //社会信用代码，登记编号，唯一
+    string address      = 4; //寺院地址，唯一
+    string deedplaceproof   = 5; //宗教活动场所登记证hash，唯一
     bool   approved     = 6; //是否已经批准法师，0尚未批准，1已经批准
     string approvedproof= 7; //授权凭证
 }
 
-//描述善举凭证信息。
-message KinddeedProof {
-    string orderid      = 1; //善举订单编号，对应Order表中的唯一主键，唯一主键
-    string proof        = 2; //善举hash，唯一主键
-    string timestamp    = 3; //法师或寺院尽心善举时的时间
-    bool   approved     = 4; //是否已经批准此善举凭证，0尚未批准，1已经批准
-    string approvedproof= 5; //授权凭证
-}
+//描述会员信息
+message Member {
+    string id           = 1; //会员名称，唯一
+    string nickname     = 2; //昵称
+    string sex          = 3; //性别
+    string address      = 4; //常住地址
+    string email        = 5; //email，唯一
+    string phone        = 6; //电话，唯一
+} 
 
 //描述善举信息。
 message Kinddeed {
-    string id           = 1; //善举编号，唯一主键
+    string id           = 1; //善举编号，唯一
     string name         = 2; //善举名称
     string owner        = 3; //哪位法师或基金会成员添加的此善举
     string lasttime     = 4; //善举最后修改的时间
@@ -42,55 +43,60 @@ message Kinddeed {
     bool   online       = 6; //是否已经是上线，0为下线状态，1为上线状态
 }
 
+//描述善举描述信息。
+message KinddeedDetail {
+    string kdid         = 1; //善举编号
+    int64  sequence     = 2; //善举描述的序号0,1,2,3...
+    string hash         = 3; //善举描述图片的hash
+}
+
 //善举规格表
 //全局共同使用此一张表，再善举下线后，删除此表中的对应的善举id表项
 message KinddeedSpec {
     string kdid         = 1;    //善举id
-    string kdspecid     = 2;    //善举规格id
+    int64  sequence     = 2;    //善举规格序号
     string desc         = 3;    //善举规格描述
     int64  price        = 4;    //价格
 }
 
 //善行评论标签表，全局统一
-//处理及时，超越期望，... ...等等
 message CommentLabel {
-    string id           = 1;    //标签id
-    string desc         = 2;    //标签内容
+    string id           = 1;    //标签id，唯一
+    string desc         = 2;    //标签内容,处理及时，超越期望，... ...等等
 }
 
-
-
-善举点评表，任何人都可以参与，包括购买者和非购买者
-昵称 满意度(很赞，满意，体验不佳)   体验标签(此处是个多选，以数组的形式存在)
-
-善举动态评论表，
-昵称 所选规则 价格 评论日期 评论内容
-
-
-进展动态是做什么的
-
-
-
-//描述大订单中的针对某个商品的子订单。
-//由于订单里可以有多个善举，并且善举的描述未必与当前的善举表中的内容一致。
-//又因为wasm不支持嵌套字段。因此此处可能存在一些冗余信息。
-message SubOrder {
-    string id           = 1; //子订单编号，唯一主键
-    string orderid      = 2; //大订单编号
-    string kdid         = 3; //对应的善举id
-    string kdname       = 4; //对应的善举名称
-    string kddesc       = 5; //对应的善举描述
-    int64  kdprice      = 6; //对应的善举价格
-    int64  kdcount      = 7; //这个善举的个数
+//善举点评表，任何人都可以参与，包括购买者和非购买者
+message BeforeComment {
+    string userid       = 1;    //账户id，前二者联合唯一
+    string kdid         = 2;    //善举id
+    int64  satisfaction = 3;    //满意度,0很赞，1满意，2体验不佳
+    string labels       = 4;    //善举体验标签数据
 }
 
-//描述大订单信息
+//描述订单信息
 message Order {
-    string id           = 1; //大订单编号，唯一主键
-    string owner        = 2; //订单所有者
+    string id           = 1; //订单编号，唯一
+    string owner        = 2; //订单所有者，哪个会员祈求了此善举订单
     string mastername   = 3; //指定
-    string suborderids  = 4; //子订单id集合 {aaa,bbb,ccc} 
-    int64  amount       = 5; //善举总价格
-    string timestamp    = 6; //订单生成时间
+    string kdid         = 4; //对应的善举id
+    int64  kdseqid      = 5; //对应的善举规格id
+    int64  count        = 6; //祈求的此善举的规格的个数
+    int64  amount       = 7; //善举总价格
+    string timestamp    = 8; //订单生成时间
+}
+
+//描述善举凭证信息。
+message KinddeedProof {
+    string orderid      = 1; //善举订单编号，对应Order表中的id，唯一
+    string proof        = 2; //善举hash，唯一
+    string timestamp    = 3; //法师或寺院尽心善举时的时间
+    bool   approved     = 4; //是否已经批准此善举凭证，0尚未批准，1已经批准
+}
+
+//善举动态评论表
+message AfterComment {
+    string userid       = 1;    //账户id, 前二者联合唯一
+    string orderid      = 2;    //善举凭证id,也就是订单id
+    string comment      = 3;    //会员针对此善举的评价
 }
 
