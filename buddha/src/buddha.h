@@ -108,7 +108,7 @@ public:
     void delete_kinddeed(); //基金会成员、法师
     void update_kinddeed(); //基金会成员、法师
     void find_kinddeed();   //所有用户
-    void list_kinddeed();   //所有用户
+    void list_kinddeed();   //所有用户。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
 
     //申请善举上架下架    
     void apply_online_kinddeed();   //法师

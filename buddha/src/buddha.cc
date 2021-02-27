@@ -228,7 +228,7 @@ bool Buddha::_is_deployer(const std::string& id) {
     if (!ctx->get_object("deployer", &deployer)) 
         return false;
 
-    if (deployer != name )
+    if (deployer != id )
         return false;
 
     return true ;
@@ -236,7 +236,7 @@ bool Buddha::_is_deployer(const std::string& id) {
 
 bool Buddha::_is_founder(const std::string& id) {
     founder ent;
-    if (!is_founder_exist(id, ent))
+    if (!_is_founder_exist_by_id(id, ent))
         return false;
     
     if( ent.approved() != true ) 
@@ -472,7 +472,7 @@ bool Buddha::_delete_after_comment_record(const std::string& orderid) {
 bool Buddha::_transfer(const std::string& id,
                     const std::string& amount){
     //将抵押退还
-    xchain::Account account = xchain::Account(name);
+    xchain::Account account = xchain::Account(id);
     if(!account.transfer(amount)) 
         return false;
 
@@ -520,8 +520,9 @@ void Buddha::apply_founder(){
         return ;
     }
     
-    if(!is_user() && !is_master() ) {
-        ctx->error(ctx->initiator() + " is not user and master, has no authority to apply tobe founder .");
+    //任何角色都可以成为基金会成员，除了已经是基金会成员
+    if(is_founder()) {
+        ctx->error(ctx->initiator() + " is already founder .");
         return ;
     }
 
@@ -531,18 +532,13 @@ void Buddha::apply_founder(){
         return ;
     }
 
-    if(is_founder()) {
-        ctx->error(ctx->initiator() + " is already founder .");
-        return ;
-    }
-
-    if( !delete_founder_record(ctx->initiator()) ) {
+    if( !_delete_founder_record(ctx->initiator()) ) {
         ctx->error("delete founder "+ ctx->initiator() + " failure .");
         return;
     }
 
     founder ent;
-    ent.set_name(ctx->initiator().c_str());
+    ent.set_id(ctx->initiator().c_str());
     ent.set_desc(desc.c_str());
     ent.set_guaranty(ent.guaranty() + std::stoll(guaranty));
     ent.set_approved(false);
@@ -555,9 +551,9 @@ void Buddha::apply_founder(){
 }
 
 void Buddha::approve_founder() {
-    const std::string& id = ctx->arg("name");
-    if(name.empty()) {
-        ctx->error("founder name is empty");
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("founder id is empty");
         return ;
     }
 
@@ -567,8 +563,8 @@ void Buddha::approve_founder() {
     }
 
     founder ent;
-    if(!is_founder_exist(name,ent)) {
-        ctx->error("founder " + name + " is not exist .");
+    if(!_is_founder_exist_by_id(id,ent)) {
+        ctx->error("founder " + id + " is not exist .");
         return ;
     }
 
@@ -577,7 +573,7 @@ void Buddha::approve_founder() {
         return ;
     }
 
-    if( !delete_founder_record(name) ) {
+    if( !_delete_founder_record(id) ) {
         ctx->error("delete founder "+ ent.to_string() + " failure .");
         return;
     }
@@ -592,9 +588,9 @@ void Buddha::approve_founder() {
 }
 
 void Buddha::recusal_founder() {
-    const std::string& id = ctx->arg("name");
-    if(name.empty()) {
-        ctx->error("founder name is empty .");
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("founder id is empty .");
         return ;
     }
 
@@ -604,24 +600,24 @@ void Buddha::recusal_founder() {
     }
 
     founder ent;
-    if(!is_founder_exist(name,ent)) {
-        ctx->error("founder " + name + " is not exist .");
+    if(!_is_founder_exist_by_id(id,ent)) {
+        ctx->error("founder " + id + " is not exist .");
         return ;
     }
 
     //将抵押退还
     std::string guaranty = std::to_string(ent.guaranty());
-    if(!transfer(name, guaranty)) {
-        ctx->error("refund transfer " + guaranty + " to " + name + " failure .");
+    if(!_transfer(id, guaranty)) {
+        ctx->error("refund transfer " + guaranty + " to " + id + " failure .");
         return ;
     }
 
-    if( !delete_founder_record(name) ) {
+    if( !_delete_founder_record(id) ) {
         ctx->error("delete founder "+ ent.to_string() + " failure .");
         return;
     }
 
-    ctx->ok("recusal founder "+ name + " success , guaranty " + guaranty + " has refund, please check balance.");
+    ctx->ok("recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance.");
 }
 
 bool Buddha::is_founder() {
@@ -641,7 +637,7 @@ void Buddha::list_founder() {
         return ;
     }
 
-    auto it = get_founder_table().scan({{"name",""}});
+    auto it = get_founder_table().scan({{"id",""}});
     int i = 0;
     std::string ret;
     while(it->next()) {
@@ -659,7 +655,8 @@ void Buddha::list_founder() {
 namespace 申请成为法师或寺院{}
 
 void Buddha::apply_master(){
-    if(!is_user()) {
+    //只有会员和普通用户才能申请成为法师。
+    if(!is_member()&&!is_user()) {
         ctx->error(ctx->initiator() + " is not common user, has no authority to apply tobe master .");
         return ;
     }
@@ -669,14 +666,32 @@ void Buddha::apply_master(){
         return ;
     }
     
-    const std::string& desc = ctx->arg("desc");
-    if(desc.empty()) {
-        ctx->error("desc is empty");
+    const std::string& unit = ctx->arg("unit");
+    if(unit.empty()) {
+        ctx->error("unit is empty");
+        return ;
+    }
+    
+    const std::string& creditcode = ctx->arg("creditcode");
+    if(creditcode.empty()) {
+        ctx->error("creditcode is empty");
+        return ;
+    }
+    
+    const std::string& address = ctx->arg("address");
+    if(address.empty()) {
+        ctx->error("address is empty");
+        return ;
+    }
+    
+    const std::string& deedplaceproof = ctx->arg("deedplaceproof");
+    if(deedplaceproof.empty()) {
+        ctx->error("deedplaceproof is empty");
         return ;
     }
 
     master ent;
-    ent.set_name(ctx->initiator().c_str());
+    ent.set_id(ctx->initiator().c_str());
     ent.set_desc(desc.c_str());
     ent.set_approved(false);
     if (!get_master_table().put(ent)) {
@@ -688,9 +703,9 @@ void Buddha::apply_master(){
 }
 
 void Buddha::approve_master() {
-    const std::string& id = ctx->arg("name");
-    if(name.empty()) {
-        ctx->error("master name is empty");
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("master id is empty");
         return ;
     }
 
@@ -700,8 +715,8 @@ void Buddha::approve_master() {
     }
 
     master ent;
-    if(!is_master_exist(name,ent)) {
-        ctx->error("master " + name + " is not exist .");
+    if(!is_master_exist(id,ent)) {
+        ctx->error("master " + id + " is not exist .");
         return ;
     }
 
@@ -710,7 +725,7 @@ void Buddha::approve_master() {
         return ;
     }
 
-    if( !delete_master_record(name) ) {
+    if( !delete_master_record(id) ) {
         ctx->error("delete master "+ ent.to_string() + " failure .");
         return;
     }
@@ -725,9 +740,9 @@ void Buddha::approve_master() {
 }
 
 void Buddha::recusal_master() {
-    const std::string& id = ctx->arg("name");
-    if(name.empty()) {
-        ctx->error("master name is empty");
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("master id is empty");
         return ;
     }
     
@@ -737,12 +752,12 @@ void Buddha::recusal_master() {
     }
 
     master ent;
-    if(!is_master_exist(name,ent)) {
-        ctx->error("master " + name + " is not exist .");
+    if(!is_master_exist(id,ent)) {
+        ctx->error("master " + id + " is not exist .");
         return ;
     }
 
-    if( !delete_master_record(name) ) {
+    if( !delete_master_record(id) ) {
         ctx->error("delete master "+ ent.to_string() + " failure .");
         return;
     }
@@ -767,7 +782,7 @@ void Buddha::list_master() {
         return ;
     }
 
-    auto it = get_master_table().scan({{"name",""}});
+    auto it = get_master_table().scan({{"id",""}});
     int i = 0;
     std::string ret;
     while(it->next()) {
@@ -1462,7 +1477,7 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
-    if(!transfer(od.mastername(), std::to_string(od.amount()))) {
+    if(!_transfer(od.mastername(), std::to_string(od.amount()))) {
         ctx->error("transfer to " + od.mastername() + " " +  std::to_string(od.amount()) + " failure .");
         return ;
     }

@@ -20,7 +20,7 @@ message Master {
     string address      = 4; //寺院地址，唯一
     string deedplaceproof   = 5; //宗教活动场所登记证hash，唯一
     bool   approved     = 6; //是否已经批准法师，0尚未批准，1已经批准
-    string approvedproof= 7; //授权凭证
+    string approvedproof= 7; //授权凭证hash
 }
 
 //描述会员信息
