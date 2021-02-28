@@ -89,19 +89,32 @@ public:
 
 
     //申请成为基金会成员
-    void apply_founder();   //用户,会员,法师
+    void apply_founder();   //用户,法师，寺院
     void approve_founder(); //合约部署者
     void recusal_founder(); //合约部署者
-    bool is_founder();      //所有角色
-    void list_founder();    //所有角色
+    bool is_founder();      //自己
+    void list_founder();    //合约部署着，基金会成员
 
-    //申请成为法师或寺院
-    void apply_master();    //用户,会员
+    //申请成为寺院
+    void apply_temple();    //用户,法师
+    void approve_temple();  //基金会成员
+    void recusal_temple();  //基金会成员
+    bool is_temple();       //自己
+    void list_temple();     //合约部署着，基金会成员
+
+    //申请成为法师
+    void apply_master();    //用户
     void approve_master();  //基金会成员
     void recusal_master();  //基金会成员
-    bool is_master();       //所有角色
+    bool is_master();       //自己
     void list_master();     //所有角色
 
+    //法师申请加入寺院
+    void apply_join_temple();    //用户,会员
+    void approve_join_temple();  //基金会成员
+    void recusal_join_temple();  //基金会成员
+    bool is_in_temple();         //法师自己
+    void list_temple_master();   //合约部署着，基金会成员
 
     //添加删除修改善举    
     void add_kinddeed();    //基金会成员、法师

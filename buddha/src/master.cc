@@ -8,8 +8,7 @@ std::string master::to_string() {
     str += creditcode() + ",";
     str += address() + ",";
     str += deedplaceproof() + ",";
-    str += std::to_string(approved()) + ",";
-    str += approvedproof();
+    str += std::to_string(approved());
     str += "}";
     return str;
 }

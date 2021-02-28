@@ -4,7 +4,7 @@ option optimize_for = LITE_RUNTIME;
 package buddha;
 
 
-//描述基金会信息。
+//基金会成员表。
 message Founder {
     string id           = 1; //基金会名称，唯一
     string desc         = 2; //基金会描述
@@ -12,39 +12,42 @@ message Founder {
     bool   approved     = 4; //是否已经批准是基金会成员，0尚未批准，1已经批准
 }
 
-//描述寺院信息。
+//寺院表，寺院具有唯一性。
 message Temple {
-    string id           = 1; //寺院法师名称，唯一，负责人姓名
+    string id           = 1; //寺院名称，唯一，负责人姓名
     string unit         = 2; //寺院单位名称，唯一
     string creditcode   = 3; //社会信用代码，登记编号，唯一
     string address      = 4; //寺院地址，唯一
     string deedplaceproof   = 5; //宗教活动场所登记证hash，唯一
-    bool   approved     = 6; //是否已经批准法师，0尚未批准，1已经批准
-    string approvedproof= 7; //授权凭证hash
+    bool   approved     = 6; //是否已经批准寺院，0尚未批准，1已经批准
 }
 
-//描述寺院法师信息。
+//法师表，法师可以存在与多个寺院中。
 message Master {
-    string id           = 1; //寺院法师名称，唯一，负责人姓名
-    string unit         = 2; //寺院单位名称，唯一
-    string creditcode   = 3; //社会信用代码，登记编号，唯一
-    string address      = 4; //寺院地址，唯一
-    string deedplaceproof   = 5; //宗教活动场所登记证hash，唯一
-    bool   approved     = 6; //是否已经批准法师，0尚未批准，1已经批准
-    string approvedproof= 7; //授权凭证hash
+    string id           = 1; //法师名称，唯一，负责人姓名
+    string creditcode   = 2; //社会信用代码，登记编号，唯一
+    bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
 }
 
-//描述会员信息
+//寺院法师关系表，寺院具有唯一性。
+message TempleMaster {
+    string templeid     = 1; //寺院名称
+    string masterid     = 2; //法师
+    bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
+}
+
+
+//会员表，目前不用
 message Member {
     string id           = 1; //会员名称，唯一
     string nickname     = 2; //昵称
-    string sex          = 3; //性别
+    bool   sex          = 3; //性别
     string address      = 4; //常住地址
     string email        = 5; //email，唯一
     string phone        = 6; //电话，唯一
 } 
 
-//描述善举信息。
+//善举表
 message Kinddeed {
     string id           = 1; //善举编号，唯一
     string name         = 2; //善举名称
@@ -54,7 +57,7 @@ message Kinddeed {
     bool   online       = 6; //是否已经是上线，0为下线状态，1为上线状态
 }
 
-//描述善举描述信息。
+//善举图片描述表
 message KinddeedDetail {
     string kdid         = 1; //善举编号
     int64  sequence     = 2; //善举描述的序号0,1,2,3...
@@ -84,7 +87,7 @@ message BeforeComment {
     string labels       = 4;    //善举体验标签数据
 }
 
-//描述订单信息
+//订单表。
 message Order {
     string id           = 1; //订单编号，唯一
     string owner        = 2; //订单所有者，哪个会员祈求了此善举订单
@@ -96,7 +99,7 @@ message Order {
     string timestamp    = 8; //订单生成时间
 }
 
-//描述善举凭证信息。
+//善举凭证表。
 message KinddeedProof {
     string orderid      = 1; //善举订单编号，对应Order表中的id，唯一
     string proof        = 2; //善举hash，唯一

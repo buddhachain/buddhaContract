@@ -520,7 +520,6 @@ void Buddha::apply_founder(){
         return ;
     }
     
-    //任何角色都可以成为基金会成员，除了已经是基金会成员
     if(is_founder()) {
         ctx->error(ctx->initiator() + " is already founder .");
         return ;
@@ -652,17 +651,17 @@ void Buddha::list_founder() {
     ctx->ok("size=" + std::to_string(i) + " " + ret);
 }
 
-namespace 申请成为法师或寺院{}
+namespace 申请成为寺院{}
 
-void Buddha::apply_master(){
-    //只有会员和普通用户才能申请成为法师。
-    if(!is_member()&&!is_user()) {
-        ctx->error(ctx->initiator() + " is not common user, has no authority to apply tobe master .");
+void Buddha::apply_temple(){
+    //只有用户和法师才能申请成为寺院
+    if(!is_user()&&!is_master()) {
+        ctx->error(ctx->initiator() + " is not user or master, has no authority to apply tobe temple .");
         return ;
     }
 
-    if(is_master()) {
-        ctx->error(ctx->initiator() + " is already master .");
+    if(is_temple()) {
+        ctx->error(ctx->initiator() + " is already temple .");
         return ;
     }
     
@@ -690,9 +689,139 @@ void Buddha::apply_master(){
         return ;
     }
 
+    temple ent;
+    ent.set_id(ctx->initiator().c_str());
+    ent.set_unit(unit.c_str());
+    ent.set_creditcode(creditcode.c_str());
+    ent.set_address(address.c_str());
+    ent.set_deedplaceproof(deedplaceproof.c_str());
+    ent.set_approved(false);
+    if (!get_temple_table().put(ent)) {
+        ctx->error("temple table put "+ ent.to_string() + " error .");
+        return;
+    }
+
+    ctx->ok(ent.to_string() + " apply tobe temple over, please wait for approve .");
+}
+
+void Buddha::approve_temple() {
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("temple id is empty");
+        return ;
+    }
+
+    if(!is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder, has no authority to approve temple .");
+        return ;
+    }
+
+    temple ent;
+    if(!is_temple_exist(id,ent)) {
+        ctx->error("temple " + id + " is not exist .");
+        return ;
+    }
+
+    if(is_temple(id)) {
+        ctx->error(ent.to_string() + " is already temple .");
+        return ;
+    }
+
+    if( !delete_temple_record(id) ) {
+        ctx->error("delete temple "+ ent.to_string() + " failure .");
+        return;
+    }
+
+    ent.set_approved(true);
+    if (!get_temple_table().put(ent)) {
+        ctx->error("temple table put "+ ent.to_string() + " error .");
+        return;
+    }
+
+    ctx->ok("approve temple "+ ent.to_string() + " success .");
+}
+
+void Buddha::recusal_temple() {
+    const std::string& id = ctx->arg("id");
+    if(id.empty()) {
+        ctx->error("temple id is empty");
+        return ;
+    }
+    
+    if(!is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder, has no authority to recusal temple .");
+        return ;
+    }
+
+    temple ent;
+    if(!is_temple_exist(id,ent)) {
+        ctx->error("temple " + id + " is not exist .");
+        return ;
+    }
+
+    if( !delete_temple_record(id) ) {
+        ctx->error("delete temple "+ ent.to_string() + " failure .");
+        return;
+    }
+
+    ctx->ok("recusal temple "+ ent.to_string() + " success .");
+}
+
+bool Buddha::is_temple() {
+    bool ret = _is_temple(ctx->initiator());
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is temple .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not temple .") ;
+    return false;
+}
+
+void Buddha::list_temple() {
+    if(!is_deployer()&&!is_founder()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list temple .");
+        return ;
+    }
+
+    auto it = get_temple_table().scan({{"id",""}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        temple ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+namespace 申请成为法师{}
+
+void Buddha::apply_master(){
+    //只有用户才能申请成为法师
+    if(!!is_user()) {
+        ctx->error(ctx->initiator() + " is not user, has no authority to apply tobe master .");
+        return ;
+    }
+
+    if(is_master()) {
+        ctx->error(ctx->initiator() + " is already master .");
+        return ;
+    }
+    
+    const std::string& creditcode = ctx->arg("creditcode");
+    if(creditcode.empty()) {
+        ctx->error("creditcode is empty");
+        return ;
+    }
+
     master ent;
     ent.set_id(ctx->initiator().c_str());
-    ent.set_desc(desc.c_str());
+    ent.set_creditcode(creditcode.c_str());
     ent.set_approved(false);
     if (!get_master_table().put(ent)) {
         ctx->error("master table put "+ ent.to_string() + " error .");
@@ -787,6 +916,163 @@ void Buddha::list_master() {
     std::string ret;
     while(it->next()) {
         master ent;
+        if (it->get(&ent)) {
+            i++;
+            ret += ent.to_string();
+        }
+        else
+            std::cout << __LINE__ << " get error : " << it->error(true) << std::endl;
+    }
+    ctx->ok("size=" + std::to_string(i) + " " + ret);
+}
+
+namespace 申请加入寺院{}
+
+void Buddha::apply_join_temple(){
+    //只有法师才能申请加入寺院
+    if(!!is_master()) {
+        ctx->error(ctx->initiator() + " is not master, has no authority to apply join temple .");
+        return ;
+    }
+
+    if(is_in_temple()) {
+        ctx->error(ctx->initiator() + " is already join temple .");
+        return ;
+    }
+    
+    const std::string& templeid = ctx->arg("templeid");
+    if(templeid.empty()) {
+        ctx->error("templeid is empty");
+        return ;
+    }
+    
+    templemaster ent;
+    ent.set_templeid(templeid.c_str());
+    ent.set_masterid(ctx->initiator().c_str());
+    ent.set_approved(false);
+    if (!get_templemaster_table().put(ent)) {
+        ctx->error("templemaster table put "+ ent.to_string() + " error .");
+        return;
+    }
+
+    ctx->ok(ent.to_string() + " apply join templemaster over, please wait for approve .");
+}
+
+void Buddha::approve_join_temple() {
+    const std::string& templeid = ctx->arg("templeid");
+    if(templeid.empty()) {
+        ctx->error("temple id is empty");
+        return ;
+    }
+
+    const std::string& masterid = ctx->arg("masterid");
+    if(masterid.empty()) {
+        ctx->error("master id is empty");
+        return ;
+    }
+
+    if(!is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder, has no authority to approve master .");
+        return ;
+    }
+
+    templemaster ent;
+    if(!_is_templemaster_exist(templeid, masterid,ent)) {
+        ctx->error("temple " + templeid + ", master " + masterid + " is not exist .");
+        return ;
+    }
+
+    if(_is_in_temple(masterid, templeid)) {
+        ctx->error(ent.to_string() + " is already join temple .");
+        return ;
+    }
+
+    if( !_delete_templemaster_record(templeid, masterid) ) {
+        ctx->error("delete templemaster "+ ent.to_string() + " failure .");
+        return;
+    }
+
+    ent.set_approved(true);
+    if (!get_templemaster_table().put(ent)) {
+        ctx->error("templemaster table put "+ ent.to_string() + " error .");
+        return;
+    }
+
+    ctx->ok("approve templemaster "+ ent.to_string() + " success .");
+}
+
+void Buddha::recusal_join_temple() {
+    const std::string& templeid = ctx->arg("templeid");
+    if(templeid.empty()) {
+        ctx->error("temple id is empty");
+        return ;
+    }
+
+    const std::string& masterid = ctx->arg("masterid");
+    if(masterid.empty()) {
+        ctx->error("master id is empty");
+        return ;
+    }
+    
+    if(!is_founder()) {
+        ctx->error(ctx->initiator() + " is not founder, has no authority to recusal master .");
+        return ;
+    }
+
+    templemaster ent;
+    if(!_is_templemaster_exist(templeid, masterid,ent)) {
+        ctx->error("temple " + templeid + ", master " + masterid + " is not exist .");
+        return ;
+    }
+
+    if( !_delete_templemaster_record(templeid, masterid) ) {
+        ctx->error("delete templemaster "+ ent.to_string() + " failure .");
+        return;
+    }
+
+    ctx->ok("recusal templemaster "+ ent.to_string() + " success .");
+}
+
+bool Buddha::is_in_temple() {
+    const std::string& templeid = ctx->arg("templeid");
+    if(templeid.empty()) {
+        ctx->error("temple id is empty");
+        return ;
+    }
+
+    bool ret = _is_in_master(ctx->initiator(), templeid);
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is join temple .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not join temple .") ;
+    return false;
+}
+
+void Buddha::list_temple_master() {
+    const std::string& templeid = ctx->arg("templeid");
+    if(templeid.empty()) {
+        ctx->error("temple id is empty");
+        return ;
+    }
+
+    const std::string& masterid = ctx->arg("masterid");
+    if(masterid.empty()) {
+        ctx->error("master id is empty");
+        return ;
+    }
+
+    if(!is_deployer()&&!is_founder()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list temple master .");
+        return ;
+    }
+
+    auto it = get_master_table().scan({{"templeid",templeid},{"masterid", masterid}});
+    int i = 0;
+    std::string ret;
+    while(it->next()) {
+        templemaster ent;
         if (it->get(&ent)) {
             i++;
             ret += ent.to_string();
