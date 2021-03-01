@@ -1,6 +1,9 @@
 #ifndef _BUDDHA_H_
 #define _BUDDHA_H_
 
+#include "xchain/contract.pb.h"
+#include <string>
+
 class Buddha : public xchain::Contract {
 public:
     Buddha();
@@ -114,7 +117,7 @@ public:
     void approve_join_temple();  //基金会成员
     void recusal_join_temple();  //基金会成员
     bool is_in_temple();         //法师自己
-    void list_temple_master();   //合约部署着，基金会成员
+    void list_temple_master();   //合约部署着，基金会成员,寺院自己
 
     //添加删除修改善举    
     void add_kinddeed();    //基金会成员、法师
