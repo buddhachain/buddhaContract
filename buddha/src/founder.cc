@@ -5,8 +5,8 @@ string founder::to_string() {
     str += "{" ;
     str += id() + ",";
     str += desc() + ",";
-    str += to_string(guaranty()) + ",";
-    str += to_string(approved());
+    str += std::to_string(guaranty()) + ",";
+    str += std::to_string(approved());
     str += "}";
     return str;
 }

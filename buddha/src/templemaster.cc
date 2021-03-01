@@ -5,7 +5,7 @@ string templemaster::to_string() {
     str += "{" ;
     str += templeid() + ",";
     str += masterid() + ",";
-    str += to_string(approved());
+    str += std::to_string(approved());
     str += "}";
     return str;
 }

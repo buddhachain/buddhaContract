@@ -7,7 +7,7 @@ string kinddeedproof::to_string() {
     str += orderid() + ",";
     str += proof() + ",";
     str += timestamp() + ",";
-    str += to_string(approved());
+    str += std::to_string(approved());
     str += "}";
     return str;
 }

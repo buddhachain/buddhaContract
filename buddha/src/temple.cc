@@ -8,7 +8,7 @@ string temple::to_string() {
     str += creditcode() + ",";
     str += address() + ",";
     str += deedplaceproof() + ",";
-    str += to_string(approved());
+    str += std::to_string(approved());
     str += "}";
     return str;
 }

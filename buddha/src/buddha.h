@@ -105,8 +105,8 @@ private:
                                 templemaster& ent);
 
     bool _is_kinddeed_exist_by_id(const string& id,kinddeed& ent);
-    bool _is_kinddeed_detail_exist_by_kdid(const string& kdid,kinddeeddetail& ent);
-    bool _is_kinddeed_spec_exist_by_kdid(const string& kdid,kinddeedspec& ent);
+    bool _is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent);
+    bool _is_kinddeed_spec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent);
     bool _is_comment_label_exist_by_id(const string& id,commentlabel& ent);
     bool _is_before_comment_exist_by_id(const string& id,beforecomment& ent);
     bool _is_order_exist_by_id(const string& id,order& ent);
@@ -179,21 +179,17 @@ public:
     void list_temple_master();   //合约部署着，基金会成员,寺院自己
 
     //添加删除修改善举    
-    void add_kinddeed();    //基金会成员、法师
-    void delete_kinddeed(); //基金会成员、法师
-    void update_kinddeed(); //基金会成员、法师
+    void add_kinddeed();    //基金会成员、寺院、法师
+    void delete_kinddeed(); //基金会成员、寺院、法师
+    void update_kinddeed(); //基金会成员、寺院、法师，只要修改善举，就需要重新审核上架
     void find_kinddeed();   //所有用户
     void list_kinddeed();   //所有用户。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
 
     //申请善举上架下架    
-    void apply_online_kinddeed();   //法师
-    void apply_offline_kinddeed();  //法师
+    void apply_online_kinddeed();   //寺院、法师
+    void apply_offline_kinddeed();  //寺院、法师
     void approve_online_kinddeed(); //基金会成员
     void approve_offline_kinddeed();//基金会成员
-
-    //注册会员
-    void apply_member();    //所有用户
-    bool is_member();       //所有用户
 
     //会员祈求善举
     void pray_kinddeed();       //所有会员

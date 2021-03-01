@@ -13,9 +13,9 @@ string commentlabel::to_string() {
 string beforecomment::to_string() {
     string str ;
     str += "{" ;
-    str += memberid() + ",";
+    str += userid() + ",";
     str += kdid() + ",";
-    str += to_string(satisfaction()) + ",";
+    str += std::to_string(satisfaction()) + ",";
     str += labels();
     str += "}";
     return str;
@@ -24,7 +24,7 @@ string beforecomment::to_string() {
 string aftercomment::to_string() {
     string str ;
     str += "{" ;
-    str += memberid() + ",";
+    str += userid() + ",";
     str += orderid() + ",";
     str += comment();
     str += "}";

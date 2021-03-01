@@ -134,15 +134,13 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_temple_master --accoun
 
 ```
 
-### 5.5 申请善举上架下架
-
-#### 5.5.1 添加删除修改善举
+### 5.5 添加删除修改善举
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeed -a '{"id":"1", "name":"kd1", "lasttime":"xxxxxx", "detail":[{"sequence":"1", "hash":"xxxxxx"},{"sequence":"2", "hash":"yyyyyy"}], "spec":[{"sequence":"1", "desc":"aaaaaa"},{"sequence":"2", "desc":"bbbbbb"}] }' --account XC1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeed -a '{"id":"1", "name":"kd1", "lasttime":"xxxxxx", "detail":"[{\"sequence\":\"1\", \"hash\":\"xxxxxx\"},{\"sequence\":\"2\", \"hash\":\"yyyyyy\"}]", "spec":"[{\"sequence\":\"1\", \"desc\":\"aaaaaa\", \"price\":\"10\"},{\"sequence\":\"2\", \"desc\":\"bbbbbb\", \"price\":\"10\"}]" }' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method delete_kinddeed -a '{"id":"1"}' --account XC1234567890444444@xuper
 
-xchain-cli wasm invoke --fee 1000000 buddha --method update_kinddeed -a '{"id":"1", "name":"kd111", "desc":"kd111", "price":"100.000", "count":"1000", "lasttime":"yyyyy" }' --account XC1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method update_kinddeed -a '{"id":"1", "name":"kd1", "lasttime":"xxxxxx", "detail":[{"sequence":"1", "hash":"xxxxxx"},{"sequence":"2", "hash":"yyyyyy"}], "spec":[{"sequence":"1", "desc":"aaaaaa", "price":"10"},{"sequence":"2", "desc":"bbbbbb", "price":"10"}] }' --account XC1234567890444444@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 
@@ -150,7 +148,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed --account XC1
 
 ```
 
-#### 5.5.2 申请善举上架下架
+### 5.6 申请善举上架下架
 
 ```bash
 xchain-cli wasm invoke --fee 1000000 buddha --method apply_online_kinddeed -a '{"id":"1"}' --account XC1234567890333333@xuper
@@ -161,19 +159,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method apply_offline_kinddeed -a '
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_offline_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 ```
 
-
-### 5.4 注册会员
-
-```bash
-xchain-cli account balance XC1234567890444444@xuper
-
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_member -a '{"desc":"apply to be member"}' --account XC1234567890444444@xuper
-
-xchain-cli wasm invoke --fee 1000000 buddha --method is_member --account XC1234567890444444@xuper
-
-```
-
-### 5.5 会员祈求善举
+### 5.7 会员祈求善举
 
 ```bash
 xchain-cli account balance XC1234567890444444@xuper
@@ -186,7 +172,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_order --account XC1234
 
 ```
 
-### 5.6 基金会成员授权法师或寺院上传的善举凭证
+### 5.8 基金会成员授权法师或寺院上传的善举凭证
 
 ```bash
 xchain-cli account balance XC1234567890333333@xuper
