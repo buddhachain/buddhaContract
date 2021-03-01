@@ -6,16 +6,16 @@
 #include "buddha.pb.h"
 
 #include <string>
+using namespace std;
 
 class master: public buddha::Master {
-    DEFINE_ROWKEY(id);
-    DEFINE_ROWKEY(creditcode);
+    DEFINE_ROWKEY(id, creditcode);
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_ADD(1, creditcode)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 

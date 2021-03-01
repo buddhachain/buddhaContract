@@ -6,6 +6,7 @@
 #include "buddha.pb.h"
 
 #include <string>
+using namespace std;
 
 class commentlabel: public buddha::CommentLabel {
     DEFINE_ROWKEY(id);
@@ -13,25 +14,25 @@ class commentlabel: public buddha::CommentLabel {
         DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 class beforecomment: public buddha::BeforeComment {
-    DEFINE_ROWKEY(memberid,kdid);
+    DEFINE_ROWKEY(userid,kdid);
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, memberid, kdid)
+        DEFINE_INDEX_ADD(0, userid, kdid)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 class aftercomment: public buddha::AfterComment {
-    DEFINE_ROWKEY(memberid, orderid);
+    DEFINE_ROWKEY(userid, orderid);
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, memberid, orderid)
+        DEFINE_INDEX_ADD(0, userid, orderid)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 

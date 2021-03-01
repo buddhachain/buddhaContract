@@ -6,13 +6,10 @@
 #include "buddha.pb.h"
 
 #include <string>
+using namespace std;
 
 class temple: public buddha::Temple {
-    DEFINE_ROWKEY(id);
-    DEFINE_ROWKEY(unit);
-    DEFINE_ROWKEY(creditcode);
-    DEFINE_ROWKEY(address);
-    DEFINE_ROWKEY(deedplaceproof);
+    DEFINE_ROWKEY(id);//,unit,creditcode,address,deedplaceproof);
     DEFINE_INDEX_BEGIN(5)
         DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_ADD(1, unit)
@@ -21,7 +18,7 @@ class temple: public buddha::Temple {
         DEFINE_INDEX_ADD(4, deedplaceproof)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 

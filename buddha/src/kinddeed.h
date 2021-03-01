@@ -7,6 +7,7 @@
 #include "buddha.pb.h"
 
 #include <string>
+using namespace std;
 
 class kinddeed: public buddha::Kinddeed {
     DEFINE_ROWKEY(id);
@@ -14,7 +15,7 @@ class kinddeed: public buddha::Kinddeed {
         DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
-    std::string to_string() ;
+    string to_string() ;
 };
 
 class kinddeeddetail: public buddha::KinddeedDetail {
@@ -23,7 +24,7 @@ class kinddeeddetail: public buddha::KinddeedDetail {
         DEFINE_INDEX_ADD(0, kdid)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 class kinddeedspec: public buddha::KinddeedSpec {
@@ -32,7 +33,7 @@ class kinddeedspec: public buddha::KinddeedSpec {
         DEFINE_INDEX_ADD(0, kdid)
     DEFINE_INDEX_END();
 
-    std::string to_string() ;
+    string to_string() ;
 };
 
 

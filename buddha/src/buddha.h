@@ -1,8 +1,20 @@
 #ifndef _BUDDHA_H_
 #define _BUDDHA_H_
 
+#include "xchain/xchain.h"
 #include "xchain/contract.pb.h"
+
+#include "founder.h"
+#include "temple.h"
+#include "master.h"
+#include "templemaster.h"
+#include "kinddeed.h"
+#include "comment.h"
+#include "order.h"
+#include "kinddeedproof.h"
+
 #include <string>
+using namespace std;
 
 class Buddha : public xchain::Contract {
 public:
@@ -10,8 +22,9 @@ public:
 
 private:
     xchain::cdt::Table<founder>         _founder_table;
+    xchain::cdt::Table<temple>          _temple_table;
     xchain::cdt::Table<master>          _master_table;
-    xchain::cdt::Table<member>          _member_table;
+    xchain::cdt::Table<templemaster>    _templemaster_table;
     xchain::cdt::Table<kinddeed>        _kinddeed_table;
     xchain::cdt::Table<kinddeeddetail>  _kinddeed_detail_table;
     xchain::cdt::Table<kinddeedspec>    _kinddeed_spec_table;
@@ -23,62 +36,108 @@ private:
 
     xchain::Context* ctx;
 
-private:
-    decltype(_founder_table)& get_founder_table();
-    decltype(_master_table)& get_master_table();
-    decltype(_member_table)& get_member_table();
-    decltype(_kinddeed_table)& get_kinddeed_table();
-    decltype(_kinddeed_detail_table)& get_kinddeed_detail_table();
-    decltype(_kinddeed_spec_table)& get_kinddeed_spec_table();
-    decltype(_comment_label_table)& get_comment_label_table();
-    decltype(_before_comment_table)& get_before_comment_table();
-    decltype(_order_table)& get_order_table();
-    decltype(_kinddeed_proof_table)& get_kinddeed_proof_table();
-    decltype(_after_comment_table)& get_after_comment_table();
+public:
+    decltype(_founder_table)& get_founder_table() {
+        return _founder_table;
+    }
+
+    decltype(_temple_table)& get_temple_table() {
+        return _temple_table;
+    }
+
+    decltype(_master_table)& get_master_table() {
+        return _master_table;
+    }
+
+    decltype(_templemaster_table)& get_templemaster_table() {
+        return _templemaster_table;
+    }
+
+    decltype(_kinddeed_table)& get_kinddeed_table() {
+        return _kinddeed_table;
+    }
+
+    decltype(_kinddeed_detail_table)& get_kinddeed_detail_table() {
+        return _kinddeed_detail_table;
+    }
+
+    decltype(_kinddeed_spec_table)& get_kinddeed_spec_table() {
+        return _kinddeed_spec_table;
+    }
+
+    decltype(_comment_label_table)& get_comment_label_table() {
+        return _comment_label_table;
+    }
+
+    decltype(_before_comment_table)& get_before_comment_table() {
+        return _before_comment_table;
+    }
+
+    decltype(_order_table)& get_order_table() {
+        return _order_table;
+    }
+
+    decltype(_kinddeed_proof_table)& get_kinddeed_proof_table() {
+        return _kinddeed_proof_table;
+    }
+
+    decltype(_after_comment_table)& get_after_comment_table() {
+        return _after_comment_table;
+    }
+
+
+
 
 private:
     //辅助函数
-    bool _is_founder_exist_by_id(const std::string& id,founder& ent);
+    bool _is_founder_exist_by_id(const string& id,founder& ent);
 
-    bool _is_master_exist_by_id(const std::string& id,master& ent);
-    bool _is_master_exist_by_unit(const std::string& unit,master& ent);
-    bool _is_master_exist_by_creditcode(const std::string& creditcode,master& ent);
-    bool _is_master_exist_by_address(const std::string& address,master& ent);
-    bool _is_master_exist_by_deedplaceproof(const std::string& deedplaceproof,master& ent);
+    bool _is_temple_exist_by_id(const string& id,temple& ent);
+    bool _is_temple_exist_by_unit(const string& unit,temple& ent);
+    bool _is_temple_exist_by_creditcode(const string& creditcode,temple& ent);
+    bool _is_temple_exist_by_address(const string& address,temple& ent);
+    bool _is_temple_exist_by_deedplaceproof(const string& deedplaceproof,temple& ent);
 
-    bool _is_member_exist_by_id(const std::string& id,member& ent);
-    bool _is_kinddeed_exist_by_id(const std::string& id,kinddeed& ent);
-    bool _is_kinddeed_detail_exist_by_kdid(const std::string& kdid,kinddeeddetail& ent);
-    bool _is_kinddeed_spec_exist_by_kdid(const std::string& kdid,kinddeedspec& ent);
-    bool _is_comment_label_exist_by_id(const std::string& id,commentlabel& ent);
-    bool _is_before_comment_exist_by_id(const std::string& id,beforecomment& ent);
-    bool _is_order_exist_by_id(const std::string& id,order& ent);
-    bool _is_kinddeed_proof_exist_by_orderid(const std::string& id,kinddeedproof& ent);
-    bool _is_after_comment_exist_by_orderid(const std::string& id,aftercomment& ent);
+    bool _is_master_exist_by_id(const string& id,master& ent);
 
-    void _get_kinddeed(const std::string& id,kinddeed& ent);
-    bool _is_kinddeed_online(const std::string& kdid) ;
+    bool _is_templemaster_exist(const string& templeid,
+                                const string& masterid,
+                                templemaster& ent);
 
-    bool _is_deployer(const std::string& id);
-    bool _is_founder(const std::string& id);
-    bool _is_master(const std::string& id);
-    bool _is_member(const std::string& id);
-    bool _is_user(const std::string& id);
+    bool _is_kinddeed_exist_by_id(const string& id,kinddeed& ent);
+    bool _is_kinddeed_detail_exist_by_kdid(const string& kdid,kinddeeddetail& ent);
+    bool _is_kinddeed_spec_exist_by_kdid(const string& kdid,kinddeedspec& ent);
+    bool _is_comment_label_exist_by_id(const string& id,commentlabel& ent);
+    bool _is_before_comment_exist_by_id(const string& id,beforecomment& ent);
+    bool _is_order_exist_by_id(const string& id,order& ent);
+    bool _is_kinddeed_proof_exist_by_orderid(const string& id,kinddeedproof& ent);
+    bool _is_after_comment_exist_by_orderid(const string& id,aftercomment& ent);
 
-    bool _delete_founder_record(const std::string& id);
-    bool _delete_master_record(const std::string& id);
-    bool _delete_member_record(const std::string& id);
-    bool _delete_kinddeed_record(const std::string& id);
-    bool _delete_kinddeed_detail_record(const std::string& id);
-    bool _delete_kinddeed_spec_record(const std::string& id);
-    bool _delete_comment_label_record(const std::string& id);
-    bool _delete_before_comment_record(const std::string& id);
-    bool _delete_order_record(const std::string& id);
-    bool _delete_kinddeed_proof_record(const std::string& orderid);
-    bool _delete_after_comment_record(const std::string& id);
+    void _get_kinddeed(const string& id,kinddeed& ent);
+    bool _is_kinddeed_online(const string& kdid) ;
 
-    bool _transfer(const std::string& id,
-                   const std::string& amount);
+    bool _is_deployer(const string& id);
+    bool _is_founder(const string& id);
+    bool _is_temple(const string& id);
+    bool _is_master(const string& id);
+    bool _is_in_temple(const string& templeid, const string& masterid );
+    bool _is_user(const string& id);
+
+    bool _delete_founder_record(const string& id);
+    bool _delete_temple_record(const string& id);
+    bool _delete_master_record(const string& id);
+    bool _delete_templemaster_record(const string& templeid, const string& masterid);
+    bool _delete_kinddeed_record(const string& id);
+    bool _delete_kinddeed_detail_record(const string& id);
+    bool _delete_kinddeed_spec_record(const string& id);
+    bool _delete_comment_label_record(const string& id);
+    bool _delete_before_comment_record(const string& id);
+    bool _delete_order_record(const string& id);
+    bool _delete_kinddeed_proof_record(const string& orderid);
+    bool _delete_after_comment_record(const string& id);
+
+    bool _transfer(const string& id,
+                   const string& amount);
 
 public:
     //对外的辅助接口
@@ -147,6 +206,6 @@ public:
     void refuse_kinddeed_proof();   //基金会成员
     void list_kinddeed_proof();     //所有会员    
 
-    void is_user();         //所有用户
+    bool is_user();         //所有用户
 };
 #endif // _BUDDHA_H_

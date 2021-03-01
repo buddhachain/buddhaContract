@@ -1,11 +1,11 @@
 #include "templemaster.h"
 
-std::string templemaster::to_string() {
-    std::string str ;
+string templemaster::to_string() {
+    string str ;
     str += "{" ;
     str += templeid() + ",";
     str += masterid() + ",";
-    str += std::to_string(approved());
+    str += to_string(approved());
     str += "}";
     return str;
 }

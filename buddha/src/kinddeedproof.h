@@ -6,15 +6,16 @@
 #include "buddha.pb.h"
 
 #include <string>
+using namespace std;
 
 class kinddeedproof: public buddha::KinddeedProof {
-    DEFINE_ROWKEY(orderid);
-    DEFINE_ROWKEY(proof);
-    DEFINE_INDEX_BEGIN(1)
+    DEFINE_ROWKEY(orderid,proof);
+    DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, orderid)
+        DEFINE_INDEX_ADD(1, proof)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 #endif // _KINDDEED_PROOF_H_

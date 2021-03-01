@@ -6,6 +6,7 @@
 #include "buddha.pb.h"
 
 #include <string>
+using namespace std;
 
 class founder: public buddha::Founder {
     DEFINE_ROWKEY(id);
@@ -13,7 +14,7 @@ class founder: public buddha::Founder {
         DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
-    std::string to_string();
+    string to_string();
 };
 
 #endif // _FOUNDER_H_
