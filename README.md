@@ -90,7 +90,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_founder --account XC12
 ### 5.2 申请成为寺院
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_temple -a '{"unit":"佛山顶观音寺", "creditcode":"F110300007", "address":"浙江丽水佛顶山", "deedplaceproof":"xxxxx"}' --account XC1234567890333333@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_temple -a '{"unit":"佛山顶观音寺", "creditcode":"F110300007", "address":"浙江丽水佛顶山", "proof":"xxxxx"}' --account XC1234567890333333@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_temple -a '{"id":"XC1234567890333333@xuper"}' --account XC1234567890222222@xuper
 
@@ -105,7 +105,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_temple --account XC123
 ### 5.3 申请成为法师
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_master -a '{"creditcode":"fashi123456"}' --account XC1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_master -a '{"creditcode":"fashi123456", "proof":"xxxxx"}' --account XC1234567890444444@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_master -a '{"id":"XC1234567890444444@xuper"}' --account XC1234567890222222@xuper
 
@@ -183,6 +183,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method upload_kinddeed_proof -a '{
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method refuse_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed_proof -a '{"orderid":"1"}' --account 1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed_proof -a '{"proof":"xxxxx"}' --account 1234567890444444@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed_proof --account XC1234567890222222@xuper
 

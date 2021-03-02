@@ -90,30 +90,32 @@ public:
 
 private:
     //辅助函数
-    bool _is_founder_exist_by_id(const string& id,founder& ent);
+    bool _is_founder_exist(const string& id,founder& ent);
 
-    bool _is_temple_exist_by_id(const string& id,temple& ent);
+    bool _is_temple_exist(const string& id,temple& ent);
     bool _is_temple_exist_by_unit(const string& unit,temple& ent);
     bool _is_temple_exist_by_creditcode(const string& creditcode,temple& ent);
     bool _is_temple_exist_by_address(const string& address,temple& ent);
-    bool _is_temple_exist_by_deedplaceproof(const string& deedplaceproof,temple& ent);
+    bool _is_temple_exist_by_proof(const string& proof,temple& ent);
 
-    bool _is_master_exist_by_id(const string& id,master& ent);
+    bool _is_master_exist(const string& id,master& ent);
+    bool _is_master_exist_by_proof(const string& proof,master& ent);
 
     bool _is_templemaster_exist(const string& templeid,
                                 const string& masterid,
                                 templemaster& ent);
 
-    bool _is_kinddeed_exist_by_id(const string& id,kinddeed& ent);
-    bool _is_kinddeed_detail_exist(const string& kdid, const string& seq, kinddeeddetail& ent);
-    bool _is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent);
-    bool _is_kinddeed_spec_exist(const string& kdid, const string& seq, kinddeedspec& ent);
-    bool _is_kinddeed_spec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent);
-    bool _is_comment_label_exist_by_id(const string& id,commentlabel& ent);
-    bool _is_before_comment_exist_by_id(const string& id,beforecomment& ent);
-    bool _is_order_exist_by_id(const string& id,order& ent);
-    bool _is_kinddeed_proof_exist_by_order(const string& id,kinddeedproof& ent);
-    bool _is_after_comment_exist_by_orderid(const string& id,aftercomment& ent);
+    bool _is_kinddeed_exist(const string& id,kinddeed& ent);
+    bool _is_kinddeeddetail_exist(const string& kdid, const string& seq, kinddeeddetail& ent);
+    bool _is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent);
+    bool _is_kinddeedspec_exist(const string& kdid, const string& seq, kinddeedspec& ent);
+    bool _is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent);
+    bool _is_commentlabel_exist(const string& id,commentlabel& ent);
+    bool _is_beforecomment_exist(const string& userid, const string& kdid,beforecomment& ent);
+    bool _is_order_exist(const string& id,order& ent);
+    bool _is_kinddeedproof_exist_by_order(const string& id,kinddeedproof& ent);
+    bool _is_kinddeedproof_exist_by_proof(const string& proof,kinddeedproof& ent);
+    bool _is_aftercomment_exist(const string& orderid,aftercomment& ent);
 
     bool _get_kinddeed(const string& id,kinddeed& ent);
     bool _is_kinddeed_online(const string& kdid) ;
@@ -122,7 +124,7 @@ private:
     bool _is_founder(const string& id);
     bool _is_temple(const string& id);
     bool _is_master(const string& id);
-    bool _is_in_temple(const string& templeid, const string& masterid );
+    bool _is_in_temple(const string& templeid, const string& masterid,templemaster& ent );
     bool _is_user(const string& id);
 
     bool _delete_founder_record(const string& id);
@@ -130,13 +132,13 @@ private:
     bool _delete_master_record(const string& id);
     bool _delete_templemaster_record(const string& templeid, const string& masterid);
     bool _delete_kinddeed_record(const string& id);
-    bool _delete_kinddeed_detail_record(const string& id);
-    bool _delete_kinddeed_spec_record(const string& id);
-    bool _delete_comment_label_record(const string& id);
-    bool _delete_before_comment_record(const string& id);
+    bool _delete_kinddeeddetail_record(const string& id);
+    bool _delete_kinddeedspec_record(const string& id);
+    bool _delete_commentlabel_record(const string& id);
+    bool _delete_beforecomment_record(const string& userid, const string& kdid);
     bool _delete_order_record(const string& id);
-    bool _delete_kinddeed_proof_record(const string& orderid);
-    bool _delete_after_comment_record(const string& id);
+    bool _delete_kinddeedproof_record(const string& orderid);
+    bool _delete_aftercomment_record(const string& orderid);
 
     bool _transfer(const string& id,
                    const string& amount);
@@ -146,14 +148,14 @@ public:
 
     void initialize();      //合约部署者
     void get_deployer();    //所有角色
-    bool is_deployer();     //所有角色
+    bool is_deployer();     //所有角色，判断自己是否是合约部署者
 
 
     //update无对应函数
 
 
     //申请成为基金会成员
-    void apply_founder();   //用户,法师，寺院
+    void apply_founder();   //用户,法师，寺院，合约部署者也可以
     void approve_founder(); //合约部署者
     void recusal_founder(); //合约部署者
     bool is_founder();      //自己

@@ -24,8 +24,8 @@ string beforecomment::to_string() {
 string aftercomment::to_string() {
     string str ;
     str += "{" ;
-    str += userid() + ",";
     str += orderid() + ",";
+    str += userid() + ",";
     str += comment();
     str += "}";
     return str;

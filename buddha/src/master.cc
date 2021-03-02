@@ -5,6 +5,7 @@ string master::to_string() {
     str += "{" ;
     str += id() + ",";
     str += creditcode() + ",";
+    str += proof() + ",";
     str += std::to_string(approved());
     str += "}";
     return str;

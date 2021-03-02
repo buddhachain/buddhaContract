@@ -396,19 +396,19 @@ class Temple :
   ::std::string* release_address();
   void set_allocated_address(::std::string* address);
 
-  // string deedplaceproof = 5;
-  void clear_deedplaceproof();
-  static const int kDeedplaceproofFieldNumber = 5;
-  const ::std::string& deedplaceproof() const;
-  void set_deedplaceproof(const ::std::string& value);
+  // string proof = 5;
+  void clear_proof();
+  static const int kProofFieldNumber = 5;
+  const ::std::string& proof() const;
+  void set_proof(const ::std::string& value);
   #if LANG_CXX11
-  void set_deedplaceproof(::std::string&& value);
+  void set_proof(::std::string&& value);
   #endif
-  void set_deedplaceproof(const char* value);
-  void set_deedplaceproof(const char* value, size_t size);
-  ::std::string* mutable_deedplaceproof();
-  ::std::string* release_deedplaceproof();
-  void set_allocated_deedplaceproof(::std::string* deedplaceproof);
+  void set_proof(const char* value);
+  void set_proof(const char* value, size_t size);
+  ::std::string* mutable_proof();
+  ::std::string* release_proof();
+  void set_allocated_proof(::std::string* proof);
 
   // bool approved = 6;
   void clear_approved();
@@ -425,7 +425,7 @@ class Temple :
   ::google::protobuf::internal::ArenaStringPtr unit_;
   ::google::protobuf::internal::ArenaStringPtr creditcode_;
   ::google::protobuf::internal::ArenaStringPtr address_;
-  ::google::protobuf::internal::ArenaStringPtr deedplaceproof_;
+  ::google::protobuf::internal::ArenaStringPtr proof_;
   bool approved_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
@@ -551,9 +551,23 @@ class Master :
   ::std::string* release_creditcode();
   void set_allocated_creditcode(::std::string* creditcode);
 
-  // bool approved = 3;
+  // string proof = 3;
+  void clear_proof();
+  static const int kProofFieldNumber = 3;
+  const ::std::string& proof() const;
+  void set_proof(const ::std::string& value);
+  #if LANG_CXX11
+  void set_proof(::std::string&& value);
+  #endif
+  void set_proof(const char* value);
+  void set_proof(const char* value, size_t size);
+  ::std::string* mutable_proof();
+  ::std::string* release_proof();
+  void set_allocated_proof(::std::string* proof);
+
+  // bool approved = 4;
   void clear_approved();
-  static const int kApprovedFieldNumber = 3;
+  static const int kApprovedFieldNumber = 4;
   bool approved() const;
   void set_approved(bool value);
 
@@ -564,6 +578,7 @@ class Master :
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr creditcode_;
+  ::google::protobuf::internal::ArenaStringPtr proof_;
   bool approved_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
@@ -2320,57 +2335,57 @@ inline void Temple::set_allocated_address(::std::string* address) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Temple.address)
 }
 
-// string deedplaceproof = 5;
-inline void Temple::clear_deedplaceproof() {
-  deedplaceproof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string proof = 5;
+inline void Temple::clear_proof() {
+  proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Temple::deedplaceproof() const {
-  // @@protoc_insertion_point(field_get:buddha.Temple.deedplaceproof)
-  return deedplaceproof_.GetNoArena();
+inline const ::std::string& Temple::proof() const {
+  // @@protoc_insertion_point(field_get:buddha.Temple.proof)
+  return proof_.GetNoArena();
 }
-inline void Temple::set_deedplaceproof(const ::std::string& value) {
+inline void Temple::set_proof(const ::std::string& value) {
   
-  deedplaceproof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.Temple.deedplaceproof)
+  proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Temple.proof)
 }
 #if LANG_CXX11
-inline void Temple::set_deedplaceproof(::std::string&& value) {
+inline void Temple::set_proof(::std::string&& value) {
   
-  deedplaceproof_.SetNoArena(
+  proof_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.Temple.deedplaceproof)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Temple.proof)
 }
 #endif
-inline void Temple::set_deedplaceproof(const char* value) {
+inline void Temple::set_proof(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  deedplaceproof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.Temple.deedplaceproof)
+  proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Temple.proof)
 }
-inline void Temple::set_deedplaceproof(const char* value, size_t size) {
+inline void Temple::set_proof(const char* value, size_t size) {
   
-  deedplaceproof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.Temple.deedplaceproof)
+  // @@protoc_insertion_point(field_set_pointer:buddha.Temple.proof)
 }
-inline ::std::string* Temple::mutable_deedplaceproof() {
+inline ::std::string* Temple::mutable_proof() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.Temple.deedplaceproof)
-  return deedplaceproof_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:buddha.Temple.proof)
+  return proof_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Temple::release_deedplaceproof() {
-  // @@protoc_insertion_point(field_release:buddha.Temple.deedplaceproof)
+inline ::std::string* Temple::release_proof() {
+  // @@protoc_insertion_point(field_release:buddha.Temple.proof)
   
-  return deedplaceproof_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return proof_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Temple::set_allocated_deedplaceproof(::std::string* deedplaceproof) {
-  if (deedplaceproof != nullptr) {
+inline void Temple::set_allocated_proof(::std::string* proof) {
+  if (proof != nullptr) {
     
   } else {
     
   }
-  deedplaceproof_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deedplaceproof);
-  // @@protoc_insertion_point(field_set_allocated:buddha.Temple.deedplaceproof)
+  proof_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), proof);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Temple.proof)
 }
 
 // bool approved = 6;
@@ -2497,7 +2512,60 @@ inline void Master::set_allocated_creditcode(::std::string* creditcode) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Master.creditcode)
 }
 
-// bool approved = 3;
+// string proof = 3;
+inline void Master::clear_proof() {
+  proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Master::proof() const {
+  // @@protoc_insertion_point(field_get:buddha.Master.proof)
+  return proof_.GetNoArena();
+}
+inline void Master::set_proof(const ::std::string& value) {
+  
+  proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Master.proof)
+}
+#if LANG_CXX11
+inline void Master::set_proof(::std::string&& value) {
+  
+  proof_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Master.proof)
+}
+#endif
+inline void Master::set_proof(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Master.proof)
+}
+inline void Master::set_proof(const char* value, size_t size) {
+  
+  proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.Master.proof)
+}
+inline ::std::string* Master::mutable_proof() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.Master.proof)
+  return proof_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Master::release_proof() {
+  // @@protoc_insertion_point(field_release:buddha.Master.proof)
+  
+  return proof_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Master::set_allocated_proof(::std::string* proof) {
+  if (proof != nullptr) {
+    
+  } else {
+    
+  }
+  proof_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), proof);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Master.proof)
+}
+
+// bool approved = 4;
 inline void Master::clear_approved() {
   approved_ = false;
 }

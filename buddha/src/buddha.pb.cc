@@ -644,7 +644,7 @@ const int Temple::kIdFieldNumber;
 const int Temple::kUnitFieldNumber;
 const int Temple::kCreditcodeFieldNumber;
 const int Temple::kAddressFieldNumber;
-const int Temple::kDeedplaceproofFieldNumber;
+const int Temple::kProofFieldNumber;
 const int Temple::kApprovedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -673,9 +673,9 @@ Temple::Temple(const Temple& from)
   if (from.address().size() > 0) {
     address_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.address_);
   }
-  deedplaceproof_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.deedplaceproof().size() > 0) {
-    deedplaceproof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deedplaceproof_);
+  proof_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.proof().size() > 0) {
+    proof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.proof_);
   }
   approved_ = from.approved_;
   // @@protoc_insertion_point(copy_constructor:buddha.Temple)
@@ -688,7 +688,7 @@ void Temple::SharedCtor() {
   unit_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   address_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  deedplaceproof_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  proof_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   approved_ = false;
 }
 
@@ -702,7 +702,7 @@ void Temple::SharedDtor() {
   unit_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   address_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  deedplaceproof_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  proof_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Temple::SetCachedSize(int size) const {
@@ -724,7 +724,7 @@ void Temple::Clear() {
   unit_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  deedplaceproof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   approved_ = false;
   _internal_metadata_.Clear();
 }
@@ -806,13 +806,13 @@ const char* Temple::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // string deedplaceproof = 5;
+      // string proof = 5;
       case 5: {
         if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_deedplaceproof();
+        object = msg->mutable_proof();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -929,15 +929,15 @@ bool Temple::MergePartialFromCodedStream(
         break;
       }
 
-      // string deedplaceproof = 5;
+      // string proof = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_deedplaceproof()));
+                input, this->mutable_proof()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->deedplaceproof().data(), static_cast<int>(this->deedplaceproof().length()),
+            this->proof().data(), static_cast<int>(this->proof().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "buddha.Temple.deedplaceproof"));
+            "buddha.Temple.proof"));
         } else {
           goto handle_unusual;
         }
@@ -1024,14 +1024,14 @@ void Temple::SerializeWithCachedSizes(
       4, this->address(), output);
   }
 
-  // string deedplaceproof = 5;
-  if (this->deedplaceproof().size() > 0) {
+  // string proof = 5;
+  if (this->proof().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->deedplaceproof().data(), static_cast<int>(this->deedplaceproof().length()),
+      this->proof().data(), static_cast<int>(this->proof().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "buddha.Temple.deedplaceproof");
+      "buddha.Temple.proof");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->deedplaceproof(), output);
+      5, this->proof(), output);
   }
 
   // bool approved = 6;
@@ -1082,11 +1082,11 @@ size_t Temple::ByteSizeLong() const {
         this->address());
   }
 
-  // string deedplaceproof = 5;
-  if (this->deedplaceproof().size() > 0) {
+  // string proof = 5;
+  if (this->proof().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->deedplaceproof());
+        this->proof());
   }
 
   // bool approved = 6;
@@ -1127,9 +1127,9 @@ void Temple::MergeFrom(const Temple& from) {
 
     address_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.address_);
   }
-  if (from.deedplaceproof().size() > 0) {
+  if (from.proof().size() > 0) {
 
-    deedplaceproof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deedplaceproof_);
+    proof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.proof_);
   }
   if (from.approved() != 0) {
     set_approved(from.approved());
@@ -1162,7 +1162,7 @@ void Temple::InternalSwap(Temple* other) {
     GetArenaNoVirtual());
   address_.Swap(&other->address_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  deedplaceproof_.Swap(&other->deedplaceproof_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  proof_.Swap(&other->proof_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(approved_, other->approved_);
 }
@@ -1183,6 +1183,7 @@ class Master::HasBitSetters {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Master::kIdFieldNumber;
 const int Master::kCreditcodeFieldNumber;
+const int Master::kProofFieldNumber;
 const int Master::kApprovedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -1203,6 +1204,10 @@ Master::Master(const Master& from)
   if (from.creditcode().size() > 0) {
     creditcode_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.creditcode_);
   }
+  proof_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.proof().size() > 0) {
+    proof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.proof_);
+  }
   approved_ = from.approved_;
   // @@protoc_insertion_point(copy_constructor:buddha.Master)
 }
@@ -1212,6 +1217,7 @@ void Master::SharedCtor() {
       &scc_info_Master_buddha_2eproto.base);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  proof_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   approved_ = false;
 }
 
@@ -1223,6 +1229,7 @@ Master::~Master() {
 void Master::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  proof_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Master::SetCachedSize(int size) const {
@@ -1242,6 +1249,7 @@ void Master::Clear() {
 
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   approved_ = false;
   _internal_metadata_.Clear();
 }
@@ -1291,9 +1299,25 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // bool approved = 3;
+      // string proof = 3;
       case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
+        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_proof();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // bool approved = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
         msg->set_approved(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
@@ -1368,9 +1392,24 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // bool approved = 3;
+      // string proof = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_proof()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->proof().data(), static_cast<int>(this->proof().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "buddha.Master.proof"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool approved = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1428,9 +1467,19 @@ void Master::SerializeWithCachedSizes(
       2, this->creditcode(), output);
   }
 
-  // bool approved = 3;
+  // string proof = 3;
+  if (this->proof().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->proof().data(), static_cast<int>(this->proof().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "buddha.Master.proof");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->proof(), output);
+  }
+
+  // bool approved = 4;
   if (this->approved() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->approved(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->approved(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -1462,7 +1511,14 @@ size_t Master::ByteSizeLong() const {
         this->creditcode());
   }
 
-  // bool approved = 3;
+  // string proof = 3;
+  if (this->proof().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->proof());
+  }
+
+  // bool approved = 4;
   if (this->approved() != 0) {
     total_size += 1 + 1;
   }
@@ -1492,6 +1548,10 @@ void Master::MergeFrom(const Master& from) {
 
     creditcode_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.creditcode_);
   }
+  if (from.proof().size() > 0) {
+
+    proof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.proof_);
+  }
   if (from.approved() != 0) {
     set_approved(from.approved());
   }
@@ -1518,6 +1578,8 @@ void Master::InternalSwap(Master* other) {
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   creditcode_.Swap(&other->creditcode_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  proof_.Swap(&other->proof_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(approved_, other->approved_);
 }

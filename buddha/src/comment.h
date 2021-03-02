@@ -27,9 +27,10 @@ class beforecomment: public buddha::BeforeComment {
 };
 
 class aftercomment: public buddha::AfterComment {
-    DEFINE_ROWKEY(userid, orderid);
-    DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, userid, orderid)
+    DEFINE_ROWKEY(orderid);
+    DEFINE_INDEX_BEGIN(2)
+        DEFINE_INDEX_ADD(0, orderid)
+        DEFINE_INDEX_ADD(1, userid)
     DEFINE_INDEX_END();
 
     string to_string();

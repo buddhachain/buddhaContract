@@ -38,14 +38,14 @@ Buddha::Buddha() :
 
 
 
-bool Buddha::_is_founder_exist_by_id(const string& id,founder& ent) {
+bool Buddha::_is_founder_exist(const string& id,founder& ent) {
     if (!get_founder_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_temple_exist_by_id(const string& id,temple& ent){
+bool Buddha::_is_temple_exist(const string& id,temple& ent){
     if (!get_temple_table().find({{"id", id}}, &ent))
         return false;
 
@@ -73,15 +73,22 @@ bool Buddha::_is_temple_exist_by_address(const string& address,temple& ent){
     return true;
 }
 
-bool Buddha::_is_temple_exist_by_deedplaceproof(const string& deedplaceproof,temple& ent){
-    if (!get_temple_table().find({{"deedplaceproof", deedplaceproof}}, &ent))
+bool Buddha::_is_temple_exist_by_proof(const string& proof,temple& ent){
+    if (!get_temple_table().find({{"proof", proof}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_master_exist_by_id(const string& id,master& ent){
+bool Buddha::_is_master_exist(const string& id,master& ent){
     if (!get_master_table().find({{"id", id}}, &ent))
+        return false;
+
+    return true;
+}
+
+bool Buddha::_is_master_exist_by_proof(const string& proof,master& ent){
+    if (!get_master_table().find({{"proof", proof}}, &ent))
         return false;
 
     return true;
@@ -96,14 +103,14 @@ bool Buddha::_is_templemaster_exist(const string& templeid,
     return true;
 }
 
-bool Buddha::_is_kinddeed_exist_by_id(const string& id,kinddeed& ent) {
+bool Buddha::_is_kinddeed_exist(const string& id,kinddeed& ent) {
     if (!get_kinddeed_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_kinddeed_detail_exist(const string& kdid,
+bool Buddha::_is_kinddeeddetail_exist(const string& kdid,
                                        const string& seq,
                                        kinddeeddetail& ent) {
     if (!get_kinddeed_detail_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
@@ -112,7 +119,7 @@ bool Buddha::_is_kinddeed_detail_exist(const string& kdid,
     return true;
 }
 
-bool Buddha::_is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent) {
+bool Buddha::_is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent) {
     auto it = get_kinddeed_detail_table().scan({{"kdid",kdid}});
     while(it->next()) {
         kinddeeddetail ent;
@@ -131,7 +138,7 @@ bool Buddha::_is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddee
     return true;
 }
 
-bool Buddha::_is_kinddeed_spec_exist(const string& kdid,
+bool Buddha::_is_kinddeedspec_exist(const string& kdid,
                                        const string& seq,
                                        kinddeedspec& ent) {
     if (!get_kinddeed_spec_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
@@ -140,7 +147,7 @@ bool Buddha::_is_kinddeed_spec_exist(const string& kdid,
     return true;
 }
 
-bool Buddha::_is_kinddeed_spec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent) {
+bool Buddha::_is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent) {
     auto it = get_kinddeed_spec_table().scan({{"kdid",kdid}});
     while(it->next()) {
         kinddeedspec ent;
@@ -159,36 +166,43 @@ bool Buddha::_is_kinddeed_spec_exist_by_kdid(const string& kdid,vector<kinddeeds
     return true;
 }
 
-bool Buddha::_is_comment_label_exist_by_id(const string& id,commentlabel& ent) {
+bool Buddha::_is_commentlabel_exist(const string& id,commentlabel& ent) {
     if (!get_comment_label_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_before_comment_exist_by_id(const string& id,beforecomment& ent) {
-    if (!get_before_comment_table().find({{"id", id}}, &ent))
+bool Buddha::_is_beforecomment_exist(const string& userid, const string& kdid,beforecomment& ent) {
+    if (!get_before_comment_table().find({{"userid", userid},{"kdid", kdid}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_order_exist_by_id(const string& id,order& ent) {
+bool Buddha::_is_order_exist(const string& id,order& ent) {
     if (!get_order_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_kinddeed_proof_exist_by_order(const string& orderid,kinddeedproof& ent) {
+bool Buddha::_is_kinddeedproof_exist_by_order(const string& orderid,kinddeedproof& ent) {
     if (!get_kinddeed_proof_table().find({{"orderid", orderid}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_after_comment_exist_by_orderid(const string& id,aftercomment& ent) {
-    if (!get_after_comment_table().find({{"id", id}}, &ent))
+bool Buddha::_is_kinddeedproof_exist_by_proof(const string& proof,kinddeedproof& ent) {
+    if (!get_kinddeed_proof_table().find({{"proof", proof}}, &ent))
+        return false;
+
+    return true;
+}
+
+bool Buddha::_is_aftercomment_exist(const string& orderid,aftercomment& ent) {
+    if (!get_after_comment_table().find({{"orderid", orderid}}, &ent))
         return false;
 
     return true;
@@ -235,7 +249,7 @@ bool Buddha::_is_deployer(const string& id) {
 
 bool Buddha::_is_founder(const string& id) {
     founder ent;
-    if (!_is_founder_exist_by_id(id, ent))
+    if (!_is_founder_exist(id, ent))
         return false;
     
     return ent.approved();
@@ -243,7 +257,7 @@ bool Buddha::_is_founder(const string& id) {
 
 bool Buddha::_is_temple(const string& id) {
     temple ent;
-    if (!_is_temple_exist_by_id(id, ent))
+    if (!_is_temple_exist(id, ent))
         return false;
     
     return ent.approved();
@@ -251,15 +265,15 @@ bool Buddha::_is_temple(const string& id) {
 
 bool Buddha::_is_master(const string& id) {
     master ent;
-    if (!_is_master_exist_by_id(id, ent))
+    if (!_is_master_exist(id, ent))
         return false;
 
     return ent.approved();
 }
 
 bool Buddha::_is_in_temple(const string& templeid,
-                           const string& masterid){
-    templemaster ent;
+                           const string& masterid,
+                           templemaster& ent){
     if (!get_templemaster_table().find({{"templeid", templeid},{"masterid", masterid}}, &ent))
         return false;
 
@@ -286,7 +300,7 @@ bool Buddha::_is_user(const string& id) {
 
 bool Buddha::_delete_founder_record(const string& id) {
     founder ent;
-    if (!_is_founder_exist_by_id(id, ent)){
+    if (!_is_founder_exist(id, ent)){
         mycout << "founder " << id << " is not exist ." << endl ;
         return false;
     }
@@ -302,7 +316,7 @@ bool Buddha::_delete_founder_record(const string& id) {
 
 bool Buddha::_delete_temple_record(const string& id) {
     temple ent;
-    if (!_is_temple_exist_by_id(id, ent)){
+    if (!_is_temple_exist(id, ent)){
         mycout << "temple " << id << " is not exist ." << endl ;
         return false;
     }
@@ -318,7 +332,7 @@ bool Buddha::_delete_temple_record(const string& id) {
 
 bool Buddha::_delete_master_record(const string& id) {
     master ent;
-    if (!_is_master_exist_by_id(id, ent)){
+    if (!_is_master_exist(id, ent)){
         mycout << "master " << id << " is not exist ." << endl ;
         return false;
     }
@@ -351,7 +365,7 @@ bool Buddha::_delete_templemaster_record(const string& templeid,
 
 bool Buddha::_delete_kinddeed_record(const string& id) {
     kinddeed ent;
-    if (!_is_kinddeed_exist_by_id(id, ent)){
+    if (!_is_kinddeed_exist(id, ent)){
         mycout << "kinddeed " << id << " is not exist ." << endl ;
         return false;
     }
@@ -361,12 +375,12 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
         return false;
     }
 
-    if( !_delete_kinddeed_detail_record(id) ) {
+    if( !_delete_kinddeeddetail_record(id) ) {
         mycout << "delete kinddeed detail " << id << " failure ." << endl ;
         return false;
     }
 
-    if( !_delete_kinddeed_spec_record(id) ) {
+    if( !_delete_kinddeedspec_record(id) ) {
         mycout << "delete kinddeed spec " << id << " failure ." << endl ;
         return false;
     }
@@ -375,7 +389,7 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeed_detail_record(const string& id) {
+bool Buddha::_delete_kinddeeddetail_record(const string& id) {
 
     while(true) {
         kinddeeddetail ent;
@@ -392,7 +406,7 @@ bool Buddha::_delete_kinddeed_detail_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeed_spec_record(const string& id) {
+bool Buddha::_delete_kinddeedspec_record(const string& id) {
     while(true) {
         kinddeedspec ent;
         if (!get_kinddeed_spec_table().find({{"kdid", id}}, &ent))
@@ -408,9 +422,9 @@ bool Buddha::_delete_kinddeed_spec_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_comment_label_record(const string& id) {
+bool Buddha::_delete_commentlabel_record(const string& id) {
     commentlabel ent;
-    if (!_is_comment_label_exist_by_id(id, ent)){
+    if (!_is_commentlabel_exist(id, ent)){
         mycout << "comment label " << id << " is not exist ." << endl ;
         return false;
     }
@@ -424,26 +438,26 @@ bool Buddha::_delete_comment_label_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_before_comment_record(const string& id) {
+bool Buddha::_delete_beforecomment_record(const string& userid, const string& kdid) {
     beforecomment ent;
-    if (!_is_before_comment_exist_by_id(id, ent)){
-        mycout << "comment label " << id << " is not exist ." << endl ;
+    if (!_is_beforecomment_exist(userid, kdid, ent)){
+        mycout << "before comment  " << userid << "," << kdid << " is not exist ." << endl ;
         return false;
     }
 
     if( !get_before_comment_table().del(ent) ) {
-        mycout << "delete comment label " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete before comment " << ent.to_string() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete comment label " << ent.to_string() << " success ." << endl ;
+    mycout << "delete before comment " << ent.to_string() << " success ." << endl ;
     return true;
 }
 
 
 bool Buddha::_delete_order_record(const string& id) {
     order ent;
-    if(!_is_order_exist_by_id(id, ent)){
+    if(!_is_order_exist(id, ent)){
         mycout << "order " << id << " is not exist ." << endl ;
         return false;
     }
@@ -457,9 +471,9 @@ bool Buddha::_delete_order_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeed_proof_record(const string& orderid) {
+bool Buddha::_delete_kinddeedproof_record(const string& orderid) {
     kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_order(orderid, ent)){
+    if (!_is_kinddeedproof_exist_by_order(orderid, ent)){
         mycout << "kinddeed proof " << orderid << " is not exist ." << endl ;
         return false;
     }
@@ -473,9 +487,9 @@ bool Buddha::_delete_kinddeed_proof_record(const string& orderid) {
     return true;
 }
 
-bool Buddha::_delete_after_comment_record(const string& orderid) {
+bool Buddha::_delete_aftercomment_record(const string& orderid) {
     aftercomment ent;
-    if (!_is_after_comment_exist_by_orderid(orderid, ent)){
+    if (!_is_aftercomment_exist(orderid, ent)){
         mycout << "after comment " << orderid << " is not exist ." << endl ;
         return false;
     }
@@ -540,21 +554,18 @@ void Buddha::apply_founder(){
         return ;
     }
     
-    if(is_founder()) {
-        ctx->error(ctx->initiator() + " is already founder .");
-        return ;
-    }
-
     const string& guaranty = ctx->transfer_amount();
     if(guaranty.empty()) {
         ctx->error("guaranty is empty");
         return ;
     }
 
-    if( !_delete_founder_record(ctx->initiator()) ) {
-        ctx->error("delete founder "+ ctx->initiator() + " failure .");
-        return;
+    if(is_founder()) {
+        ctx->error(ctx->initiator() + " is already founder .");
+        return ;
     }
+
+    _delete_founder_record(ctx->initiator());
 
     founder ent;
     ent.set_id(ctx->initiator().c_str());
@@ -582,7 +593,7 @@ void Buddha::approve_founder() {
     }
 
     founder ent;
-    if(!_is_founder_exist_by_id(id,ent)) {
+    if(!_is_founder_exist(id,ent)) {
         ctx->error("founder " + id + " is not exist .");
         return ;
     }
@@ -619,9 +630,14 @@ void Buddha::recusal_founder() {
     }
 
     founder ent;
-    if(!_is_founder_exist_by_id(id,ent)) {
+    if(!_is_founder_exist(id,ent)) {
         ctx->error("founder " + id + " is not exist .");
         return ;
+    }
+
+    if( !_delete_founder_record(id) ) {
+        ctx->error("delete founder "+ ent.to_string() + " failure .");
+        return;
     }
 
     //将抵押退还
@@ -629,11 +645,6 @@ void Buddha::recusal_founder() {
     if(!_transfer(id, guaranty)) {
         ctx->error("refund transfer " + guaranty + " to " + id + " failure .");
         return ;
-    }
-
-    if( !_delete_founder_record(id) ) {
-        ctx->error("delete founder "+ ent.to_string() + " failure .");
-        return;
     }
 
     ctx->ok("recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance.");
@@ -703,18 +714,20 @@ void Buddha::apply_temple(){
         return ;
     }
     
-    const string& deedplaceproof = ctx->arg("deedplaceproof");
-    if(deedplaceproof.empty()) {
-        ctx->error("deedplaceproof is empty");
+    const string& proof = ctx->arg("proof");
+    if(proof.empty()) {
+        ctx->error("proof is empty");
         return ;
     }
+
+    _delete_temple_record(ctx->initiator());
 
     temple ent;
     ent.set_id(ctx->initiator().c_str());
     ent.set_unit(unit.c_str());
     ent.set_creditcode(creditcode.c_str());
     ent.set_address(address.c_str());
-    ent.set_deedplaceproof(deedplaceproof.c_str());
+    ent.set_proof(proof.c_str());
     ent.set_approved(false);
     if (!get_temple_table().put(ent)) {
         ctx->error("temple table put "+ ent.to_string() + " error .");
@@ -737,7 +750,7 @@ void Buddha::approve_temple() {
     }
 
     temple ent;
-    if(!_is_temple_exist_by_id(id,ent)) {
+    if(!_is_temple_exist(id,ent)) {
         ctx->error("temple " + id + " is not exist .");
         return ;
     }
@@ -774,7 +787,7 @@ void Buddha::recusal_temple() {
     }
 
     temple ent;
-    if(!_is_temple_exist_by_id(id,ent)) {
+    if(!_is_temple_exist(id,ent)) {
         ctx->error("temple " + id + " is not exist .");
         return ;
     }
@@ -839,9 +852,18 @@ void Buddha::apply_master(){
         return ;
     }
 
+    const string& proof = ctx->arg("proof");
+    if(proof.empty()) {
+        ctx->error("proof is empty");
+        return ;
+    }
+
+    _delete_master_record(ctx->initiator());
+
     master ent;
     ent.set_id(ctx->initiator().c_str());
     ent.set_creditcode(creditcode.c_str());
+    ent.set_proof(proof.c_str());
     ent.set_approved(false);
     if (!get_master_table().put(ent)) {
         ctx->error("master table put "+ ent.to_string() + " error .");
@@ -864,7 +886,7 @@ void Buddha::approve_master() {
     }
 
     master ent;
-    if(!_is_master_exist_by_id(id,ent)) {
+    if(!_is_master_exist(id,ent)) {
         ctx->error("master " + id + " is not exist .");
         return ;
     }
@@ -901,7 +923,7 @@ void Buddha::recusal_master() {
     }
 
     master ent;
-    if(!_is_master_exist_by_id(id,ent)) {
+    if(!_is_master_exist(id,ent)) {
         ctx->error("master " + id + " is not exist .");
         return ;
     }
@@ -949,33 +971,30 @@ void Buddha::list_master() {
 namespace 申请加入寺院{}
 
 void Buddha::apply_join_temple(){
-    //只有法师才能申请加入寺院
-    if(!!is_master()) {
-        ctx->error(ctx->initiator() + " is not master, has no authority to apply join temple .");
-        return ;
-    }
-    
     const string& templeid = ctx->arg("templeid");
     if(templeid.empty()) {
         ctx->error("templeid is empty");
         return ;
     }
 
-    templemaster ent;
-    if(!_is_templemaster_exist(templeid, ctx->initiator(), ent)) {
-        ctx->error("temple " + templeid + " master " + ctx->initiator() + " is not exist .");
+    //只有法师才能申请加入寺院
+    if(!!is_master()) {
+        ctx->error(ctx->initiator() + " is not master, has no authority to apply join temple .");
         return ;
     }
 
-    if(_is_in_temple(templeid, ctx->initiator() )) {
+    if(!_is_temple(templeid)) {
+        ctx->error( templeid + " is not a temple .");
+        return ;
+    }
+
+    templemaster ent;
+    if(_is_in_temple(templeid, ctx->initiator(), ent )) {
         ctx->ok(ctx->initiator() + " is already join temple .");
         return;
     }
     
-    if( !_delete_templemaster_record(templeid, ctx->initiator()) ) {
-        ctx->error("delete templemaster "+ ent.to_string() + " failure .");
-        return;
-    }
+    _delete_templemaster_record(templeid, ctx->initiator());
     
     ent.set_templeid(templeid.c_str());
     ent.set_masterid(ctx->initiator().c_str());
@@ -1006,13 +1025,18 @@ void Buddha::approve_join_temple() {
         return ;
     }
 
-    templemaster ent;
-    if(!_is_templemaster_exist(templeid, masterid,ent)) {
-        ctx->error("temple " + templeid + ", master " + masterid + " is not exist .");
+    if(!_is_master(masterid)) {
+        ctx->error( masterid + " is not a master .");
         return ;
     }
 
-    if(_is_in_temple(masterid, templeid)) {
+    if(!_is_temple(templeid)) {
+        ctx->error( templeid + " is not a temple .");
+        return ;
+    }
+
+    templemaster ent;
+    if(_is_in_temple(masterid, templeid, ent)) {
         ctx->error(ent.to_string() + " is already join temple .");
         return ;
     }
@@ -1070,7 +1094,8 @@ bool Buddha::is_in_temple() {
         return false;
     }
 
-    if (_is_in_temple(templeid, ctx->initiator())) {
+    templemaster ent;
+    if (_is_in_temple(templeid, ctx->initiator(), ent)) {
         ctx->ok(ctx->initiator() + " is join temple .") ;
         return true;
     }
@@ -1180,19 +1205,19 @@ void Buddha::add_kinddeed() {
     }
 
     kinddeed ent;
-    if (_is_kinddeed_exist_by_id(id, ent))  {
+    if (_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + ent.to_string() + " is exist .");
         return ;
     }
 
     vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_is_kinddeed_detail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
+    if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
         ctx->error("kinddeed detail " + ent.to_string() + " is exist .");
         return ;
     }
 
     vector<kinddeedspec> v_kinddeedspec_ent;
-    if (_is_kinddeed_spec_exist_by_kdid(id, v_kinddeedspec_ent))  {
+    if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
         ctx->error("kinddeed spec " + ent.to_string() + " is exist .");
         return ;
     }
@@ -1260,7 +1285,7 @@ void Buddha::delete_kinddeed() {
     }
 
     kinddeed ent;
-    if (!_is_kinddeed_exist_by_id(id, ent))  {
+    if (!_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
         return ;
     }
@@ -1333,19 +1358,19 @@ void Buddha::update_kinddeed() {
     }
 
     kinddeed ent;
-    if (_is_kinddeed_exist_by_id(id, ent))  {
+    if (_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + ent.to_string() + " is exist .");
         return ;
     }
 
     vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_is_kinddeed_detail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
+    if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
         ctx->error("kinddeed detail " + ent.to_string() + " is exist .");
         return ;
     }
 
     vector<kinddeedspec> v_kinddeedspec_ent;
-    if (_is_kinddeed_spec_exist_by_kdid(id, v_kinddeedspec_ent))  {
+    if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
         ctx->error("kinddeed spec " + ent.to_string() + " is exist .");
         return ;
     }
@@ -1406,20 +1431,20 @@ void Buddha::find_kinddeed() {
     }
 
     kinddeed kinddeed_ent;
-    if (!_is_kinddeed_exist_by_id(id, kinddeed_ent))  {
+    if (!_is_kinddeed_exist(id, kinddeed_ent))  {
         ctx->ok("kinddeed " + id + " is not exist .");
         return ;
     }
 
     vector<kinddeeddetail> v_kinddeeddetail_ent;
-    _is_kinddeed_detail_exist_by_kdid(id, v_kinddeeddetail_ent);
+    _is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent);
     string detail_string ;
     for(int i = 0 ; i < v_kinddeeddetail_ent.size() ; i++ ) {
         detail_string += v_kinddeeddetail_ent[i].to_string();
     }
 
     vector<kinddeedspec> v_kinddeedspec_ent;
-    _is_kinddeed_spec_exist_by_kdid(id, v_kinddeedspec_ent);
+    _is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent);
     string spec_string ;
     for(int i = 0 ; i < v_kinddeedspec_ent.size() ; i++ ) {
         spec_string += v_kinddeedspec_ent[i].to_string();
@@ -1462,7 +1487,7 @@ void Buddha::apply_online_kinddeed() {
     }
 
     kinddeed ent;
-    if (!_is_kinddeed_exist_by_id(id, ent))  {
+    if (!_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
         return ;
     }
@@ -1499,7 +1524,7 @@ void Buddha::apply_offline_kinddeed() {
     }
    
     kinddeed ent;
-    if (!_is_kinddeed_exist_by_id(id, ent))  {
+    if (!_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
         return ;
     }
@@ -1541,7 +1566,7 @@ void Buddha::approve_online_kinddeed() {
     }
 
     kinddeed ent;
-    if (!_is_kinddeed_exist_by_id(id, ent))  {
+    if (!_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
         return ;
     }
@@ -1584,7 +1609,7 @@ void Buddha::approve_offline_kinddeed() {
     }
 
     kinddeed ent;
-    if (!_is_kinddeed_exist_by_id(id, ent))  {
+    if (!_is_kinddeed_exist(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
         return ;
     }
@@ -1659,14 +1684,14 @@ void Buddha::pray_kinddeed() {
 
     //判断订单是否存在
     order od;
-    if (_is_order_exist_by_id(orderid,od))  {
+    if (_is_order_exist(orderid,od))  {
         ctx->error("order " + orderid + " is exist .");
         return ;
     }
 
     //判断善举是否存在
     kinddeed kd;
-    if (!_is_kinddeed_exist_by_id(kdid, kd))  {
+    if (!_is_kinddeed_exist(kdid, kd))  {
         ctx->error("kinddeed " + kdid + " is not exist .");
         return ;
     }
@@ -1679,7 +1704,7 @@ void Buddha::pray_kinddeed() {
 
     //判断善举规格是否存在
     kinddeedspec spec;
-    if (!_is_kinddeed_spec_exist(kdid, specid, spec))  {
+    if (!_is_kinddeedspec_exist(kdid, specid, spec))  {
         ctx->error("kinddeedspec " + kdid + "," + specid + " is not exist .");
         return ;
     }
@@ -1752,6 +1777,17 @@ void Buddha::list_pray_kinddeed() {
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
 
+bool Buddha::is_user() {
+    bool ret = _is_user(ctx->initiator());
+    if (ret) {
+        ctx->ok(ctx->initiator() + " is user .") ;
+        return true;
+    }
+    
+    ctx->ok(ctx->initiator() + " is not user .") ;
+    return false;
+}
+
 namespace 基金会成员授权法师或寺院上传的善举凭证{}
 
 void Buddha::upload_kinddeed_proof() {
@@ -1774,14 +1810,13 @@ void Buddha::upload_kinddeed_proof() {
     }
 
     kinddeedproof ent;
-    if (_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+    if (_is_kinddeedproof_exist_by_order(orderid, ent))  {
         ctx->error("kinddeed proof " + orderid + " is exist .");
         return ;
     }
 
     order od;
-    if (!_is_order_exist_by_id(orderid, od)) {
-        _delete_kinddeed_proof_record(orderid);
+    if (!_is_order_exist(orderid, od)) {
         ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
@@ -1817,14 +1852,14 @@ void Buddha::approve_kinddeed_proof() {
     }
 
     kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+    if (!_is_kinddeedproof_exist_by_order(orderid, ent))  {
         ctx->error("kinddeed proof " + orderid + " is not exist .");
         return ;
     }
 
     order od;
-    if (!_is_order_exist_by_id(orderid, od)) {
-        _delete_kinddeed_proof_record(orderid);
+    if (!_is_order_exist(orderid, od)) {
+        _delete_kinddeedproof_record(orderid);
         ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
@@ -1834,12 +1869,7 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
-    if(!_transfer(ent.master(), to_string(od.amount()))) {
-        ctx->error("transfer to " + ent.master() + " " +  to_string(od.amount()) + " failure .");
-        return ;
-    }
-
-    if( !_delete_kinddeed_proof_record(orderid) ) {
+    if( !_delete_kinddeedproof_record(orderid) ) {
         ctx->error("delete kinddeed proof "+ ent.to_string() + " failure .");
         return;
     }
@@ -1848,6 +1878,11 @@ void Buddha::approve_kinddeed_proof() {
     if (!get_kinddeed_proof_table().put(ent)) {
         ctx->error("kinddeed proof table put "+ ent.to_string() + " error .");
         return;
+    }
+
+    if(!_transfer(ent.master(), to_string(od.amount()))) {
+        ctx->error("transfer to " + ent.master() + " " +  to_string(od.amount()) + " failure .");
+        return ;
     }
 
     ctx->ok("approve kinddeed "+ ent.to_string() + " proof success .");
@@ -1866,14 +1901,14 @@ void Buddha::refuse_kinddeed_proof() {
     }
 
     kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+    if (!_is_kinddeedproof_exist_by_order(orderid, ent))  {
         ctx->error("kinddeed proof " + orderid + " is not exist .");
         return ;
     }
 
     order od;
-    if (!_is_order_exist_by_id(orderid, od)) {
-        _delete_kinddeed_proof_record(orderid);
+    if (!_is_order_exist(orderid, od)) {
+        _delete_kinddeedproof_record(orderid);
         ctx->error("order lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
@@ -1883,7 +1918,7 @@ void Buddha::refuse_kinddeed_proof() {
         return ;
     }
 
-    if( !_delete_kinddeed_proof_record(orderid) ) {
+    if( !_delete_kinddeedproof_record(orderid) ) {
         ctx->error("delete kinddeed proof "+ ent.to_string() + " failure .");
         return;
     }
@@ -1893,23 +1928,39 @@ void Buddha::refuse_kinddeed_proof() {
 
 void Buddha::find_kinddeed_proof() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
-        ctx->error("kinddeed proof orderid is empty");
-        return ;
-    }
+    const string& proof = ctx->arg("proof");
 
-    if(!is_deployer() &&
-       !is_founder()) {
-        ctx->error(ctx->initiator() + " is not deployer nor founder , has no authority to find kinddeed proof .");
+    if(orderid.empty() &&
+        proof.empty()) {
+        ctx->error("kinddeed proof hash and orderid is empty .");
         return ;
     }
 
     kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_order(orderid, ent))  {
-        ctx->error("kinddeed proof " + orderid + " is not exist .");
+
+    if(!orderid.empty()) 
+        if (!_is_kinddeedproof_exist_by_order(orderid, ent))  {
+            ctx->error("kinddeed proof " + orderid + " is not exist .");
+            return ;
+        }
+
+    if(!proof.empty()) 
+        if (!_is_kinddeedproof_exist_by_order(proof, ent))  {
+            ctx->error("kinddeed proof " + proof + " is not exist .");
+            return ;
+        }
+
+    if(is_deployer() || is_founder()) {
+        ctx->ok(ent.to_string());
         return ;
     }
     
+    if( !is_temple() &&
+        !is_master() ) {
+        ctx->error(ctx->initiator() + " has no authority to find kinddeed proof .");
+        return ;
+    }
+
     if( ent.master() != ctx->initiator() ) {
         ctx->error(ctx->initiator() + " is not the right master, it should be " + ent.master());
         return ;
@@ -1938,17 +1989,6 @@ void Buddha::list_kinddeed_proof() {
             cout << __LINE__ << " get error : " << it->error(true) << endl;
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
-}
-
-bool Buddha::is_user() {
-    bool ret = _is_user(ctx->initiator());
-    if (ret) {
-        ctx->ok(ctx->initiator() + " is user .") ;
-        return true;
-    }
-    
-    ctx->ok(ctx->initiator() + " is not user .") ;
-    return false;
 }
 
 // ---------- 对外接口 -------------
@@ -1995,6 +2035,7 @@ DEFINE_METHOD(Buddha, approve_offline_kinddeed) { self.approve_offline_kinddeed(
 DEFINE_METHOD(Buddha, pray_kinddeed)            { self.pray_kinddeed();             }
 DEFINE_METHOD(Buddha, find_pray_kinddeed)       { self.find_pray_kinddeed();        }
 DEFINE_METHOD(Buddha, list_pray_kinddeed)       { self.list_pray_kinddeed();        }
+DEFINE_METHOD(Buddha, is_user)                  { self.is_user();                   }
 
 DEFINE_METHOD(Buddha, upload_kinddeed_proof)    { self.upload_kinddeed_proof();     }
 DEFINE_METHOD(Buddha, approve_kinddeed_proof)   { self.approve_kinddeed_proof();    }
@@ -2002,4 +2043,3 @@ DEFINE_METHOD(Buddha, refuse_kinddeed_proof)    { self.refuse_kinddeed_proof(); 
 DEFINE_METHOD(Buddha, find_kinddeed_proof)      { self.find_kinddeed_proof();       }
 DEFINE_METHOD(Buddha, list_kinddeed_proof)      { self.list_kinddeed_proof();       }
 
-DEFINE_METHOD(Buddha, is_user)                  { self.is_user();                   }

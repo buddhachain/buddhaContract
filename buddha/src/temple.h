@@ -9,13 +9,13 @@
 using namespace std;
 
 class temple: public buddha::Temple {
-    DEFINE_ROWKEY(id);//,unit,creditcode,address,deedplaceproof);
+    DEFINE_ROWKEY(id);//,unit,creditcode,address,proof);
     DEFINE_INDEX_BEGIN(5)
         DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_ADD(1, unit)
         DEFINE_INDEX_ADD(2, creditcode)
         DEFINE_INDEX_ADD(3, address)
-        DEFINE_INDEX_ADD(4, deedplaceproof)
+        DEFINE_INDEX_ADD(4, proof)
     DEFINE_INDEX_END();
 
     string to_string();
