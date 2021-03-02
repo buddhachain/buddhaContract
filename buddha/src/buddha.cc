@@ -103,6 +103,15 @@ bool Buddha::_is_kinddeed_exist_by_id(const string& id,kinddeed& ent) {
     return true;
 }
 
+bool Buddha::_is_kinddeed_detail_exist(const string& kdid,
+                                       const string& seq,
+                                       kinddeeddetail& ent) {
+    if (!get_kinddeed_detail_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
+        return false;
+
+    return true;
+}
+
 bool Buddha::_is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent) {
     auto it = get_kinddeed_detail_table().scan({{"kdid",kdid}});
     while(it->next()) {
@@ -117,6 +126,15 @@ bool Buddha::_is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddee
     }
 
     if(vent.size()==0)
+        return false;
+
+    return true;
+}
+
+bool Buddha::_is_kinddeed_spec_exist(const string& kdid,
+                                       const string& seq,
+                                       kinddeedspec& ent) {
+    if (!get_kinddeed_spec_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
         return false;
 
     return true;
@@ -162,7 +180,7 @@ bool Buddha::_is_order_exist_by_id(const string& id,order& ent) {
     return true;
 }
 
-bool Buddha::_is_kinddeed_proof_exist_by_orderid(const string& orderid,kinddeedproof& ent) {
+bool Buddha::_is_kinddeed_proof_exist_by_order(const string& orderid,kinddeedproof& ent) {
     if (!get_kinddeed_proof_table().find({{"orderid", orderid}}, &ent))
         return false;
 
@@ -177,8 +195,8 @@ bool Buddha::_is_after_comment_exist_by_orderid(const string& id,aftercomment& e
 }
 
 
-void Buddha::_get_kinddeed(const string& id,kinddeed& ent) {
-    get_kinddeed_table().find({{"id", id}}, &ent);
+bool Buddha::_get_kinddeed(const string& id,kinddeed& ent) {
+    return get_kinddeed_table().find({{"id", id}}, &ent);
 }
 
 bool Buddha::_is_kinddeed_online(const string& id){
@@ -441,7 +459,7 @@ bool Buddha::_delete_order_record(const string& id) {
 
 bool Buddha::_delete_kinddeed_proof_record(const string& orderid) {
     kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_orderid(orderid, ent)){
+    if (!_is_kinddeed_proof_exist_by_order(orderid, ent)){
         mycout << "kinddeed proof " << orderid << " is not exist ." << endl ;
         return false;
     }
@@ -471,11 +489,11 @@ bool Buddha::_delete_after_comment_record(const string& orderid) {
     return true;
 }
 
-bool Buddha::_transfer(const string& id,
-                    const string& amount){
+bool Buddha::_transfer(const string& toid,
+                    const string& toamount){
     //将抵押退还
-    xchain::Account account = xchain::Account(id);
-    if(!account.transfer(amount)) 
+    xchain::Account account = xchain::Account(toid);
+    if(!account.transfer(toamount)) 
         return false;
 
     return true ;
@@ -1395,16 +1413,27 @@ void Buddha::find_kinddeed() {
 
     vector<kinddeeddetail> v_kinddeeddetail_ent;
     _is_kinddeed_detail_exist_by_kdid(id, v_kinddeeddetail_ent);
+    string detail_string ;
+    for(int i = 0 ; i < v_kinddeeddetail_ent.size() ; i++ ) {
+        detail_string += v_kinddeeddetail_ent[i].to_string();
+    }
 
     vector<kinddeedspec> v_kinddeedspec_ent;
     _is_kinddeed_spec_exist_by_kdid(id, v_kinddeedspec_ent);
+    string spec_string ;
+    for(int i = 0 ; i < v_kinddeedspec_ent.size() ; i++ ) {
+        spec_string += v_kinddeedspec_ent[i].to_string();
+    }
 
-    ctx->ok("found kinddeed " + kinddeed_ent.to_string() );
+    ctx->ok(kinddeed_ent.to_string() + detail_string + spec_string);
 }
 
 void Buddha::list_kinddeed() {
-    if(!is_deployer() && !is_founder() && !is_master()) {
-        ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list kinddeed .");
+    if(!is_deployer() &&
+       !is_founder() &&
+       !is_temple() &&
+       !is_master()) {
+        ctx->error(ctx->initiator() + " has no authority to list kinddeed .");
         return ;
     }
 
@@ -1432,11 +1461,6 @@ void Buddha::apply_online_kinddeed() {
         return ;
     }
 
-    if(!is_master() && !is_founder()) {
-        ctx->error(ctx->initiator() + " is not master, has no authority to apply online kinddeed .");
-        return ;
-    }
-    
     kinddeed ent;
     if (!_is_kinddeed_exist_by_id(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
@@ -1473,12 +1497,7 @@ void Buddha::apply_offline_kinddeed() {
         ctx->error("kinddeed id is empty");
         return ;
     }
-
-    if(!is_master() && !is_founder()) {
-        ctx->error(ctx->initiator() + " is not master, has no authority to apply online kinddeed .");
-        return ;
-    }
-    
+   
     kinddeed ent;
     if (!_is_kinddeed_exist_by_id(id, ent))  {
         ctx->error("kinddeed " + id + " is not exist .");
@@ -1608,15 +1627,15 @@ void Buddha::pray_kinddeed() {
         return ;
     }
 
-    const string& kdid = ctx->arg("kdid");
+    const string& kdid = ctx->arg("kinddeed");
     if(kdid.empty()) {
         ctx->error("kdid is empty");
         return ;
     }
 
-    const string& kdseqid = ctx->arg("kdseqid");
-    if(kdseqid.empty()) {
-        ctx->error("kdseqid is empty");
+    const string& specid = ctx->arg("spec");
+    if(specid.empty()) {
+        ctx->error("specid is empty");
         return ;
     }
 
@@ -1638,88 +1657,58 @@ void Buddha::pray_kinddeed() {
         return ;
     }
 
+    //判断订单是否存在
     order od;
     if (_is_order_exist_by_id(orderid,od))  {
         ctx->error("order " + orderid + " is exist .");
         return ;
     }
 
-    //判断子订单表是否已经存在子订单id
-    //获取所有的子订单id，存如数组，方便后面写入大订单表时使用
-    //判断子订单id在数组中是否重复
-    //判断善举表中对于当前订单的善举是否都存在
-    //判断善举表中对于当前订单的善举是否已经上架
-    //判断善举表中对于当前订单的数量是否够
+    //判断善举是否存在
+    kinddeed kd;
+    if (!_is_kinddeed_exist_by_id(kdid, kd))  {
+        ctx->error("kinddeed " + kdid + " is not exist .");
+        return ;
+    }
+
+    //判断善举是否已经上架
+    if (!_is_kinddeed_online(kdid)) {
+        ctx->error("kinddeed " + kdid + " is not online .");
+        return ;
+    }
+
+    //判断善举规格是否存在
+    kinddeedspec spec;
+    if (!_is_kinddeed_spec_exist(kdid, specid, spec))  {
+        ctx->error("kinddeedspec " + kdid + "," + specid + " is not exist .");
+        return ;
+    }
+
     //计算总价格，要求转账过来的总价格跟订单计算出的总价格要求必须一直
-    //判断法师是否存在
-    // int64_t calced_amount = 0;
-    // xchain::json sodidArray = xchain::json::array();
-    // string mastername;
-    // mycout << "suborders.size()=" << suborders.size() << endl;
-    // for(int i = 0 ; i < suborders.size() ; i++) {
-    //     string sodid = suborders.at(i)["id"].template get<string>();
-    //     string kdid = suborders.at(i)["kdid"].template get<string>();
-    //     int64_t count = stoll(suborders.at(i)["count"].template get<string>());
-
-
-    //     //判断善举表中对于当前订单的善举是否都存在
-    //     kinddeed kd;
-    //     if (!_is_kinddeed_exist_by_id(kdid, kd))  {
-    //         ctx->error("kinddeed " + kdid + " is not exist .");
-    //         return ;
-    //     }
-
-    //     //判断善举表中对于当前订单的善举是否已经上架
-    //     if (!is_kinddeed_online(kdid)) {
-    //         ctx->error("kinddeed " + kdid + " is not online .");
-    //         return ;
-    //     }
-
-    //     //判断善举表中对于当前订单的数量是否够
-    //     if(kd.count() < count) {
-    //         ctx->error("kinddeed " + kdid + " is not enough .");
-    //         return ;
-    //     }
-
-    //     //讲各个子订单中的商品数量和商品价格进行总价格计算
-    //     calced_amount += kd.price() * count ;
-
-    //     //判断法师是否存在
-    //     master mt;
-    //     if (!_is_master_exist_by_id(kd.owner(), mt))  {
-    //         ctx->error("master " + kd.owner() + " is not exist .");
-    //         return ;
-    //     }
-    //     mastername = kd.owner();
-    // }
-
-    // //由于可能存在善举价格浮动，实际价格可能高于或低于开始制作订单的总价格。
-    // if(calced_amount != stoll(amount)){
-    //     ctx->error("delive amount " + amount
-    //                + ", real amount=" + to_string(calced_amount));
-    //     return;
-    // }
+    int64_t calced_amount = spec.price() * stoll(count);
+    if(calced_amount != stoll(amount)){
+        ctx->error("delive amount " + amount
+                   + ", real amount=" + to_string(calced_amount));
+        return;
+    }
     
-
-
-    // //存储大订单表
-    // order ent;
-    // ent.set_id(orderid.c_str());
-    // ent.set_owner(ctx->initiator());
-    // ent.set_mastername(mastername);
-    // ent.set_suborderids(sodidArray.dump().c_str());
-    // ent.set_amount(calced_amount);
-    // ent.set_timestamp(timestamp.c_str());
-    // if (!get_order_table().put(ent)) {
-    //     ctx->error("order table put "+ ent.to_string() + " error .");
-    //     return;
-    // }
+    od.set_id(orderid.c_str());
+    od.set_owner(ctx->initiator());
+    od.set_kdid(kdid);
+    od.set_specid(stoll(specid));
+    od.set_count(stoll(count));
+    od.set_amount(calced_amount);
+    od.set_timestamp(timestamp.c_str());
+    if (!get_order_table().put(od)) {
+        ctx->error("order table put "+ od.to_string() + " error .");
+        return;
+    }
     
-    // ctx->ok("pray kinddeed " + to_string(calced_amount) + " success .");
+    ctx->ok("pray kinddeed " + to_string(calced_amount) + " success .");
 }
 
 void Buddha::find_pray_kinddeed() {
-    cout << endl ;
+    mycout << endl ;
 
     const string& id = ctx->arg("id");
     if(id.empty()) {
@@ -1735,45 +1724,15 @@ void Buddha::find_pray_kinddeed() {
         return ;
     }
 
-    string ret = ent.to_string() + "," ;
-    mycout << ret << endl ;
-
-    //删除子订单表中的子订单
-    // xchain::json suborderids = xchain::json::parse(ent.suborderids());
-    // mycout << suborderids.dump().c_str() << endl ;
-
-    // if (!suborderids.is_array()) {
-    //     ctx->error("field 'suborderids' need to be array .");
-    //     return;
-    // }
-    // mycout << endl ;
-    
-    // if ( suborderids.empty() || suborderids.size() == 0) {
-    //     ctx->error("filed 'suborderids' empty .");
-    //     return;
-    // }
-
-    // mycout << suborderids.size() << endl ;
-
-    // for(int i = 0 ; i < suborderids.size() ; i++) {
-    //     string sodid = suborderids.at(i).template get<string>();
-    //     mycout << sodid << endl ;
-
-    //     suborder sod;
-    //     if( !is_suborder_exist(sodid, sod) ) {
-    //         ctx->error("order("+id+") sodid("+sodid+") not exist .");
-    //         return;
-    //     }
-
-    //     ret += sod.to_string() + ",";
-    // }
-    // mycout << endl ;
-
-    // ctx->ok(ret);
+    mycout << ent.to_string() << endl ;
+    ctx->ok(ent.to_string());
 }
 
 void Buddha::list_pray_kinddeed() {
-    if(!is_deployer() && !is_founder() && !is_master()) {
+    if(!is_deployer() &&
+       !is_founder() &&
+       !is_temple() &&
+       !is_master()) {
         ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list order .");
         return ;
     }
@@ -1814,6 +1773,11 @@ void Buddha::upload_kinddeed_proof() {
         return ;
     }
 
+    kinddeedproof ent;
+    if (_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+        ctx->error("kinddeed proof " + orderid + " is exist .");
+        return ;
+    }
 
     order od;
     if (!_is_order_exist_by_id(orderid, od)) {
@@ -1821,19 +1785,14 @@ void Buddha::upload_kinddeed_proof() {
         ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
         return ;
     }
-
-    if( od.mastername() != ctx->initiator() ) {
-        ctx->error(ctx->initiator() + " is not the right master, it should be " + od.mastername());
-        return ;
-    }
-
-    kinddeedproof ent;
-    if (_is_kinddeed_proof_exist_by_orderid(orderid, ent))  {
-        ctx->error("kinddeed proof " + orderid + " is exist .");
+    
+    if( od.master() != ctx->initiator() ) {
+        ctx->error(ctx->initiator() + " is not the right master, it should be " + od.master());
         return ;
     }
 
     ent.set_orderid(orderid.c_str());
+    ent.set_master(ctx->initiator());
     ent.set_proof(proof.c_str());
     ent.set_timestamp(timestamp.c_str());
     ent.set_approved(false);
@@ -1857,16 +1816,16 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
+    kinddeedproof ent;
+    if (!_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+        ctx->error("kinddeed proof " + orderid + " is not exist .");
+        return ;
+    }
+
     order od;
     if (!_is_order_exist_by_id(orderid, od)) {
         _delete_kinddeed_proof_record(orderid);
         ctx->error("order and suborder lost, kinddeed proof " + orderid + " be delete .");
-        return ;
-    }
-
-    kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_orderid(orderid, ent))  {
-        ctx->error("kinddeed proof " + orderid + " is not exist .");
         return ;
     }
 
@@ -1875,8 +1834,8 @@ void Buddha::approve_kinddeed_proof() {
         return ;
     }
 
-    if(!_transfer(od.mastername(), to_string(od.amount()))) {
-        ctx->error("transfer to " + od.mastername() + " " +  to_string(od.amount()) + " failure .");
+    if(!_transfer(ent.master(), to_string(od.amount()))) {
+        ctx->error("transfer to " + ent.master() + " " +  to_string(od.amount()) + " failure .");
         return ;
     }
 
@@ -1906,16 +1865,16 @@ void Buddha::refuse_kinddeed_proof() {
         return ;
     }
 
+    kinddeedproof ent;
+    if (!_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+        ctx->error("kinddeed proof " + orderid + " is not exist .");
+        return ;
+    }
+
     order od;
     if (!_is_order_exist_by_id(orderid, od)) {
         _delete_kinddeed_proof_record(orderid);
         ctx->error("order lost, kinddeed proof " + orderid + " be delete .");
-        return ;
-    }
-
-    kinddeedproof ent;
-    if (!_is_kinddeed_proof_exist_by_orderid(orderid, ent))  {
-        ctx->error("kinddeed proof " + orderid + " is not exist .");
         return ;
     }
 
@@ -1932,9 +1891,36 @@ void Buddha::refuse_kinddeed_proof() {
     ctx->ok("refuse kinddeed "+ ent.to_string() + " proof success .");
 }
 
+void Buddha::find_kinddeed_proof() {
+    const string& orderid = ctx->arg("orderid");
+    if(orderid.empty()) {
+        ctx->error("kinddeed proof orderid is empty");
+        return ;
+    }
+
+    if(!is_deployer() &&
+       !is_founder()) {
+        ctx->error(ctx->initiator() + " is not deployer nor founder , has no authority to find kinddeed proof .");
+        return ;
+    }
+
+    kinddeedproof ent;
+    if (!_is_kinddeed_proof_exist_by_order(orderid, ent))  {
+        ctx->error("kinddeed proof " + orderid + " is not exist .");
+        return ;
+    }
+    
+    if( ent.master() != ctx->initiator() ) {
+        ctx->error(ctx->initiator() + " is not the right master, it should be " + ent.master());
+        return ;
+    }
+
+    ctx->ok(ent.to_string());
+}
 
 void Buddha::list_kinddeed_proof() {
-    if(!is_deployer()&&!is_founder()) {
+    if(!is_deployer() &&
+       !is_founder()) {
         ctx->error(ctx->initiator() + " is not deployer nor founder, has no authority to list kinddeed proof .");
         return ;
     }
@@ -2013,6 +1999,7 @@ DEFINE_METHOD(Buddha, list_pray_kinddeed)       { self.list_pray_kinddeed();    
 DEFINE_METHOD(Buddha, upload_kinddeed_proof)    { self.upload_kinddeed_proof();     }
 DEFINE_METHOD(Buddha, approve_kinddeed_proof)   { self.approve_kinddeed_proof();    }
 DEFINE_METHOD(Buddha, refuse_kinddeed_proof)    { self.refuse_kinddeed_proof();     }
+DEFINE_METHOD(Buddha, find_kinddeed_proof)      { self.find_kinddeed_proof();       }
 DEFINE_METHOD(Buddha, list_kinddeed_proof)      { self.list_kinddeed_proof();       }
 
 DEFINE_METHOD(Buddha, is_user)                  { self.is_user();                   }

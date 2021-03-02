@@ -5,6 +5,7 @@ string kinddeedproof::to_string() {
     string str ;
     str += "{" ;
     str += orderid() + ",";
+    str += master() + ",";
     str += proof() + ",";
     str += timestamp() + ",";
     str += std::to_string(approved());

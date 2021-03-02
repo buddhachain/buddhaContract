@@ -105,15 +105,17 @@ private:
                                 templemaster& ent);
 
     bool _is_kinddeed_exist_by_id(const string& id,kinddeed& ent);
+    bool _is_kinddeed_detail_exist(const string& kdid, const string& seq, kinddeeddetail& ent);
     bool _is_kinddeed_detail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent);
+    bool _is_kinddeed_spec_exist(const string& kdid, const string& seq, kinddeedspec& ent);
     bool _is_kinddeed_spec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent);
     bool _is_comment_label_exist_by_id(const string& id,commentlabel& ent);
     bool _is_before_comment_exist_by_id(const string& id,beforecomment& ent);
     bool _is_order_exist_by_id(const string& id,order& ent);
-    bool _is_kinddeed_proof_exist_by_orderid(const string& id,kinddeedproof& ent);
+    bool _is_kinddeed_proof_exist_by_order(const string& id,kinddeedproof& ent);
     bool _is_after_comment_exist_by_orderid(const string& id,aftercomment& ent);
 
-    void _get_kinddeed(const string& id,kinddeed& ent);
+    bool _get_kinddeed(const string& id,kinddeed& ent);
     bool _is_kinddeed_online(const string& kdid) ;
 
     bool _is_deployer(const string& id);
@@ -183,7 +185,7 @@ public:
     void delete_kinddeed(); //基金会成员、寺院、法师
     void update_kinddeed(); //基金会成员、寺院、法师，只要修改善举，就需要重新审核上架
     void find_kinddeed();   //所有用户
-    void list_kinddeed();   //所有用户。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
+    void list_kinddeed();   //部署者、基金会成员、寺院、法师。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
 
     //申请善举上架下架    
     void apply_online_kinddeed();   //寺院、法师
@@ -194,13 +196,14 @@ public:
     //会员祈求善举
     void pray_kinddeed();       //所有会员
     void find_pray_kinddeed();  //所有会员
-    void list_pray_kinddeed();  //所有会员
+    void list_pray_kinddeed();  //部署者、基金会成员、寺院、法师
 
     //基金会成员授权法师或寺院上传的善举凭证
     void upload_kinddeed_proof();   //法师
     void approve_kinddeed_proof();  //基金会成员
     void refuse_kinddeed_proof();   //基金会成员
-    void list_kinddeed_proof();     //所有会员    
+    void find_kinddeed_proof();     //部署者、基金会成员  
+    void list_kinddeed_proof();     //部署者、基金会成员  
 
     bool is_user();         //所有用户
 };

@@ -36,17 +36,6 @@ message TempleMaster {
     bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
 }
 
-
-//会员表，目前不用
-message Member {
-    string id           = 1; //会员名称，唯一
-    string nickname     = 2; //昵称
-    bool   sex          = 3; //性别
-    string address      = 4; //常住地址
-    string email        = 5; //email，唯一
-    string phone        = 6; //电话，唯一
-} 
-
 //善举表
 message Kinddeed {
     string id           = 1; //善举编号，唯一
@@ -91,20 +80,21 @@ message BeforeComment {
 message Order {
     string id           = 1; //订单编号，唯一
     string owner        = 2; //订单所有者，哪个会员祈求了此善举订单
-    string mastername   = 3; //指定
+    string master       = 3; //对应善举所有者
     string kdid         = 4; //对应的善举id
-    int64  kdseqid      = 5; //对应的善举规格id
+    int64  specid       = 5; //对应的善举规格id
     int64  count        = 6; //祈求的此善举的规格的个数
     int64  amount       = 7; //善举总价格
     string timestamp    = 8; //订单生成时间
 }
 
-//善举凭证表。
+//善举凭证表
 message KinddeedProof {
     string orderid      = 1; //善举订单编号，对应Order表中的id，唯一
-    string proof        = 2; //善举hash，唯一
-    string timestamp    = 3; //法师或寺院尽心善举时的时间
-    bool   approved     = 4; //是否已经批准此善举凭证，0尚未批准，1已经批准
+    string master       = 2; //对应善举所有者
+    string proof        = 3; //善举hash，唯一
+    string timestamp    = 4; //法师或寺院尽心善举时的时间
+    bool   approved     = 5; //是否已经批准此善举凭证，0尚未批准，1已经批准
 }
 
 //善举动态评论表

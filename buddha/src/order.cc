@@ -5,9 +5,9 @@ string order::to_string() {
     str += "{" ;
     str += id() + ",";
     str += owner() + ",";
-    str += mastername() + ",";
+    str += master() + ",";
     str += kdid() + ",";
-    str += std::to_string(kdseqid()) + ",";
+    str += std::to_string(specid()) + ",";
     str += std::to_string(count()) + ",";
     str += std::to_string(amount()) + ",";
     str += timestamp() ;

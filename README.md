@@ -151,35 +151,38 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed --account XC1
 ### 5.6 申请善举上架下架
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_online_kinddeed -a '{"id":"1"}' --account XC1234567890333333@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_online_kinddeed -a '{"id":"1"}' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_online_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_offline_kinddeed -a '{"id":"1"}' --account XC1234567890333333@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_offline_kinddeed -a '{"id":"1"}' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_offline_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
+
 ```
 
 ### 5.7 会员祈求善举
 
 ```bash
-xchain-cli account balance XC1234567890444444@xuper
+xchain-cli account balance XC1234567890555555@xuper
 
-xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1","suborders":"[{\"id\":\"1\",\"kdid\":\"1\",\"count\":\"1\"},{\"id\":\"2\",\"kdid\":\"1\",\"count\":\"2\"}]","timestamp":"11111"}' --account XC1234567890444444@xuper --amount 30
+xchain-cli wasm invoke --fee 1000000 buddha --method pray_kinddeed -a '{"id": "1","kinddeed":"1","spec":"1","count":"2","timestamp":"11111"}' --account XC1234567890555555@xuper --amount 30
 
-xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890444444@xuper 
+xchain-cli wasm invoke --fee 1000000 buddha --method find_pray_kinddeed -a '{"id": "1"}' --account XC1234567890555555@xuper 
 
-xchain-cli wasm invoke --fee 1000000 buddha --method list_order --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method list_pray_kinddeed --account XC1234567890222222@xuper
 
 ```
 
 ### 5.8 基金会成员授权法师或寺院上传的善举凭证
 
 ```bash
-xchain-cli account balance XC1234567890333333@xuper
+xchain-cli account balance 1234567890444444@xuper
 
-xchain-cli wasm invoke --fee 1000000 buddha --method upload_kinddeed_proof -a '{"orderid":"1", "proof":"xxxxx", "timestamp":"xxxxxx"}' --account XC1234567890333333@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method upload_kinddeed_proof -a '{"orderid":"1", "proof":"xxxxx", "timestamp":"xxxxxx"}' --account 1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method refuse_kinddeed_proof -a '{"orderid":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed_proof -a '{"orderid":"1"}' --account 1234567890444444@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed_proof --account XC1234567890222222@xuper
 
