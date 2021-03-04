@@ -40,7 +40,7 @@ struct TableStruct_buddha_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[12]
+  static const ::google::protobuf::internal::ParseTable schema[13]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -71,6 +71,9 @@ extern KinddeedProofDefaultTypeInternal _KinddeedProof_default_instance_;
 class KinddeedSpec;
 class KinddeedSpecDefaultTypeInternal;
 extern KinddeedSpecDefaultTypeInternal _KinddeedSpec_default_instance_;
+class KinddeedType;
+class KinddeedTypeDefaultTypeInternal;
+extern KinddeedTypeDefaultTypeInternal _KinddeedType_default_instance_;
 class Master;
 class MasterDefaultTypeInternal;
 extern MasterDefaultTypeInternal _Master_default_instance_;
@@ -94,6 +97,7 @@ template<> ::buddha::Kinddeed* Arena::CreateMaybeMessage<::buddha::Kinddeed>(Are
 template<> ::buddha::KinddeedDetail* Arena::CreateMaybeMessage<::buddha::KinddeedDetail>(Arena*);
 template<> ::buddha::KinddeedProof* Arena::CreateMaybeMessage<::buddha::KinddeedProof>(Arena*);
 template<> ::buddha::KinddeedSpec* Arena::CreateMaybeMessage<::buddha::KinddeedSpec>(Arena*);
+template<> ::buddha::KinddeedType* Arena::CreateMaybeMessage<::buddha::KinddeedType>(Arena*);
 template<> ::buddha::Master* Arena::CreateMaybeMessage<::buddha::Master>(Arena*);
 template<> ::buddha::Order* Arena::CreateMaybeMessage<::buddha::Order>(Arena*);
 template<> ::buddha::Temple* Arena::CreateMaybeMessage<::buddha::Temple>(Arena*);
@@ -723,6 +727,129 @@ class TempleMaster :
 };
 // -------------------------------------------------------------------
 
+class KinddeedType :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.KinddeedType) */ {
+ public:
+  KinddeedType();
+  virtual ~KinddeedType();
+
+  KinddeedType(const KinddeedType& from);
+
+  inline KinddeedType& operator=(const KinddeedType& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  KinddeedType(KinddeedType&& from) noexcept
+    : KinddeedType() {
+    *this = ::std::move(from);
+  }
+
+  inline KinddeedType& operator=(KinddeedType&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const KinddeedType& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const KinddeedType* internal_default_instance() {
+    return reinterpret_cast<const KinddeedType*>(
+               &_KinddeedType_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  void Swap(KinddeedType* other);
+  friend void swap(KinddeedType& a, KinddeedType& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline KinddeedType* New() const final {
+    return CreateMaybeMessage<KinddeedType>(nullptr);
+  }
+
+  KinddeedType* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<KinddeedType>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const KinddeedType& from);
+  void MergeFrom(const KinddeedType& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(KinddeedType* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string desc = 2;
+  void clear_desc();
+  static const int kDescFieldNumber = 2;
+  const ::std::string& desc() const;
+  void set_desc(const ::std::string& value);
+  #if LANG_CXX11
+  void set_desc(::std::string&& value);
+  #endif
+  void set_desc(const char* value);
+  void set_desc(const char* value, size_t size);
+  ::std::string* mutable_desc();
+  ::std::string* release_desc();
+  void set_allocated_desc(::std::string* desc);
+
+  // int64 id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  ::google::protobuf::int64 id() const;
+  void set_id(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:buddha.KinddeedType)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr desc_;
+  ::google::protobuf::int64 id_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_buddha_2eproto;
+};
+// -------------------------------------------------------------------
+
 class Kinddeed :
     public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.Kinddeed) */ {
  public:
@@ -758,7 +885,7 @@ class Kinddeed :
                &_Kinddeed_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(Kinddeed* other);
   friend void swap(Kinddeed& a, Kinddeed& b) {
@@ -856,9 +983,9 @@ class Kinddeed :
   ::std::string* release_owner();
   void set_allocated_owner(::std::string* owner);
 
-  // string lasttime = 4;
+  // string lasttime = 5;
   void clear_lasttime();
-  static const int kLasttimeFieldNumber = 4;
+  static const int kLasttimeFieldNumber = 5;
   const ::std::string& lasttime() const;
   void set_lasttime(const ::std::string& value);
   #if LANG_CXX11
@@ -870,15 +997,21 @@ class Kinddeed :
   ::std::string* release_lasttime();
   void set_allocated_lasttime(::std::string* lasttime);
 
-  // bool applied = 5;
+  // int64 type = 4;
+  void clear_type();
+  static const int kTypeFieldNumber = 4;
+  ::google::protobuf::int64 type() const;
+  void set_type(::google::protobuf::int64 value);
+
+  // bool applied = 6;
   void clear_applied();
-  static const int kAppliedFieldNumber = 5;
+  static const int kAppliedFieldNumber = 6;
   bool applied() const;
   void set_applied(bool value);
 
-  // bool online = 6;
+  // bool online = 7;
   void clear_online();
-  static const int kOnlineFieldNumber = 6;
+  static const int kOnlineFieldNumber = 7;
   bool online() const;
   void set_online(bool value);
 
@@ -891,6 +1024,7 @@ class Kinddeed :
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr lasttime_;
+  ::google::protobuf::int64 type_;
   bool applied_;
   bool online_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -933,7 +1067,7 @@ class KinddeedDetail :
                &_KinddeedDetail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(KinddeedDetail* other);
   friend void swap(KinddeedDetail& a, KinddeedDetail& b) {
@@ -1071,7 +1205,7 @@ class KinddeedSpec :
                &_KinddeedSpec_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   void Swap(KinddeedSpec* other);
   friend void swap(KinddeedSpec& a, KinddeedSpec& b) {
@@ -1216,7 +1350,7 @@ class CommentLabel :
                &_CommentLabel_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   void Swap(CommentLabel* other);
   friend void swap(CommentLabel& a, CommentLabel& b) {
@@ -1272,20 +1406,6 @@ class CommentLabel :
 
   // accessors -------------------------------------------------------
 
-  // string id = 1;
-  void clear_id();
-  static const int kIdFieldNumber = 1;
-  const ::std::string& id() const;
-  void set_id(const ::std::string& value);
-  #if LANG_CXX11
-  void set_id(::std::string&& value);
-  #endif
-  void set_id(const char* value);
-  void set_id(const char* value, size_t size);
-  ::std::string* mutable_id();
-  ::std::string* release_id();
-  void set_allocated_id(::std::string* id);
-
   // string desc = 2;
   void clear_desc();
   static const int kDescFieldNumber = 2;
@@ -1300,13 +1420,19 @@ class CommentLabel :
   ::std::string* release_desc();
   void set_allocated_desc(::std::string* desc);
 
+  // int64 id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  ::google::protobuf::int64 id() const;
+  void set_id(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:buddha.CommentLabel)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
+  ::google::protobuf::int64 id_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -1347,7 +1473,7 @@ class BeforeComment :
                &_BeforeComment_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   void Swap(BeforeComment* other);
   friend void swap(BeforeComment& a, BeforeComment& b) {
@@ -1403,19 +1529,19 @@ class BeforeComment :
 
   // accessors -------------------------------------------------------
 
-  // string userid = 1;
-  void clear_userid();
-  static const int kUseridFieldNumber = 1;
-  const ::std::string& userid() const;
-  void set_userid(const ::std::string& value);
+  // string owner = 1;
+  void clear_owner();
+  static const int kOwnerFieldNumber = 1;
+  const ::std::string& owner() const;
+  void set_owner(const ::std::string& value);
   #if LANG_CXX11
-  void set_userid(::std::string&& value);
+  void set_owner(::std::string&& value);
   #endif
-  void set_userid(const char* value);
-  void set_userid(const char* value, size_t size);
-  ::std::string* mutable_userid();
-  ::std::string* release_userid();
-  void set_allocated_userid(::std::string* userid);
+  void set_owner(const char* value);
+  void set_owner(const char* value, size_t size);
+  ::std::string* mutable_owner();
+  ::std::string* release_owner();
+  void set_allocated_owner(::std::string* owner);
 
   // string kdid = 2;
   void clear_kdid();
@@ -1445,6 +1571,34 @@ class BeforeComment :
   ::std::string* release_labels();
   void set_allocated_labels(::std::string* labels);
 
+  // string comment = 5;
+  void clear_comment();
+  static const int kCommentFieldNumber = 5;
+  const ::std::string& comment() const;
+  void set_comment(const ::std::string& value);
+  #if LANG_CXX11
+  void set_comment(::std::string&& value);
+  #endif
+  void set_comment(const char* value);
+  void set_comment(const char* value, size_t size);
+  ::std::string* mutable_comment();
+  ::std::string* release_comment();
+  void set_allocated_comment(::std::string* comment);
+
+  // string timestamp = 6;
+  void clear_timestamp();
+  static const int kTimestampFieldNumber = 6;
+  const ::std::string& timestamp() const;
+  void set_timestamp(const ::std::string& value);
+  #if LANG_CXX11
+  void set_timestamp(::std::string&& value);
+  #endif
+  void set_timestamp(const char* value);
+  void set_timestamp(const char* value, size_t size);
+  ::std::string* mutable_timestamp();
+  ::std::string* release_timestamp();
+  void set_allocated_timestamp(::std::string* timestamp);
+
   // int64 satisfaction = 3;
   void clear_satisfaction();
   static const int kSatisfactionFieldNumber = 3;
@@ -1456,9 +1610,11 @@ class BeforeComment :
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr userid_;
+  ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr kdid_;
   ::google::protobuf::internal::ArenaStringPtr labels_;
+  ::google::protobuf::internal::ArenaStringPtr comment_;
+  ::google::protobuf::internal::ArenaStringPtr timestamp_;
   ::google::protobuf::int64 satisfaction_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
@@ -1500,7 +1656,7 @@ class Order :
                &_Order_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   void Swap(Order* other);
   friend void swap(Order& a, Order& b) {
@@ -1697,7 +1853,7 @@ class KinddeedProof :
                &_KinddeedProof_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   void Swap(KinddeedProof* other);
   friend void swap(KinddeedProof& a, KinddeedProof& b) {
@@ -1865,7 +2021,7 @@ class AfterComment :
                &_AfterComment_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   void Swap(AfterComment* other);
   friend void swap(AfterComment& a, AfterComment& b) {
@@ -1921,23 +2077,9 @@ class AfterComment :
 
   // accessors -------------------------------------------------------
 
-  // string userid = 1;
-  void clear_userid();
-  static const int kUseridFieldNumber = 1;
-  const ::std::string& userid() const;
-  void set_userid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_userid(::std::string&& value);
-  #endif
-  void set_userid(const char* value);
-  void set_userid(const char* value, size_t size);
-  ::std::string* mutable_userid();
-  ::std::string* release_userid();
-  void set_allocated_userid(::std::string* userid);
-
-  // string orderid = 2;
+  // string orderid = 1;
   void clear_orderid();
-  static const int kOrderidFieldNumber = 2;
+  static const int kOrderidFieldNumber = 1;
   const ::std::string& orderid() const;
   void set_orderid(const ::std::string& value);
   #if LANG_CXX11
@@ -1948,6 +2090,20 @@ class AfterComment :
   ::std::string* mutable_orderid();
   ::std::string* release_orderid();
   void set_allocated_orderid(::std::string* orderid);
+
+  // string owner = 2;
+  void clear_owner();
+  static const int kOwnerFieldNumber = 2;
+  const ::std::string& owner() const;
+  void set_owner(const ::std::string& value);
+  #if LANG_CXX11
+  void set_owner(::std::string&& value);
+  #endif
+  void set_owner(const char* value);
+  void set_owner(const char* value, size_t size);
+  ::std::string* mutable_owner();
+  ::std::string* release_owner();
+  void set_allocated_owner(::std::string* owner);
 
   // string comment = 3;
   void clear_comment();
@@ -1963,14 +2119,29 @@ class AfterComment :
   ::std::string* release_comment();
   void set_allocated_comment(::std::string* comment);
 
+  // string timestamp = 4;
+  void clear_timestamp();
+  static const int kTimestampFieldNumber = 4;
+  const ::std::string& timestamp() const;
+  void set_timestamp(const ::std::string& value);
+  #if LANG_CXX11
+  void set_timestamp(::std::string&& value);
+  #endif
+  void set_timestamp(const char* value);
+  void set_timestamp(const char* value, size_t size);
+  ::std::string* mutable_timestamp();
+  ::std::string* release_timestamp();
+  void set_allocated_timestamp(::std::string* timestamp);
+
   // @@protoc_insertion_point(class_scope:buddha.AfterComment)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr userid_;
   ::google::protobuf::internal::ArenaStringPtr orderid_;
+  ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr comment_;
+  ::google::protobuf::internal::ArenaStringPtr timestamp_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -2705,6 +2876,77 @@ inline void TempleMaster::set_approved(bool value) {
 
 // -------------------------------------------------------------------
 
+// KinddeedType
+
+// int64 id = 1;
+inline void KinddeedType::clear_id() {
+  id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 KinddeedType::id() const {
+  // @@protoc_insertion_point(field_get:buddha.KinddeedType.id)
+  return id_;
+}
+inline void KinddeedType::set_id(::google::protobuf::int64 value) {
+  
+  id_ = value;
+  // @@protoc_insertion_point(field_set:buddha.KinddeedType.id)
+}
+
+// string desc = 2;
+inline void KinddeedType::clear_desc() {
+  desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& KinddeedType::desc() const {
+  // @@protoc_insertion_point(field_get:buddha.KinddeedType.desc)
+  return desc_.GetNoArena();
+}
+inline void KinddeedType::set_desc(const ::std::string& value) {
+  
+  desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.KinddeedType.desc)
+}
+#if LANG_CXX11
+inline void KinddeedType::set_desc(::std::string&& value) {
+  
+  desc_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.KinddeedType.desc)
+}
+#endif
+inline void KinddeedType::set_desc(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.KinddeedType.desc)
+}
+inline void KinddeedType::set_desc(const char* value, size_t size) {
+  
+  desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.KinddeedType.desc)
+}
+inline ::std::string* KinddeedType::mutable_desc() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.KinddeedType.desc)
+  return desc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* KinddeedType::release_desc() {
+  // @@protoc_insertion_point(field_release:buddha.KinddeedType.desc)
+  
+  return desc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void KinddeedType::set_allocated_desc(::std::string* desc) {
+  if (desc != nullptr) {
+    
+  } else {
+    
+  }
+  desc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), desc);
+  // @@protoc_insertion_point(field_set_allocated:buddha.KinddeedType.desc)
+}
+
+// -------------------------------------------------------------------
+
 // Kinddeed
 
 // string id = 1;
@@ -2866,7 +3108,21 @@ inline void Kinddeed::set_allocated_owner(::std::string* owner) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Kinddeed.owner)
 }
 
-// string lasttime = 4;
+// int64 type = 4;
+inline void Kinddeed::clear_type() {
+  type_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Kinddeed::type() const {
+  // @@protoc_insertion_point(field_get:buddha.Kinddeed.type)
+  return type_;
+}
+inline void Kinddeed::set_type(::google::protobuf::int64 value) {
+  
+  type_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Kinddeed.type)
+}
+
+// string lasttime = 5;
 inline void Kinddeed::clear_lasttime() {
   lasttime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -2919,7 +3175,7 @@ inline void Kinddeed::set_allocated_lasttime(::std::string* lasttime) {
   // @@protoc_insertion_point(field_set_allocated:buddha.Kinddeed.lasttime)
 }
 
-// bool applied = 5;
+// bool applied = 6;
 inline void Kinddeed::clear_applied() {
   applied_ = false;
 }
@@ -2933,7 +3189,7 @@ inline void Kinddeed::set_applied(bool value) {
   // @@protoc_insertion_point(field_set:buddha.Kinddeed.applied)
 }
 
-// bool online = 6;
+// bool online = 7;
 inline void Kinddeed::clear_online() {
   online_ = false;
 }
@@ -3213,57 +3469,18 @@ inline void KinddeedSpec::set_price(::google::protobuf::int64 value) {
 
 // CommentLabel
 
-// string id = 1;
+// int64 id = 1;
 inline void CommentLabel::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_ = PROTOBUF_LONGLONG(0);
 }
-inline const ::std::string& CommentLabel::id() const {
+inline ::google::protobuf::int64 CommentLabel::id() const {
   // @@protoc_insertion_point(field_get:buddha.CommentLabel.id)
-  return id_.GetNoArena();
+  return id_;
 }
-inline void CommentLabel::set_id(const ::std::string& value) {
+inline void CommentLabel::set_id(::google::protobuf::int64 value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  id_ = value;
   // @@protoc_insertion_point(field_set:buddha.CommentLabel.id)
-}
-#if LANG_CXX11
-inline void CommentLabel::set_id(::std::string&& value) {
-  
-  id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.CommentLabel.id)
-}
-#endif
-inline void CommentLabel::set_id(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.CommentLabel.id)
-}
-inline void CommentLabel::set_id(const char* value, size_t size) {
-  
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.CommentLabel.id)
-}
-inline ::std::string* CommentLabel::mutable_id() {
-  
-  // @@protoc_insertion_point(field_mutable:buddha.CommentLabel.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CommentLabel::release_id() {
-  // @@protoc_insertion_point(field_release:buddha.CommentLabel.id)
-  
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CommentLabel::set_allocated_id(::std::string* id) {
-  if (id != nullptr) {
-    
-  } else {
-    
-  }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:buddha.CommentLabel.id)
 }
 
 // string desc = 2;
@@ -3323,57 +3540,57 @@ inline void CommentLabel::set_allocated_desc(::std::string* desc) {
 
 // BeforeComment
 
-// string userid = 1;
-inline void BeforeComment::clear_userid() {
-  userid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string owner = 1;
+inline void BeforeComment::clear_owner() {
+  owner_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& BeforeComment::userid() const {
-  // @@protoc_insertion_point(field_get:buddha.BeforeComment.userid)
-  return userid_.GetNoArena();
+inline const ::std::string& BeforeComment::owner() const {
+  // @@protoc_insertion_point(field_get:buddha.BeforeComment.owner)
+  return owner_.GetNoArena();
 }
-inline void BeforeComment::set_userid(const ::std::string& value) {
+inline void BeforeComment::set_owner(const ::std::string& value) {
   
-  userid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.BeforeComment.userid)
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.BeforeComment.owner)
 }
 #if LANG_CXX11
-inline void BeforeComment::set_userid(::std::string&& value) {
+inline void BeforeComment::set_owner(::std::string&& value) {
   
-  userid_.SetNoArena(
+  owner_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.BeforeComment.userid)
+  // @@protoc_insertion_point(field_set_rvalue:buddha.BeforeComment.owner)
 }
 #endif
-inline void BeforeComment::set_userid(const char* value) {
+inline void BeforeComment::set_owner(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  userid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.BeforeComment.userid)
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.BeforeComment.owner)
 }
-inline void BeforeComment::set_userid(const char* value, size_t size) {
+inline void BeforeComment::set_owner(const char* value, size_t size) {
   
-  userid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.BeforeComment.userid)
+  // @@protoc_insertion_point(field_set_pointer:buddha.BeforeComment.owner)
 }
-inline ::std::string* BeforeComment::mutable_userid() {
+inline ::std::string* BeforeComment::mutable_owner() {
   
-  // @@protoc_insertion_point(field_mutable:buddha.BeforeComment.userid)
-  return userid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:buddha.BeforeComment.owner)
+  return owner_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* BeforeComment::release_userid() {
-  // @@protoc_insertion_point(field_release:buddha.BeforeComment.userid)
+inline ::std::string* BeforeComment::release_owner() {
+  // @@protoc_insertion_point(field_release:buddha.BeforeComment.owner)
   
-  return userid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return owner_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void BeforeComment::set_allocated_userid(::std::string* userid) {
-  if (userid != nullptr) {
+inline void BeforeComment::set_allocated_owner(::std::string* owner) {
+  if (owner != nullptr) {
     
   } else {
     
   }
-  userid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), userid);
-  // @@protoc_insertion_point(field_set_allocated:buddha.BeforeComment.userid)
+  owner_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), owner);
+  // @@protoc_insertion_point(field_set_allocated:buddha.BeforeComment.owner)
 }
 
 // string kdid = 2;
@@ -3494,6 +3711,112 @@ inline void BeforeComment::set_allocated_labels(::std::string* labels) {
   }
   labels_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), labels);
   // @@protoc_insertion_point(field_set_allocated:buddha.BeforeComment.labels)
+}
+
+// string comment = 5;
+inline void BeforeComment::clear_comment() {
+  comment_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& BeforeComment::comment() const {
+  // @@protoc_insertion_point(field_get:buddha.BeforeComment.comment)
+  return comment_.GetNoArena();
+}
+inline void BeforeComment::set_comment(const ::std::string& value) {
+  
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.BeforeComment.comment)
+}
+#if LANG_CXX11
+inline void BeforeComment::set_comment(::std::string&& value) {
+  
+  comment_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.BeforeComment.comment)
+}
+#endif
+inline void BeforeComment::set_comment(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.BeforeComment.comment)
+}
+inline void BeforeComment::set_comment(const char* value, size_t size) {
+  
+  comment_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.BeforeComment.comment)
+}
+inline ::std::string* BeforeComment::mutable_comment() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.BeforeComment.comment)
+  return comment_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* BeforeComment::release_comment() {
+  // @@protoc_insertion_point(field_release:buddha.BeforeComment.comment)
+  
+  return comment_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void BeforeComment::set_allocated_comment(::std::string* comment) {
+  if (comment != nullptr) {
+    
+  } else {
+    
+  }
+  comment_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), comment);
+  // @@protoc_insertion_point(field_set_allocated:buddha.BeforeComment.comment)
+}
+
+// string timestamp = 6;
+inline void BeforeComment::clear_timestamp() {
+  timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& BeforeComment::timestamp() const {
+  // @@protoc_insertion_point(field_get:buddha.BeforeComment.timestamp)
+  return timestamp_.GetNoArena();
+}
+inline void BeforeComment::set_timestamp(const ::std::string& value) {
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.BeforeComment.timestamp)
+}
+#if LANG_CXX11
+inline void BeforeComment::set_timestamp(::std::string&& value) {
+  
+  timestamp_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.BeforeComment.timestamp)
+}
+#endif
+inline void BeforeComment::set_timestamp(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.BeforeComment.timestamp)
+}
+inline void BeforeComment::set_timestamp(const char* value, size_t size) {
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.BeforeComment.timestamp)
+}
+inline ::std::string* BeforeComment::mutable_timestamp() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.BeforeComment.timestamp)
+  return timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* BeforeComment::release_timestamp() {
+  // @@protoc_insertion_point(field_release:buddha.BeforeComment.timestamp)
+  
+  return timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void BeforeComment::set_allocated_timestamp(::std::string* timestamp) {
+  if (timestamp != nullptr) {
+    
+  } else {
+    
+  }
+  timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), timestamp);
+  // @@protoc_insertion_point(field_set_allocated:buddha.BeforeComment.timestamp)
 }
 
 // -------------------------------------------------------------------
@@ -4041,60 +4364,7 @@ inline void KinddeedProof::set_approved(bool value) {
 
 // AfterComment
 
-// string userid = 1;
-inline void AfterComment::clear_userid() {
-  userid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& AfterComment::userid() const {
-  // @@protoc_insertion_point(field_get:buddha.AfterComment.userid)
-  return userid_.GetNoArena();
-}
-inline void AfterComment::set_userid(const ::std::string& value) {
-  
-  userid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:buddha.AfterComment.userid)
-}
-#if LANG_CXX11
-inline void AfterComment::set_userid(::std::string&& value) {
-  
-  userid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.AfterComment.userid)
-}
-#endif
-inline void AfterComment::set_userid(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  userid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.AfterComment.userid)
-}
-inline void AfterComment::set_userid(const char* value, size_t size) {
-  
-  userid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.AfterComment.userid)
-}
-inline ::std::string* AfterComment::mutable_userid() {
-  
-  // @@protoc_insertion_point(field_mutable:buddha.AfterComment.userid)
-  return userid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* AfterComment::release_userid() {
-  // @@protoc_insertion_point(field_release:buddha.AfterComment.userid)
-  
-  return userid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void AfterComment::set_allocated_userid(::std::string* userid) {
-  if (userid != nullptr) {
-    
-  } else {
-    
-  }
-  userid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), userid);
-  // @@protoc_insertion_point(field_set_allocated:buddha.AfterComment.userid)
-}
-
-// string orderid = 2;
+// string orderid = 1;
 inline void AfterComment::clear_orderid() {
   orderid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4145,6 +4415,59 @@ inline void AfterComment::set_allocated_orderid(::std::string* orderid) {
   }
   orderid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), orderid);
   // @@protoc_insertion_point(field_set_allocated:buddha.AfterComment.orderid)
+}
+
+// string owner = 2;
+inline void AfterComment::clear_owner() {
+  owner_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AfterComment::owner() const {
+  // @@protoc_insertion_point(field_get:buddha.AfterComment.owner)
+  return owner_.GetNoArena();
+}
+inline void AfterComment::set_owner(const ::std::string& value) {
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.AfterComment.owner)
+}
+#if LANG_CXX11
+inline void AfterComment::set_owner(::std::string&& value) {
+  
+  owner_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.AfterComment.owner)
+}
+#endif
+inline void AfterComment::set_owner(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.AfterComment.owner)
+}
+inline void AfterComment::set_owner(const char* value, size_t size) {
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.AfterComment.owner)
+}
+inline ::std::string* AfterComment::mutable_owner() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.AfterComment.owner)
+  return owner_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AfterComment::release_owner() {
+  // @@protoc_insertion_point(field_release:buddha.AfterComment.owner)
+  
+  return owner_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AfterComment::set_allocated_owner(::std::string* owner) {
+  if (owner != nullptr) {
+    
+  } else {
+    
+  }
+  owner_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), owner);
+  // @@protoc_insertion_point(field_set_allocated:buddha.AfterComment.owner)
 }
 
 // string comment = 3;
@@ -4200,9 +4523,64 @@ inline void AfterComment::set_allocated_comment(::std::string* comment) {
   // @@protoc_insertion_point(field_set_allocated:buddha.AfterComment.comment)
 }
 
+// string timestamp = 4;
+inline void AfterComment::clear_timestamp() {
+  timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& AfterComment::timestamp() const {
+  // @@protoc_insertion_point(field_get:buddha.AfterComment.timestamp)
+  return timestamp_.GetNoArena();
+}
+inline void AfterComment::set_timestamp(const ::std::string& value) {
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.AfterComment.timestamp)
+}
+#if LANG_CXX11
+inline void AfterComment::set_timestamp(::std::string&& value) {
+  
+  timestamp_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.AfterComment.timestamp)
+}
+#endif
+inline void AfterComment::set_timestamp(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.AfterComment.timestamp)
+}
+inline void AfterComment::set_timestamp(const char* value, size_t size) {
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.AfterComment.timestamp)
+}
+inline ::std::string* AfterComment::mutable_timestamp() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.AfterComment.timestamp)
+  return timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* AfterComment::release_timestamp() {
+  // @@protoc_insertion_point(field_release:buddha.AfterComment.timestamp)
+  
+  return timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void AfterComment::set_allocated_timestamp(::std::string* timestamp) {
+  if (timestamp != nullptr) {
+    
+  } else {
+    
+  }
+  timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), timestamp);
+  // @@protoc_insertion_point(field_set_allocated:buddha.AfterComment.timestamp)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -37,14 +37,21 @@ message TempleMaster {
     bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
 }
 
+//善举类型表
+message KinddeedType {
+    int64 id            = 1;    //善举类型序号，0,1,2,3..，唯一
+    string desc         = 2;    //善举类型名称,超度逝者,事业顺达，学业有成，... ...等等
+}
+
 //善举表
 message Kinddeed {
     string id           = 1; //善举编号，唯一
     string name         = 2; //善举名称
     string owner        = 3; //哪位法师或基金会成员添加的此善举
-    string lasttime     = 4; //善举最后修改的时间
-    bool   applied      = 5; //是否是申请状态，0为非申请状态，1为申请状态
-    bool   online       = 6; //是否已经是上线，0为下线状态，1为上线状态
+    int64  type         = 4; //善举类型
+    string lasttime     = 5; //善举最后修改的时间
+    bool   applied      = 6; //是否是申请状态，0为非申请状态，1为申请状态
+    bool   online       = 7; //是否已经是上线，0为下线状态，1为上线状态
 }
 
 //善举图片描述表
@@ -65,16 +72,18 @@ message KinddeedSpec {
 
 //善行评论标签表，全局统一
 message CommentLabel {
-    string id           = 1;    //标签id，唯一
+    int64 id            = 1;    //标签id，0,1,2,3..， 唯一
     string desc         = 2;    //标签内容,处理及时，超越期望，... ...等等
 }
 
 //善举点评表，任何人都可以参与，包括购买者和非购买者
 message BeforeComment {
-    string userid       = 1;    //账户id，前二者联合唯一
+    string owner        = 1;    //账户id，前二者联合唯一
     string kdid         = 2;    //善举id
     int64  satisfaction = 3;    //满意度,0很赞，1满意，2体验不佳
     string labels       = 4;    //善举体验标签数据
+    string comment      = 5;    //评价
+    string timestamp    = 6;    //评论生成时间
 }
 
 //订单表。
@@ -101,7 +110,8 @@ message KinddeedProof {
 //善举动态评论表
 message AfterComment {
     string orderid      = 1;    //善举凭证id,也就是订单id,唯一
-    string userid       = 2;    //账户id
-    string comment      = 3;    //会员针对此善举的评价
+    string owner        = 2;    //账户id
+    string comment      = 3;    //评价
+    string timestamp    = 4;    //评论时间
 }
 

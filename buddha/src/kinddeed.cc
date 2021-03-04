@@ -1,11 +1,21 @@
 #include "kinddeed.h"
 
+string kinddeedtype::to_string() {
+    string str ;
+    str += "{" ;
+    str += std::to_string(id()) + ",";
+    str += desc();
+    str += "}";
+    return str;
+}
+
 string kinddeed::to_string() {
     string str ;
     str += "{" ;
     str += id() + ",";
     str += name() + ",";
     str += owner() + ",";
+    str += std::to_string(type()) + ",";
     str += lasttime() + ",";
     str += std::to_string(applied()) + ",";
     str += std::to_string(online()); 

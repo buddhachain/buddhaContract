@@ -18,9 +18,9 @@ class commentlabel: public buddha::CommentLabel {
 };
 
 class beforecomment: public buddha::BeforeComment {
-    DEFINE_ROWKEY(userid,kdid);
+    DEFINE_ROWKEY(owner,kdid);
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, userid, kdid)
+        DEFINE_INDEX_ADD(0, owner, kdid)
     DEFINE_INDEX_END();
 
     string to_string();
@@ -30,7 +30,7 @@ class aftercomment: public buddha::AfterComment {
     DEFINE_ROWKEY(orderid);
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, orderid)
-        DEFINE_INDEX_ADD(1, userid)
+        DEFINE_INDEX_ADD(1, owner)
     DEFINE_INDEX_END();
 
     string to_string();

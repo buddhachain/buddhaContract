@@ -3,7 +3,7 @@
 string commentlabel::to_string() {
     string str ;
     str += "{" ;
-    str += id() + ",";
+    str += std::to_string(id()) + ",";
     str += desc();
     str += "}";
     return str;
@@ -13,10 +13,12 @@ string commentlabel::to_string() {
 string beforecomment::to_string() {
     string str ;
     str += "{" ;
-    str += userid() + ",";
+    str += owner() + ",";
     str += kdid() + ",";
     str += std::to_string(satisfaction()) + ",";
-    str += labels();
+    str += labels() + ",";
+    str += comment();
+    str += timestamp();
     str += "}";
     return str;
 }
@@ -25,8 +27,9 @@ string aftercomment::to_string() {
     string str ;
     str += "{" ;
     str += orderid() + ",";
-    str += userid() + ",";
+    str += owner() + ",";
     str += comment();
+    str += timestamp();
     str += "}";
     return str;
 }
