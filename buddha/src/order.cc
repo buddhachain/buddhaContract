@@ -5,7 +5,7 @@ string order::to_string() {
     str += "{" ;
     str += id() + ",";
     str += owner() + ",";
-    str += master() + ",";
+    str += kdowner() + ",";
     str += kdid() + ",";
     str += std::to_string(specid()) + ",";
     str += std::to_string(count()) + ",";

@@ -90,7 +90,7 @@ message BeforeComment {
 message Order {
     string id           = 1; //订单编号，唯一
     string owner        = 2; //订单所有者，哪个会员祈求了此善举订单
-    string master       = 3; //对应善举所有者
+    string kdowner      = 3; //对应善举所有者
     string kdid         = 4; //对应的善举id
     int64  specid       = 5; //对应的善举规格id
     int64  count        = 6; //祈求的此善举的规格的个数
@@ -101,7 +101,7 @@ message Order {
 //善举凭证表
 message KinddeedProof {
     string orderid      = 1; //善举订单编号，对应Order表中的id，唯一
-    string master       = 2; //对应善举所有者
+    string owner        = 2; //对应善举凭证所有者
     string proof        = 3; //善举hash，唯一
     string timestamp    = 4; //法师或寺院尽心善举时的时间
     bool   approved     = 5; //是否已经批准此善举凭证，0尚未批准，1已经批准

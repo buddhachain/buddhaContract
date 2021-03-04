@@ -190,8 +190,13 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_commentlabel --account
 xchain-cli wasm invoke --fee 1000000 buddha --method add_beforecomment -a '{"kdid":"1", "satisfaction":"0", "labels":"[\"0\",\"1\"]"， "comment":"购前评价，不孬"}' --account XC1234567890555555@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method delete_beforecomment -a '{"kdid":"1"}' --account XC1234567890555555@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method update_beforecomment -a '{"kdid":"1", "satisfaction":"0", "labels":"[\"0\",\"1\"]"， "comment":"购前评价，不孬"}' --account XC1234567890555555@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method find_beforecomment -a '{"kdid":"1","owner":"XC1234567890555555"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method find_beforecomment -a '{"kdid":"1","owner":"XC1234567890555555"}' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_beforecomment -a '{"kdid":"1"}' --account XC1234567890555555@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method list_beforecomment --account XC1234567890222222@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method list_beforecomment -a '{"kdid":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method list_beforecomment -a '{"kdid":"1"}' --account XC1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method list_beforecomment -a '{"kdid":"1"}' --account XC1234567890555555@xuper
 
 ```
 

@@ -199,22 +199,22 @@ public:
     void list_kinddeedtype();       //基金会成员
 
     //添加删除修改善举    
-    void add_kinddeed();            //基金会成员、寺院、法师
-    void delete_kinddeed();         //基金会成员、寺院、法师
-    void update_kinddeed();         //基金会成员、寺院、法师，只要修改善举，就需要重新审核上架
+    void add_kinddeed();            //基金会成员，寺院，法师
+    void delete_kinddeed();         //基金会成员，寺院，法师
+    void update_kinddeed();         //基金会成员，寺院，法师，只要修改善举，就需要重新审核上架
     void find_kinddeed();           //所有用户
-    void list_kinddeed();           //部署者、基金会成员、寺院、法师。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
+    void list_kinddeed();           //部署者，基金会成员，寺院，法师。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
 
     //申请善举上架下架    
-    void apply_online_kinddeed();   //寺院、法师
-    void apply_offline_kinddeed();  //寺院、法师
+    void apply_online_kinddeed();   //寺院，法师
+    void apply_offline_kinddeed();  //寺院，法师
     void approve_online_kinddeed(); //基金会成员
     void approve_offline_kinddeed();//基金会成员
 
     //添加删除修改点评标签
-    void add_commentlabel();        //所有用户
-    void delete_commentlabel();     //所有用户
-    void update_commentlabel();     //所有用户
+    void add_commentlabel();        //基金会成员
+    void delete_commentlabel();     //基金会成员
+    void update_commentlabel();     //基金会成员
     void find_commentlabel();       //所有用户
     void list_commentlabel();       //基金会成员
 
@@ -223,27 +223,27 @@ public:
     void delete_beforecomment();    //所有者，基金会成员
     void update_beforecomment();    //所有者
     void find_beforecomment();      //所有者，基金会成员，善举所有者(法师或寺院)
-    void list_beforecomment();      //基金会成员，善举所有者(法师或寺院)
+    void list_beforecomment();      //所有用户，点评本来就是给所有人看的。
 
-    //会员祈求善举
-    void pray_kinddeed();           //所有会员
-    void find_pray_kinddeed();      //所有会员
-    void list_pray_kinddeed();      //部署者、基金会成员、寺院、法师
+    //用户祈求善举
+    void pray_kinddeed();           //所有用户
+    void find_pray_kinddeed();      //署者，基金会成员，寺院，法师，所有者
+    void list_pray_kinddeed();      //部署者，基金会成员，寺院，法师
     bool is_user();                 //所有用户
 
     //基金会成员授权法师或寺院上传的善举凭证
-    void upload_kinddeedproof();   //法师
+    void upload_kinddeedproof();   //基金会成员，寺院，法师
     void approve_kinddeedproof();  //基金会成员
     void refuse_kinddeedproof();   //基金会成员
-    void find_kinddeedproof();     //部署者、基金会成员  
-    void list_kinddeedproof();     //部署者、基金会成员  
+    void find_kinddeedproof();     //部署者，基金会成员，善举凭证所有者
+    void list_kinddeedproof();     //部署者，基金会成员
 
     //添加删除修改祈求善举后点评
     void add_aftercomment();       //所有用户
     void delete_aftercomment();    //所有者，基金会成员
     void update_aftercomment();    //所有者
     void find_aftercomment();      //所有者，基金会成员，善举所有者(法师或寺院)
-    void list_aftercomment();      //基金会成员，善举所有者(法师或寺院)
+    void list_aftercomment();      //所有用户，点评本来就是给所有人看的。
 
 };
 #endif // _BUDDHA_H_
