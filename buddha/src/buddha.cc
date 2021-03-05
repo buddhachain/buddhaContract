@@ -140,7 +140,7 @@ bool Buddha::_is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeed
         }            
     }
 
-    if(vent.size()==0)
+    if( vent.size()==0)
         return false;
 
     return true;
@@ -168,7 +168,7 @@ bool Buddha::_is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedsp
         }            
     }
 
-    if(vent.size()==0)
+    if( vent.size()==0)
         return false;
 
     return true;
@@ -185,7 +185,7 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
     for(int i = 0 ; i < label_array.size() ; i++) {
         string id = label_array.at(i).template get<string>();
         commentlabel ent;
-        if(!_is_commentlabel_exist(id,ent)) {
+        if( !_is_commentlabel_exist(id,ent)) {
             mycout << "type " << id << " not exist in comment label table ." << endl;
             return false;
         }            
@@ -241,12 +241,12 @@ bool Buddha::_is_kinddeed_online(const string& id){
         return false;
     }
 
-    if(ent.applied() == true) {
+    if( ent.applied() == true) {
         mycout << "kinddeed " << id << " is apply status change ." << endl;
         return false;
     }
 
-    if(ent.online() != true ) {
+    if( ent.online() != true ) {
         mycout << "kinddeed " << id << " is not online ." << endl;
         return false;
     }
@@ -303,16 +303,16 @@ bool Buddha::_is_in_temple(const string& templeid,
 
 
 bool Buddha::_is_user(const string& id) {
-    if(_is_deployer(id)) 
+    if( _is_deployer(id)) 
         return false;
 
-    if(_is_founder(id)) 
+    if( _is_founder(id)) 
         return false;
 
-    if(_is_temple(id)) 
+    if( _is_temple(id)) 
         return false;
 
-    if(_is_master(id)) 
+    if( _is_master(id)) 
         return false;
 
     return true ;
@@ -495,7 +495,7 @@ bool Buddha::_delete_beforecomment_record(const string& owner, const string& kdi
 
 bool Buddha::_delete_order_record(const string& id) {
     order ent;
-    if(!_is_order_exist(id, ent)){
+    if( !_is_order_exist(id, ent)){
         mycout << "order " << id << " is not exist ." << endl ;
         return false;
     }
@@ -545,7 +545,7 @@ bool Buddha::_transfer(const string& toid,
                     const string& toamount){
     //将抵押退还
     xchain::Account account = xchain::Account(toid);
-    if(!account.transfer(toamount)) 
+    if( !account.transfer(toamount)) 
         return false;
 
     return true ;
@@ -567,7 +567,7 @@ void Buddha::get_deployer() {
         return ;
     }
 
-    if(!_is_deployer(ctx->initiator()) &&
+    if( !_is_deployer(ctx->initiator()) &&
         !_is_founder(ctx->initiator()) ) {
         ctx->error(ctx->initiator() + " is not deployer nor founder, have no authority to get deployer .");
         return ;
@@ -593,18 +593,18 @@ namespace 申请成为基金会成员{}
 
 void Buddha::apply_founder(){
     const string& desc = ctx->arg("desc");
-    if(desc.empty()) {
+    if( desc.empty()) {
         ctx->error("desc is empty");
         return ;
     }
     
     const string& guaranty = ctx->transfer_amount();
-    if(guaranty.empty()) {
+    if( guaranty.empty()) {
         ctx->error("guaranty is empty");
         return ;
     }
 
-    if(is_founder()) {
+    if( is_founder()) {
         ctx->error(ctx->initiator() + " is already founder .");
         return ;
     }
@@ -626,23 +626,23 @@ void Buddha::apply_founder(){
 
 void Buddha::approve_founder() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("founder id is empty");
         return ;
     }
 
-    if(!is_deployer()) {
+    if( !is_deployer()) {
         ctx->error(ctx->initiator() + " is not deployer, have no authority to approve founder .");
         return ;
     }
 
     founder ent;
-    if(!_is_founder_exist(id,ent)) {
+    if( !_is_founder_exist(id,ent)) {
         ctx->error("founder " + id + " is not exist .");
         return ;
     }
 
-    if(_is_founder(id)) {
+    if( _is_founder(id)) {
         ctx->error(ent.to_string() + " is already founder .");
         return ;
     }
@@ -663,18 +663,18 @@ void Buddha::approve_founder() {
 
 void Buddha::recusal_founder() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("founder id is empty .");
         return ;
     }
 
-    if(!is_deployer()) {
+    if( !is_deployer()) {
         ctx->error(ctx->initiator() + " is not deployer, have no authority recusal founder .");
         return ;
     }
 
     founder ent;
-    if(!_is_founder_exist(id,ent)) {
+    if( !_is_founder_exist(id,ent)) {
         ctx->error("founder " + id + " is not exist .");
         return ;
     }
@@ -686,7 +686,7 @@ void Buddha::recusal_founder() {
 
     //将抵押退还
     string guaranty = to_string(ent.guaranty());
-    if(!_transfer(id, guaranty)) {
+    if( !_transfer(id, guaranty)) {
         ctx->error("refund transfer " + guaranty + " to " + id + " failure .");
         return ;
     }
@@ -705,13 +705,13 @@ bool Buddha::is_founder() {
 }
 
 void Buddha::list_founder() {
-    if(!is_deployer() &&
+    if( !is_deployer() &&
         !is_founder()) {
         ctx->error(ctx->initiator() + " is not deployer nor founder, have no authority to list founder .");
         return ;
     }
 
-    auto it = get_founder_table().scan({{"id",""}});
+    auto it = get_founder_table().scan({{"id",ctx->arg("id")}});
     int i = 0;
     string ret;
     while(it->next()) {
@@ -730,36 +730,36 @@ namespace 申请成为寺院{}
 
 void Buddha::apply_temple(){
     const string& unit = ctx->arg("unit");
-    if(unit.empty()) {
+    if( unit.empty()) {
         ctx->error("unit is empty");
         return ;
     }
     
     const string& creditcode = ctx->arg("creditcode");
-    if(creditcode.empty()) {
+    if( creditcode.empty()) {
         ctx->error("creditcode is empty");
         return ;
     }
     
     const string& address = ctx->arg("address");
-    if(address.empty()) {
+    if( address.empty()) {
         ctx->error("address is empty");
         return ;
     }
     
     const string& proof = ctx->arg("proof");
-    if(proof.empty()) {
+    if( proof.empty()) {
         ctx->error("proof is empty");
         return ;
     }
 
-    if(!is_user() &&
+    if( !is_user() &&
         !is_master()) {
         ctx->error(ctx->initiator() + " is not user or master, have no authority to apply tobe temple .");
         return ;
     }
 
-    if(is_temple()) {
+    if( is_temple()) {
         ctx->error(ctx->initiator() + " is already temple .");
         return ;
     }
@@ -783,23 +783,23 @@ void Buddha::apply_temple(){
 
 void Buddha::approve_temple() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("temple id is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve temple .");
         return ;
     }
 
     temple ent;
-    if(!_is_temple_exist(id,ent)) {
+    if( !_is_temple_exist(id,ent)) {
         ctx->error("temple " + id + " is not exist .");
         return ;
     }
 
-    if(_is_temple(id)) {
+    if( _is_temple(id)) {
         ctx->error(ent.to_string() + " is already temple .");
         return ;
     }
@@ -820,18 +820,18 @@ void Buddha::approve_temple() {
 
 void Buddha::recusal_temple() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("temple id is empty");
         return ;
     }
     
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to recusal temple .");
         return ;
     }
 
     temple ent;
-    if(!_is_temple_exist(id,ent)) {
+    if( !_is_temple_exist(id,ent)) {
         ctx->error("temple " + id + " is not exist .");
         return ;
     }
@@ -855,13 +855,13 @@ bool Buddha::is_temple() {
 }
 
 void Buddha::list_temple() {
-    if(!is_deployer()
-        &&!is_founder()) {
+    if( !is_deployer() &&
+        !is_founder()) {
         ctx->error(ctx->initiator() + " is not deployer nor founder, have no authority to list temple .");
         return ;
     }
 
-    auto it = get_temple_table().scan({{"id",""}});
+    auto it = get_temple_table().scan({{"id",ctx->arg("id")}});
     int i = 0;
     string ret;
     while(it->next()) {
@@ -880,23 +880,23 @@ namespace 申请成为法师{}
 
 void Buddha::apply_master(){
     const string& creditcode = ctx->arg("creditcode");
-    if(creditcode.empty()) {
+    if( creditcode.empty()) {
         ctx->error("creditcode is empty");
         return ;
     }
 
     const string& proof = ctx->arg("proof");
-    if(proof.empty()) {
+    if( proof.empty()) {
         ctx->error("proof is empty");
         return ;
     }
 
-    if(!is_user()) {
+    if( !is_user()) {
         ctx->error(ctx->initiator() + " is not user, have no authority to apply tobe master .");
         return ;
     }
 
-    if(is_master()) {
+    if( is_master()) {
         ctx->error(ctx->initiator() + " is already master .");
         return ;
     }
@@ -918,23 +918,23 @@ void Buddha::apply_master(){
 
 void Buddha::approve_master() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("master id is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve master .");
         return ;
     }
 
     master ent;
-    if(!_is_master_exist(id,ent)) {
+    if( !_is_master_exist(id,ent)) {
         ctx->error("master " + id + " is not exist .");
         return ;
     }
 
-    if(_is_master(id)) {
+    if( _is_master(id)) {
         ctx->error(ent.to_string() + " is already master .");
         return ;
     }
@@ -955,18 +955,18 @@ void Buddha::approve_master() {
 
 void Buddha::recusal_master() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("master id is empty");
         return ;
     }
     
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to recusal master .");
         return ;
     }
 
     master ent;
-    if(!_is_master_exist(id,ent)) {
+    if( !_is_master_exist(id,ent)) {
         ctx->error("master " + id + " is not exist .");
         return ;
     }
@@ -990,13 +990,13 @@ bool Buddha::is_master() {
 }
 
 void Buddha::list_master() {
-    if(!is_deployer() &&
+    if( !is_deployer() &&
         !is_founder()) {
         ctx->error(ctx->initiator() + " is not deployer nor founder, have no authority to list master .");
         return ;
     }
 
-    auto it = get_master_table().scan({{"id",""}});
+    auto it = get_master_table().scan({{"id",ctx->arg("id")}});
     int i = 0;
     string ret;
     while(it->next()) {
@@ -1015,23 +1015,23 @@ namespace 申请加入寺院{}
 
 void Buddha::apply_join_temple(){
     const string& templeid = ctx->arg("templeid");
-    if(templeid.empty()) {
+    if( templeid.empty()) {
         ctx->error("templeid is empty");
         return ;
     }
 
-    if(!is_master()) {
+    if( !is_master()) {
         ctx->error(ctx->initiator() + " is not master, have no authority to apply join temple .");
         return ;
     }
 
-    if(!_is_temple(templeid)) {
+    if( !_is_temple(templeid)) {
         ctx->error( templeid + " is not a temple .");
         return ;
     }
 
     templemaster ent;
-    if(_is_in_temple(templeid, ctx->initiator(), ent )) {
+    if( _is_in_temple(templeid, ctx->initiator(), ent )) {
         ctx->ok(ctx->initiator() + " is already join temple .");
         return;
     }
@@ -1051,34 +1051,34 @@ void Buddha::apply_join_temple(){
 
 void Buddha::approve_join_temple() {
     const string& templeid = ctx->arg("templeid");
-    if(templeid.empty()) {
+    if( templeid.empty()) {
         ctx->error("temple id is empty");
         return ;
     }
 
     const string& masterid = ctx->arg("masterid");
-    if(masterid.empty()) {
+    if( masterid.empty()) {
         ctx->error("master id is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve master .");
         return ;
     }
 
-    if(!_is_master(masterid)) {
+    if( !_is_master(masterid)) {
         ctx->error( masterid + " is not a master .");
         return ;
     }
 
-    if(!_is_temple(templeid)) {
+    if( !_is_temple(templeid)) {
         ctx->error( templeid + " is not a temple .");
         return ;
     }
 
     templemaster ent;
-    if(_is_in_temple(masterid, templeid, ent)) {
+    if( _is_in_temple(masterid, templeid, ent)) {
         ctx->error(ent.to_string() + " is already join temple .");
         return ;
     }
@@ -1099,24 +1099,24 @@ void Buddha::approve_join_temple() {
 
 void Buddha::recusal_join_temple() {
     const string& templeid = ctx->arg("templeid");
-    if(templeid.empty()) {
+    if( templeid.empty()) {
         ctx->error("temple id is empty");
         return ;
     }
 
     const string& masterid = ctx->arg("masterid");
-    if(masterid.empty()) {
+    if( masterid.empty()) {
         ctx->error("master id is empty");
         return ;
     }
     
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to recusal master .");
         return ;
     }
 
     templemaster ent;
-    if(!_is_templemaster_exist(templeid, masterid,ent)) {
+    if( !_is_templemaster_exist(templeid, masterid,ent)) {
         ctx->error("temple " + templeid + ", master " + masterid + " is not exist .");
         return ;
     }
@@ -1131,17 +1131,17 @@ void Buddha::recusal_join_temple() {
 
 bool Buddha::is_in_temple() {
     const string& templeid = ctx->arg("templeid");
-    if(templeid.empty()) {
+    if( templeid.empty()) {
         ctx->error("temple id is empty");
         return false;
     }
 
-    if(!_is_master(ctx->initiator())) {
+    if( !_is_master(ctx->initiator())) {
         ctx->error( ctx->initiator() + " is not a master, have no authority to query in some temple .");
         return false;
     }
 
-    if(!_is_temple(templeid)) {
+    if( !_is_temple(templeid)) {
         ctx->error(templeid + " is not a temple .");
         return false;
     }
@@ -1158,13 +1158,10 @@ bool Buddha::is_in_temple() {
 
 void Buddha::list_temple_master() {
     const string& templeid = ctx->arg("templeid");
-    if(templeid.empty()) {
-        if(!is_deployer() &&
-            !is_founder()) {
-            ctx->error(ctx->initiator() + " is not deployer nor founder, have no authority to list temple master .");
-            return ;
-        }
-        auto it = get_templemaster_table().scan({{"templeid",""}});
+
+    if( is_deployer() ||
+        is_founder()) {
+        auto it = get_templemaster_table().scan({{"templeid",templeid}});
         int i = 0;
         string ret;
         while(it->next()) {
@@ -1181,48 +1178,49 @@ void Buddha::list_temple_master() {
         return ;
     }
 
-    if(!is_temple()) {
-        ctx->error(ctx->initiator() + " is not temple, have no authority to list temple master .");
+    if( is_temple() ) {
+        auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            templemaster ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
+        }
+        ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
-    auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        templemaster ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else
-            cout << __LINE__ << " get error : " << it->error(true) << endl;
-    }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    ctx->error(ctx->initiator() + " have no authority to list temple master .");
+    return ;
 }
 
 namespace 添加删除修改善举类型{}
 
 void Buddha::add_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed type id is empty");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if(desc.empty()) {
+    if( desc.empty()) {
         ctx->error("kinddeed type desc is empty");
         return ;
     }
 
-    if(!is_founder() ) {
+    if( !is_founder() ) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to add kinddeed type .");
         return ;
     }
 
     kinddeedtype ent;
-    if(_is_kinddeedtype_exist(id,ent)) {
+    if( _is_kinddeedtype_exist(id,ent)) {
         ctx->error("kinddeedtype " + id + " is exist .");
         return ;
     }
@@ -1239,18 +1237,18 @@ void Buddha::add_kinddeedtype() {
 
 void Buddha::delete_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed type id is empty");
         return ;
     }
 
-    if(!is_founder() ) {
+    if( !is_founder() ) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to delete kinddeed type .");
         return ;
     }
 
     kinddeedtype ent;
-    if(!_is_kinddeedtype_exist(id,ent)) {
+    if( !_is_kinddeedtype_exist(id,ent)) {
         ctx->error("kindeed type " + id + " is not exist .");
         return ;
     }
@@ -1265,24 +1263,24 @@ void Buddha::delete_kinddeedtype() {
 
 void Buddha::update_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed type id is empty");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if(desc.empty()) {
+    if( desc.empty()) {
         ctx->error("kinddeed type desc is empty");
         return ;
     }
 
-    if(!is_founder() ) {
+    if( !is_founder() ) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to update kinddeed type .");
         return ;
     }
 
     kinddeedtype ent;
-    if(!_is_kinddeedtype_exist(id,ent)) {
+    if( !_is_kinddeedtype_exist(id,ent)) {
         ctx->error("kindeed type " + id + " is not exist .");
         return ;
     }
@@ -1304,7 +1302,7 @@ void Buddha::update_kinddeedtype() {
 
 void Buddha::find_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed type id is empty");
         return ;
     }
@@ -1319,11 +1317,6 @@ void Buddha::find_kinddeedtype() {
 }
 
 void Buddha::list_kinddeedtype() {
-    if(!is_founder() ) {
-        ctx->error(ctx->initiator() + " is not founder, have no authority to list kinddeed type .");
-        return ;
-    }
-
     auto it = get_kinddeedtype_table().scan({{"id",""}});
     int i = 0;
     string ret;
@@ -1351,22 +1344,22 @@ void Buddha::add_kinddeed() {
     const string& detail = ctx->arg("detail");
     const string& spec = ctx->arg("spec");
 
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
 
-    if(name.empty()) {
+    if( name.empty()) {
         ctx->error("kinddeed name is empty");
         return ;
     }
 
-    if(type.empty()) {
+    if( type.empty()) {
         ctx->error("kinddeed type is empty");
         return ;
     }
 
-    if(lasttime.empty()) {
+    if( lasttime.empty()) {
         ctx->error("kinddeed lasttime is empty");
         return ;
     }
@@ -1395,7 +1388,7 @@ void Buddha::add_kinddeed() {
         return;
     }
 
-    if(!is_founder() &&
+    if( !is_founder() &&
         !is_temple() &&
         !is_master() ) {
         ctx->error(ctx->initiator() + " is not founder,temple and master, have no authority to add kinddeed .");
@@ -1478,7 +1471,7 @@ void Buddha::add_kinddeed() {
 void Buddha::delete_kinddeed() {
 
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
@@ -1489,14 +1482,14 @@ void Buddha::delete_kinddeed() {
         return ;
     }
 
-    if(!is_founder() &&
+    if( !is_founder() &&
         !is_temple() &&
         !is_master() ) {
         ctx->error(ctx->initiator() + " is not founder and master, have no authority to delete kinddeed .");
         return ;
     }
 
-    if(ent.owner() != ctx->initiator() ) {
+    if( ent.owner() != ctx->initiator() ) {
         ctx->error("kinddeed " + ent.to_string() + " is not belong to you.");
         return ;
     }
@@ -1518,22 +1511,22 @@ void Buddha::update_kinddeed() {
     const string& detail = ctx->arg("detail");
     const string& spec = ctx->arg("spec");
 
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
 
-    if(name.empty()) {
+    if( name.empty()) {
         ctx->error("kinddeed name is empty");
         return ;
     }
 
-    if(type.empty()) {
+    if( type.empty()) {
         ctx->error("kinddeed type is empty");
         return ;
     }
 
-    if(lasttime.empty()) {
+    if( lasttime.empty()) {
         ctx->error("kinddeed lasttime is empty");
         return ;
     }
@@ -1562,7 +1555,7 @@ void Buddha::update_kinddeed() {
         return;
     }
 
-    if(!is_founder() &&
+    if( !is_founder() &&
         !is_temple() &&
         !is_master() ) {
         ctx->error(ctx->initiator() + " is not founder and master, have no authority to update kinddeed .");
@@ -1644,7 +1637,7 @@ void Buddha::update_kinddeed() {
 void Buddha::find_kinddeed() {       
 
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
@@ -1672,40 +1665,56 @@ void Buddha::find_kinddeed() {
     ctx->ok(kinddeed_ent.to_string() + detail_string + spec_string);
 }
 
-void Buddha::list_kinddeed() {
-    if(!is_deployer() &&
-       !is_founder() &&
-       !is_temple() &&
-       !is_master()) {
-        ctx->error(ctx->initiator() + " have no authority to list kinddeed .");
+void Buddha::list_kinddeed() {        
+    if( is_deployer() ||
+        is_founder() ) {    //善举过多时，此时不安全，尽可能少调用
+        auto it = get_kinddeed_table().scan({{"id",ctx->arg("id")}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            kinddeed ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
+        }
+        ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
-    auto it = get_kinddeed_table().scan({{"id",""}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        kinddeed ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
+    if( is_temple() ||
+        is_master() ) {    //善举过多时，此时不安全，不过一般不会太多。
+        auto it = get_kinddeed_table().scan({{"owner",ctx->initiator()}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            kinddeed ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
         }
-        else
-            cout << __LINE__ << " get error : " << it->error(true) << endl;
+        ctx->ok("size=" + to_string(i) + " " + ret);
+        return ;
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+
+    ctx->error(ctx->initiator() + " have no authority to list kinddeed .");
 }
 
 namespace 申请善举上架下架{}
 
 void Buddha::apply_online_kinddeed() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
 
-    if(!is_temple() &&
+    if( !is_temple() &&
         !is_master() ) {
         ctx->error(ctx->initiator() + " is not temple nor master, have no authority to apply online kinddeed .");
         return ;
@@ -1722,7 +1731,7 @@ void Buddha::apply_online_kinddeed() {
         return ;
     }
 
-    if(ent.owner() != ctx->initiator() ) {
+    if( ent.owner() != ctx->initiator() ) {
         ctx->error("kinddeed " + ent.to_string() + " is not belong to you.");
         return ;
     }
@@ -1743,12 +1752,12 @@ void Buddha::apply_online_kinddeed() {
 
 void Buddha::apply_offline_kinddeed() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
 
-    if(!is_temple() &&
+    if( !is_temple() &&
         !is_master() ) {
         ctx->error(ctx->initiator() + " is not temple nor master, have no authority to apply offline kinddeed .");
         return ;
@@ -1765,7 +1774,7 @@ void Buddha::apply_offline_kinddeed() {
         return ;
     }
 
-    if(ent.owner() != ctx->initiator() ) {
+    if( ent.owner() != ctx->initiator() ) {
         ctx->error("kinddeed " + ent.to_string() + " is not belong to you.");
         return ;
     }
@@ -1786,12 +1795,12 @@ void Buddha::apply_offline_kinddeed() {
 
 void Buddha::approve_online_kinddeed() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve online kinddeed .");
         return ;
     }
@@ -1829,12 +1838,12 @@ void Buddha::approve_online_kinddeed() {
 
 void Buddha::approve_offline_kinddeed() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("kinddeed id is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve offline kinddeed .");
         return ;
     }
@@ -1874,24 +1883,24 @@ void Buddha::approve_offline_kinddeed() {
 namespace 添加删除修改点评标签 {}
 void Buddha::add_commentlabel() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("comment label id is empty");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if(desc.empty()) {
+    if( desc.empty()) {
         ctx->error("comment label desc is empty");
         return ;
     }
 
-    if(!is_founder() ) {
+    if( !is_founder() ) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to add comment label .");
         return ;
     }
 
     commentlabel ent;
-    if(_is_commentlabel_exist(id,ent)) {
+    if( _is_commentlabel_exist(id,ent)) {
         ctx->error("commentlabel " + id + " is exist .");
         return ;
     }
@@ -1908,18 +1917,18 @@ void Buddha::add_commentlabel() {
 
 void Buddha::delete_commentlabel() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("comment label id is empty");
         return ;
     }
 
-    if(!is_founder() ) {
+    if( !is_founder() ) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to delete comment label .");
         return ;
     }
 
     commentlabel ent;
-    if(!_is_commentlabel_exist(id,ent)) {
+    if( !_is_commentlabel_exist(id,ent)) {
         ctx->error("kindeed type " + id + " is not exist .");
         return ;
     }
@@ -1934,24 +1943,24 @@ void Buddha::delete_commentlabel() {
 
 void Buddha::update_commentlabel() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("comment label id is empty");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if(desc.empty()) {
+    if( desc.empty()) {
         ctx->error("comment label desc is empty");
         return ;
     }
 
-    if(!is_founder() ) {
+    if( !is_founder() ) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to update comment label .");
         return ;
     }
 
     commentlabel ent;
-    if(!_is_commentlabel_exist(id,ent)) {
+    if( !_is_commentlabel_exist(id,ent)) {
         ctx->error("kindeed type " + id + " is not exist .");
         return ;
     }
@@ -1973,7 +1982,7 @@ void Buddha::update_commentlabel() {
 
 void Buddha::find_commentlabel() {
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("comment label id is empty");
         return ;
     }
@@ -1988,11 +1997,6 @@ void Buddha::find_commentlabel() {
 }
 
 void Buddha::list_commentlabel() {
-    if(!is_founder() ) {
-        ctx->error(ctx->initiator() + " is not founder, have no authority to list comment label .");
-        return ;
-    }
-
     auto it = get_commentlabel_table().scan({{"id",""}});
     int i = 0;
     string ret;
@@ -2012,13 +2016,13 @@ void Buddha::list_commentlabel() {
 namespace 添加删除修改祈求善举前点评 {}
 void Buddha::add_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if(kdid.empty()) {
+    if( kdid.empty()) {
         ctx->error("beforecomment kdid is empty");
         return ;
     }
 
     const string& satisfaction = ctx->arg("satisfaction");
-    if(satisfaction.empty()) {
+    if( satisfaction.empty()) {
         ctx->error("beforecomment satisfaction is empty");
         return ;
     }
@@ -2036,19 +2040,19 @@ void Buddha::add_beforecomment() {
         return;
     }
 
-    if(!_is_all_types_exist_in_commentlabel(label_array)) {
+    if( !_is_all_types_exist_in_commentlabel(label_array)) {
         ctx->error("beforecomment type error .");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if(comment.empty()) {
+    if( comment.empty()) {
         ctx->error("beforecomment comment is empty");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
+    if( timestamp.empty()) {
         ctx->error("beforecomment timestamp is empty");
         return ;
     }
@@ -2056,7 +2060,7 @@ void Buddha::add_beforecomment() {
     const string& owner = ctx->initiator() ;
 
     beforecomment ent;
-    if(_is_beforecomment_exist(owner,kdid,ent)) {
+    if( _is_beforecomment_exist(owner,kdid,ent)) {
         ctx->error("beforecomment " + kdid + " is exist .");
         return ;
     }
@@ -2077,7 +2081,7 @@ void Buddha::add_beforecomment() {
 
 void Buddha::delete_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if(kdid.empty()) {
+    if( kdid.empty()) {
         ctx->error("beforecomment kdid is empty");
         return ;
     }
@@ -2085,12 +2089,12 @@ void Buddha::delete_beforecomment() {
     const string& owner = ctx->initiator();
 
     beforecomment ent;
-    if(!_is_beforecomment_exist(owner,kdid,ent)) {
+    if( !_is_beforecomment_exist(owner,kdid,ent)) {
         ctx->error("kindeed type " + kdid + " is not exist .");
         return ;
     }
 
-    if(!is_founder() &&
+    if( !is_founder() &&
         ent.owner() != owner) {
         ctx->error(ctx->initiator() + " is not founder nor owner, have no authority to delete the comment .");
         return ;
@@ -2106,13 +2110,13 @@ void Buddha::delete_beforecomment() {
 
 void Buddha::update_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if(kdid.empty()) {
+    if( kdid.empty()) {
         ctx->error("beforecomment kdid is empty");
         return ;
     }
 
     const string& satisfaction = ctx->arg("satisfaction");
-    if(satisfaction.empty()) {
+    if( satisfaction.empty()) {
         ctx->error("beforecomment satisfaction is empty");
         return ;
     }
@@ -2130,19 +2134,19 @@ void Buddha::update_beforecomment() {
         return;
     }
 
-    if(!_is_all_types_exist_in_commentlabel(label_array)) {
+    if( !_is_all_types_exist_in_commentlabel(label_array)) {
         ctx->error("beforecomment type error .");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if(comment.empty()) {
+    if( comment.empty()) {
         ctx->error("beforecomment comment is empty");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
+    if( timestamp.empty()) {
         ctx->error("beforecomment timestamp is empty");
         return ;
     }
@@ -2150,7 +2154,7 @@ void Buddha::update_beforecomment() {
     const string& owner = ctx->initiator() ;
 
     beforecomment ent;
-    if(!_is_beforecomment_exist(owner,kdid,ent)) {
+    if( !_is_beforecomment_exist(owner,kdid,ent)) {
         ctx->error("kindeed type " + kdid + " is not exist .");
         return ;
     }
@@ -2181,7 +2185,7 @@ void Buddha::update_beforecomment() {
 
 void Buddha::find_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if(kdid.empty()) {
+    if( kdid.empty()) {
         ctx->error("beforecomment kdid is empty");
         return ;
     }
@@ -2194,14 +2198,14 @@ void Buddha::find_beforecomment() {
 
     const string& owner = ctx->arg("owner");
 
-    if(!owner.empty()) {
+    if( !owner.empty()) {
         beforecomment ent;
         if (!_is_beforecomment_exist(owner,kdid, ent))  {
             ctx->ok("beforecomment " + kdid + " is not exist .");
             return ;
         }
 
-        if(is_founder() ||                      //基金会成员
+        if( is_founder() ||                      //基金会成员
             owner == ctx->initiator() ||        //点评的所有者
             kd.owner() == ctx->initiator() ) { //善举所有者
             ctx->ok(ent.to_string());
@@ -2215,7 +2219,7 @@ void Buddha::find_beforecomment() {
 
     //owner字段为空的情况
     //此时如果是基金会成员和善举所有者调用，报错
-    if(is_founder() ||                          //基金会成员
+    if( is_founder() ||                          //基金会成员
         kd.owner() == ctx->initiator() ) {      //善举所有者
         ctx->error("beforecomment owner should be empty .");
         return ;
@@ -2232,7 +2236,7 @@ void Buddha::find_beforecomment() {
 
 void Buddha::list_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if(kdid.empty()) {
+    if( kdid.empty()) {
         ctx->error("beforecomment kdid is empty");
         return ;
     }
@@ -2266,37 +2270,37 @@ void Buddha::pray_kinddeed() {
     cout << endl ;
     
     const string& orderid = ctx->arg("id");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("orderid is empty");
         return ;
     }
 
     const string& kdid = ctx->arg("kinddeed");
-    if(kdid.empty()) {
+    if( kdid.empty()) {
         ctx->error("kdid is empty");
         return ;
     }
 
     const string& specid = ctx->arg("spec");
-    if(specid.empty()) {
+    if( specid.empty()) {
         ctx->error("specid is empty");
         return ;
     }
 
     const string& count = ctx->arg("count");
-    if(count.empty()) {
+    if( count.empty()) {
         ctx->error("count is empty");
         return ;
     }
 
     const string& amount = ctx->transfer_amount();
-    if(amount.empty()) {
+    if( amount.empty()) {
         ctx->error("amount is empty");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
+    if( timestamp.empty()) {
         ctx->error("timestamp is empty");
         return ;
     }
@@ -2330,7 +2334,7 @@ void Buddha::pray_kinddeed() {
 
     //计算总价格，要求转账过来的总价格跟订单计算出的总价格要求必须一直
     int64_t calced_amount = spec.price() * stoll(count);
-    if(calced_amount != stoll(amount)){
+    if( calced_amount != stoll(amount)){
         ctx->error("delive amount " + amount
                    + ", real amount=" + to_string(calced_amount));
         return;
@@ -2355,7 +2359,7 @@ void Buddha::find_pray_kinddeed() {
     mycout << endl ;
 
     const string& id = ctx->arg("id");
-    if(id.empty()) {
+    if( id.empty()) {
         ctx->error("order id is empty");
         return ;
     }
@@ -2368,7 +2372,7 @@ void Buddha::find_pray_kinddeed() {
         return ;
     }
 
-    if(!is_deployer() &&
+    if( !is_deployer() &&
         !is_founder() &&
         !is_temple() &&
         !is_master() &&
@@ -2382,27 +2386,43 @@ void Buddha::find_pray_kinddeed() {
 }
 
 void Buddha::list_pray_kinddeed() {
-    if(!is_deployer() &&
-       !is_founder() &&
-       !is_temple() &&
-       !is_master()) {
-        ctx->error(ctx->initiator() + " have no authority to list order .");
+    if( is_deployer() || 
+        is_founder() ) {
+        auto it = get_order_table().scan({{"id",ctx->arg("id")}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            order ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
+        }
+        ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
-    auto it = get_order_table().scan({{"id",""}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        order ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
+    if( is_temple() || 
+        is_master()) {
+        auto it = get_order_table().scan({{"kdowner", ctx->initiator()}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            order ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
         }
-        else
-            cout << __LINE__ << " get error : " << it->error(true) << endl;
+        ctx->ok("size=" + to_string(i) + " " + ret);
+        return ;
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+
+    ctx->error(ctx->initiator() + " have no authority to list order .");
 }
 
 bool Buddha::is_user() {
@@ -2419,19 +2439,19 @@ namespace 基金会成员授权法师或寺院上传的善举凭证{}
 
 void Buddha::upload_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("kinddeed proof orderid is empty");
         return ;
     }
 
     const string& proof = ctx->arg("proof");
-    if(proof.empty()) {
+    if( proof.empty()) {
         ctx->error("kinddeed proof hash is empty");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
+    if( timestamp.empty()) {
         ctx->error("kinddeed proof timestamp is empty");
         return ;
     }
@@ -2468,12 +2488,12 @@ void Buddha::upload_kinddeedproof() {
 
 void Buddha::approve_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("kinddeed proof orderid is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve kinddeed proof .");
         return ;
     }
@@ -2497,12 +2517,12 @@ void Buddha::approve_kinddeedproof() {
     }
 
     kinddeed kd;
-    if(!_is_kinddeed_exist(od.kdid(), kd)) {
+    if( !_is_kinddeed_exist(od.kdid(), kd)) {
         ctx->error("kinddeed " + od.kdid() + " is not exist .");
         return ;
     }
 
-    if(ent.owner() != od.kdowner() &&
+    if( ent.owner() != od.kdowner() &&
         ent.owner() != kd.owner()) {
         ctx->error(ent.owner() +","+ od.kdowner() + "," + kd.owner() + " error .");
         return ;
@@ -2519,7 +2539,7 @@ void Buddha::approve_kinddeedproof() {
         return;
     }
 
-    if(!_transfer(ent.owner(), to_string(od.amount()))) {
+    if( !_transfer(ent.owner(), to_string(od.amount()))) {
         ctx->error("transfer to " + ent.owner() + " " +  to_string(od.amount()) + " failure .");
         return ;
     }
@@ -2529,12 +2549,12 @@ void Buddha::approve_kinddeedproof() {
 
 void Buddha::refuse_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("kinddeed proof orderid is empty");
         return ;
     }
 
-    if(!is_founder()) {
+    if( !is_founder()) {
         ctx->error(ctx->initiator() + " is not founder, have no authority to approve kinddeed proof .");
         return ;
     }
@@ -2569,15 +2589,21 @@ void Buddha::find_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     const string& proof = ctx->arg("proof");
 
-    if(orderid.empty() &&
+    if( orderid.empty() &&
         proof.empty()) {
         ctx->error("kinddeed proof hash and orderid is empty .");
         return ;
     }
 
+    if( !orderid.empty() &&
+        !proof.empty()) {
+        ctx->error("kinddeed proof hash and orderid should not all exist .");
+        return ;
+    }
+
     kinddeedproof ent;
 
-    if(!orderid.empty()) {
+    if( !orderid.empty()) {
         order od;        
         if (!_is_order_exist(orderid, od))  {
             ctx->error("order " + orderid + " is not exist .");
@@ -2590,19 +2616,19 @@ void Buddha::find_kinddeedproof() {
         }
     }
 
-    if(!proof.empty()) 
+    if( !proof.empty()) 
         if (!_is_kinddeedproof_exist_by_proof(proof, ent))  {
             ctx->error("kinddeed proof " + proof + " is not exist .");
             return ;
         }
 
-    if(is_deployer() ||
+    if( is_deployer() ||
         is_founder()) {
         ctx->ok(ent.to_string());
         return ;
     }
     
-    if(!is_temple() &&
+    if( !is_temple() &&
         !is_master() ) {
         ctx->error(ctx->initiator() + " have no authority to find kinddeed proof .");
         return ;
@@ -2617,43 +2643,61 @@ void Buddha::find_kinddeedproof() {
 }
 
 void Buddha::list_kinddeedproof() {
-    if(!is_deployer() &&
-       !is_founder()) {
-        ctx->error(ctx->initiator() + " is not deployer nor founder, have no authority to list kinddeed proof .");
-        return ;
+    if( is_deployer() ||
+        is_founder()) {
+        auto it = get_kinddeedproof_table().scan({{"orderid",ctx->arg("orderid")}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            kinddeedproof ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
+        }
+        ctx->ok("size=" + to_string(i) + " " + ret);
     }
 
-    auto it = get_kinddeedproof_table().scan({{"orderid",""}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        kinddeedproof ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
+    if( is_temple() || 
+        is_master()) {
+        auto it = get_kinddeedproof_table().scan({{"owner",ctx->initiator()},{"orderid",ctx->arg("orderid")}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            kinddeedproof ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
         }
-        else
-            cout << __LINE__ << " get error : " << it->error(true) << endl;
+        ctx->ok("size=" + to_string(i) + " " + ret);
+        return;
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+
+    ctx->error(ctx->initiator() + " have no authority to list kinddeed proof .");
+    return ;
 }
 
 namespace 添加删除修改祈求善举后点评 {}
 void Buddha::add_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("aftercomment orderid is empty");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if(comment.empty()) {
+    if( comment.empty()) {
         ctx->error("aftercomment comment is empty");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
+    if( timestamp.empty()) {
         ctx->error("aftercomment timestamp is empty");
         return ;
     }
@@ -2661,8 +2705,19 @@ void Buddha::add_aftercomment() {
     const string& owner = ctx->initiator() ;
 
     aftercomment ent;
-    if(_is_aftercomment_exist(orderid,ent)) {
+    if( _is_aftercomment_exist(orderid,ent)) {
         ctx->error("aftercomment " + orderid + " is exist .");
+        return ;
+    }
+
+    order od;        
+    if (!_is_order_exist(orderid, od))  {
+        ctx->error("order " + orderid + " is not exist .");
+        return ;
+    }
+
+    if( od.owner() != owner ) {
+        ctx->error("order " + orderid + " is not belong to you .");
         return ;
     }
 
@@ -2680,7 +2735,7 @@ void Buddha::add_aftercomment() {
 
 void Buddha::delete_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("aftercomment orderid is empty");
         return ;
     }
@@ -2688,12 +2743,18 @@ void Buddha::delete_aftercomment() {
     const string& owner = ctx->initiator();
 
     aftercomment ent;
-    if(!_is_aftercomment_exist(orderid,ent)) {
-        ctx->error("kindeed type " + orderid + " is not exist .");
+    if( !_is_aftercomment_exist(orderid,ent)) {
+        ctx->error("aftercomment " + orderid + " is not exist .");
         return ;
     }
 
-    if(!is_founder() &&
+    order od;        
+    if (!_is_order_exist(orderid, od))  {
+        ctx->error("order " + orderid + " is not exist .");
+        return ;
+    }
+
+    if( !is_founder() &&
         ent.owner() != owner) {
         ctx->error(ctx->initiator() + " is not founder nor owner, have no authority to delete the comment .");
         return ;
@@ -2709,19 +2770,19 @@ void Buddha::delete_aftercomment() {
 
 void Buddha::update_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("aftercomment orderid is empty");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if(comment.empty()) {
+    if( comment.empty()) {
         ctx->error("aftercomment comment is empty");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if(timestamp.empty()) {
+    if( timestamp.empty()) {
         ctx->error("aftercomment timestamp is empty");
         return ;
     }
@@ -2729,8 +2790,14 @@ void Buddha::update_aftercomment() {
     const string& owner = ctx->initiator() ;
 
     aftercomment ent;
-    if(!_is_aftercomment_exist(orderid,ent)) {
+    if( !_is_aftercomment_exist(orderid,ent)) {
         ctx->error("kindeed type " + orderid + " is not exist .");
+        return ;
+    }
+
+    order od;        
+    if (!_is_order_exist(orderid, od))  {
+        ctx->error("order " + orderid + " is not exist .");
         return ;
     }
 
@@ -2758,7 +2825,7 @@ void Buddha::update_aftercomment() {
 
 void Buddha::find_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if(orderid.empty()) {
+    if( orderid.empty()) {
         ctx->error("aftercomment orderid is empty");
         return ;
     }
@@ -2769,16 +2836,55 @@ void Buddha::find_aftercomment() {
         return ;
     }
 
+    order od;        
+    if (!_is_order_exist(orderid, od))  {
+        ctx->error("order " + orderid + " is not exist .");
+        return ;
+    }
+
+    if( !is_founder() &&
+        ent.owner() != ctx->initiator() &&
+        od.kdowner() != ctx->initiator()) {
+        ctx->error(ctx->initiator() + " is not owner, have no authority to update the comment .");
+        return ;
+    }
+
     ctx->ok(ent.to_string());
 }
 
 void Buddha::list_aftercomment() {
-    if(!is_founder() ) {
-        ctx->error(ctx->initiator() + " is not founder, have no authority to list aftercomment .");
+    const string& orderid = ctx->arg("orderid");
+
+    if( is_deployer() ||
+        is_founder()) {
+        auto it = get_aftercomment_table().scan({{"orderid",orderid}});
+        int i = 0;
+        string ret;
+        while(it->next()) {
+            aftercomment ent;
+            if (it->get(&ent)) {
+                i++;
+                ret += ent.to_string();
+            }
+            else
+                cout << __LINE__ << " get error : " << it->error(true) << endl;
+        }
+        ctx->ok("size=" + to_string(i) + " " + ret);
+        return;
+    }
+    
+    if( orderid.empty()) {
+        ctx->error("aftercomment orderid is empty");
         return ;
     }
 
-    auto it = get_aftercomment_table().scan({{"orderid",""}});
+    order od;        
+    if (!_is_order_exist(orderid, od))  {
+        ctx->error("order " + orderid + " is not exist .");
+        return ;
+    }
+
+    auto it = get_aftercomment_table().scan({{"orderid",orderid}});
     int i = 0;
     string ret;
     while(it->next()) {
@@ -2791,6 +2897,7 @@ void Buddha::list_aftercomment() {
             cout << __LINE__ << " get error : " << it->error(true) << endl;
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
+
 }
 
 // ---------- 对外接口 -------------

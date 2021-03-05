@@ -22,6 +22,7 @@ class kinddeed: public buddha::Kinddeed {
     DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(0, owner)        
     DEFINE_INDEX_END();
 
     string to_string() ;

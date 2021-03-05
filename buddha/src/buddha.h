@@ -168,42 +168,43 @@ public:
     void approve_founder();         //合约部署者
     void recusal_founder();         //合约部署者
     bool is_founder();              //所有角色，判断自己是否是基金会成员
-    void list_founder();            //合约部署着，基金会成员
+    void list_founder();            //合约部署着，基金会成员，根据id查所有，id可为空，安全，
 
     //申请成为寺院
     void apply_temple();            //用户,法师
     void approve_temple();          //基金会成员
     void recusal_temple();          //基金会成员
     bool is_temple();               //所有角色，判断自己是否是寺院
-    void list_temple();             //合约部署着，基金会成员
+    void list_temple();             //合约部署着，基金会成员，根据id查所有，id可为空，安全，
 
     //申请成为法师
     void apply_master();            //用户
     void approve_master();          //基金会成员
     void recusal_master();          //基金会成员
     bool is_master();               //所有角色，判断自己是否是法师
-    void list_master();             //所有角色
+    void list_master();             //合约部署着，基金会成员，根据id查所有，id可为空，基本安全，
 
     //法师申请加入寺院
     void apply_join_temple();       //法师
     void approve_join_temple();     //基金会成员
     void recusal_join_temple();     //基金会成员
     bool is_in_temple();            //法师
-    void list_temple_master();      //合约部署着，基金会成员,寺院自己
+    void list_temple_master();      //合约部署着，基金会成员,寺院自己，根据templeid查所有，templeid为空时基本安全，templeid不为空时，安全
 
     //添加删除修改善举类型
     void add_kinddeedtype();        //基金会成员
     void delete_kinddeedtype();     //基金会成员
     void update_kinddeedtype();     //基金会成员
     void find_kinddeedtype();       //所有用户
-    void list_kinddeedtype();       //基金会成员
+    void list_kinddeedtype();       //所有用户，根据id查所有，安全，
 
     //添加删除修改善举    
     void add_kinddeed();            //基金会成员，寺院，法师
     void delete_kinddeed();         //基金会成员，寺院，法师
     void update_kinddeed();         //基金会成员，寺院，法师，只要修改善举，就需要重新审核上架
     void find_kinddeed();           //所有用户
-    void list_kinddeed();           //部署者，基金会成员，寺院，法师。这个接口是列举自己曾经的所有善举活动。尽可能的少的调用。会消耗大量的gas
+    void list_kinddeed();           //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
+                                    //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
 
     //申请善举上架下架    
     void apply_online_kinddeed();   //寺院，法师
@@ -216,19 +217,20 @@ public:
     void delete_commentlabel();     //基金会成员
     void update_commentlabel();     //基金会成员
     void find_commentlabel();       //所有用户
-    void list_commentlabel();       //基金会成员
+    void list_commentlabel();       //所有用户，根据id查所有，安全，
 
     //添加删除修改祈求善举前点评
     void add_beforecomment();       //所有用户
     void delete_beforecomment();    //所有者，基金会成员
     void update_beforecomment();    //所有者
     void find_beforecomment();      //所有者，基金会成员，善举所有者(法师或寺院)
-    void list_beforecomment();      //所有用户，点评本来就是给所有人看的。
+    void list_beforecomment();      //所有用户，点评本来就是给所有人看的，根据kdid查匹配，安全，
 
-    //用户祈求善举
+    //用户祈求善举，即订单
     void pray_kinddeed();           //所有用户
     void find_pray_kinddeed();      //署者，基金会成员，寺院，法师，所有者
-    void list_pray_kinddeed();      //部署者，基金会成员，寺院，法师
+    void list_pray_kinddeed();      //部署者，基金会成员，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
+                                    //寺院，法师(善举发布者,只查看自己发布的所有善举的订单)，根据kdowner查匹配，基本安全
     bool is_user();                 //所有用户
 
     //基金会成员授权法师或寺院上传的善举凭证
@@ -236,14 +238,16 @@ public:
     void approve_kinddeedproof();  //基金会成员
     void refuse_kinddeedproof();   //基金会成员
     void find_kinddeedproof();     //部署者，基金会成员，善举凭证所有者
-    void list_kinddeedproof();     //部署者，基金会成员
+    void list_kinddeedproof();     //部署者，基金会成员，根据orderid查所有，orderid为空时不安全，orderid不为空时基本安全，支持模糊查询
+                                   //寺院，法师(善举凭证所有者,只查看自己发布的所有善举凭证),根据owner查匹配，根据orderid查所有，orderid为空时不安全，orderid不为空时基本安全，支持模糊查询
 
     //添加删除修改祈求善举后点评
-    void add_aftercomment();       //所有用户
+    void add_aftercomment();       //善举的购买者
     void delete_aftercomment();    //所有者，基金会成员
     void update_aftercomment();    //所有者
     void find_aftercomment();      //所有者，基金会成员，善举所有者(法师或寺院)
-    void list_aftercomment();      //所有用户，点评本来就是给所有人看的。
+    void list_aftercomment();      //部署者，基金会成员，根据orderid查匹配，orderid为空时极不安全，orderid不为空时基本安全
+                                   //其他，点评本来就是给所有人看的，根据orderid查匹配，安全，
 
 };
 #endif // _BUDDHA_H_
