@@ -95,6 +95,9 @@ public:
 
 private:
     //辅助函数
+
+    void _mylog(string str);
+
     bool _is_founder_exist(const string& id,founder& ent);
 
     bool _is_temple_exist(const string& id,temple& ent);
