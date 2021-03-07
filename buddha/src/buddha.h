@@ -96,7 +96,7 @@ public:
 private:
     //辅助函数
 
-    void _mylog(string str);
+    void _log_error(string fun, int line, string str);
 
     bool _is_founder_exist(const string& id,founder& ent);
 

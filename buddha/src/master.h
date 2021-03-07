@@ -9,7 +9,7 @@
 using namespace std;
 
 class master: public buddha::Master {
-    DEFINE_ROWKEY(id, creditcode, proof);
+    DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(3)
         DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_ADD(1, creditcode)

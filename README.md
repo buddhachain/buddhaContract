@@ -54,10 +54,10 @@ xchain-cli account new --account 1234567890444444 --fee 1000
 xchain-cli transfer --to XC1234567890444444@xuper --amount 10000000000000 --keys data/keys
 xchain-cli account balance XC1234567890444444@xuper
 
-# 创建用户 123456789055555
-xchain-cli account new --account 123456789055555 --fee 1000
-xchain-cli transfer --to 123456789055555@xuper --amount 10000000000000 --keys data/keys
-xchain-cli account balance 123456789055555@xuper
+# 创建用户 1234567890555555
+xchain-cli account new --account 1234567890555555 --fee 1000
+xchain-cli transfer --to 1234567890555555@xuper --amount 10000000000000 --keys data/keys
+xchain-cli account balance 1234567890555555@xuper
 ```
 
 ## 4. 部署升级合约

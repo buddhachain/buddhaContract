@@ -9,7 +9,7 @@
 using namespace std;
 
 class temple: public buddha::Temple {
-    DEFINE_ROWKEY(id);//,unit,creditcode,address,proof);
+    DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(5)
         DEFINE_INDEX_ADD(0, id)
         DEFINE_INDEX_ADD(1, unit)
