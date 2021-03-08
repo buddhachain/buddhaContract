@@ -1024,14 +1024,22 @@ void Buddha::list_master() {
 namespace 申请加入寺院{}
 
 void Buddha::apply_join_temple(){
+    // const string& id = ctx->arg("id");
+    // if( id.empty()) {
+    //     _log_error(__FUNCTION__, __LINE__,"id is empty .");
+    //     return ;
+    // }
+
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty()) {
         _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
         return ;
     }
 
+    const string& masterid = ctx->initiator() ;
+
     if( !is_master()) {
-        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not master, have no authority to apply join temple .");
+        _log_error(__FUNCTION__, __LINE__, masterid + " is not master, have no authority to apply join temple .");
         return ;
     }
 
@@ -1041,15 +1049,16 @@ void Buddha::apply_join_temple(){
     }
 
     templemaster ent;
-    if( _is_in_temple(templeid, ctx->initiator(), ent )) {
-        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is already join temple .");
+    if( _is_in_temple(templeid, masterid, ent )) {
+        _log_error(__FUNCTION__, __LINE__,masterid + " is already join temple .");
         return;
     }
     
-    _delete_templemaster_record(templeid, ctx->initiator());
+    _delete_templemaster_record(templeid, masterid);
     
+    // ent.set_id(id.c_str());
     ent.set_templeid(templeid.c_str());
-    ent.set_masterid(ctx->initiator().c_str());
+    ent.set_masterid(masterid.c_str());
     ent.set_approved(false);
     mycout << "-----------------" << endl ;
     if (!get_templemaster_table().put(ent)) {
@@ -1089,7 +1098,7 @@ void Buddha::approve_join_temple() {
     }
 
     templemaster ent;
-    if( _is_in_temple(masterid, templeid, ent)) {
+    if( _is_in_temple(templeid, masterid,ent)) {
         _log_error(__FUNCTION__, __LINE__,ent.to_string() + " is already join temple .");
         return ;
     }
@@ -1147,8 +1156,10 @@ bool Buddha::is_in_temple() {
         return false;
     }
 
-    if( !_is_master(ctx->initiator())) {
-        _log_error(__FUNCTION__, __LINE__, ctx->initiator() + " is not a master, have no authority to query in some temple .");
+    const string& masterid = ctx->initiator();
+
+    if( !_is_master(masterid)) {
+        _log_error(__FUNCTION__, __LINE__, masterid + " is not a master, have no authority to query in some temple .");
         return false;
     }
 
@@ -1158,13 +1169,13 @@ bool Buddha::is_in_temple() {
     }
 
     templemaster ent;
-    if (_is_in_temple(templeid, ctx->initiator(), ent)) {
-        ctx->ok(ctx->initiator() + " is join temple .") ;
-        return true;
+    if (!_is_in_temple(templeid, masterid, ent)) {
+        ctx->ok(masterid + " is not join temple .") ;
+        return false;
     }
-    
-    ctx->ok(ctx->initiator() + " is not join temple .") ;
-    return false;
+
+    ctx->ok(masterid + " is join temple .") ;
+    return true;
 }
 
 void Buddha::list_temple_master() {
@@ -1172,7 +1183,7 @@ void Buddha::list_temple_master() {
 
     if( is_deployer() ||
         is_founder()) {
-        auto it = get_templemaster_table().scan({{"templeid",templeid}});
+        auto it = get_templemaster_table().scan({{"templeid",templeid},{"masterid",""}});
         int i = 0;
         string ret;
         while(it->next()) {
@@ -1193,7 +1204,7 @@ void Buddha::list_temple_master() {
     if( is_temple() ) {
 
         mycout << "111111111111111" << endl ;
-        auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()}});
+        auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()},{"masterid",""}});
         int i = 0;
         string ret;
         while(it->next()) {

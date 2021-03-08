@@ -120,7 +120,7 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_master --account XC123
 ### 5.4 法师申请加入寺院
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method apply_join_temple -a '{"templeid":"XC1234567890333333@xuper"}' --account XC1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method apply_join_temple -a '{"id":"1", "templeid":"XC1234567890333333@xuper"}' --account XC1234567890444444@xuper
 
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_join_temple -a '{"templeid":"XC1234567890333333@xuper","masterid":"XC1234567890444444@xuper"}' --account XC1234567890222222@xuper
 
