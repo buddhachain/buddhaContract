@@ -29,7 +29,7 @@ class kinddeed: public buddha::Kinddeed {
 };
 
 class kinddeeddetail: public buddha::KinddeedDetail {
-    DEFINE_ROWKEY(kdid);
+    DEFINE_ROWKEY(kdid,sequence);
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, kdid)
     DEFINE_INDEX_END();
@@ -38,7 +38,7 @@ class kinddeeddetail: public buddha::KinddeedDetail {
 };
 
 class kinddeedspec: public buddha::KinddeedSpec {
-    DEFINE_ROWKEY(kdid);
+    DEFINE_ROWKEY(kdid,sequence);
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, kdid)
     DEFINE_INDEX_END();

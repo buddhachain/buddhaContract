@@ -56,8 +56,8 @@ xchain-cli account balance XC1234567890444444@xuper
 
 # 创建用户 1234567890555555
 xchain-cli account new --account 1234567890555555 --fee 1000
-xchain-cli transfer --to 1234567890555555@xuper --amount 10000000000000 --keys data/keys
-xchain-cli account balance 1234567890555555@xuper
+xchain-cli transfer --to XC1234567890555555@xuper --amount 10000000000000 --keys data/keys
+xchain-cli account balance XC1234567890555555@xuper
 ```
 
 ## 4. 部署升级合约
@@ -65,9 +65,7 @@ xchain-cli account balance 1234567890555555@xuper
 
 ```bash
 xchain-cli wasm deploy --account XC1234567890111111@xuper --cname buddha --fee 5000000 --runtime c ../buddhaContract/buddha/buddha.wasm
-
 xchain-cli wasm upgrade --account XC1234567890111111@xuper --cname buddha --fee 5000000 ../buddhaContract/buddha/buddha.wasm
-
 xchain-cli wasm invoke --fee 1000000 buddha --method is_deployer --account XC1234567890111111@xuper
 ```
 
@@ -77,13 +75,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method is_deployer --account XC123
 
 ```bash
 xchain-cli wasm invoke --fee 1000000 buddha --method apply_founder -a '{"desc":"apply to be founder"}' --account XC1234567890222222@xuper --amount 100000
-
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_founder -a '{"id":"XC1234567890222222@xuper"}' --account XC1234567890111111@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method recusal_founder -a '{"id":"XC1234567890222222@xuper"}' --account XC1234567890111111@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method is_founder --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method list_founder --account XC1234567890222222@xuper
 ```
 
@@ -91,13 +85,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_founder --account XC12
 
 ```bash
 xchain-cli wasm invoke --fee 1000000 buddha --method apply_temple -a '{"unit":"佛山顶观音寺", "creditcode":"F110300007", "address":"浙江丽水佛顶山", "proof":"xxxxx"}' --account XC1234567890333333@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_temple -a '{"id":"XC1234567890333333@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method recusal_temple -a '{"id":"XC1234567890333333@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method is_temple --account XC1234567890333333@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method list_temple --account XC1234567890222222@xuper
 
 ```
@@ -106,13 +96,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_temple --account XC123
 
 ```bash
 xchain-cli wasm invoke --fee 1000000 buddha --method apply_master -a '{"creditcode":"fashi123456", "proof":"xxxxx"}' --account XC1234567890444444@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_master -a '{"id":"XC1234567890444444@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method recusal_master -a '{"id":"XC1234567890444444@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method is_master --account XC1234567890444444@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method list_master --account XC1234567890222222@xuper
 
 ```
@@ -121,15 +107,10 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_master --account XC123
 
 ```bash
 xchain-cli wasm invoke --fee 1000000 buddha --method apply_join_temple -a '{"id":"1", "templeid":"XC1234567890333333@xuper"}' --account XC1234567890444444@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method approve_join_temple -a '{"templeid":"XC1234567890333333@xuper","masterid":"XC1234567890444444@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method recusal_join_temple -a '{"templeid":"XC1234567890333333@xuper","masterid":"XC1234567890444444@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method is_in_temple -a '{"templeid":"XC1234567890333333@xuper"}' --account XC1234567890444444@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method list_temple_master -a '{"templeid":"XC1234567890333333@xuper"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method list_temple_master --account XC1234567890333333@xuper
 
 ```
@@ -151,12 +132,11 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeedtype --account
 ```bash
 xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeed -a '{"id":"1", "name":"kd1", "type":"1", "lasttime":"xxxxxx", "detail":"[{\"sequence\":\"1\", \"hash\":\"xxxxxx\"},{\"sequence\":\"2\", \"hash\":\"yyyyyy\"}]", "spec":"[{\"sequence\":\"1\", \"desc\":\"aaaaaa\", \"price\":\"10\"},{\"sequence\":\"2\", \"desc\":\"bbbbbb\", \"price\":\"10\"}]" }' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method delete_kinddeed -a '{"id":"1"}' --account XC1234567890444444@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method update_kinddeed -a '{"id":"1", "name":"kd1", "type":"1", "lasttime":"xxxxxx", "detail":[{"sequence":"1", "hash":"xxxxxx"},{"sequence":"2", "hash":"yyyyyy"}], "spec":[{"sequence":"1", "desc":"aaaaaa", "price":"10"},{"sequence":"2", "desc":"bbbbbb", "price":"10"}] }' --account XC1234567890444444@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
-
 xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed --account XC1234567890222222@xuper
+
+xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeeddetail -a '{"id":"1"}' --account XC1234567890222222@xuper
 
 ```
 

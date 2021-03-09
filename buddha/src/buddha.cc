@@ -135,13 +135,11 @@ bool Buddha::_is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeed
     auto it = get_kinddeeddetail_table().scan({{"kdid",kdid}});
     while(it->next()) {
         kinddeeddetail ent;
-        if (it->get(&ent)) {
-            vent.push_back(ent);
-        }
-        else {
+        if (!it->get(&ent)) {
             mycout << "kinddeeddetail table get failure : " << it->error(true) << endl;
             return false;
-        }            
+        }
+        vent.push_back(ent);
     }
 
     if( vent.size()==0)
@@ -163,13 +161,12 @@ bool Buddha::_is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedsp
     auto it = get_kinddeedspec_table().scan({{"kdid",kdid}});
     while(it->next()) {
         kinddeedspec ent;
-        if (it->get(&ent)) {
-            vent.push_back(ent);
-        }
-        else {
+        if (!it->get(&ent)) {
             mycout << "kinddeedspec table get failure : " << it->error(true) << endl;
             return false;
-        }            
+        }
+
+        vent.push_back(ent);
     }
 
     if( vent.size()==0)
@@ -720,15 +717,13 @@ void Buddha::list_founder() {
     string ret;
     while(it->next()) {
         founder ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "founder table get failure : " + it->error(true));
             return;
         }
-            
+
+        i++;
+        ret += ent.to_string();
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
@@ -873,15 +868,15 @@ void Buddha::list_temple() {
     string ret;
     while(it->next()) {
         temple ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "temple table get failure : " + it->error(true));
+            return ;
         }
-            
+
+        i++;
+        ret += ent.to_string();
     }
+
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
 
@@ -1010,13 +1005,13 @@ void Buddha::list_master() {
     string ret;
     while(it->next()) {
         master ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "master table get failure : " + it->error(true));
+            return;
         }
+
+        i++;
+        ret += ent.to_string();
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
@@ -1183,18 +1178,18 @@ void Buddha::list_temple_master() {
 
     if( is_deployer() ||
         is_founder()) {
-        auto it = get_templemaster_table().scan({{"templeid",templeid},{"masterid",""}});
+        auto it = get_templemaster_table().scan({{"templeid",templeid}});
         int i = 0;
         string ret;
         while(it->next()) {
             templemaster ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "templemaster table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
 
@@ -1204,19 +1199,19 @@ void Buddha::list_temple_master() {
     if( is_temple() ) {
 
         mycout << "111111111111111" << endl ;
-        auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()},{"masterid",""}});
+        auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()}});
         int i = 0;
         string ret;
         while(it->next()) {
             mycout << "++++++++++++++++++" << endl ;
             templemaster ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "templemaster table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
@@ -1349,13 +1344,13 @@ void Buddha::list_kinddeedtype() {
     string ret;
     while(it->next()) {
         kinddeedtype ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "kinddeedtype table get failure : " + it->error(true));
+            return;
         }
+
+        i++;
+        ret += ent.to_string();
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
@@ -1701,13 +1696,12 @@ void Buddha::list_kinddeed() {
         string ret;
         while(it->next()) {
             kinddeed ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "kinddeed table get failure : " + it->error(true));
+                return;
             }
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
@@ -1720,13 +1714,13 @@ void Buddha::list_kinddeed() {
         string ret;
         while(it->next()) {
             kinddeed ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "kinddeed table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
@@ -2032,13 +2026,13 @@ void Buddha::list_commentlabel() {
     string ret;
     while(it->next()) {
         commentlabel ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "commentlabel table get failure : " + it->error(true));
+            return;
         }
+
+        i++;
+        ret += ent.to_string();
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
@@ -2283,13 +2277,13 @@ void Buddha::list_beforecomment() {
     string ret;
     while(it->next()) {
         beforecomment ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "beforecomment table get failure : " + it->error(true));
+            return;
         }
+
+        i++;
+        ret += ent.to_string();
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
 }
@@ -2420,13 +2414,13 @@ void Buddha::list_pray_kinddeed() {
         string ret;
         while(it->next()) {
             order ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "order table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
@@ -2439,13 +2433,13 @@ void Buddha::list_pray_kinddeed() {
         string ret;
         while(it->next()) {
             order ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "order table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return ;
@@ -2679,13 +2673,13 @@ void Buddha::list_kinddeedproof() {
         string ret;
         while(it->next()) {
             kinddeedproof ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "kinddeedproof table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
     }
@@ -2697,13 +2691,13 @@ void Buddha::list_kinddeedproof() {
         string ret;
         while(it->next()) {
             kinddeedproof ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "kinddeedproof table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return;
@@ -2893,13 +2887,13 @@ void Buddha::list_aftercomment() {
         string ret;
         while(it->next()) {
             aftercomment ent;
-            if (it->get(&ent)) {
-                i++;
-                ret += ent.to_string();
-            }
-            else {
+            if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "aftercomment table get failure : " + it->error(true));
+                return;
             }
+
+            i++;
+            ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
         return;
@@ -2921,13 +2915,13 @@ void Buddha::list_aftercomment() {
     string ret;
     while(it->next()) {
         aftercomment ent;
-        if (it->get(&ent)) {
-            i++;
-            ret += ent.to_string();
-        }
-        else {
+        if (!it->get(&ent)) {
             _log_error(__FUNCTION__, __LINE__, "aftercomment table get failure : " + it->error(true));
+            return;
         }
+
+        i++;
+        ret += ent.to_string();
     }
     ctx->ok("size=" + to_string(i) + " " + ret);
 
@@ -2974,6 +2968,9 @@ DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();       
 DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }
 DEFINE_METHOD(Buddha, find_kinddeed)            { self.find_kinddeed();             }
 DEFINE_METHOD(Buddha, list_kinddeed)            { self.list_kinddeed();             }
+DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
+DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }
+
 
 DEFINE_METHOD(Buddha, apply_online_kinddeed)    { self.apply_online_kinddeed();     }
 DEFINE_METHOD(Buddha, apply_offline_kinddeed)   { self.apply_offline_kinddeed();    }
