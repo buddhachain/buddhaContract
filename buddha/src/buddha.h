@@ -96,64 +96,62 @@ public:
 private:
     //辅助函数
 
-    void _log_error(string fun, int line, string str);
+    void _log_error(string, int, string);
 
-    bool _is_founder_exist(const string& id,founder& ent);
+    bool _is_founder_exist(const string&,founder&);
 
-    bool _is_temple_exist(const string& id,temple& ent);
-    bool _is_temple_exist_by_unit(const string& unit,temple& ent);
-    bool _is_temple_exist_by_creditcode(const string& creditcode,temple& ent);
-    bool _is_temple_exist_by_address(const string& address,temple& ent);
-    bool _is_temple_exist_by_proof(const string& proof,temple& ent);
-
-    bool _is_master_exist(const string& id,master& ent);
-    bool _is_master_exist_by_proof(const string& proof,master& ent);
-
-    bool _is_templemaster_exist(const string& templeid,
-                                const string& masterid,
-                                templemaster& ent);
-
-    bool _is_kinddeedtype_exist(const string& id,kinddeedtype& ent);
-
-    bool _is_kinddeed_exist(const string& id,kinddeed& ent);
-    bool _is_kinddeeddetail_exist(const string& kdid, const string& seq, kinddeeddetail& ent);
-    bool _is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent);
-    bool _is_kinddeedspec_exist(const string& kdid, const string& seq, kinddeedspec& ent);
-    bool _is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent);
-    bool _is_commentlabel_exist(const string& id,commentlabel& ent);
+    bool _is_temple_exist(const string&,temple&);
+    bool _is_temple_exist_by_unit(const string&,temple&);
+    bool _is_temple_exist_by_creditcode(const string&,temple&);
+    bool _is_temple_exist_by_address(const string&,temple&);
+    bool _is_temple_exist_by_proof(const string&,temple&);
+    bool _is_master_exist(const string&,master&);
+    bool _is_master_exist_by_proof(const string&,master&);
+    bool _is_templemaster_exist(const string&,const string&,templemaster&);
+    bool _is_kinddeedtype_exist(const string&,kinddeedtype&);
+    bool _is_kinddeed_exist(const string&,kinddeed&);
+    bool _is_kinddeeddetail_exist(const string&, const string& seq, kinddeeddetail&);
+    bool _is_kinddeeddetail_exist_by_kdid(const string&,vector<kinddeeddetail>&);
+    bool _is_kinddeedspec_exist(const string&, const string& seq, kinddeedspec&);
+    bool _is_kinddeedspec_exist_by_kdid(const string&,vector<kinddeedspec>&);
+    bool _is_commentlabel_exist(const string&,commentlabel&);
     bool _is_all_types_exist_in_commentlabel(const xchain::json& label_array);
-    bool _is_beforecomment_exist(const string& userid, const string& kdid,beforecomment& ent);
-    bool _is_order_exist(const string& id,order& ent);
-    bool _is_kinddeedproof_exist_by_order(const string& id,kinddeedproof& ent);
-    bool _is_kinddeedproof_exist_by_proof(const string& proof,kinddeedproof& ent);
-    bool _is_aftercomment_exist(const string& orderid,aftercomment& ent);
+    bool _is_beforecomment_exist(const string&, const string&,beforecomment&);
+    bool _is_order_exist(const string&,order&);
+    bool _is_kinddeedproof_exist_by_order(const string&,kinddeedproof&);
+    bool _is_kinddeedproof_exist_by_proof(const string&,kinddeedproof&);
+    bool _is_aftercomment_exist(const string&,aftercomment&);
 
-    bool _get_kinddeed(const string& id,kinddeed& ent);
-    bool _is_kinddeed_online(const string& kdid) ;
+    bool _get_kinddeed(const string&,kinddeed&);
+    bool _is_kinddeed_online(const string&) ;
 
-    bool _is_deployer(const string& id);
-    bool _is_founder(const string& id);
-    bool _is_temple(const string& id);
-    bool _is_master(const string& id);
-    bool _is_in_temple(const string& templeid, const string& masterid,templemaster& ent );
-    bool _is_user(const string& id);
+    bool _is_deployer(const string&);
+    bool _is_founder(const string&);
+    bool _is_temple(const string&);
+    bool _is_master(const string&);
+    bool _is_in_temple(const string&, const string&,templemaster& );
+    bool _is_user(const string&);
 
-    bool _delete_founder_record(const string& id);
-    bool _delete_temple_record(const string& id);
-    bool _delete_master_record(const string& id);
-    bool _delete_templemaster_record(const string& templeid, const string& masterid);
-    bool _delete_kinddeedtype_record(const string& id);
-    bool _delete_kinddeed_record(const string& id);
-    bool _delete_kinddeeddetail_record(const string& id);
-    bool _delete_kinddeedspec_record(const string& id);
-    bool _delete_commentlabel_record(const string& id);
-    bool _delete_beforecomment_record(const string& userid, const string& kdid);
-    bool _delete_order_record(const string& id);
-    bool _delete_kinddeedproof_record(const string& orderid);
-    bool _delete_aftercomment_record(const string& orderid);
+    bool _delete_founder_record(const string&);
+    bool _delete_temple_record(const string&);
+    bool _delete_master_record(const string&);
+    bool _delete_templemaster_record(const string&, const string&);
+    bool _delete_kinddeedtype_record(const string&);
+    bool _delete_kinddeed_record(const string&);
+    bool _delete_kinddeeddetail_records(const string&);
+    bool _delete_kinddeeddetail_record(const string&, const string& );
+    bool _delete_kinddeedspec_records(const string&);
+    bool _delete_kinddeedspec_record(const string&, const string&);
+    bool _delete_commentlabel_record(const string&);
+    bool _delete_beforecomment_record(const string& userid, const string&);
+    bool _delete_order_record(const string&);
+    bool _delete_kinddeedproof_record(const string&);
+    bool _delete_aftercomment_record(const string&);
 
-    bool _transfer(const string& id,
-                   const string& amount);
+    bool _add_kinddeeddetail(const string&,const string&,const string&);
+    bool _add_kinddeedspec(const string&,const string&,const string&,const string&);
+
+    bool _transfer(const string&,const string&);
 
 public:
     //对外的辅助接口
@@ -202,6 +200,8 @@ public:
     void list_kinddeedtype();       //所有用户，根据id查所有，安全，
 
     //添加删除修改善举    
+    void add_kinddeeddetail();
+    void add_kinddeedspec();
     void add_kinddeed();            //基金会成员，寺院，法师
     void delete_kinddeed();         //基金会成员，寺院，法师
     void update_kinddeed();         //基金会成员，寺院，法师，只要修改善举，就需要重新审核上架

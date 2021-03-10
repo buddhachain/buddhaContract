@@ -17,7 +17,7 @@ string beforecomment::to_string() {
     str += kdid() + ",";
     str += std::to_string(satisfaction()) + ",";
     str += labels() + ",";
-    str += comment();
+    str += comment() + ",";
     str += timestamp();
     str += "}";
     return str;

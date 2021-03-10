@@ -10,8 +10,9 @@ using namespace std;
 
 class templemaster: public buddha::TempleMaster {
     DEFINE_ROWKEY(templeid, masterid);
-    DEFINE_INDEX_BEGIN(1)
+    DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, templeid)
+        DEFINE_INDEX_ADD(1, masterid)
     DEFINE_INDEX_END();
 
     string to_string();

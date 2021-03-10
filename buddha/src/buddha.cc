@@ -131,11 +131,14 @@ bool Buddha::_is_kinddeeddetail_exist(const string& kdid,
     return true;
 }
 
+
 bool Buddha::_is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent) {
     auto it = get_kinddeeddetail_table().scan({{"kdid",kdid}});
     while(it->next()) {
         kinddeeddetail ent;
         if (!it->get(&ent)) {
+            if(it->error(true) == "success") 
+                return false;
             mycout << "kinddeeddetail table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -162,6 +165,8 @@ bool Buddha::_is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedsp
     while(it->next()) {
         kinddeedspec ent;
         if (!it->get(&ent)) {
+            if(it->error(true) == "success") 
+                return false;
             mycout << "kinddeedspec table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -195,8 +200,8 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
     return true;
 }
 
-bool Buddha::_is_beforecomment_exist(const string& owner, const string& kdid,beforecomment& ent) {
-    if (!get_beforecomment_table().find({{"owner", owner},{"kdid", kdid}}, &ent))
+bool Buddha::_is_beforecomment_exist(const string& kdid, const string& owner,beforecomment& ent) {
+    if (!get_beforecomment_table().find({{"kdid", kdid},{"owner", owner}}, &ent))
         return false;
 
     return true;
@@ -414,12 +419,12 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
         return false;
     }
 
-    if( !_delete_kinddeeddetail_record(id) ) {
+    if( !_delete_kinddeeddetail_records(id) ) {
         mycout << "delete kinddeeddetail " << id << " failure ." << endl ;
         return false;
     }
 
-    if( !_delete_kinddeedspec_record(id) ) {
+    if( !_delete_kinddeedspec_records(id) ) {
         mycout << "delete kinddeedspec " << id << " failure ." << endl ;
         return false;
     }
@@ -428,7 +433,7 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeeddetail_record(const string& id) {
+bool Buddha::_delete_kinddeeddetail_records(const string& id) {
 
     while(true) {
         kinddeeddetail ent;
@@ -445,7 +450,23 @@ bool Buddha::_delete_kinddeeddetail_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeedspec_record(const string& id) {
+bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& sequence ) {
+    kinddeeddetail ent;
+    if (!get_kinddeeddetail_table().find({{"kdid", id},{"sequence",sequence}}, &ent)) {
+        mycout << "not found kinddeeddetail " << id << "," << sequence << " failure ." << endl ;
+        return false;
+    }
+
+    if( !get_kinddeeddetail_table().del(ent) ) {
+        mycout << "delete kinddeeddetail " << ent.to_string() << " failure ." << endl ;
+        return false;
+    }
+
+    mycout << "delete kinddeeddetail success ." << endl ;
+    return true;
+}
+
+bool Buddha::_delete_kinddeedspec_records(const string& id) {
     while(true) {
         kinddeedspec ent;
         if (!get_kinddeedspec_table().find({{"kdid", id}}, &ent))
@@ -458,6 +479,22 @@ bool Buddha::_delete_kinddeedspec_record(const string& id) {
     }
 
     mycout << "delete kinddeedspecs success ." << endl ;
+    return true;
+}
+
+bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequence ) {
+    kinddeedspec ent;
+    if (!get_kinddeedspec_table().find({{"kdid", id},{"sequence",sequence}}, &ent)) {
+        mycout << "not found kinddeedspec " << id << "," << sequence << " failure ." << endl ;
+        return false;
+    }
+
+    if( !get_kinddeedspec_table().del(ent) ) {
+        mycout << "delete kinddeedspec " << ent.to_string() << " failure ." << endl ;
+        return false;
+    }
+
+    mycout << "delete kinddeedspec success ." << endl ;
     return true;
 }
 
@@ -542,6 +579,90 @@ bool Buddha::_delete_aftercomment_record(const string& orderid) {
     return true;
 }
 
+bool Buddha::_add_kinddeeddetail(const string& kdid,
+                                 const string& sequence,
+                                 const string& hash) {
+
+    if( kdid.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kdid is empty .");
+        return false;
+    }
+
+    if( sequence.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"sequence is empty .");
+        return false;
+    }
+
+    if( hash.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"hash is empty .");
+        return false;
+    }
+
+    kinddeeddetail ent;
+    if(_is_kinddeeddetail_exist(kdid, sequence, ent))
+        if(!_delete_kinddeeddetail_record(kdid, sequence)) 
+            return false;
+
+    ent.set_kdid(kdid);
+    ent.set_sequence(stoll(sequence));
+    ent.set_hash(hash);
+
+    mycout << ent.to_string() << endl;
+
+    if (!get_kinddeeddetail_table().put(ent)) {
+        mycout << "kinddeeddetail table put " << ent.to_string() << " failure ." << endl;
+        return false;
+    }
+
+    return true ;
+}
+
+bool Buddha::_add_kinddeedspec(const string& kdid,
+                               const string& sequence,
+                               const string& desc,
+                               const string& price) {
+
+    if( kdid.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kdid is empty .");
+        return false;
+    }
+
+    if( sequence.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"sequence is empty .");
+        return false;
+    }
+
+    if( desc.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"desc is empty .");
+        return false;
+    }
+
+    if( price.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"price is empty .");
+        return false;
+    }
+
+    kinddeedspec ent;
+    if(_is_kinddeedspec_exist(kdid, sequence, ent))
+        if(!_delete_kinddeedspec_record(kdid, sequence)) 
+            return false;
+
+    ent.set_kdid(kdid);
+    ent.set_sequence(stoll(sequence));
+    ent.set_desc(desc);
+    ent.set_price(stoll(price));
+
+    mycout << ent.to_string() << endl;
+
+    if (!get_kinddeedspec_table().put(ent)) {
+        mycout << "kinddeedspec table put " << ent.to_string() << " failure ." << endl;
+        return false;
+    }
+
+    return true ;
+}
+
+
 bool Buddha::_transfer(const string& toid,
                     const string& toamount){
     //将抵押退还
@@ -613,8 +734,8 @@ void Buddha::apply_founder(){
     _delete_founder_record(ctx->initiator());
 
     founder ent;
-    ent.set_id(ctx->initiator().c_str());
-    ent.set_desc(desc.c_str());
+    ent.set_id(ctx->initiator());
+    ent.set_desc(desc);
     ent.set_guaranty(ent.guaranty() + stoll(guaranty));
     ent.set_approved(false);
     if (!get_founder_table().put(ent)) {
@@ -769,11 +890,11 @@ void Buddha::apply_temple(){
     _delete_temple_record(ctx->initiator());
 
     temple ent;
-    ent.set_id(ctx->initiator().c_str());
-    ent.set_unit(unit.c_str());
-    ent.set_creditcode(creditcode.c_str());
-    ent.set_address(address.c_str());
-    ent.set_proof(proof.c_str());
+    ent.set_id(ctx->initiator());
+    ent.set_unit(unit);
+    ent.set_creditcode(creditcode);
+    ent.set_address(address);
+    ent.set_proof(proof);
     ent.set_approved(false);
     if (!get_temple_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"temple table put " + ent.to_string() + " failure .");
@@ -908,9 +1029,9 @@ void Buddha::apply_master(){
     _delete_master_record(ctx->initiator());
 
     master ent;
-    ent.set_id(ctx->initiator().c_str());
-    ent.set_creditcode(creditcode.c_str());
-    ent.set_proof(proof.c_str());
+    ent.set_id(ctx->initiator());
+    ent.set_creditcode(creditcode);
+    ent.set_proof(proof);
     ent.set_approved(false);
     if (!get_master_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"master table put " + ent.to_string() + " failure .");
@@ -1051,11 +1172,10 @@ void Buddha::apply_join_temple(){
     
     _delete_templemaster_record(templeid, masterid);
     
-    // ent.set_id(id.c_str());
-    ent.set_templeid(templeid.c_str());
-    ent.set_masterid(masterid.c_str());
+    // ent.set_id(id);
+    ent.set_templeid(templeid);
+    ent.set_masterid(masterid);
     ent.set_approved(false);
-    mycout << "-----------------" << endl ;
     if (!get_templemaster_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"templemaster table put " + ent.to_string() + " failure .");
         return;
@@ -1198,12 +1318,10 @@ void Buddha::list_temple_master() {
 
     if( is_temple() ) {
 
-        mycout << "111111111111111" << endl ;
         auto it = get_templemaster_table().scan({{"templeid",ctx->initiator()}});
         int i = 0;
         string ret;
         while(it->next()) {
-            mycout << "++++++++++++++++++" << endl ;
             templemaster ent;
             if (!it->get(&ent)) {
                 _log_error(__FUNCTION__, __LINE__, "templemaster table get failure : " + it->error(true));
@@ -1247,8 +1365,8 @@ void Buddha::add_kinddeedtype() {
         return ;
     }
 
-    ent.set_id(stoll(id.c_str()));
-    ent.set_desc(desc.c_str());
+    ent.set_id(stoll(id));
+    ent.set_desc(desc);
     if (!get_kinddeedtype_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"kinddeedtype table put " + ent.to_string() + " failure .");
         return;
@@ -1312,8 +1430,8 @@ void Buddha::update_kinddeedtype() {
         return;
     }
 
-    ent.set_id(stoll(id.c_str()));
-    ent.set_desc(desc.c_str());
+    ent.set_id(stoll(id));
+    ent.set_desc(desc);
     if (!get_kinddeedtype_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"kinddeedtype table put " + ent.to_string() + " failure .");
         return;
@@ -1358,6 +1476,31 @@ void Buddha::list_kinddeedtype() {
 
 namespace 添加删除修改善举{}
 
+void Buddha::add_kinddeeddetail() {
+    const string& id = ctx->arg("id");
+    const string& sequence = ctx->arg("sequence");
+    const string& hash = ctx->arg("hash");
+    if (!_add_kinddeeddetail(id,sequence,hash)) {
+        _log_error(__FUNCTION__, __LINE__,"_add_kinddeeddetail " + id + " failure .");
+        return;
+    }
+
+    ctx->ok("ok");
+}
+
+void Buddha::add_kinddeedspec() {
+    const string& id = ctx->arg("id");    
+    const string& sequence = ctx->arg("sequence");
+    const string& desc = ctx->arg("desc");
+    const string& price = ctx->arg("price");
+    if (!_add_kinddeedspec(id,sequence,desc,price)) {
+        _log_error(__FUNCTION__, __LINE__,"_add_kinddeedspec " + id + " failure .");
+        return;
+    }
+
+    ctx->ok("ok");
+}
+
 void Buddha::add_kinddeed() {
     const string& id = ctx->arg("id");
     const string& name = ctx->arg("name");
@@ -1388,7 +1531,7 @@ void Buddha::add_kinddeed() {
     }
     
     auto detail_array = xchain::json::parse(detail);
-    // mycout << detail_array.dump().c_str() << endl ;
+    // mycout << detail_array.dump() << endl ;
     if (!detail_array.is_array()) {
         _log_error(__FUNCTION__, __LINE__,"field 'detail' need to be array .");
         return;
@@ -1400,7 +1543,7 @@ void Buddha::add_kinddeed() {
     }
 
     auto spec_array = xchain::json::parse(spec);
-    // mycout << spec_array.dump().c_str() << endl ;
+    // mycout << spec_array.dump() << endl ;
     if (!spec_array.is_array()) {
         _log_error(__FUNCTION__, __LINE__,"field 'spec' need to be array .");
         return;
@@ -1430,56 +1573,55 @@ void Buddha::add_kinddeed() {
         return ;
     }
 
-    vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeeddetail " + ent.to_string() + " is exist .");
-        return ;
+    // vector<kinddeeddetail> v_kinddeeddetail_ent;
+    // if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
+    //     _log_error(__FUNCTION__, __LINE__,"kinddeeddetail " + ent.to_string() + " is exist .");
+    //     return ;
+    // }
+
+    // vector<kinddeedspec> v_kinddeedspec_ent;
+    // if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
+    //     _log_error(__FUNCTION__, __LINE__,"kinddeedspec " + ent.to_string() + " is exist .");
+    //     return ;
+    // }
+
+
+    if( !_delete_kinddeeddetail_records(id) ) {
+        _log_error(__FUNCTION__, __LINE__, "delete kinddeeddetail " + id + " failure .");
+        return;
     }
 
-    vector<kinddeedspec> v_kinddeedspec_ent;
-    if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedspec " + ent.to_string() + " is exist .");
-        return ;
+    if( !_delete_kinddeedspec_records(id) ) {
+        _log_error(__FUNCTION__, __LINE__, "delete kinddeedspec " + id + " failure .") ;
+        return;
     }
 
     for(int i = 0 ; i < detail_array.size() ; i++) {
-        int64_t sequence = stoll(detail_array.at(i)["sequence"].template get<string>());
-        string hash = detail_array.at(i)["hash"].template get<string>();
-
-        kinddeeddetail ent;
-        ent.set_kdid(id.c_str());
-        ent.set_sequence(sequence);
-        ent.set_hash(hash.c_str());
-
-        if (!get_kinddeeddetail_table().put(ent)) {
-            _log_error(__FUNCTION__, __LINE__,"kinddeeddetail table put " + ent.to_string() + " failure .");
+        string sequence = detail_array.at(i)["sequence"].template get<string>();
+        string hash = detail_array.at(i)["hash"].template get<string>();        
+        if (!_add_kinddeeddetail(id,sequence,hash)) {
+            _log_error(__FUNCTION__, __LINE__,"_add_kinddeeddetail " + id + " failure .");
             return;
         }
     }
 
-    // mycout << spec_array.dump().c_str() << endl ;
+    // mycout << spec_array.dump() << endl ;
     for(int i = 0 ; i < spec_array.size() ; i++) {
-        int64_t sequence = stoll(spec_array.at(i)["sequence"].template get<string>());
+        string sequence = spec_array.at(i)["sequence"].template get<string>();
         string desc = spec_array.at(i)["desc"].template get<string>();
-        int64_t price = stoll(spec_array.at(i)["price"].template get<string>());
+        string price = spec_array.at(i)["price"].template get<string>();
 
-        kinddeedspec ent;
-        ent.set_kdid(id.c_str());
-        ent.set_sequence(sequence);
-        ent.set_desc(desc.c_str());
-        ent.set_price(price);
-
-        if (!get_kinddeedspec_table().put(ent)) {
-            _log_error(__FUNCTION__, __LINE__,"kinddeedspec table put " + ent.to_string() + " failure .");
+        if (!_add_kinddeedspec(id,sequence,desc,price)) {
+            _log_error(__FUNCTION__, __LINE__,"_add_kinddeedspec " + id + " failure .");
             return;
         }
     }
 
-    ent.set_id(id.c_str());
-    ent.set_name(name.c_str());
-    ent.set_owner(ctx->initiator().c_str());
-    ent.set_type(stoll(type.c_str()));
-    ent.set_lasttime(lasttime.c_str());
+    ent.set_id(id);
+    ent.set_name(name);
+    ent.set_owner(ctx->initiator());
+    ent.set_type(stoll(type));
+    ent.set_lasttime(lasttime);
     ent.set_applied(false);
     ent.set_online(false);
 
@@ -1555,7 +1697,7 @@ void Buddha::update_kinddeed() {
     }
 
     auto detail_array = xchain::json::parse(detail);
-    // mycout << detail_array.dump().c_str() << endl ;
+    // mycout << detail_array.dump() << endl ;
     if (!detail_array.is_array()) {
         _log_error(__FUNCTION__, __LINE__,"field 'detail' need to be array .");
         return;
@@ -1567,7 +1709,7 @@ void Buddha::update_kinddeed() {
     }
 
     auto spec_array = xchain::json::parse(spec);
-    // mycout << spec_array.dump().c_str() << endl ;
+    // mycout << spec_array.dump() << endl ;
     if (!spec_array.is_array()) {
         _log_error(__FUNCTION__, __LINE__,"field 'spec' need to be array .");
         return;
@@ -1614,9 +1756,9 @@ void Buddha::update_kinddeed() {
         string hash = detail_array.at(i)["hash"].template get<string>();
 
         kinddeeddetail ent;
-        ent.set_kdid(id.c_str());
+        ent.set_kdid(id);
         ent.set_sequence(sequence);
-        ent.set_hash(hash.c_str());
+        ent.set_hash(hash);
 
         if (!get_kinddeeddetail_table().put(ent)) {
             _log_error(__FUNCTION__, __LINE__,"kinddeeddetail table put " + ent.to_string() + " failure .");
@@ -1630,9 +1772,9 @@ void Buddha::update_kinddeed() {
         int64_t price = stoll(spec_array.at(i)["price"].template get<string>());
 
         kinddeedspec ent;
-        ent.set_kdid(id.c_str());
+        ent.set_kdid(id);
         ent.set_sequence(sequence);
-        ent.set_desc(desc.c_str());
+        ent.set_desc(desc);
         ent.set_price(price);
 
         if (!get_kinddeedspec_table().put(ent)) {
@@ -1641,11 +1783,11 @@ void Buddha::update_kinddeed() {
         }
     }
 
-    ent.set_id(id.c_str());
-    ent.set_name(name.c_str());
-    ent.set_owner(ctx->initiator().c_str());
-    ent.set_type(stoll(type.c_str()));
-    ent.set_lasttime(lasttime.c_str());
+    ent.set_id(id);
+    ent.set_name(name);
+    ent.set_owner(ctx->initiator());
+    ent.set_type(stoll(type));
+    ent.set_lasttime(lasttime);
     ent.set_applied(false);
     ent.set_online(false);
 
@@ -1728,6 +1870,56 @@ void Buddha::list_kinddeed() {
 
     _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeed .");
 }
+
+void Buddha::list_kinddeeddetail() {        
+    if( !is_deployer() &&
+        !is_founder() &&
+        !is_temple() &&
+        !is_master() ) {
+        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeeddetail .");
+        return ;
+    }
+
+    auto it = get_kinddeeddetail_table().scan({{"kdid",ctx->arg("kdid")}});
+    int i = 0;
+    string ret;
+    while(it->next()) {
+        kinddeeddetail ent;
+        if (!it->get(&ent)) {
+            _log_error(__FUNCTION__, __LINE__, "kinddeeddetail table get failure : " + it->error(true));
+            return;
+        }
+        i++;
+        ret += ent.to_string();
+    }
+    ctx->ok("size=" + to_string(i) + " " + ret);
+}
+
+void Buddha::list_kinddeedspec() {        
+    if( !is_deployer() &&
+        !is_founder() &&
+        !is_temple() &&
+        !is_master() ) {
+        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeedspec .");
+        return ;
+    }
+
+    auto it = get_kinddeedspec_table().scan({{"kdid",ctx->arg("kdid")}});
+    int i = 0;
+    string ret;
+    while(it->next()) {
+        kinddeedspec ent;
+        if (!it->get(&ent)) {
+            _log_error(__FUNCTION__, __LINE__, "kinddeedspec table get failure : " + it->error(true));
+            return;
+        }
+        i++;
+        ret += ent.to_string();
+    }
+    ctx->ok("size=" + to_string(i) + " " + ret);
+}
+
+
 
 namespace 申请善举上架下架{}
 
@@ -1929,8 +2121,8 @@ void Buddha::add_commentlabel() {
         return ;
     }
 
-    ent.set_id(stoll(id.c_str()));
-    ent.set_desc(desc.c_str());
+    ent.set_id(stoll(id));
+    ent.set_desc(desc);
     if (!get_commentlabel_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"commentlabel table put " + ent.to_string() + " failure .");
         return;
@@ -1994,8 +2186,8 @@ void Buddha::update_commentlabel() {
         return;
     }
 
-    ent.set_id(stoll(id.c_str()));
-    ent.set_desc(desc.c_str());
+    ent.set_id(stoll(id));
+    ent.set_desc(desc);
     if (!get_commentlabel_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"commentlabel table put " + ent.to_string() + " failure .");
         return;
@@ -2054,7 +2246,7 @@ void Buddha::add_beforecomment() {
 
     const string& labels = ctx->arg("labels");
     xchain::json label_array = xchain::json::parse(labels);
-    // mycout << label_array.dump().c_str() << endl ;
+    // mycout << label_array.dump() << endl ;
     if (!label_array.is_array()) {
         _log_error(__FUNCTION__, __LINE__,"field 'labels' need to be array .");
         return;
@@ -2090,12 +2282,12 @@ void Buddha::add_beforecomment() {
         return ;
     }
 
-    ent.set_owner(owner.c_str());
-    ent.set_kdid(kdid.c_str());
-    ent.set_satisfaction(stoll(satisfaction.c_str()));
-    ent.set_labels(labels.c_str());    
-    ent.set_comment(comment.c_str());
-    ent.set_timestamp(timestamp.c_str());
+    ent.set_owner(owner);
+    ent.set_kdid(kdid);
+    ent.set_satisfaction(stoll(satisfaction));
+    ent.set_labels(labels);    
+    ent.set_comment(comment);
+    ent.set_timestamp(timestamp);
     if (!get_beforecomment_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment table put " + ent.to_string() + " failure .");
         return;
@@ -2148,7 +2340,7 @@ void Buddha::update_beforecomment() {
 
     const string& labels = ctx->arg("labels");
     auto label_array = xchain::json::parse(labels);
-    // mycout << label_array.dump().c_str() << endl ;
+    // mycout << label_array.dump() << endl ;
     if (!label_array.is_array()) {
         _log_error(__FUNCTION__, __LINE__,"field 'labels' need to be array .");
         return;
@@ -2194,12 +2386,12 @@ void Buddha::update_beforecomment() {
         return;
     }
 
-    ent.set_owner(owner.c_str());
-    ent.set_kdid(kdid.c_str());
-    ent.set_satisfaction(stoll(satisfaction.c_str()));
-    ent.set_labels(labels.c_str());    
-    ent.set_comment(comment.c_str());
-    ent.set_timestamp(timestamp.c_str());
+    ent.set_owner(owner);
+    ent.set_kdid(kdid);
+    ent.set_satisfaction(stoll(satisfaction));
+    ent.set_labels(labels);    
+    ent.set_comment(comment);
+    ent.set_timestamp(timestamp);
     if (!get_beforecomment_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment table put " + ent.to_string() + " failure .");
         return;
@@ -2366,13 +2558,13 @@ void Buddha::pray_kinddeed() {
         return;
     }
     
-    od.set_id(orderid.c_str());
+    od.set_id(orderid);
     od.set_owner(ctx->initiator());
     od.set_kdid(kdid);
     od.set_specid(stoll(specid));
     od.set_count(stoll(count));
     od.set_amount(calced_amount);
-    od.set_timestamp(timestamp.c_str());
+    od.set_timestamp(timestamp);
     if (!get_order_table().put(od)) {
         _log_error(__FUNCTION__, __LINE__,"order table put " + od.to_string() + " failure .");
         return;
@@ -2496,10 +2688,10 @@ void Buddha::upload_kinddeedproof() {
         return ;
     }
 
-    ent.set_orderid(orderid.c_str());
+    ent.set_orderid(orderid);
     ent.set_owner(ctx->initiator());
-    ent.set_proof(proof.c_str());
-    ent.set_timestamp(timestamp.c_str());
+    ent.set_proof(proof);
+    ent.set_timestamp(timestamp);
     ent.set_approved(false);
     if (!get_kinddeedproof_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof table put " + ent.to_string() + " failure .");
@@ -2746,10 +2938,10 @@ void Buddha::add_aftercomment() {
         return ;
     }
 
-    ent.set_orderid(orderid.c_str());
-    ent.set_owner(owner.c_str());
-    ent.set_comment(comment.c_str());
-    ent.set_timestamp(timestamp.c_str());
+    ent.set_orderid(orderid);
+    ent.set_owner(owner);
+    ent.set_comment(comment);
+    ent.set_timestamp(timestamp);
     if (!get_aftercomment_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment table put " + ent.to_string() + " failure .");
         return;
@@ -2836,10 +3028,10 @@ void Buddha::update_aftercomment() {
         return;
     }
 
-    ent.set_orderid(orderid.c_str());
-    ent.set_owner(owner.c_str());
-    ent.set_comment(comment.c_str());
-    ent.set_timestamp(timestamp.c_str());
+    ent.set_orderid(orderid);
+    ent.set_owner(owner);
+    ent.set_comment(comment);
+    ent.set_timestamp(timestamp);
     if (!get_aftercomment_table().put(ent)) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment table put " + ent.to_string() + " failure .");
         return;
@@ -2963,6 +3155,9 @@ DEFINE_METHOD(Buddha, update_kinddeedtype)      { self.update_kinddeedtype();   
 DEFINE_METHOD(Buddha, find_kinddeedtype)        { self.find_kinddeedtype();         }
 DEFINE_METHOD(Buddha, list_kinddeedtype)        { self.list_kinddeedtype();         }
 
+
+DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
+DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
 DEFINE_METHOD(Buddha, add_kinddeed)             { self.add_kinddeed();              }
 DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();           }
 DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }

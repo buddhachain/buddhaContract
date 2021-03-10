@@ -130,13 +130,19 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeedtype --account
 ### 5.6 添加删除修改善举
 
 ```bash
+
+xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeeddetail -a '{"id":"1","sequence":"1","hash":"xxxxxx"}' --account XC1234567890444444@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeedspec -a '{"id":"1","sequence":"1","desc":"xxxxxx", "price":"10"}' --account XC1234567890444444@xuper
+
+
 xchain-cli wasm invoke --fee 1000000 buddha --method add_kinddeed -a '{"id":"1", "name":"kd1", "type":"1", "lasttime":"xxxxxx", "detail":"[{\"sequence\":\"1\", \"hash\":\"xxxxxx\"},{\"sequence\":\"2\", \"hash\":\"yyyyyy\"}]", "spec":"[{\"sequence\":\"1\", \"desc\":\"aaaaaa\", \"price\":\"10\"},{\"sequence\":\"2\", \"desc\":\"bbbbbb\", \"price\":\"10\"}]" }' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method delete_kinddeed -a '{"id":"1"}' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method update_kinddeed -a '{"id":"1", "name":"kd1", "type":"1", "lasttime":"xxxxxx", "detail":[{"sequence":"1", "hash":"xxxxxx"},{"sequence":"2", "hash":"yyyyyy"}], "spec":[{"sequence":"1", "desc":"aaaaaa", "price":"10"},{"sequence":"2", "desc":"bbbbbb", "price":"10"}] }' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_kinddeed -a '{"id":"1"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeed --account XC1234567890222222@xuper
 
-xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeeddetail -a '{"id":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeeddetail -a '{"kdid":"1"}' --account XC1234567890222222@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method list_kinddeedspec -a '{"kdid":"1"}' --account XC1234567890222222@xuper
 
 ```
 
@@ -167,9 +173,9 @@ xchain-cli wasm invoke --fee 1000000 buddha --method list_commentlabel --account
 ### 5.8 添加删除修改祈求善举前点评
 
 ```bash
-xchain-cli wasm invoke --fee 1000000 buddha --method add_beforecomment -a '{"kdid":"1", "satisfaction":"0", "labels":"[\"0\",\"1\"]"， "comment":"购前评价，不孬"}' --account XC1234567890555555@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method add_beforecomment -a '{"kdid":"1", "satisfaction":"0", "labels":"[\"1\"]","comment":"够前评论，不孬","timestamp":"xxxxxx"}' --account XC1234567890555555@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method delete_beforecomment -a '{"kdid":"1"}' --account XC1234567890555555@xuper
-xchain-cli wasm invoke --fee 1000000 buddha --method update_beforecomment -a '{"kdid":"1", "satisfaction":"0", "labels":"[\"0\",\"1\"]"， "comment":"购前评价，不孬"}' --account XC1234567890555555@xuper
+xchain-cli wasm invoke --fee 1000000 buddha --method update_beforecomment -a '{"kdid":"1", "satisfaction":"0", "labels":"[\"1\"]","comment":"够前评论，不孬","timestamp":"xxxxxx"}' --account XC1234567890555555@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_beforecomment -a '{"kdid":"1","owner":"XC1234567890555555"}' --account XC1234567890222222@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_beforecomment -a '{"kdid":"1","owner":"XC1234567890555555"}' --account XC1234567890444444@xuper
 xchain-cli wasm invoke --fee 1000000 buddha --method find_beforecomment -a '{"kdid":"1"}' --account XC1234567890555555@xuper
