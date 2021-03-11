@@ -214,22 +214,15 @@ bool Buddha::_is_order_exist(const string& id,order& ent) {
     return true;
 }
 
-bool Buddha::_is_kinddeedproof_exist_by_order(const string& orderid,kinddeedproof& ent) {
+bool Buddha::_is_kinddeedproof_exist(const string& orderid,kinddeedproof& ent) {
     if (!get_kinddeedproof_table().find({{"orderid", orderid}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_kinddeedproof_exist_by_proof(const string& proof,kinddeedproof& ent) {
-    if (!get_kinddeedproof_table().find({{"proof", proof}}, &ent))
-        return false;
-
-    return true;
-}
-
-bool Buddha::_is_aftercomment_exist(const string& orderid,aftercomment& ent) {
-    if (!get_aftercomment_table().find({{"orderid", orderid}}, &ent))
+bool Buddha::_is_aftercomment_exist(const string& orderid, const string& owner, aftercomment& ent) {
+    if (!get_aftercomment_table().find({{"orderid", orderid}, {"owner", owner}}, &ent))
         return false;
 
     return true;
@@ -514,9 +507,9 @@ bool Buddha::_delete_commentlabel_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_beforecomment_record(const string& owner, const string& kdid) {
+bool Buddha::_delete_beforecomment_record(const string& kdid, const string& owner) {
     beforecomment ent;
-    if (!_is_beforecomment_exist(owner, kdid, ent)){
+    if (!_is_beforecomment_exist(kdid, owner, ent)){
         mycout << "beforecomment  " << owner << "," << kdid << " is not exist ." << endl ;
         return false;
     }
@@ -549,7 +542,7 @@ bool Buddha::_delete_order_record(const string& id) {
 
 bool Buddha::_delete_kinddeedproof_record(const string& orderid) {
     kinddeedproof ent;
-    if (!_is_kinddeedproof_exist_by_order(orderid, ent)){
+    if (!_is_kinddeedproof_exist(orderid, ent)){
         mycout << "kinddeedproof " << orderid << " is not exist ." << endl ;
         return false;
     }
@@ -563,9 +556,9 @@ bool Buddha::_delete_kinddeedproof_record(const string& orderid) {
     return true;
 }
 
-bool Buddha::_delete_aftercomment_record(const string& orderid) {
+bool Buddha::_delete_aftercomment_record(const string& orderid, const string& owner) {
     aftercomment ent;
-    if (!_is_aftercomment_exist(orderid, ent)){
+    if (!_is_aftercomment_exist(orderid,owner,ent)){
         mycout << "aftercomment " << orderid << " is not exist ." << endl ;
         return false;
     }
@@ -2277,7 +2270,7 @@ void Buddha::add_beforecomment() {
     const string& owner = ctx->initiator() ;
 
     beforecomment ent;
-    if( _is_beforecomment_exist(owner,kdid,ent)) {
+    if( _is_beforecomment_exist(kdid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment " + kdid + " is exist .");
         return ;
     }
@@ -2306,7 +2299,7 @@ void Buddha::delete_beforecomment() {
     const string& owner = ctx->initiator();
 
     beforecomment ent;
-    if( !_is_beforecomment_exist(owner,kdid,ent)) {
+    if( !_is_beforecomment_exist(kdid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -2317,7 +2310,7 @@ void Buddha::delete_beforecomment() {
         return ;
     }
 
-    if( !_delete_beforecomment_record(owner, kdid) ) {
+    if( !_delete_beforecomment_record(kdid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete beforecomment " + ent.to_string() + " failure .");
         return;
     }
@@ -2371,7 +2364,7 @@ void Buddha::update_beforecomment() {
     const string& owner = ctx->initiator() ;
 
     beforecomment ent;
-    if( !_is_beforecomment_exist(owner,kdid,ent)) {
+    if( !_is_beforecomment_exist(kdid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -2381,7 +2374,7 @@ void Buddha::update_beforecomment() {
         return ;
     }
 
-    if( !_delete_beforecomment_record(owner, kdid) ) {
+    if( !_delete_beforecomment_record(kdid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete beforecomment " + ent.to_string() + " failure .");
         return;
     }
@@ -2417,7 +2410,7 @@ void Buddha::find_beforecomment() {
 
     if( !owner.empty()) {
         beforecomment ent;
-        if (!_is_beforecomment_exist(owner,kdid, ent))  {
+        if (!_is_beforecomment_exist(kdid,owner,ent))  {
             ctx->ok("beforecomment " + kdid + " is not exist .");
             return ;
         }
@@ -2444,7 +2437,7 @@ void Buddha::find_beforecomment() {
 
     //点评所有者调用，直接查询
     beforecomment ent;
-    if (!_is_beforecomment_exist(ctx->initiator(),kdid, ent))  {
+    if (!_is_beforecomment_exist(kdid,ctx->initiator(),ent))  {
         ctx->ok("beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -2481,12 +2474,10 @@ void Buddha::list_beforecomment() {
 }
 
 
-namespace 会员祈求善举{}
+namespace 用户祈求善举{}
 
 void Buddha::pray_kinddeed() {
 
-    cout << endl ;
-    
     const string& orderid = ctx->arg("id");
     if( orderid.empty()) {
         _log_error(__FUNCTION__, __LINE__,"orderid is empty .");
@@ -2560,6 +2551,7 @@ void Buddha::pray_kinddeed() {
     
     od.set_id(orderid);
     od.set_owner(ctx->initiator());
+    od.set_kdowner(kd.owner());
     od.set_kdid(kdid);
     od.set_specid(stoll(specid));
     od.set_count(stoll(count));
@@ -2571,6 +2563,39 @@ void Buddha::pray_kinddeed() {
     }
     
     ctx->ok("pray kinddeed " + to_string(calced_amount) + " success .");
+}
+
+void Buddha::delete_pray_kinddeed() {
+
+    const string& orderid = ctx->arg("id");
+    if( orderid.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"orderid is empty .");
+        return ;
+    }
+
+    //判断订单是否存在
+    order ent;
+    if (!_is_order_exist(orderid,ent))  {
+        _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
+        return ;
+    }
+
+    //判断身份
+    //判断是否是订单所有者，判断是否是善举所有者，判断是否是基金会成员或部署
+    if( !is_deployer() &&
+        !is_founder() &&
+        ctx->initiator() != ent.kdowner() &&
+        ctx->initiator() != ent.owner() ) {
+        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " have no authority to delete the pray kinddeed .");
+        return ;
+    }
+
+    if( !_delete_order_record(orderid) ) {
+        _log_error(__FUNCTION__, __LINE__,"delete pray kinddeed " + ent.to_string() + " failure .");
+        return;
+    }
+
+    ctx->ok("delete pray kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::find_pray_kinddeed() {
@@ -2672,7 +2697,7 @@ void Buddha::upload_kinddeedproof() {
     }
 
     kinddeedproof ent;
-    if (_is_kinddeedproof_exist_by_order(orderid, ent))  {
+    if (_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is exist .");
         return ;
     }
@@ -2714,7 +2739,7 @@ void Buddha::approve_kinddeedproof() {
     }
 
     kinddeedproof ent;
-    if (!_is_kinddeedproof_exist_by_order(orderid, ent))  {
+    if (!_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
         return ;
     }
@@ -2775,7 +2800,7 @@ void Buddha::refuse_kinddeedproof() {
     }
 
     kinddeedproof ent;
-    if (!_is_kinddeedproof_exist_by_order(orderid, ent))  {
+    if (!_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
         return ;
     }
@@ -2802,55 +2827,28 @@ void Buddha::refuse_kinddeedproof() {
 
 void Buddha::find_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    const string& proof = ctx->arg("proof");
 
-    if( orderid.empty() &&
-        proof.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof hash and orderid is empty .");
         return ;
     }
 
-    if( !orderid.empty() &&
-        !proof.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof hash and orderid should not all exist .");
+    order od;        
+    if (!_is_order_exist(orderid, od))  {
+        _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
         return ;
     }
 
     kinddeedproof ent;
-
-    if( !orderid.empty()) {
-        order od;        
-        if (!_is_order_exist(orderid, od))  {
-            _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
-            return ;
-        }
-
-        if (!_is_kinddeedproof_exist_by_order(orderid, ent))  {
-            _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
-            return ;
-        }
-    }
-
-    if( !proof.empty()) 
-        if (!_is_kinddeedproof_exist_by_proof(proof, ent))  {
-            _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + proof + " is not exist .");
-            return ;
-        }
-
-    if( is_deployer() ||
-        is_founder()) {
-        ctx->ok(ent.to_string());
+    if (!_is_kinddeedproof_exist(orderid, ent))  {
+        _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
         return ;
     }
     
-    if( !is_temple() &&
-        !is_master() ) {
+    if( !is_deployer() &&
+        !is_founder() &&
+        ent.owner() != ctx->initiator() ) {
         _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " have no authority to find kinddeedproof .");
-        return ;
-    }
-
-    if( ent.owner() != ctx->initiator() ) {
-        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not the right kinddeedproof owner, it should be " + ent.owner());
         return ;
     }
 
@@ -2874,6 +2872,7 @@ void Buddha::list_kinddeedproof() {
             ret += ent.to_string();
         }
         ctx->ok("size=" + to_string(i) + " " + ret);
+        return;
     }
 
     if( is_temple() || 
@@ -2922,7 +2921,7 @@ void Buddha::add_aftercomment() {
     const string& owner = ctx->initiator() ;
 
     aftercomment ent;
-    if( _is_aftercomment_exist(orderid,ent)) {
+    if( _is_aftercomment_exist(orderid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment " + orderid + " is exist .");
         return ;
     }
@@ -2960,7 +2959,7 @@ void Buddha::delete_aftercomment() {
     const string& owner = ctx->initiator();
 
     aftercomment ent;
-    if( !_is_aftercomment_exist(orderid,ent)) {
+    if( !_is_aftercomment_exist(orderid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment " + orderid + " is not exist .");
         return ;
     }
@@ -2977,7 +2976,7 @@ void Buddha::delete_aftercomment() {
         return ;
     }
 
-    if( !_delete_aftercomment_record(orderid) ) {
+    if( !_delete_aftercomment_record(orderid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete aftercomment " + ent.to_string() + " failure .");
         return;
     }
@@ -3007,7 +3006,7 @@ void Buddha::update_aftercomment() {
     const string& owner = ctx->initiator() ;
 
     aftercomment ent;
-    if( !_is_aftercomment_exist(orderid,ent)) {
+    if( !_is_aftercomment_exist(orderid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"kindeed type " + orderid + " is not exist .");
         return ;
     }
@@ -3023,7 +3022,7 @@ void Buddha::update_aftercomment() {
         return ;
     }
 
-    if( !_delete_aftercomment_record(orderid) ) {
+    if( !_delete_aftercomment_record(orderid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete aftercomment " + ent.to_string() + " failure .");
         return;
     }
@@ -3047,12 +3046,6 @@ void Buddha::find_aftercomment() {
         return ;
     }
 
-    aftercomment ent;
-    if (!_is_aftercomment_exist(orderid, ent))  {
-        ctx->ok("aftercomment " + orderid + " is not exist .");
-        return ;
-    }
-
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
@@ -3060,9 +3053,15 @@ void Buddha::find_aftercomment() {
     }
 
     if( !is_founder() &&
-        ent.owner() != ctx->initiator() &&
+        od.owner() != ctx->initiator() &&
         od.kdowner() != ctx->initiator()) {
-        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not owner, have no authority to update the comment .");
+        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " have no authority to update the comment .");
+        return ;
+    }
+
+    aftercomment ent;
+    if (!_is_aftercomment_exist(orderid,od.owner(),ent))  {
+        ctx->ok("aftercomment " + orderid + " is not exist .");
         return ;
     }
 
@@ -3185,6 +3184,7 @@ DEFINE_METHOD(Buddha, find_beforecomment)       { self.find_beforecomment();    
 DEFINE_METHOD(Buddha, list_beforecomment)       { self.list_beforecomment();        }
 
 DEFINE_METHOD(Buddha, pray_kinddeed)            { self.pray_kinddeed();             }
+DEFINE_METHOD(Buddha, delete_pray_kinddeed)     { self.delete_pray_kinddeed();      }
 DEFINE_METHOD(Buddha, find_pray_kinddeed)       { self.find_pray_kinddeed();        }
 DEFINE_METHOD(Buddha, list_pray_kinddeed)       { self.list_pray_kinddeed();        }
 DEFINE_METHOD(Buddha, is_user)                  { self.is_user();                   }

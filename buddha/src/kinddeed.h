@@ -10,40 +10,37 @@
 using namespace std;
 
 class kinddeedtype : public buddha::KinddeedType {
-    DEFINE_ROWKEY(id);
+    DEFINE_ROWKEY(id);          //主键
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(0, id) //主键只能find
     DEFINE_INDEX_END();
 
     string to_string();
 };
 
 class kinddeed: public buddha::Kinddeed {
-    DEFINE_ROWKEY(id);
+    DEFINE_ROWKEY(id);              //主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, id)
-        DEFINE_INDEX_ADD(1, owner)
-        DEFINE_INDEX_ADD(2, type)
-        DEFINE_INDEX_ADD(3, applied)
-        DEFINE_INDEX_ADD(4, online)
+        DEFINE_INDEX_ADD(0, id)     //主键只能find
+        DEFINE_INDEX_ADD(1, owner)  //非主键只能scan
     DEFINE_INDEX_END();
 
     string to_string() ;
 };
 
 class kinddeeddetail: public buddha::KinddeedDetail {
-    DEFINE_ROWKEY(kdid,sequence);
+    DEFINE_ROWKEY(kdid,sequence);   //联合主键
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, kdid)
+        DEFINE_INDEX_ADD(0, kdid)   //非主键只能scan
     DEFINE_INDEX_END();
 
     string to_string();
 };
 
 class kinddeedspec: public buddha::KinddeedSpec {
-    DEFINE_ROWKEY(kdid,sequence);
+    DEFINE_ROWKEY(kdid,sequence);   //联合主键
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, kdid)
+        DEFINE_INDEX_ADD(0, kdid)   //非主键只能scan
     DEFINE_INDEX_END();
 
     string to_string() ;

@@ -118,9 +118,8 @@ private:
     bool _is_all_types_exist_in_commentlabel(const xchain::json& label_array);
     bool _is_beforecomment_exist(const string&, const string&,beforecomment&);
     bool _is_order_exist(const string&,order&);
-    bool _is_kinddeedproof_exist_by_order(const string&,kinddeedproof&);
-    bool _is_kinddeedproof_exist_by_proof(const string&,kinddeedproof&);
-    bool _is_aftercomment_exist(const string&,aftercomment&);
+    bool _is_kinddeedproof_exist(const string&,kinddeedproof&);
+    bool _is_aftercomment_exist(const string&,const string&, aftercomment&);
 
     bool _get_kinddeed(const string&,kinddeed&);
     bool _is_kinddeed_online(const string&) ;
@@ -143,10 +142,10 @@ private:
     bool _delete_kinddeedspec_records(const string&);
     bool _delete_kinddeedspec_record(const string&, const string&);
     bool _delete_commentlabel_record(const string&);
-    bool _delete_beforecomment_record(const string& userid, const string&);
+    bool _delete_beforecomment_record(const string&, const string&);
     bool _delete_order_record(const string&);
     bool _delete_kinddeedproof_record(const string&);
-    bool _delete_aftercomment_record(const string&);
+    bool _delete_aftercomment_record(const string&, const string&);
 
     bool _add_kinddeeddetail(const string&,const string&,const string&);
     bool _add_kinddeedspec(const string&,const string&,const string&,const string&);
@@ -169,28 +168,28 @@ public:
     void approve_founder();         //合约部署者
     void recusal_founder();         //合约部署者
     bool is_founder();              //所有角色，判断自己是否是基金会成员
-    void list_founder();            //合约部署着，基金会成员，根据id查所有，id可为空，安全，
+    void list_founder();            //合约部署者，基金会成员，根据id查所有，id可为空，安全，
 
     //申请成为寺院
     void apply_temple();            //用户,法师
     void approve_temple();          //基金会成员
     void recusal_temple();          //基金会成员
     bool is_temple();               //所有角色，判断自己是否是寺院
-    void list_temple();             //合约部署着，基金会成员，根据id查所有，id可为空，安全，
+    void list_temple();             //合约部署者，基金会成员，根据id查所有，id可为空，安全，
 
     //申请成为法师
     void apply_master();            //用户
     void approve_master();          //基金会成员
     void recusal_master();          //基金会成员
     bool is_master();               //所有角色，判断自己是否是法师
-    void list_master();             //合约部署着，基金会成员，根据id查所有，id可为空，基本安全，
+    void list_master();             //合约部署者，基金会成员，根据id查所有，id可为空，基本安全，
 
     //法师申请加入寺院
     void apply_join_temple();       //法师
     void approve_join_temple();     //基金会成员
     void recusal_join_temple();     //基金会成员
     bool is_in_temple();            //法师
-    void list_temple_master();      //合约部署着，基金会成员,寺院自己，根据templeid查所有，templeid为空时基本安全，templeid不为空时，安全
+    void list_temple_master();      //合约部署者，基金会成员,寺院自己，根据templeid查所有，templeid为空时基本安全，templeid不为空时，安全
 
     //添加删除修改善举类型
     void add_kinddeedtype();        //基金会成员
@@ -235,7 +234,8 @@ public:
 
     //用户祈求善举，即订单
     void pray_kinddeed();           //所有用户
-    void find_pray_kinddeed();      //署者，基金会成员，寺院，法师，所有者
+    void delete_pray_kinddeed();    //部署者，基金会成员,寺院，法师(善举所有者),订单所有者
+    void find_pray_kinddeed();      //部署者，基金会成员，寺院，法师，所有者
     void list_pray_kinddeed();      //部署者，基金会成员，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
                                     //寺院，法师(善举发布者,只查看自己发布的所有善举的订单)，根据kdowner查匹配，基本安全
     bool is_user();                 //所有用户

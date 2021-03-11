@@ -89,7 +89,7 @@ message BeforeComment {
 //订单表。
 message Order {
     string id           = 1; //订单编号，唯一
-    string owner        = 2; //订单所有者，哪个会员祈求了此善举订单
+    string owner        = 2; //订单所有者，哪个用户祈求了此善举订单
     string kdowner      = 3; //对应善举所有者
     string kdid         = 4; //对应的善举id
     int64  specid       = 5; //对应的善举规格id

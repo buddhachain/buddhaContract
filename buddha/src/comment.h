@@ -9,29 +9,29 @@
 using namespace std;
 
 class commentlabel: public buddha::CommentLabel {
-    DEFINE_ROWKEY(id);
+    DEFINE_ROWKEY(id);          //主键
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(0, id) //主键只能find
     DEFINE_INDEX_END();
 
     string to_string();
 };
 
 class beforecomment: public buddha::BeforeComment {
-    DEFINE_ROWKEY(kdid,owner);
+    DEFINE_ROWKEY(kdid,owner);      //联合主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, kdid)
-        DEFINE_INDEX_ADD(1, owner)
+        DEFINE_INDEX_ADD(0, kdid)   //非主键只能scan
+        DEFINE_INDEX_ADD(1, owner)  //非主键只能scan
     DEFINE_INDEX_END();
 
     string to_string();
 };
 
 class aftercomment: public buddha::AfterComment {
-    DEFINE_ROWKEY(orderid, owner);
+    DEFINE_ROWKEY(orderid, owner);      //联合主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, orderid)
-        DEFINE_INDEX_ADD(1, owner)
+        DEFINE_INDEX_ADD(0, orderid)    //非主键只能scan
+        DEFINE_INDEX_ADD(1, owner)      //非主键只能scan
     DEFINE_INDEX_END();
 
     string to_string();
