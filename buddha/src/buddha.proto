@@ -3,13 +3,29 @@ option optimize_for = LITE_RUNTIME;
 
 package buddha;
 
-
 //基金会成员表。
 message Founder {
     string id           = 1; //基金会名称，唯一
     string desc         = 2; //基金会描述
     int64  guaranty     = 3; //抵押数量
-    bool   approved     = 4; //是否已经批准是基金会成员，0尚未批准，1已经批准
+    string address      = 4; //地址
+    string timestamp    = 5; //申请时间
+    bool   approved     = 6; //是否已经批准是基金会成员，0尚未批准，1已经批准
+}
+
+//提案表
+message Proposal {
+    string key          = 1; //配置的键,唯一
+    string value        = 2; //配置的老键值
+    string owner        = 3; //提案发起者   
+    string newvalue     = 4; //配置的新键值
+    string operate      = 5; //make,delete,update
+    string timestamp    = 6; //发起提案日期
+    string expire       = 7; //最晚提案确认时间
+    int64  count        = 8; //基金会成员个数
+    string founders     = 9; //基金会成员列表
+    string results      = 10; //提案结论
+    string timestamps   = 11; //提案结论时间
 }
 
 //寺院表，寺院具有唯一性。

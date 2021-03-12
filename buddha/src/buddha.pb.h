@@ -40,7 +40,7 @@ struct TableStruct_buddha_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[13]
+  static const ::google::protobuf::internal::ParseTable schema[14]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -56,6 +56,9 @@ extern BeforeCommentDefaultTypeInternal _BeforeComment_default_instance_;
 class CommentLabel;
 class CommentLabelDefaultTypeInternal;
 extern CommentLabelDefaultTypeInternal _CommentLabel_default_instance_;
+class Config;
+class ConfigDefaultTypeInternal;
+extern ConfigDefaultTypeInternal _Config_default_instance_;
 class Founder;
 class FounderDefaultTypeInternal;
 extern FounderDefaultTypeInternal _Founder_default_instance_;
@@ -92,6 +95,7 @@ namespace protobuf {
 template<> ::buddha::AfterComment* Arena::CreateMaybeMessage<::buddha::AfterComment>(Arena*);
 template<> ::buddha::BeforeComment* Arena::CreateMaybeMessage<::buddha::BeforeComment>(Arena*);
 template<> ::buddha::CommentLabel* Arena::CreateMaybeMessage<::buddha::CommentLabel>(Arena*);
+template<> ::buddha::Config* Arena::CreateMaybeMessage<::buddha::Config>(Arena*);
 template<> ::buddha::Founder* Arena::CreateMaybeMessage<::buddha::Founder>(Arena*);
 template<> ::buddha::Kinddeed* Arena::CreateMaybeMessage<::buddha::Kinddeed>(Arena*);
 template<> ::buddha::KinddeedDetail* Arena::CreateMaybeMessage<::buddha::KinddeedDetail>(Arena*);
@@ -107,6 +111,137 @@ template<> ::buddha::TempleMaster* Arena::CreateMaybeMessage<::buddha::TempleMas
 namespace buddha {
 
 // ===================================================================
+
+class Config :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.Config) */ {
+ public:
+  Config();
+  virtual ~Config();
+
+  Config(const Config& from);
+
+  inline Config& operator=(const Config& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Config(Config&& from) noexcept
+    : Config() {
+    *this = ::std::move(from);
+  }
+
+  inline Config& operator=(Config&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const Config& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Config* internal_default_instance() {
+    return reinterpret_cast<const Config*>(
+               &_Config_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  void Swap(Config* other);
+  friend void swap(Config& a, Config& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Config* New() const final {
+    return CreateMaybeMessage<Config>(nullptr);
+  }
+
+  Config* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Config>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const Config& from);
+  void MergeFrom(const Config& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Config* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string key = 1;
+  void clear_key();
+  static const int kKeyFieldNumber = 1;
+  const ::std::string& key() const;
+  void set_key(const ::std::string& value);
+  #if LANG_CXX11
+  void set_key(::std::string&& value);
+  #endif
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  ::std::string* mutable_key();
+  ::std::string* release_key();
+  void set_allocated_key(::std::string* key);
+
+  // string value = 2;
+  void clear_value();
+  static const int kValueFieldNumber = 2;
+  const ::std::string& value() const;
+  void set_value(const ::std::string& value);
+  #if LANG_CXX11
+  void set_value(::std::string&& value);
+  #endif
+  void set_value(const char* value);
+  void set_value(const char* value, size_t size);
+  ::std::string* mutable_value();
+  ::std::string* release_value();
+  void set_allocated_value(::std::string* value);
+
+  // @@protoc_insertion_point(class_scope:buddha.Config)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr key_;
+  ::google::protobuf::internal::ArenaStringPtr value_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_buddha_2eproto;
+};
+// -------------------------------------------------------------------
 
 class Founder :
     public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.Founder) */ {
@@ -143,7 +278,7 @@ class Founder :
                &_Founder_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   void Swap(Founder* other);
   friend void swap(Founder& a, Founder& b) {
@@ -288,7 +423,7 @@ class Temple :
                &_Temple_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   void Swap(Temple* other);
   friend void swap(Temple& a, Temple& b) {
@@ -471,7 +606,7 @@ class Master :
                &_Master_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   void Swap(Master* other);
   friend void swap(Master& a, Master& b) {
@@ -624,7 +759,7 @@ class TempleMaster :
                &_TempleMaster_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(TempleMaster* other);
   friend void swap(TempleMaster& a, TempleMaster& b) {
@@ -762,7 +897,7 @@ class KinddeedType :
                &_KinddeedType_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(KinddeedType* other);
   friend void swap(KinddeedType& a, KinddeedType& b) {
@@ -885,7 +1020,7 @@ class Kinddeed :
                &_Kinddeed_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(Kinddeed* other);
   friend void swap(Kinddeed& a, Kinddeed& b) {
@@ -1067,7 +1202,7 @@ class KinddeedDetail :
                &_KinddeedDetail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   void Swap(KinddeedDetail* other);
   friend void swap(KinddeedDetail& a, KinddeedDetail& b) {
@@ -1205,7 +1340,7 @@ class KinddeedSpec :
                &_KinddeedSpec_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   void Swap(KinddeedSpec* other);
   friend void swap(KinddeedSpec& a, KinddeedSpec& b) {
@@ -1350,7 +1485,7 @@ class CommentLabel :
                &_CommentLabel_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   void Swap(CommentLabel* other);
   friend void swap(CommentLabel& a, CommentLabel& b) {
@@ -1473,7 +1608,7 @@ class BeforeComment :
                &_BeforeComment_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   void Swap(BeforeComment* other);
   friend void swap(BeforeComment& a, BeforeComment& b) {
@@ -1656,7 +1791,7 @@ class Order :
                &_Order_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   void Swap(Order* other);
   friend void swap(Order& a, Order& b) {
@@ -1853,7 +1988,7 @@ class KinddeedProof :
                &_KinddeedProof_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   void Swap(KinddeedProof* other);
   friend void swap(KinddeedProof& a, KinddeedProof& b) {
@@ -2021,7 +2156,7 @@ class AfterComment :
                &_AfterComment_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   void Swap(AfterComment* other);
   friend void swap(AfterComment& a, AfterComment& b) {
@@ -2154,6 +2289,116 @@ class AfterComment :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// Config
+
+// string key = 1;
+inline void Config::clear_key() {
+  key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Config::key() const {
+  // @@protoc_insertion_point(field_get:buddha.Config.key)
+  return key_.GetNoArena();
+}
+inline void Config::set_key(const ::std::string& value) {
+  
+  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Config.key)
+}
+#if LANG_CXX11
+inline void Config::set_key(::std::string&& value) {
+  
+  key_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Config.key)
+}
+#endif
+inline void Config::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Config.key)
+}
+inline void Config::set_key(const char* value, size_t size) {
+  
+  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.Config.key)
+}
+inline ::std::string* Config::mutable_key() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.Config.key)
+  return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Config::release_key() {
+  // @@protoc_insertion_point(field_release:buddha.Config.key)
+  
+  return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Config::set_allocated_key(::std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Config.key)
+}
+
+// string value = 2;
+inline void Config::clear_value() {
+  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Config::value() const {
+  // @@protoc_insertion_point(field_get:buddha.Config.value)
+  return value_.GetNoArena();
+}
+inline void Config::set_value(const ::std::string& value) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Config.value)
+}
+#if LANG_CXX11
+inline void Config::set_value(::std::string&& value) {
+  
+  value_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Config.value)
+}
+#endif
+inline void Config::set_value(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Config.value)
+}
+inline void Config::set_value(const char* value, size_t size) {
+  
+  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.Config.value)
+}
+inline ::std::string* Config::mutable_value() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.Config.value)
+  return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Config::release_value() {
+  // @@protoc_insertion_point(field_release:buddha.Config.value)
+  
+  return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Config::set_allocated_value(::std::string* value) {
+  if (value != nullptr) {
+    
+  } else {
+    
+  }
+  value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Config.value)
+}
+
+// -------------------------------------------------------------------
+
 // Founder
 
 // string id = 1;
@@ -4579,6 +4824,8 @@ inline void AfterComment::set_allocated_timestamp(::std::string* timestamp) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
