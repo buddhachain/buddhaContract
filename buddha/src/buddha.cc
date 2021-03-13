@@ -40,7 +40,12 @@ Buddha::Buddha() :
 
 void Buddha::_log_error(string fun, int line, string str) {
     cout << fun << "[" << line << "] " << str << endl;
-    ctx->error(str);
+
+    ctx->error("{ \"result\":false, \"message\":\"" + str +"\" }");
+}
+
+void Buddha::_log_ok(string str) {
+    ctx->ok("{ \"result\":true, \"message\":\"" + str +"\" }");
 }
 
 bool Buddha::_is_founder_exist(const string& id,founder& ent) {
@@ -672,7 +677,7 @@ namespace 合约部署者{}
 void Buddha::initialize() {
     ctx->put_object("deployer", ctx->initiator());
     ctx->emit_event("initialize", ctx->initiator());
-    ctx->ok("deployer=" + ctx->initiator() + " success");
+    _log_ok("deployer=" + ctx->initiator() + " success");
 }
 
 void Buddha::get_deployer() {
@@ -688,17 +693,17 @@ void Buddha::get_deployer() {
         return ;
     }
 
-    ctx->ok("deployer=" + deployer);
+    _log_ok("deployer=" + deployer);
 }
 
 bool Buddha::is_deployer() {
     bool ret = _is_deployer(ctx->initiator());
     if (ret) {
-        ctx->ok(ctx->initiator() + " is deployer .") ;
+        _log_ok(ctx->initiator() + " is deployer .") ;
         return true;
     }
     
-    ctx->ok(ctx->initiator() + " is not deployer .") ;
+    _log_ok(ctx->initiator() + " is not deployer .") ;
     return false;
 }
 
@@ -750,7 +755,7 @@ void Buddha::apply_founder(){
         return;
     }
 
-    ctx->ok(ent.to_string() + " apply tobe founder over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply tobe founder over, please wait for approve .");
 }
 
 void Buddha::approve_founder() {
@@ -787,7 +792,7 @@ void Buddha::approve_founder() {
         return;
     }
 
-    ctx->ok("audit " + ent.to_string() + " to be founder .");
+    _log_ok("audit " + ent.to_string() + " to be founder .");
 }
 
 void Buddha::recusal_founder() {
@@ -820,16 +825,16 @@ void Buddha::recusal_founder() {
         return ;
     }
 
-    ctx->ok("recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance .");
+    _log_ok("recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance .");
 }
 
 bool Buddha::is_founder() {
     if (!_is_founder(ctx->initiator())) {
-        ctx->ok(ctx->initiator() + " is not founder .") ;
+        _log_ok(ctx->initiator() + " is not founder .") ;
         return false;
     }
     
-    ctx->ok(ctx->initiator() + " is founder .") ;
+    _log_ok(ctx->initiator() + " is founder .") ;
     return true;
 }
 
@@ -853,7 +858,7 @@ void Buddha::list_founder() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 namespace 申请成为寺院{}
@@ -908,7 +913,7 @@ void Buddha::apply_temple(){
         return;
     }
 
-    ctx->ok(ent.to_string() + " apply tobe temple over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply tobe temple over, please wait for approve .");
 }
 
 void Buddha::approve_temple() {
@@ -945,7 +950,7 @@ void Buddha::approve_temple() {
         return;
     }
 
-    ctx->ok("approve temple " + ent.to_string() + " success .");
+    _log_ok("approve temple " + ent.to_string() + " success .");
 }
 
 void Buddha::recusal_temple() {
@@ -971,16 +976,16 @@ void Buddha::recusal_temple() {
         return;
     }
 
-    ctx->ok("recusal temple " + ent.to_string() + " success .");
+    _log_ok("recusal temple " + ent.to_string() + " success .");
 }
 
 bool Buddha::is_temple() {
     if (!_is_temple(ctx->initiator())) {
-        ctx->ok(ctx->initiator() + " is not temple .") ;
+        _log_ok(ctx->initiator() + " is not temple .") ;
         return false;
     }
     
-    ctx->ok(ctx->initiator() + " is temple .") ;
+    _log_ok(ctx->initiator() + " is temple .") ;
     return true;
 }
 
@@ -1005,7 +1010,7 @@ void Buddha::list_temple() {
         ret += ent.to_string();
     }
 
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 namespace 申请成为法师{}
@@ -1045,7 +1050,7 @@ void Buddha::apply_master(){
         return;
     }
 
-    ctx->ok(ent.to_string() + " apply tobe master over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply tobe master over, please wait for approve .");
 }
 
 void Buddha::approve_master() {
@@ -1082,7 +1087,7 @@ void Buddha::approve_master() {
         return;
     }
 
-    ctx->ok("approve master " + ent.to_string() + " success .");
+    _log_ok("approve master " + ent.to_string() + " success .");
 }
 
 void Buddha::recusal_master() {
@@ -1108,16 +1113,16 @@ void Buddha::recusal_master() {
         return;
     }
 
-    ctx->ok("recusal master " + ent.to_string() + " success .");
+    _log_ok("recusal master " + ent.to_string() + " success .");
 }
 
 bool Buddha::is_master() {
     if (!_is_master(ctx->initiator())) {
-        ctx->ok(ctx->initiator() + " is not master .") ;
+        _log_ok(ctx->initiator() + " is not master .") ;
         return false;
     }
     
-    ctx->ok(ctx->initiator() + " is master .") ;
+    _log_ok(ctx->initiator() + " is master .") ;
     return true;
 }
 
@@ -1141,7 +1146,7 @@ void Buddha::list_master() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 namespace 申请加入寺院{}
@@ -1188,7 +1193,7 @@ void Buddha::apply_join_temple(){
         return;
     }
 
-    ctx->ok(ent.to_string() + " apply join templemaster over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply join templemaster over, please wait for approve .");
 }
 
 void Buddha::approve_join_temple() {
@@ -1236,7 +1241,7 @@ void Buddha::approve_join_temple() {
         return;
     }
 
-    ctx->ok("approve templemaster " + ent.to_string() + " success .");
+    _log_ok("approve templemaster " + ent.to_string() + " success .");
 }
 
 void Buddha::recusal_join_temple() {
@@ -1268,7 +1273,7 @@ void Buddha::recusal_join_temple() {
         return;
     }
 
-    ctx->ok("recusal templemaster " + ent.to_string() + " success .");
+    _log_ok("recusal templemaster " + ent.to_string() + " success .");
 }
 
 bool Buddha::is_in_temple() {
@@ -1292,11 +1297,11 @@ bool Buddha::is_in_temple() {
 
     templemaster ent;
     if (!_is_in_temple(templeid, masterid, ent)) {
-        ctx->ok(masterid + " is not join temple .") ;
+        _log_ok(masterid + " is not join temple .") ;
         return false;
     }
 
-    ctx->ok(masterid + " is join temple .") ;
+    _log_ok(masterid + " is join temple .") ;
     return true;
 }
 
@@ -1318,7 +1323,7 @@ void Buddha::list_temple_master() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
 
         return ;
     }
@@ -1338,7 +1343,7 @@ void Buddha::list_temple_master() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -1379,7 +1384,7 @@ void Buddha::add_kinddeedtype() {
         return;
     }
 
-    ctx->ok("add kinddeedtype " + ent.to_string() + " success .");
+    _log_ok("add kinddeedtype " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_kinddeedtype() {
@@ -1405,7 +1410,7 @@ void Buddha::delete_kinddeedtype() {
         return;
     }
 
-    ctx->ok("delete kinddeedtype " + ent.to_string() + " success .");
+    _log_ok("delete kinddeedtype " + ent.to_string() + " success .");
 }
 
 void Buddha::update_kinddeedtype() {
@@ -1444,7 +1449,7 @@ void Buddha::update_kinddeedtype() {
         return;
     }
 
-    ctx->ok("update kinddeedtype " + ent.to_string() + " success .");
+    _log_ok("update kinddeedtype " + ent.to_string() + " success .");
 }
 
 void Buddha::find_kinddeedtype() {
@@ -1456,11 +1461,11 @@ void Buddha::find_kinddeedtype() {
 
     kinddeedtype ent;
     if (!_is_kinddeedtype_exist(id, ent))  {
-        ctx->ok("kinddeedtype " + id + " is not exist .");
+        _log_ok("kinddeedtype " + id + " is not exist .");
         return ;
     }
 
-    ctx->ok(ent.to_string());
+    _log_ok(ent.to_string());
 }
 
 void Buddha::list_kinddeedtype() {
@@ -1477,7 +1482,7 @@ void Buddha::list_kinddeedtype() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 
@@ -1492,7 +1497,7 @@ void Buddha::add_kinddeeddetail() {
         return;
     }
 
-    ctx->ok("ok");
+    _log_ok("ok");
 }
 
 void Buddha::add_kinddeedspec() {
@@ -1505,7 +1510,7 @@ void Buddha::add_kinddeedspec() {
         return;
     }
 
-    ctx->ok("ok");
+    _log_ok("ok");
 }
 
 void Buddha::add_kinddeed() {
@@ -1637,7 +1642,7 @@ void Buddha::add_kinddeed() {
         return;
     }
 
-    ctx->ok("add kinddeed " + ent.to_string() + " success .");
+    _log_ok("add kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_kinddeed() {
@@ -1671,7 +1676,7 @@ void Buddha::delete_kinddeed() {
         return;
     }
 
-    ctx->ok("delete kinddeed " + ent.to_string() + " success .");
+    _log_ok("delete kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::update_kinddeed() {
@@ -1803,7 +1808,7 @@ void Buddha::update_kinddeed() {
         return;
     }
 
-    ctx->ok("update kinddeed " + ent.to_string() + " success .");
+    _log_ok("update kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::find_kinddeed() {       
@@ -1816,7 +1821,7 @@ void Buddha::find_kinddeed() {
 
     kinddeed kinddeed_ent;
     if (!_is_kinddeed_exist(id, kinddeed_ent))  {
-        ctx->ok("kinddeed " + id + " is not exist .");
+        _log_ok("kinddeed " + id + " is not exist .");
         return ;
     }
 
@@ -1834,7 +1839,7 @@ void Buddha::find_kinddeed() {
         spec_string += v_kinddeedspec_ent[i].to_string();
     }
 
-    ctx->ok(kinddeed_ent.to_string() + detail_string + spec_string);
+    _log_ok(kinddeed_ent.to_string() + detail_string + spec_string);
 }
 
 void Buddha::list_kinddeed() {        
@@ -1852,7 +1857,7 @@ void Buddha::list_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -1871,7 +1876,7 @@ void Buddha::list_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -1899,7 +1904,7 @@ void Buddha::list_kinddeeddetail() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 void Buddha::list_kinddeedspec() {        
@@ -1923,7 +1928,7 @@ void Buddha::list_kinddeedspec() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 
@@ -1970,7 +1975,7 @@ void Buddha::apply_online_kinddeed() {
         return;
     }
 
-    ctx->ok("kinddeed " + ent.to_string() + " apply online over, please wait for approve .");
+    _log_ok("kinddeed " + ent.to_string() + " apply online over, please wait for approve .");
 }
 
 void Buddha::apply_offline_kinddeed() {
@@ -2013,7 +2018,7 @@ void Buddha::apply_offline_kinddeed() {
         return;
     }
 
-    ctx->ok("kinddeed " + ent.to_string() + " apply offline over, please wait for approve .");
+    _log_ok("kinddeed " + ent.to_string() + " apply offline over, please wait for approve .");
 }
 
 void Buddha::approve_online_kinddeed() {
@@ -2056,7 +2061,7 @@ void Buddha::approve_online_kinddeed() {
         return;
     }
 
-    ctx->ok("approve kinddeed " + ent.to_string() + " online success .");
+    _log_ok("approve kinddeed " + ent.to_string() + " online success .");
 }
 
 void Buddha::approve_offline_kinddeed() {
@@ -2099,7 +2104,7 @@ void Buddha::approve_offline_kinddeed() {
         return;
     }
 
-    ctx->ok("approve kinddeed " + ent.to_string() + " offline success .");
+    _log_ok("approve kinddeed " + ent.to_string() + " offline success .");
 }
 
 
@@ -2135,7 +2140,7 @@ void Buddha::add_commentlabel() {
         return;
     }
 
-    ctx->ok("add commentlabel " + ent.to_string() + " success .");
+    _log_ok("add commentlabel " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_commentlabel() {
@@ -2161,7 +2166,7 @@ void Buddha::delete_commentlabel() {
         return;
     }
 
-    ctx->ok("delete commentlabel " + ent.to_string() + " success .");
+    _log_ok("delete commentlabel " + ent.to_string() + " success .");
 }
 
 void Buddha::update_commentlabel() {
@@ -2200,7 +2205,7 @@ void Buddha::update_commentlabel() {
         return;
     }
 
-    ctx->ok("update commentlabel " + ent.to_string() + " success .");
+    _log_ok("update commentlabel " + ent.to_string() + " success .");
 }
 
 void Buddha::find_commentlabel() {
@@ -2216,7 +2221,7 @@ void Buddha::find_commentlabel() {
         return ;
     }
 
-    ctx->ok(ent.to_string());
+    _log_ok(ent.to_string());
 }
 
 void Buddha::list_commentlabel() {
@@ -2233,7 +2238,7 @@ void Buddha::list_commentlabel() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 
@@ -2300,7 +2305,7 @@ void Buddha::add_beforecomment() {
         return;
     }
 
-    ctx->ok("add beforecomment " + ent.to_string() + " success .");
+    _log_ok("add beforecomment " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_beforecomment() {
@@ -2329,7 +2334,7 @@ void Buddha::delete_beforecomment() {
         return;
     }
 
-    ctx->ok("delete beforecomment " + ent.to_string() + " success .");
+    _log_ok("delete beforecomment " + ent.to_string() + " success .");
 }
 
 void Buddha::update_beforecomment() {
@@ -2404,7 +2409,7 @@ void Buddha::update_beforecomment() {
         return;
     }
 
-    ctx->ok("update beforecomment " + ent.to_string() + " success .");
+    _log_ok("update beforecomment " + ent.to_string() + " success .");
 }
 
 void Buddha::find_beforecomment() {
@@ -2425,14 +2430,14 @@ void Buddha::find_beforecomment() {
     if( !owner.empty()) {
         beforecomment ent;
         if (!_is_beforecomment_exist(kdid,owner,ent))  {
-            ctx->ok("beforecomment " + kdid + " is not exist .");
+            _log_ok("beforecomment " + kdid + " is not exist .");
             return ;
         }
 
         if( is_founder() ||                      //基金会成员
             owner == ctx->initiator() ||        //点评的所有者
             kd.owner() == ctx->initiator() ) { //善举所有者
-            ctx->ok(ent.to_string());
+            _log_ok(ent.to_string());
             return ;
         }
 
@@ -2452,10 +2457,10 @@ void Buddha::find_beforecomment() {
     //点评所有者调用，直接查询
     beforecomment ent;
     if (!_is_beforecomment_exist(kdid,ctx->initiator(),ent))  {
-        ctx->ok("beforecomment " + kdid + " is not exist .");
+        _log_ok("beforecomment " + kdid + " is not exist .");
         return ;
     }
-    ctx->ok(ent.to_string());
+    _log_ok(ent.to_string());
 }
 
 void Buddha::list_beforecomment() {
@@ -2484,7 +2489,7 @@ void Buddha::list_beforecomment() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 }
 
 
@@ -2576,7 +2581,7 @@ void Buddha::pray_kinddeed() {
         return;
     }
     
-    ctx->ok("pray kinddeed " + to_string(calced_amount) + " success .");
+    _log_ok("pray kinddeed " + to_string(calced_amount) + " success .");
 }
 
 void Buddha::delete_pray_kinddeed() {
@@ -2609,7 +2614,7 @@ void Buddha::delete_pray_kinddeed() {
         return;
     }
 
-    ctx->ok("delete pray kinddeed " + ent.to_string() + " success .");
+    _log_ok("delete pray kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::find_pray_kinddeed() {
@@ -2634,7 +2639,7 @@ void Buddha::find_pray_kinddeed() {
         return ;
     }
 
-    ctx->ok(ent.to_string());
+    _log_ok(ent.to_string());
 }
 
 void Buddha::list_pray_kinddeed() {
@@ -2653,7 +2658,7 @@ void Buddha::list_pray_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -2672,7 +2677,7 @@ void Buddha::list_pray_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -2681,11 +2686,11 @@ void Buddha::list_pray_kinddeed() {
 
 bool Buddha::is_user() {
     if (!_is_user(ctx->initiator())) {
-        ctx->ok(ctx->initiator() + " is not user .") ;
+        _log_ok(ctx->initiator() + " is not user .") ;
         return false;
     }
 
-    ctx->ok(ctx->initiator() + " is user .") ;
+    _log_ok(ctx->initiator() + " is user .") ;
     return true;
 }
 
@@ -2737,7 +2742,7 @@ void Buddha::upload_kinddeedproof() {
         return;
     }
 
-    ctx->ok("apply kinddeed " + ent.to_string() + " proof over, please wait for approve .");
+    _log_ok("apply kinddeed " + ent.to_string() + " proof over, please wait for approve .");
 }
 
 void Buddha::approve_kinddeedproof() {
@@ -2766,7 +2771,7 @@ void Buddha::approve_kinddeedproof() {
     }
 
     if (ent.approved())  {
-        ctx->ok("kinddeedproof " + orderid + " has approved yet .");
+        _log_ok("kinddeedproof " + orderid + " has approved yet .");
         return ;
     }
 
@@ -2798,7 +2803,7 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
-    ctx->ok("approve kinddeed " + ent.to_string() + " proof success .");
+    _log_ok("approve kinddeed " + ent.to_string() + " proof success .");
 }
 
 void Buddha::refuse_kinddeedproof() {
@@ -2827,7 +2832,7 @@ void Buddha::refuse_kinddeedproof() {
     }
 
     if (ent.approved())  {
-        ctx->ok("kinddeedproof " + orderid + " has approved yet .");
+        _log_ok("kinddeedproof " + orderid + " has approved yet .");
         return ;
     }
 
@@ -2836,7 +2841,7 @@ void Buddha::refuse_kinddeedproof() {
         return;
     }
 
-    ctx->ok("refuse kinddeed " + ent.to_string() + " proof success .");
+    _log_ok("refuse kinddeed " + ent.to_string() + " proof success .");
 }
 
 void Buddha::find_kinddeedproof() {
@@ -2866,7 +2871,7 @@ void Buddha::find_kinddeedproof() {
         return ;
     }
 
-    ctx->ok(ent.to_string());
+    _log_ok(ent.to_string());
 }
 
 void Buddha::list_kinddeedproof() {
@@ -2885,7 +2890,7 @@ void Buddha::list_kinddeedproof() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return;
     }
 
@@ -2904,7 +2909,7 @@ void Buddha::list_kinddeedproof() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return;
     }
 
@@ -2960,7 +2965,7 @@ void Buddha::add_aftercomment() {
         return;
     }
 
-    ctx->ok("add aftercomment " + ent.to_string() + " success .");
+    _log_ok("add aftercomment " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_aftercomment() {
@@ -2995,7 +3000,7 @@ void Buddha::delete_aftercomment() {
         return;
     }
 
-    ctx->ok("delete aftercomment " + ent.to_string() + " success .");
+    _log_ok("delete aftercomment " + ent.to_string() + " success .");
 }
 
 void Buddha::update_aftercomment() {
@@ -3050,7 +3055,7 @@ void Buddha::update_aftercomment() {
         return;
     }
 
-    ctx->ok("update aftercomment " + ent.to_string() + " success .");
+    _log_ok("update aftercomment " + ent.to_string() + " success .");
 }
 
 void Buddha::find_aftercomment() {
@@ -3075,11 +3080,11 @@ void Buddha::find_aftercomment() {
 
     aftercomment ent;
     if (!_is_aftercomment_exist(orderid,od.owner(),ent))  {
-        ctx->ok("aftercomment " + orderid + " is not exist .");
+        _log_ok("aftercomment " + orderid + " is not exist .");
         return ;
     }
 
-    ctx->ok(ent.to_string());
+    _log_ok(ent.to_string());
 }
 
 void Buddha::list_aftercomment() {
@@ -3100,7 +3105,7 @@ void Buddha::list_aftercomment() {
             i++;
             ret += ent.to_string();
         }
-        ctx->ok("size=" + to_string(i) + " " + ret);
+        _log_ok("size=" + to_string(i) + " " + ret);
         return;
     }
     
@@ -3128,7 +3133,7 @@ void Buddha::list_aftercomment() {
         i++;
         ret += ent.to_string();
     }
-    ctx->ok("size=" + to_string(i) + " " + ret);
+    _log_ok("size=" + to_string(i) + " " + ret);
 
 }
 
