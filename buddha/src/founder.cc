@@ -5,6 +5,8 @@ string founder::to_string() {
     str += "{" ;
     str += id() + ",";
     str += desc() + ",";
+    str += address() + ",";
+    str += timestamp() + ",";
     str += std::to_string(guaranty()) + ",";
     str += std::to_string(approved());
     str += "}";

@@ -7,9 +7,9 @@ package buddha;
 message Founder {
     string id           = 1; //基金会名称，唯一
     string desc         = 2; //基金会描述
-    int64  guaranty     = 3; //抵押数量
-    string address      = 4; //地址
-    string timestamp    = 5; //申请时间
+    string address      = 3; //地址
+    string timestamp    = 4; //申请时间
+    int64  guaranty     = 5; //抵押数量
     bool   approved     = 6; //是否已经批准是基金会成员，0尚未批准，1已经批准
 }
 

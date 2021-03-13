@@ -712,7 +712,19 @@ void Buddha::apply_founder(){
         _log_error(__FUNCTION__, __LINE__,"desc is empty .");
         return ;
     }
-    
+
+    const string& address = ctx->arg("address");
+    if( address.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"address is empty .");
+        return ;
+    }
+
+    const string& timestamp = ctx->arg("timestamp");
+    if( timestamp.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"timestamp is empty .");
+        return ;
+    }
+
     const string& guaranty = ctx->transfer_amount();
     if( guaranty.empty()) {
         _log_error(__FUNCTION__, __LINE__,"guaranty is empty .");
@@ -729,6 +741,8 @@ void Buddha::apply_founder(){
     founder ent;
     ent.set_id(ctx->initiator());
     ent.set_desc(desc);
+    ent.set_address(address);
+    ent.set_timestamp(timestamp);
     ent.set_guaranty(ent.guaranty() + stoll(guaranty));
     ent.set_approved(false);
     if (!get_founder_table().put(ent)) {
