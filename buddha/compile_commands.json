@@ -6,6 +6,16 @@
   },
   {
     "directory": "/root/buddhaContract/buddha",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/7f/7fe476c451ee4cbd.o /root/buddhaContract/buddha/src/buddha.help.cc",
+    "file": "/root/buddhaContract/buddha/src/buddha.help.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/buddha",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/6a/6a1850c5e2ba341c.o /root/buddhaContract/buddha/src/buddha.iner.cc",
+    "file": "/root/buddhaContract/buddha/src/buddha.iner.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/buddha",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/24/24903919f5478416.o /root/buddhaContract/buddha/src/buddha.pb.cc",
     "file": "/root/buddhaContract/buddha/src/buddha.pb.cc"
   },

@@ -16,16 +16,16 @@ message Founder {
 //提案表
 message Proposal {
     string key          = 1; //配置的键,唯一
-    string value        = 2; //配置的老键值
-    string owner        = 3; //提案发起者   
-    string newvalue     = 4; //配置的新键值
-    string operate      = 5; //make,delete,update
-    string timestamp    = 6; //发起提案日期
+    string value        = 2; //配置的正在使用的键值
+    string owner        = 3; //提案发起者，必须基金会成员才能发起提案
+    string newvalue     = 4; //提案发起的新键值
+    string operate      = 5; //make,delete,update；如果时delete，最后一个基金会成员通过后，直接产出这个记录。
+    string timestamp    = 6; //提案发起日期
     string expire       = 7; //最晚提案确认时间
-    int64  count        = 8; //基金会成员个数
-    string founders     = 9; //基金会成员列表
-    string results      = 10; //提案结论
-    string timestamps   = 11; //提案结论时间
+    int64  count        = 8; //发起提案时的基金会成员个数
+    string founders     = 9; //发起提案时的基金会成员列表
+    string results      = 10;//提案结论，各个基金会成员是否都通过的标识
+    string timestamps   = 11;//提案结论时间，各个基金会成员设置是否通过时的时间
 }
 
 //寺院表，寺院具有唯一性。

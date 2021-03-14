@@ -16,6 +16,8 @@
 #include <string>
 using namespace std;
 
+#define mycout cout << __func__ << "[" << __LINE__ << "] " 
+
 class Buddha : public xchain::Contract {
 public:
     Buddha();
@@ -122,7 +124,6 @@ private:
     bool _is_kinddeedproof_exist(const string&,kinddeedproof&);
     bool _is_aftercomment_exist(const string&,const string&, aftercomment&);
 
-    bool _get_kinddeed(const string&,kinddeed&);
     bool _is_kinddeed_online(const string&) ;
 
     bool _is_deployer(const string&);
