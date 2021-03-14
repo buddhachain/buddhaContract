@@ -195,3 +195,87 @@ bool Buddha::_is_aftercomment_exist(const string& orderid, const string& owner, 
     return true;
 }
 
+bool Buddha::_is_kinddeed_online(const string& id){
+    kinddeed ent;
+    if (!get_kinddeed_table().find({{"id", id}}, &ent)) {
+        mycout << "kinddeed " << id << " is not exist ." << endl;
+        return false;
+    }
+
+    if( ent.applied() == true) {
+        mycout << "kinddeed " << id << " is apply status change ." << endl;
+        return false;
+    }
+
+    if( ent.online() != true ) {
+        mycout << "kinddeed " << id << " is not online ." << endl;
+        return false;
+    }
+
+    return true;
+
+}
+
+
+
+bool Buddha::_is_deployer(const string& id) {
+    string deployer;
+    if (!ctx->get_object("deployer", &deployer)) 
+        return false;
+
+    if (deployer != id )
+        return false;
+
+    return true ;
+}
+
+bool Buddha::_is_founder(const string& id) {
+    founder ent;
+    if (!_is_founder_exist(id, ent))
+        return false;
+    
+    return ent.approved();
+}
+
+bool Buddha::_is_temple(const string& id) {
+    temple ent;
+    if (!_is_temple_exist(id, ent))
+        return false;
+    
+    return ent.approved();
+}
+
+bool Buddha::_is_master(const string& id) {
+    master ent;
+    if (!_is_master_exist(id, ent))
+        return false;
+
+    return ent.approved();
+}
+
+bool Buddha::_is_in_temple(const string& templeid,
+                           const string& masterid,
+                           templemaster& ent){
+    if (!get_templemaster_table().find({{"templeid", templeid},{"masterid", masterid}}, &ent))
+        return false;
+
+    return ent.approved();
+}
+
+
+bool Buddha::_is_user(const string& id) {
+    if( _is_deployer(id)) 
+        return false;
+
+    if( _is_founder(id)) 
+        return false;
+
+    if( _is_temple(id)) 
+        return false;
+
+    if( _is_master(id)) 
+        return false;
+
+    return true ;
+}
+
