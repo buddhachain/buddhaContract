@@ -35,6 +35,7 @@ void Buddha::upload_kinddeedproof() {
         return ;
     }
 
+    //判断订单是否存在
     order od;
     if (!_is_order_exist(orderid, od)) {
         _log_error(__FUNCTION__, __LINE__,"order and suborder lost, kinddeedproof " + orderid + " be delete .");
@@ -77,6 +78,7 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
+    //判断订单是否存在
     order od;
     if (!_is_order_exist(orderid, od)) {
         _delete_kinddeedproof_record(orderid);
@@ -89,6 +91,7 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed kd;
     if( !_is_kinddeed_exist(od.kdid(), kd)) {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + od.kdid() + " is not exist .");
@@ -138,6 +141,7 @@ void Buddha::refuse_kinddeedproof() {
         return ;
     }
 
+    //判断订单是否存在
     order od;
     if (!_is_order_exist(orderid, od)) {
         _delete_kinddeedproof_record(orderid);
@@ -166,6 +170,7 @@ void Buddha::find_kinddeedproof() {
         return ;
     }
 
+    //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");

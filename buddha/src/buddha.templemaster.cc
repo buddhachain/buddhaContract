@@ -121,6 +121,7 @@ void Buddha::recusal_join_temple() {
         return ;
     }
 
+    //判断寺院法师记录是否存在
     templemaster ent;
     if( !_is_templemaster_exist(templeid, masterid,ent)) {
         _log_error(__FUNCTION__, __LINE__,"temple " + templeid + ", master " + masterid + " is not exist .");

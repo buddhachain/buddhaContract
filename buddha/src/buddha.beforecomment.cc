@@ -187,6 +187,7 @@ void Buddha::find_beforecomment() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed kd;
     if (!_is_kinddeed_exist(kdid, kd))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + kdid + " is not exist .");
@@ -238,6 +239,7 @@ void Buddha::list_beforecomment() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed kd;
     if (!_is_kinddeed_exist(kdid, kd))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + kdid + " is not exist .");

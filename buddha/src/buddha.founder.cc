@@ -55,7 +55,7 @@ void Buddha::apply_founder(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply tobe founder over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply  founder over, please wait for approve .");
 }
 
 void Buddha::approve_founder() {
@@ -70,6 +70,7 @@ void Buddha::approve_founder() {
         return ;
     }
 
+    //判断此基金会成员是否存在
     founder ent;
     if( !_is_founder_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"founder " + id + " is not exist .");
@@ -107,6 +108,7 @@ void Buddha::recusal_founder() {
         return ;
     }
 
+    //判断此基金会成员是否存在
     founder ent;
     if( !_is_founder_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"founder " + id + " is not exist .");

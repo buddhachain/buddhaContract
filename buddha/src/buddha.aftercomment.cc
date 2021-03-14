@@ -32,18 +32,21 @@ void Buddha::add_aftercomment() {
 
     const string& owner = ctx->initiator() ;
 
+    //判断此评论是否已经存在
     aftercomment ent;
     if( _is_aftercomment_exist(orderid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment " + orderid + " is exist .");
         return ;
     }
 
+    //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
         return ;
     }
 
+    //判断订单的所有者是否是当前的评论者
     if( od.owner() != owner ) {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not belong to you .");
         return ;
@@ -76,6 +79,7 @@ void Buddha::delete_aftercomment() {
         return ;
     }
 
+    //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
@@ -123,6 +127,7 @@ void Buddha::update_aftercomment() {
         return ;
     }
 
+    //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
@@ -158,6 +163,7 @@ void Buddha::find_aftercomment() {
         return ;
     }
 
+    //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
@@ -207,6 +213,7 @@ void Buddha::list_aftercomment() {
         return ;
     }
 
+    //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
         _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");

@@ -12,6 +12,7 @@ using namespace std;
 
 Buddha::Buddha() :
     _founder_table(         context(), "founder"                ),
+    _proposal_table(        context(), "proposal"               ),
     _temple_table(          context(), "temple"                 ),
     _master_table(          context(), "master"                 ),
     _templemaster_table(    context(), "templemaster"           ),

@@ -37,7 +37,7 @@ void Buddha::apply_temple(){
 
     if( !is_user() &&
         !is_master()) {
-        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not user or master, have no authority to apply tobe temple .");
+        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not user or master, have no authority to apply  temple .");
         return ;
     }
 
@@ -60,7 +60,7 @@ void Buddha::apply_temple(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply tobe temple over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply  temple over, please wait for approve .");
 }
 
 void Buddha::approve_temple() {
@@ -75,6 +75,7 @@ void Buddha::approve_temple() {
         return ;
     }
 
+    //判断此寺院是否存在
     temple ent;
     if( !_is_temple_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"temple " + id + " is not exist .");
@@ -112,6 +113,7 @@ void Buddha::recusal_temple() {
         return ;
     }
 
+    //判断此寺院是否存在
     temple ent;
     if( !_is_temple_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"temple " + id + " is not exist .");

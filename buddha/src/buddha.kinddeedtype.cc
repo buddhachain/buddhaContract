@@ -29,6 +29,7 @@ void Buddha::add_kinddeedtype() {
         return ;
     }
 
+    //判断善举类型是否存在
     kinddeedtype ent;
     if( _is_kinddeedtype_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"kinddeedtype " + id + " is exist .");
@@ -57,6 +58,7 @@ void Buddha::delete_kinddeedtype() {
         return ;
     }
 
+    //判断善举类型是否存在
     kinddeedtype ent;
     if( !_is_kinddeedtype_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"kindeed type " + id + " is not exist .");
@@ -89,6 +91,7 @@ void Buddha::update_kinddeedtype() {
         return ;
     }
 
+    //判断善举类型是否存在
     kinddeedtype ent;
     if( !_is_kinddeedtype_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"kindeedtype " + id + " is not exist .");
@@ -117,6 +120,7 @@ void Buddha::find_kinddeedtype() {
         return ;
     }
 
+    //判断善举类型是否存在
     kinddeedtype ent;
     if (!_is_kinddeedtype_exist(id, ent))  {
         _log_ok("kinddeedtype " + id + " is not exist .");

@@ -23,6 +23,7 @@ void Buddha::apply_online_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
@@ -66,6 +67,7 @@ void Buddha::apply_offline_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
@@ -108,6 +110,7 @@ void Buddha::approve_online_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
@@ -151,6 +154,7 @@ void Buddha::approve_offline_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");

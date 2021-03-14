@@ -5,6 +5,7 @@
 #include "xchain/contract.pb.h"
 
 #include "founder.h"
+#include "proposal.h"
 #include "temple.h"
 #include "master.h"
 #include "templemaster.h"
@@ -24,6 +25,7 @@ public:
 
 private:
     xchain::cdt::Table<founder>         _founder_table;
+    xchain::cdt::Table<proposal>        _proposal_table;
     xchain::cdt::Table<temple>          _temple_table;
     xchain::cdt::Table<master>          _master_table;
     xchain::cdt::Table<templemaster>    _templemaster_table;
@@ -40,8 +42,13 @@ private:
     xchain::Context* ctx;
 
 public:
+
     decltype(_founder_table)& get_founder_table() {
         return _founder_table;
+    }
+
+    decltype(_proposal_table)& get_proposal_table() {
+        return _proposal_table;
     }
 
     decltype(_temple_table)& get_temple_table() {
@@ -102,7 +109,7 @@ private:
     void _log_ok(string);
 
     bool _is_founder_exist(const string&,founder&);
-
+    bool _is_proposal_exist(const string&,proposal&);
     bool _is_temple_exist(const string&,temple&);
     bool _is_temple_exist_by_unit(const string&,temple&);
     bool _is_temple_exist_by_creditcode(const string&,temple&);
@@ -123,7 +130,6 @@ private:
     bool _is_order_exist(const string&,order&);
     bool _is_kinddeedproof_exist(const string&,kinddeedproof&);
     bool _is_aftercomment_exist(const string&,const string&, aftercomment&);
-
     bool _is_kinddeed_online(const string&) ;
 
     bool _is_deployer(const string&);
@@ -133,7 +139,10 @@ private:
     bool _is_in_temple(const string&, const string&,templemaster& );
     bool _is_user(const string&);
 
+    bool _scan_founder(vector<founder>&, const string& cond="");
+
     bool _delete_founder_record(const string&);
+    bool _delete_proposal_record(const string&);
     bool _delete_temple_record(const string&);
     bool _delete_master_record(const string&);
     bool _delete_templemaster_record(const string&, const string&);
@@ -171,6 +180,15 @@ public:
     void recusal_founder();         //合约部署者
     bool is_founder();              //所有角色，判断自己是否是基金会成员
     void list_founder();            //合约部署者，基金会成员，根据id查所有，id可为空，安全，
+
+    //提案
+    void make_proposal();           //基金会成员
+    void delete_proposal();         //基金会成员
+    void update_proposal();         //基金会成员
+    void approve_proposal();        //基金会成员
+    void recusal_proposal();        //基金会成员
+    void find_proposal();           //基金会成员
+    void list_proposal();           //基金会成员
 
     //申请成为寺院
     void apply_temple();            //用户,法师

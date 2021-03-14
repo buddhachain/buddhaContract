@@ -96,12 +96,14 @@ void Buddha::add_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is exist .");
         return ;
     }
 
+    //判断善举类型是否存在
     kinddeedtype type_ent;
     if (!_is_kinddeedtype_exist(type, type_ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedtype " + type + " is not exist .");
@@ -176,6 +178,7 @@ void Buddha::delete_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
@@ -262,24 +265,28 @@ void Buddha::update_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed ent;
     if (_is_kinddeed_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is exist .");
         return ;
     }
 
+    //判断善举类型是否存在
     kinddeedtype type_ent;
     if (!_is_kinddeedtype_exist(type, type_ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedtype " + type + " is not exist .");
         return ;
     }
 
+    //判断善举描述是否存在
     vector<kinddeeddetail> v_kinddeeddetail_ent;
     if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeeddetail " + ent.to_string() + " is exist .");
         return ;
     }
 
+    //判断善举规格是否存在
     vector<kinddeedspec> v_kinddeedspec_ent;
     if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedspec " + ent.to_string() + " is exist .");
@@ -342,12 +349,14 @@ void Buddha::find_kinddeed() {
         return ;
     }
 
+    //判断善举是否存在
     kinddeed kinddeed_ent;
     if (!_is_kinddeed_exist(id, kinddeed_ent))  {
         _log_ok("kinddeed " + id + " is not exist .");
         return ;
     }
 
+    //获取善举描述
     vector<kinddeeddetail> v_kinddeeddetail_ent;
     _is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent);
     string detail_string ;
@@ -355,6 +364,7 @@ void Buddha::find_kinddeed() {
         detail_string += v_kinddeeddetail_ent[i].to_string();
     }
 
+    //获取善举规格
     vector<kinddeedspec> v_kinddeedspec_ent;
     _is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent);
     string spec_string ;

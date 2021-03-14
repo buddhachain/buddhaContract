@@ -24,7 +24,7 @@ void Buddha::apply_master(){
     }
 
     if( !is_user()) {
-        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply tobe master .");
+        _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  master .");
         return ;
     }
 
@@ -45,7 +45,7 @@ void Buddha::apply_master(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply tobe master over, please wait for approve .");
+    _log_ok(ent.to_string() + " apply  master over, please wait for approve .");
 }
 
 void Buddha::approve_master() {
@@ -60,6 +60,7 @@ void Buddha::approve_master() {
         return ;
     }
 
+    //判断此法师是否存在
     master ent;
     if( !_is_master_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"master " + id + " is not exist .");
@@ -97,6 +98,7 @@ void Buddha::recusal_master() {
         return ;
     }
 
+    //判断此法师是否存在
     master ent;
     if( !_is_master_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"master " + id + " is not exist .");

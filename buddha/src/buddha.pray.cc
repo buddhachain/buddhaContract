@@ -139,6 +139,7 @@ void Buddha::find_pray_kinddeed() {
         return ;
     }
 
+    //判断订单是否存在
     order ent;       
     if (!_is_order_exist(id, ent)) {
         _log_error(__FUNCTION__, __LINE__,"order " + id + " is not exist .");
