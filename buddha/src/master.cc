@@ -10,3 +10,14 @@ string master::to_string() {
     str += "}";
     return str;
 }
+
+xchain::json kinddeedproof::to_json() {
+    xchain::json j = {
+        {"id", id()},
+        {"creditcode", creditcode()},
+        {"proof", proof()},
+        {"approved", approved()},
+    };
+
+    return j;
+}

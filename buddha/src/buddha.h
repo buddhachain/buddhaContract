@@ -106,7 +106,7 @@ private:
     //辅助函数
 
     void _log_error(string, int, string);
-    void _log_ok(string);
+    void _log_ok(string, int, string);
 
     bool _is_founder_exist(const string&,founder&);
     bool _is_proposal_exist(const string&,proposal&);
@@ -139,7 +139,21 @@ private:
     bool _is_in_temple(const string&, const string&,templemaster& );
     bool _is_user(const string&);
 
-    bool _scan_founder(vector<founder>&, const string& cond="");
+    bool _scan_founder(xchain::json&, const string& ="");
+    bool _scan_proposal(xchain::json&, const string& ="");
+    bool _scan_temple(xchain::json&, const string& ="");
+    bool _scan_master(xchain::json&,master&);
+    bool _scan_templemaster(xchain::json&,const string&,templemaster&);
+    bool _scan_kinddeedtype(xchain::json&,kinddeedtype&);
+    bool _scan_kinddeed(xchain::json&,kinddeed&);
+    bool _scan_kinddeeddetail(xchain::json&, const string& seq, kinddeeddetail&);
+    bool _scan_kinddeedspec(xchain::json&, const string& seq, kinddeedspec&);
+    bool _scan_commentlabel(xchain::json&,commentlabel&);
+    bool _scan_beforecomment(xchain::json&, const string&,beforecomment&);
+    bool _scan_order(xchain::json&,order&);
+    bool _scan_kinddeedproof(xchain::json&,kinddeedproof&);
+    bool _scan_aftercomment(xchain::json&,const string&, aftercomment&);
+
 
     bool _delete_founder_record(const string&);
     bool _delete_proposal_record(const string&);

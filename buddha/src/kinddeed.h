@@ -16,6 +16,7 @@ class kinddeedtype : public buddha::KinddeedType {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 class kinddeed: public buddha::Kinddeed {
@@ -25,7 +26,8 @@ class kinddeed: public buddha::Kinddeed {
         DEFINE_INDEX_ADD(1, owner)  //非主键只能scan
     DEFINE_INDEX_END();
 
-    string to_string() ;
+    string to_string();
+    string to_json();
 };
 
 class kinddeeddetail: public buddha::KinddeedDetail {
@@ -35,6 +37,7 @@ class kinddeeddetail: public buddha::KinddeedDetail {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 class kinddeedspec: public buddha::KinddeedSpec {
@@ -43,7 +46,8 @@ class kinddeedspec: public buddha::KinddeedSpec {
         DEFINE_INDEX_ADD(0, kdid)   //非主键只能scan
     DEFINE_INDEX_END();
 
-    string to_string() ;
+    string to_string();
+    string to_json();
 };
 
 

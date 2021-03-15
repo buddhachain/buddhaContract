@@ -14,3 +14,18 @@ string order::to_string() {
     str += "}";
     return str;
 }
+
+xchain::json kinddeedproof::to_json() {
+    xchain::json j = {
+        {"id", id()},
+        {"owner", owner()},
+        {"kdowner", kdowner()},
+        {"kdid", kdid()},
+        {"specid", specid()},
+        {"count", count()},
+        {"amount", amount()},
+        {"timestamp", timestamp()},
+    };
+
+    return j;
+}

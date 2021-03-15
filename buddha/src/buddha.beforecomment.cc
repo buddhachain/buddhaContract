@@ -37,6 +37,7 @@ void Buddha::add_beforecomment() {
         return;
     }
 
+    //判断所有标签类型都在评论标签表中
     if( !_is_all_types_exist_in_commentlabel(label_array)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment type failure .");
         return ;
@@ -56,6 +57,7 @@ void Buddha::add_beforecomment() {
 
     const string& owner = ctx->initiator() ;
 
+    //判断售前点评是否存在
     beforecomment ent;
     if( _is_beforecomment_exist(kdid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment " + kdid + " is exist .");
@@ -73,7 +75,7 @@ void Buddha::add_beforecomment() {
         return;
     }
 
-    _log_ok("add beforecomment " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "add beforecomment " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_beforecomment() {
@@ -85,6 +87,7 @@ void Buddha::delete_beforecomment() {
 
     const string& owner = ctx->initiator();
 
+    //判断售前点评是否存在
     beforecomment ent;
     if( !_is_beforecomment_exist(kdid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment " + kdid + " is not exist .");
@@ -97,12 +100,13 @@ void Buddha::delete_beforecomment() {
         return ;
     }
 
+    //删除此售前点评
     if( !_delete_beforecomment_record(kdid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete beforecomment " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("delete beforecomment " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "delete beforecomment " + ent.to_string() + " success .");
 }
 
 void Buddha::update_beforecomment() {
@@ -131,6 +135,7 @@ void Buddha::update_beforecomment() {
         return;
     }
 
+    //判断所有标签类型都在评论标签表中
     if( !_is_all_types_exist_in_commentlabel(label_array)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment type failure .");
         return ;
@@ -150,6 +155,7 @@ void Buddha::update_beforecomment() {
 
     const string& owner = ctx->initiator() ;
 
+    //判断售前点评是否存在
     beforecomment ent;
     if( !_is_beforecomment_exist(kdid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"beforecomment " + kdid + " is not exist .");
@@ -161,6 +167,7 @@ void Buddha::update_beforecomment() {
         return ;
     }
 
+    //删除此售前点评
     if( !_delete_beforecomment_record(kdid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete beforecomment " + ent.to_string() + " failure .");
         return;
@@ -177,7 +184,7 @@ void Buddha::update_beforecomment() {
         return;
     }
 
-    _log_ok("update beforecomment " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "update beforecomment " + ent.to_string() + " success .");
 }
 
 void Buddha::find_beforecomment() {
@@ -197,16 +204,17 @@ void Buddha::find_beforecomment() {
     const string& owner = ctx->arg("owner");
 
     if( !owner.empty()) {
+        //判断售前点评是否存在
         beforecomment ent;
         if (!_is_beforecomment_exist(kdid,owner,ent))  {
-            _log_ok("beforecomment " + kdid + " is not exist .");
+            _log_ok(__FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
             return ;
         }
 
         if( is_founder() ||                      //基金会成员
             owner == ctx->initiator() ||        //点评的所有者
             kd.owner() == ctx->initiator() ) { //善举所有者
-            _log_ok(ent.to_string());
+            _log_ok(__FUNCTION__, __LINE__, ent.to_string());
             return ;
         }
 
@@ -224,12 +232,13 @@ void Buddha::find_beforecomment() {
     }
 
     //点评所有者调用，直接查询
+    //判断售前点评是否存在
     beforecomment ent;
     if (!_is_beforecomment_exist(kdid,ctx->initiator(),ent))  {
-        _log_ok("beforecomment " + kdid + " is not exist .");
+        _log_ok(__FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
-    _log_ok(ent.to_string());
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string());
 }
 
 void Buddha::list_beforecomment() {
@@ -259,7 +268,7 @@ void Buddha::list_beforecomment() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 

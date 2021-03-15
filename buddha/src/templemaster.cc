@@ -9,3 +9,13 @@ string templemaster::to_string() {
     str += "}";
     return str;
 }
+
+xchain::json templemaster::to_json() {
+    xchain::json j = {
+        {"templeid", templeid()},
+        {"masterid", masterid()},
+        {"approved", approved()},
+    };
+
+    return j;
+}

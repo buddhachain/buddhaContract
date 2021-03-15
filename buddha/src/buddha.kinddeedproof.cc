@@ -29,6 +29,7 @@ void Buddha::upload_kinddeedproof() {
         return ;
     }
 
+    //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is exist .");
@@ -57,7 +58,7 @@ void Buddha::upload_kinddeedproof() {
         return;
     }
 
-    _log_ok("apply kinddeed " + ent.to_string() + " proof over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, "apply kinddeed " + ent.to_string() + " proof over, please wait for approve .");
 }
 
 void Buddha::approve_kinddeedproof() {
@@ -72,6 +73,7 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
+    //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
@@ -81,13 +83,14 @@ void Buddha::approve_kinddeedproof() {
     //判断订单是否存在
     order od;
     if (!_is_order_exist(orderid, od)) {
+        //删除此善举凭证
         _delete_kinddeedproof_record(orderid);
         _log_error(__FUNCTION__, __LINE__,"order and suborder lost, kinddeedproof " + orderid + " be delete .");
         return ;
     }
 
     if (ent.approved())  {
-        _log_ok("kinddeedproof " + orderid + " has approved yet .");
+        _log_ok(__FUNCTION__, __LINE__, "kinddeedproof " + orderid + " has approved yet .");
         return ;
     }
 
@@ -104,6 +107,7 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
+    //删除此善举凭证
     if( !_delete_kinddeedproof_record(orderid) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeedproof " + ent.to_string() + " failure .");
         return;
@@ -120,7 +124,7 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
-    _log_ok("approve kinddeed " + ent.to_string() + " proof success .");
+    _log_ok(__FUNCTION__, __LINE__, "approve kinddeed " + ent.to_string() + " proof success .");
 }
 
 void Buddha::refuse_kinddeedproof() {
@@ -135,6 +139,7 @@ void Buddha::refuse_kinddeedproof() {
         return ;
     }
 
+    //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
@@ -144,22 +149,24 @@ void Buddha::refuse_kinddeedproof() {
     //判断订单是否存在
     order od;
     if (!_is_order_exist(orderid, od)) {
+        //删除此善举凭证
         _delete_kinddeedproof_record(orderid);
         _log_error(__FUNCTION__, __LINE__,"order lost, kinddeedproof " + orderid + " be delete .");
         return ;
     }
 
     if (ent.approved())  {
-        _log_ok("kinddeedproof " + orderid + " has approved yet .");
+        _log_ok(__FUNCTION__, __LINE__, "kinddeedproof " + orderid + " has approved yet .");
         return ;
     }
 
+    //删除此善举凭证
     if( !_delete_kinddeedproof_record(orderid) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeedproof " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("refuse kinddeed " + ent.to_string() + " proof success .");
+    _log_ok(__FUNCTION__, __LINE__, "refuse kinddeed " + ent.to_string() + " proof success .");
 }
 
 void Buddha::find_kinddeedproof() {
@@ -177,6 +184,7 @@ void Buddha::find_kinddeedproof() {
         return ;
     }
 
+    //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(orderid, ent))  {
         _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
@@ -190,7 +198,7 @@ void Buddha::find_kinddeedproof() {
         return ;
     }
 
-    _log_ok(ent.to_string());
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string());
 }
 
 void Buddha::list_kinddeedproof() {
@@ -209,7 +217,7 @@ void Buddha::list_kinddeedproof() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return;
     }
 
@@ -228,7 +236,7 @@ void Buddha::list_kinddeedproof() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return;
     }
 

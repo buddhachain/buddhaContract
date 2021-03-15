@@ -15,6 +15,7 @@ class commentlabel: public buddha::CommentLabel {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 class beforecomment: public buddha::BeforeComment {
@@ -25,6 +26,7 @@ class beforecomment: public buddha::BeforeComment {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 class aftercomment: public buddha::AfterComment {
@@ -35,6 +37,7 @@ class aftercomment: public buddha::AfterComment {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 

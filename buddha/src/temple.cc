@@ -12,3 +12,16 @@ string temple::to_string() {
     str += "}";
     return str;
 }
+
+xchain::json temple::to_json() {
+    xchain::json j = {
+        {"id", id()},
+        {"unit", unit()},
+        {"creditcode", creditcode()},
+        {"address", address()},
+        {"proof", proof()},
+        {"approved", approved()},
+    };
+
+    return j;
+}

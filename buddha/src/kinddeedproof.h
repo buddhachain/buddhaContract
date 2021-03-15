@@ -16,6 +16,7 @@ class kinddeedproof: public buddha::KinddeedProof {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 #endif // _KINDDEED_PROOF_H_

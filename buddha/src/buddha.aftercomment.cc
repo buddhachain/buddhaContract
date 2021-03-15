@@ -61,7 +61,7 @@ void Buddha::add_aftercomment() {
         return;
     }
 
-    _log_ok("add aftercomment " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "add aftercomment " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_aftercomment() {
@@ -73,6 +73,7 @@ void Buddha::delete_aftercomment() {
 
     const string& owner = ctx->initiator();
 
+    //判断此评论是否已经存在
     aftercomment ent;
     if( !_is_aftercomment_exist(orderid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment " + orderid + " is not exist .");
@@ -92,12 +93,13 @@ void Buddha::delete_aftercomment() {
         return ;
     }
 
+    //删除此善举售后评论
     if( !_delete_aftercomment_record(orderid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete aftercomment " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("delete aftercomment " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "delete aftercomment " + ent.to_string() + " success .");
 }
 
 void Buddha::update_aftercomment() {
@@ -121,6 +123,7 @@ void Buddha::update_aftercomment() {
 
     const string& owner = ctx->initiator() ;
 
+    //判断此评论是否已经存在
     aftercomment ent;
     if( !_is_aftercomment_exist(orderid,owner,ent)) {
         _log_error(__FUNCTION__, __LINE__,"kindeed type " + orderid + " is not exist .");
@@ -139,6 +142,7 @@ void Buddha::update_aftercomment() {
         return ;
     }
 
+    //删除此善举售后评论
     if( !_delete_aftercomment_record(orderid,owner) ) {
         _log_error(__FUNCTION__, __LINE__,"delete aftercomment " + ent.to_string() + " failure .");
         return;
@@ -153,7 +157,7 @@ void Buddha::update_aftercomment() {
         return;
     }
 
-    _log_ok("update aftercomment " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "update aftercomment " + ent.to_string() + " success .");
 }
 
 void Buddha::find_aftercomment() {
@@ -177,18 +181,20 @@ void Buddha::find_aftercomment() {
         return ;
     }
 
+    //判断此评论是否已经存在
     aftercomment ent;
     if (!_is_aftercomment_exist(orderid,od.owner(),ent))  {
-        _log_ok("aftercomment " + orderid + " is not exist .");
+        _log_ok(__FUNCTION__, __LINE__, "aftercomment " + orderid + " is not exist .");
         return ;
     }
 
-    _log_ok(ent.to_string());
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string());
 }
 
 void Buddha::list_aftercomment() {
     const string& orderid = ctx->arg("orderid");
 
+    //如果是合约部署者或基金会成员，直接遍历所有符合orderid条件的所有售后评论
     if( is_deployer() ||
         is_founder()) {
         auto it = get_aftercomment_table().scan({{"orderid",orderid}});
@@ -204,10 +210,11 @@ void Buddha::list_aftercomment() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return;
     }
-    
+
+    //非合约部署者和基金会成员，orderid不能为空，即禁止其他角色遍历所有售后评论记录
     if( orderid.empty()) {
         _log_error(__FUNCTION__, __LINE__,"aftercomment orderid is empty .");
         return ;
@@ -233,7 +240,7 @@ void Buddha::list_aftercomment() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 
 }
 

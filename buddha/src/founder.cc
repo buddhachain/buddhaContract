@@ -12,3 +12,17 @@ string founder::to_string() {
     str += "}";
     return str;
 }
+
+
+xchain::json founder::to_json() {
+    xchain::json j = {
+        {"id", id()},
+        {"desc", desc()},
+        {"address", address()},
+        {"timestamp", timestamp()},
+        {"guaranty", guaranty()},
+        {"approved", approved()},
+    };
+
+    return j;
+}

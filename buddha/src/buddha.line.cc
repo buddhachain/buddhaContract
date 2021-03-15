@@ -40,6 +40,7 @@ void Buddha::apply_online_kinddeed() {
         return ;
     }
 
+    //删除此善举
     if( !_delete_kinddeed_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
         return;
@@ -51,7 +52,7 @@ void Buddha::apply_online_kinddeed() {
         return;
     }
 
-    _log_ok("kinddeed " + ent.to_string() + " apply online over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " apply online over, please wait for approve .");
 }
 
 void Buddha::apply_offline_kinddeed() {
@@ -84,6 +85,7 @@ void Buddha::apply_offline_kinddeed() {
         return ;
     }
 
+    //删除此善举
     if( !_delete_kinddeed_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
         return;
@@ -95,7 +97,7 @@ void Buddha::apply_offline_kinddeed() {
         return;
     }
 
-    _log_ok("kinddeed " + ent.to_string() + " apply offline over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " apply offline over, please wait for approve .");
 }
 
 void Buddha::approve_online_kinddeed() {
@@ -127,6 +129,7 @@ void Buddha::approve_online_kinddeed() {
         return ;
     }
 
+    //删除此善举
     if( !_delete_kinddeed_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
         return;
@@ -139,7 +142,7 @@ void Buddha::approve_online_kinddeed() {
         return;
     }
 
-    _log_ok("approve kinddeed " + ent.to_string() + " online success .");
+    _log_ok(__FUNCTION__, __LINE__, "approve kinddeed " + ent.to_string() + " online success .");
 }
 
 void Buddha::approve_offline_kinddeed() {
@@ -171,6 +174,7 @@ void Buddha::approve_offline_kinddeed() {
         return ;
     }
 
+    //删除此善举
     if( !_delete_kinddeed_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
         return;
@@ -183,7 +187,7 @@ void Buddha::approve_offline_kinddeed() {
         return;
     }
 
-    _log_ok("approve kinddeed " + ent.to_string() + " offline success .");
+    _log_ok(__FUNCTION__, __LINE__, "approve kinddeed " + ent.to_string() + " offline success .");
 }
 
 DEFINE_METHOD(Buddha, apply_online_kinddeed)    { self.apply_online_kinddeed();     }

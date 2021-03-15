@@ -45,7 +45,7 @@ void Buddha::apply_master(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply  master over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string() + " apply  master over, please wait for approve .");
 }
 
 void Buddha::approve_master() {
@@ -67,11 +67,13 @@ void Buddha::approve_master() {
         return ;
     }
 
+    //判断是否是法师
     if( _is_master(id)) {
         _log_error(__FUNCTION__, __LINE__,ent.to_string() + " is already master .");
         return ;
     }
 
+    //删除此法师
     if( !_delete_master_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete master " + ent.to_string() + " failure .");
         return;
@@ -83,7 +85,7 @@ void Buddha::approve_master() {
         return;
     }
 
-    _log_ok("approve master " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "approve master " + ent.to_string() + " success .");
 }
 
 void Buddha::recusal_master() {
@@ -105,21 +107,22 @@ void Buddha::recusal_master() {
         return ;
     }
 
+    //删除此法师
     if( !_delete_master_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete master " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("recusal master " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "recusal master " + ent.to_string() + " success .");
 }
 
 bool Buddha::is_master() {
     if (!_is_master(ctx->initiator())) {
-        _log_ok(ctx->initiator() + " is not master .") ;
+        _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is not master .") ;
         return false;
     }
     
-    _log_ok(ctx->initiator() + " is master .") ;
+    _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is master .") ;
     return true;
 }
 
@@ -143,7 +146,7 @@ void Buddha::list_master() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 

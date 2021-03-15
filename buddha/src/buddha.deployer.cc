@@ -13,7 +13,7 @@ using namespace std;
 void Buddha::initialize() {
     ctx->put_object("deployer", ctx->initiator());
     ctx->emit_event("initialize", ctx->initiator());
-    _log_ok("deployer=" + ctx->initiator() + " success");
+    _log_ok(__FUNCTION__, __LINE__, "deployer=" + ctx->initiator() + " success");
 }
 
 void Buddha::get_deployer() {
@@ -23,23 +23,24 @@ void Buddha::get_deployer() {
         return ;
     }
 
+    //判断当前调用者是否是合约部署者或者基金会成员
     if( !_is_deployer(ctx->initiator()) &&
         !_is_founder(ctx->initiator()) ) {
         _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to get deployer .");
         return ;
     }
 
-    _log_ok("deployer=" + deployer);
+    _log_ok(__FUNCTION__, __LINE__, "deployer=" + deployer);
 }
 
 bool Buddha::is_deployer() {
     bool ret = _is_deployer(ctx->initiator());
     if (ret) {
-        _log_ok(ctx->initiator() + " is deployer .") ;
+        _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is deployer .") ;
         return true;
     }
     
-    _log_ok(ctx->initiator() + " is not deployer .") ;
+    _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is not deployer .") ;
     return false;
 }
 

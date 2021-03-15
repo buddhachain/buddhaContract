@@ -43,7 +43,7 @@ void Buddha::add_kinddeedtype() {
         return;
     }
 
-    _log_ok("add kinddeedtype " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "add kinddeedtype " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_kinddeedtype() {
@@ -65,12 +65,13 @@ void Buddha::delete_kinddeedtype() {
         return ;
     }
 
+    //删除此善举类型
     if( !_delete_kinddeedtype_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeedtype " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("delete kinddeedtype " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "delete kinddeedtype " + ent.to_string() + " success .");
 }
 
 void Buddha::update_kinddeedtype() {
@@ -98,6 +99,7 @@ void Buddha::update_kinddeedtype() {
         return ;
     }
 
+    //删除此善举类型
     if( !_delete_kinddeedtype_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeedtype " + ent.to_string() + " failure .");
         return;
@@ -110,7 +112,7 @@ void Buddha::update_kinddeedtype() {
         return;
     }
 
-    _log_ok("update kinddeedtype " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "update kinddeedtype " + ent.to_string() + " success .");
 }
 
 void Buddha::find_kinddeedtype() {
@@ -123,11 +125,11 @@ void Buddha::find_kinddeedtype() {
     //判断善举类型是否存在
     kinddeedtype ent;
     if (!_is_kinddeedtype_exist(id, ent))  {
-        _log_ok("kinddeedtype " + id + " is not exist .");
+        _log_ok(__FUNCTION__, __LINE__, "kinddeedtype " + id + " is not exist .");
         return ;
     }
 
-    _log_ok(ent.to_string());
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string());
 }
 
 void Buddha::list_kinddeedtype() {
@@ -144,7 +146,7 @@ void Buddha::list_kinddeedtype() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 

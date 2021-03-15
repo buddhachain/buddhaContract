@@ -28,6 +28,7 @@ void Buddha::add_commentlabel() {
         return ;
     }
 
+    //判断评论标签是否存在
     commentlabel ent;
     if( _is_commentlabel_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"commentlabel " + id + " is exist .");
@@ -41,7 +42,7 @@ void Buddha::add_commentlabel() {
         return;
     }
 
-    _log_ok("add commentlabel " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "add commentlabel " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_commentlabel() {
@@ -56,18 +57,20 @@ void Buddha::delete_commentlabel() {
         return ;
     }
 
+    //判断评论标签是否存在
     commentlabel ent;
     if( !_is_commentlabel_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"kindeed type " + id + " is not exist .");
         return ;
     }
 
+    //删除此善举标签
     if( !_delete_commentlabel_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete commentlabel " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("delete commentlabel " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "delete commentlabel " + ent.to_string() + " success .");
 }
 
 void Buddha::update_commentlabel() {
@@ -88,12 +91,14 @@ void Buddha::update_commentlabel() {
         return ;
     }
 
+    //判断评论标签是否存在
     commentlabel ent;
     if( !_is_commentlabel_exist(id,ent)) {
         _log_error(__FUNCTION__, __LINE__,"commentlabel " + id + " is not exist .");
         return ;
     }
 
+    //删除此善举标签
     if( !_delete_commentlabel_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete commentlabel " + ent.to_string() + " failure .");
         return;
@@ -106,7 +111,7 @@ void Buddha::update_commentlabel() {
         return;
     }
 
-    _log_ok("update commentlabel " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "update commentlabel " + ent.to_string() + " success .");
 }
 
 void Buddha::find_commentlabel() {
@@ -116,13 +121,14 @@ void Buddha::find_commentlabel() {
         return ;
     }
 
+    //判断评论标签是否存在
     commentlabel ent;
     if (!_is_commentlabel_exist(id, ent))  {
         _log_error(__FUNCTION__, __LINE__,"commentlabel " + id + " is not exist .");
         return ;
     }
 
-    _log_ok(ent.to_string());
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string());
 }
 
 void Buddha::list_commentlabel() {
@@ -139,7 +145,7 @@ void Buddha::list_commentlabel() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 

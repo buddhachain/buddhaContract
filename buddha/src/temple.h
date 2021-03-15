@@ -19,6 +19,7 @@ class temple: public buddha::Temple {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 

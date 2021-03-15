@@ -17,3 +17,21 @@ string proposal::to_string() {
     str += "}";
     return str;
 }
+
+xchain::json kinddeedproof::to_json() {
+    xchain::json j = {
+        {"key", key()},
+        {"value", value()},
+        {"owner", owner()},
+        {"newvalue", newvalue()},
+        {"operate", operate()},
+        {"timestamp", timestamp()},
+        {"expire", expire()},
+        {"count", count()},
+        {"founders", founders()},
+        {"results", results()},
+        {"timestamps", timestamps()},
+    };
+
+    return j;
+}

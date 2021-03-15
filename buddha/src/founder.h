@@ -15,6 +15,7 @@ class founder: public buddha::Founder {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 #endif // _FOUNDER_H_

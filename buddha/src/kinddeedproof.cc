@@ -12,3 +12,15 @@ string kinddeedproof::to_string() {
     str += "}";
     return str;
 }
+
+xchain::json kinddeedproof::to_json() {
+    xchain::json j = {
+        {"orderid", orderid()},
+        {"owner", owner()},
+        {"proof", proof()},
+        {"timestamp", timestamp()},
+        {"approved", approved()},
+    };
+
+    return j;
+}

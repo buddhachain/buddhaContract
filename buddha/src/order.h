@@ -16,6 +16,7 @@ class order: public buddha::Order {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 

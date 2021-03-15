@@ -33,10 +33,10 @@ Buddha::Buddha() :
 
 void Buddha::_log_error(string fun, int line, string str) {
     cout << fun << "[" << line << "] " << str << endl;
-
     ctx->error("{ \"result\":false, \"message\":\"" + str +"\" }");
 }
 
-void Buddha::_log_ok(string str) {
+void Buddha::_log_ok(string fun, int line, string str) {
+    cout << fun << "[" << line << "] " << str << endl;
     ctx->ok("{ \"result\":true, \"message\":\"" + str +"\" }");
 }

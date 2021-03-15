@@ -15,6 +15,7 @@ class proposal: public buddha::Proposal {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 #endif // _PROPOSAL_H_

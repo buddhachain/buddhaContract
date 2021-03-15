@@ -9,6 +9,16 @@ string kinddeedtype::to_string() {
     return str;
 }
 
+
+xchain::json kinddeedtype::to_json() {
+    xchain::json j = {
+        {"id", id()},
+        {"desc", desc()},
+    };
+
+    return j;
+}
+
 string kinddeed::to_string() {
     string str ;
     str += "{" ;
@@ -23,6 +33,20 @@ string kinddeed::to_string() {
     return str;
 }
 
+xchain::json kinddeed::to_json() {
+    xchain::json j = {
+        {"id", id()},
+        {"name", name()},
+        {"owner", owner()},
+        {"type", type()},
+        {"lasttime", lasttime()},
+        {"applied", applied()},
+        {"online", online()},
+    };
+
+    return j;
+}
+
 string kinddeeddetail::to_string() {
     string str ;
     str += "{" ;
@@ -31,6 +55,16 @@ string kinddeeddetail::to_string() {
     str += hash();
     str += "}";
     return str;
+}
+
+xchain::json kinddeeddetail::to_json() {
+    xchain::json j = {
+        {"kdid", kdid()},
+        {"sequence", sequence()},
+        {"hash", hash()},
+    };
+
+    return j;
 }
 
 string kinddeedspec::to_string() {
@@ -42,4 +76,15 @@ string kinddeedspec::to_string() {
     str += std::to_string(price());
     str += "}";
     return str;
+}
+
+xchain::json kinddeedspec::to_json() {
+    xchain::json j = {
+        {"kdid", kdid()},
+        {"sequence", sequence()},
+        {"desc", desc()},
+        {"price", price()},
+    };
+
+    return j;
 }

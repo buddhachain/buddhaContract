@@ -49,17 +49,18 @@ void Buddha::make_proposal(){
         return ;
     }
 
-    vector<founder> v ;
+    //获取所有的基金会成员
+    xchain::json v ;
     if(!_scan_founder(v) ) {
         _log_error(__FUNCTION__, __LINE__, "scan founder failure .");
         return;
     }
 
-    xchain::json founder_array = xchain::json::array();
+    xchain::json id_array = xchain::json::array();
     xchain::json result_array = xchain::json::array();
     xchain::json timestamp_array = xchain::json::array();
     for( auto& e : v) {
-        founder_array.push_back(e.id());
+        id_array.push_back(e.id());
         if(e.id() == ctx->initiator()) {
             result_array.push_back("1");
             timestamp_array.push_back(timestamp);
@@ -69,7 +70,7 @@ void Buddha::make_proposal(){
         timestamp_array.push_back("0");
     }
 
-
+    //删除此提案
     _delete_proposal_record(key);
 
     ent.set_key(key);
@@ -80,7 +81,7 @@ void Buddha::make_proposal(){
     ent.set_timestamp(timestamp);
     ent.set_expire(expire);
     ent.set_count(v.size());
-    ent.set_founders(founder_array.dump());
+    ent.set_founders(id_array.dump().c_str());
     ent.set_results(result_array.dump());
     ent.set_timestamps(timestamp_array.dump());
 
@@ -89,7 +90,7 @@ void Buddha::make_proposal(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply proposal over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string() + " apply proposal over, please wait for approve .");
 
 }
 

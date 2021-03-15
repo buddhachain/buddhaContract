@@ -96,7 +96,7 @@ void Buddha::pray_kinddeed() {
         return;
     }
     
-    _log_ok("pray kinddeed " + to_string(calced_amount) + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "pray kinddeed " + to_string(calced_amount) + " success .");
 }
 
 void Buddha::delete_pray_kinddeed() {
@@ -124,12 +124,13 @@ void Buddha::delete_pray_kinddeed() {
         return ;
     }
 
+    //删除此订单
     if( !_delete_order_record(orderid) ) {
         _log_error(__FUNCTION__, __LINE__,"delete pray kinddeed " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("delete pray kinddeed " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "delete pray kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::find_pray_kinddeed() {
@@ -155,7 +156,7 @@ void Buddha::find_pray_kinddeed() {
         return ;
     }
 
-    _log_ok(ent.to_string());
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string());
 }
 
 void Buddha::list_pray_kinddeed() {
@@ -174,7 +175,7 @@ void Buddha::list_pray_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -193,7 +194,7 @@ void Buddha::list_pray_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -202,11 +203,11 @@ void Buddha::list_pray_kinddeed() {
 
 bool Buddha::is_user() {
     if (!_is_user(ctx->initiator())) {
-        _log_ok(ctx->initiator() + " is not user .") ;
+        _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is not user .") ;
         return false;
     }
 
-    _log_ok(ctx->initiator() + " is user .") ;
+    _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is user .") ;
     return true;
 }
 

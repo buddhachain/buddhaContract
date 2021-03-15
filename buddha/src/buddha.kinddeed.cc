@@ -15,12 +15,28 @@ void Buddha::add_kinddeeddetail() {
     const string& id = ctx->arg("id");
     const string& sequence = ctx->arg("sequence");
     const string& hash = ctx->arg("hash");
+
+    if( id.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed id is empty .");
+        return ;
+    }
+
+    if( sequence.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed sequence is empty .");
+        return ;
+    }
+
+    if( hash.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed hash is empty .");
+        return ;
+    }
+
     if (!_add_kinddeeddetail(id,sequence,hash)) {
         _log_error(__FUNCTION__, __LINE__,"_add_kinddeeddetail " + id + " failure .");
         return;
     }
 
-    _log_ok("ok");
+    _log_ok(__FUNCTION__, __LINE__, "ok");
 }
 
 void Buddha::add_kinddeedspec() {
@@ -28,12 +44,33 @@ void Buddha::add_kinddeedspec() {
     const string& sequence = ctx->arg("sequence");
     const string& desc = ctx->arg("desc");
     const string& price = ctx->arg("price");
+
+    if( id.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed id is empty .");
+        return ;
+    }
+
+    if( sequence.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed sequence is empty .");
+        return ;
+    }
+
+    if( desc.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed desc is empty .");
+        return ;
+    }
+    
+    if( price.empty()) {
+        _log_error(__FUNCTION__, __LINE__,"kinddeed price is empty .");
+        return ;
+    }
+    
     if (!_add_kinddeedspec(id,sequence,desc,price)) {
         _log_error(__FUNCTION__, __LINE__,"_add_kinddeedspec " + id + " failure .");
         return;
     }
 
-    _log_ok("ok");
+    _log_ok(__FUNCTION__, __LINE__, "ok");
 }
 
 void Buddha::add_kinddeed() {
@@ -123,11 +160,13 @@ void Buddha::add_kinddeed() {
     // }
 
 
+    //删除此善举的所有描述记录
     if( !_delete_kinddeeddetail_records(id) ) {
         _log_error(__FUNCTION__, __LINE__, "delete kinddeeddetail " + id + " failure .");
         return;
     }
 
+    //删除此善举的所有规格记录
     if( !_delete_kinddeedspec_records(id) ) {
         _log_error(__FUNCTION__, __LINE__, "delete kinddeedspec " + id + " failure .") ;
         return;
@@ -135,7 +174,9 @@ void Buddha::add_kinddeed() {
 
     for(int i = 0 ; i < detail_array.size() ; i++) {
         string sequence = detail_array.at(i)["sequence"].template get<string>();
-        string hash = detail_array.at(i)["hash"].template get<string>();        
+        string hash = detail_array.at(i)["hash"].template get<string>();
+
+        //添加善举描述记录        
         if (!_add_kinddeeddetail(id,sequence,hash)) {
             _log_error(__FUNCTION__, __LINE__,"_add_kinddeeddetail " + id + " failure .");
             return;
@@ -148,6 +189,7 @@ void Buddha::add_kinddeed() {
         string desc = spec_array.at(i)["desc"].template get<string>();
         string price = spec_array.at(i)["price"].template get<string>();
 
+        //添加善举规格记录        
         if (!_add_kinddeedspec(id,sequence,desc,price)) {
             _log_error(__FUNCTION__, __LINE__,"_add_kinddeedspec " + id + " failure .");
             return;
@@ -167,7 +209,7 @@ void Buddha::add_kinddeed() {
         return;
     }
 
-    _log_ok("add kinddeed " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "add kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::delete_kinddeed() {
@@ -197,12 +239,13 @@ void Buddha::delete_kinddeed() {
         return ;
     }
 
+    //删除此善举
     if( !_delete_kinddeed_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("delete kinddeed " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "delete kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::update_kinddeed() {
@@ -338,7 +381,7 @@ void Buddha::update_kinddeed() {
         return;
     }
 
-    _log_ok("update kinddeed " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "update kinddeed " + ent.to_string() + " success .");
 }
 
 void Buddha::find_kinddeed() {       
@@ -352,7 +395,7 @@ void Buddha::find_kinddeed() {
     //判断善举是否存在
     kinddeed kinddeed_ent;
     if (!_is_kinddeed_exist(id, kinddeed_ent))  {
-        _log_ok("kinddeed " + id + " is not exist .");
+        _log_ok(__FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
 
@@ -372,7 +415,7 @@ void Buddha::find_kinddeed() {
         spec_string += v_kinddeedspec_ent[i].to_string();
     }
 
-    _log_ok(kinddeed_ent.to_string() + detail_string + spec_string);
+    _log_ok(__FUNCTION__, __LINE__, kinddeed_ent.to_string() + detail_string + spec_string);
 }
 
 void Buddha::list_kinddeed() {        
@@ -390,7 +433,7 @@ void Buddha::list_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -409,7 +452,7 @@ void Buddha::list_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok("size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
         return ;
     }
 
@@ -437,7 +480,7 @@ void Buddha::list_kinddeeddetail() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 void Buddha::list_kinddeedspec() {        
@@ -461,17 +504,17 @@ void Buddha::list_kinddeedspec() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 
 
-DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
-DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
+// DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
+// DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
 DEFINE_METHOD(Buddha, add_kinddeed)             { self.add_kinddeed();              }
 DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();           }
 DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }
 DEFINE_METHOD(Buddha, find_kinddeed)            { self.find_kinddeed();             }
 DEFINE_METHOD(Buddha, list_kinddeed)            { self.list_kinddeed();             }
-DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
-DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }
+// DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
+// DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }

@@ -55,7 +55,7 @@ void Buddha::apply_founder(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply  founder over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string() + " apply  founder over, please wait for approve .");
 }
 
 void Buddha::approve_founder() {
@@ -77,11 +77,13 @@ void Buddha::approve_founder() {
         return ;
     }
 
+    //判断是否是基金会成员
     if( _is_founder(id)) {
         _log_error(__FUNCTION__, __LINE__,ent.to_string() + " is already founder .");
         return ;
     }
 
+    //删除此基金会成员
     if( !_delete_founder_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete founder " + ent.to_string() + " failure .");
         return;
@@ -93,7 +95,7 @@ void Buddha::approve_founder() {
         return;
     }
 
-    _log_ok("audit " + ent.to_string() + " to be founder .");
+    _log_ok(__FUNCTION__, __LINE__, "audit " + ent.to_string() + " to be founder .");
 }
 
 void Buddha::recusal_founder() {
@@ -115,6 +117,7 @@ void Buddha::recusal_founder() {
         return ;
     }
 
+    //删除此基金会成员
     if( !_delete_founder_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete founder " + ent.to_string() + " failure .");
         return;
@@ -127,16 +130,16 @@ void Buddha::recusal_founder() {
         return ;
     }
 
-    _log_ok("recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance .");
+    _log_ok(__FUNCTION__, __LINE__, "recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance .");
 }
 
 bool Buddha::is_founder() {
     if (!_is_founder(ctx->initiator())) {
-        _log_ok(ctx->initiator() + " is not founder .") ;
+        _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is not founder .") ;
         return false;
     }
     
-    _log_ok(ctx->initiator() + " is founder .") ;
+    _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is founder .") ;
     return true;
 }
 
@@ -147,20 +150,14 @@ void Buddha::list_founder() {
         return ;
     }
 
-    auto it = get_founder_table().scan({{"id",ctx->arg("id")}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        founder ent;
-        if (!it->get(&ent)) {
-            _log_error(__FUNCTION__, __LINE__, "founder table get failure : " + it->error(true));
-            return;
-        }
-
-        i++;
-        ret += ent.to_string();
+    //获取所有的基金会成员
+    xchain::json v ;
+    if(!_scan_founder(v, ctx->arg("id")) ) {
+        _log_error(__FUNCTION__, __LINE__, "scan founder failure .");
+        return;
     }
-    _log_ok("size=" + to_string(i) + " " + ret);
+
+    _log_ok(__FUNCTION__, __LINE__, "size=" + std::to_string(v.size()) + " " + v.dump());
 }
 
 

@@ -60,7 +60,7 @@ void Buddha::apply_temple(){
         return;
     }
 
-    _log_ok(ent.to_string() + " apply  temple over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, ent.to_string() + " apply  temple over, please wait for approve .");
 }
 
 void Buddha::approve_temple() {
@@ -82,11 +82,13 @@ void Buddha::approve_temple() {
         return ;
     }
 
+    //判断是否是寺院
     if( _is_temple(id)) {
         _log_error(__FUNCTION__, __LINE__,ent.to_string() + " is already temple .");
         return ;
     }
 
+    //删除此寺院
     if( !_delete_temple_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete temple " + ent.to_string() + " failure .");
         return;
@@ -98,7 +100,7 @@ void Buddha::approve_temple() {
         return;
     }
 
-    _log_ok("approve temple " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "approve temple " + ent.to_string() + " success .");
 }
 
 void Buddha::recusal_temple() {
@@ -120,21 +122,22 @@ void Buddha::recusal_temple() {
         return ;
     }
 
+    //删除此寺院
     if( !_delete_temple_record(id) ) {
         _log_error(__FUNCTION__, __LINE__,"delete temple " + ent.to_string() + " failure .");
         return;
     }
 
-    _log_ok("recusal temple " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "recusal temple " + ent.to_string() + " success .");
 }
 
 bool Buddha::is_temple() {
     if (!_is_temple(ctx->initiator())) {
-        _log_ok(ctx->initiator() + " is not temple .") ;
+        _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is not temple .") ;
         return false;
     }
     
-    _log_ok(ctx->initiator() + " is temple .") ;
+    _log_ok(__FUNCTION__, __LINE__, ctx->initiator() + " is temple .") ;
     return true;
 }
 
@@ -143,6 +146,13 @@ void Buddha::list_temple() {
         !is_founder()) {
         _log_error(__FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list temple .");
         return ;
+    }
+
+    //获取所有的寺院
+    vector<temple> v;
+    if(!_scan_temple(v) ) {
+        _log_error(__FUNCTION__, __LINE__, "scan temple failure .");
+        return;
     }
 
     auto it = get_temple_table().scan({{"id",ctx->arg("id")}});
@@ -159,7 +169,7 @@ void Buddha::list_temple() {
         ret += ent.to_string();
     }
 
-    _log_ok("size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
 }
 
 

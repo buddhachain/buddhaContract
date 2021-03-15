@@ -16,6 +16,7 @@ class templemaster: public buddha::TempleMaster {
     DEFINE_INDEX_END();
 
     string to_string();
+    string to_json();
 };
 
 

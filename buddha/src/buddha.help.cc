@@ -286,16 +286,46 @@ bool Buddha::_is_user(const string& id) {
     return true ;
 }
 
-bool Buddha::_scan_founder(vector<founder>& v, const string& cond) {
+bool Buddha::_scan_founder(xchain::json& v, const string& cond) {
     auto it = get_founder_table().scan({{"id",cond}});
     while(it->next()) {
         founder ent;
         if (!it->get(&ent)) {
-            _log_error(__FUNCTION__, __LINE__, "founder table get failure : " + it->error(true));
+            mycout << "founder table get failure : " << it->error(true) << endl;
             return false;
         }
 
-        v.push_back(ent);
+        v.push_back(ent.to_json());
+    }
+
+    return true;
+}
+
+bool Buddha::_scan_proposal(xchain::json& v, const string& cond) {
+    auto it = get_proposal_table().scan({{"key",cond}});
+    while(it->next()) {
+        proposal ent;
+        if (!it->get(&ent)) {
+            mycout << "proposal table get failure : " << it->error(true) << endl;
+            return false;
+        }
+
+        v.push_back(ent.to_json());
+    }
+
+    return true;
+}
+
+bool Buddha::_scan_temple(xchain::json& v, const string& cond) {
+    auto it = get_temple_table().scan({{"id",cond}});
+    while(it->next()) {
+        temple ent;
+        if (!it->get(&ent)) {
+            mycout << "temple table get failure : " << it->error(true) << endl;
+            return false;
+        }
+
+        v.push_back(ent.to_json());
     }
 
     return true;
@@ -412,11 +442,13 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
         return false;
     }
 
+    //删除此善举的所有描述记录
     if( !_delete_kinddeeddetail_records(id) ) {
         mycout << "delete kinddeeddetail " << id << " failure ." << endl ;
         return false;
     }
 
+    //删除此善举的所有规格记录
     if( !_delete_kinddeedspec_records(id) ) {
         mycout << "delete kinddeedspec " << id << " failure ." << endl ;
         return false;
@@ -578,20 +610,21 @@ bool Buddha::_add_kinddeeddetail(const string& kdid,
                                  const string& hash) {
 
     if( kdid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kdid is empty .");
+        mycout << "kdid is empty ." << endl;
         return false;
     }
 
     if( sequence.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"sequence is empty .");
+        mycout << "sequence is empty ." << endl;
         return false;
     }
 
     if( hash.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"hash is empty .");
+        mycout << "hash is empty ." << endl;
         return false;
     }
 
+    //删除在此善举已经存在的描述
     kinddeeddetail ent;
     if(_is_kinddeeddetail_exist(kdid, sequence, ent))
         if(!_delete_kinddeeddetail_record(kdid, sequence)) 
@@ -617,25 +650,26 @@ bool Buddha::_add_kinddeedspec(const string& kdid,
                                const string& price) {
 
     if( kdid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kdid is empty .");
+        mycout << "kdid is empty ." << endl;
         return false;
     }
 
     if( sequence.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"sequence is empty .");
+        mycout << "sequence is empty ." << endl;
         return false;
     }
 
     if( desc.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"desc is empty .");
+        mycout << "desc is empty ." << endl;
         return false;
     }
 
     if( price.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"price is empty .");
+        mycout << "price is empty ." << endl;
         return false;
     }
 
+    //删除在此善举已经存在的规格
     kinddeedspec ent;
     if(_is_kinddeedspec_exist(kdid, sequence, ent))
         if(!_delete_kinddeedspec_record(kdid, sequence)) 
