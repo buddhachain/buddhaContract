@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -14,25 +13,25 @@ using namespace std;
 void Buddha::apply_founder(){
     const string& desc = ctx->arg("desc");
     if( desc.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"desc is empty .");
+        _log_error(__FUNCTION__, __LINE__, "desc is empty .");
         return ;
     }
 
     const string& address = ctx->arg("address");
     if( address.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"address is empty .");
+        _log_error(__FUNCTION__, __LINE__, "address is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
     if( timestamp.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"timestamp is empty .");
+        _log_error(__FUNCTION__, __LINE__, "timestamp is empty .");
         return ;
     }
 
     const string& guaranty = ctx->transfer_amount();
     if( guaranty.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"guaranty is empty .");
+        _log_error(__FUNCTION__, __LINE__, "guaranty is empty .");
         return ;
     }
 
@@ -51,17 +50,17 @@ void Buddha::apply_founder(){
     ent.set_guaranty(ent.guaranty() + stoll(guaranty));
     ent.set_approved(false);
     if (!get_founder_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"founder table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FUNCTION__, __LINE__, ent.to_string() + " apply  founder over, please wait for approve .");
+    _log_ok(__FUNCTION__, __LINE__, ent.to_json(), "apply founder over, please wait for approve .");
 }
 
 void Buddha::approve_founder() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"founder id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "founder id is empty .");
         return ;
     }
 
@@ -73,7 +72,7 @@ void Buddha::approve_founder() {
     //判断此基金会成员是否存在
     founder ent;
     if( !_is_founder_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"founder " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
     }
 
@@ -85,13 +84,13 @@ void Buddha::approve_founder() {
 
     //删除此基金会成员
     if( !_delete_founder_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete founder " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_approved(true);
     if (!get_founder_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"founder table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -101,7 +100,7 @@ void Buddha::approve_founder() {
 void Buddha::recusal_founder() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"founder id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "founder id is empty .");
         return ;
     }
 
@@ -113,20 +112,20 @@ void Buddha::recusal_founder() {
     //判断此基金会成员是否存在
     founder ent;
     if( !_is_founder_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"founder " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
     }
 
     //删除此基金会成员
     if( !_delete_founder_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete founder " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     //将抵押退还
     string guaranty = to_string(ent.guaranty());
     if( !_transfer(id, guaranty)) {
-        _log_error(__FUNCTION__, __LINE__,"refund transfer " + guaranty + " to " + id + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "refund transfer " + guaranty + " to " + id + " failure .");
         return ;
     }
 
@@ -157,7 +156,7 @@ void Buddha::list_founder() {
         return;
     }
 
-    _log_ok(__FUNCTION__, __LINE__, "size=" + std::to_string(v.size()) + " " + v.dump());
+    _log_ok(__FUNCTION__, __LINE__, v);
 }
 
 

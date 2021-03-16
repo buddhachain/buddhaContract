@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -13,13 +12,13 @@ using namespace std;
 void Buddha::apply_join_temple(){
     // const string& id = ctx->arg("id");
     // if( id.empty()) {
-    //     _log_error(__FUNCTION__, __LINE__,"id is empty .");
+    //     _log_error(__FUNCTION__, __LINE__, "id is empty .");
     //     return ;
     // }
 
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
@@ -50,7 +49,7 @@ void Buddha::apply_join_temple(){
     ent.set_masterid(masterid);
     ent.set_approved(false);
     if (!get_templemaster_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"templemaster table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -60,13 +59,13 @@ void Buddha::apply_join_temple(){
 void Buddha::approve_join_temple() {
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
     const string& masterid = ctx->arg("masterid");
     if( masterid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"master id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
 
@@ -96,13 +95,13 @@ void Buddha::approve_join_temple() {
 
     //删除此寺院法师记录
     if( !_delete_templemaster_record(templeid, masterid) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete templemaster " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_approved(true);
     if (!get_templemaster_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"templemaster table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -112,13 +111,13 @@ void Buddha::approve_join_temple() {
 void Buddha::recusal_join_temple() {
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
     const string& masterid = ctx->arg("masterid");
     if( masterid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"master id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
     
@@ -130,13 +129,13 @@ void Buddha::recusal_join_temple() {
     //判断寺院法师记录是否存在
     templemaster ent;
     if( !_is_templemaster_exist(templeid, masterid,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"temple " + templeid + ", master " + masterid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "temple " + templeid + ", master " + masterid + " is not exist .");
         return ;
     }
 
     //删除此寺院法师记录
     if( !_delete_templemaster_record(templeid, masterid) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete templemaster " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
@@ -146,7 +145,7 @@ void Buddha::recusal_join_temple() {
 bool Buddha::is_in_temple() {
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "temple id is empty .");
         return false;
     }
 
@@ -193,7 +192,7 @@ void Buddha::list_temple_master() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, v);
 
         return ;
     }
@@ -213,7 +212,7 @@ void Buddha::list_temple_master() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, v);
         return ;
     }
 

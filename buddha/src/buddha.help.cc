@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -322,6 +321,36 @@ bool Buddha::_scan_temple(xchain::json& v, const string& cond) {
         temple ent;
         if (!it->get(&ent)) {
             mycout << "temple table get failure : " << it->error(true) << endl;
+            return false;
+        }
+
+        v.push_back(ent.to_json());
+    }
+
+    return true;
+}
+
+bool Buddha::_scan_master(xchain::json& v, const string& cond) {
+    auto it = get_master_table().scan({{"id",cond}});
+    while(it->next()) {
+        master ent;
+        if (!it->get(&ent)) {
+            mycout << "master table get failure : " << it->error(true) << endl;
+            return false;
+        }
+
+        v.push_back(ent.to_json());
+    }
+
+    return true;
+}
+
+bool Buddha::_scan_templemaster(xchain::json& v, const string& cond) {
+    auto it = get_templemaste_table().scan({{"id",cond}});
+    while(it->next()) {
+        templemaster ent;
+        if (!it->get(&ent)) {
+            mycout << "templemaster table get failure : " << it->error(true) << endl;
             return false;
         }
 

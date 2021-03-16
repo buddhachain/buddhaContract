@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -13,7 +12,7 @@ using namespace std;
 void Buddha::apply_online_kinddeed() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed id is empty .");
         return ;
     }
 
@@ -26,29 +25,29 @@ void Buddha::apply_online_kinddeed() {
     //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
 
     if (ent.online()==true){
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is already online .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is already online .");
         return ;
     }
 
     if( ent.owner() != ctx->initiator() ) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is not belong to you .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is not belong to you .");
         return ;
     }
 
     //删除此善举
     if( !_delete_kinddeed_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_applied(true);
     if (!get_kinddeed_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -58,7 +57,7 @@ void Buddha::apply_online_kinddeed() {
 void Buddha::apply_offline_kinddeed() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed id is empty .");
         return ;
     }
 
@@ -71,29 +70,29 @@ void Buddha::apply_offline_kinddeed() {
     //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
 
     if (ent.online()==false){
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is already offline .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is already offline .");
         return ;
     }
 
     if( ent.owner() != ctx->initiator() ) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is not belong to you .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is not belong to you .");
         return ;
     }
 
     //删除此善举
     if( !_delete_kinddeed_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_applied(true);
     if (!get_kinddeed_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -103,7 +102,7 @@ void Buddha::apply_offline_kinddeed() {
 void Buddha::approve_online_kinddeed() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed id is empty .");
         return ;
     }
 
@@ -115,30 +114,30 @@ void Buddha::approve_online_kinddeed() {
     //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
 
     if (ent.online()==true){
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is already online .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is already online .");
         return ;
     }
 
     if (ent.applied()==false)  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is not apply online .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is not apply online .");
         return ;
     }
 
     //删除此善举
     if( !_delete_kinddeed_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_applied(false);
     ent.set_online(true);
     if (!get_kinddeed_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -148,7 +147,7 @@ void Buddha::approve_online_kinddeed() {
 void Buddha::approve_offline_kinddeed() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed id is empty .");
         return ;
     }
 
@@ -160,30 +159,30 @@ void Buddha::approve_offline_kinddeed() {
     //判断善举是否存在
     kinddeed ent;
     if (!_is_kinddeed_exist(id, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
 
     if (ent.online()==false){
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is already offline .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is already offline .");
         return ;
     }
 
     if (ent.applied()==false)  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + ent.to_string() + " is not apply offline .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + ent.to_string() + " is not apply offline .");
         return ;
     }
 
     //删除此善举
     if( !_delete_kinddeed_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeed " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_applied(false);
     ent.set_online(false);
     if (!get_kinddeed_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 

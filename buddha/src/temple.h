@@ -2,6 +2,7 @@
 #define _TEMPLE_H_
 
 #include "xchain/table/types.h"
+#include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
 #include "buddha.pb.h"
 
@@ -19,7 +20,7 @@ class temple: public buddha::Temple {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 

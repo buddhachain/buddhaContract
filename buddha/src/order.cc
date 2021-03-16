@@ -15,7 +15,7 @@ string order::to_string() {
     return str;
 }
 
-xchain::json kinddeedproof::to_json() {
+xchain::json order::to_json() {
     xchain::json j = {
         {"id", id()},
         {"owner", owner()},

@@ -3,6 +3,7 @@
 #define _KINDDEED_H_
 
 #include "xchain/table/types.h"
+#include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
 #include "buddha.pb.h"
 
@@ -16,7 +17,7 @@ class kinddeedtype : public buddha::KinddeedType {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 class kinddeed: public buddha::Kinddeed {
@@ -27,7 +28,7 @@ class kinddeed: public buddha::Kinddeed {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 class kinddeeddetail: public buddha::KinddeedDetail {
@@ -37,7 +38,7 @@ class kinddeeddetail: public buddha::KinddeedDetail {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 class kinddeedspec: public buddha::KinddeedSpec {
@@ -47,7 +48,7 @@ class kinddeedspec: public buddha::KinddeedSpec {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 

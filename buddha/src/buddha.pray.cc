@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -14,71 +13,71 @@ void Buddha::pray_kinddeed() {
 
     const string& orderid = ctx->arg("id");
     if( orderid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"orderid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "orderid is empty .");
         return ;
     }
 
     const string& kdid = ctx->arg("kinddeed");
     if( kdid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kdid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kdid is empty .");
         return ;
     }
 
     const string& specid = ctx->arg("spec");
     if( specid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"specid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "specid is empty .");
         return ;
     }
 
     const string& count = ctx->arg("count");
     if( count.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"count is empty .");
+        _log_error(__FUNCTION__, __LINE__, "count is empty .");
         return ;
     }
 
     const string& amount = ctx->transfer_amount();
     if( amount.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"amount is empty .");
+        _log_error(__FUNCTION__, __LINE__, "amount is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
     if( timestamp.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"timestamp is empty .");
+        _log_error(__FUNCTION__, __LINE__, "timestamp is empty .");
         return ;
     }
 
     //判断订单是否存在
     order od;
     if (_is_order_exist(orderid,od))  {
-        _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is exist .");
+        _log_error(__FUNCTION__, __LINE__, "order " + orderid + " is exist .");
         return ;
     }
 
     //判断善举是否存在
     kinddeed kd;
     if (!_is_kinddeed_exist(kdid, kd))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + kdid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + kdid + " is not exist .");
         return ;
     }
 
     //判断善举是否已经上架
     if (!_is_kinddeed_online(kdid)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + kdid + " is not online .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + kdid + " is not online .");
         return ;
     }
 
     //判断善举规格是否存在
     kinddeedspec spec;
     if (!_is_kinddeedspec_exist(kdid, specid, spec))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedspec " + kdid + "," + specid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedspec " + kdid + "," + specid + " is not exist .");
         return ;
     }
 
     //计算总价格，要求转账过来的总价格跟订单计算出的总价格要求必须一直
     int64_t calced_amount = spec.price() * stoll(count);
     if( calced_amount != stoll(amount)){
-        _log_error(__FUNCTION__, __LINE__,"delive amount " + amount
+        _log_error(__FUNCTION__, __LINE__, "delive amount " + amount
                    + ", real amount=" + to_string(calced_amount));
         return;
     }
@@ -92,25 +91,25 @@ void Buddha::pray_kinddeed() {
     od.set_amount(calced_amount);
     od.set_timestamp(timestamp);
     if (!get_order_table().put(od)) {
-        _log_error(__FUNCTION__, __LINE__,"order table put " + od.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", od.to_json());
         return;
     }
     
-    _log_ok(__FUNCTION__, __LINE__, "pray kinddeed " + to_string(calced_amount) + " success .");
+    _log_ok(__FUNCTION__, __LINE__, od.to_json());
 }
 
 void Buddha::delete_pray_kinddeed() {
 
     const string& orderid = ctx->arg("id");
     if( orderid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"orderid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "orderid is empty .");
         return ;
     }
 
     //判断订单是否存在
     order ent;
     if (!_is_order_exist(orderid,ent))  {
-        _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "order " + orderid + " is not exist .");
         return ;
     }
 
@@ -126,24 +125,24 @@ void Buddha::delete_pray_kinddeed() {
 
     //删除此订单
     if( !_delete_order_record(orderid) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete pray kinddeed " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FUNCTION__, __LINE__, "delete pray kinddeed " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "create success .", ent.to_json());
 }
 
 void Buddha::find_pray_kinddeed() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"order id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "order id is empty .");
         return ;
     }
 
     //判断订单是否存在
     order ent;       
     if (!_is_order_exist(id, ent)) {
-        _log_error(__FUNCTION__, __LINE__,"order " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "order " + id + " is not exist .");
         return ;
     }
 
@@ -175,7 +174,7 @@ void Buddha::list_pray_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, v);
         return ;
     }
 
@@ -194,7 +193,7 @@ void Buddha::list_pray_kinddeed() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, v);
         return ;
     }
 

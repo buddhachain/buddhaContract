@@ -2,6 +2,7 @@
 #define _BUDDHA_H_
 
 #include "xchain/xchain.h"
+#include "xchain/json/json.h"
 #include "xchain/contract.pb.h"
 
 #include "founder.h"
@@ -105,8 +106,10 @@ public:
 private:
     //辅助函数
 
-    void _log_error(string, int, string);
-    void _log_ok(string, int, string);
+    void _log_error(const string&, const int, const string& ="") ;
+    void _log_error(const string&, const int, const string&, const xchain::json&) ;
+    void _log_ok(const string&, const int, const string& ="") ;
+    void _log_ok(const string&, const int, const string&, const xchain::json&) ;
 
     bool _is_founder_exist(const string&,founder&);
     bool _is_proposal_exist(const string&,proposal&);

@@ -2,6 +2,7 @@
 #define _KINDDEED_PROOF_H_
 
 #include "xchain/table/types.h"
+#include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
 #include "buddha.pb.h"
 
@@ -16,7 +17,7 @@ class kinddeedproof: public buddha::KinddeedProof {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 #endif // _KINDDEED_PROOF_H_

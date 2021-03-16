@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -19,7 +18,7 @@ void Buddha::initialize() {
 void Buddha::get_deployer() {
     string deployer;
     if (!ctx->get_object("deployer", &deployer)) {
-        _log_error(__FUNCTION__, __LINE__,"unknown deployer .");
+        _log_error(__FUNCTION__, __LINE__, "unknown deployer .");
         return ;
     }
 

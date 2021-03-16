@@ -2,6 +2,7 @@
 #define _PROPOSAL_H_
 
 #include "xchain/table/types.h"
+#include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
 #include "buddha.pb.h"
 
@@ -15,7 +16,7 @@ class proposal: public buddha::Proposal {
     DEFINE_INDEX_END();
 
     string to_string();
-    string to_json();
+    xchain::json to_json();
 };
 
 #endif // _PROPOSAL_H_

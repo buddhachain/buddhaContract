@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -30,13 +29,44 @@ Buddha::Buddha() :
 {
 }
 
+void Buddha::_log_error(const string& fun, const int line, const string& message) {
+    cout << fun << "[" << line << "] " << message << endl;
+    xchain::json ret ;
+    ret["result"] = false;
+    ret["message"] = message;
 
-void Buddha::_log_error(string fun, int line, string str) {
-    cout << fun << "[" << line << "] " << str << endl;
-    ctx->error("{ \"result\":false, \"message\":\"" + str +"\" }");
+    ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(string fun, int line, string str) {
-    cout << fun << "[" << line << "] " << str << endl;
-    ctx->ok("{ \"result\":true, \"message\":\"" + str +"\" }");
+
+void Buddha::_log_error(const string& fun, const int line, const string& message, const xchain::json& j) {
+    cout << fun << "[" << line << "] " << j.dump() << endl;
+    xchain::json ret ;
+    ret["result"] = false;
+    ret["message"] = message;
+    ret["value"] = j;
+    if(j.is_array())
+        ret["size"] = j.size();
+
+    ctx->ok(ret.dump());
+}
+
+void Buddha::_log_ok(const string& fun, const int line, const string& message) {
+    cout << fun << "[" << line << "] " << message << endl;
+    xchain::json ret ;
+    ret["result"] = true;
+    ret["message"] = message;
+    ctx->ok(ret.dump());
+}
+
+void Buddha::_log_ok(const string& fun, const int line, const string& message, const xchain::json& j) {
+    cout << fun << "[" << line << "] " << j.dump() << endl;
+    xchain::json ret ;
+    ret["result"] = true;
+    ret["message"] = message;
+    ret["value"] = j;
+    if(j.is_array())
+        ret["size"] = j.size();
+
+    ctx->ok(ret.dump());
 }

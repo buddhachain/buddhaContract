@@ -18,7 +18,7 @@ string proposal::to_string() {
     return str;
 }
 
-xchain::json kinddeedproof::to_json() {
+xchain::json proposal::to_json() {
     xchain::json j = {
         {"key", key()},
         {"value", value()},

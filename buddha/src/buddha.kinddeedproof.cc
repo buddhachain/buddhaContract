@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -13,33 +12,33 @@ using namespace std;
 void Buddha::upload_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof orderid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
         return ;
     }
 
     const string& proof = ctx->arg("proof");
     if( proof.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof hash is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof hash is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
     if( timestamp.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof timestamp is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof timestamp is empty .");
         return ;
     }
 
     //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (_is_kinddeedproof_exist(orderid, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is exist .");
         return ;
     }
 
     //判断订单是否存在
     order od;
     if (!_is_order_exist(orderid, od)) {
-        _log_error(__FUNCTION__, __LINE__,"order and suborder lost, kinddeedproof " + orderid + " be delete .");
+        _log_error(__FUNCTION__, __LINE__, "order and suborder lost, kinddeedproof " + orderid + " be delete .");
         return ;
     }
     
@@ -54,7 +53,7 @@ void Buddha::upload_kinddeedproof() {
     ent.set_timestamp(timestamp);
     ent.set_approved(false);
     if (!get_kinddeedproof_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof table put " + ent.to_string() + " failure .");
         return;
     }
 
@@ -64,7 +63,7 @@ void Buddha::upload_kinddeedproof() {
 void Buddha::approve_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof orderid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
         return ;
     }
 
@@ -76,7 +75,7 @@ void Buddha::approve_kinddeedproof() {
     //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(orderid, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is not exist .");
         return ;
     }
 
@@ -85,7 +84,7 @@ void Buddha::approve_kinddeedproof() {
     if (!_is_order_exist(orderid, od)) {
         //删除此善举凭证
         _delete_kinddeedproof_record(orderid);
-        _log_error(__FUNCTION__, __LINE__,"order and suborder lost, kinddeedproof " + orderid + " be delete .");
+        _log_error(__FUNCTION__, __LINE__, "order and suborder lost, kinddeedproof " + orderid + " be delete .");
         return ;
     }
 
@@ -97,7 +96,7 @@ void Buddha::approve_kinddeedproof() {
     //判断善举是否存在
     kinddeed kd;
     if( !_is_kinddeed_exist(od.kdid(), kd)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeed " + od.kdid() + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeed " + od.kdid() + " is not exist .");
         return ;
     }
 
@@ -109,18 +108,18 @@ void Buddha::approve_kinddeedproof() {
 
     //删除此善举凭证
     if( !_delete_kinddeedproof_record(orderid) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeedproof " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_approved(true);
     if (!get_kinddeedproof_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof table put " + ent.to_string() + " failure .");
         return;
     }
 
     if( !_transfer(ent.owner(), to_string(od.amount()))) {
-        _log_error(__FUNCTION__, __LINE__,"transfer to " + ent.owner() + " " +  to_string(od.amount()) + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "transfer to " + ent.owner() + " " +  to_string(od.amount()) + " failure .");
         return ;
     }
 
@@ -130,7 +129,7 @@ void Buddha::approve_kinddeedproof() {
 void Buddha::refuse_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof orderid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
         return ;
     }
 
@@ -142,7 +141,7 @@ void Buddha::refuse_kinddeedproof() {
     //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(orderid, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is not exist .");
         return ;
     }
 
@@ -151,7 +150,7 @@ void Buddha::refuse_kinddeedproof() {
     if (!_is_order_exist(orderid, od)) {
         //删除此善举凭证
         _delete_kinddeedproof_record(orderid);
-        _log_error(__FUNCTION__, __LINE__,"order lost, kinddeedproof " + orderid + " be delete .");
+        _log_error(__FUNCTION__, __LINE__, "order lost, kinddeedproof " + orderid + " be delete .");
         return ;
     }
 
@@ -162,7 +161,7 @@ void Buddha::refuse_kinddeedproof() {
 
     //删除此善举凭证
     if( !_delete_kinddeedproof_record(orderid) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeedproof " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
@@ -173,21 +172,21 @@ void Buddha::find_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
 
     if( orderid.empty() ) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof hash and orderid is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof hash and orderid is empty .");
         return ;
     }
 
     //判断订单是否存在
     order od;        
     if (!_is_order_exist(orderid, od))  {
-        _log_error(__FUNCTION__, __LINE__,"order " + orderid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "order " + orderid + " is not exist .");
         return ;
     }
 
     //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(orderid, ent))  {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedproof " + orderid + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is not exist .");
         return ;
     }
     
@@ -217,7 +216,7 @@ void Buddha::list_kinddeedproof() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, v);
         return;
     }
 
@@ -236,7 +235,7 @@ void Buddha::list_kinddeedproof() {
             i++;
             ret += ent.to_string();
         }
-        _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+        _log_ok(__FUNCTION__, __LINE__, v);
         return;
     }
 

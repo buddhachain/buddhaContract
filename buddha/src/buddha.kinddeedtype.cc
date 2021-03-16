@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -14,13 +13,13 @@ using namespace std;
 void Buddha::add_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
     if( desc.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype desc is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype desc is empty .");
         return ;
     }
 
@@ -32,24 +31,24 @@ void Buddha::add_kinddeedtype() {
     //判断善举类型是否存在
     kinddeedtype ent;
     if( _is_kinddeedtype_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype " + id + " is exist .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype " + id + " is exist .");
         return ;
     }
 
     ent.set_id(stoll(id));
     ent.set_desc(desc);
     if (!get_kinddeedtype_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FUNCTION__, __LINE__, "add kinddeedtype " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "create success .", ent.to_json());
 }
 
 void Buddha::delete_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
@@ -61,29 +60,29 @@ void Buddha::delete_kinddeedtype() {
     //判断善举类型是否存在
     kinddeedtype ent;
     if( !_is_kinddeedtype_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kindeed type " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kindeed type " + id + " is not exist .");
         return ;
     }
 
     //删除此善举类型
     if( !_delete_kinddeedtype_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeedtype " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FUNCTION__, __LINE__, "delete kinddeedtype " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, __LINE__, "create success .", ent.to_json());
 }
 
 void Buddha::update_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
     if( desc.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype desc is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype desc is empty .");
         return ;
     }
 
@@ -95,30 +94,30 @@ void Buddha::update_kinddeedtype() {
     //判断善举类型是否存在
     kinddeedtype ent;
     if( !_is_kinddeedtype_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kindeedtype " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "kindeedtype " + id + " is not exist .");
         return ;
     }
 
     //删除此善举类型
     if( !_delete_kinddeedtype_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete kinddeedtype " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_id(stoll(id));
     ent.set_desc(desc);
     if (!get_kinddeedtype_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FUNCTION__, __LINE__, "update kinddeedtype " + ent.to_string() + " success .");
+    _log_ok(__FUNCTION__, ent.to_json());
 }
 
 void Buddha::find_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"kinddeedtype id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
@@ -146,7 +145,7 @@ void Buddha::list_kinddeedtype() {
         i++;
         ret += ent.to_string();
     }
-    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, v);
 }
 
 

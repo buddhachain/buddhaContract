@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -13,25 +12,25 @@ using namespace std;
 void Buddha::apply_temple(){
     const string& unit = ctx->arg("unit");
     if( unit.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"unit is empty .");
+        _log_error(__FUNCTION__, __LINE__, "unit is empty .");
         return ;
     }
     
     const string& creditcode = ctx->arg("creditcode");
     if( creditcode.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"creditcode is empty .");
+        _log_error(__FUNCTION__, __LINE__, "creditcode is empty .");
         return ;
     }
     
     const string& address = ctx->arg("address");
     if( address.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"address is empty .");
+        _log_error(__FUNCTION__, __LINE__, "address is empty .");
         return ;
     }
     
     const string& proof = ctx->arg("proof");
     if( proof.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"proof is empty .");
+        _log_error(__FUNCTION__, __LINE__, "proof is empty .");
         return ;
     }
 
@@ -56,7 +55,7 @@ void Buddha::apply_temple(){
     ent.set_proof(proof);
     ent.set_approved(false);
     if (!get_temple_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"temple table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -66,7 +65,7 @@ void Buddha::apply_temple(){
 void Buddha::approve_temple() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
@@ -78,7 +77,7 @@ void Buddha::approve_temple() {
     //判断此寺院是否存在
     temple ent;
     if( !_is_temple_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"temple " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "temple " + id + " is not exist .");
         return ;
     }
 
@@ -90,13 +89,13 @@ void Buddha::approve_temple() {
 
     //删除此寺院
     if( !_delete_temple_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete temple " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_approved(true);
     if (!get_temple_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"temple table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -106,7 +105,7 @@ void Buddha::approve_temple() {
 void Buddha::recusal_temple() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"temple id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
     
@@ -118,13 +117,13 @@ void Buddha::recusal_temple() {
     //判断此寺院是否存在
     temple ent;
     if( !_is_temple_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"temple " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "temple " + id + " is not exist .");
         return ;
     }
 
     //删除此寺院
     if( !_delete_temple_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete temple " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
@@ -149,27 +148,13 @@ void Buddha::list_temple() {
     }
 
     //获取所有的寺院
-    vector<temple> v;
-    if(!_scan_temple(v) ) {
+    xchain::json vtemple;
+    if(!_scan_temple(vtemple) ) {
         _log_error(__FUNCTION__, __LINE__, "scan temple failure .");
         return;
     }
 
-    auto it = get_temple_table().scan({{"id",ctx->arg("id")}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        temple ent;
-        if (!it->get(&ent)) {
-            _log_error(__FUNCTION__, __LINE__, "temple table get failure : " + it->error(true));
-            return ;
-        }
-
-        i++;
-        ret += ent.to_string();
-    }
-
-    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(vtemple.size()) + " " + vtemple.dump());
 }
 
 

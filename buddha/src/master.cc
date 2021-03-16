@@ -11,7 +11,7 @@ string master::to_string() {
     return str;
 }
 
-xchain::json kinddeedproof::to_json() {
+xchain::json master::to_json() {
     xchain::json j = {
         {"id", id()},
         {"creditcode", creditcode()},

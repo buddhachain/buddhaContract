@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "xchain/json/json.h"
 #include "xchain/xchain.h"
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
@@ -13,13 +12,13 @@ using namespace std;
 void Buddha::apply_master(){
     const string& creditcode = ctx->arg("creditcode");
     if( creditcode.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"creditcode is empty .");
+        _log_error(__FUNCTION__, __LINE__, "creditcode is empty .");
         return ;
     }
 
     const string& proof = ctx->arg("proof");
     if( proof.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"proof is empty .");
+        _log_error(__FUNCTION__, __LINE__, "proof is empty .");
         return ;
     }
 
@@ -41,7 +40,7 @@ void Buddha::apply_master(){
     ent.set_proof(proof);
     ent.set_approved(false);
     if (!get_master_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"master table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -51,7 +50,7 @@ void Buddha::apply_master(){
 void Buddha::approve_master() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"master id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
 
@@ -63,7 +62,7 @@ void Buddha::approve_master() {
     //判断此法师是否存在
     master ent;
     if( !_is_master_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"master " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "master " + id + " is not exist .");
         return ;
     }
 
@@ -75,13 +74,13 @@ void Buddha::approve_master() {
 
     //删除此法师
     if( !_delete_master_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete master " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     ent.set_approved(true);
     if (!get_master_table().put(ent)) {
-        _log_error(__FUNCTION__, __LINE__,"master table put " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
@@ -91,7 +90,7 @@ void Buddha::approve_master() {
 void Buddha::recusal_master() {
     const string& id = ctx->arg("id");
     if( id.empty()) {
-        _log_error(__FUNCTION__, __LINE__,"master id is empty .");
+        _log_error(__FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
     
@@ -103,13 +102,13 @@ void Buddha::recusal_master() {
     //判断此法师是否存在
     master ent;
     if( !_is_master_exist(id,ent)) {
-        _log_error(__FUNCTION__, __LINE__,"master " + id + " is not exist .");
+        _log_error(__FUNCTION__, __LINE__, "master " + id + " is not exist .");
         return ;
     }
 
     //删除此法师
     if( !_delete_master_record(id) ) {
-        _log_error(__FUNCTION__, __LINE__,"delete master " + ent.to_string() + " failure .");
+        _log_error(__FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
@@ -133,20 +132,13 @@ void Buddha::list_master() {
         return ;
     }
 
-    auto it = get_master_table().scan({{"id",ctx->arg("id")}});
-    int i = 0;
-    string ret;
-    while(it->next()) {
-        master ent;
-        if (!it->get(&ent)) {
-            _log_error(__FUNCTION__, __LINE__, "master table get failure : " + it->error(true));
-            return;
-        }
-
-        i++;
-        ret += ent.to_string();
+    xchain::json v ;
+    if(!_scan_master(v, ctx->arg("id")) ) {
+        _log_error(__FUNCTION__, __LINE__, "scan table failure .");
+        return;
     }
-    _log_ok(__FUNCTION__, __LINE__, "size=" + to_string(i) + " " + ret);
+
+    _log_ok(__FUNCTION__, __LINE__, v);
 }
 
 
