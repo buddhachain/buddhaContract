@@ -1,13 +1,13 @@
 [
   {
     "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/63/63c2a7716170aee1.o /root/buddhaContract/buddha/src/buddha.aftercomment.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.aftercomment.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/1d/1d145199ac22c269.o /root/buddhaContract/buddha/src/aftercomment.cc",
+    "file": "/root/buddhaContract/buddha/src/aftercomment.cc"
   },
   {
     "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/0a/0a77ca6efedad854.o /root/buddhaContract/buddha/src/buddha.beforecomment.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.beforecomment.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/08/088063f793dad79c.o /root/buddhaContract/buddha/src/beforecomment.cc",
+    "file": "/root/buddhaContract/buddha/src/beforecomment.cc"
   },
   {
     "directory": "/root/buddhaContract/buddha",
@@ -16,78 +16,18 @@
   },
   {
     "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/25/2568d5fb587b9b87.o /root/buddhaContract/buddha/src/buddha.commentlabel.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.commentlabel.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/02/025816e8527e3b78.o /root/buddhaContract/buddha/src/buddha.deployer.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.deployer.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e8/e82a8558b10ada5d.o /root/buddhaContract/buddha/src/buddha.founder.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.founder.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/7f/7fe476c451ee4cbd.o /root/buddhaContract/buddha/src/buddha.help.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.help.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f8/f8f38772fa36cc44.o /root/buddhaContract/buddha/src/buddha.kinddeed.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.kinddeed.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/5a/5a1a453867b7863a.o /root/buddhaContract/buddha/src/buddha.kinddeedproof.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.kinddeedproof.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/17/17751387be39667c.o /root/buddhaContract/buddha/src/buddha.kinddeedtype.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.kinddeedtype.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/67/67de6a355f6b2c2a.o /root/buddhaContract/buddha/src/buddha.line.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.line.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/52/524eb86f9d86c386.o /root/buddhaContract/buddha/src/buddha.master.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.master.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/24/24903919f5478416.o /root/buddhaContract/buddha/src/buddha.pb.cc",
     "file": "/root/buddhaContract/buddha/src/buddha.pb.cc"
   },
   {
     "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/10/10da671be58ce93c.o /root/buddhaContract/buddha/src/buddha.pray.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.pray.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e7/e74173b5c2db28cf.o /root/buddhaContract/buddha/src/commentlabel.cc",
+    "file": "/root/buddhaContract/buddha/src/commentlabel.cc"
   },
   {
     "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e1/e17d25fcbcf1fa46.o /root/buddhaContract/buddha/src/buddha.proposal.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.proposal.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/85/85459d759995898b.o /root/buddhaContract/buddha/src/buddha.temple.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.temple.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/22/223fabe240e2acf1.o /root/buddhaContract/buddha/src/buddha.templemaster.cc",
-    "file": "/root/buddhaContract/buddha/src/buddha.templemaster.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/buddha",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/3e/3eb6fdf5b1a080a7.o /root/buddhaContract/buddha/src/comment.cc",
-    "file": "/root/buddhaContract/buddha/src/comment.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/8b/8b77e1435e697270.o /root/buddhaContract/buddha/src/deployer.cc",
+    "file": "/root/buddhaContract/buddha/src/deployer.cc"
   },
   {
     "directory": "/root/buddhaContract/buddha",
@@ -103,6 +43,16 @@
     "directory": "/root/buddhaContract/buddha",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/54/543f8718fc255ba2.o /root/buddhaContract/buddha/src/kinddeedproof.cc",
     "file": "/root/buddhaContract/buddha/src/kinddeedproof.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/buddha",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/8f/8f902fd0368b8224.o /root/buddhaContract/buddha/src/kinddeedtype.cc",
+    "file": "/root/buddhaContract/buddha/src/kinddeedtype.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/buddha",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e5/e5a6a88857a4fbe2.o /root/buddhaContract/buddha/src/line.cc",
+    "file": "/root/buddhaContract/buddha/src/line.cc"
   },
   {
     "directory": "/root/buddhaContract/buddha",

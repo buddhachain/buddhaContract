@@ -12,8 +12,8 @@ using namespace std;
 class order: public buddha::Order {
     DEFINE_ROWKEY(id);                  //主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, id)         //主键只能find
-        DEFINE_INDEX_ADD(1, kdowner)    //非主键只能scan
+        DEFINE_INDEX_ADD(0, id)         //只主键能find，也支持scan
+        DEFINE_INDEX_ADD(1, kdowner)    //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
     string to_string();

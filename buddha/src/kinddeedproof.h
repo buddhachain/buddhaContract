@@ -12,8 +12,8 @@ using namespace std;
 class kinddeedproof: public buddha::KinddeedProof {
     DEFINE_ROWKEY(orderid);             //主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, orderid)    //主键只能find
-        DEFINE_INDEX_ADD(1, owner)      //非主键只能scan
+        DEFINE_INDEX_ADD(0, orderid)    //只主键能find，也支持scan
+        DEFINE_INDEX_ADD(1, owner)      //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
     string to_string();

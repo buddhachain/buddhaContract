@@ -12,7 +12,7 @@ using namespace std;
 class founder: public buddha::Founder {
     DEFINE_ROWKEY(id);          //主键
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, id) //主键只能find
+        DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
     DEFINE_INDEX_END();
 
     string to_string();

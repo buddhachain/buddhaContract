@@ -29,8 +29,8 @@ Buddha::Buddha() :
 {
 }
 
-void Buddha::_log_error(const string& fun, const int line, const string& message) {
-    cout << fun << "[" << line << "] " << message << endl;
+void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message) {
+    cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = false;
     ret["message"] = message;
@@ -39,8 +39,8 @@ void Buddha::_log_error(const string& fun, const int line, const string& message
 }
 
 
-void Buddha::_log_error(const string& fun, const int line, const string& message, const xchain::json& j) {
-    cout << fun << "[" << line << "] " << j.dump() << endl;
+void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+    cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = false;
     ret["message"] = message;
@@ -51,16 +51,16 @@ void Buddha::_log_error(const string& fun, const int line, const string& message
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& fun, const int line, const string& message) {
-    cout << fun << "[" << line << "] " << message << endl;
+void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message) {
+    cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = true;
     ret["message"] = message;
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& fun, const int line, const string& message, const xchain::json& j) {
-    cout << fun << "[" << line << "] " << j.dump() << endl;
+void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+    cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = true;
     ret["message"] = message;

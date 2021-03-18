@@ -18,7 +18,7 @@
 #include <string>
 using namespace std;
 
-#define mycout cout << __func__ << "[" << __LINE__ << "] " 
+#define mycout cout << __FILE__ << "(" << __LINE__ << ") [" << __FUNCTION__ << "] " 
 
 class Buddha : public xchain::Contract {
 public:
@@ -106,10 +106,10 @@ public:
 private:
     //辅助函数
 
-    void _log_error(const string&, const int, const string& ="") ;
-    void _log_error(const string&, const int, const string&, const xchain::json&) ;
-    void _log_ok(const string&, const int, const string& ="") ;
-    void _log_ok(const string&, const int, const string&, const xchain::json&) ;
+    void _log_error(const string&, const string&, const int, const string& ="") ;
+    void _log_error(const string&, const string&, const int, const string&, const xchain::json&) ;
+    void _log_ok(const string&, const string&, const int, const string& ="") ;
+    void _log_ok(const string&, const string&, const int, const string&, const xchain::json&) ;
 
     bool _is_founder_exist(const string&,founder&);
     bool _is_proposal_exist(const string&,proposal&);
@@ -145,17 +145,23 @@ private:
     bool _scan_founder(xchain::json&, const string& ="");
     bool _scan_proposal(xchain::json&, const string& ="");
     bool _scan_temple(xchain::json&, const string& ="");
-    bool _scan_master(xchain::json&,master&);
-    bool _scan_templemaster(xchain::json&,const string&,templemaster&);
-    bool _scan_kinddeedtype(xchain::json&,kinddeedtype&);
-    bool _scan_kinddeed(xchain::json&,kinddeed&);
-    bool _scan_kinddeeddetail(xchain::json&, const string& seq, kinddeeddetail&);
-    bool _scan_kinddeedspec(xchain::json&, const string& seq, kinddeedspec&);
-    bool _scan_commentlabel(xchain::json&,commentlabel&);
-    bool _scan_beforecomment(xchain::json&, const string&,beforecomment&);
-    bool _scan_order(xchain::json&,order&);
-    bool _scan_kinddeedproof(xchain::json&,kinddeedproof&);
-    bool _scan_aftercomment(xchain::json&,const string&, aftercomment&);
+    bool _scan_master(xchain::json&, const string& ="");
+    bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
+    bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
+    bool _scan_kinddeedtype(xchain::json&, const string& ="");
+    bool _scan_kinddeed_by_id(xchain::json&, const string& ="");
+    bool _scan_kinddeed_by_owner(xchain::json&, const string& ="");
+    bool _scan_kinddeed_by_idowner(xchain::json&, const string& ="");
+    bool _scan_kinddeeddetail(xchain::json&, const string& ="");
+    bool _scan_kinddeedspec(xchain::json&, const string& ="");
+    bool _scan_commentlabel(xchain::json&, const string& ="");
+    bool _scan_beforecomment(xchain::json&, const string& ="");
+    bool _scan_order_by_id(xchain::json&, const string& ="");
+    bool _scan_order_by_kdowner(xchain::json&, const string& ="");    
+    bool _scan_kinddeedproof_by_orderid(xchain::json&, const string& ="");
+    bool _scan_kinddeedproof_by_owner(xchain::json&, const string& ="");
+    bool _scan_kinddeedproof_by_owner_orderid(xchain::json&, const string& ="", const string& ="");    
+    bool _scan_aftercomment_by_orderid(xchain::json&, const string& ="");
 
 
     bool _delete_founder_record(const string&);
