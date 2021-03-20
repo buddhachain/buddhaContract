@@ -49,9 +49,9 @@ bool Buddha::_is_in_temple(const string& templeid,
 
 bool Buddha::_scan_templemaster_by_templeid(xchain::json& v, const string& cond) {
     auto it = get_templemaster_table().scan({{"templeid",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         templemaster ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "templemaster table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -64,9 +64,9 @@ bool Buddha::_scan_templemaster_by_templeid(xchain::json& v, const string& cond)
 
 bool Buddha::_scan_templemaster_by_masterid(xchain::json& v, const string& cond) {
     auto it = get_templemaster_table().scan({{"masterid",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         templemaster ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "templemaster table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -97,86 +97,87 @@ bool Buddha::_delete_templemaster_record(const string& templeid,
 namespace 分界线{}
 
 void Buddha::apply_join_temple(){
-    // const string& id = ctx->arg("id");
-    // if( id.empty()) {
-    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "id is empty .");
-    //     return ;
-    // }
-
     const string& templeid = ctx->arg("templeid");
-    if( templeid.empty()) {
+    if( templeid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
+    //法师申请加入寺院
     const string& masterid = ctx->initiator() ;
 
-    if( !is_master()) {
+    //身份检查，判断是否是法师
+    if( !is_master() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is not master, have no authority to apply join temple .");
         return ;
     }
 
-    //判断是否是寺院
-    if( !_is_temple(templeid)) {
+    //身份检查，判断是否是寺院
+    if( !_is_temple(templeid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, templeid + " is not a temple .");
         return ;
     }
 
-    //判断是否法师是否已经入驻此寺院
     templemaster ent;
-    if( _is_in_temple(templeid, masterid, ent )) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,masterid + " is already join temple .");
+
+    //判断是否法师是否已经入驻此寺院
+    if( _is_in_temple(templeid, masterid, ent ) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is already join temple .");
         return;
     }
-    
-    _delete_templemaster_record(templeid, masterid);
-    
-    // ent.set_id(id);
+
+    //判断是否是否已经申请
+    if( _is_templemaster_exist(templeid, masterid, ent ) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is applying .", ent.to_json() );
+        return;
+    }
+
     ent.set_templeid(templeid);
     ent.set_masterid(masterid);
     ent.set_approved(false);
-    if (!get_templemaster_table().put(ent)) {
+    if (!get_templemaster_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string() + " apply join templemaster over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, masterid + " apply join templemaster over, please wait for approve .", ent.to_json() );
 }
 
 void Buddha::approve_join_temple() {
     const string& templeid = ctx->arg("templeid");
-    if( templeid.empty()) {
+    if( templeid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
     const string& masterid = ctx->arg("masterid");
-    if( masterid.empty()) {
+    if( masterid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
 
-    if( !is_founder()) {
+    //判断是否是基金会成员
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve master .");
         return ;
     }
 
     //判断是否是法师
-    if( !_is_master(masterid)) {
+    if( !_is_master(masterid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is not a master .");
         return ;
     }
 
     //判断是否是寺院
-    if( !_is_temple(templeid)) {
+    if( !_is_temple(templeid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, templeid + " is not a temple .");
         return ;
     }
 
     //判断是否法师是否已经入驻此寺院
     templemaster ent;
-    if( _is_in_temple(templeid, masterid,ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ent.to_string() + " is already join temple .");
+    if( _is_in_temple(templeid, masterid,ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is already join temple .", ent.to_json() );
         return ;
     }
 
@@ -186,36 +187,38 @@ void Buddha::approve_join_temple() {
         return;
     }
 
+    //授权
     ent.set_approved(true);
-    if (!get_templemaster_table().put(ent)) {
+    if (!get_templemaster_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve templemaster " + ent.to_string() + " success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve templemaster " + masterid + " success .", ent.to_json() );
 }
 
 void Buddha::recusal_join_temple() {
     const string& templeid = ctx->arg("templeid");
-    if( templeid.empty()) {
+    if( templeid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
     const string& masterid = ctx->arg("masterid");
-    if( masterid.empty()) {
+    if( masterid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
-    
-    if( !is_founder()) {
+
+    //判断是否是基金会成员
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal master .");
         return ;
     }
 
     //判断寺院法师记录是否存在
     templemaster ent;
-    if( !_is_templemaster_exist(templeid, masterid,ent)) {
+    if( !_is_templemaster_exist(templeid, masterid,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple " + templeid + ", master " + masterid + " is not exist .");
         return ;
     }
@@ -226,12 +229,12 @@ void Buddha::recusal_join_temple() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "recusal templemaster " + ent.to_string() + " success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "recusal templemaster " + masterid + " success .", ent.to_json() );
 }
 
 bool Buddha::is_in_temple() {
     const string& templeid = ctx->arg("templeid");
-    if( templeid.empty()) {
+    if( templeid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
         return false;
     }
@@ -239,20 +242,20 @@ bool Buddha::is_in_temple() {
     const string& masterid = ctx->initiator();
 
     //判断是否是法师
-    if( !_is_master(masterid)) {
+    if( !_is_master(masterid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is not a master, have no authority to query in some temple .");
         return false;
     }
 
     //判断是否是寺院
-    if( !_is_temple(templeid)) {
+    if( !_is_temple(templeid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,templeid + " is not a temple .");
         return false;
     }
 
     //判断是否法师是否已经入驻此寺院
     templemaster ent;
-    if (!_is_in_temple(templeid, masterid, ent)) {
+    if (!_is_in_temple(templeid, masterid, ent) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, masterid + " is not join temple .") ;
         return false;
     }
@@ -264,8 +267,9 @@ bool Buddha::is_in_temple() {
 void Buddha::list_temple_master() {
     const string& templeid = ctx->arg("templeid");
 
+    //身份检查，部署者和基金会成员可以查看所有当前寺院的所有法师
     if( is_deployer() ||
-        is_founder()) {
+        is_founder() ) {
         xchain::json v ;
         if(!_scan_templemaster_by_templeid(v,templeid) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
@@ -276,6 +280,7 @@ void Buddha::list_temple_master() {
         return ;
     }
 
+    //身份检查，寺院可以查看自己寺院的所有法师
     if( is_temple() ) {
         xchain::json v ;
         if(!_scan_templemaster_by_templeid(v,ctx->initiator()) ) {

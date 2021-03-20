@@ -80,9 +80,9 @@ bool Buddha::_is_temple(const string& id) {
 
 bool Buddha::_scan_temple(xchain::json& v, const string& cond) {
     auto it = get_temple_table().scan({{"id",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         temple ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "temple table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -113,80 +113,86 @@ namespace 分界线{}
 
 void Buddha::apply_temple(){
     const string& unit = ctx->arg("unit");
-    if( unit.empty()) {
+    if( unit.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "unit is empty .");
         return ;
     }
     
     const string& creditcode = ctx->arg("creditcode");
-    if( creditcode.empty()) {
+    if( creditcode.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "creditcode is empty .");
         return ;
     }
     
     const string& address = ctx->arg("address");
-    if( address.empty()) {
+    if( address.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "address is empty .");
         return ;
     }
     
     const string& proof = ctx->arg("proof");
-    if( proof.empty()) {
+    if( proof.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proof is empty .");
         return ;
     }
 
-    //用户和法师可以申请成为寺院
+    //身份检查，用户和法师可以申请成为寺院
     if( !is_user() &&
-        !is_master()) {
+        !is_master() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user or master, have no authority to apply  temple .");
         return ;
     }
 
-    if( is_temple()) {
+    //判断是否已经是寺院
+    if( is_temple() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already temple .");
         return ;
     }
 
-    _delete_temple_record(ctx->initiator());
-
+    //判断此寺院是否存在
     temple ent;
+    if( _is_temple_exist(ctx->initiator(),ent) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "temple " + ctx->initiator() + " is applying .", ent.to_json() );
+        return ;
+    }
+
     ent.set_id(ctx->initiator());
     ent.set_unit(unit);
     ent.set_creditcode(creditcode);
     ent.set_address(address);
     ent.set_proof(proof);
     ent.set_approved(false);
-    if (!get_temple_table().put(ent)) {
+    if (!get_temple_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string() + " apply  temple over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply temple over, please wait for approve .", ent.to_json() );
 }
 
 void Buddha::approve_temple() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
 
-    if( !is_founder()) {
+    //判断是否是基金会成员
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve temple .");
         return ;
     }
 
     //判断此寺院是否存在
     temple ent;
-    if( !_is_temple_exist(id,ent)) {
+    if( !_is_temple_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple " + id + " is not exist .");
         return ;
     }
 
     //判断是否是寺院
-    if( _is_temple(id)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ent.to_string() + " is already temple .");
+    if( _is_temple(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already temple .", ent.to_json() );
         return ;
     }
 
@@ -196,30 +202,32 @@ void Buddha::approve_temple() {
         return;
     }
 
+    //授权
     ent.set_approved(true);
-    if (!get_temple_table().put(ent)) {
+    if (!get_temple_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve temple " + ent.to_string() + " success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve temple " + id + " success .", ent.to_json() );
 }
 
 void Buddha::recusal_temple() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
         return ;
     }
-    
-    if( !is_founder()) {
+
+    //判断是否是基金会成员
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal temple .");
         return ;
     }
 
     //判断此寺院是否存在
     temple ent;
-    if( !_is_temple_exist(id,ent)) {
+    if( !_is_temple_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple " + id + " is not exist .");
         return ;
     }
@@ -230,11 +238,11 @@ void Buddha::recusal_temple() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "recusal temple " + ent.to_string() + " success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "recusal temple " + id + " success .", ent.to_json() );
 }
 
 bool Buddha::is_temple() {
-    if (!_is_temple(ctx->initiator())) {
+    if (!_is_temple(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not temple .") ;
         return false;
     }
@@ -244,8 +252,9 @@ bool Buddha::is_temple() {
 }
 
 void Buddha::list_temple() {
+    //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
-        !is_founder()) {
+        !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list temple .");
         return ;
     }

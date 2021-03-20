@@ -64,9 +64,9 @@ bool Buddha::_is_user(const string& id) {
 
 bool Buddha::_scan_order_by_id(xchain::json& v, const string& cond) {
     auto it = get_order_table().scan({{"id",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         order ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "order table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -79,9 +79,9 @@ bool Buddha::_scan_order_by_id(xchain::json& v, const string& cond) {
 
 bool Buddha::_scan_order_by_kdowner(xchain::json& v, const string& cond) {
     auto it = get_order_table().scan({{"kdowner",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         order ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "order table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -100,7 +100,7 @@ bool Buddha::_delete_order_record(const string& id) {
         return false;
     }
 
-    if( !get_order_table().del(ent)) {
+    if( !get_order_table().del(ent) ) {
         mycout << "delete order " << ent.to_string() << " failure ." << endl ;
         return false;
     }
@@ -114,37 +114,37 @@ namespace 分界线{}
 void Buddha::pray_kinddeed() {
 
     const string& orderid = ctx->arg("id");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "orderid is empty .");
         return ;
     }
 
     const string& kdid = ctx->arg("kinddeed");
-    if( kdid.empty()) {
+    if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kdid is empty .");
         return ;
     }
 
     const string& specid = ctx->arg("spec");
-    if( specid.empty()) {
+    if( specid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "specid is empty .");
         return ;
     }
 
     const string& count = ctx->arg("count");
-    if( count.empty()) {
+    if( count.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "count is empty .");
         return ;
     }
 
     const string& amount = ctx->transfer_amount();
-    if( amount.empty()) {
+    if( amount.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "amount is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "timestamp is empty .");
         return ;
     }
@@ -152,7 +152,7 @@ void Buddha::pray_kinddeed() {
     //判断订单是否存在
     order od;
     if (_is_order_exist(orderid,od))  {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + orderid + " is exist .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + orderid + " is exist .", od.to_json() );
         return ;
     }
 
@@ -164,7 +164,7 @@ void Buddha::pray_kinddeed() {
     }
 
     //判断善举是否已经上架
-    if (!_is_kinddeed_online(kdid)) {
+    if (!_is_kinddeed_online(kdid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kdid + " is not online .");
         return ;
     }
@@ -192,7 +192,7 @@ void Buddha::pray_kinddeed() {
     od.set_count(stoll(count));
     od.set_amount(calced_amount);
     od.set_timestamp(timestamp);
-    if (!get_order_table().put(od)) {
+    if (!get_order_table().put(od) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", od.to_json());
         return;
     }
@@ -203,7 +203,7 @@ void Buddha::pray_kinddeed() {
 void Buddha::delete_pray_kinddeed() {
 
     const string& orderid = ctx->arg("id");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "orderid is empty .");
         return ;
     }
@@ -215,8 +215,7 @@ void Buddha::delete_pray_kinddeed() {
         return ;
     }
 
-    //判断身份
-    //判断是否是订单所有者，判断是否是善举所有者，判断是否是基金会成员或部署
+    //身份检查，部署者，基金会成员，善举所有者，购买者具有权限
     if( !is_deployer() &&
         !is_founder() &&
         ctx->initiator() != ent.kdowner() &&
@@ -236,23 +235,24 @@ void Buddha::delete_pray_kinddeed() {
 
 void Buddha::find_pray_kinddeed() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order id is empty .");
         return ;
     }
 
     //判断订单是否存在
     order ent;       
-    if (!_is_order_exist(id, ent)) {
+    if (!_is_order_exist(id, ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + id + " is not exist .");
         return ;
     }
 
+    //身份检查，部署者，基金会成员，寺院，法师，购买者具有权限
     if( !is_deployer() &&
         !is_founder() &&
         !is_temple() &&
         !is_master() &&
-        ent.owner() != ctx->initiator()) {
+        ent.owner() != ctx->initiator() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to find pray kinddeed .");
         return ;
     }
@@ -261,6 +261,7 @@ void Buddha::find_pray_kinddeed() {
 }
 
 void Buddha::list_pray_kinddeed() {
+    //身份检查，合约部署者和基金会成员可以查看所有订单
     if( is_deployer() || 
         is_founder() ) {
         xchain::json v ;
@@ -273,8 +274,9 @@ void Buddha::list_pray_kinddeed() {
         return ;
     }
 
+    //身份检查，寺院和法师只能查看属于自己善举的所有订单
     if( is_temple() || 
-        is_master()) {
+        is_master() ) {
         xchain::json v ;
         if(!_scan_order_by_kdowner(v,ctx->initiator()) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
@@ -289,7 +291,7 @@ void Buddha::list_pray_kinddeed() {
 }
 
 bool Buddha::is_user() {
-    if (!_is_user(ctx->initiator())) {
+    if (!_is_user(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not user .") ;
         return false;
     }

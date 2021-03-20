@@ -46,9 +46,9 @@ bool Buddha::_is_beforecomment_exist(const string& kdid, const string& owner,bef
 
 bool Buddha::_scan_beforecomment(xchain::json& v, const string& cond) {
     auto it = get_beforecomment_table().scan({{"kdid",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         beforecomment ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "beforecomment table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -79,13 +79,13 @@ namespace 分界线{}
 
 void Buddha::add_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if( kdid.empty()) {
+    if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
         return ;
     }
 
     const string& satisfaction = ctx->arg("satisfaction");
-    if( satisfaction.empty()) {
+    if( satisfaction.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment satisfaction is empty .");
         return ;
     }
@@ -93,7 +93,7 @@ void Buddha::add_beforecomment() {
     const string& labels = ctx->arg("labels");
     xchain::json label_array = xchain::json::parse(labels);
     // mycout << label_array.dump() << endl ;
-    if (!label_array.is_array()) {
+    if (!label_array.is_array() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "field 'labels' need to be array .");
         return;
     }
@@ -104,19 +104,19 @@ void Buddha::add_beforecomment() {
     }
 
     //判断所有标签类型都在评论标签表中
-    if( !_is_all_types_exist_in_commentlabel(label_array)) {
+    if( !_is_all_types_exist_in_commentlabel(label_array) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment type failure .");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if( comment.empty()) {
+    if( comment.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment comment is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment timestamp is empty .");
         return ;
     }
@@ -125,8 +125,8 @@ void Buddha::add_beforecomment() {
 
     //判断售前点评是否存在
     beforecomment ent;
-    if( _is_beforecomment_exist(kdid,owner,ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is exist .");
+    if( _is_beforecomment_exist(kdid,owner,ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is exist .", ent.to_json() );
         return ;
     }
 
@@ -136,7 +136,7 @@ void Buddha::add_beforecomment() {
     ent.set_labels(labels);    
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
-    if (!get_beforecomment_table().put(ent)) {
+    if (!get_beforecomment_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -146,7 +146,7 @@ void Buddha::add_beforecomment() {
 
 void Buddha::delete_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if( kdid.empty()) {
+    if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
         return ;
     }
@@ -155,11 +155,12 @@ void Buddha::delete_beforecomment() {
 
     //判断售前点评是否存在
     beforecomment ent;
-    if( !_is_beforecomment_exist(kdid,owner,ent)) {
+    if( !_is_beforecomment_exist(kdid,owner,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
 
+    //身份检查，基金会成员，点评所有者具有权限
     if( !is_founder() &&
         ent.owner() != owner) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder nor owner, have no authority to delete the comment .");
@@ -177,13 +178,13 @@ void Buddha::delete_beforecomment() {
 
 void Buddha::update_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if( kdid.empty()) {
+    if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
         return ;
     }
 
     const string& satisfaction = ctx->arg("satisfaction");
-    if( satisfaction.empty()) {
+    if( satisfaction.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment satisfaction is empty .");
         return ;
     }
@@ -191,7 +192,7 @@ void Buddha::update_beforecomment() {
     const string& labels = ctx->arg("labels");
     auto label_array = xchain::json::parse(labels);
     // mycout << label_array.dump() << endl ;
-    if (!label_array.is_array()) {
+    if (!label_array.is_array() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "field 'labels' need to be array .");
         return;
     }
@@ -202,19 +203,19 @@ void Buddha::update_beforecomment() {
     }
 
     //判断所有标签类型都在评论标签表中
-    if( !_is_all_types_exist_in_commentlabel(label_array)) {
+    if( !_is_all_types_exist_in_commentlabel(label_array) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment type failure .");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if( comment.empty()) {
+    if( comment.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment comment is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment timestamp is empty .");
         return ;
     }
@@ -223,7 +224,7 @@ void Buddha::update_beforecomment() {
 
     //判断售前点评是否存在
     beforecomment ent;
-    if( !_is_beforecomment_exist(kdid,owner,ent)) {
+    if( !_is_beforecomment_exist(kdid,owner,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -245,7 +246,7 @@ void Buddha::update_beforecomment() {
     ent.set_labels(labels);    
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
-    if (!get_beforecomment_table().put(ent)) {
+    if (!get_beforecomment_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -255,7 +256,7 @@ void Buddha::update_beforecomment() {
 
 void Buddha::find_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if( kdid.empty()) {
+    if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
         return ;
     }
@@ -269,7 +270,7 @@ void Buddha::find_beforecomment() {
 
     const string& owner = ctx->arg("owner");
 
-    if( !owner.empty()) {
+    if( !owner.empty() ) {
         //判断售前点评是否存在
         beforecomment ent;
         if (!_is_beforecomment_exist(kdid,owner,ent))  {
@@ -277,9 +278,10 @@ void Buddha::find_beforecomment() {
             return ;
         }
 
-        if( is_founder() ||                      //基金会成员
-            owner == ctx->initiator() ||        //点评的所有者
-            kd.owner() == ctx->initiator() ) { //善举所有者
+        //身份检查，基金会成员，点评所有者，善举所有者具有权限
+        if( is_founder() ||
+            owner == ctx->initiator() ||
+            kd.owner() == ctx->initiator() ) {
             _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string());
             return ;
         }
@@ -290,9 +292,9 @@ void Buddha::find_beforecomment() {
     }
 
     //owner字段为空的情况
-    //此时如果是基金会成员和善举所有者调用，报错
-    if( is_founder() ||                          //基金会成员
-        kd.owner() == ctx->initiator() ) {      //善举所有者
+    //身份检查，基金会成员，善举所有者不具有权限，只有owner不为空的情况下，才具备权限
+    if( is_founder() ||
+        kd.owner() == ctx->initiator() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment owner should be empty .");
         return ;
     }
@@ -309,7 +311,7 @@ void Buddha::find_beforecomment() {
 
 void Buddha::list_beforecomment() {
     const string& kdid = ctx->arg("kdid");
-    if( kdid.empty()) {
+    if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
         return ;
     }

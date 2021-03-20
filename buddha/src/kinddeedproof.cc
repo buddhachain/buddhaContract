@@ -43,9 +43,9 @@ bool Buddha::_is_kinddeedproof_exist(const string& orderid,kinddeedproof& ent) {
 
 bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& v, const string& cond) {
     auto it = get_kinddeedproof_table().scan({{"orderid",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         kinddeedproof ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "kinddeedproof table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -58,9 +58,9 @@ bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& v, const string& cond)
 
 bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& v, const string& cond) {
     auto it = get_kinddeedproof_table().scan({{"owner",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         kinddeedproof ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "kinddeedproof table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -73,9 +73,9 @@ bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& v, const string& cond) {
 
 bool Buddha::_scan_kinddeedproof_by_owner_orderid(xchain::json& v, const string& owner, const string& orderid) {
     auto it = get_kinddeedproof_table().scan({{"owner",owner},{"orderid",orderid}});
-    while(it->next()) {
+    while(it->next() ) {
         kinddeedproof ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "kinddeedproof table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -106,19 +106,19 @@ namespace 分界线{}
 
 void Buddha::upload_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
         return ;
     }
 
     const string& proof = ctx->arg("proof");
-    if( proof.empty()) {
+    if( proof.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof hash is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof timestamp is empty .");
         return ;
     }
@@ -126,13 +126,13 @@ void Buddha::upload_kinddeedproof() {
     //判断善举凭证是否已经存在
     kinddeedproof ent;
     if (_is_kinddeedproof_exist(orderid, ent))  {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is exist .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is exist .", ent.to_json() );
         return ;
     }
 
     //判断订单是否存在
     order od;
-    if (!_is_order_exist(orderid, od)) {
+    if (!_is_order_exist(orderid, od) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order and suborder lost, kinddeedproof " + orderid + " be delete .");
         return ;
     }
@@ -147,22 +147,23 @@ void Buddha::upload_kinddeedproof() {
     ent.set_proof(proof);
     ent.set_timestamp(timestamp);
     ent.set_approved(false);
-    if (!get_kinddeedproof_table().put(ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof table put " + ent.to_string() + " failure .");
+    if (!get_kinddeedproof_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof table put " + orderid + " failure .", ent.to_json() );
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "apply kinddeed " + ent.to_string() + " proof over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "apply kinddeed " + orderid + " proof over, please wait for approve .", ent.to_json());
 }
 
 void Buddha::approve_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
         return ;
     }
 
-    if( !is_founder()) {
+    //判断是否是基金会成员
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve kinddeedproof .");
         return ;
     }
@@ -176,7 +177,7 @@ void Buddha::approve_kinddeedproof() {
 
     //判断订单是否存在
     order od;
-    if (!_is_order_exist(orderid, od)) {
+    if (!_is_order_exist(orderid, od) ) {
         //删除此善举凭证
         _delete_kinddeedproof_record(orderid);
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order and suborder lost, kinddeedproof " + orderid + " be delete .");
@@ -190,13 +191,13 @@ void Buddha::approve_kinddeedproof() {
 
     //判断善举是否存在
     kinddeed kd;
-    if( !_is_kinddeed_exist(od.kdid(), kd)) {
+    if( !_is_kinddeed_exist(od.kdid(), kd) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + od.kdid() + " is not exist .");
         return ;
     }
 
     if( ent.owner() != od.kdowner() &&
-        ent.owner() != kd.owner()) {
+        ent.owner() != kd.owner() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ent.owner() +","+ od.kdowner() + "," + kd.owner() + " failure .");
         return ;
     }
@@ -207,28 +208,30 @@ void Buddha::approve_kinddeedproof() {
         return;
     }
 
+    //授权
     ent.set_approved(true);
-    if (!get_kinddeedproof_table().put(ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof table put " + ent.to_string() + " failure .");
+    if (!get_kinddeedproof_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof table put " + orderid + " failure .", ent.to_json());
         return;
     }
 
-    if( !_transfer(ent.owner(), to_string(od.amount()))) {
+    if( !_transfer(ent.owner(), to_string(od.amount())) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "transfer to " + ent.owner() + " " +  to_string(od.amount()) + " failure .");
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve kinddeed " + ent.to_string() + " proof success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve kinddeed " + orderid + " proof success .", ent.to_json());
 }
 
 void Buddha::refuse_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
         return ;
     }
 
-    if( !is_founder()) {
+    //判断是否是基金会成员
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve kinddeedproof .");
         return ;
     }
@@ -242,7 +245,7 @@ void Buddha::refuse_kinddeedproof() {
 
     //判断订单是否存在
     order od;
-    if (!_is_order_exist(orderid, od)) {
+    if (!_is_order_exist(orderid, od) ) {
         //删除此善举凭证
         _delete_kinddeedproof_record(orderid);
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order lost, kinddeedproof " + orderid + " be delete .");
@@ -260,7 +263,7 @@ void Buddha::refuse_kinddeedproof() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "refuse kinddeed " + ent.to_string() + " proof success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "refuse kinddeed " + orderid + " proof success .", ent.to_json());
 }
 
 void Buddha::find_kinddeedproof() {
@@ -284,7 +287,8 @@ void Buddha::find_kinddeedproof() {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof " + orderid + " is not exist .");
         return ;
     }
-    
+
+    //身份检查，部署者，基金会成员，凭证所有者具有权限
     if( !is_deployer() &&
         !is_founder() &&
         ent.owner() != ctx->initiator() ) {
@@ -296,8 +300,9 @@ void Buddha::find_kinddeedproof() {
 }
 
 void Buddha::list_kinddeedproof() {
+    //身份检查，部署者和基金会成员可以查看所有善举凭证
     if( is_deployer() ||
-        is_founder()) {
+        is_founder() ) {
         xchain::json v ;
         if(!_scan_kinddeedproof_by_orderid(v,ctx->arg("orderid")) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
@@ -308,8 +313,9 @@ void Buddha::list_kinddeedproof() {
         return;
     }
 
+    //身份检查，寺院和法师只能查看属于自己善举的所有订单id的善举凭证
     if( is_temple() || 
-        is_master()) {
+        is_master() ) {
         xchain::json v ;
         if(!_scan_kinddeedproof_by_owner_orderid(v,ctx->initiator(),ctx->arg("orderid")) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");

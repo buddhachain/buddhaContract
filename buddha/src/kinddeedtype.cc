@@ -38,9 +38,9 @@ bool Buddha::_is_kinddeedtype_exist(const string& id,kinddeedtype& ent) {
 
 bool Buddha::_scan_kinddeedtype(xchain::json& v, const string& cond) {
     auto it = get_kinddeedtype_table().scan({{"id",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         kinddeedtype ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "kinddeedtype table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -71,17 +71,18 @@ namespace 分界线{}
 
 void Buddha::add_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if( desc.empty()) {
+    if( desc.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype desc is empty .");
         return ;
     }
 
+    //判断是否是基金会成员
     if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to add kinddeedtype .");
         return ;
@@ -89,14 +90,14 @@ void Buddha::add_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if( _is_kinddeedtype_exist(id,ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + id + " is exist .");
+    if( _is_kinddeedtype_exist(id,ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + id + " is exist .", ent.to_json());
         return ;
     }
 
     ent.set_id(stoll(id));
     ent.set_desc(desc);
-    if (!get_kinddeedtype_table().put(ent)) {
+    if (!get_kinddeedtype_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -106,11 +107,12 @@ void Buddha::add_kinddeedtype() {
 
 void Buddha::delete_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
+    //判断是否是基金会成员
     if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to delete kinddeedtype .");
         return ;
@@ -118,7 +120,7 @@ void Buddha::delete_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if( !_is_kinddeedtype_exist(id,ent)) {
+    if( !_is_kinddeedtype_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeed type " + id + " is not exist .");
         return ;
     }
@@ -134,17 +136,18 @@ void Buddha::delete_kinddeedtype() {
 
 void Buddha::update_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if( desc.empty()) {
+    if( desc.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype desc is empty .");
         return ;
     }
 
+    //判断是否是基金会成员
     if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to update kinddeedtype .");
         return ;
@@ -152,7 +155,7 @@ void Buddha::update_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if( !_is_kinddeedtype_exist(id,ent)) {
+    if( !_is_kinddeedtype_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeedtype " + id + " is not exist .");
         return ;
     }
@@ -165,7 +168,7 @@ void Buddha::update_kinddeedtype() {
 
     ent.set_id(stoll(id));
     ent.set_desc(desc);
-    if (!get_kinddeedtype_table().put(ent)) {
+    if (!get_kinddeedtype_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -175,7 +178,7 @@ void Buddha::update_kinddeedtype() {
 
 void Buddha::find_kinddeedtype() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
         return ;
     }

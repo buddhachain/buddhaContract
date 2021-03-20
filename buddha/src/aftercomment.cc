@@ -40,9 +40,9 @@ bool Buddha::_is_aftercomment_exist(const string& orderid, const string& owner, 
 
 bool Buddha::_scan_aftercomment_by_orderid(xchain::json& v, const string& cond) {
     auto it = get_aftercomment_table().scan({{"orderid",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         aftercomment ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "aftercomment table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -73,19 +73,19 @@ namespace 分界线{}
 
 void Buddha::add_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if( comment.empty()) {
+    if( comment.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment comment is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment timestamp is empty .");
         return ;
     }
@@ -94,8 +94,8 @@ void Buddha::add_aftercomment() {
 
     //判断此评论是否已经存在
     aftercomment ent;
-    if( _is_aftercomment_exist(orderid,owner,ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment " + orderid + " is exist .");
+    if( _is_aftercomment_exist(orderid,owner,ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment " + orderid + " is exist .", ent.to_json() );
         return ;
     }
 
@@ -116,7 +116,7 @@ void Buddha::add_aftercomment() {
     ent.set_owner(owner);
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
-    if (!get_aftercomment_table().put(ent)) {
+    if (!get_aftercomment_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -126,7 +126,7 @@ void Buddha::add_aftercomment() {
 
 void Buddha::delete_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
         return ;
     }
@@ -135,7 +135,7 @@ void Buddha::delete_aftercomment() {
 
     //判断此评论是否已经存在
     aftercomment ent;
-    if( !_is_aftercomment_exist(orderid,owner,ent)) {
+    if( !_is_aftercomment_exist(orderid,owner,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment " + orderid + " is not exist .");
         return ;
     }
@@ -147,6 +147,7 @@ void Buddha::delete_aftercomment() {
         return ;
     }
 
+    //身份检查，基金会成员，订单所有者具有权限
     if( !is_founder() &&
         ent.owner() != owner) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder nor owner, have no authority to delete the comment .");
@@ -164,19 +165,19 @@ void Buddha::delete_aftercomment() {
 
 void Buddha::update_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
         return ;
     }
 
     const string& comment = ctx->arg("comment");
-    if( comment.empty()) {
+    if( comment.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment comment is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment timestamp is empty .");
         return ;
     }
@@ -185,7 +186,7 @@ void Buddha::update_aftercomment() {
 
     //判断此评论是否已经存在
     aftercomment ent;
-    if( !_is_aftercomment_exist(orderid,owner,ent)) {
+    if( !_is_aftercomment_exist(orderid,owner,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeed type " + orderid + " is not exist .");
         return ;
     }
@@ -212,7 +213,7 @@ void Buddha::update_aftercomment() {
     ent.set_owner(owner);
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
-    if (!get_aftercomment_table().put(ent)) {
+    if (!get_aftercomment_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -222,7 +223,7 @@ void Buddha::update_aftercomment() {
 
 void Buddha::find_aftercomment() {
     const string& orderid = ctx->arg("orderid");
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
         return ;
     }
@@ -234,9 +235,10 @@ void Buddha::find_aftercomment() {
         return ;
     }
 
+    //身份检查，基金会成员，订单所有者，善举所有者具有权限
     if( !is_founder() &&
         od.owner() != ctx->initiator() &&
-        od.kdowner() != ctx->initiator()) {
+        od.kdowner() != ctx->initiator() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to update the comment .");
         return ;
     }
@@ -254,9 +256,9 @@ void Buddha::find_aftercomment() {
 void Buddha::list_aftercomment() {
     const string& orderid = ctx->arg("orderid");
 
-    //如果是合约部署者或基金会成员，直接遍历所有符合orderid条件的所有售后评论
+    //身份检查，部署者，基金会成员具有权限
     if( is_deployer() ||
-        is_founder()) {
+        is_founder() ) {
         xchain::json v ;
         if(!_scan_aftercomment_by_orderid(v, orderid) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
@@ -268,7 +270,7 @@ void Buddha::list_aftercomment() {
     }
 
     //非合约部署者和基金会成员，orderid不能为空，即禁止其他角色遍历所有售后评论记录
-    if( orderid.empty()) {
+    if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
         return ;
     }

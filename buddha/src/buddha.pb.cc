@@ -496,10 +496,10 @@ bool Founder::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -514,7 +514,7 @@ bool Founder::MergePartialFromCodedStream(
 
       // string desc = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_desc()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -529,7 +529,7 @@ bool Founder::MergePartialFromCodedStream(
 
       // string address = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_address()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -544,7 +544,7 @@ bool Founder::MergePartialFromCodedStream(
 
       // string timestamp = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamp()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -559,7 +559,7 @@ bool Founder::MergePartialFromCodedStream(
 
       // int64 guaranty = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -572,7 +572,7 @@ bool Founder::MergePartialFromCodedStream(
 
       // bool approved = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1148,10 +1148,10 @@ bool Proposal::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string key = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_key()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1166,7 +1166,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string value = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_value()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1181,7 +1181,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string owner = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_owner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1196,7 +1196,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string newvalue = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_newvalue()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1211,7 +1211,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string operate = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_operate()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1226,7 +1226,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string timestamp = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamp()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1241,7 +1241,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string expire = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_expire()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1256,7 +1256,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // int64 count = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -1269,7 +1269,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string founders = 9;
       case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_founders()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1284,7 +1284,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string results = 10;
       case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (82 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (82 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_results()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1299,7 +1299,7 @@ bool Proposal::MergePartialFromCodedStream(
 
       // string timestamps = 11;
       case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (90 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (90 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamps()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1881,10 +1881,10 @@ bool Temple::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1899,7 +1899,7 @@ bool Temple::MergePartialFromCodedStream(
 
       // string unit = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_unit()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1914,7 +1914,7 @@ bool Temple::MergePartialFromCodedStream(
 
       // string creditcode = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_creditcode()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1929,7 +1929,7 @@ bool Temple::MergePartialFromCodedStream(
 
       // string address = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_address()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1944,7 +1944,7 @@ bool Temple::MergePartialFromCodedStream(
 
       // string proof = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_proof()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -1959,7 +1959,7 @@ bool Temple::MergePartialFromCodedStream(
 
       // bool approved = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -2374,10 +2374,10 @@ bool Master::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -2392,7 +2392,7 @@ bool Master::MergePartialFromCodedStream(
 
       // string creditcode = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_creditcode()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -2407,7 +2407,7 @@ bool Master::MergePartialFromCodedStream(
 
       // string proof = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_proof()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -2422,7 +2422,7 @@ bool Master::MergePartialFromCodedStream(
 
       // bool approved = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -2767,10 +2767,10 @@ bool TempleMaster::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string templeid = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_templeid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -2785,7 +2785,7 @@ bool TempleMaster::MergePartialFromCodedStream(
 
       // string masterid = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_masterid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -2800,7 +2800,7 @@ bool TempleMaster::MergePartialFromCodedStream(
 
       // bool approved = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -3098,10 +3098,10 @@ bool KinddeedType::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // int64 id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -3114,7 +3114,7 @@ bool KinddeedType::MergePartialFromCodedStream(
 
       // string desc = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_desc()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -3487,10 +3487,10 @@ bool Kinddeed::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -3505,7 +3505,7 @@ bool Kinddeed::MergePartialFromCodedStream(
 
       // string name = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -3520,7 +3520,7 @@ bool Kinddeed::MergePartialFromCodedStream(
 
       // string owner = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_owner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -3535,7 +3535,7 @@ bool Kinddeed::MergePartialFromCodedStream(
 
       // int64 type = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -3548,7 +3548,7 @@ bool Kinddeed::MergePartialFromCodedStream(
 
       // string lasttime = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_lasttime()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -3563,7 +3563,7 @@ bool Kinddeed::MergePartialFromCodedStream(
 
       // bool applied = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -3576,7 +3576,7 @@ bool Kinddeed::MergePartialFromCodedStream(
 
       // bool online = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -3974,10 +3974,10 @@ bool KinddeedDetail::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string kdid = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_kdid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -3992,7 +3992,7 @@ bool KinddeedDetail::MergePartialFromCodedStream(
 
       // int64 sequence = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -4005,7 +4005,7 @@ bool KinddeedDetail::MergePartialFromCodedStream(
 
       // string hash = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_hash()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -4345,10 +4345,10 @@ bool KinddeedSpec::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string kdid = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_kdid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -4363,7 +4363,7 @@ bool KinddeedSpec::MergePartialFromCodedStream(
 
       // int64 sequence = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -4376,7 +4376,7 @@ bool KinddeedSpec::MergePartialFromCodedStream(
 
       // string desc = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_desc()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -4391,7 +4391,7 @@ bool KinddeedSpec::MergePartialFromCodedStream(
 
       // int64 price = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -4707,10 +4707,10 @@ bool CommentLabel::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // int64 id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -4723,7 +4723,7 @@ bool CommentLabel::MergePartialFromCodedStream(
 
       // string desc = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_desc()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5098,10 +5098,10 @@ bool BeforeComment::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string owner = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_owner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5116,7 +5116,7 @@ bool BeforeComment::MergePartialFromCodedStream(
 
       // string kdid = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_kdid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5131,7 +5131,7 @@ bool BeforeComment::MergePartialFromCodedStream(
 
       // int64 satisfaction = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -5144,7 +5144,7 @@ bool BeforeComment::MergePartialFromCodedStream(
 
       // string labels = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_labels()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5159,7 +5159,7 @@ bool BeforeComment::MergePartialFromCodedStream(
 
       // string comment = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_comment()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5174,7 +5174,7 @@ bool BeforeComment::MergePartialFromCodedStream(
 
       // string timestamp = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamp()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5663,10 +5663,10 @@ bool Order::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string id = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5681,7 +5681,7 @@ bool Order::MergePartialFromCodedStream(
 
       // string owner = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_owner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5696,7 +5696,7 @@ bool Order::MergePartialFromCodedStream(
 
       // string kdowner = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_kdowner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5711,7 +5711,7 @@ bool Order::MergePartialFromCodedStream(
 
       // string kdid = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_kdid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -5726,7 +5726,7 @@ bool Order::MergePartialFromCodedStream(
 
       // int64 specid = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -5739,7 +5739,7 @@ bool Order::MergePartialFromCodedStream(
 
       // int64 count = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -5752,7 +5752,7 @@ bool Order::MergePartialFromCodedStream(
 
       // int64 amount = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
@@ -5765,7 +5765,7 @@ bool Order::MergePartialFromCodedStream(
 
       // string timestamp = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamp()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6240,10 +6240,10 @@ bool KinddeedProof::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string orderid = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_orderid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6258,7 +6258,7 @@ bool KinddeedProof::MergePartialFromCodedStream(
 
       // string owner = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_owner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6273,7 +6273,7 @@ bool KinddeedProof::MergePartialFromCodedStream(
 
       // string proof = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_proof()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6288,7 +6288,7 @@ bool KinddeedProof::MergePartialFromCodedStream(
 
       // string timestamp = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamp()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6303,7 +6303,7 @@ bool KinddeedProof::MergePartialFromCodedStream(
 
       // bool approved = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF) ) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -6708,10 +6708,10 @@ bool AfterComment::MergePartialFromCodedStream(
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag) ) {
       // string orderid = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_orderid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6726,7 +6726,7 @@ bool AfterComment::MergePartialFromCodedStream(
 
       // string owner = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_owner()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6741,7 +6741,7 @@ bool AfterComment::MergePartialFromCodedStream(
 
       // string comment = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_comment()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -6756,7 +6756,7 @@ bool AfterComment::MergePartialFromCodedStream(
 
       // string timestamp = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF) ) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_timestamp()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(

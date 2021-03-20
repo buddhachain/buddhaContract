@@ -53,9 +53,9 @@ bool Buddha::_is_founder(const string& id) {
 
 bool Buddha::_scan_founder(xchain::json& v, const string& cond) {
     auto it = get_founder_table().scan({{"id",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         founder ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "founder table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -86,39 +86,39 @@ namespace 分界线{}
 
 void Buddha::apply_founder(){
     const string& desc = ctx->arg("desc");
-    if( desc.empty()) {
+    if( desc.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "desc is empty .");
         return ;
     }
 
     const string& address = ctx->arg("address");
-    if( address.empty()) {
+    if( address.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "address is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "timestamp is empty .");
         return ;
     }
 
     const string& guaranty = ctx->transfer_amount();
-    if( guaranty.empty()) {
+    if( guaranty.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty is empty .");
         return ;
     }
 
     //判断是否已经是基金会成员
-    if( is_founder()) {
+    if( is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already founder .");
         return ;
     }
 
     //判断此基金会成员是否存在
     founder ent;
-    if( _is_founder_exist(ctx->initiator(),ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is applying .");
+    if( _is_founder_exist(ctx->initiator(),ent) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "founder " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
 
@@ -128,7 +128,7 @@ void Buddha::apply_founder(){
     ent.set_timestamp(timestamp);
     ent.set_guaranty(ent.guaranty() + stoll(guaranty));
     ent.set_approved(false);
-    if (!get_founder_table().put(ent)) {
+    if (!get_founder_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -138,27 +138,27 @@ void Buddha::apply_founder(){
 
 void Buddha::approve_founder() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder id is empty .");
         return ;
     }
 
-    //判断是否是部署者
-    if( !is_deployer()) {
+    //身份检查，部署者具有权限
+    if( !is_deployer() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer, have no authority to approve founder .");
         return ;
     }
 
     //判断此基金会成员是否存在
     founder ent;
-    if( !_is_founder_exist(id,ent)) {
+    if( !_is_founder_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
     }
 
     //判断是否是基金会成员
-    if( _is_founder(id)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ent.to_string() + " is already founder .");
+    if( _is_founder(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already founder .", ent.to_json());
         return ;
     }
 
@@ -170,30 +170,30 @@ void Buddha::approve_founder() {
 
     //授权
     ent.set_approved(true);
-    if (!get_founder_table().put(ent)) {
+    if (!get_founder_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "audit " + ent.to_string() + " to be founder .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "audit " + id +  " to be founder .", ent.to_json() );
 }
 
 void Buddha::recusal_founder() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder id is empty .");
         return ;
     }
 
-    //判断是否是部署者
-    if( !is_deployer()) {
+    //身份检查，部署者具有权限
+    if( !is_deployer() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer, have no authority recusal founder .");
         return ;
     }
 
     //判断此基金会成员是否存在
     founder ent;
-    if( !_is_founder_exist(id,ent)) {
+    if( !_is_founder_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
     }
@@ -206,7 +206,7 @@ void Buddha::recusal_founder() {
 
     //将抵押退还
     string guaranty = to_string(ent.guaranty());
-    if( !_transfer(id, guaranty)) {
+    if( !_transfer(id, guaranty) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "refund transfer " + guaranty + " to " + id + " failure .");
         return ;
     }
@@ -215,7 +215,7 @@ void Buddha::recusal_founder() {
 }
 
 bool Buddha::is_founder() {
-    if (!_is_founder(ctx->initiator())) {
+    if (!_is_founder(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not founder .") ;
         return false;
     }
@@ -225,8 +225,9 @@ bool Buddha::is_founder() {
 }
 
 void Buddha::list_founder() {
+    //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
-        !is_founder()) {
+        !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list founder .");
         return ;
     }

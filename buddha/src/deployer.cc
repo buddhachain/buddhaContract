@@ -42,7 +42,7 @@ void Buddha::initialize() {
 void Buddha::get_deployer() {
     //获取deployer对象
     string deployer;
-    if (!ctx->get_object("deployer", &deployer)) {
+    if (!ctx->get_object("deployer", &deployer) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "unknown deployer .");
         return ;
     }

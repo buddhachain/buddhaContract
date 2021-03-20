@@ -54,9 +54,9 @@ bool Buddha::_is_proposal_exist(const string& key,proposal& ent) {
 
 bool Buddha::_scan_proposal(xchain::json& v, const string& cond) {
     auto it = get_proposal_table().scan({{"key",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         proposal ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "proposal table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -87,39 +87,39 @@ namespace 分界线{}
 
 void Buddha::make_proposal(){
     const string& key = ctx->arg("key");
-    if( key.empty()) {
+    if( key.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "key is empty .");
         return ;
     }
 
     const string& newvalue = ctx->arg("value");
-    if( newvalue.empty()) {
+    if( newvalue.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "value is empty .");
         return ;
     }
 
     const string& timestamp = ctx->arg("timestamp");
-    if( timestamp.empty()) {
+    if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "timestamp is empty .");
         return ;
     }
 
     const string& expire = ctx->arg("expire");
-    if( expire.empty()) {
+    if( expire.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "expire is empty .");
         return ;
     }
 
     //判断是否时基金会成员
-    if( !is_founder()) {
+    if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder .");
         return ;
     }
 
     //判断是否已经存在这个提案
     proposal ent;
-    if(_is_proposal_exist(key, ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is exist .");
+    if(_is_proposal_exist(key, ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is exist .", ent.to_json() );
         return ;
     }
 
@@ -137,7 +137,7 @@ void Buddha::make_proposal(){
     for(int i = 0 ; i < v.size() ; i++) {
         std::string id = v.at(i)["id"].template get<std::string>();
         id_array.push_back(id);
-        if(id == ctx->initiator()) {
+        if(id == ctx->initiator() ) {
             //对于提案提出者，直接授权通过
             result_array.push_back("1");
             timestamp_array.push_back(timestamp);
@@ -159,12 +159,12 @@ void Buddha::make_proposal(){
     ent.set_results(result_array.dump());
     ent.set_timestamps(timestamp_array.dump());
 
-    if (!get_proposal_table().put(ent)) {
+    if (!get_proposal_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string() + " apply proposal over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, key + " apply proposal over, please wait for approve .", ent.to_json() );
 
 }
 

@@ -38,7 +38,7 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
     for(int i = 0 ; i < label_array.size() ; i++) {
         string id = label_array.at(i).template get<string>();
         commentlabel ent;
-        if( !_is_commentlabel_exist(id,ent)) {
+        if( !_is_commentlabel_exist(id,ent) ) {
             mycout << "type " << id << " not exist in commentlabel table ." << endl;
             return false;
         }            
@@ -49,9 +49,9 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
 
 bool Buddha::_scan_commentlabel(xchain::json& v, const string& cond) {
     auto it = get_commentlabel_table().scan({{"id",cond}});
-    while(it->next()) {
+    while(it->next() ) {
         commentlabel ent;
-        if (!it->get(&ent)) {
+        if (!it->get(&ent) ) {
             mycout << "commentlabel table get failure : " << it->error(true) << endl;
             return false;
         }
@@ -83,17 +83,18 @@ namespace 分界线{}
 
 void Buddha::add_commentlabel() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if( desc.empty()) {
+    if( desc.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel desc is empty .");
         return ;
     }
 
+    //身份检查，基金会成员具有权限
     if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to add commentlabel .");
         return ;
@@ -101,14 +102,14 @@ void Buddha::add_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if( _is_commentlabel_exist(id,ent)) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel " + id + " is exist .");
+    if( _is_commentlabel_exist(id,ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel " + id + " is exist .", ent.to_json() );
         return ;
     }
 
     ent.set_id(stoll(id));
     ent.set_desc(desc);
-    if (!get_commentlabel_table().put(ent)) {
+    if (!get_commentlabel_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -118,11 +119,12 @@ void Buddha::add_commentlabel() {
 
 void Buddha::delete_commentlabel() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
         return ;
     }
 
+    //身份检查，基金会成员具有权限
     if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to delete commentlabel .");
         return ;
@@ -130,7 +132,7 @@ void Buddha::delete_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if( !_is_commentlabel_exist(id,ent)) {
+    if( !_is_commentlabel_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeed type " + id + " is not exist .");
         return ;
     }
@@ -146,17 +148,18 @@ void Buddha::delete_commentlabel() {
 
 void Buddha::update_commentlabel() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
         return ;
     }
 
     const string& desc = ctx->arg("desc");
-    if( desc.empty()) {
+    if( desc.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel desc is empty .");
         return ;
     }
 
+    //身份检查，基金会成员具有权限
     if( !is_founder() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to update commentlabel .");
         return ;
@@ -164,7 +167,7 @@ void Buddha::update_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if( !_is_commentlabel_exist(id,ent)) {
+    if( !_is_commentlabel_exist(id,ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel " + id + " is not exist .");
         return ;
     }
@@ -177,7 +180,7 @@ void Buddha::update_commentlabel() {
 
     ent.set_id(stoll(id));
     ent.set_desc(desc);
-    if (!get_commentlabel_table().put(ent)) {
+    if (!get_commentlabel_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
@@ -187,7 +190,7 @@ void Buddha::update_commentlabel() {
 
 void Buddha::find_commentlabel() {
     const string& id = ctx->arg("id");
-    if( id.empty()) {
+    if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
         return ;
     }

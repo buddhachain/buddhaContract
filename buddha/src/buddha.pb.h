@@ -131,7 +131,7 @@ class Founder :
   }
 
   inline Founder& operator=(Founder&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -306,7 +306,7 @@ class Proposal :
   }
 
   inline Proposal& operator=(Proposal&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -564,7 +564,7 @@ class Temple :
   }
 
   inline Temple& operator=(Temple&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -747,7 +747,7 @@ class Master :
   }
 
   inline Master& operator=(Master&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -900,7 +900,7 @@ class TempleMaster :
   }
 
   inline TempleMaster& operator=(TempleMaster&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1038,7 +1038,7 @@ class KinddeedType :
   }
 
   inline KinddeedType& operator=(KinddeedType&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1161,7 +1161,7 @@ class Kinddeed :
   }
 
   inline Kinddeed& operator=(Kinddeed&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1343,7 +1343,7 @@ class KinddeedDetail :
   }
 
   inline KinddeedDetail& operator=(KinddeedDetail&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1481,7 +1481,7 @@ class KinddeedSpec :
   }
 
   inline KinddeedSpec& operator=(KinddeedSpec&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1626,7 +1626,7 @@ class CommentLabel :
   }
 
   inline CommentLabel& operator=(CommentLabel&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1749,7 +1749,7 @@ class BeforeComment :
   }
 
   inline BeforeComment& operator=(BeforeComment&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1932,7 +1932,7 @@ class Order :
   }
 
   inline Order& operator=(Order&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -2129,7 +2129,7 @@ class KinddeedProof :
   }
 
   inline KinddeedProof& operator=(KinddeedProof&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -2297,7 +2297,7 @@ class AfterComment :
   }
 
   inline AfterComment& operator=(AfterComment&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
