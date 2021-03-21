@@ -239,7 +239,7 @@ void Buddha::list_founder() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "list founder .", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
 }
 
 

@@ -199,7 +199,7 @@ void Buddha::list_kinddeedtype() {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
 }
 
 
