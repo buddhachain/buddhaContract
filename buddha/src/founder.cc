@@ -133,7 +133,7 @@ void Buddha::apply_founder(){
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_json(), "apply founder over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "apply founder over, please wait for approve .", ent.to_json());
 }
 
 void Buddha::approve_founder() {
