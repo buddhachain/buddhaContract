@@ -9,21 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string order::to_string() {
-    string str ;
-    str += "{" ;
-    str += id() + ",";
-    str += owner() + ",";
-    str += kdowner() + ",";
-    str += kdid() + ",";
-    str += std::to_string(specid()) + ",";
-    str += std::to_string(count()) + ",";
-    str += std::to_string(amount()) + ",";
-    str += timestamp() ;
-    str += "}";
-    return str;
-}
-
 xchain::json order::to_json() {
     xchain::json j = {
         {"id", id()},
@@ -62,7 +47,7 @@ bool Buddha::_is_user(const string& id) {
     return true ;
 }
 
-bool Buddha::_scan_order_by_id(xchain::json& v, const string& cond) {
+bool Buddha::_scan_order_by_id(xchain::json& ja, const string& cond) {
     auto it = get_order_table().scan({{"id",cond}});
     while(it->next() ) {
         order ent;
@@ -71,13 +56,13 @@ bool Buddha::_scan_order_by_id(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_order_by_kdowner(xchain::json& v, const string& cond) {
+bool Buddha::_scan_order_by_kdowner(xchain::json& ja, const string& cond) {
     auto it = get_order_table().scan({{"kdowner",cond}});
     while(it->next() ) {
         order ent;
@@ -86,7 +71,7 @@ bool Buddha::_scan_order_by_kdowner(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -101,11 +86,11 @@ bool Buddha::_delete_order_record(const string& id) {
     }
 
     if( !get_order_table().del(ent) ) {
-        mycout << "delete order " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete order " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete order " << ent.to_string() << " success ." << endl ;
+    mycout << "delete order " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -257,33 +242,33 @@ void Buddha::find_pray_kinddeed() {
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_pray_kinddeed() {
     //身份检查，合约部署者和基金会成员可以查看所有订单
     if( is_deployer() || 
         is_founder() ) {
-        xchain::json v ;
-        if(!_scan_order_by_id(v,ctx->arg("id")) ) {
+        xchain::json ja ;
+        if(!_scan_order_by_id(ja,ctx->arg("id")) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return ;
     }
 
     //身份检查，寺院和法师只能查看属于自己善举的所有订单
     if( is_temple() || 
         is_master() ) {
-        xchain::json v ;
-        if(!_scan_order_by_kdowner(v,ctx->initiator()) ) {
+        xchain::json ja ;
+        if(!_scan_order_by_kdowner(ja,ctx->initiator()) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
         
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return ;
     }
 

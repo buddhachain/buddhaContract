@@ -9,19 +9,6 @@
 #include <iostream>
 using namespace std;
 
-
-string kinddeedproof::to_string() {
-    string str ;
-    str += "{" ;
-    str += orderid() + ",";
-    str += owner() + ",";
-    str += proof() + ",";
-    str += timestamp() + ",";
-    str += std::to_string(approved());
-    str += "}";
-    return str;
-}
-
 xchain::json kinddeedproof::to_json() {
     xchain::json j = {
         {"orderid", orderid()},
@@ -41,7 +28,7 @@ bool Buddha::_is_kinddeedproof_exist(const string& orderid,kinddeedproof& ent) {
     return true;
 }
 
-bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedproof_table().scan({{"orderid",cond}});
     while(it->next() ) {
         kinddeedproof ent;
@@ -50,13 +37,13 @@ bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& v, const string& cond)
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedproof_table().scan({{"owner",cond}});
     while(it->next() ) {
         kinddeedproof ent;
@@ -65,13 +52,13 @@ bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_kinddeedproof_by_owner_orderid(xchain::json& v, const string& owner, const string& orderid) {
+bool Buddha::_scan_kinddeedproof_by_owner_orderid(xchain::json& ja, const string& owner, const string& orderid) {
     auto it = get_kinddeedproof_table().scan({{"owner",owner},{"orderid",orderid}});
     while(it->next() ) {
         kinddeedproof ent;
@@ -80,7 +67,7 @@ bool Buddha::_scan_kinddeedproof_by_owner_orderid(xchain::json& v, const string&
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -94,11 +81,11 @@ bool Buddha::_delete_kinddeedproof_record(const string& orderid) {
     }
 
     if( !get_kinddeedproof_table().del(ent) ) {
-        mycout << "delete kinddeedproof " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete kinddeedproof " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete kinddeedproof " << ent.to_string() << " success ." << endl ;
+    mycout << "delete kinddeedproof " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -296,33 +283,33 @@ void Buddha::find_kinddeedproof() {
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_kinddeedproof() {
     //身份检查，部署者和基金会成员可以查看所有善举凭证
     if( is_deployer() ||
         is_founder() ) {
-        xchain::json v ;
-        if(!_scan_kinddeedproof_by_orderid(v,ctx->arg("orderid")) ) {
+        xchain::json ja ;
+        if(!_scan_kinddeedproof_by_orderid(ja,ctx->arg("orderid")) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return;
     }
 
     //身份检查，寺院和法师只能查看属于自己善举的所有订单id的善举凭证
     if( is_temple() || 
         is_master() ) {
-        xchain::json v ;
-        if(!_scan_kinddeedproof_by_owner_orderid(v,ctx->initiator(),ctx->arg("orderid")) ) {
+        xchain::json ja ;
+        if(!_scan_kinddeedproof_by_owner_orderid(ja,ctx->initiator(),ctx->arg("orderid")) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return;
     }
 

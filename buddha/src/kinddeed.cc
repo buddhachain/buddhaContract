@@ -9,21 +9,6 @@
 #include <iostream>
 using namespace std;
 
-
-string kinddeed::to_string() {
-    string str ;
-    str += "{" ;
-    str += id() + ",";
-    str += name() + ",";
-    str += owner() + ",";
-    str += std::to_string(type()) + ",";
-    str += lasttime() + ",";
-    str += std::to_string(applied()) + ",";
-    str += std::to_string(online()); 
-    str += "}";
-    return str;
-}
-
 xchain::json kinddeed::to_json() {
     xchain::json j = {
         {"id", id()},
@@ -38,16 +23,6 @@ xchain::json kinddeed::to_json() {
     return j;
 }
 
-string kinddeeddetail::to_string() {
-    string str ;
-    str += "{" ;
-    str += kdid() + ",";
-    str += std::to_string(sequence()) + ",";
-    str += hash();
-    str += "}";
-    return str;
-}
-
 xchain::json kinddeeddetail::to_json() {
     xchain::json j = {
         {"kdid", kdid()},
@@ -56,17 +31,6 @@ xchain::json kinddeeddetail::to_json() {
     };
 
     return j;
-}
-
-string kinddeedspec::to_string() {
-    string str ;
-    str += "{" ;
-    str += kdid() + ",";
-    str += std::to_string(sequence()) + ",";
-    str += desc() + ",";
-    str += std::to_string(price());
-    str += "}";
-    return str;
 }
 
 xchain::json kinddeedspec::to_json() {
@@ -167,7 +131,7 @@ bool Buddha::_is_kinddeed_online(const string& id){
 
 }
 
-bool Buddha::_scan_kinddeed_by_id(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeed_by_id(xchain::json& ja, const string& cond) {
     auto it = get_kinddeed_table().scan({{"id",cond}});
     while(it->next() ) {
         kinddeed ent;
@@ -176,13 +140,13 @@ bool Buddha::_scan_kinddeed_by_id(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_kinddeed_by_owner(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeed_by_owner(xchain::json& ja, const string& cond) {
     auto it = get_kinddeed_table().scan({{"owner",cond}});
     while(it->next() ) {
         kinddeed ent;
@@ -191,13 +155,13 @@ bool Buddha::_scan_kinddeed_by_owner(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_kinddeeddetail(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeeddetail(xchain::json& ja, const string& cond) {
     auto it = get_kinddeeddetail_table().scan({{"kdid",cond}});
     while(it->next() ) {
         kinddeeddetail ent;
@@ -206,13 +170,13 @@ bool Buddha::_scan_kinddeeddetail(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_kinddeedspec(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeedspec(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedspec_table().scan({{"kdid",cond}});
     while(it->next() ) {
         kinddeedspec ent;
@@ -221,7 +185,7 @@ bool Buddha::_scan_kinddeedspec(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -235,7 +199,7 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
     }
 
     if( !get_kinddeed_table().del(ent) ) {
-        mycout << "delete kinddeed " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete kinddeed " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
@@ -251,7 +215,7 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
         return false;
     }
 
-    mycout << "delete kinddeed " << ent.to_string() << " success ." << endl ;
+    mycout << "delete kinddeed " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -263,7 +227,7 @@ bool Buddha::_delete_kinddeeddetail_records(const string& id) {
             break;
 
         if( !get_kinddeeddetail_table().del(ent) ) {
-            mycout << "delete kinddeeddetail " << ent.to_string() << " failure ." << endl ;
+            mycout << "delete kinddeeddetail " << ent.to_json().dump() << " failure ." << endl ;
             return false;
         }
     }
@@ -280,7 +244,7 @@ bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& seque
     }
 
     if( !get_kinddeeddetail_table().del(ent) ) {
-        mycout << "delete kinddeeddetail " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete kinddeeddetail " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
@@ -295,7 +259,7 @@ bool Buddha::_delete_kinddeedspec_records(const string& id) {
             break;
 
         if( !get_kinddeedspec_table().del(ent) ) {
-            mycout << "delete kinddeedspec " << ent.to_string() << " failure ." << endl ;
+            mycout << "delete kinddeedspec " << ent.to_json().dump() << " failure ." << endl ;
             return false;
         }
     }
@@ -312,7 +276,7 @@ bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequenc
     }
 
     if( !get_kinddeedspec_table().del(ent) ) {
-        mycout << "delete kinddeedspec " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete kinddeedspec " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
@@ -349,10 +313,10 @@ bool Buddha::_add_kinddeeddetail(const string& kdid,
     ent.set_sequence(stoll(sequence));
     ent.set_hash(hash);
 
-    mycout << ent.to_string() << endl;
+    mycout << ent.to_json().dump() << endl;
 
     if (!get_kinddeeddetail_table().put(ent) ) {
-        mycout << "kinddeeddetail table put " << ent.to_string() << " failure ." << endl;
+        mycout << "kinddeeddetail table put " << ent.to_json().dump() << " failure ." << endl;
         return false;
     }
 
@@ -395,10 +359,10 @@ bool Buddha::_add_kinddeedspec(const string& kdid,
     ent.set_desc(desc);
     ent.set_price(stoll(price));
 
-    mycout << ent.to_string() << endl;
+    mycout << ent.to_json().dump() << endl;
 
     if (!get_kinddeedspec_table().put(ent) ) {
-        mycout << "kinddeedspec table put " << ent.to_string() << " failure ." << endl;
+        mycout << "kinddeedspec table put " << ent.to_json().dump() << " failure ." << endl;
         return false;
     }
 
@@ -825,13 +789,13 @@ void Buddha::list_kinddeed() {
     //善举过多时，此时不安全，尽可能少调用
     if( is_deployer() ||
         is_founder() ) {
-        xchain::json v ;
-        if(!_scan_kinddeed_by_id(v,ctx->arg("id")) ) {
+        xchain::json ja ;
+        if(!_scan_kinddeed_by_id(ja,ctx->arg("id")) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return ;
     }
 
@@ -839,13 +803,13 @@ void Buddha::list_kinddeed() {
     //善举过多时，此时不安全，不过一般不会太多。
     if( is_temple() ||
         is_master() ) {
-        xchain::json v ;
-        if(!_scan_kinddeed_by_owner(v,ctx->initiator()) ) {
+        xchain::json ja ;
+        if(!_scan_kinddeed_by_owner(ja,ctx->initiator()) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
         
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return ;
     }
 
@@ -862,13 +826,13 @@ void Buddha::list_kinddeeddetail() {
         return ;
     }
 
-    xchain::json v ;
-    if(!_scan_kinddeeddetail(v, ctx->arg("kdid")) ) {
+    xchain::json ja ;
+    if(!_scan_kinddeeddetail(ja, ctx->arg("kdid")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
     
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 void Buddha::list_kinddeedspec() {
@@ -881,13 +845,13 @@ void Buddha::list_kinddeedspec() {
         return ;
     }
 
-    xchain::json v ;
-    if(!_scan_kinddeedspec(v,ctx->arg("kdid")) ) {
+    xchain::json ja ;
+    if(!_scan_kinddeedspec(ja,ctx->arg("kdid")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 

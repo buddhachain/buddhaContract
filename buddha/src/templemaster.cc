@@ -9,16 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string templemaster::to_string() {
-    string str ;
-    str += "{" ;
-    str += templeid() + ",";
-    str += masterid() + ",";
-    str += std::to_string(approved());
-    str += "}";
-    return str;
-}
-
 xchain::json templemaster::to_json() {
     xchain::json j = {
         {"templeid", templeid()},
@@ -47,7 +37,7 @@ bool Buddha::_is_in_temple(const string& templeid,
     return ent.approved();
 }
 
-bool Buddha::_scan_templemaster_by_templeid(xchain::json& v, const string& cond) {
+bool Buddha::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) {
     auto it = get_templemaster_table().scan({{"templeid",cond}});
     while(it->next() ) {
         templemaster ent;
@@ -56,13 +46,13 @@ bool Buddha::_scan_templemaster_by_templeid(xchain::json& v, const string& cond)
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
 }
 
-bool Buddha::_scan_templemaster_by_masterid(xchain::json& v, const string& cond) {
+bool Buddha::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) {
     auto it = get_templemaster_table().scan({{"masterid",cond}});
     while(it->next() ) {
         templemaster ent;
@@ -71,7 +61,7 @@ bool Buddha::_scan_templemaster_by_masterid(xchain::json& v, const string& cond)
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -86,11 +76,11 @@ bool Buddha::_delete_templemaster_record(const string& templeid,
     }
 
     if( !get_templemaster_table().del(ent) ) {
-        mycout << "delete templemaster " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete templemaster " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete templemaster " << ent.to_string() << " success ." << endl ;
+    mycout << "delete templemaster " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -270,25 +260,25 @@ void Buddha::list_temple_master() {
     //身份检查，部署者和基金会成员可以查看所有当前寺院的所有法师
     if( is_deployer() ||
         is_founder() ) {
-        xchain::json v ;
-        if(!_scan_templemaster_by_templeid(v,templeid) ) {
+        xchain::json ja ;
+        if(!_scan_templemaster_by_templeid(ja,templeid) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return ;
     }
 
     //身份检查，寺院可以查看自己寺院的所有法师
     if( is_temple() ) {
-        xchain::json v ;
-        if(!_scan_templemaster_by_templeid(v,ctx->initiator()) ) {
+        xchain::json ja ;
+        if(!_scan_templemaster_by_templeid(ja,ctx->initiator()) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
         
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return ;
     }
 

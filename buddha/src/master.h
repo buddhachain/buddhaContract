@@ -17,7 +17,6 @@ class master: public buddha::Master {
         DEFINE_INDEX_ADD(2, proof)      //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

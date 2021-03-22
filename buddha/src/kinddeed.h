@@ -16,7 +16,6 @@ class kinddeedtype : public buddha::KinddeedType {
         DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 
@@ -27,7 +26,6 @@ class kinddeed: public buddha::Kinddeed {
         DEFINE_INDEX_ADD(1, owner)  //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 
@@ -37,7 +35,6 @@ class kinddeeddetail: public buddha::KinddeedDetail {
         DEFINE_INDEX_ADD(0, kdid)   //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 
@@ -47,7 +44,6 @@ class kinddeedspec: public buddha::KinddeedSpec {
         DEFINE_INDEX_ADD(0, kdid)   //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

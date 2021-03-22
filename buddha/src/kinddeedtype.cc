@@ -9,16 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string kinddeedtype::to_string() {
-    string str ;
-    str += "{" ;
-    str += std::to_string(id()) + ",";
-    str += desc();
-    str += "}";
-    return str;
-}
-
-
 xchain::json kinddeedtype::to_json() {
     xchain::json j = {
         {"id", id()},
@@ -36,7 +26,7 @@ bool Buddha::_is_kinddeedtype_exist(const string& id,kinddeedtype& ent) {
     return true;
 }
 
-bool Buddha::_scan_kinddeedtype(xchain::json& v, const string& cond) {
+bool Buddha::_scan_kinddeedtype(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedtype_table().scan({{"id",cond}});
     while(it->next() ) {
         kinddeedtype ent;
@@ -45,7 +35,7 @@ bool Buddha::_scan_kinddeedtype(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -59,11 +49,11 @@ bool Buddha::_delete_kinddeedtype_record(const string& id) {
     }
 
     if( !get_kinddeedtype_table().del(ent) ) {
-        mycout << "delete kinddeedtype " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete kinddeedtype " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete kinddeedtype " << ent.to_string() << " success ." << endl ;
+    mycout << "delete kinddeedtype " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -190,16 +180,16 @@ void Buddha::find_kinddeedtype() {
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_kinddeedtype() {
-    xchain::json v ;
-    if(!_scan_kinddeedtype(v) ) {
+    xchain::json ja ;
+    if(!_scan_kinddeedtype(ja) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 

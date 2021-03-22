@@ -16,7 +16,6 @@ class kinddeedproof: public buddha::KinddeedProof {
         DEFINE_INDEX_ADD(1, owner)      //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

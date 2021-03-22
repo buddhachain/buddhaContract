@@ -19,7 +19,6 @@ class temple: public buddha::Temple {
         DEFINE_INDEX_ADD(4, proof)      //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

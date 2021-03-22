@@ -15,7 +15,6 @@ class proposal: public buddha::Proposal {
         DEFINE_INDEX_ADD(0, key) //只主键能find，也支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

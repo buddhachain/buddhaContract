@@ -9,19 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string temple::to_string() {
-    string str ;
-    str += "{" ;
-    str += id() + ",";
-    str += unit() + ",";
-    str += creditcode() + ",";
-    str += address() + ",";
-    str += proof() + ",";
-    str += std::to_string(approved());
-    str += "}";
-    return str;
-}
-
 xchain::json temple::to_json() {
     xchain::json j = {
         {"id", id()},
@@ -78,7 +65,7 @@ bool Buddha::_is_temple(const string& id) {
     return ent.approved();
 }
 
-bool Buddha::_scan_temple(xchain::json& v, const string& cond) {
+bool Buddha::_scan_temple(xchain::json& ja, const string& cond) {
     auto it = get_temple_table().scan({{"id",cond}});
     while(it->next() ) {
         temple ent;
@@ -87,7 +74,7 @@ bool Buddha::_scan_temple(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -101,11 +88,11 @@ bool Buddha::_delete_temple_record(const string& id) {
     }
 
     if( !get_temple_table().del(ent) ) {
-        mycout << "delete temple " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete temple " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete temple " << ent.to_string() << " success ." << endl ;
+    mycout << "delete temple " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -260,13 +247,13 @@ void Buddha::list_temple() {
     }
 
     //获取所有的寺院
-    xchain::json vtemple;
-    if(!_scan_temple(vtemple) ) {
+    xchain::json ja;
+    if(!_scan_temple(ja) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan temple failure .");
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(vtemple.size()) + " " + vtemple.dump());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 

@@ -16,7 +16,6 @@ class templemaster: public buddha::TempleMaster {
         DEFINE_INDEX_ADD(1, masterid)   //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

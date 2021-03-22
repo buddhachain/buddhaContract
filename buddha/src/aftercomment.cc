@@ -9,17 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string aftercomment::to_string() {
-    string str ;
-    str += "{" ;
-    str += orderid() + ",";
-    str += owner() + ",";
-    str += comment();
-    str += timestamp();
-    str += "}";
-    return str;
-}
-
 xchain::json aftercomment::to_json() {
     xchain::json j = {
         {"orderid", orderid()},
@@ -38,7 +27,7 @@ bool Buddha::_is_aftercomment_exist(const string& orderid, const string& owner, 
     return true;
 }
 
-bool Buddha::_scan_aftercomment_by_orderid(xchain::json& v, const string& cond) {
+bool Buddha::_scan_aftercomment_by_orderid(xchain::json& ja, const string& cond) {
     auto it = get_aftercomment_table().scan({{"orderid",cond}});
     while(it->next() ) {
         aftercomment ent;
@@ -47,7 +36,7 @@ bool Buddha::_scan_aftercomment_by_orderid(xchain::json& v, const string& cond) 
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -61,11 +50,11 @@ bool Buddha::_delete_aftercomment_record(const string& orderid, const string& ow
     }
 
     if( !get_aftercomment_table().del(ent) ) {
-        mycout << "delete aftercomment " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete aftercomment " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete aftercomment " << ent.to_string() << " success ." << endl ;
+    mycout << "delete aftercomment " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -259,13 +248,13 @@ void Buddha::list_aftercomment() {
     //身份检查，部署者，基金会成员具有权限
     if( is_deployer() ||
         is_founder() ) {
-        xchain::json v ;
-        if(!_scan_aftercomment_by_orderid(v, orderid) ) {
+        xchain::json ja ;
+        if(!_scan_aftercomment_by_orderid(ja, orderid) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
         return;
     }
 
@@ -282,12 +271,12 @@ void Buddha::list_aftercomment() {
         return ;
     }
 
-    xchain::json v ;
-    if(!_scan_aftercomment_by_orderid(v, orderid) ) {
+    xchain::json ja ;
+    if(!_scan_aftercomment_by_orderid(ja, orderid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 

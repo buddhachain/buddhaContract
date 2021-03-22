@@ -10,20 +10,6 @@
 using namespace std;
 
 
-
-string beforecomment::to_string() {
-    string str ;
-    str += "{" ;
-    str += owner() + ",";
-    str += kdid() + ",";
-    str += std::to_string(satisfaction()) + ",";
-    str += labels() + ",";
-    str += comment() + ",";
-    str += timestamp();
-    str += "}";
-    return str;
-}
-
 xchain::json beforecomment::to_json() {
     xchain::json j = {
         {"owner", owner()},
@@ -44,7 +30,7 @@ bool Buddha::_is_beforecomment_exist(const string& kdid, const string& owner,bef
     return true;
 }
 
-bool Buddha::_scan_beforecomment(xchain::json& v, const string& cond) {
+bool Buddha::_scan_beforecomment(xchain::json& ja, const string& cond) {
     auto it = get_beforecomment_table().scan({{"kdid",cond}});
     while(it->next() ) {
         beforecomment ent;
@@ -53,7 +39,7 @@ bool Buddha::_scan_beforecomment(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -67,11 +53,11 @@ bool Buddha::_delete_beforecomment_record(const string& kdid, const string& owne
     }
 
     if( !get_beforecomment_table().del(ent) ) {
-        mycout << "delete beforecomment " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete beforecomment " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete beforecomment " << ent.to_string() << " success ." << endl ;
+    mycout << "delete beforecomment " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -282,7 +268,7 @@ void Buddha::find_beforecomment() {
         if( is_founder() ||
             owner == ctx->initiator() ||
             kd.owner() == ctx->initiator() ) {
-            _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string());
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
             return ;
         }
 
@@ -323,13 +309,13 @@ void Buddha::list_beforecomment() {
         return ;
     }
 
-    xchain::json v ;
-    if(!_scan_beforecomment(v, kdid) ) {
+    xchain::json ja ;
+    if(!_scan_beforecomment(ja, kdid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 

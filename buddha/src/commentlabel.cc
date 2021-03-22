@@ -9,15 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string commentlabel::to_string() {
-    string str ;
-    str += "{" ;
-    str += std::to_string(id()) + ",";
-    str += desc();
-    str += "}";
-    return str;
-}
-
 xchain::json commentlabel::to_json() {
     xchain::json j = {
         {"id", id()},
@@ -47,7 +38,7 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
     return true;
 }
 
-bool Buddha::_scan_commentlabel(xchain::json& v, const string& cond) {
+bool Buddha::_scan_commentlabel(xchain::json& ja, const string& cond) {
     auto it = get_commentlabel_table().scan({{"id",cond}});
     while(it->next() ) {
         commentlabel ent;
@@ -56,7 +47,7 @@ bool Buddha::_scan_commentlabel(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -70,11 +61,11 @@ bool Buddha::_delete_commentlabel_record(const string& id) {
     }
 
     if( !get_commentlabel_table().del(ent) ) {
-        mycout << "delete commentlabel " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete commentlabel " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete commentlabel " << ent.to_string() << " success ." << endl ;
+    mycout << "delete commentlabel " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -202,17 +193,17 @@ void Buddha::find_commentlabel() {
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ent.to_string());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_commentlabel() {
-    xchain::json v ;
-    if(!_scan_beforecomment(v) ) {
+    xchain::json ja ;
+    if(!_scan_beforecomment(ja) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 

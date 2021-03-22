@@ -15,7 +15,6 @@ class commentlabel: public buddha::CommentLabel {
         DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 
@@ -26,7 +25,6 @@ class beforecomment: public buddha::BeforeComment {
         DEFINE_INDEX_ADD(1, owner)  //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 
@@ -37,7 +35,6 @@ class aftercomment: public buddha::AfterComment {
         DEFINE_INDEX_ADD(1, owner)      //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    string to_string();
     xchain::json to_json();
 };
 

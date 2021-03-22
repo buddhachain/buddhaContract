@@ -9,17 +9,6 @@
 #include <iostream>
 using namespace std;
 
-string master::to_string() {
-    string str ;
-    str += "{" ;
-    str += id() + ",";
-    str += creditcode() + ",";
-    str += proof() + ",";
-    str += std::to_string(approved());
-    str += "}";
-    return str;
-}
-
 xchain::json master::to_json() {
     xchain::json j = {
         {"id", id()},
@@ -53,7 +42,7 @@ bool Buddha::_is_master(const string& id) {
     return ent.approved();
 }
 
-bool Buddha::_scan_master(xchain::json& v, const string& cond) {
+bool Buddha::_scan_master(xchain::json& ja, const string& cond) {
     auto it = get_master_table().scan({{"id",cond}});
     while(it->next() ) {
         master ent;
@@ -62,7 +51,7 @@ bool Buddha::_scan_master(xchain::json& v, const string& cond) {
             return false;
         }
 
-        v.push_back(ent.to_json());
+        ja.push_back(ent.to_json());
     }
 
     return true;
@@ -76,11 +65,11 @@ bool Buddha::_delete_master_record(const string& id) {
     }
 
     if( !get_master_table().del(ent) ) {
-        mycout << "delete master " << ent.to_string() << " failure ." << endl ;
+        mycout << "delete master " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete master " << ent.to_string() << " success ." << endl ;
+    mycout << "delete master " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
@@ -219,13 +208,13 @@ void Buddha::list_master() {
         return ;
     }
 
-    xchain::json v ;
-    if(!_scan_master(v, ctx->arg("id")) ) {
+    xchain::json ja ;
+    if(!_scan_master(ja, ctx->arg("id")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", v);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
 }
 
 
