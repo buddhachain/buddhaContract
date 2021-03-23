@@ -209,7 +209,7 @@ public:
     void delete_proposal();         //基金会成员
     void update_proposal();         //基金会成员
     void approve_proposal();        //基金会成员
-    void recusal_proposal();        //基金会成员
+    //void recusal_proposal();        //基金会成员
     void find_proposal();           //基金会成员
     void list_proposal();           //基金会成员
 

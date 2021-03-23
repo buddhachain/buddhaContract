@@ -255,7 +255,7 @@ void Buddha::list_pray_kinddeed() {
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
         return ;
     }
 
@@ -268,7 +268,7 @@ void Buddha::list_pray_kinddeed() {
             return;
         }
         
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
         return ;
     }
 

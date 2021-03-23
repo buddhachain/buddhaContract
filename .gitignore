@@ -3,3 +3,4 @@
 exchange/build
 build
 exchange/CMakeLists.txt
+*Makefile*

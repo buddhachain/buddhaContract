@@ -795,7 +795,7 @@ void Buddha::list_kinddeed() {
             return;
         }
 
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
         return ;
     }
 
@@ -809,7 +809,7 @@ void Buddha::list_kinddeed() {
             return;
         }
         
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
         return ;
     }
 
@@ -832,7 +832,7 @@ void Buddha::list_kinddeeddetail() {
         return;
     }
     
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
 void Buddha::list_kinddeedspec() {
@@ -851,7 +851,7 @@ void Buddha::list_kinddeedspec() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
 

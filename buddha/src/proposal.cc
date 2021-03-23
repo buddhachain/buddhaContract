@@ -205,6 +205,12 @@ void Buddha::delete_proposal(){
         jatimestamp.push_back("0");
     }
 
+    //删除此提案
+    if( !_delete_proposal_record(key) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
+        return;
+    }
+    
     // ent.set_key(key);                   //key值保持不变
     // ent.set_value("");                  //通过前保持原值不变
     ent.set_owner(ctx->initiator());    //设置提案的所有者,这个提案所有者可能不同于原提案创建者
@@ -263,6 +269,12 @@ void Buddha::update_proposal(){
         return ;
     }
 
+    //判断新值老值相同
+    if(ent.value() == ent.newvalue()) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is approved, yet .", ent.to_json() );
+        return ;
+    }
+
     //获取所有的基金会成员
     xchain::json ja ;
     if(!_scan_founder(ja) ) {
@@ -287,6 +299,12 @@ void Buddha::update_proposal(){
         jatimestamp.push_back("0");
     }
 
+    //删除此提案
+    if( !_delete_proposal_record(key) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
+        return;
+    }
+    
     // ent.set_key(key);                   //key值保持不变
     // ent.set_value("");                  //通过前保持原值不变
     ent.set_owner(ctx->initiator());    //设置提案的所有者,这个提案所有者可能不同于原提案创建者
@@ -333,6 +351,13 @@ void Buddha::approve_proposal(){
         return ;
     }
 
+    //判断新值老值相同
+    if(ent.operate() != string("1") &&
+        ent.value() == ent.newvalue()) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is approved, yet .", ent.to_json() );
+        return ;
+    }
+
     //判断是否过期
     if(ent.expire() < timestamp) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is expired, yet ." );
@@ -346,16 +371,29 @@ void Buddha::approve_proposal(){
         return;
     }
 
+    //获取所有的基金会成员，结果，以及时间戳
+    xchain::json jafounder = xchain::json::parse(ent.founders());
+    xchain::json jaresult = xchain::json::parse(ent.results());
+    xchain::json jatimestamp = xchain::json::parse(ent.timestamps());
 
-    xchain::json jafounder = xchain::json::array(ent.founders());
-    xchain::json jaresult = xchain::json::array(ent.results());
-    xchain::json jatimestamp = xchain::json::array(ent.timestamps());
-    jafounder.push_back(ctx->initiator();
-    jaresult.push_back("1");
-    jatimestamp.push_back(timestamp);
+    bool is_all_approve = true;
+    for(int i=0; i<ent.count(); i++) {
+        string founder = jafounder.at(i).template get<string>();
+        if(founder == ctx->initiator()) {
+            mycout << founder << endl ;
+            jaresult[i]= "1";           //设置为通过
+            jatimestamp[i]= timestamp;  //设置通过时间
+        }
+        if(jaresult.at(i).template get<string>()!=string("1")) {
+            mycout << founder << " " << jaresult[i] << endl ;
+            is_all_approve = false;
+        }            
+    }
 
     // ent.set_key(key);                   //key值保持不变
+    // ent.set_value(ent.value())          //value，原始提案值保持不变
     // ent.set_owner(ctx->initiator());    //授权通过，提案所有者不变
+    // ent.set_newvalue(ent.newvalue());   //newvalue，新提案值保持不变
     // ent.set_operate("2");               //授权通过，提案操作不变
     // ent.set_timestamp(timestamp);       //授权通过，修改提案的时间不变
     // ent.set_expire(expire);             //授权通过，修改提案的时间不变
@@ -364,23 +402,40 @@ void Buddha::approve_proposal(){
     ent.set_results(jaresult.dump());   //设置各个基金会成员对提案操作的结果列表
     ent.set_timestamps(jatimestamp.dump()); //设置各个基金会成员对提案的操作时间
 
-    // 如果基金会成员个数已满足，并且每个基金会成员都是通过的，则修改提案
-    if() {
-        ent.set_value("");                  //通过前保持原值
-        ent.set_newvalue(newvalue);         //修改提案配置的新值
+    //判断是否是所有基金会成员都通过
+    if(is_all_approve) {
+        mycout << endl;
+        //判断此提案是否是删除提案
+        if(ent.operate() == string("1")) {
+            //直接删除此条提案
+            if( !_delete_proposal_record(key) ) {
+                _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete proposal " + key + " success .", ent.to_json());
+                return;
+            }
+        }
+
+        //不是删除提案的需求, 生效新的提案
+        ent.set_value(ent.newvalue());
     }
 
+    //删除此提案
+    if( !_delete_proposal_record(key) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
+        return;
+    }
+    
     if (!get_proposal_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, key + " apply proposal over, please wait for approve .", ent.to_json() );
+    _log_ok(__FILE__, __FUNCTION__, __LINE__,  ctx->initiator() + " audit proposal key=" + key + " over .", ent.to_json() );
 }
 
-void Buddha::recusal_proposal(){
+// 对于提案来说，基金会成员只有一次通过或者不通过的授权机会，没有授权后再次反悔的机会
+// void Buddha::recusal_proposal(){
 
-}
+// }
 
 void Buddha::find_proposal(){
     const string& key = ctx->arg("key");
@@ -389,12 +444,12 @@ void Buddha::find_proposal(){
         return ;
     }
 
-    //判断提案是否存在
-    proposal ent;
-    if (!_is_proposal_exist(key, ent))  {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist .");
-        return ;
-    }
+    // //判断提案是否存在
+    // proposal ent;
+    // if (!_is_proposal_exist(key, ent))  {
+    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist .");
+    //     return ;
+    // }
 
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
@@ -414,7 +469,7 @@ void Buddha::list_proposal(){
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "size=" + to_string(ja.size()), ja);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
 
@@ -423,6 +478,6 @@ DEFINE_METHOD(Buddha, make_proposal)            { self.make_proposal();         
 DEFINE_METHOD(Buddha, delete_proposal)          { self.delete_proposal();           }
 DEFINE_METHOD(Buddha, update_proposal)          { self.update_proposal();           }
 DEFINE_METHOD(Buddha, approve_proposal)         { self.approve_proposal();          }
-DEFINE_METHOD(Buddha, recusal_proposal)         { self.recusal_proposal();          }
+// DEFINE_METHOD(Buddha, recusal_proposal)         { self.recusal_proposal();          }
 DEFINE_METHOD(Buddha, find_proposal)            { self.find_proposal();             }
 DEFINE_METHOD(Buddha, list_proposal)            { self.list_proposal();             }
