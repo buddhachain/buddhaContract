@@ -74,9 +74,9 @@ void Buddha::make_proposal(){
         return ;
     }
 
-    const string& newvalue = ctx->arg("value");
+    const string& newvalue = ctx->arg("newvalue");
     if( newvalue.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "value is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "newvalue is empty .");
         return ;
     }
 
@@ -156,6 +156,12 @@ void Buddha::delete_proposal(){
         return ;
     }
 
+    const string& value = ctx->arg("value");
+    if( value.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "value is empty .");
+        return ;
+    }
+
     const string& timestamp = ctx->arg("timestamp");
     if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "timestamp is empty .");
@@ -178,6 +184,12 @@ void Buddha::delete_proposal(){
     proposal ent;
     if(!_is_proposal_exist(key, ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
+        return ;
+    }
+
+    //确实要删除的value值是否匹配表中的value值，防止误删
+    if( ent.value() != value ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "the value you want to delete is not match .", ent.to_json() );
         return ;
     }
 
@@ -238,9 +250,15 @@ void Buddha::update_proposal(){
         return ;
     }
 
-    const string& newvalue = ctx->arg("value");
-    if( newvalue.empty() ) {
+    const string& value = ctx->arg("value");
+    if( value.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "value is empty .");
+        return ;
+    }
+
+    const string& newvalue = ctx->arg("newvalue");
+    if( newvalue.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "newvalue is empty .");
         return ;
     }
 
@@ -269,8 +287,14 @@ void Buddha::update_proposal(){
         return ;
     }
 
+    //确实要删除的value值是否匹配表中的value值，防止误修改
+    if( ent.value() != value ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "the value you want to update is not match .", ent.to_json() );
+        return ;
+    }
+
     //判断新值老值相同
-    if(ent.value() == ent.newvalue()) {
+    if(ent.value() == newvalue) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is approved, yet .", ent.to_json() );
         return ;
     }
@@ -332,6 +356,12 @@ void Buddha::approve_proposal(){
         return ;
     }
 
+    const string& operate = ctx->arg("operate");
+    if( operate.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "operate is empty .");
+        return ;
+    }
+
     const string& timestamp = ctx->arg("timestamp");
     if( timestamp.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "timestamp is empty .");
@@ -351,17 +381,72 @@ void Buddha::approve_proposal(){
         return ;
     }
 
-    //判断新值老值相同
-    if(ent.operate() != string("1") &&
-        ent.value() == ent.newvalue()) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is approved, yet .", ent.to_json() );
-        return ;
-    }
-
     //判断是否过期
     if(ent.expire() < timestamp) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is expired, yet ." );
         return ;
+    }
+
+    //确实要授权的操作时正确的，防止误授权
+    if( ent.operate() != operate ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "the operate you want to approve is not match .", ent.to_json() );
+        return ;
+    }
+
+    if( ent.operate() == string("0") ) {
+        const string& newvalue = ctx->arg("newvalue");
+        if( newvalue.empty() ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "newvalue is empty .");
+            return ;
+        }
+
+        //确实要删除的newvalue值是否匹配表中的newvalue值，防止误授权
+        if( ent.newvalue() != newvalue ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "the newvalue you want to approve is not match .", ent.to_json() );
+            return ;
+        }
+    } else if ( ent.operate() == string("1") ) {
+        const string& value = ctx->arg("value");
+        if( value.empty() ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "value is empty .");
+            return ;
+        }
+
+        //确实要删除的value值是否匹配表中的value值，防止误授权
+        if( ent.value() != value ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "the value you want to approve is not match .", ent.to_json() );
+            return ;
+        }
+    } else if ( ent.operate() == string("2") ) {
+        const string& value = ctx->arg("value");
+        if( value.empty() ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "value is empty .");
+            return ;
+        }
+
+        const string& newvalue = ctx->arg("newvalue");
+        if( newvalue.empty() ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "newvalue is empty .");
+            return ;
+        }
+
+        //判断新值老值相同
+        if( ent.value() == ent.newvalue()) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is approved, yet .", ent.to_json() );
+            return ;
+        }
+
+        //确实要删除的value值是否匹配表中的value值，防止误授权
+        if( ent.value() != value ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "the value you want to approve is not match .", ent.to_json() );
+            return ;
+        }
+
+        //确实要删除的newvalue值是否匹配表中的newvalue值，防止误授权
+        if( ent.newvalue() != newvalue ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "the newvalue you want to approve is not match .", ent.to_json() );
+            return ;
+        }
     }
 
     //获取所有的基金会成员
@@ -408,10 +493,13 @@ void Buddha::approve_proposal(){
         //判断此提案是否是删除提案
         if(ent.operate() == string("1")) {
             //直接删除此条提案
-            if( !_delete_proposal_record(key) ) {
-                _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete proposal " + key + " success .", ent.to_json());
+            if(!_delete_proposal_record(key) ) {
+                _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
                 return;
             }
+
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete proposal " + key + " success .", ent.to_json());
+            return;
         }
 
         //不是删除提案的需求, 生效新的提案
@@ -445,13 +533,13 @@ void Buddha::find_proposal(){
     }
 
     // //判断提案是否存在
-    // proposal ent;
-    // if (!_is_proposal_exist(key, ent))  {
-    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist .");
-    //     return ;
-    // }
+    proposal ent;
+    if (!_is_proposal_exist(key, ent))  {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist .");
+        return ;
+    }
 
-    // _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_proposal(){
