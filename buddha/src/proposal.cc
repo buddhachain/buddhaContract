@@ -451,7 +451,7 @@ void Buddha::find_proposal(){
     //     return ;
     // }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
+    // _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_proposal(){
