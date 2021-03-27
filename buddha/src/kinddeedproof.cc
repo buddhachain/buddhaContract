@@ -9,6 +9,14 @@
 #include <iostream>
 using namespace std;
 
+// 订单所有者的比例分成随前二者变动而变动 
+// ratio_for_kinddeed_owner = 100 - ratio_for_burn - ratio_for_some_contract;
+static int64_t ratio_for_burn           = 10 ; //默认给0账户的燃烧值比是10%
+static int64_t ratio_for_some_contract  = 10 ; //默认给某合约账户的比例是10%
+// static int64_t ratio_for_kinddeed_owner = 80 ; //默认给订单所有者账户的比例是80%
+static string some_contract             = "buddha"; //某个默认的收款合约账户
+
+
 xchain::json kinddeedproof::to_json() {
     xchain::json j = {
         {"orderid", orderid()},
@@ -189,6 +197,43 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
+    //计算分成
+
+    {//判断是否已经存在这个ratio_for_burn这个提案
+        proposal pps;
+        if(_is_proposal_exist( "ratio_for_burn", pps) ) {
+            mycout << "proposal ratio_for_burn=" << pps.value() << endl ;
+            ratio_for_burn = stoll(pps.value());
+        } else
+            mycout << "proposal ratio_for_burn is not exist ." << endl ;
+    }
+
+    {//判断是否已经存在这个ratio_for_some_contract这个提案
+        proposal pps;
+        if(_is_proposal_exist( "ratio_for_some_contract", pps) ) {
+            mycout << "proposal ratio_for_some_contract=" << pps.value() << endl ;
+            ratio_for_some_contract = stoll(pps.value());
+        } else
+            mycout << "proposal ratio_for_some_contract is not exist ." << endl ;
+    }
+
+    {//判断是否已经存在这个some_contract这个提案
+        proposal pps;
+        if(_is_proposal_exist( "some_contract", pps) ) {
+            mycout << "proposal some_contract=" << pps.value() << endl ;
+            some_contract = pps.value();
+        } else
+            mycout << "proposal some_contract is not exist ." << endl ;
+    }
+
+    //如果分成给0账户和某合约账户的总分成超过100，说明数值存在错误。
+    if( ratio_for_burn + ratio_for_some_contract > 100 ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,
+            "ratio error : ratio_for_burn=" + to_string(ratio_for_burn) + ", ratio_for_some_contract=" + to_string(ratio_for_some_contract),
+            ent.to_json());
+        return;
+    }
+
     //删除此善举凭证
     if( !_delete_kinddeedproof_record(orderid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
@@ -202,10 +247,34 @@ void Buddha::approve_kinddeedproof() {
         return;
     }
 
-    if( !_transfer(ent.owner(), to_string(od.amount())) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "transfer to " + ent.owner() + " " +  to_string(od.amount()) + " failure .");
+    //执行分成
+
+    //转账给0账户
+    int64_t amount_for_burn = (int64_t)(ratio_for_burn*od.amount()/100);
+    if( !_transfer("000000000000000000000000000000000", to_string(amount_for_burn)) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "transfer to 0 account " +  to_string(amount_for_burn) + " failure .");
         return ;
     }
+
+    //转账给some_contract,无需判断此账户是否存在
+    int64_t amount_for_some_contract = (int64_t)(ratio_for_some_contract*od.amount()/100);
+    if ( some_contract != "buddha" ) {
+        if( !_transfer(some_contract, to_string(amount_for_some_contract)) ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "transfer to some account " +  to_string(amount_for_some_contract) + " failure .");
+            return ;
+        }
+    }
+
+    //转账给订单所有者
+    int64_t amount_for_kinddeed_owner = od.amount()-amount_for_burn - amount_for_some_contract;
+    if( !_transfer(ent.owner(), to_string(amount_for_kinddeed_owner)) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "transfer to " + ent.owner() + " " +  to_string(amount_for_kinddeed_owner) + " failure .");
+        return ;
+    }
+
+    //记录用户的功德值
+
+    //记录善举发布者的信用值
 
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve kinddeed " + orderid + " proof success .", ent.to_json());
 }
