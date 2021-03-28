@@ -272,9 +272,16 @@ void Buddha::approve_kinddeedproof() {
         return ;
     }
 
-    //记录用户的功德值
+    //记录善举所有者的信用值
+    int64_t new_value ;
+    if ( !_add_credit(ent.owner(), od.amount(), new_value) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, od.owner() + " add credit " + to_string(od.amount()) + " failure .");
+        return ;
+    }
+    //排序善举所有者的信用值排名
 
-    //记录善举发布者的信用值
+    //记录用户的功德值
+    //排序用户的功德值排名
 
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve kinddeed " + orderid + " proof success .", ent.to_json());
 }

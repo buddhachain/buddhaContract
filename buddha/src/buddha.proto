@@ -131,3 +131,29 @@ message AfterComment {
     string timestamp    = 4;    //评论时间
 }
 
+//善举所有者信用值表
+message Credit {
+    string id           = 1;    //善举所有者
+    int64  value        = 2;    //信用值   
+}
+
+//善举所有者信用值排名表
+message CreditRanking {
+    string ranking      = 1;    //名次
+    string id           = 2;    //善举所有者
+    int64  value        = 3;    //信用值   
+}
+
+//购买者功德值表
+message Merit {
+    string id           = 1;    //购买者
+    int64  value        = 2;    //功德值   
+}
+
+//购买者功德值排名表
+message MeritRanking {
+    string ranking      = 1;    //名次
+    string id           = 2;    //购买者
+    int64  value        = 3;    //功德值   
+}
+

@@ -561,7 +561,7 @@ void Buddha::add_kinddeed() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
 void Buddha::delete_kinddeed() {
@@ -599,7 +599,7 @@ void Buddha::delete_kinddeed() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
 void Buddha::update_kinddeed() {
@@ -743,7 +743,7 @@ void Buddha::update_kinddeed() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
 void Buddha::find_kinddeed() {       

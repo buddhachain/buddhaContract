@@ -40,7 +40,7 @@ struct TableStruct_buddha_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[14]
+  static const ::google::protobuf::internal::ParseTable schema[18]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -56,6 +56,12 @@ extern BeforeCommentDefaultTypeInternal _BeforeComment_default_instance_;
 class CommentLabel;
 class CommentLabelDefaultTypeInternal;
 extern CommentLabelDefaultTypeInternal _CommentLabel_default_instance_;
+class Credit;
+class CreditDefaultTypeInternal;
+extern CreditDefaultTypeInternal _Credit_default_instance_;
+class CreditRanking;
+class CreditRankingDefaultTypeInternal;
+extern CreditRankingDefaultTypeInternal _CreditRanking_default_instance_;
 class Founder;
 class FounderDefaultTypeInternal;
 extern FounderDefaultTypeInternal _Founder_default_instance_;
@@ -77,6 +83,12 @@ extern KinddeedTypeDefaultTypeInternal _KinddeedType_default_instance_;
 class Master;
 class MasterDefaultTypeInternal;
 extern MasterDefaultTypeInternal _Master_default_instance_;
+class Merit;
+class MeritDefaultTypeInternal;
+extern MeritDefaultTypeInternal _Merit_default_instance_;
+class MeritRanking;
+class MeritRankingDefaultTypeInternal;
+extern MeritRankingDefaultTypeInternal _MeritRanking_default_instance_;
 class Order;
 class OrderDefaultTypeInternal;
 extern OrderDefaultTypeInternal _Order_default_instance_;
@@ -95,6 +107,8 @@ namespace protobuf {
 template<> ::buddha::AfterComment* Arena::CreateMaybeMessage<::buddha::AfterComment>(Arena*);
 template<> ::buddha::BeforeComment* Arena::CreateMaybeMessage<::buddha::BeforeComment>(Arena*);
 template<> ::buddha::CommentLabel* Arena::CreateMaybeMessage<::buddha::CommentLabel>(Arena*);
+template<> ::buddha::Credit* Arena::CreateMaybeMessage<::buddha::Credit>(Arena*);
+template<> ::buddha::CreditRanking* Arena::CreateMaybeMessage<::buddha::CreditRanking>(Arena*);
 template<> ::buddha::Founder* Arena::CreateMaybeMessage<::buddha::Founder>(Arena*);
 template<> ::buddha::Kinddeed* Arena::CreateMaybeMessage<::buddha::Kinddeed>(Arena*);
 template<> ::buddha::KinddeedDetail* Arena::CreateMaybeMessage<::buddha::KinddeedDetail>(Arena*);
@@ -102,6 +116,8 @@ template<> ::buddha::KinddeedProof* Arena::CreateMaybeMessage<::buddha::Kinddeed
 template<> ::buddha::KinddeedSpec* Arena::CreateMaybeMessage<::buddha::KinddeedSpec>(Arena*);
 template<> ::buddha::KinddeedType* Arena::CreateMaybeMessage<::buddha::KinddeedType>(Arena*);
 template<> ::buddha::Master* Arena::CreateMaybeMessage<::buddha::Master>(Arena*);
+template<> ::buddha::Merit* Arena::CreateMaybeMessage<::buddha::Merit>(Arena*);
+template<> ::buddha::MeritRanking* Arena::CreateMaybeMessage<::buddha::MeritRanking>(Arena*);
 template<> ::buddha::Order* Arena::CreateMaybeMessage<::buddha::Order>(Arena*);
 template<> ::buddha::Proposal* Arena::CreateMaybeMessage<::buddha::Proposal>(Arena*);
 template<> ::buddha::Temple* Arena::CreateMaybeMessage<::buddha::Temple>(Arena*);
@@ -131,7 +147,7 @@ class Founder :
   }
 
   inline Founder& operator=(Founder&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -306,7 +322,7 @@ class Proposal :
   }
 
   inline Proposal& operator=(Proposal&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -564,7 +580,7 @@ class Temple :
   }
 
   inline Temple& operator=(Temple&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -747,7 +763,7 @@ class Master :
   }
 
   inline Master& operator=(Master&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -900,7 +916,7 @@ class TempleMaster :
   }
 
   inline TempleMaster& operator=(TempleMaster&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1038,7 +1054,7 @@ class KinddeedType :
   }
 
   inline KinddeedType& operator=(KinddeedType&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1161,7 +1177,7 @@ class Kinddeed :
   }
 
   inline Kinddeed& operator=(Kinddeed&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1343,7 +1359,7 @@ class KinddeedDetail :
   }
 
   inline KinddeedDetail& operator=(KinddeedDetail&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1481,7 +1497,7 @@ class KinddeedSpec :
   }
 
   inline KinddeedSpec& operator=(KinddeedSpec&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1626,7 +1642,7 @@ class CommentLabel :
   }
 
   inline CommentLabel& operator=(CommentLabel&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1749,7 +1765,7 @@ class BeforeComment :
   }
 
   inline BeforeComment& operator=(BeforeComment&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1932,7 +1948,7 @@ class Order :
   }
 
   inline Order& operator=(Order&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -2129,7 +2145,7 @@ class KinddeedProof :
   }
 
   inline KinddeedProof& operator=(KinddeedProof&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -2297,7 +2313,7 @@ class AfterComment :
   }
 
   inline AfterComment& operator=(AfterComment&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual() ) {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -2434,6 +2450,528 @@ class AfterComment :
   ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr comment_;
   ::google::protobuf::internal::ArenaStringPtr timestamp_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_buddha_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Credit :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.Credit) */ {
+ public:
+  Credit();
+  virtual ~Credit();
+
+  Credit(const Credit& from);
+
+  inline Credit& operator=(const Credit& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Credit(Credit&& from) noexcept
+    : Credit() {
+    *this = ::std::move(from);
+  }
+
+  inline Credit& operator=(Credit&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const Credit& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Credit* internal_default_instance() {
+    return reinterpret_cast<const Credit*>(
+               &_Credit_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    14;
+
+  void Swap(Credit* other);
+  friend void swap(Credit& a, Credit& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Credit* New() const final {
+    return CreateMaybeMessage<Credit>(nullptr);
+  }
+
+  Credit* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Credit>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const Credit& from);
+  void MergeFrom(const Credit& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Credit* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_id(::std::string&& value);
+  #endif
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // int64 value = 2;
+  void clear_value();
+  static const int kValueFieldNumber = 2;
+  ::google::protobuf::int64 value() const;
+  void set_value(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:buddha.Credit)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::int64 value_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_buddha_2eproto;
+};
+// -------------------------------------------------------------------
+
+class CreditRanking :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.CreditRanking) */ {
+ public:
+  CreditRanking();
+  virtual ~CreditRanking();
+
+  CreditRanking(const CreditRanking& from);
+
+  inline CreditRanking& operator=(const CreditRanking& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  CreditRanking(CreditRanking&& from) noexcept
+    : CreditRanking() {
+    *this = ::std::move(from);
+  }
+
+  inline CreditRanking& operator=(CreditRanking&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const CreditRanking& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const CreditRanking* internal_default_instance() {
+    return reinterpret_cast<const CreditRanking*>(
+               &_CreditRanking_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  void Swap(CreditRanking* other);
+  friend void swap(CreditRanking& a, CreditRanking& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CreditRanking* New() const final {
+    return CreateMaybeMessage<CreditRanking>(nullptr);
+  }
+
+  CreditRanking* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<CreditRanking>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const CreditRanking& from);
+  void MergeFrom(const CreditRanking& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(CreditRanking* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string ranking = 1;
+  void clear_ranking();
+  static const int kRankingFieldNumber = 1;
+  const ::std::string& ranking() const;
+  void set_ranking(const ::std::string& value);
+  #if LANG_CXX11
+  void set_ranking(::std::string&& value);
+  #endif
+  void set_ranking(const char* value);
+  void set_ranking(const char* value, size_t size);
+  ::std::string* mutable_ranking();
+  ::std::string* release_ranking();
+  void set_allocated_ranking(::std::string* ranking);
+
+  // string id = 2;
+  void clear_id();
+  static const int kIdFieldNumber = 2;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_id(::std::string&& value);
+  #endif
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // int64 value = 3;
+  void clear_value();
+  static const int kValueFieldNumber = 3;
+  ::google::protobuf::int64 value() const;
+  void set_value(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:buddha.CreditRanking)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr ranking_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::int64 value_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_buddha_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Merit :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.Merit) */ {
+ public:
+  Merit();
+  virtual ~Merit();
+
+  Merit(const Merit& from);
+
+  inline Merit& operator=(const Merit& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Merit(Merit&& from) noexcept
+    : Merit() {
+    *this = ::std::move(from);
+  }
+
+  inline Merit& operator=(Merit&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const Merit& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Merit* internal_default_instance() {
+    return reinterpret_cast<const Merit*>(
+               &_Merit_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  void Swap(Merit* other);
+  friend void swap(Merit& a, Merit& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Merit* New() const final {
+    return CreateMaybeMessage<Merit>(nullptr);
+  }
+
+  Merit* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Merit>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const Merit& from);
+  void MergeFrom(const Merit& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Merit* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_id(::std::string&& value);
+  #endif
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // int64 value = 2;
+  void clear_value();
+  static const int kValueFieldNumber = 2;
+  ::google::protobuf::int64 value() const;
+  void set_value(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:buddha.Merit)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::int64 value_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_buddha_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MeritRanking :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:buddha.MeritRanking) */ {
+ public:
+  MeritRanking();
+  virtual ~MeritRanking();
+
+  MeritRanking(const MeritRanking& from);
+
+  inline MeritRanking& operator=(const MeritRanking& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  MeritRanking(MeritRanking&& from) noexcept
+    : MeritRanking() {
+    *this = ::std::move(from);
+  }
+
+  inline MeritRanking& operator=(MeritRanking&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const MeritRanking& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const MeritRanking* internal_default_instance() {
+    return reinterpret_cast<const MeritRanking*>(
+               &_MeritRanking_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    17;
+
+  void Swap(MeritRanking* other);
+  friend void swap(MeritRanking& a, MeritRanking& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MeritRanking* New() const final {
+    return CreateMaybeMessage<MeritRanking>(nullptr);
+  }
+
+  MeritRanking* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<MeritRanking>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const MeritRanking& from);
+  void MergeFrom(const MeritRanking& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MeritRanking* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string ranking = 1;
+  void clear_ranking();
+  static const int kRankingFieldNumber = 1;
+  const ::std::string& ranking() const;
+  void set_ranking(const ::std::string& value);
+  #if LANG_CXX11
+  void set_ranking(::std::string&& value);
+  #endif
+  void set_ranking(const char* value);
+  void set_ranking(const char* value, size_t size);
+  ::std::string* mutable_ranking();
+  ::std::string* release_ranking();
+  void set_allocated_ranking(::std::string* ranking);
+
+  // string id = 2;
+  void clear_id();
+  static const int kIdFieldNumber = 2;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_id(::std::string&& value);
+  #endif
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // int64 value = 3;
+  void clear_value();
+  static const int kValueFieldNumber = 3;
+  ::google::protobuf::int64 value() const;
+  void set_value(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:buddha.MeritRanking)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr ranking_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::int64 value_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
 };
@@ -5522,9 +6060,407 @@ inline void AfterComment::set_allocated_timestamp(::std::string* timestamp) {
   // @@protoc_insertion_point(field_set_allocated:buddha.AfterComment.timestamp)
 }
 
+// -------------------------------------------------------------------
+
+// Credit
+
+// string id = 1;
+inline void Credit::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Credit::id() const {
+  // @@protoc_insertion_point(field_get:buddha.Credit.id)
+  return id_.GetNoArena();
+}
+inline void Credit::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Credit.id)
+}
+#if LANG_CXX11
+inline void Credit::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Credit.id)
+}
+#endif
+inline void Credit::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Credit.id)
+}
+inline void Credit::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.Credit.id)
+}
+inline ::std::string* Credit::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.Credit.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Credit::release_id() {
+  // @@protoc_insertion_point(field_release:buddha.Credit.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Credit::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Credit.id)
+}
+
+// int64 value = 2;
+inline void Credit::clear_value() {
+  value_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Credit::value() const {
+  // @@protoc_insertion_point(field_get:buddha.Credit.value)
+  return value_;
+}
+inline void Credit::set_value(::google::protobuf::int64 value) {
+  
+  value_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Credit.value)
+}
+
+// -------------------------------------------------------------------
+
+// CreditRanking
+
+// string ranking = 1;
+inline void CreditRanking::clear_ranking() {
+  ranking_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& CreditRanking::ranking() const {
+  // @@protoc_insertion_point(field_get:buddha.CreditRanking.ranking)
+  return ranking_.GetNoArena();
+}
+inline void CreditRanking::set_ranking(const ::std::string& value) {
+  
+  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.CreditRanking.ranking)
+}
+#if LANG_CXX11
+inline void CreditRanking::set_ranking(::std::string&& value) {
+  
+  ranking_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.CreditRanking.ranking)
+}
+#endif
+inline void CreditRanking::set_ranking(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.CreditRanking.ranking)
+}
+inline void CreditRanking::set_ranking(const char* value, size_t size) {
+  
+  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.CreditRanking.ranking)
+}
+inline ::std::string* CreditRanking::mutable_ranking() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.CreditRanking.ranking)
+  return ranking_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* CreditRanking::release_ranking() {
+  // @@protoc_insertion_point(field_release:buddha.CreditRanking.ranking)
+  
+  return ranking_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CreditRanking::set_allocated_ranking(::std::string* ranking) {
+  if (ranking != nullptr) {
+    
+  } else {
+    
+  }
+  ranking_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ranking);
+  // @@protoc_insertion_point(field_set_allocated:buddha.CreditRanking.ranking)
+}
+
+// string id = 2;
+inline void CreditRanking::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& CreditRanking::id() const {
+  // @@protoc_insertion_point(field_get:buddha.CreditRanking.id)
+  return id_.GetNoArena();
+}
+inline void CreditRanking::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.CreditRanking.id)
+}
+#if LANG_CXX11
+inline void CreditRanking::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.CreditRanking.id)
+}
+#endif
+inline void CreditRanking::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.CreditRanking.id)
+}
+inline void CreditRanking::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.CreditRanking.id)
+}
+inline ::std::string* CreditRanking::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.CreditRanking.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* CreditRanking::release_id() {
+  // @@protoc_insertion_point(field_release:buddha.CreditRanking.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CreditRanking::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:buddha.CreditRanking.id)
+}
+
+// int64 value = 3;
+inline void CreditRanking::clear_value() {
+  value_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 CreditRanking::value() const {
+  // @@protoc_insertion_point(field_get:buddha.CreditRanking.value)
+  return value_;
+}
+inline void CreditRanking::set_value(::google::protobuf::int64 value) {
+  
+  value_ = value;
+  // @@protoc_insertion_point(field_set:buddha.CreditRanking.value)
+}
+
+// -------------------------------------------------------------------
+
+// Merit
+
+// string id = 1;
+inline void Merit::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Merit::id() const {
+  // @@protoc_insertion_point(field_get:buddha.Merit.id)
+  return id_.GetNoArena();
+}
+inline void Merit::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.Merit.id)
+}
+#if LANG_CXX11
+inline void Merit::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.Merit.id)
+}
+#endif
+inline void Merit::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.Merit.id)
+}
+inline void Merit::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.Merit.id)
+}
+inline ::std::string* Merit::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.Merit.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Merit::release_id() {
+  // @@protoc_insertion_point(field_release:buddha.Merit.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Merit::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:buddha.Merit.id)
+}
+
+// int64 value = 2;
+inline void Merit::clear_value() {
+  value_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Merit::value() const {
+  // @@protoc_insertion_point(field_get:buddha.Merit.value)
+  return value_;
+}
+inline void Merit::set_value(::google::protobuf::int64 value) {
+  
+  value_ = value;
+  // @@protoc_insertion_point(field_set:buddha.Merit.value)
+}
+
+// -------------------------------------------------------------------
+
+// MeritRanking
+
+// string ranking = 1;
+inline void MeritRanking::clear_ranking() {
+  ranking_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& MeritRanking::ranking() const {
+  // @@protoc_insertion_point(field_get:buddha.MeritRanking.ranking)
+  return ranking_.GetNoArena();
+}
+inline void MeritRanking::set_ranking(const ::std::string& value) {
+  
+  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.MeritRanking.ranking)
+}
+#if LANG_CXX11
+inline void MeritRanking::set_ranking(::std::string&& value) {
+  
+  ranking_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.MeritRanking.ranking)
+}
+#endif
+inline void MeritRanking::set_ranking(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.MeritRanking.ranking)
+}
+inline void MeritRanking::set_ranking(const char* value, size_t size) {
+  
+  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.MeritRanking.ranking)
+}
+inline ::std::string* MeritRanking::mutable_ranking() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.MeritRanking.ranking)
+  return ranking_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* MeritRanking::release_ranking() {
+  // @@protoc_insertion_point(field_release:buddha.MeritRanking.ranking)
+  
+  return ranking_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void MeritRanking::set_allocated_ranking(::std::string* ranking) {
+  if (ranking != nullptr) {
+    
+  } else {
+    
+  }
+  ranking_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ranking);
+  // @@protoc_insertion_point(field_set_allocated:buddha.MeritRanking.ranking)
+}
+
+// string id = 2;
+inline void MeritRanking::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& MeritRanking::id() const {
+  // @@protoc_insertion_point(field_get:buddha.MeritRanking.id)
+  return id_.GetNoArena();
+}
+inline void MeritRanking::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:buddha.MeritRanking.id)
+}
+#if LANG_CXX11
+inline void MeritRanking::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:buddha.MeritRanking.id)
+}
+#endif
+inline void MeritRanking::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:buddha.MeritRanking.id)
+}
+inline void MeritRanking::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:buddha.MeritRanking.id)
+}
+inline ::std::string* MeritRanking::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:buddha.MeritRanking.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* MeritRanking::release_id() {
+  // @@protoc_insertion_point(field_release:buddha.MeritRanking.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void MeritRanking::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:buddha.MeritRanking.id)
+}
+
+// int64 value = 3;
+inline void MeritRanking::clear_value() {
+  value_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 MeritRanking::value() const {
+  // @@protoc_insertion_point(field_get:buddha.MeritRanking.value)
+  return value_;
+}
+inline void MeritRanking::set_value(::google::protobuf::int64 value) {
+  
+  value_ = value;
+  // @@protoc_insertion_point(field_set:buddha.MeritRanking.value)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

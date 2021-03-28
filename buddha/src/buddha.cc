@@ -24,6 +24,7 @@ Buddha::Buddha() :
     _order_table(           context(), "order"                  ),
     _kinddeedproof_table(   context(), "kinddeedproof"          ),
     _aftercomment_table(    context(), "aftercomment"           ),
+    _credit_table(          context(), "credit"                 ),
 
     ctx(context())
 {

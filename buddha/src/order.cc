@@ -215,7 +215,7 @@ void Buddha::delete_pray_kinddeed() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
 void Buddha::find_pray_kinddeed() {

@@ -26,6 +26,11 @@
   },
   {
     "directory": "/root/buddhaContract/buddha",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/49/4905cd3db395e407.o /root/buddhaContract/buddha/src/credit.cc",
+    "file": "/root/buddhaContract/buddha/src/credit.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/buddha",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/8b/8b77e1435e697270.o /root/buddhaContract/buddha/src/deployer.cc",
     "file": "/root/buddhaContract/buddha/src/deployer.cc"
   },

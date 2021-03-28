@@ -110,7 +110,7 @@ void Buddha::add_aftercomment() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
 void Buddha::delete_aftercomment() {
@@ -149,7 +149,7 @@ void Buddha::delete_aftercomment() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
 void Buddha::update_aftercomment() {
@@ -207,7 +207,7 @@ void Buddha::update_aftercomment() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
 void Buddha::find_aftercomment() {
@@ -239,7 +239,7 @@ void Buddha::find_aftercomment() {
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_aftercomment() {

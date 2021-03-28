@@ -127,7 +127,7 @@ void Buddha::add_beforecomment() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
 void Buddha::delete_beforecomment() {
@@ -159,7 +159,7 @@ void Buddha::delete_beforecomment() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
 void Buddha::update_beforecomment() {
@@ -237,7 +237,7 @@ void Buddha::update_beforecomment() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
 void Buddha::find_beforecomment() {
@@ -260,7 +260,7 @@ void Buddha::find_beforecomment() {
         //判断售前点评是否存在
         beforecomment ent;
         if (!_is_beforecomment_exist(kdid,owner,ent))  {
-            _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kdid + " beforecomment is not exist belong to " + owner + ".");
             return ;
         }
 
@@ -292,7 +292,8 @@ void Buddha::find_beforecomment() {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create success .", ent.to_json());
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
 void Buddha::list_beforecomment() {

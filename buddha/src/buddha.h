@@ -14,6 +14,7 @@
 #include "comment.h"
 #include "order.h"
 #include "kinddeedproof.h"
+#include "credit.h"
 
 #include <string>
 using namespace std;
@@ -39,6 +40,7 @@ private:
     xchain::cdt::Table<order>           _order_table;
     xchain::cdt::Table<kinddeedproof>   _kinddeedproof_table;
     xchain::cdt::Table<aftercomment>    _aftercomment_table;
+    xchain::cdt::Table<credit>          _credit_table;
 
     xchain::Context* ctx;
 
@@ -100,6 +102,10 @@ public:
         return _aftercomment_table;
     }
 
+    decltype(_credit_table)& get_credit_table() {
+        return _credit_table;
+    }
+
 
 
 
@@ -133,6 +139,7 @@ private:
     bool _is_order_exist(const string&,order&);
     bool _is_kinddeedproof_exist(const string&,kinddeedproof&);
     bool _is_aftercomment_exist(const string&,const string&, aftercomment&);
+    bool _is_credit_exist(const string&,credit&);
     bool _is_kinddeed_online(const string&) ;
 
     bool _is_deployer(const string&);
@@ -162,7 +169,11 @@ private:
     bool _scan_kinddeedproof_by_owner(xchain::json&, const string& ="");
     bool _scan_kinddeedproof_by_owner_orderid(xchain::json&, const string& ="", const string& ="");    
     bool _scan_aftercomment_by_orderid(xchain::json&, const string& ="");
+    bool _scan_credit(xchain::json&, const string&);
 
+    bool _add_credit(const string&, const int64_t, int64_t&);
+    bool _add_kinddeeddetail(const string&,const string&,const string&);
+    bool _add_kinddeedspec(const string&,const string&,const string&,const string&);
 
     bool _delete_founder_record(const string&);
     bool _delete_proposal_record(const string&);
@@ -180,9 +191,7 @@ private:
     bool _delete_order_record(const string&);
     bool _delete_kinddeedproof_record(const string&);
     bool _delete_aftercomment_record(const string&, const string&);
-
-    bool _add_kinddeeddetail(const string&,const string&,const string&);
-    bool _add_kinddeedspec(const string&,const string&,const string&,const string&);
+    bool _delete_credit_record(const string&);
 
     bool _transfer(const string&,const string&);
 
@@ -299,5 +308,7 @@ public:
     void list_aftercomment();      //部署者，基金会成员，根据orderid查匹配，orderid为空时极不安全，orderid不为空时基本安全
                                    //其他，点评本来就是给所有人看的，根据orderid查匹配，安全，
 
+    void find_credit();             //所有用户
+    void list_credit();             //部署者，基金会成员，数据量过大时不安全
 };
 #endif // _BUDDHA_H_
