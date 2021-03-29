@@ -25,6 +25,7 @@ Buddha::Buddha() :
     _kinddeedproof_table(   context(), "kinddeedproof"          ),
     _aftercomment_table(    context(), "aftercomment"           ),
     _credit_table(          context(), "credit"                 ),
+    _creditranking_table(   context(), "creditranking"          ),
 
     ctx(context())
 {

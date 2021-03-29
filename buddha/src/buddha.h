@@ -177,12 +177,15 @@ private:
     bool _scan_kinddeedproof_by_owner_orderid(xchain::json&, const string& ="", const string& ="");    
     bool _scan_aftercomment_by_orderid(xchain::json&, const string& ="");
     bool _scan_credit(xchain::json&, const string&);
-    bool _scan_creditraning(xchain::json&, const string&);
+    bool _scan_creditranking(xchain::json&, const string&);
+    bool _scan_creditranking(vector<creditranking>&, const string&);
 
     bool _add_kinddeeddetail(const string&,const string&,const string&);
     bool _add_kinddeedspec(const string&,const string&,const string&,const string&);
     bool _add_credit(const string&, const int64_t, int64_t&);
-    bool _add_creditraning(const string&, const int64_t);
+    bool _add_creditranking(const string&, const int64_t);
+
+    bool _compare_credit( const creditranking&, const creditranking&);
 
     bool _delete_founder_record(const string&);
     bool _delete_proposal_record(const string&);

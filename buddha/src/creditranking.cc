@@ -5,7 +5,7 @@
 #include "xchain/syscall.h"
 #include "buddha.pb.h"
 #include "buddha.h"
-#include "creditrankingranking.h"
+#include "creditranking.h"
 
 #include <iostream>
 using namespace std;
@@ -76,7 +76,7 @@ bool Buddha::_add_creditranking(const string& id, const int64_t value ) {
         mycout << "clear table failure ." << endl;
         return false ;
     }
-    
+
     //把id插入到vector中，如果存在则覆盖，不存在则添加
     bool flag = false;
     for( creditranking& o : v ) {
@@ -114,21 +114,21 @@ bool Buddha::_add_creditranking(const string& id, const int64_t value ) {
     return true ;
 }
 
-bool Buddha::_delete_creditranking_record(const string& id) {
-    creditranking ent;
-    if (!_is_creditranking_exist(id, ent)){
-        mycout << "creditranking " << id << " is not exist ." << endl ;
-        return false;
-    }
+// bool Buddha::_delete_creditranking_record(const string& id) {
+//     creditranking ent;
+//     if (!_is_creditranking_exist(id, ent)){
+//         mycout << "creditranking " << id << " is not exist ." << endl ;
+//         return false;
+//     }
 
-    if( !get_creditranking_table().del(ent) ) {
-        mycout << "delete creditranking " << ent.to_json().dump() << " failure ." << endl ;
-        return false;
-    }
+//     if( !get_creditranking_table().del(ent) ) {
+//         mycout << "delete creditranking " << ent.to_json().dump() << " failure ." << endl ;
+//         return false;
+//     }
 
-    mycout << "delete creditranking " << ent.to_json().dump() << " success ." << endl ;
-    return true;
-}
+//     mycout << "delete creditranking " << ent.to_json().dump() << " success ." << endl ;
+//     return true;
+// }
 
 bool Buddha::_clear_creditranking() {
     //获取所有的记录
