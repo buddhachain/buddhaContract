@@ -278,7 +278,11 @@ void Buddha::approve_kinddeedproof() {
         _log_error(__FILE__, __FUNCTION__, __LINE__, od.owner() + " add credit " + to_string(od.amount()) + " failure .");
         return ;
     }
-    //排序善举所有者的信用值排名
+    //添加到信用值排名表
+    if ( !_add_creditranking(ent.owner(), new_value) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, od.owner() + " add creditranking value " + to_string(new_value) + " failure .");
+        return ;
+    }
 
     //记录用户的功德值
     //排序用户的功德值排名

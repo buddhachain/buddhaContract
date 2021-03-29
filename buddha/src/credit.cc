@@ -26,6 +26,21 @@ bool Buddha::_is_credit_exist(const string& id,credit& ent) {
     return true;
 }
 
+bool Buddha::_scan_credit(xchain::json& ja, const string& cond) {
+    auto it = get_credit_table().scan({{"id",cond}});
+    while(it->next() ) {
+        credit ent;
+        if (!it->get(&ent) ) {
+            mycout << "credit table get failure : " << it->error(true) << endl;
+            return false;
+        }
+
+        ja.push_back(ent.to_json());
+    }
+
+    return true;
+}
+
 bool Buddha::_add_credit(const string& id, const int64_t value, int64_t& total_value) {
     //判断此信用值是否存在
     credit ent;
@@ -50,21 +65,6 @@ bool Buddha::_add_credit(const string& id, const int64_t value, int64_t& total_v
 
     mycout << "table put success ." << ent.to_json() << endl;
     return true ;
-}
-
-bool Buddha::_scan_credit(xchain::json& ja, const string& cond) {
-    auto it = get_credit_table().scan({{"id",cond}});
-    while(it->next() ) {
-        credit ent;
-        if (!it->get(&ent) ) {
-            mycout << "credit table get failure : " << it->error(true) << endl;
-            return false;
-        }
-
-        ja.push_back(ent.to_json());
-    }
-
-    return true;
 }
 
 bool Buddha::_delete_credit_record(const string& id) {
