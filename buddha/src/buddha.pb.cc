@@ -7337,24 +7337,23 @@ CreditRanking::CreditRanking(const CreditRanking& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ranking_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.ranking().size() > 0) {
-    ranking_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ranking_);
-  }
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
-  value_ = from.value_;
+  ::memcpy(&ranking_, &from.ranking_,
+    static_cast<size_t>(reinterpret_cast<char*>(&value_) -
+    reinterpret_cast<char*>(&ranking_)) + sizeof(value_));
   // @@protoc_insertion_point(copy_constructor:buddha.CreditRanking)
 }
 
 void CreditRanking::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_CreditRanking_buddha_2eproto.base);
-  ranking_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  value_ = PROTOBUF_LONGLONG(0);
+  ::memset(&ranking_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value_) -
+      reinterpret_cast<char*>(&ranking_)) + sizeof(value_));
 }
 
 CreditRanking::~CreditRanking() {
@@ -7363,7 +7362,6 @@ CreditRanking::~CreditRanking() {
 }
 
 void CreditRanking::SharedDtor() {
-  ranking_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -7382,9 +7380,10 @@ void CreditRanking::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ranking_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  value_ = PROTOBUF_LONGLONG(0);
+  ::memset(&ranking_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value_) -
+      reinterpret_cast<char*>(&ranking_)) + sizeof(value_));
   _internal_metadata_.Clear();
 }
 
@@ -7401,20 +7400,11 @@ const char* CreditRanking::_InternalParse(const char* begin, const char* end, vo
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // string ranking = 1;
+      // int64 ranking = 1;
       case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_ranking(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_ranking();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
         break;
       }
       // string id = 2;
@@ -7480,15 +7470,13 @@ bool CreditRanking::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string ranking = 1;
+      // int64 ranking = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_ranking()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->ranking().data(), static_cast<int>(this->ranking().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "buddha.CreditRanking.ranking"));
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &ranking_)));
         } else {
           goto handle_unusual;
         }
@@ -7550,14 +7538,9 @@ void CreditRanking::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string ranking = 1;
-  if (this->ranking().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ranking().data(), static_cast<int>(this->ranking().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "buddha.CreditRanking.ranking");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->ranking(), output);
+  // int64 ranking = 1;
+  if (this->ranking() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->ranking(), output);
   }
 
   // string id = 2;
@@ -7590,18 +7573,18 @@ size_t CreditRanking::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string ranking = 1;
-  if (this->ranking().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->ranking());
-  }
-
   // string id = 2;
   if (this->id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->id());
+  }
+
+  // int64 ranking = 1;
+  if (this->ranking() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->ranking());
   }
 
   // int64 value = 3;
@@ -7628,13 +7611,12 @@ void CreditRanking::MergeFrom(const CreditRanking& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.ranking().size() > 0) {
-
-    ranking_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ranking_);
-  }
   if (from.id().size() > 0) {
 
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.ranking() != 0) {
+    set_ranking(from.ranking());
   }
   if (from.value() != 0) {
     set_value(from.value());
@@ -7659,10 +7641,9 @@ void CreditRanking::Swap(CreditRanking* other) {
 void CreditRanking::InternalSwap(CreditRanking* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  ranking_.Swap(&other->ranking_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  swap(ranking_, other->ranking_);
   swap(value_, other->value_);
 }
 
@@ -7989,24 +7970,23 @@ MeritRanking::MeritRanking(const MeritRanking& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ranking_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.ranking().size() > 0) {
-    ranking_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ranking_);
-  }
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
-  value_ = from.value_;
+  ::memcpy(&ranking_, &from.ranking_,
+    static_cast<size_t>(reinterpret_cast<char*>(&value_) -
+    reinterpret_cast<char*>(&ranking_)) + sizeof(value_));
   // @@protoc_insertion_point(copy_constructor:buddha.MeritRanking)
 }
 
 void MeritRanking::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_MeritRanking_buddha_2eproto.base);
-  ranking_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  value_ = PROTOBUF_LONGLONG(0);
+  ::memset(&ranking_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value_) -
+      reinterpret_cast<char*>(&ranking_)) + sizeof(value_));
 }
 
 MeritRanking::~MeritRanking() {
@@ -8015,7 +7995,6 @@ MeritRanking::~MeritRanking() {
 }
 
 void MeritRanking::SharedDtor() {
-  ranking_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -8034,9 +8013,10 @@ void MeritRanking::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ranking_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  value_ = PROTOBUF_LONGLONG(0);
+  ::memset(&ranking_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value_) -
+      reinterpret_cast<char*>(&ranking_)) + sizeof(value_));
   _internal_metadata_.Clear();
 }
 
@@ -8053,20 +8033,11 @@ const char* MeritRanking::_InternalParse(const char* begin, const char* end, voi
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // string ranking = 1;
+      // int64 ranking = 1;
       case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_ranking(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_ranking();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
         break;
       }
       // string id = 2;
@@ -8132,15 +8103,13 @@ bool MeritRanking::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string ranking = 1;
+      // int64 ranking = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_ranking()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->ranking().data(), static_cast<int>(this->ranking().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "buddha.MeritRanking.ranking"));
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &ranking_)));
         } else {
           goto handle_unusual;
         }
@@ -8202,14 +8171,9 @@ void MeritRanking::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string ranking = 1;
-  if (this->ranking().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->ranking().data(), static_cast<int>(this->ranking().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "buddha.MeritRanking.ranking");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->ranking(), output);
+  // int64 ranking = 1;
+  if (this->ranking() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->ranking(), output);
   }
 
   // string id = 2;
@@ -8242,18 +8206,18 @@ size_t MeritRanking::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string ranking = 1;
-  if (this->ranking().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->ranking());
-  }
-
   // string id = 2;
   if (this->id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->id());
+  }
+
+  // int64 ranking = 1;
+  if (this->ranking() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->ranking());
   }
 
   // int64 value = 3;
@@ -8280,13 +8244,12 @@ void MeritRanking::MergeFrom(const MeritRanking& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.ranking().size() > 0) {
-
-    ranking_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ranking_);
-  }
   if (from.id().size() > 0) {
 
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.ranking() != 0) {
+    set_ranking(from.ranking());
   }
   if (from.value() != 0) {
     set_value(from.value());
@@ -8311,10 +8274,9 @@ void MeritRanking::Swap(MeritRanking* other) {
 void MeritRanking::InternalSwap(MeritRanking* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  ranking_.Swap(&other->ranking_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  swap(ranking_, other->ranking_);
   swap(value_, other->value_);
 }
 

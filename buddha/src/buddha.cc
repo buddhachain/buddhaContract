@@ -26,6 +26,8 @@ Buddha::Buddha() :
     _aftercomment_table(    context(), "aftercomment"           ),
     _credit_table(          context(), "credit"                 ),
     _creditranking_table(   context(), "creditranking"          ),
+    _merit_table(           context(), "merit"                  ),
+    _meritranking_table(    context(), "meritranking"           ),
 
     ctx(context())
 {

@@ -2669,20 +2669,6 @@ class CreditRanking :
 
   // accessors -------------------------------------------------------
 
-  // string ranking = 1;
-  void clear_ranking();
-  static const int kRankingFieldNumber = 1;
-  const ::std::string& ranking() const;
-  void set_ranking(const ::std::string& value);
-  #if LANG_CXX11
-  void set_ranking(::std::string&& value);
-  #endif
-  void set_ranking(const char* value);
-  void set_ranking(const char* value, size_t size);
-  ::std::string* mutable_ranking();
-  ::std::string* release_ranking();
-  void set_allocated_ranking(::std::string* ranking);
-
   // string id = 2;
   void clear_id();
   static const int kIdFieldNumber = 2;
@@ -2697,6 +2683,12 @@ class CreditRanking :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
+  // int64 ranking = 1;
+  void clear_ranking();
+  static const int kRankingFieldNumber = 1;
+  ::google::protobuf::int64 ranking() const;
+  void set_ranking(::google::protobuf::int64 value);
+
   // int64 value = 3;
   void clear_value();
   static const int kValueFieldNumber = 3;
@@ -2708,8 +2700,8 @@ class CreditRanking :
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr ranking_;
   ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::int64 ranking_;
   ::google::protobuf::int64 value_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
@@ -2930,20 +2922,6 @@ class MeritRanking :
 
   // accessors -------------------------------------------------------
 
-  // string ranking = 1;
-  void clear_ranking();
-  static const int kRankingFieldNumber = 1;
-  const ::std::string& ranking() const;
-  void set_ranking(const ::std::string& value);
-  #if LANG_CXX11
-  void set_ranking(::std::string&& value);
-  #endif
-  void set_ranking(const char* value);
-  void set_ranking(const char* value, size_t size);
-  ::std::string* mutable_ranking();
-  ::std::string* release_ranking();
-  void set_allocated_ranking(::std::string* ranking);
-
   // string id = 2;
   void clear_id();
   static const int kIdFieldNumber = 2;
@@ -2958,6 +2936,12 @@ class MeritRanking :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
+  // int64 ranking = 1;
+  void clear_ranking();
+  static const int kRankingFieldNumber = 1;
+  ::google::protobuf::int64 ranking() const;
+  void set_ranking(::google::protobuf::int64 value);
+
   // int64 value = 3;
   void clear_value();
   static const int kValueFieldNumber = 3;
@@ -2969,8 +2953,8 @@ class MeritRanking :
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr ranking_;
   ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::int64 ranking_;
   ::google::protobuf::int64 value_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_buddha_2eproto;
@@ -6135,57 +6119,18 @@ inline void Credit::set_value(::google::protobuf::int64 value) {
 
 // CreditRanking
 
-// string ranking = 1;
+// int64 ranking = 1;
 inline void CreditRanking::clear_ranking() {
-  ranking_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ranking_ = PROTOBUF_LONGLONG(0);
 }
-inline const ::std::string& CreditRanking::ranking() const {
+inline ::google::protobuf::int64 CreditRanking::ranking() const {
   // @@protoc_insertion_point(field_get:buddha.CreditRanking.ranking)
-  return ranking_.GetNoArena();
+  return ranking_;
 }
-inline void CreditRanking::set_ranking(const ::std::string& value) {
+inline void CreditRanking::set_ranking(::google::protobuf::int64 value) {
   
-  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  ranking_ = value;
   // @@protoc_insertion_point(field_set:buddha.CreditRanking.ranking)
-}
-#if LANG_CXX11
-inline void CreditRanking::set_ranking(::std::string&& value) {
-  
-  ranking_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.CreditRanking.ranking)
-}
-#endif
-inline void CreditRanking::set_ranking(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.CreditRanking.ranking)
-}
-inline void CreditRanking::set_ranking(const char* value, size_t size) {
-  
-  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.CreditRanking.ranking)
-}
-inline ::std::string* CreditRanking::mutable_ranking() {
-  
-  // @@protoc_insertion_point(field_mutable:buddha.CreditRanking.ranking)
-  return ranking_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CreditRanking::release_ranking() {
-  // @@protoc_insertion_point(field_release:buddha.CreditRanking.ranking)
-  
-  return ranking_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CreditRanking::set_allocated_ranking(::std::string* ranking) {
-  if (ranking != nullptr) {
-    
-  } else {
-    
-  }
-  ranking_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ranking);
-  // @@protoc_insertion_point(field_set_allocated:buddha.CreditRanking.ranking)
 }
 
 // string id = 2;
@@ -6330,57 +6275,18 @@ inline void Merit::set_value(::google::protobuf::int64 value) {
 
 // MeritRanking
 
-// string ranking = 1;
+// int64 ranking = 1;
 inline void MeritRanking::clear_ranking() {
-  ranking_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ranking_ = PROTOBUF_LONGLONG(0);
 }
-inline const ::std::string& MeritRanking::ranking() const {
+inline ::google::protobuf::int64 MeritRanking::ranking() const {
   // @@protoc_insertion_point(field_get:buddha.MeritRanking.ranking)
-  return ranking_.GetNoArena();
+  return ranking_;
 }
-inline void MeritRanking::set_ranking(const ::std::string& value) {
+inline void MeritRanking::set_ranking(::google::protobuf::int64 value) {
   
-  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  ranking_ = value;
   // @@protoc_insertion_point(field_set:buddha.MeritRanking.ranking)
-}
-#if LANG_CXX11
-inline void MeritRanking::set_ranking(::std::string&& value) {
-  
-  ranking_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:buddha.MeritRanking.ranking)
-}
-#endif
-inline void MeritRanking::set_ranking(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:buddha.MeritRanking.ranking)
-}
-inline void MeritRanking::set_ranking(const char* value, size_t size) {
-  
-  ranking_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:buddha.MeritRanking.ranking)
-}
-inline ::std::string* MeritRanking::mutable_ranking() {
-  
-  // @@protoc_insertion_point(field_mutable:buddha.MeritRanking.ranking)
-  return ranking_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* MeritRanking::release_ranking() {
-  // @@protoc_insertion_point(field_release:buddha.MeritRanking.ranking)
-  
-  return ranking_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void MeritRanking::set_allocated_ranking(::std::string* ranking) {
-  if (ranking != nullptr) {
-    
-  } else {
-    
-  }
-  ranking_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ranking);
-  // @@protoc_insertion_point(field_set_allocated:buddha.MeritRanking.ranking)
 }
 
 // string id = 2;

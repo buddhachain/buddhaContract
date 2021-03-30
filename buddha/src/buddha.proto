@@ -139,7 +139,7 @@ message Credit {
 
 //善举所有者信用值排名表,只排名前100信用值棒
 message CreditRanking {
-    string ranking      = 1;    //名次 1,2,3,....100
+    int64  ranking      = 1;    //名次 1,2,3,....100
     string id           = 2;    //善举所有者
     int64  value        = 3;    //信用值   
 }
@@ -152,7 +152,7 @@ message Merit {
 
 //购买者功德值排名表,只排名前100功德值棒
 message MeritRanking {
-    string ranking      = 1;    //名次 1,2,3,....100
+    int64  ranking      = 1;    //名次 1,2,3,....100
     string id           = 2;    //购买者
     int64  value        = 3;    //功德值   
 }

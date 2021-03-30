@@ -16,6 +16,8 @@
 #include "kinddeedproof.h"
 #include "credit.h"
 #include "creditranking.h"
+#include "merit.h"
+#include "meritranking.h"
 
 #include <string>
 using namespace std;
@@ -43,6 +45,8 @@ private:
     xchain::cdt::Table<aftercomment>    _aftercomment_table;
     xchain::cdt::Table<credit>          _credit_table;
     xchain::cdt::Table<creditranking>   _creditranking_table;
+    xchain::cdt::Table<merit>           _merit_table;
+    xchain::cdt::Table<meritranking>    _meritranking_table;
 
     xchain::Context* ctx;
 
@@ -112,6 +116,15 @@ public:
         return _creditranking_table;
     }
 
+    decltype(_merit_table)& get_merit_table() {
+        return _merit_table;
+    }
+
+    decltype(_meritranking_table)& get_meritranking_table() {
+        return _meritranking_table;
+    }
+
+
 
 
 
@@ -147,6 +160,8 @@ private:
     bool _is_aftercomment_exist(const string&,const string&, aftercomment&);
     bool _is_credit_exist(const string&,credit&);
     bool _is_creditranking_exist(const string&,creditranking&);
+    bool _is_merit_exist(const string&,merit&);
+    bool _is_meritranking_exist(const string&,meritranking&);
     bool _is_kinddeed_online(const string&) ;
 
     bool _is_deployer(const string&);
@@ -177,15 +192,18 @@ private:
     bool _scan_kinddeedproof_by_owner_orderid(xchain::json&, const string& ="", const string& ="");    
     bool _scan_aftercomment_by_orderid(xchain::json&, const string& ="");
     bool _scan_credit(xchain::json&, const string&);
-    bool _scan_creditranking(xchain::json&, const string&);
-    bool _scan_creditranking(vector<creditranking>&, const string&);
+    bool _scan_creditranking(xchain::json&, const string& ="");
+    bool _scan_creditranking(vector<creditranking>&, const string& ="");
+    bool _scan_merit(xchain::json&, const string&);
+    bool _scan_meritranking(xchain::json&, const string& ="");
+    bool _scan_meritranking(vector<meritranking>&, const string& ="");
 
     bool _add_kinddeeddetail(const string&,const string&,const string&);
     bool _add_kinddeedspec(const string&,const string&,const string&,const string&);
     bool _add_credit(const string&, const int64_t, int64_t&);
     bool _add_creditranking(const string&, const int64_t);
-
-    bool _compare_credit( const creditranking&, const creditranking&);
+    bool _add_merit(const string&, const int64_t, int64_t&);
+    bool _add_meritranking(const string&, const int64_t);
 
     bool _delete_founder_record(const string&);
     bool _delete_proposal_record(const string&);
@@ -205,6 +223,11 @@ private:
     bool _delete_aftercomment_record(const string&, const string&);
     bool _delete_credit_record(const string&);
     bool _delete_creditranking_record(const string&);
+    bool _delete_merit_record(const string&);
+    bool _delete_meritranking_record(const string&);
+
+    bool _clear_creditranking();
+    bool _clear_meritranking();
 
     bool _transfer(const string&,const string&);
 
@@ -323,9 +346,13 @@ public:
 
     void find_credit();             //所有用户
     void list_credit();             //部署者，基金会成员，数据量过大时不安全
-
     void list_creditranking();      //获取前100所有的信用值排名
     void get_creditranking();       //查看第n名的情况
+
+    void find_merit();             //所有用户
+    void list_merit();             //部署者，基金会成员，数据量过大时不安全
+    void list_meritranking();      //获取前100所有的信用值排名
+    void get_meritranking();       //查看第n名的情况
 
 };
 #endif // _BUDDHA_H_
