@@ -16,7 +16,6 @@ xchain::json kinddeed::to_json() {
         {"owner", owner()},
         {"type", type()},
         {"lasttime", lasttime()},
-        {"applied", applied()},
         {"online", online()},
     };
 
@@ -114,11 +113,6 @@ bool Buddha::_is_kinddeed_online(const string& id){
     kinddeed ent;
     if (!get_kinddeed_table().find({{"id", id}}, &ent) ) {
         mycout << "kinddeed " << id << " is not exist ." << endl;
-        return false;
-    }
-
-    if( ent.applied() == true) {
-        mycout << "kinddeed " << id << " is apply status change ." << endl;
         return false;
     }
 
@@ -553,8 +547,7 @@ void Buddha::add_kinddeed() {
     ent.set_owner(ctx->initiator());
     ent.set_type(stoll(type));
     ent.set_lasttime(lasttime);
-    ent.set_applied(false);
-    ent.set_online(false);
+    ent.set_online(true);
 
     if (!get_kinddeed_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
@@ -735,8 +728,7 @@ void Buddha::update_kinddeed() {
     ent.set_owner(ctx->initiator());
     ent.set_type(stoll(type));
     ent.set_lasttime(lasttime);
-    ent.set_applied(false);
-    ent.set_online(false);
+    ent.set_online(true);
 
     if (!get_kinddeed_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
@@ -746,7 +738,68 @@ void Buddha::update_kinddeed() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
-void Buddha::find_kinddeed() {       
+void Buddha::offline_kinddeed() {
+    const string& id = ctx->arg("id");
+    if( id.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
+        return ;
+    }
+
+    //判断是否是基金会成员
+    if( !is_founder() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve offline kinddeed .");
+        return ;
+    }
+
+    //判断善举是否存在
+    kinddeed ent;
+    if (!_is_kinddeed_exist(id, ent))  {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
+        return ;
+    }
+
+    if (ent.online()==false){
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is already offline .", ent.to_json() );
+        return ;
+    }
+
+    //删除此善举
+    if( !_delete_kinddeed_record(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
+        return;
+    }
+
+    ent.set_online(false);
+    if (!get_kinddeed_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        return;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "offline kinddeed " + id + " success .", ent.to_json() );
+}
+
+void Buddha::is_kinddeed_online() {
+    const string& id = ctx->arg("id");
+    if( id.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
+        return ;
+    }
+
+    kinddeed ent;
+    if (!get_kinddeed_table().find({{"id", id}}, &ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id  + " is not exist .");
+        return;
+    }
+
+    if( ent.online() != true ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id  + " is offline .");
+        return;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id  + " is online .");
+}    
+
+void Buddha::find_kinddeed() {
 
     const string& id = ctx->arg("id");
     if( id.empty() ) {
@@ -861,6 +914,8 @@ void Buddha::list_kinddeedspec() {
 DEFINE_METHOD(Buddha, add_kinddeed)             { self.add_kinddeed();              }
 DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();           }
 DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }
+DEFINE_METHOD(Buddha, offline_kinddeed)         { self.offline_kinddeed();          }
+DEFINE_METHOD(Buddha, is_kinddeed_online)       { self.is_kinddeed_online();        }
 DEFINE_METHOD(Buddha, find_kinddeed)            { self.find_kinddeed();             }
 DEFINE_METHOD(Buddha, list_kinddeed)            { self.list_kinddeed();             }
 // DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }

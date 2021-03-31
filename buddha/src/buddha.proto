@@ -66,8 +66,7 @@ message Kinddeed {
     string owner        = 3; //哪位法师或基金会成员添加的此善举
     int64  type         = 4; //善举类型
     string lasttime     = 5; //善举最后修改的时间
-    bool   applied      = 6; //是否是申请状态，0为非申请状态，1为申请状态
-    bool   online       = 7; //是否已经是上线，0为下线状态，1为上线状态
+    bool   online       = 6; //是否已经是上线，0为下线状态，1为上线状态
 }
 
 //善举图片描述表

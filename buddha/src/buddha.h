@@ -300,11 +300,9 @@ public:
     void list_kinddeedspec();       //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
                                     //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
 
-    //申请善举上架下架    
-    void apply_online_kinddeed();   //寺院，法师
-    void apply_offline_kinddeed();  //寺院，法师
-    void approve_online_kinddeed(); //基金会成员
-    void approve_offline_kinddeed();//基金会成员
+    //善举下架    
+    void offline_kinddeed();        //基金会成员
+    void is_kinddeed_online();      //所有用户
 
     //添加删除修改点评标签
     void add_commentlabel();        //基金会成员
