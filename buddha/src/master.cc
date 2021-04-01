@@ -20,14 +20,14 @@ xchain::json master::to_json() {
     return j;
 }
 
-bool Buddha::_is_master_exist(const string& id,master& ent){
+bool Buddha::_is_master_exist(master& ent, const string& id){
     if (!get_master_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_master_exist_by_proof(const string& proof,master& ent){
+bool Buddha::_is_master_exist_by_proof(master& ent, const string& proof){
     if (!get_master_table().find({{"proof", proof}}, &ent))
         return false;
 
@@ -36,7 +36,7 @@ bool Buddha::_is_master_exist_by_proof(const string& proof,master& ent){
 
 bool Buddha::_is_master(const string& id) {
     master ent;
-    if (!_is_master_exist(id, ent))
+    if (!_is_master_exist(ent, id))
         return false;
 
     return ent.approved();
@@ -59,7 +59,7 @@ bool Buddha::_scan_master(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_master_record(const string& id) {
     master ent;
-    if (!_is_master_exist(id, ent)){
+    if (!_is_master_exist(ent, id)){
         mycout << "master " << id << " is not exist ." << endl ;
         return false;
     }
@@ -102,7 +102,7 @@ void Buddha::apply_master(){
 
     //判断此寺院是否存在
     master ent;
-    if( _is_master_exist(ctx->initiator(),ent) ) {
+    if( _is_master_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "master " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
@@ -134,7 +134,7 @@ void Buddha::approve_master() {
 
     //判断此法师是否存在
     master ent;
-    if( !_is_master_exist(id,ent) ) {
+    if( !_is_master_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master " + id + " is not exist .");
         return ;
     }
@@ -176,7 +176,7 @@ void Buddha::recusal_master() {
 
     //判断此法师是否存在
     master ent;
-    if( !_is_master_exist(id,ent) ) {
+    if( !_is_master_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master " + id + " is not exist .");
         return ;
     }
@@ -187,7 +187,7 @@ void Buddha::recusal_master() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "recusal master " + id + " success .", ent.to_json() );
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
 bool Buddha::is_master() {

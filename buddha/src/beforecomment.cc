@@ -23,7 +23,9 @@ xchain::json beforecomment::to_json() {
     return j;
 }
 
-bool Buddha::_is_beforecomment_exist(const string& kdid, const string& owner,beforecomment& ent) {
+bool Buddha::_is_beforecomment_exist(beforecomment& ent,
+                                     const string& kdid,
+                                     const string& owner) {
     if (!get_beforecomment_table().find({{"kdid", kdid},{"owner", owner}}, &ent))
         return false;
 
@@ -47,7 +49,7 @@ bool Buddha::_scan_beforecomment(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_beforecomment_record(const string& kdid, const string& owner) {
     beforecomment ent;
-    if (!_is_beforecomment_exist(kdid, owner, ent)){
+    if (!_is_beforecomment_exist(ent, kdid, owner)){
         mycout << "beforecomment  " << owner << "," << kdid << " is not exist ." << endl ;
         return false;
     }
@@ -111,7 +113,7 @@ void Buddha::add_beforecomment() {
 
     //判断售前点评是否存在
     beforecomment ent;
-    if( _is_beforecomment_exist(kdid,owner,ent) ) {
+    if( _is_beforecomment_exist(ent, kdid, owner) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is exist .", ent.to_json() );
         return ;
     }
@@ -141,7 +143,7 @@ void Buddha::delete_beforecomment() {
 
     //判断售前点评是否存在
     beforecomment ent;
-    if( !_is_beforecomment_exist(kdid,owner,ent) ) {
+    if( !_is_beforecomment_exist(ent, kdid, owner) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -210,7 +212,7 @@ void Buddha::update_beforecomment() {
 
     //判断售前点评是否存在
     beforecomment ent;
-    if( !_is_beforecomment_exist(kdid,owner,ent) ) {
+    if( !_is_beforecomment_exist(ent, kdid, owner) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -249,7 +251,7 @@ void Buddha::find_beforecomment() {
 
     //判断善举是否存在
     kinddeed kd;
-    if (!_is_kinddeed_exist(kdid, kd))  {
+    if (!_is_kinddeed_exist(kd, kdid))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kdid + " is not exist .");
         return ;
     }
@@ -259,7 +261,7 @@ void Buddha::find_beforecomment() {
     if( !owner.empty() ) {
         //判断售前点评是否存在
         beforecomment ent;
-        if (!_is_beforecomment_exist(kdid,owner,ent))  {
+        if (!_is_beforecomment_exist(ent, kdid, owner))  {
             _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kdid + " beforecomment is not exist belong to " + owner + ".");
             return ;
         }
@@ -288,7 +290,7 @@ void Buddha::find_beforecomment() {
     //点评所有者调用，直接查询
     //判断售前点评是否存在
     beforecomment ent;
-    if (!_is_beforecomment_exist(kdid,ctx->initiator(),ent))  {
+    if (!_is_beforecomment_exist(ent, kdid, ctx->initiator()))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "beforecomment " + kdid + " is not exist .");
         return ;
     }
@@ -305,7 +307,7 @@ void Buddha::list_beforecomment() {
 
     //判断善举是否存在
     kinddeed kd;
-    if (!_is_kinddeed_exist(kdid, kd))  {
+    if (!_is_kinddeed_exist(kd, kdid))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kdid + " is not exist .");
         return ;
     }

@@ -19,7 +19,7 @@ xchain::json kinddeedtype::to_json() {
 }
 
 
-bool Buddha::_is_kinddeedtype_exist(const string& id,kinddeedtype& ent) {
+bool Buddha::_is_kinddeedtype_exist(kinddeedtype& ent, const string& id) {
     if (!get_kinddeedtype_table().find({{"id", id}}, &ent))
         return false;
 
@@ -43,7 +43,7 @@ bool Buddha::_scan_kinddeedtype(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_kinddeedtype_record(const string& id) {
     kinddeedtype ent;
-    if (!_is_kinddeedtype_exist(id, ent)){
+    if (!_is_kinddeedtype_exist(ent, id)){
         mycout << "kinddeedtype " << id << " is not exist ." << endl ;
         return false;
     }
@@ -80,7 +80,7 @@ void Buddha::add_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if( _is_kinddeedtype_exist(id,ent) ) {
+    if( _is_kinddeedtype_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + id + " is exist .", ent.to_json());
         return ;
     }
@@ -110,7 +110,7 @@ void Buddha::delete_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if( !_is_kinddeedtype_exist(id,ent) ) {
+    if( !_is_kinddeedtype_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeed type " + id + " is not exist .");
         return ;
     }
@@ -145,7 +145,7 @@ void Buddha::update_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if( !_is_kinddeedtype_exist(id,ent) ) {
+    if( !_is_kinddeedtype_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeedtype " + id + " is not exist .");
         return ;
     }
@@ -175,7 +175,7 @@ void Buddha::find_kinddeedtype() {
 
     //判断善举类型是否存在
     kinddeedtype ent;
-    if (!_is_kinddeedtype_exist(id, ent))  {
+    if (!_is_kinddeedtype_exist(ent, id))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + id + " is not exist .");
         return ;
     }

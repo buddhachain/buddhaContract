@@ -18,7 +18,7 @@ xchain::json commentlabel::to_json() {
     return j;
 }
 
-bool Buddha::_is_commentlabel_exist(const string& id,commentlabel& ent) {
+bool Buddha::_is_commentlabel_exist(commentlabel& ent, const string& id) {
     if (!get_commentlabel_table().find({{"id", id}}, &ent))
         return false;
 
@@ -29,7 +29,7 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
     for(int i = 0 ; i < label_array.size() ; i++) {
         string id = label_array.at(i).template get<string>();
         commentlabel ent;
-        if( !_is_commentlabel_exist(id,ent) ) {
+        if( !_is_commentlabel_exist(ent, id) ) {
             mycout << "type " << id << " not exist in commentlabel table ." << endl;
             return false;
         }            
@@ -55,7 +55,7 @@ bool Buddha::_scan_commentlabel(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_commentlabel_record(const string& id) {
     commentlabel ent;
-    if (!_is_commentlabel_exist(id, ent)){
+    if (!_is_commentlabel_exist(ent, id)){
         mycout << "commentlabel " << id << " is not exist ." << endl ;
         return false;
     }
@@ -93,7 +93,7 @@ void Buddha::add_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if( _is_commentlabel_exist(id,ent) ) {
+    if( _is_commentlabel_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel " + id + " is exist .", ent.to_json() );
         return ;
     }
@@ -123,7 +123,7 @@ void Buddha::delete_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if( !_is_commentlabel_exist(id,ent) ) {
+    if( !_is_commentlabel_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kindeed type " + id + " is not exist .");
         return ;
     }
@@ -158,7 +158,7 @@ void Buddha::update_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if( !_is_commentlabel_exist(id,ent) ) {
+    if( !_is_commentlabel_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel " + id + " is not exist .");
         return ;
     }
@@ -188,7 +188,7 @@ void Buddha::find_commentlabel() {
 
     //判断评论标签是否存在
     commentlabel ent;
-    if (!_is_commentlabel_exist(id, ent))  {
+    if (!_is_commentlabel_exist(ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel " + id + " is not exist .");
         return ;
     }

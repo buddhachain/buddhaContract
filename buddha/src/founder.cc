@@ -22,7 +22,7 @@ xchain::json founder::to_json() {
     return j;
 }
 
-bool Buddha::_is_founder_exist(const string& id,founder& ent) {
+bool Buddha::_is_founder_exist(founder& ent, const string& id) {
     if (!get_founder_table().find({{"id", id}}, &ent))
         return false;
 
@@ -31,7 +31,7 @@ bool Buddha::_is_founder_exist(const string& id,founder& ent) {
 
 bool Buddha::_is_founder(const string& id) {
     founder ent;
-    if (!_is_founder_exist(id, ent))
+    if (!_is_founder_exist(ent, id))
         return false;
     
     return ent.approved();
@@ -54,7 +54,7 @@ bool Buddha::_scan_founder(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_founder_record(const string& id) {
     founder ent;
-    if (!_is_founder_exist(id, ent)){
+    if (!_is_founder_exist(ent, id)){
         mycout << "founder " << id << " is not exist ." << endl ;
         return false;
     }
@@ -103,7 +103,7 @@ void Buddha::apply_founder(){
 
     //判断此基金会成员是否存在
     founder ent;
-    if( _is_founder_exist(ctx->initiator(),ent) ) {
+    if( _is_founder_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "founder " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
@@ -137,7 +137,7 @@ void Buddha::approve_founder() {
 
     //判断此基金会成员是否存在
     founder ent;
-    if( !_is_founder_exist(id,ent) ) {
+    if( !_is_founder_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
     }
@@ -179,7 +179,7 @@ void Buddha::recusal_founder() {
 
     //判断此基金会成员是否存在
     founder ent;
-    if( !_is_founder_exist(id,ent) ) {
+    if( !_is_founder_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
     }

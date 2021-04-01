@@ -19,7 +19,7 @@ xchain::json merit::to_json() {
     return j;
 }
 
-bool Buddha::_is_merit_exist(const string& id,merit& ent) {
+bool Buddha::_is_merit_exist(merit& ent, const string& id) {
     if (!get_merit_table().find({{"id", id}}, &ent))
         return false;
 
@@ -44,7 +44,7 @@ bool Buddha::_scan_merit(xchain::json& ja, const string& cond) {
 bool Buddha::_add_merit(const string& id, const int64_t value, int64_t& total_value) {
     //判断此功德值是否存在
     merit ent;
-    if( _is_merit_exist(id,ent) ) {
+    if( _is_merit_exist(ent, id) ) {
         mycout << id << " merit is exist ." << ent.to_json() << endl;
 
         //删除旧数据
@@ -69,7 +69,7 @@ bool Buddha::_add_merit(const string& id, const int64_t value, int64_t& total_va
 
 bool Buddha::_delete_merit_record(const string& id) {
     merit ent;
-    if (!_is_merit_exist(id, ent)){
+    if (!_is_merit_exist(ent, id)){
         mycout << "merit " << id << " is not exist ." << endl ;
         return false;
     }
@@ -95,7 +95,7 @@ void Buddha::find_merit() {
 
     //判断此功德值是否已经存在
     merit ent;
-    if (!_is_merit_exist(id,ent))  {
+    if (!_is_merit_exist(ent, id))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "merit " + id + " is not exist .");
         return ;
     }
@@ -127,7 +127,7 @@ void Buddha::list_merit() {
 
     //判断订单是否存在
     order od;        
-    if (!_is_order_exist(id, od))  {
+    if (!_is_order_exist(od, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + id + " is not exist .");
         return ;
     }

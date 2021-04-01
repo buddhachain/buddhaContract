@@ -27,7 +27,7 @@ xchain::json proposal::to_json() {
     return j;
 }
 
-bool Buddha::_is_proposal_exist(const string& key,proposal& ent) {
+bool Buddha::_is_proposal_exist(proposal& ent, const string& key) {
     if (!get_proposal_table().find({{"key", key}}, &ent))
         return false;
 
@@ -51,7 +51,7 @@ bool Buddha::_scan_proposal(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_proposal_record(const string& key) {
     proposal ent;
-    if (!_is_proposal_exist(key, ent)){
+    if (!_is_proposal_exist(ent, key)){
         mycout << "proposal " << key << " is not exist ." << endl ;
         return false;
     }
@@ -100,7 +100,7 @@ void Buddha::make_proposal(){
 
     //判断是否已经存在这个提案
     proposal ent;
-    if(_is_proposal_exist(key, ent) ) {
+    if(_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is exist .", ent.to_json() );
         return ;
     }
@@ -182,7 +182,7 @@ void Buddha::delete_proposal(){
 
     //判断是否已经存在这个提案
     proposal ent;
-    if(!_is_proposal_exist(key, ent) ) {
+    if(!_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
         return ;
     }
@@ -282,7 +282,7 @@ void Buddha::update_proposal(){
 
     //判断是否已经存在这个提案
     proposal ent;
-    if(!_is_proposal_exist(key, ent) ) {
+    if(!_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
         return ;
     }
@@ -376,7 +376,7 @@ void Buddha::approve_proposal(){
 
     //判断是否已经存在这个提案
     proposal ent;
-    if(!_is_proposal_exist(key, ent) ) {
+    if(!_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
         return ;
     }
@@ -534,7 +534,7 @@ void Buddha::find_proposal(){
 
     // //判断提案是否存在
     proposal ent;
-    if (!_is_proposal_exist(key, ent))  {
+    if (!_is_proposal_exist(ent, key))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist .");
         return ;
     }

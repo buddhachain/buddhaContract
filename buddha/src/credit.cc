@@ -19,7 +19,7 @@ xchain::json credit::to_json() {
     return j;
 }
 
-bool Buddha::_is_credit_exist(const string& id,credit& ent) {
+bool Buddha::_is_credit_exist(credit& ent, const string& id) {
     if (!get_credit_table().find({{"id", id}}, &ent))
         return false;
 
@@ -44,7 +44,7 @@ bool Buddha::_scan_credit(xchain::json& ja, const string& cond) {
 bool Buddha::_add_credit(const string& id, const int64_t value, int64_t& total_value) {
     //判断此信用值是否存在
     credit ent;
-    if( _is_credit_exist(id,ent) ) {
+    if( _is_credit_exist(ent, id) ) {
         mycout << id << " credit is exist ." << ent.to_json() << endl;
 
         //删除旧数据
@@ -69,7 +69,7 @@ bool Buddha::_add_credit(const string& id, const int64_t value, int64_t& total_v
 
 bool Buddha::_delete_credit_record(const string& id) {
     credit ent;
-    if (!_is_credit_exist(id, ent)){
+    if (!_is_credit_exist(ent, id)){
         mycout << "credit " << id << " is not exist ." << endl ;
         return false;
     }
@@ -95,7 +95,7 @@ void Buddha::find_credit() {
 
     //判断此信用值是否已经存在
     credit ent;
-    if (!_is_credit_exist(id,ent))  {
+    if (!_is_credit_exist(ent, id))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "credit " + id + " is not exist .");
         return ;
     }
@@ -127,7 +127,7 @@ void Buddha::list_credit() {
 
     //判断订单是否存在
     order od;        
-    if (!_is_order_exist(id, od))  {
+    if (!_is_order_exist(od, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + id + " is not exist .");
         return ;
     }

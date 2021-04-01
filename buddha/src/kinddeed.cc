@@ -44,70 +44,30 @@ xchain::json kinddeedspec::to_json() {
 }
 
 
-bool Buddha::_is_kinddeed_exist(const string& id,kinddeed& ent) {
+bool Buddha::_is_kinddeed_exist(kinddeed& ent, const string& id) {
     if (!get_kinddeed_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_kinddeeddetail_exist(const string& kdid,
-                                       const string& seq,
-                                       kinddeeddetail& ent) {
+bool Buddha::_is_kinddeeddetail_exist(kinddeeddetail& ent,
+                                      const string& kdid,
+                                      const string& seq) {
     if (!get_kinddeeddetail_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_kinddeeddetail_exist_by_kdid(const string& kdid,vector<kinddeeddetail>& vent) {
-    auto it = get_kinddeeddetail_table().scan({{"kdid",kdid}});
-    while(it->next() ) {
-        kinddeeddetail ent;
-        if (!it->get(&ent) ) {
-            if(it->error(true) == "success") 
-                return false;
-            mycout << "kinddeeddetail table get failure : " << it->error(true) << endl;
-            return false;
-        }
-        vent.push_back(ent);
-    }
-
-    if( vent.size()==0)
-        return false;
-
-    return true;
-}
-
-bool Buddha::_is_kinddeedspec_exist(const string& kdid,
-                                       const string& seq,
-                                       kinddeedspec& ent) {
+bool Buddha::_is_kinddeedspec_exist(kinddeedspec& ent,
+                                    const string& kdid,
+                                    const string& seq) {
     if (!get_kinddeedspec_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
         return false;
 
     return true;
 }
-
-bool Buddha::_is_kinddeedspec_exist_by_kdid(const string& kdid,vector<kinddeedspec>& vent) {
-    auto it = get_kinddeedspec_table().scan({{"kdid",kdid}});
-    while(it->next() ) {
-        kinddeedspec ent;
-        if (!it->get(&ent) ) {
-            if(it->error(true) == "success") 
-                return false;
-            mycout << "kinddeedspec table get failure : " << it->error(true) << endl;
-            return false;
-        }
-
-        vent.push_back(ent);
-    }
-
-    if( vent.size()==0)
-        return false;
-
-    return true;
-}
-
 
 bool Buddha::_is_kinddeed_online(const string& id){
     kinddeed ent;
@@ -155,6 +115,25 @@ bool Buddha::_scan_kinddeed_by_owner(xchain::json& ja, const string& cond) {
     return true;
 }
 
+bool Buddha::_scan_kinddeeddetail(vector<kinddeeddetail>& v, const string& cond) {
+    auto it = get_kinddeeddetail_table().scan({{"kdid",cond}});
+    while(it->next() ) {
+        kinddeeddetail ent;
+        if (!it->get(&ent) ) {
+            if(it->error(true) == "success") 
+                return false;
+            mycout << "kinddeeddetail table get failure : " << it->error(true) << endl;
+            return false;
+        }
+        v.push_back(ent);
+    }
+
+    if( v.size()==0)
+        return false;
+
+    return true;
+}
+
 bool Buddha::_scan_kinddeeddetail(xchain::json& ja, const string& cond) {
     auto it = get_kinddeeddetail_table().scan({{"kdid",cond}});
     while(it->next() ) {
@@ -169,6 +148,27 @@ bool Buddha::_scan_kinddeeddetail(xchain::json& ja, const string& cond) {
 
     return true;
 }
+
+bool Buddha::_scan_kinddeedspec(vector<kinddeedspec>& v, const string& cond) {
+    auto it = get_kinddeedspec_table().scan({{"kdid",cond}});
+    while(it->next() ) {
+        kinddeedspec ent;
+        if (!it->get(&ent) ) {
+            if(it->error(true) == "success") 
+                return false;
+            mycout << "kinddeedspec table get failure : " << it->error(true) << endl;
+            return false;
+        }
+
+        v.push_back(ent);
+    }
+
+    if( v.size()==0)
+        return false;
+
+    return true;
+}
+
 
 bool Buddha::_scan_kinddeedspec(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedspec_table().scan({{"kdid",cond}});
@@ -187,7 +187,7 @@ bool Buddha::_scan_kinddeedspec(xchain::json& ja, const string& cond) {
 
 bool Buddha::_delete_kinddeed_record(const string& id) {
     kinddeed ent;
-    if (!_is_kinddeed_exist(id, ent)){
+    if (!_is_kinddeed_exist(ent, id)){
         mycout << "kinddeed " << id << " is not exist ." << endl ;
         return false;
     }
@@ -299,7 +299,7 @@ bool Buddha::_add_kinddeeddetail(const string& kdid,
 
     //删除在此善举已经存在的描述
     kinddeeddetail ent;
-    if(_is_kinddeeddetail_exist(kdid, sequence, ent)) 
+    if(_is_kinddeeddetail_exist(ent, kdid, sequence)) 
         if(!_delete_kinddeeddetail_record(kdid, sequence)) 
             return false;
 
@@ -344,7 +344,7 @@ bool Buddha::_add_kinddeedspec(const string& kdid,
 
     //删除在此善举已经存在的规格
     kinddeedspec ent;
-    if(_is_kinddeedspec_exist(kdid, sequence, ent))
+    if(_is_kinddeedspec_exist(ent, kdid, sequence))
         if(!_delete_kinddeedspec_record(kdid, sequence)) 
             return false;
 
@@ -391,7 +391,39 @@ void Buddha::add_kinddeeddetail() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "ok");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create");
+}
+
+void Buddha::delete_kinddeeddetail() {
+    const string& kinddeed = ctx->arg("kinddeed");
+    if( kinddeed.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed is empty .");
+        return ;
+    }
+
+    //身份检查，部署者，基金会成员，寺院，法师具有权限
+    if( !is_deployer() &&
+        !is_founder() &&
+        !is_temple() &&
+        !is_master() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to delete kinddeeddetail .");
+        return ;
+    }
+
+    //判断善举描述是否存在
+    xchain::json ja ;
+    if (!_scan_kinddeeddetail(ja, kinddeed))  {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kinddeed + " kinddeeddetail is not exist ." );
+        return ;
+    }
+
+    //删除此善举的所有描述记录
+    if( !_delete_kinddeeddetail_record(kinddeed) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete kinddeeddetail " + kinddeed + " failure ." );
+        return;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ja);
 }
 
 void Buddha::list_kinddeeddetail() {
@@ -444,7 +476,7 @@ void Buddha::add_kinddeedspec() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "ok");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create");
 }
 
 void Buddha::delete_kinddeedspec() {
@@ -548,28 +580,28 @@ void Buddha::add_kinddeed() {
 
     //判断善举是否存在
     kinddeed ent;
-    if (_is_kinddeed_exist(id, ent))  {
+    if (_is_kinddeed_exist(ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is exist .", ent.to_json());
         return ;
     }
 
     //判断善举类型是否存在
     kinddeedtype type_ent;
-    if (!_is_kinddeedtype_exist(type, type_ent))  {
+    if (!_is_kinddeedtype_exist(type_ent, type))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + type + " is not exist .");
         return ;
     }
 
     //判断善举描述是否存在
     vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
+    if (_scan_kinddeeddetail(v_kinddeeddetail_ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail is exist ." );
         return ;
     }
 
     // //判断善举规格是否存在
     // vector<kinddeedspec> v_kinddeedspec_ent;
-    // if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
+    // if (_scan_kinddeedspec(v_kinddeedspec_ent, id))  {
     //     _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedspec is exist ." );
     //     return ;
     // }
@@ -625,7 +657,7 @@ void Buddha::delete_kinddeed() {
 
     //判断善举是否存在
     kinddeed ent;
-    if (!_is_kinddeed_exist(id, ent))  {
+    if (!_is_kinddeed_exist(ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
@@ -716,21 +748,21 @@ void Buddha::update_kinddeed() {
 
     //判断善举是否存在
     kinddeed ent;
-    if (_is_kinddeed_exist(id, ent))  {
+    if (_is_kinddeed_exist(ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is exist .", ent.to_json());
         return ;
     }
 
     //判断善举类型是否存在
     kinddeedtype type_ent;
-    if (!_is_kinddeedtype_exist(type, type_ent))  {
+    if (!_is_kinddeedtype_exist(type_ent, type))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + type + " is not exist .");
         return ;
     }
 
     //删除此善举的所有描述记录
     vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
+    if (_scan_kinddeeddetail(v_kinddeeddetail_ent, id))  {
         if( !_delete_kinddeeddetail_record(id) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
             return;
@@ -738,7 +770,7 @@ void Buddha::update_kinddeed() {
     }
 
     vector<kinddeedspec> v_kinddeedspec_ent;
-    if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
+    if (_scan_kinddeedspec(v_kinddeedspec_ent, id))  {
         //删除此善举的所有规格记录
         if( !_delete_kinddeedspec_record(id) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
@@ -811,7 +843,7 @@ void Buddha::offline_kinddeed() {
 
     //判断善举是否存在
     kinddeed ent;
-    if (!_is_kinddeed_exist(id, ent))  {
+    if (!_is_kinddeed_exist(ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
@@ -867,14 +899,14 @@ void Buddha::find_kinddeed() {
 
     //判断善举是否存在
     kinddeed kinddeed_ent;
-    if (!_is_kinddeed_exist(id, kinddeed_ent))  {
+    if (!_is_kinddeed_exist(kinddeed_ent, id))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .");
         return ;
     }
 
     //获取善举描述
     vector<kinddeeddetail> v_kinddeeddetail_ent;
-    _is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent);
+    _scan_kinddeeddetail(v_kinddeeddetail_ent, id);
     xchain::json detail_json ;
     for(int i = 0 ; i < v_kinddeeddetail_ent.size() ; i++ ) {
         detail_json += v_kinddeeddetail_ent[i].to_json();
@@ -882,7 +914,7 @@ void Buddha::find_kinddeed() {
 
     //获取善举规格
     vector<kinddeedspec> v_kinddeedspec_ent;
-    _is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent);
+    _scan_kinddeedspec(v_kinddeedspec_ent, id);
     xchain::json spec_json ;
     for(int i = 0 ; i < v_kinddeedspec_ent.size() ; i++ ) {
         spec_json.push_back(v_kinddeedspec_ent[i].to_json());

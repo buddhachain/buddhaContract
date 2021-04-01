@@ -20,7 +20,7 @@ xchain::json meritranking::to_json() {
     return j;
 }
 
-bool Buddha::_is_meritranking_exist(const string& ranking,meritranking& ent) {
+bool Buddha::_is_meritranking_exist(meritranking& ent, const string& ranking) {
     if (!get_meritranking_table().find({{"ranking", ranking}}, &ent))
         return false;
 
@@ -121,7 +121,7 @@ bool Buddha::_add_meritranking(const string& id, const int64_t value ) {
 
 // bool Buddha::_delete_meritranking_record(const string& id) {
 //     meritranking ent;
-//     if (!_is_meritranking_exist(id, ent)){
+//     if (!_is_meritranking_exist(ent, id)){
 //         mycout << "meritranking " << id << " is not exist ." << endl ;
 //         return false;
 //     }
@@ -171,7 +171,7 @@ void Buddha::get_meritranking() {
 
     //判断此功德值排名是否已经存在
     meritranking ent;
-    if (!_is_meritranking_exist(ranking,ent))  {
+    if (!_is_meritranking_exist(ent, ranking))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "meritranking " + ranking + " is not exist .");
         return ;
     }

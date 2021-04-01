@@ -20,7 +20,7 @@ xchain::json creditranking::to_json() {
     return j;
 }
 
-bool Buddha::_is_creditranking_exist(const string& ranking,creditranking& ent) {
+bool Buddha::_is_creditranking_exist(creditranking& ent, const string& ranking) {
     if (!get_creditranking_table().find({{"ranking", ranking}}, &ent))
         return false;
 
@@ -155,7 +155,7 @@ void Buddha::get_creditranking() {
 
     //判断此信用值排名是否已经存在
     creditranking ent;
-    if (!_is_creditranking_exist(ranking,ent))  {
+    if (!_is_creditranking_exist(ent, ranking))  {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "creditranking " + ranking + " is not exist .");
         return ;
     }

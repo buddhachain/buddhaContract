@@ -24,7 +24,7 @@ xchain::json order::to_json() {
     return j;
 }
 
-bool Buddha::_is_order_exist(const string& id,order& ent) {
+bool Buddha::_is_order_exist(order& ent, const string& id) {
     if (!get_order_table().find({{"id", id}}, &ent))
         return false;
 
@@ -80,7 +80,7 @@ bool Buddha::_scan_order_by_kdowner(xchain::json& ja, const string& cond) {
 bool Buddha::_delete_order_record(const string& id) {
     //判断订单是否存在
     order ent;
-    if( !_is_order_exist(id, ent)){
+    if( !_is_order_exist(ent, id)){
         mycout << "order " << id << " is not exist ." << endl ;
         return false;
     }
@@ -136,14 +136,14 @@ void Buddha::pray_kinddeed() {
 
     //判断订单是否存在
     order od;
-    if (_is_order_exist(orderid,od))  {
+    if (_is_order_exist(od, orderid))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + orderid + " is exist .", od.to_json() );
         return ;
     }
 
     //判断善举是否存在
     kinddeed kd;
-    if (!_is_kinddeed_exist(kdid, kd))  {
+    if (!_is_kinddeed_exist(kd, kdid))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kdid + " is not exist .");
         return ;
     }
@@ -156,7 +156,7 @@ void Buddha::pray_kinddeed() {
 
     //判断善举规格是否存在
     kinddeedspec spec;
-    if (!_is_kinddeedspec_exist(kdid, specid, spec))  {
+    if (!_is_kinddeedspec_exist(spec, kdid, specid))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedspec " + kdid + "," + specid + " is not exist .");
         return ;
     }
@@ -195,7 +195,7 @@ void Buddha::delete_pray_kinddeed() {
 
     //判断订单是否存在
     order ent;
-    if (!_is_order_exist(orderid,ent))  {
+    if (!_is_order_exist(ent, orderid))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + orderid + " is not exist .");
         return ;
     }
@@ -215,7 +215,7 @@ void Buddha::delete_pray_kinddeed() {
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
 void Buddha::find_pray_kinddeed() {
@@ -227,7 +227,7 @@ void Buddha::find_pray_kinddeed() {
 
     //判断订单是否存在
     order ent;       
-    if (!_is_order_exist(id, ent) ) {
+    if (!_is_order_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "order " + id + " is not exist .");
         return ;
     }
