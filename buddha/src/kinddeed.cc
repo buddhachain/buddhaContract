@@ -367,27 +367,27 @@ bool Buddha::_add_kinddeedspec(const string& kdid,
 namespace 分界线{}
 
 void Buddha::add_kinddeeddetail() {
-    const string& id = ctx->arg("id");
+    const string& kinddeed = ctx->arg("kinddeed");
     const string& sequence = ctx->arg("sequence");
     const string& hash = ctx->arg("hash");
 
-    if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
+    if( kinddeed.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed is empty .");
         return ;
     }
 
     if( sequence.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed sequence is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "sequence is empty .");
         return ;
     }
 
     if( hash.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed hash is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "hash is empty .");
         return ;
     }
 
-    if (!_add_kinddeeddetail(id,sequence,hash) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "_add_kinddeeddetail " + id + " failure .");
+    if (!_add_kinddeeddetail(kinddeed,sequence,hash) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "_add_kinddeeddetail " + kinddeed + " failure .");
         return;
     }
 
@@ -437,7 +437,7 @@ void Buddha::list_kinddeeddetail() {
     }
 
     xchain::json ja ;
-    if(!_scan_kinddeeddetail(ja, ctx->arg("kdid")) ) {
+    if(!_scan_kinddeeddetail(ja, ctx->arg("kinddeed")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
@@ -446,23 +446,23 @@ void Buddha::list_kinddeeddetail() {
 }
 
 void Buddha::add_kinddeedspec() {
-    const string& id = ctx->arg("id");    
+    const string& kinddeed = ctx->arg("kinddeed");    
     const string& sequence = ctx->arg("sequence");
     const string& desc = ctx->arg("desc");
     const string& price = ctx->arg("price");
 
-    if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
+    if( kinddeed.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed is empty .");
         return ;
     }
 
     if( sequence.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed sequence is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "sequence is empty .");
         return ;
     }
 
     if( desc.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed desc is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "desc is empty .");
         return ;
     }
     
@@ -471,8 +471,8 @@ void Buddha::add_kinddeedspec() {
         return ;
     }
     
-    if (!_add_kinddeedspec(id,sequence,desc,price) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "_add_kinddeedspec " + id + " failure .");
+    if (!_add_kinddeedspec(kinddeed,sequence,desc,price) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "_add_kinddeedspec " + kinddeed + " failure .");
         return;
     }
 
@@ -480,6 +480,12 @@ void Buddha::add_kinddeedspec() {
 }
 
 void Buddha::delete_kinddeedspec() {
+    const string& kinddeed = ctx->arg("kinddeed");
+    if( kinddeed.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed is empty .");
+        return ;
+    }
+
     //身份检查，部署者，基金会成员，寺院，法师具有权限
     if( !is_deployer() &&
         !is_founder() &&
@@ -489,13 +495,20 @@ void Buddha::delete_kinddeedspec() {
         return ;
     }
 
+    //判断善举描述是否存在
     xchain::json ja ;
-    if(!_scan_kinddeedspec(ja,ctx->arg("kdid")) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
+    if (!_scan_kinddeedspec(ja, kinddeed))  {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + kinddeed + " kinddeedspec is not exist ." );
+        return ;
+    }
+
+    //删除此善举的所有描述记录
+    if( !_delete_kinddeedspec_record(kinddeed) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete kinddeedspec " + kinddeed + " failure ." );
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ja);
 }
 
 void Buddha::list_kinddeedspec() {
@@ -509,7 +522,7 @@ void Buddha::list_kinddeedspec() {
     }
 
     xchain::json ja ;
-    if(!_scan_kinddeedspec(ja,ctx->arg("kdid")) ) {
+    if(!_scan_kinddeedspec(ja,ctx->arg("kinddeed")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
@@ -527,22 +540,22 @@ void Buddha::add_kinddeed() {
     const string& spec = ctx->arg("spec");
 
     if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "id is empty .");
         return ;
     }
 
     if( name.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed name is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "name is empty .");
         return ;
     }
 
     if( type.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed type is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "type is empty .");
         return ;
     }
 
     if( lasttime.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed lasttime is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "lasttime is empty .");
         return ;
     }
 
