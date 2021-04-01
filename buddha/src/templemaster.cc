@@ -134,21 +134,9 @@ void Buddha::apply_join_temple(){
 }
 
 void Buddha::approve_join_temple() {
-    const string& templeid = ctx->arg("templeid");
-    if( templeid.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
-        return ;
-    }
-
     const string& masterid = ctx->arg("masterid");
     if( masterid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
-        return ;
-    }
-
-    //判断是否是基金会成员
-    if( !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve master .");
         return ;
     }
 
@@ -158,11 +146,7 @@ void Buddha::approve_join_temple() {
         return ;
     }
 
-    //判断是否是寺院
-    if( !_is_temple(templeid) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, templeid + " is not a temple .");
-        return ;
-    }
+    const string& templeid = ctx->initiator();
 
     //判断是否法师是否已经入驻此寺院
     templemaster ent;
@@ -188,23 +172,13 @@ void Buddha::approve_join_temple() {
 }
 
 void Buddha::recusal_join_temple() {
-    const string& templeid = ctx->arg("templeid");
-    if( templeid.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
-        return ;
-    }
-
     const string& masterid = ctx->arg("masterid");
     if( masterid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
         return ;
     }
 
-    //判断是否是基金会成员
-    if( !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal master .");
-        return ;
-    }
+    const string& templeid = ctx->initiator();
 
     //判断寺院法师记录是否存在
     templemaster ent;
