@@ -299,7 +299,7 @@ bool Buddha::_add_kinddeeddetail(const string& kdid,
 
     //删除在此善举已经存在的描述
     kinddeeddetail ent;
-    if(_is_kinddeeddetail_exist(kdid, sequence, ent))
+    if(_is_kinddeeddetail_exist(kdid, sequence, ent)) 
         if(!_delete_kinddeeddetail_record(kdid, sequence)) 
             return false;
 
@@ -457,8 +457,6 @@ void Buddha::add_kinddeed() {
         return ;
     }
 
-    mycout << "11111111111" << endl ;
-
     //判断善举描述是否是数组
     auto detail_array = xchain::json::parse(detail);
     if (!detail_array.is_array() ) {
@@ -490,8 +488,6 @@ void Buddha::add_kinddeed() {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder,temple and master, have no authority to add kinddeed .");
         return ;
     }
-
-    mycout << "222222222222222" << endl ;
 
     //判断善举是否存在
     kinddeed ent;
@@ -545,7 +541,6 @@ void Buddha::add_kinddeed() {
             return;
         }
     }
-    mycout << "333333333333333" << endl ;
 
     ent.set_id(id);
     ent.set_name(name);
@@ -558,7 +553,7 @@ void Buddha::add_kinddeed() {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
-    mycout << "444444444444444" << endl ;
+
 
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
@@ -915,8 +910,8 @@ void Buddha::list_kinddeedspec() {
 
 
 
-// DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
-// DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
+DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
+DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
 DEFINE_METHOD(Buddha, add_kinddeed)             { self.add_kinddeed();              }
 DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();           }
 DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }
@@ -924,5 +919,5 @@ DEFINE_METHOD(Buddha, offline_kinddeed)         { self.offline_kinddeed();      
 DEFINE_METHOD(Buddha, is_kinddeed_online)       { self.is_kinddeed_online();        }
 DEFINE_METHOD(Buddha, find_kinddeed)            { self.find_kinddeed();             }
 DEFINE_METHOD(Buddha, list_kinddeed)            { self.list_kinddeed();             }
-// DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
-// DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }
+DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
+DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }
