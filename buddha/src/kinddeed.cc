@@ -198,13 +198,13 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
     }
 
     //删除此善举的所有描述记录
-    if( !_delete_kinddeeddetail_records(id) ) {
+    if( !_delete_kinddeeddetail_record(id) ) {
         mycout << "delete kinddeeddetail " << id << " failure ." << endl ;
         return false;
     }
 
     //删除此善举的所有规格记录
-    if( !_delete_kinddeedspec_records(id) ) {
+    if( !_delete_kinddeedspec_record(id) ) {
         mycout << "delete kinddeedspec " << id << " failure ." << endl ;
         return false;
     }
@@ -213,24 +213,24 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeeddetail_records(const string& id) {
+bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& sequence ) {
+    if( sequence.empty() ) {
+        while(true) {
+            kinddeeddetail ent;
+            if (!get_kinddeeddetail_table().find({{"kdid", id}}, &ent))
+                break;
 
-    while(true) {
-        kinddeeddetail ent;
-        if (!get_kinddeeddetail_table().find({{"kdid", id}}, &ent))
-            break;
-
-        if( !get_kinddeeddetail_table().del(ent) ) {
-            mycout << "delete kinddeeddetail " << ent.to_json().dump() << " failure ." << endl ;
-            return false;
+            if( !get_kinddeeddetail_table().del(ent) ) {
+                mycout << "delete kinddeeddetail " << ent.to_json().dump() << " failure ." << endl ;
+                return false;
+            }
         }
+
+        mycout << "delete kinddeeddetails success ." << endl ;
+        return true;
+
     }
 
-    mycout << "delete kinddeeddetails success ." << endl ;
-    return true;
-}
-
-bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& sequence ) {
     kinddeeddetail ent;
     if (!get_kinddeeddetail_table().find({{"kdid", id},{"sequence",sequence}}, &ent) ) {
         mycout << "not found kinddeeddetail " << id << "," << sequence << " failure ." << endl ;
@@ -246,23 +246,23 @@ bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& seque
     return true;
 }
 
-bool Buddha::_delete_kinddeedspec_records(const string& id) {
-    while(true) {
-        kinddeedspec ent;
-        if (!get_kinddeedspec_table().find({{"kdid", id}}, &ent))
-            break;
+bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequence ) {
+    if( sequence.empty() ) {
+        while(true) {
+            kinddeedspec ent;
+            if (!get_kinddeedspec_table().find({{"kdid", id}}, &ent))
+                break;
 
-        if( !get_kinddeedspec_table().del(ent) ) {
-            mycout << "delete kinddeedspec " << ent.to_json().dump() << " failure ." << endl ;
-            return false;
+            if( !get_kinddeedspec_table().del(ent) ) {
+                mycout << "delete kinddeedspec " << ent.to_json().dump() << " failure ." << endl ;
+                return false;
+            }
         }
+
+        mycout << "delete kinddeedspecs success ." << endl ;
+        return true;
     }
 
-    mycout << "delete kinddeedspecs success ." << endl ;
-    return true;
-}
-
-bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequence ) {
     kinddeedspec ent;
     if (!get_kinddeedspec_table().find({{"kdid", id},{"sequence",sequence}}, &ent) ) {
         mycout << "not found kinddeedspec " << id << "," << sequence << " failure ." << endl ;
@@ -394,6 +394,25 @@ void Buddha::add_kinddeeddetail() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "ok");
 }
 
+void Buddha::list_kinddeeddetail() {
+    //身份检查，部署者，基金会成员，寺院，法师具有权限
+    if( !is_deployer() &&
+        !is_founder() &&
+        !is_temple() &&
+        !is_master() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeeddetail .");
+        return ;
+    }
+
+    xchain::json ja ;
+    if(!_scan_kinddeeddetail(ja, ctx->arg("kdid")) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
+        return;
+    }
+    
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
+}
+
 void Buddha::add_kinddeedspec() {
     const string& id = ctx->arg("id");    
     const string& sequence = ctx->arg("sequence");
@@ -426,6 +445,44 @@ void Buddha::add_kinddeedspec() {
     }
 
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "ok");
+}
+
+void Buddha::delete_kinddeedspec() {
+    //身份检查，部署者，基金会成员，寺院，法师具有权限
+    if( !is_deployer() &&
+        !is_founder() &&
+        !is_temple() &&
+        !is_master() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeedspec .");
+        return ;
+    }
+
+    xchain::json ja ;
+    if(!_scan_kinddeedspec(ja,ctx->arg("kdid")) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
+        return;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
+}
+
+void Buddha::list_kinddeedspec() {
+    //身份检查，部署者，基金会成员，寺院，法师具有权限
+    if( !is_deployer() &&
+        !is_founder() &&
+        !is_temple() &&
+        !is_master() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeedspec .");
+        return ;
+    }
+
+    xchain::json ja ;
+    if(!_scan_kinddeedspec(ja,ctx->arg("kdid")) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
+        return;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
 void Buddha::add_kinddeed() {
@@ -510,12 +567,12 @@ void Buddha::add_kinddeed() {
         return ;
     }
 
-    //判断善举规格是否存在
-    vector<kinddeedspec> v_kinddeedspec_ent;
-    if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail is exist ." );
-        return ;
-    }
+    // //判断善举规格是否存在
+    // vector<kinddeedspec> v_kinddeedspec_ent;
+    // if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
+    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedspec is exist ." );
+    //     return ;
+    // }
 
     //添加善举描述列表
     for(int i = 0 ; i < detail_array.size() ; i++) {
@@ -674,7 +731,7 @@ void Buddha::update_kinddeed() {
     //删除此善举的所有描述记录
     vector<kinddeeddetail> v_kinddeeddetail_ent;
     if (_is_kinddeeddetail_exist_by_kdid(id, v_kinddeeddetail_ent))  {
-        if( !_delete_kinddeeddetail_records(id) ) {
+        if( !_delete_kinddeeddetail_record(id) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
             return;
         }
@@ -683,7 +740,7 @@ void Buddha::update_kinddeed() {
     vector<kinddeedspec> v_kinddeedspec_ent;
     if (_is_kinddeedspec_exist_by_kdid(id, v_kinddeedspec_ent))  {
         //删除此善举的所有规格记录
-        if( !_delete_kinddeedspec_records(id) ) {
+        if( !_delete_kinddeedspec_record(id) ) {
             _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
             return;
         }
@@ -870,48 +927,17 @@ void Buddha::list_kinddeed() {
     _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeed .");
 }
 
-void Buddha::list_kinddeeddetail() {
-    //身份检查，部署者，基金会成员，寺院，法师具有权限
-    if( !is_deployer() &&
-        !is_founder() &&
-        !is_temple() &&
-        !is_master() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeeddetail .");
-        return ;
-    }
-
-    xchain::json ja ;
-    if(!_scan_kinddeeddetail(ja, ctx->arg("kdid")) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
-        return;
-    }
-    
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
-}
-
-void Buddha::list_kinddeedspec() {
-    //身份检查，部署者，基金会成员，寺院，法师具有权限
-    if( !is_deployer() &&
-        !is_founder() &&
-        !is_temple() &&
-        !is_master() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " have no authority to list kinddeedspec .");
-        return ;
-    }
-
-    xchain::json ja ;
-    if(!_scan_kinddeedspec(ja,ctx->arg("kdid")) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
-        return;
-    }
-
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
-}
 
 
 
 DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
+DEFINE_METHOD(Buddha, delete_kinddeeddetail)    { self.delete_kinddeeddetail();     }
+DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
+
 DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
+DEFINE_METHOD(Buddha, delete_kinddeedspec)      { self.delete_kinddeedspec();       }
+DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }
+
 DEFINE_METHOD(Buddha, add_kinddeed)             { self.add_kinddeed();              }
 DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();           }
 DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }
@@ -919,5 +945,3 @@ DEFINE_METHOD(Buddha, offline_kinddeed)         { self.offline_kinddeed();      
 DEFINE_METHOD(Buddha, is_kinddeed_online)       { self.is_kinddeed_online();        }
 DEFINE_METHOD(Buddha, find_kinddeed)            { self.find_kinddeed();             }
 DEFINE_METHOD(Buddha, list_kinddeed)            { self.list_kinddeed();             }
-DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
-DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }

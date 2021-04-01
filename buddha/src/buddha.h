@@ -212,10 +212,8 @@ private:
     bool _delete_templemaster_record(const string&, const string&);
     bool _delete_kinddeedtype_record(const string&);
     bool _delete_kinddeed_record(const string&);
-    bool _delete_kinddeeddetail_records(const string&);
-    bool _delete_kinddeeddetail_record(const string&, const string& );
-    bool _delete_kinddeedspec_records(const string&);
-    bool _delete_kinddeedspec_record(const string&, const string&);
+    bool _delete_kinddeeddetail_record(const string&, const string& ="");
+    bool _delete_kinddeedspec_record(const string&, const string& ="");
     bool _delete_commentlabel_record(const string&);
     bool _delete_beforecomment_record(const string&, const string&);
     bool _delete_order_record(const string&);
@@ -288,16 +286,20 @@ public:
 
     //添加删除修改善举    
     void add_kinddeeddetail();
+    void delete_kinddeeddetail();
+    void list_kinddeeddetail();     //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
+                                    //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
+
     void add_kinddeedspec();
+    void delete_kinddeedspec();
+    void list_kinddeedspec();       //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
+                                    //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
+
     void add_kinddeed();            //基金会成员，寺院，法师
     void delete_kinddeed();         //基金会成员，寺院，法师
     void update_kinddeed();         //基金会成员，寺院，法师，只要修改善举，就需要重新审核上架
     void find_kinddeed();           //所有用户
     void list_kinddeed();           //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
-                                    //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
-    void list_kinddeeddetail();     //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
-                                    //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
-    void list_kinddeedspec();       //部署者，基金会成员，列举所有善举，根据id查所有，id为空时不安全，id不为空时基本安全，支持模糊查询
                                     //寺院，法师。列举所有者所有善举，根据owner查匹配，基本安全
 
     //善举下架    
