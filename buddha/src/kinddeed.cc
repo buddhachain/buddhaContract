@@ -270,7 +270,7 @@ bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequenc
                 return false;
             }
 
-            mycout << "delete kinddeeddetail " << ent.to_json().dump() << " success ." << endl ;
+            mycout << "delete kinddeedspec " << ent.to_json().dump() << " success ." << endl ;
         }
 
         mycout << "delete kinddeedspecs success ." << endl ;
@@ -311,12 +311,10 @@ bool Buddha::_add_kinddeeddetail(const string& kdid,
         return false;
     }
 
-    //删除在此善举已经存在的描述
-    kinddeeddetail ent;
-    if(_is_kinddeeddetail_exist(ent, kdid, sequence)) 
-        if(!_delete_kinddeeddetail_record(kdid, sequence)) 
-            return false;
+    // //删除在此善举已经存在的描述
+    // _delete_kinddeeddetail_record(kdid, sequence);
 
+    kinddeeddetail ent;
     ent.set_kdid(kdid);
     ent.set_sequence(stoll(sequence));
     ent.set_hash(hash);
@@ -605,31 +603,31 @@ void Buddha::add_kinddeed() {
         return ;
     }
 
-    //判断善举是否存在
+    // //判断善举是否存在
     kinddeed ent;
     if (_is_kinddeed_exist(ent, id))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is exist .", ent.to_json());
         return ;
     }
 
-    //判断善举类型是否存在
+    // //判断善举类型是否存在
     kinddeedtype type_ent;
     if (!_is_kinddeedtype_exist(type_ent, type))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype " + type + " is not exist .");
         return ;
     }
 
-    // //删除此善举的所有描述记录
-    // if( !_delete_kinddeeddetail_record(id) ) {
-    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "delete kinddeeddetail " + id + " failure ." );
-    //     return;
-    // }
+    //删除此善举的所有描述记录
+    if( !_delete_kinddeeddetail_record(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete kinddeeddetail " + id + " failure ." );
+        return;
+    }
 
-    // //删除此善举的所有规格记录
-    // if( !_delete_kinddeedspec_record(id) ) {
-    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "delete kinddeedspec " + id + " failure ." );
-    //     return;
-    // }
+    //删除此善举的所有规格记录
+    if( !_delete_kinddeedspec_record(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete kinddeedspec " + id + " failure ." );
+        return;
+    }
 
     //添加善举描述列表
     for(int i = 0 ; i < detail_array.size() ; i++) {
@@ -642,6 +640,10 @@ void Buddha::add_kinddeed() {
             return;
         }
     }
+
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "111111111111111111111111" );
+    return ;
 
     //添加善举规格列表
     for(int i = 0 ; i < spec_array.size() ; i++) {
@@ -656,20 +658,21 @@ void Buddha::add_kinddeed() {
         }
     }
 
-    ent.set_id(id);
-    ent.set_name(name);
-    ent.set_owner(ctx->initiator());
-    ent.set_type(stoll(type));
-    ent.set_lasttime(lasttime);
-    ent.set_online(true);
 
-    if (!get_kinddeed_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
-        return;
-    }
+    // ent.set_id(id);
+    // ent.set_name(name);
+    // ent.set_owner(ctx->initiator());
+    // ent.set_type(stoll(type));
+    // ent.set_lasttime(lasttime);
+    // ent.set_online(true);
+
+    // if (!get_kinddeed_table().put(ent) ) {
+    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+    //     return;
+    // }
 
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
+    // _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
 void Buddha::delete_kinddeed() {
@@ -773,8 +776,8 @@ void Buddha::update_kinddeed() {
 
     //判断善举是否存在
     kinddeed ent;
-    if (_is_kinddeed_exist(ent, id))  {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is exist .", ent.to_json());
+    if (!_is_kinddeed_exist(ent, id))  {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id + " is not exist .", ent.to_json());
         return ;
     }
 
@@ -785,23 +788,26 @@ void Buddha::update_kinddeed() {
         return ;
     }
 
-    //删除此善举的所有描述记录
-    vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_scan_kinddeeddetail(v_kinddeeddetail_ent, id))  {
-        if( !_delete_kinddeeddetail_record(id) ) {
-            _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
-            return;
-        }
-    }
+    // //删除此善举的所有描述记录
+    // vector<kinddeeddetail> v_kinddeeddetail_ent;
+    // if (_scan_kinddeeddetail(v_kinddeeddetail_ent, id))  {
+    //     if( !_delete_kinddeeddetail_record(id) ) {
+    //         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
+    //         return;
+    //     }
+    // }
 
-    vector<kinddeedspec> v_kinddeedspec_ent;
-    if (_scan_kinddeedspec(v_kinddeedspec_ent, id))  {
-        //删除此善举的所有规格记录
-        if( !_delete_kinddeedspec_record(id) ) {
-            _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
-            return;
-        }
-    }
+    // vector<kinddeedspec> v_kinddeedspec_ent;
+    // if (_scan_kinddeedspec(v_kinddeedspec_ent, id))  {
+    //     //删除此善举的所有规格记录
+    //     if( !_delete_kinddeedspec_record(id) ) {
+    //         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
+    //         return;
+    //     }
+    // }
+
+    _delete_kinddeeddetail_record(id);
+    _delete_kinddeedspec_record(id);
 
     //添加善举描述列表
     for(int i = 0 ; i < detail_array.size() ; i++) {
