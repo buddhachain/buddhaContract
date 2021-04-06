@@ -121,8 +121,8 @@ bool Buddha::_scan_kinddeeddetail(vector<kinddeeddetail>& v, const string& cond)
         kinddeeddetail ent;
         if (!it->get(&ent) ) {
             mycout << "kinddeeddetail " << ent.to_json().dump()  << endl ;
-            // if(it->error(true) == "success") 
-            //     return false;
+            if(it->error(true) == "success") 
+                return false;
             mycout << "kinddeeddetail table get failure : " << it->error() << endl;
             return false;
         }
@@ -450,22 +450,13 @@ void Buddha::list_kinddeeddetail() {
         return ;
     }
 
-    // xchain::json ja ;
-    // if(!_scan_kinddeeddetail(ja, ctx->arg("kinddeed")) ) {
-    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
-    //     return;
-    // }
-    
-    vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (!_scan_kinddeeddetail(v_kinddeeddetail_ent, ctx->arg("kinddeed")))  {
+    xchain::json ja ;
+    if(!_scan_kinddeeddetail(ja, ctx->arg("kinddeed")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
-        return ;
+        return;
     }
 
-
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan");
-
-    // _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
 void Buddha::add_kinddeedspec() {
@@ -629,18 +620,23 @@ void Buddha::add_kinddeed() {
     }
 
     { //判断善举描述是否存在
-        // xchain::json ja ;
-        // if (_scan_kinddeeddetail(ja, id))  {
-        //     _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail is exist ." );
-        //     return ;
-        // }
+        xchain::json ja ;
+        if (!_scan_kinddeeddetail(ja, id))  {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure ." );
+            return ;
+        }
+
+        if ( !ja.empty() || ja.size() != 0) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail is exist ." );
+            return;
+        }
     }
 
-    vector<kinddeeddetail> v_kinddeeddetail_ent;
-    if (_scan_kinddeeddetail(v_kinddeeddetail_ent, id))  {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail is exist ." );
-        return ;
-    }
+    // vector<kinddeeddetail> v_kinddeeddetail_ent;
+    // if (_scan_kinddeeddetail(v_kinddeeddetail_ent, id))  {
+    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail is exist ." );
+    //     return ;
+    // }
 
     // //判断善举规格是否存在
     // vector<kinddeedspec> v_kinddeedspec_ent;
