@@ -40,7 +40,7 @@ struct TableStruct_otc_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[2]
+  static const ::google::protobuf::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -50,14 +50,18 @@ namespace otc {
 class Guaranty;
 class GuarantyDefaultTypeInternal;
 extern GuarantyDefaultTypeInternal _Guaranty_default_instance_;
-class Temple;
-class TempleDefaultTypeInternal;
-extern TempleDefaultTypeInternal _Temple_default_instance_;
+class Order;
+class OrderDefaultTypeInternal;
+extern OrderDefaultTypeInternal _Order_default_instance_;
+class Redeem;
+class RedeemDefaultTypeInternal;
+extern RedeemDefaultTypeInternal _Redeem_default_instance_;
 }  // namespace otc
 namespace google {
 namespace protobuf {
 template<> ::otc::Guaranty* Arena::CreateMaybeMessage<::otc::Guaranty>(Arena*);
-template<> ::otc::Temple* Arena::CreateMaybeMessage<::otc::Temple>(Arena*);
+template<> ::otc::Order* Arena::CreateMaybeMessage<::otc::Order>(Arena*);
+template<> ::otc::Redeem* Arena::CreateMaybeMessage<::otc::Redeem>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace otc {
@@ -155,57 +159,101 @@ class Guaranty :
 
   // accessors -------------------------------------------------------
 
-  // string accountid = 1;
-  void clear_accountid();
-  static const int kAccountidFieldNumber = 1;
-  const ::std::string& accountid() const;
-  void set_accountid(const ::std::string& value);
+  // string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
   #if LANG_CXX11
-  void set_accountid(::std::string&& value);
+  void set_id(::std::string&& value);
   #endif
-  void set_accountid(const char* value);
-  void set_accountid(const char* value, size_t size);
-  ::std::string* mutable_accountid();
-  ::std::string* release_accountid();
-  void set_allocated_accountid(::std::string* accountid);
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
 
-  // int64 amount = 2;
+  // string seller = 2;
+  void clear_seller();
+  static const int kSellerFieldNumber = 2;
+  const ::std::string& seller() const;
+  void set_seller(const ::std::string& value);
+  #if LANG_CXX11
+  void set_seller(::std::string&& value);
+  #endif
+  void set_seller(const char* value);
+  void set_seller(const char* value, size_t size);
+  ::std::string* mutable_seller();
+  ::std::string* release_seller();
+  void set_allocated_seller(::std::string* seller);
+
+  // string timestamp = 6;
+  void clear_timestamp();
+  static const int kTimestampFieldNumber = 6;
+  const ::std::string& timestamp() const;
+  void set_timestamp(const ::std::string& value);
+  #if LANG_CXX11
+  void set_timestamp(::std::string&& value);
+  #endif
+  void set_timestamp(const char* value);
+  void set_timestamp(const char* value, size_t size);
+  ::std::string* mutable_timestamp();
+  ::std::string* release_timestamp();
+  void set_allocated_timestamp(::std::string* timestamp);
+
+  // int64 amount = 3;
   void clear_amount();
-  static const int kAmountFieldNumber = 2;
+  static const int kAmountFieldNumber = 3;
   ::google::protobuf::int64 amount() const;
   void set_amount(::google::protobuf::int64 value);
+
+  // int64 left = 4;
+  void clear_left();
+  static const int kLeftFieldNumber = 4;
+  ::google::protobuf::int64 left() const;
+  void set_left(::google::protobuf::int64 value);
+
+  // int64 price = 5;
+  void clear_price();
+  static const int kPriceFieldNumber = 5;
+  ::google::protobuf::int64 price() const;
+  void set_price(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:otc.Guaranty)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr accountid_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr seller_;
+  ::google::protobuf::internal::ArenaStringPtr timestamp_;
   ::google::protobuf::int64 amount_;
+  ::google::protobuf::int64 left_;
+  ::google::protobuf::int64 price_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_otc_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Temple :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:otc.Temple) */ {
+class Redeem :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:otc.Redeem) */ {
  public:
-  Temple();
-  virtual ~Temple();
+  Redeem();
+  virtual ~Redeem();
 
-  Temple(const Temple& from);
+  Redeem(const Redeem& from);
 
-  inline Temple& operator=(const Temple& from) {
+  inline Redeem& operator=(const Redeem& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Temple(Temple&& from) noexcept
-    : Temple() {
+  Redeem(Redeem&& from) noexcept
+    : Redeem() {
     *this = ::std::move(from);
   }
 
-  inline Temple& operator=(Temple&& from) noexcept {
+  inline Redeem& operator=(Redeem&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -214,34 +262,34 @@ class Temple :
     return *this;
   }
   #endif
-  static const Temple& default_instance();
+  static const Redeem& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Temple* internal_default_instance() {
-    return reinterpret_cast<const Temple*>(
-               &_Temple_default_instance_);
+  static inline const Redeem* internal_default_instance() {
+    return reinterpret_cast<const Redeem*>(
+               &_Redeem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  void Swap(Temple* other);
-  friend void swap(Temple& a, Temple& b) {
+  void Swap(Redeem* other);
+  friend void swap(Redeem& a, Redeem& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Temple* New() const final {
-    return CreateMaybeMessage<Temple>(nullptr);
+  inline Redeem* New() const final {
+    return CreateMaybeMessage<Redeem>(nullptr);
   }
 
-  Temple* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<Temple>(arena);
+  Redeem* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Redeem>(arena);
   }
   void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
     final;
-  void CopyFrom(const Temple& from);
-  void MergeFrom(const Temple& from);
+  void CopyFrom(const Redeem& from);
+  void MergeFrom(const Redeem& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -262,7 +310,7 @@ class Temple :
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(Temple* other);
+  void InternalSwap(Redeem* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return nullptr;
@@ -278,19 +326,33 @@ class Temple :
 
   // accessors -------------------------------------------------------
 
-  // string accountid = 1;
-  void clear_accountid();
-  static const int kAccountidFieldNumber = 1;
-  const ::std::string& accountid() const;
-  void set_accountid(const ::std::string& value);
+  // string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
   #if LANG_CXX11
-  void set_accountid(::std::string&& value);
+  void set_id(::std::string&& value);
   #endif
-  void set_accountid(const char* value);
-  void set_accountid(const char* value, size_t size);
-  ::std::string* mutable_accountid();
-  ::std::string* release_accountid();
-  void set_allocated_accountid(::std::string* accountid);
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // string guaranty_id = 2;
+  void clear_guaranty_id();
+  static const int kGuarantyIdFieldNumber = 2;
+  const ::std::string& guaranty_id() const;
+  void set_guaranty_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_guaranty_id(::std::string&& value);
+  #endif
+  void set_guaranty_id(const char* value);
+  void set_guaranty_id(const char* value, size_t size);
+  ::std::string* mutable_guaranty_id();
+  ::std::string* release_guaranty_id();
+  void set_allocated_guaranty_id(::std::string* guaranty_id);
 
   // string timestamp = 4;
   void clear_timestamp();
@@ -306,27 +368,218 @@ class Temple :
   ::std::string* release_timestamp();
   void set_allocated_timestamp(::std::string* timestamp);
 
-  // int64 opttype = 2;
-  void clear_opttype();
-  static const int kOpttypeFieldNumber = 2;
-  ::google::protobuf::int64 opttype() const;
-  void set_opttype(::google::protobuf::int64 value);
-
   // int64 amount = 3;
   void clear_amount();
   static const int kAmountFieldNumber = 3;
   ::google::protobuf::int64 amount() const;
   void set_amount(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:otc.Temple)
+  // @@protoc_insertion_point(class_scope:otc.Redeem)
  private:
   class HasBitSetters;
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr accountid_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr guaranty_id_;
   ::google::protobuf::internal::ArenaStringPtr timestamp_;
-  ::google::protobuf::int64 opttype_;
   ::google::protobuf::int64 amount_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_otc_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Order :
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:otc.Order) */ {
+ public:
+  Order();
+  virtual ~Order();
+
+  Order(const Order& from);
+
+  inline Order& operator=(const Order& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Order(Order&& from) noexcept
+    : Order() {
+    *this = ::std::move(from);
+  }
+
+  inline Order& operator=(Order&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const Order& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Order* internal_default_instance() {
+    return reinterpret_cast<const Order*>(
+               &_Order_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(Order* other);
+  friend void swap(Order& a, Order& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Order* New() const final {
+    return CreateMaybeMessage<Order>(nullptr);
+  }
+
+  Order* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<Order>(arena);
+  }
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    final;
+  void CopyFrom(const Order& from);
+  void MergeFrom(const Order& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  void DiscardUnknownFields();
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Order* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::std::string GetTypeName() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_id(::std::string&& value);
+  #endif
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
+
+  // string guaranty_id = 2;
+  void clear_guaranty_id();
+  static const int kGuarantyIdFieldNumber = 2;
+  const ::std::string& guaranty_id() const;
+  void set_guaranty_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_guaranty_id(::std::string&& value);
+  #endif
+  void set_guaranty_id(const char* value);
+  void set_guaranty_id(const char* value, size_t size);
+  ::std::string* mutable_guaranty_id();
+  ::std::string* release_guaranty_id();
+  void set_allocated_guaranty_id(::std::string* guaranty_id);
+
+  // string buyer = 3;
+  void clear_buyer();
+  static const int kBuyerFieldNumber = 3;
+  const ::std::string& buyer() const;
+  void set_buyer(const ::std::string& value);
+  #if LANG_CXX11
+  void set_buyer(::std::string&& value);
+  #endif
+  void set_buyer(const char* value);
+  void set_buyer(const char* value, size_t size);
+  ::std::string* mutable_buyer();
+  ::std::string* release_buyer();
+  void set_allocated_buyer(::std::string* buyer);
+
+  // string start_timestamp = 7;
+  void clear_start_timestamp();
+  static const int kStartTimestampFieldNumber = 7;
+  const ::std::string& start_timestamp() const;
+  void set_start_timestamp(const ::std::string& value);
+  #if LANG_CXX11
+  void set_start_timestamp(::std::string&& value);
+  #endif
+  void set_start_timestamp(const char* value);
+  void set_start_timestamp(const char* value, size_t size);
+  ::std::string* mutable_start_timestamp();
+  ::std::string* release_start_timestamp();
+  void set_allocated_start_timestamp(::std::string* start_timestamp);
+
+  // string confirm_timestamp = 8;
+  void clear_confirm_timestamp();
+  static const int kConfirmTimestampFieldNumber = 8;
+  const ::std::string& confirm_timestamp() const;
+  void set_confirm_timestamp(const ::std::string& value);
+  #if LANG_CXX11
+  void set_confirm_timestamp(::std::string&& value);
+  #endif
+  void set_confirm_timestamp(const char* value);
+  void set_confirm_timestamp(const char* value, size_t size);
+  ::std::string* mutable_confirm_timestamp();
+  ::std::string* release_confirm_timestamp();
+  void set_allocated_confirm_timestamp(::std::string* confirm_timestamp);
+
+  // int64 amount = 4;
+  void clear_amount();
+  static const int kAmountFieldNumber = 4;
+  ::google::protobuf::int64 amount() const;
+  void set_amount(::google::protobuf::int64 value);
+
+  // int64 price = 5;
+  void clear_price();
+  static const int kPriceFieldNumber = 5;
+  ::google::protobuf::int64 price() const;
+  void set_price(::google::protobuf::int64 value);
+
+  // int64 state = 6;
+  void clear_state();
+  static const int kStateFieldNumber = 6;
+  ::google::protobuf::int64 state() const;
+  void set_state(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:otc.Order)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr guaranty_id_;
+  ::google::protobuf::internal::ArenaStringPtr buyer_;
+  ::google::protobuf::internal::ArenaStringPtr start_timestamp_;
+  ::google::protobuf::internal::ArenaStringPtr confirm_timestamp_;
+  ::google::protobuf::int64 amount_;
+  ::google::protobuf::int64 price_;
+  ::google::protobuf::int64 state_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_otc_2eproto;
 };
@@ -341,60 +594,113 @@ class Temple :
 #endif  // __GNUC__
 // Guaranty
 
-// string accountid = 1;
-inline void Guaranty::clear_accountid() {
-  accountid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string id = 1;
+inline void Guaranty::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Guaranty::accountid() const {
-  // @@protoc_insertion_point(field_get:otc.Guaranty.accountid)
-  return accountid_.GetNoArena();
+inline const ::std::string& Guaranty::id() const {
+  // @@protoc_insertion_point(field_get:otc.Guaranty.id)
+  return id_.GetNoArena();
 }
-inline void Guaranty::set_accountid(const ::std::string& value) {
+inline void Guaranty::set_id(const ::std::string& value) {
   
-  accountid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:otc.Guaranty.accountid)
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Guaranty.id)
 }
 #if LANG_CXX11
-inline void Guaranty::set_accountid(::std::string&& value) {
+inline void Guaranty::set_id(::std::string&& value) {
   
-  accountid_.SetNoArena(
+  id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:otc.Guaranty.accountid)
+  // @@protoc_insertion_point(field_set_rvalue:otc.Guaranty.id)
 }
 #endif
-inline void Guaranty::set_accountid(const char* value) {
+inline void Guaranty::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  accountid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:otc.Guaranty.accountid)
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Guaranty.id)
 }
-inline void Guaranty::set_accountid(const char* value, size_t size) {
+inline void Guaranty::set_id(const char* value, size_t size) {
   
-  accountid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:otc.Guaranty.accountid)
+  // @@protoc_insertion_point(field_set_pointer:otc.Guaranty.id)
 }
-inline ::std::string* Guaranty::mutable_accountid() {
+inline ::std::string* Guaranty::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:otc.Guaranty.accountid)
-  return accountid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:otc.Guaranty.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Guaranty::release_accountid() {
-  // @@protoc_insertion_point(field_release:otc.Guaranty.accountid)
+inline ::std::string* Guaranty::release_id() {
+  // @@protoc_insertion_point(field_release:otc.Guaranty.id)
   
-  return accountid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Guaranty::set_allocated_accountid(::std::string* accountid) {
-  if (accountid != nullptr) {
+inline void Guaranty::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
     
   } else {
     
   }
-  accountid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accountid);
-  // @@protoc_insertion_point(field_set_allocated:otc.Guaranty.accountid)
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:otc.Guaranty.id)
 }
 
-// int64 amount = 2;
+// string seller = 2;
+inline void Guaranty::clear_seller() {
+  seller_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Guaranty::seller() const {
+  // @@protoc_insertion_point(field_get:otc.Guaranty.seller)
+  return seller_.GetNoArena();
+}
+inline void Guaranty::set_seller(const ::std::string& value) {
+  
+  seller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Guaranty.seller)
+}
+#if LANG_CXX11
+inline void Guaranty::set_seller(::std::string&& value) {
+  
+  seller_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Guaranty.seller)
+}
+#endif
+inline void Guaranty::set_seller(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  seller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Guaranty.seller)
+}
+inline void Guaranty::set_seller(const char* value, size_t size) {
+  
+  seller_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Guaranty.seller)
+}
+inline ::std::string* Guaranty::mutable_seller() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Guaranty.seller)
+  return seller_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Guaranty::release_seller() {
+  // @@protoc_insertion_point(field_release:otc.Guaranty.seller)
+  
+  return seller_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Guaranty::set_allocated_seller(::std::string* seller) {
+  if (seller != nullptr) {
+    
+  } else {
+    
+  }
+  seller_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), seller);
+  // @@protoc_insertion_point(field_set_allocated:otc.Guaranty.seller)
+}
+
+// int64 amount = 3;
 inline void Guaranty::clear_amount() {
   amount_ = PROTOBUF_LONGLONG(0);
 }
@@ -408,147 +714,580 @@ inline void Guaranty::set_amount(::google::protobuf::int64 value) {
   // @@protoc_insertion_point(field_set:otc.Guaranty.amount)
 }
 
-// -------------------------------------------------------------------
-
-// Temple
-
-// string accountid = 1;
-inline void Temple::clear_accountid() {
-  accountid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// int64 left = 4;
+inline void Guaranty::clear_left() {
+  left_ = PROTOBUF_LONGLONG(0);
 }
-inline const ::std::string& Temple::accountid() const {
-  // @@protoc_insertion_point(field_get:otc.Temple.accountid)
-  return accountid_.GetNoArena();
+inline ::google::protobuf::int64 Guaranty::left() const {
+  // @@protoc_insertion_point(field_get:otc.Guaranty.left)
+  return left_;
 }
-inline void Temple::set_accountid(const ::std::string& value) {
+inline void Guaranty::set_left(::google::protobuf::int64 value) {
   
-  accountid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:otc.Temple.accountid)
-}
-#if LANG_CXX11
-inline void Temple::set_accountid(::std::string&& value) {
-  
-  accountid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:otc.Temple.accountid)
-}
-#endif
-inline void Temple::set_accountid(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  accountid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:otc.Temple.accountid)
-}
-inline void Temple::set_accountid(const char* value, size_t size) {
-  
-  accountid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:otc.Temple.accountid)
-}
-inline ::std::string* Temple::mutable_accountid() {
-  
-  // @@protoc_insertion_point(field_mutable:otc.Temple.accountid)
-  return accountid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Temple::release_accountid() {
-  // @@protoc_insertion_point(field_release:otc.Temple.accountid)
-  
-  return accountid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Temple::set_allocated_accountid(::std::string* accountid) {
-  if (accountid != nullptr) {
-    
-  } else {
-    
-  }
-  accountid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), accountid);
-  // @@protoc_insertion_point(field_set_allocated:otc.Temple.accountid)
+  left_ = value;
+  // @@protoc_insertion_point(field_set:otc.Guaranty.left)
 }
 
-// int64 opttype = 2;
-inline void Temple::clear_opttype() {
-  opttype_ = PROTOBUF_LONGLONG(0);
+// int64 price = 5;
+inline void Guaranty::clear_price() {
+  price_ = PROTOBUF_LONGLONG(0);
 }
-inline ::google::protobuf::int64 Temple::opttype() const {
-  // @@protoc_insertion_point(field_get:otc.Temple.opttype)
-  return opttype_;
+inline ::google::protobuf::int64 Guaranty::price() const {
+  // @@protoc_insertion_point(field_get:otc.Guaranty.price)
+  return price_;
 }
-inline void Temple::set_opttype(::google::protobuf::int64 value) {
+inline void Guaranty::set_price(::google::protobuf::int64 value) {
   
-  opttype_ = value;
-  // @@protoc_insertion_point(field_set:otc.Temple.opttype)
+  price_ = value;
+  // @@protoc_insertion_point(field_set:otc.Guaranty.price)
 }
 
-// int64 amount = 3;
-inline void Temple::clear_amount() {
-  amount_ = PROTOBUF_LONGLONG(0);
-}
-inline ::google::protobuf::int64 Temple::amount() const {
-  // @@protoc_insertion_point(field_get:otc.Temple.amount)
-  return amount_;
-}
-inline void Temple::set_amount(::google::protobuf::int64 value) {
-  
-  amount_ = value;
-  // @@protoc_insertion_point(field_set:otc.Temple.amount)
-}
-
-// string timestamp = 4;
-inline void Temple::clear_timestamp() {
+// string timestamp = 6;
+inline void Guaranty::clear_timestamp() {
   timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Temple::timestamp() const {
-  // @@protoc_insertion_point(field_get:otc.Temple.timestamp)
+inline const ::std::string& Guaranty::timestamp() const {
+  // @@protoc_insertion_point(field_get:otc.Guaranty.timestamp)
   return timestamp_.GetNoArena();
 }
-inline void Temple::set_timestamp(const ::std::string& value) {
+inline void Guaranty::set_timestamp(const ::std::string& value) {
   
   timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:otc.Temple.timestamp)
+  // @@protoc_insertion_point(field_set:otc.Guaranty.timestamp)
 }
 #if LANG_CXX11
-inline void Temple::set_timestamp(::std::string&& value) {
+inline void Guaranty::set_timestamp(::std::string&& value) {
   
   timestamp_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:otc.Temple.timestamp)
+  // @@protoc_insertion_point(field_set_rvalue:otc.Guaranty.timestamp)
 }
 #endif
-inline void Temple::set_timestamp(const char* value) {
+inline void Guaranty::set_timestamp(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:otc.Temple.timestamp)
+  // @@protoc_insertion_point(field_set_char:otc.Guaranty.timestamp)
 }
-inline void Temple::set_timestamp(const char* value, size_t size) {
+inline void Guaranty::set_timestamp(const char* value, size_t size) {
   
   timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:otc.Temple.timestamp)
+  // @@protoc_insertion_point(field_set_pointer:otc.Guaranty.timestamp)
 }
-inline ::std::string* Temple::mutable_timestamp() {
+inline ::std::string* Guaranty::mutable_timestamp() {
   
-  // @@protoc_insertion_point(field_mutable:otc.Temple.timestamp)
+  // @@protoc_insertion_point(field_mutable:otc.Guaranty.timestamp)
   return timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Temple::release_timestamp() {
-  // @@protoc_insertion_point(field_release:otc.Temple.timestamp)
+inline ::std::string* Guaranty::release_timestamp() {
+  // @@protoc_insertion_point(field_release:otc.Guaranty.timestamp)
   
   return timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Temple::set_allocated_timestamp(::std::string* timestamp) {
+inline void Guaranty::set_allocated_timestamp(::std::string* timestamp) {
   if (timestamp != nullptr) {
     
   } else {
     
   }
   timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), timestamp);
-  // @@protoc_insertion_point(field_set_allocated:otc.Temple.timestamp)
+  // @@protoc_insertion_point(field_set_allocated:otc.Guaranty.timestamp)
+}
+
+// -------------------------------------------------------------------
+
+// Redeem
+
+// string id = 1;
+inline void Redeem::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Redeem::id() const {
+  // @@protoc_insertion_point(field_get:otc.Redeem.id)
+  return id_.GetNoArena();
+}
+inline void Redeem::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Redeem.id)
+}
+#if LANG_CXX11
+inline void Redeem::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Redeem.id)
+}
+#endif
+inline void Redeem::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Redeem.id)
+}
+inline void Redeem::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Redeem.id)
+}
+inline ::std::string* Redeem::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Redeem.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Redeem::release_id() {
+  // @@protoc_insertion_point(field_release:otc.Redeem.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Redeem::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:otc.Redeem.id)
+}
+
+// string guaranty_id = 2;
+inline void Redeem::clear_guaranty_id() {
+  guaranty_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Redeem::guaranty_id() const {
+  // @@protoc_insertion_point(field_get:otc.Redeem.guaranty_id)
+  return guaranty_id_.GetNoArena();
+}
+inline void Redeem::set_guaranty_id(const ::std::string& value) {
+  
+  guaranty_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Redeem.guaranty_id)
+}
+#if LANG_CXX11
+inline void Redeem::set_guaranty_id(::std::string&& value) {
+  
+  guaranty_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Redeem.guaranty_id)
+}
+#endif
+inline void Redeem::set_guaranty_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  guaranty_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Redeem.guaranty_id)
+}
+inline void Redeem::set_guaranty_id(const char* value, size_t size) {
+  
+  guaranty_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Redeem.guaranty_id)
+}
+inline ::std::string* Redeem::mutable_guaranty_id() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Redeem.guaranty_id)
+  return guaranty_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Redeem::release_guaranty_id() {
+  // @@protoc_insertion_point(field_release:otc.Redeem.guaranty_id)
+  
+  return guaranty_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Redeem::set_allocated_guaranty_id(::std::string* guaranty_id) {
+  if (guaranty_id != nullptr) {
+    
+  } else {
+    
+  }
+  guaranty_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), guaranty_id);
+  // @@protoc_insertion_point(field_set_allocated:otc.Redeem.guaranty_id)
+}
+
+// int64 amount = 3;
+inline void Redeem::clear_amount() {
+  amount_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Redeem::amount() const {
+  // @@protoc_insertion_point(field_get:otc.Redeem.amount)
+  return amount_;
+}
+inline void Redeem::set_amount(::google::protobuf::int64 value) {
+  
+  amount_ = value;
+  // @@protoc_insertion_point(field_set:otc.Redeem.amount)
+}
+
+// string timestamp = 4;
+inline void Redeem::clear_timestamp() {
+  timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Redeem::timestamp() const {
+  // @@protoc_insertion_point(field_get:otc.Redeem.timestamp)
+  return timestamp_.GetNoArena();
+}
+inline void Redeem::set_timestamp(const ::std::string& value) {
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Redeem.timestamp)
+}
+#if LANG_CXX11
+inline void Redeem::set_timestamp(::std::string&& value) {
+  
+  timestamp_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Redeem.timestamp)
+}
+#endif
+inline void Redeem::set_timestamp(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Redeem.timestamp)
+}
+inline void Redeem::set_timestamp(const char* value, size_t size) {
+  
+  timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Redeem.timestamp)
+}
+inline ::std::string* Redeem::mutable_timestamp() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Redeem.timestamp)
+  return timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Redeem::release_timestamp() {
+  // @@protoc_insertion_point(field_release:otc.Redeem.timestamp)
+  
+  return timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Redeem::set_allocated_timestamp(::std::string* timestamp) {
+  if (timestamp != nullptr) {
+    
+  } else {
+    
+  }
+  timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), timestamp);
+  // @@protoc_insertion_point(field_set_allocated:otc.Redeem.timestamp)
+}
+
+// -------------------------------------------------------------------
+
+// Order
+
+// string id = 1;
+inline void Order::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::id() const {
+  // @@protoc_insertion_point(field_get:otc.Order.id)
+  return id_.GetNoArena();
+}
+inline void Order::set_id(const ::std::string& value) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Order.id)
+}
+#if LANG_CXX11
+inline void Order::set_id(::std::string&& value) {
+  
+  id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Order.id)
+}
+#endif
+inline void Order::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Order.id)
+}
+inline void Order::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Order.id)
+}
+inline ::std::string* Order::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Order.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_id() {
+  // @@protoc_insertion_point(field_release:otc.Order.id)
+  
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_id(::std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:otc.Order.id)
+}
+
+// string guaranty_id = 2;
+inline void Order::clear_guaranty_id() {
+  guaranty_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::guaranty_id() const {
+  // @@protoc_insertion_point(field_get:otc.Order.guaranty_id)
+  return guaranty_id_.GetNoArena();
+}
+inline void Order::set_guaranty_id(const ::std::string& value) {
+  
+  guaranty_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Order.guaranty_id)
+}
+#if LANG_CXX11
+inline void Order::set_guaranty_id(::std::string&& value) {
+  
+  guaranty_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Order.guaranty_id)
+}
+#endif
+inline void Order::set_guaranty_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  guaranty_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Order.guaranty_id)
+}
+inline void Order::set_guaranty_id(const char* value, size_t size) {
+  
+  guaranty_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Order.guaranty_id)
+}
+inline ::std::string* Order::mutable_guaranty_id() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Order.guaranty_id)
+  return guaranty_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_guaranty_id() {
+  // @@protoc_insertion_point(field_release:otc.Order.guaranty_id)
+  
+  return guaranty_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_guaranty_id(::std::string* guaranty_id) {
+  if (guaranty_id != nullptr) {
+    
+  } else {
+    
+  }
+  guaranty_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), guaranty_id);
+  // @@protoc_insertion_point(field_set_allocated:otc.Order.guaranty_id)
+}
+
+// string buyer = 3;
+inline void Order::clear_buyer() {
+  buyer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::buyer() const {
+  // @@protoc_insertion_point(field_get:otc.Order.buyer)
+  return buyer_.GetNoArena();
+}
+inline void Order::set_buyer(const ::std::string& value) {
+  
+  buyer_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Order.buyer)
+}
+#if LANG_CXX11
+inline void Order::set_buyer(::std::string&& value) {
+  
+  buyer_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Order.buyer)
+}
+#endif
+inline void Order::set_buyer(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  buyer_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Order.buyer)
+}
+inline void Order::set_buyer(const char* value, size_t size) {
+  
+  buyer_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Order.buyer)
+}
+inline ::std::string* Order::mutable_buyer() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Order.buyer)
+  return buyer_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_buyer() {
+  // @@protoc_insertion_point(field_release:otc.Order.buyer)
+  
+  return buyer_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_buyer(::std::string* buyer) {
+  if (buyer != nullptr) {
+    
+  } else {
+    
+  }
+  buyer_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), buyer);
+  // @@protoc_insertion_point(field_set_allocated:otc.Order.buyer)
+}
+
+// int64 amount = 4;
+inline void Order::clear_amount() {
+  amount_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Order::amount() const {
+  // @@protoc_insertion_point(field_get:otc.Order.amount)
+  return amount_;
+}
+inline void Order::set_amount(::google::protobuf::int64 value) {
+  
+  amount_ = value;
+  // @@protoc_insertion_point(field_set:otc.Order.amount)
+}
+
+// int64 price = 5;
+inline void Order::clear_price() {
+  price_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Order::price() const {
+  // @@protoc_insertion_point(field_get:otc.Order.price)
+  return price_;
+}
+inline void Order::set_price(::google::protobuf::int64 value) {
+  
+  price_ = value;
+  // @@protoc_insertion_point(field_set:otc.Order.price)
+}
+
+// int64 state = 6;
+inline void Order::clear_state() {
+  state_ = PROTOBUF_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Order::state() const {
+  // @@protoc_insertion_point(field_get:otc.Order.state)
+  return state_;
+}
+inline void Order::set_state(::google::protobuf::int64 value) {
+  
+  state_ = value;
+  // @@protoc_insertion_point(field_set:otc.Order.state)
+}
+
+// string start_timestamp = 7;
+inline void Order::clear_start_timestamp() {
+  start_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::start_timestamp() const {
+  // @@protoc_insertion_point(field_get:otc.Order.start_timestamp)
+  return start_timestamp_.GetNoArena();
+}
+inline void Order::set_start_timestamp(const ::std::string& value) {
+  
+  start_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Order.start_timestamp)
+}
+#if LANG_CXX11
+inline void Order::set_start_timestamp(::std::string&& value) {
+  
+  start_timestamp_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Order.start_timestamp)
+}
+#endif
+inline void Order::set_start_timestamp(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  start_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Order.start_timestamp)
+}
+inline void Order::set_start_timestamp(const char* value, size_t size) {
+  
+  start_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Order.start_timestamp)
+}
+inline ::std::string* Order::mutable_start_timestamp() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Order.start_timestamp)
+  return start_timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_start_timestamp() {
+  // @@protoc_insertion_point(field_release:otc.Order.start_timestamp)
+  
+  return start_timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_start_timestamp(::std::string* start_timestamp) {
+  if (start_timestamp != nullptr) {
+    
+  } else {
+    
+  }
+  start_timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), start_timestamp);
+  // @@protoc_insertion_point(field_set_allocated:otc.Order.start_timestamp)
+}
+
+// string confirm_timestamp = 8;
+inline void Order::clear_confirm_timestamp() {
+  confirm_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Order::confirm_timestamp() const {
+  // @@protoc_insertion_point(field_get:otc.Order.confirm_timestamp)
+  return confirm_timestamp_.GetNoArena();
+}
+inline void Order::set_confirm_timestamp(const ::std::string& value) {
+  
+  confirm_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:otc.Order.confirm_timestamp)
+}
+#if LANG_CXX11
+inline void Order::set_confirm_timestamp(::std::string&& value) {
+  
+  confirm_timestamp_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:otc.Order.confirm_timestamp)
+}
+#endif
+inline void Order::set_confirm_timestamp(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  confirm_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:otc.Order.confirm_timestamp)
+}
+inline void Order::set_confirm_timestamp(const char* value, size_t size) {
+  
+  confirm_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:otc.Order.confirm_timestamp)
+}
+inline ::std::string* Order::mutable_confirm_timestamp() {
+  
+  // @@protoc_insertion_point(field_mutable:otc.Order.confirm_timestamp)
+  return confirm_timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Order::release_confirm_timestamp() {
+  // @@protoc_insertion_point(field_release:otc.Order.confirm_timestamp)
+  
+  return confirm_timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Order::set_allocated_confirm_timestamp(::std::string* confirm_timestamp) {
+  if (confirm_timestamp != nullptr) {
+    
+  } else {
+    
+  }
+  confirm_timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), confirm_timestamp);
+  // @@protoc_insertion_point(field_set_allocated:otc.Order.confirm_timestamp)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

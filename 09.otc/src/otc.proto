@@ -5,15 +5,30 @@ package otc;
 
 //抵押表
 message Guaranty {
-    string accountid    = 1; //账户id，唯一
-    int64  amount       = 2; //抵押额
+    string id           = 1; //抵押id，唯一
+    string seller       = 2; //买家id
+    int64  amount       = 3; //抵押数量
+    int64  left         = 4; //剩余数量
+    int64  price        = 5; //单价
+    string timestamp    = 6; //抵押时间 
 }
 
-//日志表
-message Log {
-    string id           = 1; //日志id，唯一
-    string accountid    = 2; //账户id
-    int64  opttype      = 3; //操作类型，1抵押，2赎回，3售出
-    int64  amount       = 4; //抵押额
-    string timestamp    = 5; //操作时间
+//赎回表
+message Redeem {
+    string id           = 1; //赎回id，唯一
+    string guaranty_id  = 2; //抵押id
+    int64  amount       = 3; //赎回数量
+    string timestamp    = 4; //抵押时间 
+}
+
+//订单表
+message Order {
+    string id           = 1; //订单id，唯一
+    string guaranty_id  = 2; //抵押id
+    string buyer        = 3; //买家id
+    int64  amount       = 4; //购买数量
+    int64  price        = 5; //单价
+    int64  state        = 6; //当前状态:1发起,2确认
+    string start_timestamp    = 7; //发起时间
+    string confirm_timestamp  = 8; //确认时间
 }

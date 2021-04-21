@@ -9,15 +9,16 @@
 #include <iostream>
 using namespace std;
 
-Buddha::Buddha() :
-    _guaranty_table(          context(), "guaranty"                 ),
-    _log_table(          context(), "log"                 ),
+Otc::Otc() :
+    _guaranty_table(   context(), "guaranty"    ),
+    _redeem_table(     context(), "redeem"      ),
+    _order_table(      context(), "order"       ),
 
     ctx(context())
 {
 }
 
-void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message) {
+void Otc::_log_error(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -27,7 +28,7 @@ void Buddha::_log_error(const string& file, const string& fun, const int line, c
 }
 
 
-void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Otc::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -39,7 +40,7 @@ void Buddha::_log_error(const string& file, const string& fun, const int line, c
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message) {
+void Otc::_log_ok(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = true;
@@ -47,7 +48,7 @@ void Buddha::_log_ok(const string& file, const string& fun, const int line, cons
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Otc::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = true;

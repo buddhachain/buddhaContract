@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-bool Buddha::_is_deployer(const string& id) {
+bool Otc::_is_deployer(const string& id) {
     string deployer;
     if (!ctx->get_object("deployer", &deployer)) 
         return false;
@@ -20,7 +20,7 @@ bool Buddha::_is_deployer(const string& id) {
     return true ;
 }
 
-bool Buddha::_transfer(const string& toid,
+bool Otc::_transfer(const string& toid,
                     const string& toamount){
     //将抵押退还
     xchain::Account account = xchain::Account(toid);
@@ -32,14 +32,14 @@ bool Buddha::_transfer(const string& toid,
 
 namespace 分界线{}
 
-void Buddha::initialize() {
+void Otc::initialize() {
     //deployer对象存储
     ctx->put_object("deployer", ctx->initiator());
     ctx->emit_event("initialize", ctx->initiator());
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "deployer=" + ctx->initiator());
 }
 
-void Buddha::get_deployer() {
+void Otc::get_deployer() {
     //获取deployer对象
     string deployer;
     if (!ctx->get_object("deployer", &deployer) ) {
@@ -57,7 +57,7 @@ void Buddha::get_deployer() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "deployer=" + deployer);
 }
 
-bool Buddha::is_deployer() {
+bool Otc::is_deployer() {
     bool ret = _is_deployer(ctx->initiator());
     if (ret) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is deployer .") ;
@@ -69,6 +69,6 @@ bool Buddha::is_deployer() {
 }
 
 
-DEFINE_METHOD(Buddha, initialize)               { self.initialize();                }
-DEFINE_METHOD(Buddha, get_deployer)             { self.get_deployer();              }
-DEFINE_METHOD(Buddha, is_deployer)              { self.is_deployer();               }
+DEFINE_METHOD(Otc, initialize)               { self.initialize();                }
+DEFINE_METHOD(Otc, get_deployer)             { self.get_deployer();              }
+DEFINE_METHOD(Otc, is_deployer)              { self.is_deployer();               }

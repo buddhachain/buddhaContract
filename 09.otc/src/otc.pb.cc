@@ -18,10 +18,14 @@ class GuarantyDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Guaranty> _instance;
 } _Guaranty_default_instance_;
-class TempleDefaultTypeInternal {
+class RedeemDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Temple> _instance;
-} _Temple_default_instance_;
+  ::google::protobuf::internal::ExplicitlyConstructed<Redeem> _instance;
+} _Redeem_default_instance_;
+class OrderDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<Order> _instance;
+} _Order_default_instance_;
 }  // namespace otc
 static void InitDefaultsGuaranty_otc_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -37,19 +41,33 @@ static void InitDefaultsGuaranty_otc_2eproto() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_Guaranty_otc_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsGuaranty_otc_2eproto}, {}};
 
-static void InitDefaultsTemple_otc_2eproto() {
+static void InitDefaultsRedeem_otc_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::otc::_Temple_default_instance_;
-    new (ptr) ::otc::Temple();
+    void* ptr = &::otc::_Redeem_default_instance_;
+    new (ptr) ::otc::Redeem();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::otc::Temple::InitAsDefaultInstance();
+  ::otc::Redeem::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_Temple_otc_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTemple_otc_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_Redeem_otc_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsRedeem_otc_2eproto}, {}};
+
+static void InitDefaultsOrder_otc_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::otc::_Order_default_instance_;
+    new (ptr) ::otc::Order();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::otc::Order::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_Order_otc_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsOrder_otc_2eproto}, {}};
 
 namespace otc {
 
@@ -62,8 +80,12 @@ class Guaranty::HasBitSetters {
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Guaranty::kAccountidFieldNumber;
+const int Guaranty::kIdFieldNumber;
+const int Guaranty::kSellerFieldNumber;
 const int Guaranty::kAmountFieldNumber;
+const int Guaranty::kLeftFieldNumber;
+const int Guaranty::kPriceFieldNumber;
+const int Guaranty::kTimestampFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Guaranty::Guaranty()
@@ -75,19 +97,33 @@ Guaranty::Guaranty(const Guaranty& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  accountid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.accountid().size() > 0) {
-    accountid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accountid_);
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.id().size() > 0) {
+    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
-  amount_ = from.amount_;
+  seller_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.seller().size() > 0) {
+    seller_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.seller_);
+  }
+  timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.timestamp().size() > 0) {
+    timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.timestamp_);
+  }
+  ::memcpy(&amount_, &from.amount_,
+    static_cast<size_t>(reinterpret_cast<char*>(&price_) -
+    reinterpret_cast<char*>(&amount_)) + sizeof(price_));
   // @@protoc_insertion_point(copy_constructor:otc.Guaranty)
 }
 
 void Guaranty::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_Guaranty_otc_2eproto.base);
-  accountid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  amount_ = PROTOBUF_LONGLONG(0);
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  seller_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&amount_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&price_) -
+      reinterpret_cast<char*>(&amount_)) + sizeof(price_));
 }
 
 Guaranty::~Guaranty() {
@@ -96,7 +132,9 @@ Guaranty::~Guaranty() {
 }
 
 void Guaranty::SharedDtor() {
-  accountid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  seller_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Guaranty::SetCachedSize(int size) const {
@@ -114,8 +152,12 @@ void Guaranty::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  accountid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  amount_ = PROTOBUF_LONGLONG(0);
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  seller_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&amount_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&price_) -
+      reinterpret_cast<char*>(&amount_)) + sizeof(price_));
   _internal_metadata_.Clear();
 }
 
@@ -132,13 +174,13 @@ const char* Guaranty::_InternalParse(const char* begin, const char* end, void* o
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // string accountid = 1;
+      // string id = 1;
       case 1: {
         if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_accountid();
+        object = msg->mutable_id();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -148,11 +190,57 @@ const char* Guaranty::_InternalParse(const char* begin, const char* end, void* o
         ptr += size;
         break;
       }
-      // int64 amount = 2;
+      // string seller = 2;
       case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_seller();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // int64 amount = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
         msg->set_amount(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // int64 left = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        msg->set_left(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // int64 price = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        msg->set_price(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // string timestamp = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_timestamp();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
         break;
       }
       default: {
@@ -195,28 +283,84 @@ bool Guaranty::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string accountid = 1;
+      // string id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_accountid()));
+                input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->accountid().data(), static_cast<int>(this->accountid().length()),
+            this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "otc.Guaranty.accountid"));
+            "otc.Guaranty.id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int64 amount = 2;
+      // string seller = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_seller()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->seller().data(), static_cast<int>(this->seller().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Guaranty.seller"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 amount = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
                  input, &amount_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 left = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &left_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 price = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &price_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string timestamp = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_timestamp()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->timestamp().data(), static_cast<int>(this->timestamp().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Guaranty.timestamp"));
         } else {
           goto handle_unusual;
         }
@@ -250,19 +394,49 @@ void Guaranty::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string accountid = 1;
-  if (this->accountid().size() > 0) {
+  // string id = 1;
+  if (this->id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->accountid().data(), static_cast<int>(this->accountid().length()),
+      this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "otc.Guaranty.accountid");
+      "otc.Guaranty.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->accountid(), output);
+      1, this->id(), output);
   }
 
-  // int64 amount = 2;
+  // string seller = 2;
+  if (this->seller().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->seller().data(), static_cast<int>(this->seller().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Guaranty.seller");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->seller(), output);
+  }
+
+  // int64 amount = 3;
   if (this->amount() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->amount(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->amount(), output);
+  }
+
+  // int64 left = 4;
+  if (this->left() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->left(), output);
+  }
+
+  // int64 price = 5;
+  if (this->price() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(5, this->price(), output);
+  }
+
+  // string timestamp = 6;
+  if (this->timestamp().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->timestamp().data(), static_cast<int>(this->timestamp().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Guaranty.timestamp");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->timestamp(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -280,18 +454,46 @@ size_t Guaranty::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string accountid = 1;
-  if (this->accountid().size() > 0) {
+  // string id = 1;
+  if (this->id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->accountid());
+        this->id());
   }
 
-  // int64 amount = 2;
+  // string seller = 2;
+  if (this->seller().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->seller());
+  }
+
+  // string timestamp = 6;
+  if (this->timestamp().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->timestamp());
+  }
+
+  // int64 amount = 3;
   if (this->amount() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
         this->amount());
+  }
+
+  // int64 left = 4;
+  if (this->left() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->left());
+  }
+
+  // int64 price = 5;
+  if (this->price() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->price());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -311,12 +513,26 @@ void Guaranty::MergeFrom(const Guaranty& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.accountid().size() > 0) {
+  if (from.id().size() > 0) {
 
-    accountid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accountid_);
+    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.seller().size() > 0) {
+
+    seller_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.seller_);
+  }
+  if (from.timestamp().size() > 0) {
+
+    timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.timestamp_);
   }
   if (from.amount() != 0) {
     set_amount(from.amount());
+  }
+  if (from.left() != 0) {
+    set_left(from.left());
+  }
+  if (from.price() != 0) {
+    set_price(from.price());
   }
 }
 
@@ -338,9 +554,15 @@ void Guaranty::Swap(Guaranty* other) {
 void Guaranty::InternalSwap(Guaranty* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  accountid_.Swap(&other->accountid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  seller_.Swap(&other->seller_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  timestamp_.Swap(&other->timestamp_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(amount_, other->amount_);
+  swap(left_, other->left_);
+  swap(price_, other->price_);
 }
 
 ::std::string Guaranty::GetTypeName() const {
@@ -350,89 +572,90 @@ void Guaranty::InternalSwap(Guaranty* other) {
 
 // ===================================================================
 
-void Temple::InitAsDefaultInstance() {
+void Redeem::InitAsDefaultInstance() {
 }
-class Temple::HasBitSetters {
+class Redeem::HasBitSetters {
  public:
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Temple::kAccountidFieldNumber;
-const int Temple::kOpttypeFieldNumber;
-const int Temple::kAmountFieldNumber;
-const int Temple::kTimestampFieldNumber;
+const int Redeem::kIdFieldNumber;
+const int Redeem::kGuarantyIdFieldNumber;
+const int Redeem::kAmountFieldNumber;
+const int Redeem::kTimestampFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-Temple::Temple()
+Redeem::Redeem()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:otc.Temple)
+  // @@protoc_insertion_point(constructor:otc.Redeem)
 }
-Temple::Temple(const Temple& from)
+Redeem::Redeem(const Redeem& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  accountid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.accountid().size() > 0) {
-    accountid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accountid_);
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.id().size() > 0) {
+    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  guaranty_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.guaranty_id().size() > 0) {
+    guaranty_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guaranty_id_);
   }
   timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.timestamp().size() > 0) {
     timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.timestamp_);
   }
-  ::memcpy(&opttype_, &from.opttype_,
-    static_cast<size_t>(reinterpret_cast<char*>(&amount_) -
-    reinterpret_cast<char*>(&opttype_)) + sizeof(amount_));
-  // @@protoc_insertion_point(copy_constructor:otc.Temple)
+  amount_ = from.amount_;
+  // @@protoc_insertion_point(copy_constructor:otc.Redeem)
 }
 
-void Temple::SharedCtor() {
+void Redeem::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
-      &scc_info_Temple_otc_2eproto.base);
-  accountid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      &scc_info_Redeem_otc_2eproto.base);
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  guaranty_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&opttype_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&amount_) -
-      reinterpret_cast<char*>(&opttype_)) + sizeof(amount_));
+  amount_ = PROTOBUF_LONGLONG(0);
 }
 
-Temple::~Temple() {
-  // @@protoc_insertion_point(destructor:otc.Temple)
+Redeem::~Redeem() {
+  // @@protoc_insertion_point(destructor:otc.Redeem)
   SharedDtor();
 }
 
-void Temple::SharedDtor() {
-  accountid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void Redeem::SharedDtor() {
+  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  guaranty_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void Temple::SetCachedSize(int size) const {
+void Redeem::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const Temple& Temple::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_Temple_otc_2eproto.base);
+const Redeem& Redeem::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_Redeem_otc_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void Temple::Clear() {
-// @@protoc_insertion_point(message_clear_start:otc.Temple)
+void Redeem::Clear() {
+// @@protoc_insertion_point(message_clear_start:otc.Redeem)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  accountid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  guaranty_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&opttype_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&amount_) -
-      reinterpret_cast<char*>(&opttype_)) + sizeof(amount_));
+  amount_ = PROTOBUF_LONGLONG(0);
   _internal_metadata_.Clear();
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Temple::_InternalParse(const char* begin, const char* end, void* object,
+const char* Redeem::_InternalParse(const char* begin, const char* end, void* object,
                   ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<Temple*>(object);
+  auto msg = static_cast<Redeem*>(object);
   ::google::protobuf::int32 size; (void)size;
   int depth; (void)depth;
   ::google::protobuf::uint32 tag;
@@ -442,13 +665,13 @@ const char* Temple::_InternalParse(const char* begin, const char* end, void* obj
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // string accountid = 1;
+      // string id = 1;
       case 1: {
         if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_accountid();
+        object = msg->mutable_id();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -458,11 +681,20 @@ const char* Temple::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // int64 opttype = 2;
+      // string guaranty_id = 2;
       case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
-        msg->set_opttype(::google::protobuf::internal::ReadVarint(&ptr));
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_guaranty_id();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
         break;
       }
       // int64 amount = 3;
@@ -512,7 +744,7 @@ len_delim_till_end:
                                {parser_till_end, object}, size);
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool Temple::MergePartialFromCodedStream(
+bool Redeem::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
@@ -522,34 +754,36 @@ bool Temple::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:otc.Temple)
+  // @@protoc_insertion_point(parse_start:otc.Redeem)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string accountid = 1;
+      // string id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_accountid()));
+                input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->accountid().data(), static_cast<int>(this->accountid().length()),
+            this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "otc.Temple.accountid"));
+            "otc.Redeem.id"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int64 opttype = 2;
+      // string guaranty_id = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &opttype_)));
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_guaranty_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->guaranty_id().data(), static_cast<int>(this->guaranty_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Redeem.guaranty_id"));
         } else {
           goto handle_unusual;
         }
@@ -577,7 +811,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->timestamp().data(), static_cast<int>(this->timestamp().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "otc.Temple.timestamp"));
+            "otc.Redeem.timestamp"));
         } else {
           goto handle_unusual;
         }
@@ -596,34 +830,39 @@ bool Temple::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:otc.Temple)
+  // @@protoc_insertion_point(parse_success:otc.Redeem)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:otc.Temple)
+  // @@protoc_insertion_point(parse_failure:otc.Redeem)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void Temple::SerializeWithCachedSizes(
+void Redeem::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:otc.Temple)
+  // @@protoc_insertion_point(serialize_start:otc.Redeem)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string accountid = 1;
-  if (this->accountid().size() > 0) {
+  // string id = 1;
+  if (this->id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->accountid().data(), static_cast<int>(this->accountid().length()),
+      this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "otc.Temple.accountid");
+      "otc.Redeem.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->accountid(), output);
+      1, this->id(), output);
   }
 
-  // int64 opttype = 2;
-  if (this->opttype() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->opttype(), output);
+  // string guaranty_id = 2;
+  if (this->guaranty_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->guaranty_id().data(), static_cast<int>(this->guaranty_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Redeem.guaranty_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->guaranty_id(), output);
   }
 
   // int64 amount = 3;
@@ -636,18 +875,18 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->timestamp().data(), static_cast<int>(this->timestamp().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "otc.Temple.timestamp");
+      "otc.Redeem.timestamp");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->timestamp(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:otc.Temple)
+  // @@protoc_insertion_point(serialize_end:otc.Redeem)
 }
 
-size_t Temple::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:otc.Temple)
+size_t Redeem::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:otc.Redeem)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -656,11 +895,18 @@ size_t Temple::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string accountid = 1;
-  if (this->accountid().size() > 0) {
+  // string id = 1;
+  if (this->id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->accountid());
+        this->id());
+  }
+
+  // string guaranty_id = 2;
+  if (this->guaranty_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->guaranty_id());
   }
 
   // string timestamp = 4;
@@ -668,13 +914,6 @@ size_t Temple::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->timestamp());
-  }
-
-  // int64 opttype = 2;
-  if (this->opttype() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->opttype());
   }
 
   // int64 amount = 3;
@@ -689,62 +928,687 @@ size_t Temple::ByteSizeLong() const {
   return total_size;
 }
 
-void Temple::CheckTypeAndMergeFrom(
+void Redeem::CheckTypeAndMergeFrom(
     const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const Temple*>(&from));
+  MergeFrom(*::google::protobuf::down_cast<const Redeem*>(&from));
 }
 
-void Temple::MergeFrom(const Temple& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:otc.Temple)
+void Redeem::MergeFrom(const Redeem& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:otc.Redeem)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.accountid().size() > 0) {
+  if (from.id().size() > 0) {
 
-    accountid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.accountid_);
+    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.guaranty_id().size() > 0) {
+
+    guaranty_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guaranty_id_);
   }
   if (from.timestamp().size() > 0) {
 
     timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.timestamp_);
-  }
-  if (from.opttype() != 0) {
-    set_opttype(from.opttype());
   }
   if (from.amount() != 0) {
     set_amount(from.amount());
   }
 }
 
-void Temple::CopyFrom(const Temple& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:otc.Temple)
+void Redeem::CopyFrom(const Redeem& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:otc.Redeem)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Temple::IsInitialized() const {
+bool Redeem::IsInitialized() const {
   return true;
 }
 
-void Temple::Swap(Temple* other) {
+void Redeem::Swap(Redeem* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void Temple::InternalSwap(Temple* other) {
+void Redeem::InternalSwap(Redeem* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  accountid_.Swap(&other->accountid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  guaranty_id_.Swap(&other->guaranty_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   timestamp_.Swap(&other->timestamp_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(opttype_, other->opttype_);
   swap(amount_, other->amount_);
 }
 
-::std::string Temple::GetTypeName() const {
-  return "otc.Temple";
+::std::string Redeem::GetTypeName() const {
+  return "otc.Redeem";
+}
+
+
+// ===================================================================
+
+void Order::InitAsDefaultInstance() {
+}
+class Order::HasBitSetters {
+ public:
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Order::kIdFieldNumber;
+const int Order::kGuarantyIdFieldNumber;
+const int Order::kBuyerFieldNumber;
+const int Order::kAmountFieldNumber;
+const int Order::kPriceFieldNumber;
+const int Order::kStateFieldNumber;
+const int Order::kStartTimestampFieldNumber;
+const int Order::kConfirmTimestampFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Order::Order()
+  : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:otc.Order)
+}
+Order::Order(const Order& from)
+  : ::google::protobuf::MessageLite(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.id().size() > 0) {
+    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  guaranty_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.guaranty_id().size() > 0) {
+    guaranty_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guaranty_id_);
+  }
+  buyer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.buyer().size() > 0) {
+    buyer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.buyer_);
+  }
+  start_timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.start_timestamp().size() > 0) {
+    start_timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.start_timestamp_);
+  }
+  confirm_timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.confirm_timestamp().size() > 0) {
+    confirm_timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.confirm_timestamp_);
+  }
+  ::memcpy(&amount_, &from.amount_,
+    static_cast<size_t>(reinterpret_cast<char*>(&state_) -
+    reinterpret_cast<char*>(&amount_)) + sizeof(state_));
+  // @@protoc_insertion_point(copy_constructor:otc.Order)
+}
+
+void Order::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_Order_otc_2eproto.base);
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  guaranty_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  buyer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  start_timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  confirm_timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&amount_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&state_) -
+      reinterpret_cast<char*>(&amount_)) + sizeof(state_));
+}
+
+Order::~Order() {
+  // @@protoc_insertion_point(destructor:otc.Order)
+  SharedDtor();
+}
+
+void Order::SharedDtor() {
+  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  guaranty_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  buyer_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  start_timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  confirm_timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void Order::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const Order& Order::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_Order_otc_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void Order::Clear() {
+// @@protoc_insertion_point(message_clear_start:otc.Order)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  guaranty_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  buyer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  start_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  confirm_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&amount_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&state_) -
+      reinterpret_cast<char*>(&amount_)) + sizeof(state_));
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* Order::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<Order*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // string id = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_id();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string guaranty_id = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_guaranty_id();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string buyer = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_buyer();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // int64 amount = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
+        msg->set_amount(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // int64 price = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
+        msg->set_price(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // int64 state = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
+        msg->set_state(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // string start_timestamp = 7;
+      case 7: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 58) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_start_timestamp();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string confirm_timestamp = 8;
+      case 8: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_confirm_timestamp();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool Order::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::LiteUnknownFieldSetter unknown_fields_setter(
+      &_internal_metadata_);
+  ::google::protobuf::io::StringOutputStream unknown_fields_output(
+      unknown_fields_setter.buffer());
+  ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
+      &unknown_fields_output, false);
+  // @@protoc_insertion_point(parse_start:otc.Order)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->id().data(), static_cast<int>(this->id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Order.id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string guaranty_id = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_guaranty_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->guaranty_id().data(), static_cast<int>(this->guaranty_id().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Order.guaranty_id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string buyer = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_buyer()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->buyer().data(), static_cast<int>(this->buyer().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Order.buyer"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 amount = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &amount_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 price = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &price_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 state = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &state_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string start_timestamp = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_start_timestamp()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->start_timestamp().data(), static_cast<int>(this->start_timestamp().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Order.start_timestamp"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string confirm_timestamp = 8;
+      case 8: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (66 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_confirm_timestamp()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->confirm_timestamp().data(), static_cast<int>(this->confirm_timestamp().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "otc.Order.confirm_timestamp"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(
+            input, tag, &unknown_fields_stream));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:otc.Order)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:otc.Order)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void Order::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:otc.Order)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (this->id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Order.id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->id(), output);
+  }
+
+  // string guaranty_id = 2;
+  if (this->guaranty_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->guaranty_id().data(), static_cast<int>(this->guaranty_id().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Order.guaranty_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->guaranty_id(), output);
+  }
+
+  // string buyer = 3;
+  if (this->buyer().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->buyer().data(), static_cast<int>(this->buyer().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Order.buyer");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->buyer(), output);
+  }
+
+  // int64 amount = 4;
+  if (this->amount() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->amount(), output);
+  }
+
+  // int64 price = 5;
+  if (this->price() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(5, this->price(), output);
+  }
+
+  // int64 state = 6;
+  if (this->state() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->state(), output);
+  }
+
+  // string start_timestamp = 7;
+  if (this->start_timestamp().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->start_timestamp().data(), static_cast<int>(this->start_timestamp().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Order.start_timestamp");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->start_timestamp(), output);
+  }
+
+  // string confirm_timestamp = 8;
+  if (this->confirm_timestamp().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->confirm_timestamp().data(), static_cast<int>(this->confirm_timestamp().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "otc.Order.confirm_timestamp");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      8, this->confirm_timestamp(), output);
+  }
+
+  output->WriteRaw(_internal_metadata_.unknown_fields().data(),
+                   static_cast<int>(_internal_metadata_.unknown_fields().size()));
+  // @@protoc_insertion_point(serialize_end:otc.Order)
+}
+
+size_t Order::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:otc.Order)
+  size_t total_size = 0;
+
+  total_size += _internal_metadata_.unknown_fields().size();
+
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string id = 1;
+  if (this->id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->id());
+  }
+
+  // string guaranty_id = 2;
+  if (this->guaranty_id().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->guaranty_id());
+  }
+
+  // string buyer = 3;
+  if (this->buyer().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->buyer());
+  }
+
+  // string start_timestamp = 7;
+  if (this->start_timestamp().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->start_timestamp());
+  }
+
+  // string confirm_timestamp = 8;
+  if (this->confirm_timestamp().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->confirm_timestamp());
+  }
+
+  // int64 amount = 4;
+  if (this->amount() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->amount());
+  }
+
+  // int64 price = 5;
+  if (this->price() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->price());
+  }
+
+  // int64 state = 6;
+  if (this->state() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->state());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Order::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const Order*>(&from));
+}
+
+void Order::MergeFrom(const Order& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:otc.Order)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.id().size() > 0) {
+
+    id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
+  if (from.guaranty_id().size() > 0) {
+
+    guaranty_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.guaranty_id_);
+  }
+  if (from.buyer().size() > 0) {
+
+    buyer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.buyer_);
+  }
+  if (from.start_timestamp().size() > 0) {
+
+    start_timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.start_timestamp_);
+  }
+  if (from.confirm_timestamp().size() > 0) {
+
+    confirm_timestamp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.confirm_timestamp_);
+  }
+  if (from.amount() != 0) {
+    set_amount(from.amount());
+  }
+  if (from.price() != 0) {
+    set_price(from.price());
+  }
+  if (from.state() != 0) {
+    set_state(from.state());
+  }
+}
+
+void Order::CopyFrom(const Order& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:otc.Order)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Order::IsInitialized() const {
+  return true;
+}
+
+void Order::Swap(Order* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Order::InternalSwap(Order* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  guaranty_id_.Swap(&other->guaranty_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  buyer_.Swap(&other->buyer_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  start_timestamp_.Swap(&other->start_timestamp_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  confirm_timestamp_.Swap(&other->confirm_timestamp_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(amount_, other->amount_);
+  swap(price_, other->price_);
+  swap(state_, other->state_);
+}
+
+::std::string Order::GetTypeName() const {
+  return "otc.Order";
 }
 
 
@@ -755,8 +1619,11 @@ namespace protobuf {
 template<> PROTOBUF_NOINLINE ::otc::Guaranty* Arena::CreateMaybeMessage< ::otc::Guaranty >(Arena* arena) {
   return Arena::CreateInternal< ::otc::Guaranty >(arena);
 }
-template<> PROTOBUF_NOINLINE ::otc::Temple* Arena::CreateMaybeMessage< ::otc::Temple >(Arena* arena) {
-  return Arena::CreateInternal< ::otc::Temple >(arena);
+template<> PROTOBUF_NOINLINE ::otc::Redeem* Arena::CreateMaybeMessage< ::otc::Redeem >(Arena* arena) {
+  return Arena::CreateInternal< ::otc::Redeem >(arena);
+}
+template<> PROTOBUF_NOINLINE ::otc::Order* Arena::CreateMaybeMessage< ::otc::Order >(Arena* arena) {
+  return Arena::CreateInternal< ::otc::Order >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

@@ -1,0 +1,142 @@
+[
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/d8/d8f3c88b2bc58307.o /root/buddhaContract/07.kinddeed_mall/src/aftercomment.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/aftercomment.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/40/40af88f2c7f2d336.o /root/buddhaContract/07.kinddeed_mall/src/beforecomment.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/beforecomment.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/14/14e8f0055b9de224.o /root/buddhaContract/07.kinddeed_mall/src/buddha.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/buddha.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/4b/4ba741051dea1208.o /root/buddhaContract/07.kinddeed_mall/src/buddha.pb.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/buddha.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/3c/3c8b0d67a2560831.o /root/buddhaContract/07.kinddeed_mall/src/commentlabel.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/commentlabel.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e6/e6d4dd1b62d334b9.o /root/buddhaContract/07.kinddeed_mall/src/credit.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/credit.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/ab/abdeebe4e461458d.o /root/buddhaContract/07.kinddeed_mall/src/creditranking.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/creditranking.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/4b/4bcbc0aa3fe5c34a.o /root/buddhaContract/07.kinddeed_mall/src/deployer.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/deployer.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/41/41a6f2dd72375dc3.o /root/buddhaContract/07.kinddeed_mall/src/founder.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/founder.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/cc/cc30b65bbecd72fe.o /root/buddhaContract/07.kinddeed_mall/src/kinddeed.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/kinddeed.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/ee/ee398eb61f602fc0.o /root/buddhaContract/07.kinddeed_mall/src/kinddeedproof.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/kinddeedproof.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/19/19754a81aa45773e.o /root/buddhaContract/07.kinddeed_mall/src/kinddeedtype.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/kinddeedtype.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/55/555df77a1dc16628.o /root/buddhaContract/07.kinddeed_mall/src/master.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/master.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a5/a514f539f9371d7d.o /root/buddhaContract/07.kinddeed_mall/src/merit.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/merit.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/31/31567b60e8502121.o /root/buddhaContract/07.kinddeed_mall/src/meritranking.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/meritranking.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/0f/0fa6669fd0dc581a.o /root/buddhaContract/07.kinddeed_mall/src/order.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/order.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/1a/1a58895e4cb73520.o /root/buddhaContract/07.kinddeed_mall/src/proposal.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/proposal.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/3f/3fe4e8fa2312ee95.o /root/buddhaContract/07.kinddeed_mall/src/temple.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/temple.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f3/f3551dc4ef47d933.o /root/buddhaContract/07.kinddeed_mall/src/templemaster.cc",
+    "file": "/root/buddhaContract/07.kinddeed_mall/src/templemaster.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f7/f7a346506baf3c18.o /root/xuperchain/core/contractsdk/cpp/src/xchain/account.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/account.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a4/a40f048dee03eaf8.o /root/xuperchain/core/contractsdk/cpp/src/xchain/basic_iterator.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/basic_iterator.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/9c/9cfcfca62a9662f6.o /root/xuperchain/core/contractsdk/cpp/src/xchain/block.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/block.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/ec/ecbb5cc223f25341.o /root/xuperchain/core/contractsdk/cpp/src/xchain/context_impl.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/context_impl.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/83/832fb0a0f7ba0e99.o /root/xuperchain/core/contractsdk/cpp/src/xchain/contract.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/contract.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/58/586638b75bfd932b.o /root/xuperchain/core/contractsdk/cpp/src/xchain/contract.pb.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/contract.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f2/f2a8cc87f3c8b6d4.o /root/xuperchain/core/contractsdk/cpp/src/xchain/crypto.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/crypto.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e6/e680c780ff7430ae.o /root/xuperchain/core/contractsdk/cpp/src/xchain/syscall.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/syscall.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/07.kinddeed_mall",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/41/41ad0191c39ce959.o /root/xuperchain/core/contractsdk/cpp/src/xchain/transaction.cc",
+    "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/transaction.cc"
+  }
+]
