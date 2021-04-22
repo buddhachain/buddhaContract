@@ -3,8 +3,7 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "otc.pb.h"
-#include "otc.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;

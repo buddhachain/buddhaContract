@@ -1,0 +1,31 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package identity;
+
+message User {
+    string id           = 1; //日志id，唯一
+    string nickname     = 2; //昵称
+    string head_hash    = 3; //头像哈希
+    string name         = 4; //姓名
+    int64  sex          = 5; //性别 1男，2女
+    string phone        = 6; //手机号
+    int64  wechat       = 7; //微信号
+    string email        = 8; //邮箱
+    string home_address = 9; //家庭地址
+    string born_timestamp   = 10; //出生年月日
+    string idcard       = 11; //身份证
+    string otherid      = 12; //其他证件
+    string photo        = 13; //照片哈希 [111,222,333]
+    string desc         = 14; //简介哈希
+    string degree       = 15; //学历
+    string job          = 16; //职业
+    string income       = 17; //收入
+    string marry        = 18; //婚姻状况
+    string hobyy        = 19; //爱好
+    string recommender  = 20; //推荐人id
+    string belief       = 21; //信佛时长
+    string idname       = 22; //身份名称
+    bool   approved     = 23; //批准标记
+}
+

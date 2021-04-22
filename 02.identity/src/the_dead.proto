@@ -1,0 +1,17 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package identity;
+
+message TheDead {
+    string id               = 1; //日志id，唯一
+    string name             = 2; //姓名
+    int64  sex              = 3; //性别 1男，2女
+    string born_timestamp   = 4; //出生年月日
+    string born_address     = 5; //出生地址
+    string dead_timestamp   = 6; //出生年月日
+    string dead_address     = 7; //逝世地址
+    string idcard           = 8; //身份证
+    string otherid          = 9; //其他证件
+    string desc             = 10;//简介哈希
+}

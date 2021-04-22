@@ -1,0 +1,9 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package identity;
+
+message Identity {
+    string id    = 1; //账户id，唯一
+    int64  type  = 2; //类型 [1~6] [游客,用户,认证用户, 法师,寺院,逝者] 根据此类型去查找对应的表
+}

@@ -3,21 +3,21 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "otc.pb.h"
-#include "otc.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
 
-Buddha::Buddha() :
-    _guaranty_table(          context(), "guaranty"                 ),
-    _log_table(          context(), "log"                 ),
+Main::Main() :
+    _identity_table(   context(), "identity"    ),
+    _visitor_table(     context(), "visitor"      ),
+    _user_table(      context(), "user"       ),
 
     ctx(context())
 {
 }
 
-void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message) {
+void Main::_log_error(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -27,7 +27,7 @@ void Buddha::_log_error(const string& file, const string& fun, const int line, c
 }
 
 
-void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Main::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -39,7 +39,7 @@ void Buddha::_log_error(const string& file, const string& fun, const int line, c
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message) {
+void Main::_log_ok(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = true;
@@ -47,7 +47,7 @@ void Buddha::_log_ok(const string& file, const string& fun, const int line, cons
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Main::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = true;
