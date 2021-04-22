@@ -1,0 +1,14 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package otc;
+
+//抵押表
+message Guaranty {
+    string id           = 1; //抵押id，唯一
+    string seller       = 2; //买家id
+    int64  amount       = 3; //抵押数量
+    int64  left         = 4; //剩余数量
+    int64  price        = 5; //单价
+    string timestamp    = 6; //抵押时间 
+}

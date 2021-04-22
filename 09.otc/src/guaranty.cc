@@ -3,51 +3,53 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "buddha.pb.h"
-#include "buddha.h"
+#include "guaranty.pb.h"
+#include "guaranty.h"
 
 #include <iostream>
 using namespace std;
-
-xchain::json master::to_json() {
+    
+xchain::json guaranty::to_json() {
     xchain::json j = {
-        {"id", id()},
-        {"creditcode", creditcode()},
-        {"proof", proof()},
-        {"approved", approved()},
+        { "id",          id()        },
+        { "seller",      seller()    },
+        { "amount",      amount()    },
+        { "left",        left()      },
+        { "price",       price()     },
+        { "timestamp",   timestamp() },
     };
 
     return j;
 }
 
-bool Buddha::_is_master_exist(master& ent, const string& id){
-    if (!get_master_table().find({{"id", id}}, &ent))
+bool Otc::_is_guaranty_exist(guaranty& ent, const string& id){
+    if (!get_guaranty_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_master_exist_by_proof(master& ent, const string& proof){
-    if (!get_master_table().find({{"proof", proof}}, &ent))
+bool Otc::_is_guaranty_exist_by_amount(guaranty& ent, const string& amount){
+    if (!get_guaranty_table().find({{"amount", amount}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_master(const string& id) {
-    master ent;
-    if (!_is_master_exist(ent, id))
+bool Otc::_is_guaranty(const string& id) {
+    guaranty ent;
+    if (!_is_guaranty_exist(ent, id))
         return false;
 
-    return ent.approved();
+    return ent.left();
 }
 
-bool Buddha::_scan_master(xchain::json& ja, const string& cond) {
-    auto it = get_master_table().scan({{"id",cond}});
+bool Otc::_scan_guaranty(xchain::json& ja, const string& cond) {
+    auto it = get_guaranty_table().scan({{"id",cond}});
     while(it->next() ) {
-        master ent;
+        guaranty ent;
         if (!it->get(&ent) ) {
-            mycout << "master table get failure : " << it->error(true) << endl;
+            mycout << "guaranty table get failure : " << it->error(true) << endl;
             return false;
         }
 
@@ -57,132 +59,132 @@ bool Buddha::_scan_master(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_master_record(const string& id) {
-    master ent;
-    if (!_is_master_exist(ent, id)){
-        mycout << "master " << id << " is not exist ." << endl ;
+bool Otc::_delete_guaranty_record(const string& id) {
+    guaranty ent;
+    if (!_is_guaranty_exist(ent, id)){
+        mycout << "guaranty " << id << " is not exist ." << endl ;
         return false;
     }
 
-    if( !get_master_table().del(ent) ) {
-        mycout << "delete master " << ent.to_json().dump() << " failure ." << endl ;
+    if( !get_guaranty_table().del(ent) ) {
+        mycout << "delete guaranty " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete master " << ent.to_json().dump() << " success ." << endl ;
+    mycout << "delete guaranty " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
 namespace 分界线{}
 
-void Buddha::apply_master(){
-    const string& creditcode = ctx->arg("creditcode");
-    if( creditcode.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "creditcode is empty .");
+void Otc::apply_guaranty(){
+    const string& seller = ctx->arg("seller");
+    if( seller.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "seller is empty .");
         return ;
     }
 
-    const string& proof = ctx->arg("proof");
-    if( proof.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "proof is empty .");
+    const string& amount = ctx->arg("amount");
+    if( amount.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "amount is empty .");
         return ;
     }
 
     //身份检查，只有用户才能申请成为法师
     if( !is_user() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  guaranty .");
         return ;
     }
 
     //判断是否已经是法师
-    if( is_master() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already master .");
+    if( is_guaranty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already guaranty .");
         return ;
     }
 
     //判断此寺院是否存在
-    master ent;
-    if( _is_master_exist(ent, ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "master " + ctx->initiator() + " is applying .", ent.to_json() );
+    guaranty ent;
+    if( _is_guaranty_exist(ent, ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "guaranty " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
 
     ent.set_id(ctx->initiator());
-    ent.set_creditcode(creditcode);
-    ent.set_proof(proof);
-    ent.set_approved(false);
-    if (!get_master_table().put(ent) ) {
+    ent.set_seller(seller);
+    ent.set_amount(amount);
+    ent.set_left(false);
+    if (!get_guaranty_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply master over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply guaranty over, please wait for approve .");
 }
 
-void Buddha::approve_master() {
+void Otc::approve_guaranty() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty id is empty .");
         return ;
     }
 
     //判断是否是基金会成员
     if( !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve guaranty .");
         return ;
     }
 
     //判断此法师是否存在
-    master ent;
-    if( !_is_master_exist(ent, id) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master " + id + " is not exist .");
+    guaranty ent;
+    if( !_is_guaranty_exist(ent, id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty " + id + " is not exist .");
         return ;
     }
 
     //判断是否是法师
-    if( _is_master(id) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already master .", ent.to_json() );
+    if( _is_guaranty(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already guaranty .", ent.to_json() );
         return ;
     }
 
     //删除此法师
-    if( !_delete_master_record(id) ) {
+    if( !_delete_guaranty_record(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     //授权
-    ent.set_approved(true);
-    if (!get_master_table().put(ent) ) {
+    ent.set_left(true);
+    if (!get_guaranty_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve master " + id + " success .", ent.to_json() );
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve guaranty " + id + " success .", ent.to_json() );
 }
 
-void Buddha::recusal_master() {
+void Otc::recusal_guaranty() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty id is empty .");
         return ;
     }
 
     //判断是否是基金会成员
     if( !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal guaranty .");
         return ;
     }
 
     //判断此法师是否存在
-    master ent;
-    if( !_is_master_exist(ent, id) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master " + id + " is not exist .");
+    guaranty ent;
+    if( !_is_guaranty_exist(ent, id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty " + id + " is not exist .");
         return ;
     }
 
     //删除此法师
-    if( !_delete_master_record(id) ) {
+    if( !_delete_guaranty_record(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
@@ -190,26 +192,26 @@ void Buddha::recusal_master() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Buddha::is_master() {
-    if (!_is_master(ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not master .") ;
+bool Otc::is_guaranty() {
+    if (!_is_guaranty(ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not guaranty .") ;
         return false;
     }
     
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is master .") ;
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is guaranty .") ;
     return true;
 }
 
-void Buddha::list_master() {
+void Otc::list_guaranty() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list guaranty .");
         return ;
     }
 
     xchain::json ja ;
-    if(!_scan_master(ja, ctx->arg("id")) ) {
+    if(!_scan_guaranty(ja, ctx->arg("id")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
@@ -218,8 +220,8 @@ void Buddha::list_master() {
 }
 
 
-DEFINE_METHOD(Buddha, apply_master)             { self.apply_master();              }
-DEFINE_METHOD(Buddha, approve_master)           { self.approve_master();            }
-DEFINE_METHOD(Buddha, recusal_master)           { self.recusal_master();            }
-DEFINE_METHOD(Buddha, is_master)                { self.is_master();                 }
-DEFINE_METHOD(Buddha, list_master)              { self.list_master();               }
+DEFINE_METHOD(Otc, apply_guaranty)             { self.apply_guaranty();              }
+DEFINE_METHOD(Otc, approve_guaranty)           { self.approve_guaranty();            }
+DEFINE_METHOD(Otc, recusal_guaranty)           { self.recusal_guaranty();            }
+DEFINE_METHOD(Otc, is_guaranty)                { self.is_guaranty();                 }
+DEFINE_METHOD(Otc, list_guaranty)              { self.list_guaranty();               }
