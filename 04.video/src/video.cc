@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-Main::Buddha() :
+Buddha::Buddha() :
     _guaranty_table(          context(), "guaranty"                 ),
     _log_table(          context(), "log"                 ),
 
@@ -17,7 +17,7 @@ Main::Buddha() :
 {
 }
 
-void Main::_log_error(const string& file, const string& fun, const int line, const string& message) {
+void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -27,7 +27,7 @@ void Main::_log_error(const string& file, const string& fun, const int line, con
 }
 
 
-void Main::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -39,7 +39,7 @@ void Main::_log_error(const string& file, const string& fun, const int line, con
     ctx->ok(ret.dump());
 }
 
-void Main::_log_ok(const string& file, const string& fun, const int line, const string& message) {
+void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = true;
@@ -47,7 +47,7 @@ void Main::_log_ok(const string& file, const string& fun, const int line, const 
     ctx->ok(ret.dump());
 }
 
-void Main::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = true;
