@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json kinddeedtype::to_json() {
+xchain::json BKinddeedType::to_json() {
     xchain::json j = {
         {"id", id()},
         {"desc", desc()},
@@ -19,14 +19,14 @@ xchain::json kinddeedtype::to_json() {
 }
 
 
-bool Buddha::_is_kinddeedtype_exist(kinddeedtype& ent, const string& id) {
+bool Main::_is_kinddeedtype_exist(kinddeedtype& ent, const string& id) {
     if (!get_kinddeedtype_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_scan_kinddeedtype(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeedtype(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedtype_table().scan({{"id",cond}});
     while(it->next() ) {
         kinddeedtype ent;
@@ -41,7 +41,7 @@ bool Buddha::_scan_kinddeedtype(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_kinddeedtype_record(const string& id) {
+bool Main::_delete_kinddeedtype_record(const string& id) {
     kinddeedtype ent;
     if (!_is_kinddeedtype_exist(ent, id)){
         mycout << "kinddeedtype " << id << " is not exist ." << endl ;
@@ -59,7 +59,7 @@ bool Buddha::_delete_kinddeedtype_record(const string& id) {
 
 namespace 分界线{}
 
-void Buddha::add_kinddeedtype() {
+void Main::add_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
@@ -95,7 +95,7 @@ void Buddha::add_kinddeedtype() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
-void Buddha::delete_kinddeedtype() {
+void Main::delete_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
@@ -124,7 +124,7 @@ void Buddha::delete_kinddeedtype() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
-void Buddha::update_kinddeedtype() {
+void Main::update_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
@@ -166,7 +166,7 @@ void Buddha::update_kinddeedtype() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
-void Buddha::find_kinddeedtype() {
+void Main::find_kinddeedtype() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype id is empty .");
@@ -183,7 +183,7 @@ void Buddha::find_kinddeedtype() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_kinddeedtype() {
+void Main::list_kinddeedtype() {
     xchain::json ja ;
     if(!_scan_kinddeedtype(ja) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");

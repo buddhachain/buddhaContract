@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-Buddha::Buddha() :
+Main::Buddha() :
     _founder_table(         context(), "founder"                ),
     _proposal_table(        context(), "proposal"               ),
     _temple_table(          context(), "temple"                 ),
@@ -33,7 +33,7 @@ Buddha::Buddha() :
 {
 }
 
-void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message) {
+void Main::_log_error(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -43,7 +43,7 @@ void Buddha::_log_error(const string& file, const string& fun, const int line, c
 }
 
 
-void Buddha::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Main::_log_error(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = false;
@@ -55,7 +55,7 @@ void Buddha::_log_error(const string& file, const string& fun, const int line, c
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message) {
+void Main::_log_ok(const string& file, const string& fun, const int line, const string& message) {
     cout << file << "(" << line << ") [" << fun << "] " << message << endl;
     xchain::json ret ;
     ret["result"] = true;
@@ -63,7 +63,7 @@ void Buddha::_log_ok(const string& file, const string& fun, const int line, cons
     ctx->ok(ret.dump());
 }
 
-void Buddha::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
+void Main::_log_ok(const string& file, const string& fun, const int line, const string& message, const xchain::json& j) {
     cout << file << "(" << line << ") [" << fun << "] " << j.dump() << endl;
     xchain::json ret ;
     ret["result"] = true;

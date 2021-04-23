@@ -46,22 +46,19 @@ struct TableStruct_visitor_2eproto {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-namespace identity {
 class Visitor;
 class VisitorDefaultTypeInternal;
 extern VisitorDefaultTypeInternal _Visitor_default_instance_;
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> ::identity::Visitor* Arena::CreateMaybeMessage<::identity::Visitor>(Arena*);
+template<> ::Visitor* Arena::CreateMaybeMessage<::Visitor>(Arena*);
 }  // namespace protobuf
 }  // namespace google
-namespace identity {
 
 // ===================================================================
 
 class Visitor :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.Visitor) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:Visitor) */ {
  public:
   Visitor();
   virtual ~Visitor();
@@ -185,7 +182,7 @@ class Visitor :
   ::google::protobuf::int64 wechat() const;
   void set_wechat(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:identity.Visitor)
+  // @@protoc_insertion_point(class_scope:Visitor)
  private:
   class HasBitSetters;
 
@@ -212,41 +209,41 @@ inline void Visitor::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Visitor::id() const {
-  // @@protoc_insertion_point(field_get:identity.Visitor.id)
+  // @@protoc_insertion_point(field_get:Visitor.id)
   return id_.GetNoArena();
 }
 inline void Visitor::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Visitor.id)
+  // @@protoc_insertion_point(field_set:Visitor.id)
 }
 #if LANG_CXX11
 inline void Visitor::set_id(::std::string&& value) {
   
   id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Visitor.id)
+  // @@protoc_insertion_point(field_set_rvalue:Visitor.id)
 }
 #endif
 inline void Visitor::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Visitor.id)
+  // @@protoc_insertion_point(field_set_char:Visitor.id)
 }
 inline void Visitor::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Visitor.id)
+  // @@protoc_insertion_point(field_set_pointer:Visitor.id)
 }
 inline ::std::string* Visitor::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Visitor.id)
+  // @@protoc_insertion_point(field_mutable:Visitor.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Visitor::release_id() {
-  // @@protoc_insertion_point(field_release:identity.Visitor.id)
+  // @@protoc_insertion_point(field_release:Visitor.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -257,7 +254,7 @@ inline void Visitor::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:identity.Visitor.id)
+  // @@protoc_insertion_point(field_set_allocated:Visitor.id)
 }
 
 // string nickname = 2;
@@ -265,41 +262,41 @@ inline void Visitor::clear_nickname() {
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Visitor::nickname() const {
-  // @@protoc_insertion_point(field_get:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_get:Visitor.nickname)
   return nickname_.GetNoArena();
 }
 inline void Visitor::set_nickname(const ::std::string& value) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_set:Visitor.nickname)
 }
 #if LANG_CXX11
 inline void Visitor::set_nickname(::std::string&& value) {
   
   nickname_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_set_rvalue:Visitor.nickname)
 }
 #endif
 inline void Visitor::set_nickname(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_set_char:Visitor.nickname)
 }
 inline void Visitor::set_nickname(const char* value, size_t size) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_set_pointer:Visitor.nickname)
 }
 inline ::std::string* Visitor::mutable_nickname() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_mutable:Visitor.nickname)
   return nickname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Visitor::release_nickname() {
-  // @@protoc_insertion_point(field_release:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_release:Visitor.nickname)
   
   return nickname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -310,7 +307,7 @@ inline void Visitor::set_allocated_nickname(::std::string* nickname) {
     
   }
   nickname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), nickname);
-  // @@protoc_insertion_point(field_set_allocated:identity.Visitor.nickname)
+  // @@protoc_insertion_point(field_set_allocated:Visitor.nickname)
 }
 
 // int64 wechat = 3;
@@ -318,13 +315,13 @@ inline void Visitor::clear_wechat() {
   wechat_ = PROTOBUF_LONGLONG(0);
 }
 inline ::google::protobuf::int64 Visitor::wechat() const {
-  // @@protoc_insertion_point(field_get:identity.Visitor.wechat)
+  // @@protoc_insertion_point(field_get:Visitor.wechat)
   return wechat_;
 }
 inline void Visitor::set_wechat(::google::protobuf::int64 value) {
   
   wechat_ = value;
-  // @@protoc_insertion_point(field_set:identity.Visitor.wechat)
+  // @@protoc_insertion_point(field_set:Visitor.wechat)
 }
 
 #ifdef __GNUC__
@@ -333,7 +330,6 @@ inline void Visitor::set_wechat(::google::protobuf::int64 value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace identity
 
 // @@protoc_insertion_point(global_scope)
 

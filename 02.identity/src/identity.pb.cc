@@ -13,27 +13,24 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-namespace identity {
 class IdentityDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Identity> _instance;
 } _Identity_default_instance_;
-}  // namespace identity
 static void InitDefaultsIdentity_identity_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::identity::_Identity_default_instance_;
-    new (ptr) ::identity::Identity();
+    void* ptr = &::_Identity_default_instance_;
+    new (ptr) ::Identity();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::identity::Identity::InitAsDefaultInstance();
+  ::Identity::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Identity_identity_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsIdentity_identity_2eproto}, {}};
 
-namespace identity {
 
 // ===================================================================
 
@@ -51,7 +48,7 @@ const int Identity::kTypeFieldNumber;
 Identity::Identity()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:identity.Identity)
+  // @@protoc_insertion_point(constructor:Identity)
 }
 Identity::Identity(const Identity& from)
   : ::google::protobuf::MessageLite(),
@@ -62,7 +59,7 @@ Identity::Identity(const Identity& from)
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
   type_ = from.type_;
-  // @@protoc_insertion_point(copy_constructor:identity.Identity)
+  // @@protoc_insertion_point(copy_constructor:Identity)
 }
 
 void Identity::SharedCtor() {
@@ -73,7 +70,7 @@ void Identity::SharedCtor() {
 }
 
 Identity::~Identity() {
-  // @@protoc_insertion_point(destructor:identity.Identity)
+  // @@protoc_insertion_point(destructor:Identity)
   SharedDtor();
 }
 
@@ -91,7 +88,7 @@ const Identity& Identity::default_instance() {
 
 
 void Identity::Clear() {
-// @@protoc_insertion_point(message_clear_start:identity.Identity)
+// @@protoc_insertion_point(message_clear_start:Identity)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -171,7 +168,7 @@ bool Identity::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:identity.Identity)
+  // @@protoc_insertion_point(parse_start:Identity)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -185,7 +182,7 @@ bool Identity::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Identity.id"));
+            "Identity.id"));
         } else {
           goto handle_unusual;
         }
@@ -217,10 +214,10 @@ bool Identity::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:identity.Identity)
+  // @@protoc_insertion_point(parse_success:Identity)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:identity.Identity)
+  // @@protoc_insertion_point(parse_failure:Identity)
   return false;
 #undef DO_
 }
@@ -228,7 +225,7 @@ failure:
 
 void Identity::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:identity.Identity)
+  // @@protoc_insertion_point(serialize_start:Identity)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -237,7 +234,7 @@ void Identity::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Identity.id");
+      "Identity.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -249,11 +246,11 @@ void Identity::SerializeWithCachedSizes(
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:identity.Identity)
+  // @@protoc_insertion_point(serialize_end:Identity)
 }
 
 size_t Identity::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:identity.Identity)
+// @@protoc_insertion_point(message_byte_size_start:Identity)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -287,7 +284,7 @@ void Identity::CheckTypeAndMergeFrom(
 }
 
 void Identity::MergeFrom(const Identity& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:identity.Identity)
+// @@protoc_insertion_point(class_specific_merge_from_start:Identity)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -303,7 +300,7 @@ void Identity::MergeFrom(const Identity& from) {
 }
 
 void Identity::CopyFrom(const Identity& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:identity.Identity)
+// @@protoc_insertion_point(class_specific_copy_from_start:Identity)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -326,16 +323,15 @@ void Identity::InternalSwap(Identity* other) {
 }
 
 ::std::string Identity::GetTypeName() const {
-  return "identity.Identity";
+  return "Identity";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::identity::Identity* Arena::CreateMaybeMessage< ::identity::Identity >(Arena* arena) {
-  return Arena::CreateInternal< ::identity::Identity >(arena);
+template<> PROTOBUF_NOINLINE ::Identity* Arena::CreateMaybeMessage< ::Identity >(Arena* arena) {
+  return Arena::CreateInternal< ::Identity >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

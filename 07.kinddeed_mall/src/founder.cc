@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json founder::to_json() {
+xchain::json BFounder::to_json() {
     xchain::json j = {
         {"id", id()},
         {"desc", desc()},
@@ -22,14 +22,14 @@ xchain::json founder::to_json() {
     return j;
 }
 
-bool Buddha::_is_founder_exist(founder& ent, const string& id) {
+bool Main::_is_founder_exist(founder& ent, const string& id) {
     if (!get_founder_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_founder(const string& id) {
+bool Main::_is_founder(const string& id) {
     founder ent;
     if (!_is_founder_exist(ent, id))
         return false;
@@ -37,7 +37,7 @@ bool Buddha::_is_founder(const string& id) {
     return ent.approved();
 }
 
-bool Buddha::_scan_founder(xchain::json& ja, const string& cond) {
+bool Main::_scan_founder(xchain::json& ja, const string& cond) {
     auto it = get_founder_table().scan({{"id",cond}});
     while(it->next() ) {
         founder ent;
@@ -52,7 +52,7 @@ bool Buddha::_scan_founder(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_founder_record(const string& id) {
+bool Main::_delete_founder_record(const string& id) {
     founder ent;
     if (!_is_founder_exist(ent, id)){
         mycout << "founder " << id << " is not exist ." << endl ;
@@ -70,7 +70,7 @@ bool Buddha::_delete_founder_record(const string& id) {
 
 namespace 分界线{}
 
-void Buddha::apply_founder(){
+void Main::apply_founder(){
     const string& desc = ctx->arg("desc");
     if( desc.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "desc is empty .");
@@ -122,7 +122,7 @@ void Buddha::apply_founder(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "apply founder over, please wait for approve .", ent.to_json());
 }
 
-void Buddha::approve_founder() {
+void Main::approve_founder() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder id is empty .");
@@ -164,7 +164,7 @@ void Buddha::approve_founder() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "audit " + id +  " to be founder .", ent.to_json() );
 }
 
-void Buddha::recusal_founder() {
+void Main::recusal_founder() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder id is empty .");
@@ -200,7 +200,7 @@ void Buddha::recusal_founder() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "recusal founder "+ id + " success , guaranty " + guaranty + " has refund, please check balance .");
 }
 
-bool Buddha::is_founder() {
+bool Main::is_founder() {
     if (!_is_founder(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not founder .") ;
         return false;
@@ -210,7 +210,7 @@ bool Buddha::is_founder() {
     return true;
 }
 
-void Buddha::list_founder() {
+void Main::list_founder() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {

@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json commentlabel::to_json() {
+xchain::json BCommentLabel::to_json() {
     xchain::json j = {
         {"id", id()},
         {"desc", desc()},
@@ -18,14 +18,14 @@ xchain::json commentlabel::to_json() {
     return j;
 }
 
-bool Buddha::_is_commentlabel_exist(commentlabel& ent, const string& id) {
+bool Main::_is_commentlabel_exist(commentlabel& ent, const string& id) {
     if (!get_commentlabel_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array) {
+bool Main::_is_all_types_exist_in_commentlabel(const xchain::json& label_array) {
     for(int i = 0 ; i < label_array.size() ; i++) {
         string id = label_array.at(i).template get<string>();
         commentlabel ent;
@@ -38,7 +38,7 @@ bool Buddha::_is_all_types_exist_in_commentlabel(const xchain::json& label_array
     return true;
 }
 
-bool Buddha::_scan_commentlabel(xchain::json& ja, const string& cond) {
+bool Main::_scan_commentlabel(xchain::json& ja, const string& cond) {
     auto it = get_commentlabel_table().scan({{"id",cond}});
     while(it->next() ) {
         commentlabel ent;
@@ -53,7 +53,7 @@ bool Buddha::_scan_commentlabel(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_commentlabel_record(const string& id) {
+bool Main::_delete_commentlabel_record(const string& id) {
     commentlabel ent;
     if (!_is_commentlabel_exist(ent, id)){
         mycout << "commentlabel " << id << " is not exist ." << endl ;
@@ -72,7 +72,7 @@ bool Buddha::_delete_commentlabel_record(const string& id) {
 namespace 分界线{}
 
 
-void Buddha::add_commentlabel() {
+void Main::add_commentlabel() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
@@ -108,7 +108,7 @@ void Buddha::add_commentlabel() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
-void Buddha::delete_commentlabel() {
+void Main::delete_commentlabel() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
@@ -137,7 +137,7 @@ void Buddha::delete_commentlabel() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
-void Buddha::update_commentlabel() {
+void Main::update_commentlabel() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
@@ -179,7 +179,7 @@ void Buddha::update_commentlabel() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
-void Buddha::find_commentlabel() {
+void Main::find_commentlabel() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel id is empty .");
@@ -196,7 +196,7 @@ void Buddha::find_commentlabel() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_commentlabel() {
+void Main::list_commentlabel() {
     xchain::json ja ;
     if(!_scan_beforecomment(ja) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");

@@ -1,8 +1,6 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-package identity;
-
 message Temple {
     string id           = 1; //寺院id，唯一
     string photo        = 2; //图片哈希

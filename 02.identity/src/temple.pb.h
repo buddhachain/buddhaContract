@@ -46,26 +46,23 @@ struct TableStruct_temple_2eproto {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-namespace identity {
 class Temple;
 class TempleDefaultTypeInternal;
 extern TempleDefaultTypeInternal _Temple_default_instance_;
 class TempleMaster;
 class TempleMasterDefaultTypeInternal;
 extern TempleMasterDefaultTypeInternal _TempleMaster_default_instance_;
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> ::identity::Temple* Arena::CreateMaybeMessage<::identity::Temple>(Arena*);
-template<> ::identity::TempleMaster* Arena::CreateMaybeMessage<::identity::TempleMaster>(Arena*);
+template<> ::Temple* Arena::CreateMaybeMessage<::Temple>(Arena*);
+template<> ::TempleMaster* Arena::CreateMaybeMessage<::TempleMaster>(Arena*);
 }  // namespace protobuf
 }  // namespace google
-namespace identity {
 
 // ===================================================================
 
 class Temple :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.Temple) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:Temple) */ {
  public:
   Temple();
   virtual ~Temple();
@@ -273,7 +270,7 @@ class Temple :
   bool approved() const;
   void set_approved(bool value);
 
-  // @@protoc_insertion_point(class_scope:identity.Temple)
+  // @@protoc_insertion_point(class_scope:Temple)
  private:
   class HasBitSetters;
 
@@ -293,7 +290,7 @@ class Temple :
 // -------------------------------------------------------------------
 
 class TempleMaster :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.TempleMaster) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:TempleMaster) */ {
  public:
   TempleMaster();
   virtual ~TempleMaster();
@@ -417,7 +414,7 @@ class TempleMaster :
   bool approved() const;
   void set_approved(bool value);
 
-  // @@protoc_insertion_point(class_scope:identity.TempleMaster)
+  // @@protoc_insertion_point(class_scope:TempleMaster)
  private:
   class HasBitSetters;
 
@@ -444,41 +441,41 @@ inline void Temple::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::id() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.id)
+  // @@protoc_insertion_point(field_get:Temple.id)
   return id_.GetNoArena();
 }
 inline void Temple::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.id)
+  // @@protoc_insertion_point(field_set:Temple.id)
 }
 #if LANG_CXX11
 inline void Temple::set_id(::std::string&& value) {
   
   id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.id)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.id)
 }
 #endif
 inline void Temple::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.id)
+  // @@protoc_insertion_point(field_set_char:Temple.id)
 }
 inline void Temple::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.id)
+  // @@protoc_insertion_point(field_set_pointer:Temple.id)
 }
 inline ::std::string* Temple::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.id)
+  // @@protoc_insertion_point(field_mutable:Temple.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_id() {
-  // @@protoc_insertion_point(field_release:identity.Temple.id)
+  // @@protoc_insertion_point(field_release:Temple.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -489,7 +486,7 @@ inline void Temple::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.id)
+  // @@protoc_insertion_point(field_set_allocated:Temple.id)
 }
 
 // string photo = 2;
@@ -497,41 +494,41 @@ inline void Temple::clear_photo() {
   photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::photo() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.photo)
+  // @@protoc_insertion_point(field_get:Temple.photo)
   return photo_.GetNoArena();
 }
 inline void Temple::set_photo(const ::std::string& value) {
   
   photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.photo)
+  // @@protoc_insertion_point(field_set:Temple.photo)
 }
 #if LANG_CXX11
 inline void Temple::set_photo(::std::string&& value) {
   
   photo_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.photo)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.photo)
 }
 #endif
 inline void Temple::set_photo(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.photo)
+  // @@protoc_insertion_point(field_set_char:Temple.photo)
 }
 inline void Temple::set_photo(const char* value, size_t size) {
   
   photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.photo)
+  // @@protoc_insertion_point(field_set_pointer:Temple.photo)
 }
 inline ::std::string* Temple::mutable_photo() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.photo)
+  // @@protoc_insertion_point(field_mutable:Temple.photo)
   return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_photo() {
-  // @@protoc_insertion_point(field_release:identity.Temple.photo)
+  // @@protoc_insertion_point(field_release:Temple.photo)
   
   return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -542,7 +539,7 @@ inline void Temple::set_allocated_photo(::std::string* photo) {
     
   }
   photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.photo)
+  // @@protoc_insertion_point(field_set_allocated:Temple.photo)
 }
 
 // string buddhist_name = 3;
@@ -550,41 +547,41 @@ inline void Temple::clear_buddhist_name() {
   buddhist_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::buddhist_name() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_get:Temple.buddhist_name)
   return buddhist_name_.GetNoArena();
 }
 inline void Temple::set_buddhist_name(const ::std::string& value) {
   
   buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_set:Temple.buddhist_name)
 }
 #if LANG_CXX11
 inline void Temple::set_buddhist_name(::std::string&& value) {
   
   buddhist_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.buddhist_name)
 }
 #endif
 inline void Temple::set_buddhist_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_set_char:Temple.buddhist_name)
 }
 inline void Temple::set_buddhist_name(const char* value, size_t size) {
   
   buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_set_pointer:Temple.buddhist_name)
 }
 inline ::std::string* Temple::mutable_buddhist_name() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_mutable:Temple.buddhist_name)
   return buddhist_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_buddhist_name() {
-  // @@protoc_insertion_point(field_release:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_release:Temple.buddhist_name)
   
   return buddhist_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -595,7 +592,7 @@ inline void Temple::set_allocated_buddhist_name(::std::string* buddhist_name) {
     
   }
   buddhist_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), buddhist_name);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.buddhist_name)
+  // @@protoc_insertion_point(field_set_allocated:Temple.buddhist_name)
 }
 
 // string unit = 4;
@@ -603,41 +600,41 @@ inline void Temple::clear_unit() {
   unit_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::unit() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.unit)
+  // @@protoc_insertion_point(field_get:Temple.unit)
   return unit_.GetNoArena();
 }
 inline void Temple::set_unit(const ::std::string& value) {
   
   unit_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.unit)
+  // @@protoc_insertion_point(field_set:Temple.unit)
 }
 #if LANG_CXX11
 inline void Temple::set_unit(::std::string&& value) {
   
   unit_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.unit)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.unit)
 }
 #endif
 inline void Temple::set_unit(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   unit_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.unit)
+  // @@protoc_insertion_point(field_set_char:Temple.unit)
 }
 inline void Temple::set_unit(const char* value, size_t size) {
   
   unit_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.unit)
+  // @@protoc_insertion_point(field_set_pointer:Temple.unit)
 }
 inline ::std::string* Temple::mutable_unit() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.unit)
+  // @@protoc_insertion_point(field_mutable:Temple.unit)
   return unit_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_unit() {
-  // @@protoc_insertion_point(field_release:identity.Temple.unit)
+  // @@protoc_insertion_point(field_release:Temple.unit)
   
   return unit_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -648,7 +645,7 @@ inline void Temple::set_allocated_unit(::std::string* unit) {
     
   }
   unit_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), unit);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.unit)
+  // @@protoc_insertion_point(field_set_allocated:Temple.unit)
 }
 
 // string creditcode = 5;
@@ -656,41 +653,41 @@ inline void Temple::clear_creditcode() {
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::creditcode() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_get:Temple.creditcode)
   return creditcode_.GetNoArena();
 }
 inline void Temple::set_creditcode(const ::std::string& value) {
   
   creditcode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_set:Temple.creditcode)
 }
 #if LANG_CXX11
 inline void Temple::set_creditcode(::std::string&& value) {
   
   creditcode_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.creditcode)
 }
 #endif
 inline void Temple::set_creditcode(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   creditcode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_set_char:Temple.creditcode)
 }
 inline void Temple::set_creditcode(const char* value, size_t size) {
   
   creditcode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_set_pointer:Temple.creditcode)
 }
 inline ::std::string* Temple::mutable_creditcode() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_mutable:Temple.creditcode)
   return creditcode_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_creditcode() {
-  // @@protoc_insertion_point(field_release:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_release:Temple.creditcode)
   
   return creditcode_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -701,7 +698,7 @@ inline void Temple::set_allocated_creditcode(::std::string* creditcode) {
     
   }
   creditcode_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), creditcode);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.creditcode)
+  // @@protoc_insertion_point(field_set_allocated:Temple.creditcode)
 }
 
 // string address = 6;
@@ -709,41 +706,41 @@ inline void Temple::clear_address() {
   address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::address() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.address)
+  // @@protoc_insertion_point(field_get:Temple.address)
   return address_.GetNoArena();
 }
 inline void Temple::set_address(const ::std::string& value) {
   
   address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.address)
+  // @@protoc_insertion_point(field_set:Temple.address)
 }
 #if LANG_CXX11
 inline void Temple::set_address(::std::string&& value) {
   
   address_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.address)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.address)
 }
 #endif
 inline void Temple::set_address(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.address)
+  // @@protoc_insertion_point(field_set_char:Temple.address)
 }
 inline void Temple::set_address(const char* value, size_t size) {
   
   address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.address)
+  // @@protoc_insertion_point(field_set_pointer:Temple.address)
 }
 inline ::std::string* Temple::mutable_address() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.address)
+  // @@protoc_insertion_point(field_mutable:Temple.address)
   return address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_address() {
-  // @@protoc_insertion_point(field_release:identity.Temple.address)
+  // @@protoc_insertion_point(field_release:Temple.address)
   
   return address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -754,7 +751,7 @@ inline void Temple::set_allocated_address(::std::string* address) {
     
   }
   address_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), address);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.address)
+  // @@protoc_insertion_point(field_set_allocated:Temple.address)
 }
 
 // string sect = 7;
@@ -762,41 +759,41 @@ inline void Temple::clear_sect() {
   sect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::sect() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.sect)
+  // @@protoc_insertion_point(field_get:Temple.sect)
   return sect_.GetNoArena();
 }
 inline void Temple::set_sect(const ::std::string& value) {
   
   sect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.sect)
+  // @@protoc_insertion_point(field_set:Temple.sect)
 }
 #if LANG_CXX11
 inline void Temple::set_sect(::std::string&& value) {
   
   sect_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.sect)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.sect)
 }
 #endif
 inline void Temple::set_sect(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   sect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.sect)
+  // @@protoc_insertion_point(field_set_char:Temple.sect)
 }
 inline void Temple::set_sect(const char* value, size_t size) {
   
   sect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.sect)
+  // @@protoc_insertion_point(field_set_pointer:Temple.sect)
 }
 inline ::std::string* Temple::mutable_sect() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.sect)
+  // @@protoc_insertion_point(field_mutable:Temple.sect)
   return sect_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_sect() {
-  // @@protoc_insertion_point(field_release:identity.Temple.sect)
+  // @@protoc_insertion_point(field_release:Temple.sect)
   
   return sect_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -807,7 +804,7 @@ inline void Temple::set_allocated_sect(::std::string* sect) {
     
   }
   sect_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sect);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.sect)
+  // @@protoc_insertion_point(field_set_allocated:Temple.sect)
 }
 
 // string proof = 8;
@@ -815,41 +812,41 @@ inline void Temple::clear_proof() {
   proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Temple::proof() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.proof)
+  // @@protoc_insertion_point(field_get:Temple.proof)
   return proof_.GetNoArena();
 }
 inline void Temple::set_proof(const ::std::string& value) {
   
   proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Temple.proof)
+  // @@protoc_insertion_point(field_set:Temple.proof)
 }
 #if LANG_CXX11
 inline void Temple::set_proof(::std::string&& value) {
   
   proof_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Temple.proof)
+  // @@protoc_insertion_point(field_set_rvalue:Temple.proof)
 }
 #endif
 inline void Temple::set_proof(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Temple.proof)
+  // @@protoc_insertion_point(field_set_char:Temple.proof)
 }
 inline void Temple::set_proof(const char* value, size_t size) {
   
   proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Temple.proof)
+  // @@protoc_insertion_point(field_set_pointer:Temple.proof)
 }
 inline ::std::string* Temple::mutable_proof() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Temple.proof)
+  // @@protoc_insertion_point(field_mutable:Temple.proof)
   return proof_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Temple::release_proof() {
-  // @@protoc_insertion_point(field_release:identity.Temple.proof)
+  // @@protoc_insertion_point(field_release:Temple.proof)
   
   return proof_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -860,7 +857,7 @@ inline void Temple::set_allocated_proof(::std::string* proof) {
     
   }
   proof_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), proof);
-  // @@protoc_insertion_point(field_set_allocated:identity.Temple.proof)
+  // @@protoc_insertion_point(field_set_allocated:Temple.proof)
 }
 
 // bool approved = 9;
@@ -868,13 +865,13 @@ inline void Temple::clear_approved() {
   approved_ = false;
 }
 inline bool Temple::approved() const {
-  // @@protoc_insertion_point(field_get:identity.Temple.approved)
+  // @@protoc_insertion_point(field_get:Temple.approved)
   return approved_;
 }
 inline void Temple::set_approved(bool value) {
   
   approved_ = value;
-  // @@protoc_insertion_point(field_set:identity.Temple.approved)
+  // @@protoc_insertion_point(field_set:Temple.approved)
 }
 
 // -------------------------------------------------------------------
@@ -886,41 +883,41 @@ inline void TempleMaster::clear_templeid() {
   templeid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TempleMaster::templeid() const {
-  // @@protoc_insertion_point(field_get:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_get:TempleMaster.templeid)
   return templeid_.GetNoArena();
 }
 inline void TempleMaster::set_templeid(const ::std::string& value) {
   
   templeid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_set:TempleMaster.templeid)
 }
 #if LANG_CXX11
 inline void TempleMaster::set_templeid(::std::string&& value) {
   
   templeid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_set_rvalue:TempleMaster.templeid)
 }
 #endif
 inline void TempleMaster::set_templeid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   templeid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_set_char:TempleMaster.templeid)
 }
 inline void TempleMaster::set_templeid(const char* value, size_t size) {
   
   templeid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_set_pointer:TempleMaster.templeid)
 }
 inline ::std::string* TempleMaster::mutable_templeid() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_mutable:TempleMaster.templeid)
   return templeid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TempleMaster::release_templeid() {
-  // @@protoc_insertion_point(field_release:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_release:TempleMaster.templeid)
   
   return templeid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -931,7 +928,7 @@ inline void TempleMaster::set_allocated_templeid(::std::string* templeid) {
     
   }
   templeid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), templeid);
-  // @@protoc_insertion_point(field_set_allocated:identity.TempleMaster.templeid)
+  // @@protoc_insertion_point(field_set_allocated:TempleMaster.templeid)
 }
 
 // string masterid = 2;
@@ -939,41 +936,41 @@ inline void TempleMaster::clear_masterid() {
   masterid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TempleMaster::masterid() const {
-  // @@protoc_insertion_point(field_get:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_get:TempleMaster.masterid)
   return masterid_.GetNoArena();
 }
 inline void TempleMaster::set_masterid(const ::std::string& value) {
   
   masterid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_set:TempleMaster.masterid)
 }
 #if LANG_CXX11
 inline void TempleMaster::set_masterid(::std::string&& value) {
   
   masterid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_set_rvalue:TempleMaster.masterid)
 }
 #endif
 inline void TempleMaster::set_masterid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   masterid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_set_char:TempleMaster.masterid)
 }
 inline void TempleMaster::set_masterid(const char* value, size_t size) {
   
   masterid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_set_pointer:TempleMaster.masterid)
 }
 inline ::std::string* TempleMaster::mutable_masterid() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_mutable:TempleMaster.masterid)
   return masterid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TempleMaster::release_masterid() {
-  // @@protoc_insertion_point(field_release:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_release:TempleMaster.masterid)
   
   return masterid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -984,7 +981,7 @@ inline void TempleMaster::set_allocated_masterid(::std::string* masterid) {
     
   }
   masterid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), masterid);
-  // @@protoc_insertion_point(field_set_allocated:identity.TempleMaster.masterid)
+  // @@protoc_insertion_point(field_set_allocated:TempleMaster.masterid)
 }
 
 // bool approved = 3;
@@ -992,13 +989,13 @@ inline void TempleMaster::clear_approved() {
   approved_ = false;
 }
 inline bool TempleMaster::approved() const {
-  // @@protoc_insertion_point(field_get:identity.TempleMaster.approved)
+  // @@protoc_insertion_point(field_get:TempleMaster.approved)
   return approved_;
 }
 inline void TempleMaster::set_approved(bool value) {
   
   approved_ = value;
-  // @@protoc_insertion_point(field_set:identity.TempleMaster.approved)
+  // @@protoc_insertion_point(field_set:TempleMaster.approved)
 }
 
 #ifdef __GNUC__
@@ -1009,7 +1006,6 @@ inline void TempleMaster::set_approved(bool value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace identity
 
 // @@protoc_insertion_point(global_scope)
 

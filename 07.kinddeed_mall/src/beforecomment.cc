@@ -10,7 +10,7 @@
 using namespace std;
 
 
-xchain::json beforecomment::to_json() {
+xchain::json BBeforeComment::to_json() {
     xchain::json j = {
         {"owner", owner()},
         {"kdid", kdid()},
@@ -23,7 +23,7 @@ xchain::json beforecomment::to_json() {
     return j;
 }
 
-bool Buddha::_is_beforecomment_exist(beforecomment& ent,
+bool Main::_is_beforecomment_exist(beforecomment& ent,
                                      const string& kdid,
                                      const string& owner) {
     if (!get_beforecomment_table().find({{"kdid", kdid},{"owner", owner}}, &ent))
@@ -32,7 +32,7 @@ bool Buddha::_is_beforecomment_exist(beforecomment& ent,
     return true;
 }
 
-bool Buddha::_scan_beforecomment(xchain::json& ja, const string& cond) {
+bool Main::_scan_beforecomment(xchain::json& ja, const string& cond) {
     auto it = get_beforecomment_table().scan({{"kdid",cond}});
     while(it->next() ) {
         beforecomment ent;
@@ -47,7 +47,7 @@ bool Buddha::_scan_beforecomment(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_beforecomment_record(const string& kdid, const string& owner) {
+bool Main::_delete_beforecomment_record(const string& kdid, const string& owner) {
     beforecomment ent;
     if (!_is_beforecomment_exist(ent, kdid, owner)){
         mycout << "beforecomment  " << owner << "," << kdid << " is not exist ." << endl ;
@@ -65,7 +65,7 @@ bool Buddha::_delete_beforecomment_record(const string& kdid, const string& owne
 
 namespace 分界线{}
 
-void Buddha::add_beforecomment() {
+void Main::add_beforecomment() {
     const string& kdid = ctx->arg("kdid");
     if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
@@ -132,7 +132,7 @@ void Buddha::add_beforecomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
-void Buddha::delete_beforecomment() {
+void Main::delete_beforecomment() {
     const string& kdid = ctx->arg("kdid");
     if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
@@ -164,7 +164,7 @@ void Buddha::delete_beforecomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
-void Buddha::update_beforecomment() {
+void Main::update_beforecomment() {
     const string& kdid = ctx->arg("kdid");
     if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
@@ -242,7 +242,7 @@ void Buddha::update_beforecomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
-void Buddha::find_beforecomment() {
+void Main::find_beforecomment() {
     const string& kdid = ctx->arg("kdid");
     if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");
@@ -298,7 +298,7 @@ void Buddha::find_beforecomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_beforecomment() {
+void Main::list_beforecomment() {
     const string& kdid = ctx->arg("kdid");
     if( kdid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment kdid is empty .");

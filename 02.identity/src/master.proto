@@ -1,8 +1,6 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-package identity;
-
 message Master {
     string id           = 1; //法师id，唯一
     string head_photo   = 2; //头像哈希

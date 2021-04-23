@@ -1,5 +1,5 @@
-#ifndef _OTC_H_
-#define _OTC_H_
+#ifndef _MEMORIAL_HALL_H_
+#define _MEMORIAL_HALL_H_
 
 #include "xchain/xchain.h"
 #include "xchain/json/json.h"
@@ -10,9 +10,9 @@ using namespace std;
 
 #define mycout cout << __FILE__ << "(" << __LINE__ << ") [" << __FUNCTION__ << "] " 
 
-class Buddha : public xchain::Contract {
+class Main : public xchain::Contract {
 public:
-    Buddha();
+    Main();
 
 private:
     xchain::cdt::Table<guaranty>     _guaranty_table;
@@ -170,4 +170,4 @@ public:
     void get_meritranking();       //查看第n名的情况
 
 };
-#endif // _OTC_H_
+#endif // _MEMORIAL_HALL_H_

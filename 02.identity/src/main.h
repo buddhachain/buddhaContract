@@ -5,6 +5,13 @@
 #include "xchain/json/json.h"
 #include "xchain/contract.pb.h"
 
+#include "identiy.h"
+#include "visitor.h"
+#include "user.h"
+#include "identity_user.h"
+#include "master.h"
+#include "temple.h"
+
 #include <string>
 using namespace std;
 
@@ -33,6 +40,22 @@ public:
 
     decltype(_user_table)& get_user_table() {
         return _user_table;
+    }
+
+    decltype(_identity_user_table)& get_identity_user_table() {
+        return _identity_user_table;
+    }
+
+    decltype(_master_table)& get_master_table() {
+        return _masterr_table;
+    }
+
+    decltype(_temple_table)& get_temple_table() {
+        return _temple_table;
+    }
+
+    decltype(_templemaster_table)& get_templemaster_table() {
+        return _templemaster_table;
     }
 
 private:
@@ -103,27 +126,57 @@ public:
 
     //update无对应函数
 
-    //发布卖单
+    //所有的list函数，尽可能key:value中的value不为空，缩小scan范围，提高效率
 
     void find_identity();           //任意身份
-    void list_identity();           //任意身份，根据身份id查所有，id可为空，安全
+    void list_identity();           //基金会成员
 
-    bool find_visitor();             //任意身份
-    void list_visitor();             //任意身份，根据身份id查所有，id可为空，安全
+    bool is_visitor();              //任意身份
+    void list_visitor();            //基金会成员
 
-    bool find_user();              //任意身份
-    void list_user();              //任意身份，根据身份id查所有，id可为空，安全
+    bool is_user();                 //任意身份
+    void list_user();               //基金会成员
 
-    bool find_identity_user();              //任意身份
-    void list_identity_user();              //任意身份，根据身份id查所有，id可为空，安全
+    bool is_identity_user();        //任意身份
+    void list_identity_user();      //基金会成员
 
-    bool find_master();              //任意身份
-    void list_master();              //任意身份，根据身份id查所有，id可为空，安全
+    bool is_master();               //任意身份
+    void list_master();             //基金会成员
 
-    bool find_temple();              //任意身份
-    void list_temple();              //任意身份，根据身份id查所有，id可为空，安全
+    bool is_temple();               //任意身份
+    void list_temple();             //基金会成员
 
-    bool find_the_dead();              //任意身份
-    void list_the_dead();              //任意身份，根据身份id查所有，id可为空，安全
+    bool is_d_the_dead();           //任意身份
+    void list_the_dead();           //基金会成员
+
+    //添加游客
+    void add_visitor();             //任意身份
+    
+    //添加用户
+    void add_user();                //任意身份
+
+    //申请成为认证用户
+    void apply_identify_user();     //用户，游客
+    void approve_identify_user();   //基金会成员
+    void recusal_identify_user();   //基金会成员
+
+    //申请成为法师
+    void apply_master();            //用户
+    void approve_master();          //基金会成员
+    void recusal_master();          //基金会成员
+
+    //申请成为寺院
+    void apply_temple();            //用户,法师
+    void approve_temple();          //基金会成员
+    void recusal_temple();          //基金会成员
+
+    //法师申请加入寺院
+    void apply_join_temple();       //法师
+    void approve_join_temple();     //基金会成员
+    void recusal_join_temple();     //基金会成员
+    bool is_in_temple();            //法师
+    void list_my_master();          //寺院
+    void list_temple_master();      //基金会成员
+
 };
 #endif // _MAIN_H_

@@ -46,22 +46,19 @@ struct TableStruct_user_2eproto {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-namespace identity {
 class User;
 class UserDefaultTypeInternal;
 extern UserDefaultTypeInternal _User_default_instance_;
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> ::identity::User* Arena::CreateMaybeMessage<::identity::User>(Arena*);
+template<> ::User* Arena::CreateMaybeMessage<::User>(Arena*);
 }  // namespace protobuf
 }  // namespace google
-namespace identity {
 
 // ===================================================================
 
 class User :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.User) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:User) */ {
  public:
   User();
   virtual ~User();
@@ -429,7 +426,7 @@ class User :
   ::google::protobuf::int64 wechat() const;
   void set_wechat(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:identity.User)
+  // @@protoc_insertion_point(class_scope:User)
  private:
   class HasBitSetters;
 
@@ -474,41 +471,41 @@ inline void User::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::id() const {
-  // @@protoc_insertion_point(field_get:identity.User.id)
+  // @@protoc_insertion_point(field_get:User.id)
   return id_.GetNoArena();
 }
 inline void User::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.id)
+  // @@protoc_insertion_point(field_set:User.id)
 }
 #if LANG_CXX11
 inline void User::set_id(::std::string&& value) {
   
   id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.id)
+  // @@protoc_insertion_point(field_set_rvalue:User.id)
 }
 #endif
 inline void User::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.id)
+  // @@protoc_insertion_point(field_set_char:User.id)
 }
 inline void User::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.id)
+  // @@protoc_insertion_point(field_set_pointer:User.id)
 }
 inline ::std::string* User::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.id)
+  // @@protoc_insertion_point(field_mutable:User.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_id() {
-  // @@protoc_insertion_point(field_release:identity.User.id)
+  // @@protoc_insertion_point(field_release:User.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -519,7 +516,7 @@ inline void User::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.id)
+  // @@protoc_insertion_point(field_set_allocated:User.id)
 }
 
 // string nickname = 2;
@@ -527,41 +524,41 @@ inline void User::clear_nickname() {
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::nickname() const {
-  // @@protoc_insertion_point(field_get:identity.User.nickname)
+  // @@protoc_insertion_point(field_get:User.nickname)
   return nickname_.GetNoArena();
 }
 inline void User::set_nickname(const ::std::string& value) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.nickname)
+  // @@protoc_insertion_point(field_set:User.nickname)
 }
 #if LANG_CXX11
 inline void User::set_nickname(::std::string&& value) {
   
   nickname_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.nickname)
+  // @@protoc_insertion_point(field_set_rvalue:User.nickname)
 }
 #endif
 inline void User::set_nickname(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.nickname)
+  // @@protoc_insertion_point(field_set_char:User.nickname)
 }
 inline void User::set_nickname(const char* value, size_t size) {
   
   nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.nickname)
+  // @@protoc_insertion_point(field_set_pointer:User.nickname)
 }
 inline ::std::string* User::mutable_nickname() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.nickname)
+  // @@protoc_insertion_point(field_mutable:User.nickname)
   return nickname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_nickname() {
-  // @@protoc_insertion_point(field_release:identity.User.nickname)
+  // @@protoc_insertion_point(field_release:User.nickname)
   
   return nickname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -572,7 +569,7 @@ inline void User::set_allocated_nickname(::std::string* nickname) {
     
   }
   nickname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), nickname);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.nickname)
+  // @@protoc_insertion_point(field_set_allocated:User.nickname)
 }
 
 // string head_photo = 3;
@@ -580,41 +577,41 @@ inline void User::clear_head_photo() {
   head_photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::head_photo() const {
-  // @@protoc_insertion_point(field_get:identity.User.head_photo)
+  // @@protoc_insertion_point(field_get:User.head_photo)
   return head_photo_.GetNoArena();
 }
 inline void User::set_head_photo(const ::std::string& value) {
   
   head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.head_photo)
+  // @@protoc_insertion_point(field_set:User.head_photo)
 }
 #if LANG_CXX11
 inline void User::set_head_photo(::std::string&& value) {
   
   head_photo_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.head_photo)
+  // @@protoc_insertion_point(field_set_rvalue:User.head_photo)
 }
 #endif
 inline void User::set_head_photo(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.head_photo)
+  // @@protoc_insertion_point(field_set_char:User.head_photo)
 }
 inline void User::set_head_photo(const char* value, size_t size) {
   
   head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.head_photo)
+  // @@protoc_insertion_point(field_set_pointer:User.head_photo)
 }
 inline ::std::string* User::mutable_head_photo() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.head_photo)
+  // @@protoc_insertion_point(field_mutable:User.head_photo)
   return head_photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_head_photo() {
-  // @@protoc_insertion_point(field_release:identity.User.head_photo)
+  // @@protoc_insertion_point(field_release:User.head_photo)
   
   return head_photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -625,7 +622,7 @@ inline void User::set_allocated_head_photo(::std::string* head_photo) {
     
   }
   head_photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), head_photo);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.head_photo)
+  // @@protoc_insertion_point(field_set_allocated:User.head_photo)
 }
 
 // string name = 4;
@@ -633,41 +630,41 @@ inline void User::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::name() const {
-  // @@protoc_insertion_point(field_get:identity.User.name)
+  // @@protoc_insertion_point(field_get:User.name)
   return name_.GetNoArena();
 }
 inline void User::set_name(const ::std::string& value) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.name)
+  // @@protoc_insertion_point(field_set:User.name)
 }
 #if LANG_CXX11
 inline void User::set_name(::std::string&& value) {
   
   name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.name)
+  // @@protoc_insertion_point(field_set_rvalue:User.name)
 }
 #endif
 inline void User::set_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.name)
+  // @@protoc_insertion_point(field_set_char:User.name)
 }
 inline void User::set_name(const char* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.name)
+  // @@protoc_insertion_point(field_set_pointer:User.name)
 }
 inline ::std::string* User::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.name)
+  // @@protoc_insertion_point(field_mutable:User.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_name() {
-  // @@protoc_insertion_point(field_release:identity.User.name)
+  // @@protoc_insertion_point(field_release:User.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -678,7 +675,7 @@ inline void User::set_allocated_name(::std::string* name) {
     
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.name)
+  // @@protoc_insertion_point(field_set_allocated:User.name)
 }
 
 // int64 sex = 5;
@@ -686,13 +683,13 @@ inline void User::clear_sex() {
   sex_ = PROTOBUF_LONGLONG(0);
 }
 inline ::google::protobuf::int64 User::sex() const {
-  // @@protoc_insertion_point(field_get:identity.User.sex)
+  // @@protoc_insertion_point(field_get:User.sex)
   return sex_;
 }
 inline void User::set_sex(::google::protobuf::int64 value) {
   
   sex_ = value;
-  // @@protoc_insertion_point(field_set:identity.User.sex)
+  // @@protoc_insertion_point(field_set:User.sex)
 }
 
 // string phone = 6;
@@ -700,41 +697,41 @@ inline void User::clear_phone() {
   phone_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::phone() const {
-  // @@protoc_insertion_point(field_get:identity.User.phone)
+  // @@protoc_insertion_point(field_get:User.phone)
   return phone_.GetNoArena();
 }
 inline void User::set_phone(const ::std::string& value) {
   
   phone_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.phone)
+  // @@protoc_insertion_point(field_set:User.phone)
 }
 #if LANG_CXX11
 inline void User::set_phone(::std::string&& value) {
   
   phone_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.phone)
+  // @@protoc_insertion_point(field_set_rvalue:User.phone)
 }
 #endif
 inline void User::set_phone(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   phone_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.phone)
+  // @@protoc_insertion_point(field_set_char:User.phone)
 }
 inline void User::set_phone(const char* value, size_t size) {
   
   phone_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.phone)
+  // @@protoc_insertion_point(field_set_pointer:User.phone)
 }
 inline ::std::string* User::mutable_phone() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.phone)
+  // @@protoc_insertion_point(field_mutable:User.phone)
   return phone_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_phone() {
-  // @@protoc_insertion_point(field_release:identity.User.phone)
+  // @@protoc_insertion_point(field_release:User.phone)
   
   return phone_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -745,7 +742,7 @@ inline void User::set_allocated_phone(::std::string* phone) {
     
   }
   phone_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), phone);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.phone)
+  // @@protoc_insertion_point(field_set_allocated:User.phone)
 }
 
 // int64 wechat = 7;
@@ -753,13 +750,13 @@ inline void User::clear_wechat() {
   wechat_ = PROTOBUF_LONGLONG(0);
 }
 inline ::google::protobuf::int64 User::wechat() const {
-  // @@protoc_insertion_point(field_get:identity.User.wechat)
+  // @@protoc_insertion_point(field_get:User.wechat)
   return wechat_;
 }
 inline void User::set_wechat(::google::protobuf::int64 value) {
   
   wechat_ = value;
-  // @@protoc_insertion_point(field_set:identity.User.wechat)
+  // @@protoc_insertion_point(field_set:User.wechat)
 }
 
 // string email = 8;
@@ -767,41 +764,41 @@ inline void User::clear_email() {
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::email() const {
-  // @@protoc_insertion_point(field_get:identity.User.email)
+  // @@protoc_insertion_point(field_get:User.email)
   return email_.GetNoArena();
 }
 inline void User::set_email(const ::std::string& value) {
   
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.email)
+  // @@protoc_insertion_point(field_set:User.email)
 }
 #if LANG_CXX11
 inline void User::set_email(::std::string&& value) {
   
   email_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.email)
+  // @@protoc_insertion_point(field_set_rvalue:User.email)
 }
 #endif
 inline void User::set_email(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.email)
+  // @@protoc_insertion_point(field_set_char:User.email)
 }
 inline void User::set_email(const char* value, size_t size) {
   
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.email)
+  // @@protoc_insertion_point(field_set_pointer:User.email)
 }
 inline ::std::string* User::mutable_email() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.email)
+  // @@protoc_insertion_point(field_mutable:User.email)
   return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_email() {
-  // @@protoc_insertion_point(field_release:identity.User.email)
+  // @@protoc_insertion_point(field_release:User.email)
   
   return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -812,7 +809,7 @@ inline void User::set_allocated_email(::std::string* email) {
     
   }
   email_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), email);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.email)
+  // @@protoc_insertion_point(field_set_allocated:User.email)
 }
 
 // string home_address = 9;
@@ -820,41 +817,41 @@ inline void User::clear_home_address() {
   home_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::home_address() const {
-  // @@protoc_insertion_point(field_get:identity.User.home_address)
+  // @@protoc_insertion_point(field_get:User.home_address)
   return home_address_.GetNoArena();
 }
 inline void User::set_home_address(const ::std::string& value) {
   
   home_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.home_address)
+  // @@protoc_insertion_point(field_set:User.home_address)
 }
 #if LANG_CXX11
 inline void User::set_home_address(::std::string&& value) {
   
   home_address_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.home_address)
+  // @@protoc_insertion_point(field_set_rvalue:User.home_address)
 }
 #endif
 inline void User::set_home_address(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   home_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.home_address)
+  // @@protoc_insertion_point(field_set_char:User.home_address)
 }
 inline void User::set_home_address(const char* value, size_t size) {
   
   home_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.home_address)
+  // @@protoc_insertion_point(field_set_pointer:User.home_address)
 }
 inline ::std::string* User::mutable_home_address() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.home_address)
+  // @@protoc_insertion_point(field_mutable:User.home_address)
   return home_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_home_address() {
-  // @@protoc_insertion_point(field_release:identity.User.home_address)
+  // @@protoc_insertion_point(field_release:User.home_address)
   
   return home_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -865,7 +862,7 @@ inline void User::set_allocated_home_address(::std::string* home_address) {
     
   }
   home_address_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), home_address);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.home_address)
+  // @@protoc_insertion_point(field_set_allocated:User.home_address)
 }
 
 // string born_timestamp = 10;
@@ -873,41 +870,41 @@ inline void User::clear_born_timestamp() {
   born_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::born_timestamp() const {
-  // @@protoc_insertion_point(field_get:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_get:User.born_timestamp)
   return born_timestamp_.GetNoArena();
 }
 inline void User::set_born_timestamp(const ::std::string& value) {
   
   born_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_set:User.born_timestamp)
 }
 #if LANG_CXX11
 inline void User::set_born_timestamp(::std::string&& value) {
   
   born_timestamp_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_set_rvalue:User.born_timestamp)
 }
 #endif
 inline void User::set_born_timestamp(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   born_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_set_char:User.born_timestamp)
 }
 inline void User::set_born_timestamp(const char* value, size_t size) {
   
   born_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_set_pointer:User.born_timestamp)
 }
 inline ::std::string* User::mutable_born_timestamp() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_mutable:User.born_timestamp)
   return born_timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_born_timestamp() {
-  // @@protoc_insertion_point(field_release:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_release:User.born_timestamp)
   
   return born_timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -918,7 +915,7 @@ inline void User::set_allocated_born_timestamp(::std::string* born_timestamp) {
     
   }
   born_timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), born_timestamp);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.born_timestamp)
+  // @@protoc_insertion_point(field_set_allocated:User.born_timestamp)
 }
 
 // string idcard = 11;
@@ -926,41 +923,41 @@ inline void User::clear_idcard() {
   idcard_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::idcard() const {
-  // @@protoc_insertion_point(field_get:identity.User.idcard)
+  // @@protoc_insertion_point(field_get:User.idcard)
   return idcard_.GetNoArena();
 }
 inline void User::set_idcard(const ::std::string& value) {
   
   idcard_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.idcard)
+  // @@protoc_insertion_point(field_set:User.idcard)
 }
 #if LANG_CXX11
 inline void User::set_idcard(::std::string&& value) {
   
   idcard_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.idcard)
+  // @@protoc_insertion_point(field_set_rvalue:User.idcard)
 }
 #endif
 inline void User::set_idcard(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   idcard_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.idcard)
+  // @@protoc_insertion_point(field_set_char:User.idcard)
 }
 inline void User::set_idcard(const char* value, size_t size) {
   
   idcard_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.idcard)
+  // @@protoc_insertion_point(field_set_pointer:User.idcard)
 }
 inline ::std::string* User::mutable_idcard() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.idcard)
+  // @@protoc_insertion_point(field_mutable:User.idcard)
   return idcard_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_idcard() {
-  // @@protoc_insertion_point(field_release:identity.User.idcard)
+  // @@protoc_insertion_point(field_release:User.idcard)
   
   return idcard_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -971,7 +968,7 @@ inline void User::set_allocated_idcard(::std::string* idcard) {
     
   }
   idcard_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), idcard);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.idcard)
+  // @@protoc_insertion_point(field_set_allocated:User.idcard)
 }
 
 // string otherid = 12;
@@ -979,41 +976,41 @@ inline void User::clear_otherid() {
   otherid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::otherid() const {
-  // @@protoc_insertion_point(field_get:identity.User.otherid)
+  // @@protoc_insertion_point(field_get:User.otherid)
   return otherid_.GetNoArena();
 }
 inline void User::set_otherid(const ::std::string& value) {
   
   otherid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.otherid)
+  // @@protoc_insertion_point(field_set:User.otherid)
 }
 #if LANG_CXX11
 inline void User::set_otherid(::std::string&& value) {
   
   otherid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.otherid)
+  // @@protoc_insertion_point(field_set_rvalue:User.otherid)
 }
 #endif
 inline void User::set_otherid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   otherid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.otherid)
+  // @@protoc_insertion_point(field_set_char:User.otherid)
 }
 inline void User::set_otherid(const char* value, size_t size) {
   
   otherid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.otherid)
+  // @@protoc_insertion_point(field_set_pointer:User.otherid)
 }
 inline ::std::string* User::mutable_otherid() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.otherid)
+  // @@protoc_insertion_point(field_mutable:User.otherid)
   return otherid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_otherid() {
-  // @@protoc_insertion_point(field_release:identity.User.otherid)
+  // @@protoc_insertion_point(field_release:User.otherid)
   
   return otherid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1024,7 +1021,7 @@ inline void User::set_allocated_otherid(::std::string* otherid) {
     
   }
   otherid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), otherid);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.otherid)
+  // @@protoc_insertion_point(field_set_allocated:User.otherid)
 }
 
 // string photo = 13;
@@ -1032,41 +1029,41 @@ inline void User::clear_photo() {
   photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::photo() const {
-  // @@protoc_insertion_point(field_get:identity.User.photo)
+  // @@protoc_insertion_point(field_get:User.photo)
   return photo_.GetNoArena();
 }
 inline void User::set_photo(const ::std::string& value) {
   
   photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.photo)
+  // @@protoc_insertion_point(field_set:User.photo)
 }
 #if LANG_CXX11
 inline void User::set_photo(::std::string&& value) {
   
   photo_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.photo)
+  // @@protoc_insertion_point(field_set_rvalue:User.photo)
 }
 #endif
 inline void User::set_photo(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.photo)
+  // @@protoc_insertion_point(field_set_char:User.photo)
 }
 inline void User::set_photo(const char* value, size_t size) {
   
   photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.photo)
+  // @@protoc_insertion_point(field_set_pointer:User.photo)
 }
 inline ::std::string* User::mutable_photo() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.photo)
+  // @@protoc_insertion_point(field_mutable:User.photo)
   return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_photo() {
-  // @@protoc_insertion_point(field_release:identity.User.photo)
+  // @@protoc_insertion_point(field_release:User.photo)
   
   return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1077,7 +1074,7 @@ inline void User::set_allocated_photo(::std::string* photo) {
     
   }
   photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.photo)
+  // @@protoc_insertion_point(field_set_allocated:User.photo)
 }
 
 // string desc = 14;
@@ -1085,41 +1082,41 @@ inline void User::clear_desc() {
   desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::desc() const {
-  // @@protoc_insertion_point(field_get:identity.User.desc)
+  // @@protoc_insertion_point(field_get:User.desc)
   return desc_.GetNoArena();
 }
 inline void User::set_desc(const ::std::string& value) {
   
   desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.desc)
+  // @@protoc_insertion_point(field_set:User.desc)
 }
 #if LANG_CXX11
 inline void User::set_desc(::std::string&& value) {
   
   desc_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.desc)
+  // @@protoc_insertion_point(field_set_rvalue:User.desc)
 }
 #endif
 inline void User::set_desc(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.desc)
+  // @@protoc_insertion_point(field_set_char:User.desc)
 }
 inline void User::set_desc(const char* value, size_t size) {
   
   desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.desc)
+  // @@protoc_insertion_point(field_set_pointer:User.desc)
 }
 inline ::std::string* User::mutable_desc() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.desc)
+  // @@protoc_insertion_point(field_mutable:User.desc)
   return desc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_desc() {
-  // @@protoc_insertion_point(field_release:identity.User.desc)
+  // @@protoc_insertion_point(field_release:User.desc)
   
   return desc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1130,7 +1127,7 @@ inline void User::set_allocated_desc(::std::string* desc) {
     
   }
   desc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), desc);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.desc)
+  // @@protoc_insertion_point(field_set_allocated:User.desc)
 }
 
 // string degree = 15;
@@ -1138,41 +1135,41 @@ inline void User::clear_degree() {
   degree_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::degree() const {
-  // @@protoc_insertion_point(field_get:identity.User.degree)
+  // @@protoc_insertion_point(field_get:User.degree)
   return degree_.GetNoArena();
 }
 inline void User::set_degree(const ::std::string& value) {
   
   degree_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.degree)
+  // @@protoc_insertion_point(field_set:User.degree)
 }
 #if LANG_CXX11
 inline void User::set_degree(::std::string&& value) {
   
   degree_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.degree)
+  // @@protoc_insertion_point(field_set_rvalue:User.degree)
 }
 #endif
 inline void User::set_degree(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   degree_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.degree)
+  // @@protoc_insertion_point(field_set_char:User.degree)
 }
 inline void User::set_degree(const char* value, size_t size) {
   
   degree_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.degree)
+  // @@protoc_insertion_point(field_set_pointer:User.degree)
 }
 inline ::std::string* User::mutable_degree() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.degree)
+  // @@protoc_insertion_point(field_mutable:User.degree)
   return degree_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_degree() {
-  // @@protoc_insertion_point(field_release:identity.User.degree)
+  // @@protoc_insertion_point(field_release:User.degree)
   
   return degree_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1183,7 +1180,7 @@ inline void User::set_allocated_degree(::std::string* degree) {
     
   }
   degree_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), degree);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.degree)
+  // @@protoc_insertion_point(field_set_allocated:User.degree)
 }
 
 // string job = 16;
@@ -1191,41 +1188,41 @@ inline void User::clear_job() {
   job_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::job() const {
-  // @@protoc_insertion_point(field_get:identity.User.job)
+  // @@protoc_insertion_point(field_get:User.job)
   return job_.GetNoArena();
 }
 inline void User::set_job(const ::std::string& value) {
   
   job_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.job)
+  // @@protoc_insertion_point(field_set:User.job)
 }
 #if LANG_CXX11
 inline void User::set_job(::std::string&& value) {
   
   job_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.job)
+  // @@protoc_insertion_point(field_set_rvalue:User.job)
 }
 #endif
 inline void User::set_job(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   job_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.job)
+  // @@protoc_insertion_point(field_set_char:User.job)
 }
 inline void User::set_job(const char* value, size_t size) {
   
   job_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.job)
+  // @@protoc_insertion_point(field_set_pointer:User.job)
 }
 inline ::std::string* User::mutable_job() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.job)
+  // @@protoc_insertion_point(field_mutable:User.job)
   return job_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_job() {
-  // @@protoc_insertion_point(field_release:identity.User.job)
+  // @@protoc_insertion_point(field_release:User.job)
   
   return job_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1236,7 +1233,7 @@ inline void User::set_allocated_job(::std::string* job) {
     
   }
   job_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), job);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.job)
+  // @@protoc_insertion_point(field_set_allocated:User.job)
 }
 
 // string income = 17;
@@ -1244,41 +1241,41 @@ inline void User::clear_income() {
   income_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::income() const {
-  // @@protoc_insertion_point(field_get:identity.User.income)
+  // @@protoc_insertion_point(field_get:User.income)
   return income_.GetNoArena();
 }
 inline void User::set_income(const ::std::string& value) {
   
   income_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.income)
+  // @@protoc_insertion_point(field_set:User.income)
 }
 #if LANG_CXX11
 inline void User::set_income(::std::string&& value) {
   
   income_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.income)
+  // @@protoc_insertion_point(field_set_rvalue:User.income)
 }
 #endif
 inline void User::set_income(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   income_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.income)
+  // @@protoc_insertion_point(field_set_char:User.income)
 }
 inline void User::set_income(const char* value, size_t size) {
   
   income_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.income)
+  // @@protoc_insertion_point(field_set_pointer:User.income)
 }
 inline ::std::string* User::mutable_income() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.income)
+  // @@protoc_insertion_point(field_mutable:User.income)
   return income_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_income() {
-  // @@protoc_insertion_point(field_release:identity.User.income)
+  // @@protoc_insertion_point(field_release:User.income)
   
   return income_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1289,7 +1286,7 @@ inline void User::set_allocated_income(::std::string* income) {
     
   }
   income_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), income);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.income)
+  // @@protoc_insertion_point(field_set_allocated:User.income)
 }
 
 // string marry = 18;
@@ -1297,41 +1294,41 @@ inline void User::clear_marry() {
   marry_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::marry() const {
-  // @@protoc_insertion_point(field_get:identity.User.marry)
+  // @@protoc_insertion_point(field_get:User.marry)
   return marry_.GetNoArena();
 }
 inline void User::set_marry(const ::std::string& value) {
   
   marry_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.marry)
+  // @@protoc_insertion_point(field_set:User.marry)
 }
 #if LANG_CXX11
 inline void User::set_marry(::std::string&& value) {
   
   marry_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.marry)
+  // @@protoc_insertion_point(field_set_rvalue:User.marry)
 }
 #endif
 inline void User::set_marry(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   marry_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.marry)
+  // @@protoc_insertion_point(field_set_char:User.marry)
 }
 inline void User::set_marry(const char* value, size_t size) {
   
   marry_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.marry)
+  // @@protoc_insertion_point(field_set_pointer:User.marry)
 }
 inline ::std::string* User::mutable_marry() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.marry)
+  // @@protoc_insertion_point(field_mutable:User.marry)
   return marry_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_marry() {
-  // @@protoc_insertion_point(field_release:identity.User.marry)
+  // @@protoc_insertion_point(field_release:User.marry)
   
   return marry_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1342,7 +1339,7 @@ inline void User::set_allocated_marry(::std::string* marry) {
     
   }
   marry_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), marry);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.marry)
+  // @@protoc_insertion_point(field_set_allocated:User.marry)
 }
 
 // string hobyy = 19;
@@ -1350,41 +1347,41 @@ inline void User::clear_hobyy() {
   hobyy_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::hobyy() const {
-  // @@protoc_insertion_point(field_get:identity.User.hobyy)
+  // @@protoc_insertion_point(field_get:User.hobyy)
   return hobyy_.GetNoArena();
 }
 inline void User::set_hobyy(const ::std::string& value) {
   
   hobyy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.hobyy)
+  // @@protoc_insertion_point(field_set:User.hobyy)
 }
 #if LANG_CXX11
 inline void User::set_hobyy(::std::string&& value) {
   
   hobyy_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.hobyy)
+  // @@protoc_insertion_point(field_set_rvalue:User.hobyy)
 }
 #endif
 inline void User::set_hobyy(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   hobyy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.hobyy)
+  // @@protoc_insertion_point(field_set_char:User.hobyy)
 }
 inline void User::set_hobyy(const char* value, size_t size) {
   
   hobyy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.hobyy)
+  // @@protoc_insertion_point(field_set_pointer:User.hobyy)
 }
 inline ::std::string* User::mutable_hobyy() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.hobyy)
+  // @@protoc_insertion_point(field_mutable:User.hobyy)
   return hobyy_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_hobyy() {
-  // @@protoc_insertion_point(field_release:identity.User.hobyy)
+  // @@protoc_insertion_point(field_release:User.hobyy)
   
   return hobyy_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1395,7 +1392,7 @@ inline void User::set_allocated_hobyy(::std::string* hobyy) {
     
   }
   hobyy_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hobyy);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.hobyy)
+  // @@protoc_insertion_point(field_set_allocated:User.hobyy)
 }
 
 // string recommender = 20;
@@ -1403,41 +1400,41 @@ inline void User::clear_recommender() {
   recommender_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::recommender() const {
-  // @@protoc_insertion_point(field_get:identity.User.recommender)
+  // @@protoc_insertion_point(field_get:User.recommender)
   return recommender_.GetNoArena();
 }
 inline void User::set_recommender(const ::std::string& value) {
   
   recommender_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.recommender)
+  // @@protoc_insertion_point(field_set:User.recommender)
 }
 #if LANG_CXX11
 inline void User::set_recommender(::std::string&& value) {
   
   recommender_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.recommender)
+  // @@protoc_insertion_point(field_set_rvalue:User.recommender)
 }
 #endif
 inline void User::set_recommender(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   recommender_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.recommender)
+  // @@protoc_insertion_point(field_set_char:User.recommender)
 }
 inline void User::set_recommender(const char* value, size_t size) {
   
   recommender_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.recommender)
+  // @@protoc_insertion_point(field_set_pointer:User.recommender)
 }
 inline ::std::string* User::mutable_recommender() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.recommender)
+  // @@protoc_insertion_point(field_mutable:User.recommender)
   return recommender_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_recommender() {
-  // @@protoc_insertion_point(field_release:identity.User.recommender)
+  // @@protoc_insertion_point(field_release:User.recommender)
   
   return recommender_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1448,7 +1445,7 @@ inline void User::set_allocated_recommender(::std::string* recommender) {
     
   }
   recommender_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), recommender);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.recommender)
+  // @@protoc_insertion_point(field_set_allocated:User.recommender)
 }
 
 // string belief = 21;
@@ -1456,41 +1453,41 @@ inline void User::clear_belief() {
   belief_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& User::belief() const {
-  // @@protoc_insertion_point(field_get:identity.User.belief)
+  // @@protoc_insertion_point(field_get:User.belief)
   return belief_.GetNoArena();
 }
 inline void User::set_belief(const ::std::string& value) {
   
   belief_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.User.belief)
+  // @@protoc_insertion_point(field_set:User.belief)
 }
 #if LANG_CXX11
 inline void User::set_belief(::std::string&& value) {
   
   belief_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.User.belief)
+  // @@protoc_insertion_point(field_set_rvalue:User.belief)
 }
 #endif
 inline void User::set_belief(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   belief_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.User.belief)
+  // @@protoc_insertion_point(field_set_char:User.belief)
 }
 inline void User::set_belief(const char* value, size_t size) {
   
   belief_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.User.belief)
+  // @@protoc_insertion_point(field_set_pointer:User.belief)
 }
 inline ::std::string* User::mutable_belief() {
   
-  // @@protoc_insertion_point(field_mutable:identity.User.belief)
+  // @@protoc_insertion_point(field_mutable:User.belief)
   return belief_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* User::release_belief() {
-  // @@protoc_insertion_point(field_release:identity.User.belief)
+  // @@protoc_insertion_point(field_release:User.belief)
   
   return belief_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1501,7 +1498,7 @@ inline void User::set_allocated_belief(::std::string* belief) {
     
   }
   belief_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), belief);
-  // @@protoc_insertion_point(field_set_allocated:identity.User.belief)
+  // @@protoc_insertion_point(field_set_allocated:User.belief)
 }
 
 #ifdef __GNUC__
@@ -1510,7 +1507,6 @@ inline void User::set_allocated_belief(::std::string* belief) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace identity
 
 // @@protoc_insertion_point(global_scope)
 

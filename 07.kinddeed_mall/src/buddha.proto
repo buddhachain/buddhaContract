@@ -28,31 +28,6 @@ message Proposal {
     string timestamps   = 11;//提案结论时间，各个基金会成员设置是否通过时的时间,[xxx,xxx,xxx]
 }
 
-//寺院表，寺院具有唯一性。
-message Temple {
-    string id           = 1; //寺院名称，唯一，负责人姓名
-    string unit         = 2; //寺院单位名称，唯一
-    string creditcode   = 3; //社会信用代码，登记编号，唯一
-    string address      = 4; //寺院地址，唯一
-    string proof        = 5; //登记证hash，唯一
-    bool   approved     = 6; //是否已经批准寺院，0尚未批准，1已经批准
-}
-
-//法师表，法师可以存在与多个寺院中。
-message Master {
-    string id           = 1; //法师名称，唯一，负责人姓名
-    string creditcode   = 2; //社会信用代码，登记编号，唯一
-    string proof        = 3; //登记证hash，唯一
-    bool   approved     = 4; //是否已经批准法师，0尚未批准，1已经批准
-}
-
-//寺院法师关系表
-message TempleMaster {
-    string templeid     = 1; //寺院,前二者联合唯一
-    string masterid     = 2; //法师
-    bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
-}
-
 //善举类型表
 message KinddeedType {
     int64 id            = 1;    //善举类型序号，0,1,2,3..，唯一

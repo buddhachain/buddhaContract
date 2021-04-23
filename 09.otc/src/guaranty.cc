@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
     
-xchain::json guaranty::to_json() {
+xchain::json BGuaranty::to_json() {
     xchain::json j = {
         { "id",          id()        },
         { "seller",      seller()    },

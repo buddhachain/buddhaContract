@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json credit::to_json() {
+xchain::json BCredit::to_json() {
     xchain::json j = {
         {"id", id()},
         {"value", value()},
@@ -19,14 +19,14 @@ xchain::json credit::to_json() {
     return j;
 }
 
-bool Buddha::_is_credit_exist(credit& ent, const string& id) {
+bool Main::_is_credit_exist(credit& ent, const string& id) {
     if (!get_credit_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_scan_credit(xchain::json& ja, const string& cond) {
+bool Main::_scan_credit(xchain::json& ja, const string& cond) {
     auto it = get_credit_table().scan({{"id",cond}});
     while(it->next() ) {
         credit ent;
@@ -41,7 +41,7 @@ bool Buddha::_scan_credit(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_add_credit(const string& id, const int64_t value, int64_t& total_value) {
+bool Main::_add_credit(const string& id, const int64_t value, int64_t& total_value) {
     //判断此信用值是否存在
     credit ent;
     if( _is_credit_exist(ent, id) ) {
@@ -67,7 +67,7 @@ bool Buddha::_add_credit(const string& id, const int64_t value, int64_t& total_v
     return true ;
 }
 
-bool Buddha::_delete_credit_record(const string& id) {
+bool Main::_delete_credit_record(const string& id) {
     credit ent;
     if (!_is_credit_exist(ent, id)){
         mycout << "credit " << id << " is not exist ." << endl ;
@@ -86,7 +86,7 @@ bool Buddha::_delete_credit_record(const string& id) {
 
 namespace 分界线{}
 
-void Buddha::find_credit() {
+void Main::find_credit() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "credit id is empty .");
@@ -103,7 +103,7 @@ void Buddha::find_credit() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_credit() {
+void Main::list_credit() {
     const string& id = ctx->arg("id");
 
     //身份检查，部署者，基金会成员具有权限

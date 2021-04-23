@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json proposal::to_json() {
+xchain::json BProposal::to_json() {
     xchain::json j = {
         {"key", key()},
         {"value", value()},
@@ -27,14 +27,14 @@ xchain::json proposal::to_json() {
     return j;
 }
 
-bool Buddha::_is_proposal_exist(proposal& ent, const string& key) {
+bool Main::_is_proposal_exist(proposal& ent, const string& key) {
     if (!get_proposal_table().find({{"key", key}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_scan_proposal(xchain::json& ja, const string& cond) {
+bool Main::_scan_proposal(xchain::json& ja, const string& cond) {
     auto it = get_proposal_table().scan({{"key",cond}});
     while(it->next() ) {
         proposal ent;
@@ -49,7 +49,7 @@ bool Buddha::_scan_proposal(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_proposal_record(const string& key) {
+bool Main::_delete_proposal_record(const string& key) {
     proposal ent;
     if (!_is_proposal_exist(ent, key)){
         mycout << "proposal " << key << " is not exist ." << endl ;
@@ -67,7 +67,7 @@ bool Buddha::_delete_proposal_record(const string& key) {
 
 namespace 分界线{}
 
-void Buddha::make_proposal(){
+void Main::make_proposal(){
     const string& key = ctx->arg("key");
     if( key.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "key is empty .");
@@ -149,7 +149,7 @@ void Buddha::make_proposal(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, key + " apply proposal over, please wait for approve .", ent.to_json() );
 }
 
-void Buddha::delete_proposal(){
+void Main::delete_proposal(){
     const string& key = ctx->arg("key");
     if( key.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "key is empty .");
@@ -243,7 +243,7 @@ void Buddha::delete_proposal(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, key + " apply proposal over, please wait for approve .", ent.to_json() );
 }
 
-void Buddha::update_proposal(){
+void Main::update_proposal(){
     const string& key = ctx->arg("key");
     if( key.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "key is empty .");
@@ -349,7 +349,7 @@ void Buddha::update_proposal(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, key + " apply proposal over, please wait for approve .", ent.to_json() );
 }
 
-void Buddha::approve_proposal(){
+void Main::approve_proposal(){
     const string& key = ctx->arg("key");
     if( key.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "key is empty .");
@@ -521,11 +521,11 @@ void Buddha::approve_proposal(){
 }
 
 // 对于提案来说，基金会成员只有一次通过或者不通过的授权机会，没有授权后再次反悔的机会
-// void Buddha::recusal_proposal(){
+// void Main::recusal_proposal(){
 
 // }
 
-void Buddha::find_proposal(){
+void Main::find_proposal(){
     const string& key = ctx->arg("key");
     if( key.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal key is empty .");
@@ -542,7 +542,7 @@ void Buddha::find_proposal(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_proposal(){
+void Main::list_proposal(){
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {

@@ -256,26 +256,6 @@ public:
     void find_proposal();           //基金会成员
     void list_proposal();           //基金会成员
 
-    //申请成为寺院
-    void apply_temple();            //用户,法师
-    void approve_temple();          //基金会成员
-    void recusal_temple();          //基金会成员
-    bool is_temple();               //所有角色，判断自己是否是寺院
-    void list_temple();             //合约部署者，基金会成员，根据id查所有，id可为空，安全，
-
-    //申请成为法师
-    void apply_master();            //用户
-    void approve_master();          //基金会成员
-    void recusal_master();          //基金会成员
-    bool is_master();               //所有角色，判断自己是否是法师
-    void list_master();             //合约部署者，基金会成员，根据id查所有，id可为空，基本安全，
-
-    //法师申请加入寺院
-    void apply_join_temple();       //法师
-    void approve_join_temple();     //基金会成员
-    void recusal_join_temple();     //基金会成员
-    bool is_in_temple();            //法师
-    void list_temple_master();      //合约部署者，基金会成员,寺院自己，根据templeid查所有，templeid为空时基本安全，templeid不为空时，安全
 
     //添加删除修改善举类型
     void add_kinddeedtype();        //基金会成员

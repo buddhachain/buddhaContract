@@ -13,7 +13,6 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-namespace identity {
 class TempleDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Temple> _instance;
@@ -22,16 +21,15 @@ class TempleMasterDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<TempleMaster> _instance;
 } _TempleMaster_default_instance_;
-}  // namespace identity
 static void InitDefaultsTemple_temple_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::identity::_Temple_default_instance_;
-    new (ptr) ::identity::Temple();
+    void* ptr = &::_Temple_default_instance_;
+    new (ptr) ::Temple();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::identity::Temple::InitAsDefaultInstance();
+  ::Temple::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Temple_temple_2eproto =
@@ -41,17 +39,16 @@ static void InitDefaultsTempleMaster_temple_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::identity::_TempleMaster_default_instance_;
-    new (ptr) ::identity::TempleMaster();
+    void* ptr = &::_TempleMaster_default_instance_;
+    new (ptr) ::TempleMaster();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::identity::TempleMaster::InitAsDefaultInstance();
+  ::TempleMaster::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_TempleMaster_temple_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTempleMaster_temple_2eproto}, {}};
 
-namespace identity {
 
 // ===================================================================
 
@@ -76,7 +73,7 @@ const int Temple::kApprovedFieldNumber;
 Temple::Temple()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:identity.Temple)
+  // @@protoc_insertion_point(constructor:Temple)
 }
 Temple::Temple(const Temple& from)
   : ::google::protobuf::MessageLite(),
@@ -115,7 +112,7 @@ Temple::Temple(const Temple& from)
     proof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.proof_);
   }
   approved_ = from.approved_;
-  // @@protoc_insertion_point(copy_constructor:identity.Temple)
+  // @@protoc_insertion_point(copy_constructor:Temple)
 }
 
 void Temple::SharedCtor() {
@@ -133,7 +130,7 @@ void Temple::SharedCtor() {
 }
 
 Temple::~Temple() {
-  // @@protoc_insertion_point(destructor:identity.Temple)
+  // @@protoc_insertion_point(destructor:Temple)
   SharedDtor();
 }
 
@@ -158,7 +155,7 @@ const Temple& Temple::default_instance() {
 
 
 void Temple::Clear() {
-// @@protoc_insertion_point(message_clear_start:identity.Temple)
+// @@protoc_insertion_point(message_clear_start:Temple)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -357,7 +354,7 @@ bool Temple::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:identity.Temple)
+  // @@protoc_insertion_point(parse_start:Temple)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -371,7 +368,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.id"));
+            "Temple.id"));
         } else {
           goto handle_unusual;
         }
@@ -386,7 +383,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->photo().data(), static_cast<int>(this->photo().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.photo"));
+            "Temple.photo"));
         } else {
           goto handle_unusual;
         }
@@ -401,7 +398,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->buddhist_name().data(), static_cast<int>(this->buddhist_name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.buddhist_name"));
+            "Temple.buddhist_name"));
         } else {
           goto handle_unusual;
         }
@@ -416,7 +413,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->unit().data(), static_cast<int>(this->unit().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.unit"));
+            "Temple.unit"));
         } else {
           goto handle_unusual;
         }
@@ -431,7 +428,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->creditcode().data(), static_cast<int>(this->creditcode().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.creditcode"));
+            "Temple.creditcode"));
         } else {
           goto handle_unusual;
         }
@@ -446,7 +443,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->address().data(), static_cast<int>(this->address().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.address"));
+            "Temple.address"));
         } else {
           goto handle_unusual;
         }
@@ -461,7 +458,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->sect().data(), static_cast<int>(this->sect().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.sect"));
+            "Temple.sect"));
         } else {
           goto handle_unusual;
         }
@@ -476,7 +473,7 @@ bool Temple::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->proof().data(), static_cast<int>(this->proof().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Temple.proof"));
+            "Temple.proof"));
         } else {
           goto handle_unusual;
         }
@@ -508,10 +505,10 @@ bool Temple::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:identity.Temple)
+  // @@protoc_insertion_point(parse_success:Temple)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:identity.Temple)
+  // @@protoc_insertion_point(parse_failure:Temple)
   return false;
 #undef DO_
 }
@@ -519,7 +516,7 @@ failure:
 
 void Temple::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:identity.Temple)
+  // @@protoc_insertion_point(serialize_start:Temple)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -528,7 +525,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.id");
+      "Temple.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -538,7 +535,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->photo().data(), static_cast<int>(this->photo().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.photo");
+      "Temple.photo");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->photo(), output);
   }
@@ -548,7 +545,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->buddhist_name().data(), static_cast<int>(this->buddhist_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.buddhist_name");
+      "Temple.buddhist_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->buddhist_name(), output);
   }
@@ -558,7 +555,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->unit().data(), static_cast<int>(this->unit().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.unit");
+      "Temple.unit");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->unit(), output);
   }
@@ -568,7 +565,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->creditcode().data(), static_cast<int>(this->creditcode().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.creditcode");
+      "Temple.creditcode");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->creditcode(), output);
   }
@@ -578,7 +575,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->address().data(), static_cast<int>(this->address().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.address");
+      "Temple.address");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->address(), output);
   }
@@ -588,7 +585,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->sect().data(), static_cast<int>(this->sect().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.sect");
+      "Temple.sect");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       7, this->sect(), output);
   }
@@ -598,7 +595,7 @@ void Temple::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->proof().data(), static_cast<int>(this->proof().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Temple.proof");
+      "Temple.proof");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       8, this->proof(), output);
   }
@@ -610,11 +607,11 @@ void Temple::SerializeWithCachedSizes(
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:identity.Temple)
+  // @@protoc_insertion_point(serialize_end:Temple)
 }
 
 size_t Temple::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:identity.Temple)
+// @@protoc_insertion_point(message_byte_size_start:Temple)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -695,7 +692,7 @@ void Temple::CheckTypeAndMergeFrom(
 }
 
 void Temple::MergeFrom(const Temple& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:identity.Temple)
+// @@protoc_insertion_point(class_specific_merge_from_start:Temple)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -739,7 +736,7 @@ void Temple::MergeFrom(const Temple& from) {
 }
 
 void Temple::CopyFrom(const Temple& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:identity.Temple)
+// @@protoc_insertion_point(class_specific_copy_from_start:Temple)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -776,7 +773,7 @@ void Temple::InternalSwap(Temple* other) {
 }
 
 ::std::string Temple::GetTypeName() const {
-  return "identity.Temple";
+  return "Temple";
 }
 
 
@@ -797,7 +794,7 @@ const int TempleMaster::kApprovedFieldNumber;
 TempleMaster::TempleMaster()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:identity.TempleMaster)
+  // @@protoc_insertion_point(constructor:TempleMaster)
 }
 TempleMaster::TempleMaster(const TempleMaster& from)
   : ::google::protobuf::MessageLite(),
@@ -812,7 +809,7 @@ TempleMaster::TempleMaster(const TempleMaster& from)
     masterid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.masterid_);
   }
   approved_ = from.approved_;
-  // @@protoc_insertion_point(copy_constructor:identity.TempleMaster)
+  // @@protoc_insertion_point(copy_constructor:TempleMaster)
 }
 
 void TempleMaster::SharedCtor() {
@@ -824,7 +821,7 @@ void TempleMaster::SharedCtor() {
 }
 
 TempleMaster::~TempleMaster() {
-  // @@protoc_insertion_point(destructor:identity.TempleMaster)
+  // @@protoc_insertion_point(destructor:TempleMaster)
   SharedDtor();
 }
 
@@ -843,7 +840,7 @@ const TempleMaster& TempleMaster::default_instance() {
 
 
 void TempleMaster::Clear() {
-// @@protoc_insertion_point(message_clear_start:identity.TempleMaster)
+// @@protoc_insertion_point(message_clear_start:TempleMaster)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -940,7 +937,7 @@ bool TempleMaster::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:identity.TempleMaster)
+  // @@protoc_insertion_point(parse_start:TempleMaster)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -954,7 +951,7 @@ bool TempleMaster::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->templeid().data(), static_cast<int>(this->templeid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TempleMaster.templeid"));
+            "TempleMaster.templeid"));
         } else {
           goto handle_unusual;
         }
@@ -969,7 +966,7 @@ bool TempleMaster::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->masterid().data(), static_cast<int>(this->masterid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TempleMaster.masterid"));
+            "TempleMaster.masterid"));
         } else {
           goto handle_unusual;
         }
@@ -1001,10 +998,10 @@ bool TempleMaster::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:identity.TempleMaster)
+  // @@protoc_insertion_point(parse_success:TempleMaster)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:identity.TempleMaster)
+  // @@protoc_insertion_point(parse_failure:TempleMaster)
   return false;
 #undef DO_
 }
@@ -1012,7 +1009,7 @@ failure:
 
 void TempleMaster::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:identity.TempleMaster)
+  // @@protoc_insertion_point(serialize_start:TempleMaster)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1021,7 +1018,7 @@ void TempleMaster::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->templeid().data(), static_cast<int>(this->templeid().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TempleMaster.templeid");
+      "TempleMaster.templeid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->templeid(), output);
   }
@@ -1031,7 +1028,7 @@ void TempleMaster::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->masterid().data(), static_cast<int>(this->masterid().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TempleMaster.masterid");
+      "TempleMaster.masterid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->masterid(), output);
   }
@@ -1043,11 +1040,11 @@ void TempleMaster::SerializeWithCachedSizes(
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:identity.TempleMaster)
+  // @@protoc_insertion_point(serialize_end:TempleMaster)
 }
 
 size_t TempleMaster::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:identity.TempleMaster)
+// @@protoc_insertion_point(message_byte_size_start:TempleMaster)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -1086,7 +1083,7 @@ void TempleMaster::CheckTypeAndMergeFrom(
 }
 
 void TempleMaster::MergeFrom(const TempleMaster& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:identity.TempleMaster)
+// @@protoc_insertion_point(class_specific_merge_from_start:TempleMaster)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -1106,7 +1103,7 @@ void TempleMaster::MergeFrom(const TempleMaster& from) {
 }
 
 void TempleMaster::CopyFrom(const TempleMaster& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:identity.TempleMaster)
+// @@protoc_insertion_point(class_specific_copy_from_start:TempleMaster)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1131,19 +1128,18 @@ void TempleMaster::InternalSwap(TempleMaster* other) {
 }
 
 ::std::string TempleMaster::GetTypeName() const {
-  return "identity.TempleMaster";
+  return "TempleMaster";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::identity::Temple* Arena::CreateMaybeMessage< ::identity::Temple >(Arena* arena) {
-  return Arena::CreateInternal< ::identity::Temple >(arena);
+template<> PROTOBUF_NOINLINE ::Temple* Arena::CreateMaybeMessage< ::Temple >(Arena* arena) {
+  return Arena::CreateInternal< ::Temple >(arena);
 }
-template<> PROTOBUF_NOINLINE ::identity::TempleMaster* Arena::CreateMaybeMessage< ::identity::TempleMaster >(Arena* arena) {
-  return Arena::CreateInternal< ::identity::TempleMaster >(arena);
+template<> PROTOBUF_NOINLINE ::TempleMaster* Arena::CreateMaybeMessage< ::TempleMaster >(Arena* arena) {
+  return Arena::CreateInternal< ::TempleMaster >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

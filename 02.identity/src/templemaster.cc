@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json templemaster::to_json() {
+xchain::json BTempleMaster::to_json() {
     xchain::json j = {
         {"templeid", templeid()},
         {"masterid", masterid()},
@@ -19,7 +19,7 @@ xchain::json templemaster::to_json() {
     return j;
 }
 
-bool Buddha::_is_templemaster_exist(templemaster& ent,
+bool Main::_is_templemaster_exist(templemaster& ent,
                                     const string& templeid,
                                     const string& masterid){
     if (!get_templemaster_table().find({{"templeid", templeid},{"masterid", masterid}}, &ent))
@@ -28,7 +28,7 @@ bool Buddha::_is_templemaster_exist(templemaster& ent,
     return true;
 }
 
-bool Buddha::_is_in_temple(templemaster& ent,
+bool Main::_is_in_temple(templemaster& ent,
                            const string& templeid,
                            const string& masterid){
     if (!get_templemaster_table().find({{"templeid", templeid},{"masterid", masterid}}, &ent))
@@ -37,7 +37,7 @@ bool Buddha::_is_in_temple(templemaster& ent,
     return ent.approved();
 }
 
-bool Buddha::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) {
+bool Main::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) {
     auto it = get_templemaster_table().scan({{"templeid",cond}});
     while(it->next() ) {
         templemaster ent;
@@ -52,7 +52,7 @@ bool Buddha::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond
     return true;
 }
 
-bool Buddha::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) {
+bool Main::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) {
     auto it = get_templemaster_table().scan({{"masterid",cond}});
     while(it->next() ) {
         templemaster ent;
@@ -67,7 +67,7 @@ bool Buddha::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond
     return true;
 }
 
-bool Buddha::_delete_templemaster_record(const string& templeid,
+bool Main::_delete_templemaster_record(const string& templeid,
                                          const string& masterid) {
     templemaster ent;
     if (!_is_templemaster_exist(ent, templeid, masterid)){
@@ -86,7 +86,7 @@ bool Buddha::_delete_templemaster_record(const string& templeid,
 
 namespace 分界线{}
 
-void Buddha::apply_join_temple(){
+void Main::apply_join_temple(){
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
@@ -133,7 +133,7 @@ void Buddha::apply_join_temple(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, masterid + " apply join templemaster over, please wait for approve .", ent.to_json() );
 }
 
-void Buddha::approve_join_temple() {
+void Main::approve_join_temple() {
     const string& masterid = ctx->arg("masterid");
     if( masterid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
@@ -171,7 +171,7 @@ void Buddha::approve_join_temple() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve templemaster " + masterid + " success .", ent.to_json() );
 }
 
-void Buddha::recusal_join_temple() {
+void Main::recusal_join_temple() {
     const string& masterid = ctx->arg("masterid");
     if( masterid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
@@ -196,7 +196,7 @@ void Buddha::recusal_join_temple() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Buddha::is_in_temple() {
+bool Main::is_in_temple() {
     const string& templeid = ctx->arg("templeid");
     if( templeid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
@@ -228,7 +228,7 @@ bool Buddha::is_in_temple() {
     return true;
 }
 
-void Buddha::list_temple_master() {
+void Main::list_temple_master() {
     const string& templeid = ctx->arg("templeid");
 
     //身份检查，部署者和基金会成员可以查看所有当前寺院的所有法师

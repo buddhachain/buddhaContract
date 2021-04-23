@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json aftercomment::to_json() {
+xchain::json BAfterComment::to_json() {
     xchain::json j = {
         {"orderid", orderid()},
         {"owner", owner()},
@@ -20,7 +20,7 @@ xchain::json aftercomment::to_json() {
     return j;
 }
 
-bool Buddha::_is_aftercomment_exist(aftercomment& ent,
+bool Main::_is_aftercomment_exist(aftercomment& ent,
                                     const string& orderid,
                                     const string& owner) {
     if (!get_aftercomment_table().find({{"orderid", orderid}, {"owner", owner}}, &ent))
@@ -29,7 +29,7 @@ bool Buddha::_is_aftercomment_exist(aftercomment& ent,
     return true;
 }
 
-bool Buddha::_scan_aftercomment_by_orderid(xchain::json& ja, const string& cond) {
+bool Main::_scan_aftercomment_by_orderid(xchain::json& ja, const string& cond) {
     auto it = get_aftercomment_table().scan({{"orderid",cond}});
     while(it->next() ) {
         aftercomment ent;
@@ -44,7 +44,7 @@ bool Buddha::_scan_aftercomment_by_orderid(xchain::json& ja, const string& cond)
     return true;
 }
 
-bool Buddha::_delete_aftercomment_record(const string& orderid, const string& owner) {
+bool Main::_delete_aftercomment_record(const string& orderid, const string& owner) {
     aftercomment ent;
     if (!_is_aftercomment_exist(ent,orderid,owner)){
         mycout << "aftercomment " << orderid << " is not exist ." << endl ;
@@ -62,7 +62,7 @@ bool Buddha::_delete_aftercomment_record(const string& orderid, const string& ow
 
 namespace 分界线{}
 
-void Buddha::add_aftercomment() {
+void Main::add_aftercomment() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
@@ -115,7 +115,7 @@ void Buddha::add_aftercomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
-void Buddha::delete_aftercomment() {
+void Main::delete_aftercomment() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
@@ -154,7 +154,7 @@ void Buddha::delete_aftercomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
-void Buddha::update_aftercomment() {
+void Main::update_aftercomment() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
@@ -212,7 +212,7 @@ void Buddha::update_aftercomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
-void Buddha::find_aftercomment() {
+void Main::find_aftercomment() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment orderid is empty .");
@@ -244,7 +244,7 @@ void Buddha::find_aftercomment() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_aftercomment() {
+void Main::list_aftercomment() {
     const string& orderid = ctx->arg("orderid");
 
     //身份检查，部署者，基金会成员具有权限

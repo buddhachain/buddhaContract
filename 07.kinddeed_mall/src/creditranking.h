@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-class creditranking: public buddha::CreditRanking {
+class BCreditRanking: public buddha::CreditRanking {
     DEFINE_ROWKEY(ranking);          //主键
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, ranking) //只主键能find，也支持scan

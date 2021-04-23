@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json creditranking::to_json() {
+xchain::json BCreditRanking::to_json() {
     xchain::json j = {
         {"ranking", ranking()},
         {"id", id()},
@@ -20,14 +20,14 @@ xchain::json creditranking::to_json() {
     return j;
 }
 
-bool Buddha::_is_creditranking_exist(creditranking& ent, const string& ranking) {
+bool Main::_is_creditranking_exist(creditranking& ent, const string& ranking) {
     if (!get_creditranking_table().find({{"ranking", ranking}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_scan_creditranking(xchain::json& ja, const string& cond) {
+bool Main::_scan_creditranking(xchain::json& ja, const string& cond) {
     auto it = get_creditranking_table().scan({{"id",cond}});
     while(it->next() ) {
         creditranking ent;
@@ -46,7 +46,7 @@ static bool _compare_credit( const creditranking& r1, const creditranking& r2) {
     return r1.value() > r2.value();
 }
 
-bool Buddha::_scan_creditranking(vector<creditranking>& v, const string& cond) {
+bool Main::_scan_creditranking(vector<creditranking>& v, const string& cond) {
     auto it = get_creditranking_table().scan({{"id",cond}});
     while(it->next() ) {
         creditranking ent;
@@ -61,7 +61,7 @@ bool Buddha::_scan_creditranking(vector<creditranking>& v, const string& cond) {
     return true;
 }
 
-bool Buddha::_add_creditranking(const string& id, const int64_t value ) {
+bool Main::_add_creditranking(const string& id, const int64_t value ) {
     //添加本质上就是找到合适的位置，然后进行覆盖，删除最后一名
 
     //检索出所有的记录
@@ -119,7 +119,7 @@ bool Buddha::_add_creditranking(const string& id, const int64_t value ) {
     return true ;
 }
 
-bool Buddha::_clear_creditranking() {
+bool Main::_clear_creditranking() {
     //获取所有的记录
     vector<creditranking> v;
     if(!_scan_creditranking(v) ) {
@@ -140,7 +140,7 @@ bool Buddha::_clear_creditranking() {
 
 namespace 分界线{}
 
-void Buddha::get_creditranking() {
+void Main::get_creditranking() {
     const string& ranking = ctx->arg("ranking");
     if( ranking.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "ranking is empty .");
@@ -163,7 +163,7 @@ void Buddha::get_creditranking() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_creditranking() {
+void Main::list_creditranking() {
     const string& id = ctx->arg("id");
 
     //身份检查，部署者，基金会成员具有权限

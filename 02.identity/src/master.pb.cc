@@ -13,27 +13,24 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-namespace identity {
 class MasterDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Master> _instance;
 } _Master_default_instance_;
-}  // namespace identity
 static void InitDefaultsMaster_master_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::identity::_Master_default_instance_;
-    new (ptr) ::identity::Master();
+    void* ptr = &::_Master_default_instance_;
+    new (ptr) ::Master();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::identity::Master::InitAsDefaultInstance();
+  ::Master::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Master_master_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsMaster_master_2eproto}, {}};
 
-namespace identity {
 
 // ===================================================================
 
@@ -56,7 +53,7 @@ const int Master::kApprovedFieldNumber;
 Master::Master()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:identity.Master)
+  // @@protoc_insertion_point(constructor:Master)
 }
 Master::Master(const Master& from)
   : ::google::protobuf::MessageLite(),
@@ -87,7 +84,7 @@ Master::Master(const Master& from)
     proof_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.proof_);
   }
   approved_ = from.approved_;
-  // @@protoc_insertion_point(copy_constructor:identity.Master)
+  // @@protoc_insertion_point(copy_constructor:Master)
 }
 
 void Master::SharedCtor() {
@@ -103,7 +100,7 @@ void Master::SharedCtor() {
 }
 
 Master::~Master() {
-  // @@protoc_insertion_point(destructor:identity.Master)
+  // @@protoc_insertion_point(destructor:Master)
   SharedDtor();
 }
 
@@ -126,7 +123,7 @@ const Master& Master::default_instance() {
 
 
 void Master::Clear() {
-// @@protoc_insertion_point(message_clear_start:identity.Master)
+// @@protoc_insertion_point(message_clear_start:Master)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -291,7 +288,7 @@ bool Master::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:identity.Master)
+  // @@protoc_insertion_point(parse_start:Master)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -305,7 +302,7 @@ bool Master::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Master.id"));
+            "Master.id"));
         } else {
           goto handle_unusual;
         }
@@ -320,7 +317,7 @@ bool Master::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->head_photo().data(), static_cast<int>(this->head_photo().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Master.head_photo"));
+            "Master.head_photo"));
         } else {
           goto handle_unusual;
         }
@@ -335,7 +332,7 @@ bool Master::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->buddhist_name().data(), static_cast<int>(this->buddhist_name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Master.buddhist_name"));
+            "Master.buddhist_name"));
         } else {
           goto handle_unusual;
         }
@@ -350,7 +347,7 @@ bool Master::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->sect().data(), static_cast<int>(this->sect().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Master.sect"));
+            "Master.sect"));
         } else {
           goto handle_unusual;
         }
@@ -365,7 +362,7 @@ bool Master::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->creditcode().data(), static_cast<int>(this->creditcode().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Master.creditcode"));
+            "Master.creditcode"));
         } else {
           goto handle_unusual;
         }
@@ -380,7 +377,7 @@ bool Master::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->proof().data(), static_cast<int>(this->proof().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Master.proof"));
+            "Master.proof"));
         } else {
           goto handle_unusual;
         }
@@ -412,10 +409,10 @@ bool Master::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:identity.Master)
+  // @@protoc_insertion_point(parse_success:Master)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:identity.Master)
+  // @@protoc_insertion_point(parse_failure:Master)
   return false;
 #undef DO_
 }
@@ -423,7 +420,7 @@ failure:
 
 void Master::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:identity.Master)
+  // @@protoc_insertion_point(serialize_start:Master)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -432,7 +429,7 @@ void Master::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Master.id");
+      "Master.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -442,7 +439,7 @@ void Master::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->head_photo().data(), static_cast<int>(this->head_photo().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Master.head_photo");
+      "Master.head_photo");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->head_photo(), output);
   }
@@ -452,7 +449,7 @@ void Master::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->buddhist_name().data(), static_cast<int>(this->buddhist_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Master.buddhist_name");
+      "Master.buddhist_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->buddhist_name(), output);
   }
@@ -462,7 +459,7 @@ void Master::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->sect().data(), static_cast<int>(this->sect().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Master.sect");
+      "Master.sect");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->sect(), output);
   }
@@ -472,7 +469,7 @@ void Master::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->creditcode().data(), static_cast<int>(this->creditcode().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Master.creditcode");
+      "Master.creditcode");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->creditcode(), output);
   }
@@ -482,7 +479,7 @@ void Master::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->proof().data(), static_cast<int>(this->proof().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Master.proof");
+      "Master.proof");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->proof(), output);
   }
@@ -494,11 +491,11 @@ void Master::SerializeWithCachedSizes(
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:identity.Master)
+  // @@protoc_insertion_point(serialize_end:Master)
 }
 
 size_t Master::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:identity.Master)
+// @@protoc_insertion_point(message_byte_size_start:Master)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -565,7 +562,7 @@ void Master::CheckTypeAndMergeFrom(
 }
 
 void Master::MergeFrom(const Master& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:identity.Master)
+// @@protoc_insertion_point(class_specific_merge_from_start:Master)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -601,7 +598,7 @@ void Master::MergeFrom(const Master& from) {
 }
 
 void Master::CopyFrom(const Master& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:identity.Master)
+// @@protoc_insertion_point(class_specific_copy_from_start:Master)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -634,16 +631,15 @@ void Master::InternalSwap(Master* other) {
 }
 
 ::std::string Master::GetTypeName() const {
-  return "identity.Master";
+  return "Master";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::identity::Master* Arena::CreateMaybeMessage< ::identity::Master >(Arena* arena) {
-  return Arena::CreateInternal< ::identity::Master >(arena);
+template<> PROTOBUF_NOINLINE ::Master* Arena::CreateMaybeMessage< ::Master >(Arena* arena) {
+  return Arena::CreateInternal< ::Master >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

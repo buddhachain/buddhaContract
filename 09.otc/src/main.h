@@ -10,9 +10,9 @@ using namespace std;
 
 #define mycout cout << __FILE__ << "(" << __LINE__ << ") [" << __FUNCTION__ << "] " 
 
-class Otc : public xchain::Contract {
+class Main : public xchain::Contract {
 public:
-    Otc();
+    Main();
 
 private:
     xchain::cdt::Table<guaranty>     _guaranty_table;

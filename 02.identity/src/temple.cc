@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json temple::to_json() {
+xchain::json BTemple::to_json() {
     xchain::json j = {
         {"id", id()},
         {"unit", unit()},
@@ -22,42 +22,42 @@ xchain::json temple::to_json() {
     return j;
 }
 
-bool Buddha::_is_temple_exist(temple& ent, const string& id){
+bool Main::_is_temple_exist(temple& ent, const string& id){
     if (!get_temple_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_temple_exist_by_unit(temple& ent, const string& unit){
+bool Main::_is_temple_exist_by_unit(temple& ent, const string& unit){
     if (!get_temple_table().find({{"unit", unit}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_temple_exist_by_creditcode(temple& ent, const string& creditcode){
+bool Main::_is_temple_exist_by_creditcode(temple& ent, const string& creditcode){
     if (!get_temple_table().find({{"creditcode", creditcode}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_temple_exist_by_address(temple& ent, const string& address){
+bool Main::_is_temple_exist_by_address(temple& ent, const string& address){
     if (!get_temple_table().find({{"address", address}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_temple_exist_by_proof(temple& ent, const string& proof){
+bool Main::_is_temple_exist_by_proof(temple& ent, const string& proof){
     if (!get_temple_table().find({{"proof", proof}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_temple(const string& id) {
+bool Main::_is_temple(const string& id) {
     temple ent;
     if (!_is_temple_exist(ent, id))
         return false;
@@ -65,7 +65,7 @@ bool Buddha::_is_temple(const string& id) {
     return ent.approved();
 }
 
-bool Buddha::_scan_temple(xchain::json& ja, const string& cond) {
+bool Main::_scan_temple(xchain::json& ja, const string& cond) {
     auto it = get_temple_table().scan({{"id",cond}});
     while(it->next() ) {
         temple ent;
@@ -80,7 +80,7 @@ bool Buddha::_scan_temple(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_temple_record(const string& id) {
+bool Main::_delete_temple_record(const string& id) {
     temple ent;
     if (!_is_temple_exist(ent, id)){
         mycout << "temple " << id << " is not exist ." << endl ;
@@ -98,7 +98,7 @@ bool Buddha::_delete_temple_record(const string& id) {
 
 namespace 分界线{}
 
-void Buddha::apply_temple(){
+void Main::apply_temple(){
     const string& unit = ctx->arg("unit");
     if( unit.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "unit is empty .");
@@ -157,7 +157,7 @@ void Buddha::apply_temple(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply temple over, please wait for approve .", ent.to_json() );
 }
 
-void Buddha::approve_temple() {
+void Main::approve_temple() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
@@ -199,7 +199,7 @@ void Buddha::approve_temple() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve temple " + id + " success .", ent.to_json() );
 }
 
-void Buddha::recusal_temple() {
+void Main::recusal_temple() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple id is empty .");
@@ -228,7 +228,7 @@ void Buddha::recusal_temple() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Buddha::is_temple() {
+bool Main::is_temple() {
     if (!_is_temple(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not temple .") ;
         return false;
@@ -238,7 +238,7 @@ bool Buddha::is_temple() {
     return true;
 }
 
-void Buddha::list_temple() {
+void Main::list_temple() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {

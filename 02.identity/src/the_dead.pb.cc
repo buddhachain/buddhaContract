@@ -13,27 +13,24 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-namespace identity {
 class TheDeadDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<TheDead> _instance;
 } _TheDead_default_instance_;
-}  // namespace identity
 static void InitDefaultsTheDead_the_5fdead_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::identity::_TheDead_default_instance_;
-    new (ptr) ::identity::TheDead();
+    void* ptr = &::_TheDead_default_instance_;
+    new (ptr) ::TheDead();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::identity::TheDead::InitAsDefaultInstance();
+  ::TheDead::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_TheDead_the_5fdead_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTheDead_the_5fdead_2eproto}, {}};
 
-namespace identity {
 
 // ===================================================================
 
@@ -59,7 +56,7 @@ const int TheDead::kDescFieldNumber;
 TheDead::TheDead()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:identity.TheDead)
+  // @@protoc_insertion_point(constructor:TheDead)
 }
 TheDead::TheDead(const TheDead& from)
   : ::google::protobuf::MessageLite(),
@@ -102,7 +99,7 @@ TheDead::TheDead(const TheDead& from)
     desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
   }
   sex_ = from.sex_;
-  // @@protoc_insertion_point(copy_constructor:identity.TheDead)
+  // @@protoc_insertion_point(copy_constructor:TheDead)
 }
 
 void TheDead::SharedCtor() {
@@ -121,7 +118,7 @@ void TheDead::SharedCtor() {
 }
 
 TheDead::~TheDead() {
-  // @@protoc_insertion_point(destructor:identity.TheDead)
+  // @@protoc_insertion_point(destructor:TheDead)
   SharedDtor();
 }
 
@@ -147,7 +144,7 @@ const TheDead& TheDead::default_instance() {
 
 
 void TheDead::Clear() {
-// @@protoc_insertion_point(message_clear_start:identity.TheDead)
+// @@protoc_insertion_point(message_clear_start:TheDead)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -363,7 +360,7 @@ bool TheDead::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:identity.TheDead)
+  // @@protoc_insertion_point(parse_start:TheDead)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -377,7 +374,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.id"));
+            "TheDead.id"));
         } else {
           goto handle_unusual;
         }
@@ -392,7 +389,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->name().data(), static_cast<int>(this->name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.name"));
+            "TheDead.name"));
         } else {
           goto handle_unusual;
         }
@@ -420,7 +417,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->born_timestamp().data(), static_cast<int>(this->born_timestamp().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.born_timestamp"));
+            "TheDead.born_timestamp"));
         } else {
           goto handle_unusual;
         }
@@ -435,7 +432,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->born_address().data(), static_cast<int>(this->born_address().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.born_address"));
+            "TheDead.born_address"));
         } else {
           goto handle_unusual;
         }
@@ -450,7 +447,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->dead_timestamp().data(), static_cast<int>(this->dead_timestamp().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.dead_timestamp"));
+            "TheDead.dead_timestamp"));
         } else {
           goto handle_unusual;
         }
@@ -465,7 +462,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->dead_address().data(), static_cast<int>(this->dead_address().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.dead_address"));
+            "TheDead.dead_address"));
         } else {
           goto handle_unusual;
         }
@@ -480,7 +477,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->idcard().data(), static_cast<int>(this->idcard().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.idcard"));
+            "TheDead.idcard"));
         } else {
           goto handle_unusual;
         }
@@ -495,7 +492,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->otherid().data(), static_cast<int>(this->otherid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.otherid"));
+            "TheDead.otherid"));
         } else {
           goto handle_unusual;
         }
@@ -510,7 +507,7 @@ bool TheDead::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->desc().data(), static_cast<int>(this->desc().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.TheDead.desc"));
+            "TheDead.desc"));
         } else {
           goto handle_unusual;
         }
@@ -529,10 +526,10 @@ bool TheDead::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:identity.TheDead)
+  // @@protoc_insertion_point(parse_success:TheDead)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:identity.TheDead)
+  // @@protoc_insertion_point(parse_failure:TheDead)
   return false;
 #undef DO_
 }
@@ -540,7 +537,7 @@ failure:
 
 void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:identity.TheDead)
+  // @@protoc_insertion_point(serialize_start:TheDead)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -549,7 +546,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.id");
+      "TheDead.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -559,7 +556,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.name");
+      "TheDead.name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->name(), output);
   }
@@ -574,7 +571,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->born_timestamp().data(), static_cast<int>(this->born_timestamp().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.born_timestamp");
+      "TheDead.born_timestamp");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->born_timestamp(), output);
   }
@@ -584,7 +581,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->born_address().data(), static_cast<int>(this->born_address().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.born_address");
+      "TheDead.born_address");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->born_address(), output);
   }
@@ -594,7 +591,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->dead_timestamp().data(), static_cast<int>(this->dead_timestamp().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.dead_timestamp");
+      "TheDead.dead_timestamp");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->dead_timestamp(), output);
   }
@@ -604,7 +601,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->dead_address().data(), static_cast<int>(this->dead_address().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.dead_address");
+      "TheDead.dead_address");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       7, this->dead_address(), output);
   }
@@ -614,7 +611,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->idcard().data(), static_cast<int>(this->idcard().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.idcard");
+      "TheDead.idcard");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       8, this->idcard(), output);
   }
@@ -624,7 +621,7 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->otherid().data(), static_cast<int>(this->otherid().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.otherid");
+      "TheDead.otherid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       9, this->otherid(), output);
   }
@@ -634,18 +631,18 @@ void TheDead::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->desc().data(), static_cast<int>(this->desc().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.TheDead.desc");
+      "TheDead.desc");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       10, this->desc(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:identity.TheDead)
+  // @@protoc_insertion_point(serialize_end:TheDead)
 }
 
 size_t TheDead::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:identity.TheDead)
+// @@protoc_insertion_point(message_byte_size_start:TheDead)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -735,7 +732,7 @@ void TheDead::CheckTypeAndMergeFrom(
 }
 
 void TheDead::MergeFrom(const TheDead& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:identity.TheDead)
+// @@protoc_insertion_point(class_specific_merge_from_start:TheDead)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -783,7 +780,7 @@ void TheDead::MergeFrom(const TheDead& from) {
 }
 
 void TheDead::CopyFrom(const TheDead& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:identity.TheDead)
+// @@protoc_insertion_point(class_specific_copy_from_start:TheDead)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -822,16 +819,15 @@ void TheDead::InternalSwap(TheDead* other) {
 }
 
 ::std::string TheDead::GetTypeName() const {
-  return "identity.TheDead";
+  return "TheDead";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::identity::TheDead* Arena::CreateMaybeMessage< ::identity::TheDead >(Arena* arena) {
-  return Arena::CreateInternal< ::identity::TheDead >(arena);
+template<> PROTOBUF_NOINLINE ::TheDead* Arena::CreateMaybeMessage< ::TheDead >(Arena* arena) {
+  return Arena::CreateInternal< ::TheDead >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

@@ -17,7 +17,7 @@ static int64_t ratio_for_some_contract  = 10 ; //默认给某合约账户的比�
 static string some_contract             = "buddha"; //某个默认的收款合约账户
 
 
-xchain::json kinddeedproof::to_json() {
+xchain::json BKinddeedProof::to_json() {
     xchain::json j = {
         {"orderid", orderid()},
         {"owner", owner()},
@@ -29,14 +29,14 @@ xchain::json kinddeedproof::to_json() {
     return j;
 }
 
-bool Buddha::_is_kinddeedproof_exist(kinddeedproof& ent, const string& orderid) {
+bool Main::_is_kinddeedproof_exist(kinddeedproof& ent, const string& orderid) {
     if (!get_kinddeedproof_table().find({{"orderid", orderid}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeedproof_by_orderid(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedproof_table().scan({{"orderid",cond}});
     while(it->next() ) {
         kinddeedproof ent;
@@ -51,7 +51,7 @@ bool Buddha::_scan_kinddeedproof_by_orderid(xchain::json& ja, const string& cond
     return true;
 }
 
-bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeedproof_by_owner(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedproof_table().scan({{"owner",cond}});
     while(it->next() ) {
         kinddeedproof ent;
@@ -66,7 +66,7 @@ bool Buddha::_scan_kinddeedproof_by_owner(xchain::json& ja, const string& cond) 
     return true;
 }
 
-bool Buddha::_scan_kinddeedproof_by_owner_orderid(xchain::json& ja, const string& owner, const string& orderid) {
+bool Main::_scan_kinddeedproof_by_owner_orderid(xchain::json& ja, const string& owner, const string& orderid) {
     auto it = get_kinddeedproof_table().scan({{"owner",owner},{"orderid",orderid}});
     while(it->next() ) {
         kinddeedproof ent;
@@ -81,7 +81,7 @@ bool Buddha::_scan_kinddeedproof_by_owner_orderid(xchain::json& ja, const string
     return true;
 }
 
-bool Buddha::_delete_kinddeedproof_record(const string& orderid) {
+bool Main::_delete_kinddeedproof_record(const string& orderid) {
     kinddeedproof ent;
     if (!_is_kinddeedproof_exist(ent, orderid)){
         mycout << "kinddeedproof " << orderid << " is not exist ." << endl ;
@@ -99,7 +99,7 @@ bool Buddha::_delete_kinddeedproof_record(const string& orderid) {
 
 namespace 分界线{}
 
-void Buddha::upload_kinddeedproof() {
+void Main::upload_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
@@ -150,7 +150,7 @@ void Buddha::upload_kinddeedproof() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "apply kinddeed " + orderid + " proof over, please wait for approve .", ent.to_json());
 }
 
-void Buddha::approve_kinddeedproof() {
+void Main::approve_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
@@ -299,7 +299,7 @@ void Buddha::approve_kinddeedproof() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve kinddeed " + orderid + " proof success .", ent.to_json());
 }
 
-void Buddha::refuse_kinddeedproof() {
+void Main::refuse_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
     if( orderid.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedproof orderid is empty .");
@@ -342,7 +342,7 @@ void Buddha::refuse_kinddeedproof() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "refuse kinddeed " + orderid + " proof success .", ent.to_json());
 }
 
-void Buddha::find_kinddeedproof() {
+void Main::find_kinddeedproof() {
     const string& orderid = ctx->arg("orderid");
 
     if( orderid.empty() ) {
@@ -375,7 +375,7 @@ void Buddha::find_kinddeedproof() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", ent.to_json());
 }
 
-void Buddha::list_kinddeedproof() {
+void Main::list_kinddeedproof() {
     //身份检查，部署者和基金会成员可以查看所有善举凭证
     if( is_deployer() ||
         is_founder() ) {

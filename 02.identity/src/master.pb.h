@@ -46,22 +46,19 @@ struct TableStruct_master_2eproto {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-namespace identity {
 class Master;
 class MasterDefaultTypeInternal;
 extern MasterDefaultTypeInternal _Master_default_instance_;
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> ::identity::Master* Arena::CreateMaybeMessage<::identity::Master>(Arena*);
+template<> ::Master* Arena::CreateMaybeMessage<::Master>(Arena*);
 }  // namespace protobuf
 }  // namespace google
-namespace identity {
 
 // ===================================================================
 
 class Master :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.Master) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:Master) */ {
  public:
   Master();
   virtual ~Master();
@@ -241,7 +238,7 @@ class Master :
   bool approved() const;
   void set_approved(bool value);
 
-  // @@protoc_insertion_point(class_scope:identity.Master)
+  // @@protoc_insertion_point(class_scope:Master)
  private:
   class HasBitSetters;
 
@@ -272,41 +269,41 @@ inline void Master::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Master::id() const {
-  // @@protoc_insertion_point(field_get:identity.Master.id)
+  // @@protoc_insertion_point(field_get:Master.id)
   return id_.GetNoArena();
 }
 inline void Master::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Master.id)
+  // @@protoc_insertion_point(field_set:Master.id)
 }
 #if LANG_CXX11
 inline void Master::set_id(::std::string&& value) {
   
   id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Master.id)
+  // @@protoc_insertion_point(field_set_rvalue:Master.id)
 }
 #endif
 inline void Master::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Master.id)
+  // @@protoc_insertion_point(field_set_char:Master.id)
 }
 inline void Master::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Master.id)
+  // @@protoc_insertion_point(field_set_pointer:Master.id)
 }
 inline ::std::string* Master::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Master.id)
+  // @@protoc_insertion_point(field_mutable:Master.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Master::release_id() {
-  // @@protoc_insertion_point(field_release:identity.Master.id)
+  // @@protoc_insertion_point(field_release:Master.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -317,7 +314,7 @@ inline void Master::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:identity.Master.id)
+  // @@protoc_insertion_point(field_set_allocated:Master.id)
 }
 
 // string head_photo = 2;
@@ -325,41 +322,41 @@ inline void Master::clear_head_photo() {
   head_photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Master::head_photo() const {
-  // @@protoc_insertion_point(field_get:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_get:Master.head_photo)
   return head_photo_.GetNoArena();
 }
 inline void Master::set_head_photo(const ::std::string& value) {
   
   head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_set:Master.head_photo)
 }
 #if LANG_CXX11
 inline void Master::set_head_photo(::std::string&& value) {
   
   head_photo_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_set_rvalue:Master.head_photo)
 }
 #endif
 inline void Master::set_head_photo(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_set_char:Master.head_photo)
 }
 inline void Master::set_head_photo(const char* value, size_t size) {
   
   head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_set_pointer:Master.head_photo)
 }
 inline ::std::string* Master::mutable_head_photo() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_mutable:Master.head_photo)
   return head_photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Master::release_head_photo() {
-  // @@protoc_insertion_point(field_release:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_release:Master.head_photo)
   
   return head_photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -370,7 +367,7 @@ inline void Master::set_allocated_head_photo(::std::string* head_photo) {
     
   }
   head_photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), head_photo);
-  // @@protoc_insertion_point(field_set_allocated:identity.Master.head_photo)
+  // @@protoc_insertion_point(field_set_allocated:Master.head_photo)
 }
 
 // string buddhist_name = 3;
@@ -378,41 +375,41 @@ inline void Master::clear_buddhist_name() {
   buddhist_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Master::buddhist_name() const {
-  // @@protoc_insertion_point(field_get:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_get:Master.buddhist_name)
   return buddhist_name_.GetNoArena();
 }
 inline void Master::set_buddhist_name(const ::std::string& value) {
   
   buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_set:Master.buddhist_name)
 }
 #if LANG_CXX11
 inline void Master::set_buddhist_name(::std::string&& value) {
   
   buddhist_name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_set_rvalue:Master.buddhist_name)
 }
 #endif
 inline void Master::set_buddhist_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_set_char:Master.buddhist_name)
 }
 inline void Master::set_buddhist_name(const char* value, size_t size) {
   
   buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_set_pointer:Master.buddhist_name)
 }
 inline ::std::string* Master::mutable_buddhist_name() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_mutable:Master.buddhist_name)
   return buddhist_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Master::release_buddhist_name() {
-  // @@protoc_insertion_point(field_release:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_release:Master.buddhist_name)
   
   return buddhist_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -423,7 +420,7 @@ inline void Master::set_allocated_buddhist_name(::std::string* buddhist_name) {
     
   }
   buddhist_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), buddhist_name);
-  // @@protoc_insertion_point(field_set_allocated:identity.Master.buddhist_name)
+  // @@protoc_insertion_point(field_set_allocated:Master.buddhist_name)
 }
 
 // string sect = 4;
@@ -431,41 +428,41 @@ inline void Master::clear_sect() {
   sect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Master::sect() const {
-  // @@protoc_insertion_point(field_get:identity.Master.sect)
+  // @@protoc_insertion_point(field_get:Master.sect)
   return sect_.GetNoArena();
 }
 inline void Master::set_sect(const ::std::string& value) {
   
   sect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Master.sect)
+  // @@protoc_insertion_point(field_set:Master.sect)
 }
 #if LANG_CXX11
 inline void Master::set_sect(::std::string&& value) {
   
   sect_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Master.sect)
+  // @@protoc_insertion_point(field_set_rvalue:Master.sect)
 }
 #endif
 inline void Master::set_sect(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   sect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Master.sect)
+  // @@protoc_insertion_point(field_set_char:Master.sect)
 }
 inline void Master::set_sect(const char* value, size_t size) {
   
   sect_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Master.sect)
+  // @@protoc_insertion_point(field_set_pointer:Master.sect)
 }
 inline ::std::string* Master::mutable_sect() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Master.sect)
+  // @@protoc_insertion_point(field_mutable:Master.sect)
   return sect_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Master::release_sect() {
-  // @@protoc_insertion_point(field_release:identity.Master.sect)
+  // @@protoc_insertion_point(field_release:Master.sect)
   
   return sect_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -476,7 +473,7 @@ inline void Master::set_allocated_sect(::std::string* sect) {
     
   }
   sect_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sect);
-  // @@protoc_insertion_point(field_set_allocated:identity.Master.sect)
+  // @@protoc_insertion_point(field_set_allocated:Master.sect)
 }
 
 // string creditcode = 5;
@@ -484,41 +481,41 @@ inline void Master::clear_creditcode() {
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Master::creditcode() const {
-  // @@protoc_insertion_point(field_get:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_get:Master.creditcode)
   return creditcode_.GetNoArena();
 }
 inline void Master::set_creditcode(const ::std::string& value) {
   
   creditcode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_set:Master.creditcode)
 }
 #if LANG_CXX11
 inline void Master::set_creditcode(::std::string&& value) {
   
   creditcode_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_set_rvalue:Master.creditcode)
 }
 #endif
 inline void Master::set_creditcode(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   creditcode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_set_char:Master.creditcode)
 }
 inline void Master::set_creditcode(const char* value, size_t size) {
   
   creditcode_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_set_pointer:Master.creditcode)
 }
 inline ::std::string* Master::mutable_creditcode() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_mutable:Master.creditcode)
   return creditcode_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Master::release_creditcode() {
-  // @@protoc_insertion_point(field_release:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_release:Master.creditcode)
   
   return creditcode_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -529,7 +526,7 @@ inline void Master::set_allocated_creditcode(::std::string* creditcode) {
     
   }
   creditcode_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), creditcode);
-  // @@protoc_insertion_point(field_set_allocated:identity.Master.creditcode)
+  // @@protoc_insertion_point(field_set_allocated:Master.creditcode)
 }
 
 // string proof = 6;
@@ -537,41 +534,41 @@ inline void Master::clear_proof() {
   proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Master::proof() const {
-  // @@protoc_insertion_point(field_get:identity.Master.proof)
+  // @@protoc_insertion_point(field_get:Master.proof)
   return proof_.GetNoArena();
 }
 inline void Master::set_proof(const ::std::string& value) {
   
   proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Master.proof)
+  // @@protoc_insertion_point(field_set:Master.proof)
 }
 #if LANG_CXX11
 inline void Master::set_proof(::std::string&& value) {
   
   proof_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Master.proof)
+  // @@protoc_insertion_point(field_set_rvalue:Master.proof)
 }
 #endif
 inline void Master::set_proof(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Master.proof)
+  // @@protoc_insertion_point(field_set_char:Master.proof)
 }
 inline void Master::set_proof(const char* value, size_t size) {
   
   proof_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Master.proof)
+  // @@protoc_insertion_point(field_set_pointer:Master.proof)
 }
 inline ::std::string* Master::mutable_proof() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Master.proof)
+  // @@protoc_insertion_point(field_mutable:Master.proof)
   return proof_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Master::release_proof() {
-  // @@protoc_insertion_point(field_release:identity.Master.proof)
+  // @@protoc_insertion_point(field_release:Master.proof)
   
   return proof_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -582,7 +579,7 @@ inline void Master::set_allocated_proof(::std::string* proof) {
     
   }
   proof_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), proof);
-  // @@protoc_insertion_point(field_set_allocated:identity.Master.proof)
+  // @@protoc_insertion_point(field_set_allocated:Master.proof)
 }
 
 // bool approved = 7;
@@ -590,13 +587,13 @@ inline void Master::clear_approved() {
   approved_ = false;
 }
 inline bool Master::approved() const {
-  // @@protoc_insertion_point(field_get:identity.Master.approved)
+  // @@protoc_insertion_point(field_get:Master.approved)
   return approved_;
 }
 inline void Master::set_approved(bool value) {
   
   approved_ = value;
-  // @@protoc_insertion_point(field_set:identity.Master.approved)
+  // @@protoc_insertion_point(field_set:Master.approved)
 }
 
 #ifdef __GNUC__
@@ -605,7 +602,6 @@ inline void Master::set_approved(bool value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace identity
 
 // @@protoc_insertion_point(global_scope)
 

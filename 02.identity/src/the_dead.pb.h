@@ -46,22 +46,19 @@ struct TableStruct_the_5fdead_2eproto {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-namespace identity {
 class TheDead;
 class TheDeadDefaultTypeInternal;
 extern TheDeadDefaultTypeInternal _TheDead_default_instance_;
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> ::identity::TheDead* Arena::CreateMaybeMessage<::identity::TheDead>(Arena*);
+template<> ::TheDead* Arena::CreateMaybeMessage<::TheDead>(Arena*);
 }  // namespace protobuf
 }  // namespace google
-namespace identity {
 
 // ===================================================================
 
 class TheDead :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.TheDead) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:TheDead) */ {
  public:
   TheDead();
   virtual ~TheDead();
@@ -283,7 +280,7 @@ class TheDead :
   ::google::protobuf::int64 sex() const;
   void set_sex(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:identity.TheDead)
+  // @@protoc_insertion_point(class_scope:TheDead)
  private:
   class HasBitSetters;
 
@@ -317,41 +314,41 @@ inline void TheDead::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::id() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.id)
+  // @@protoc_insertion_point(field_get:TheDead.id)
   return id_.GetNoArena();
 }
 inline void TheDead::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.id)
+  // @@protoc_insertion_point(field_set:TheDead.id)
 }
 #if LANG_CXX11
 inline void TheDead::set_id(::std::string&& value) {
   
   id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.id)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.id)
 }
 #endif
 inline void TheDead::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.id)
+  // @@protoc_insertion_point(field_set_char:TheDead.id)
 }
 inline void TheDead::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.id)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.id)
 }
 inline ::std::string* TheDead::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.id)
+  // @@protoc_insertion_point(field_mutable:TheDead.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_id() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.id)
+  // @@protoc_insertion_point(field_release:TheDead.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -362,7 +359,7 @@ inline void TheDead::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.id)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.id)
 }
 
 // string name = 2;
@@ -370,41 +367,41 @@ inline void TheDead::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::name() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.name)
+  // @@protoc_insertion_point(field_get:TheDead.name)
   return name_.GetNoArena();
 }
 inline void TheDead::set_name(const ::std::string& value) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.name)
+  // @@protoc_insertion_point(field_set:TheDead.name)
 }
 #if LANG_CXX11
 inline void TheDead::set_name(::std::string&& value) {
   
   name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.name)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.name)
 }
 #endif
 inline void TheDead::set_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.name)
+  // @@protoc_insertion_point(field_set_char:TheDead.name)
 }
 inline void TheDead::set_name(const char* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.name)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.name)
 }
 inline ::std::string* TheDead::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.name)
+  // @@protoc_insertion_point(field_mutable:TheDead.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_name() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.name)
+  // @@protoc_insertion_point(field_release:TheDead.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -415,7 +412,7 @@ inline void TheDead::set_allocated_name(::std::string* name) {
     
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.name)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.name)
 }
 
 // int64 sex = 3;
@@ -423,13 +420,13 @@ inline void TheDead::clear_sex() {
   sex_ = PROTOBUF_LONGLONG(0);
 }
 inline ::google::protobuf::int64 TheDead::sex() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.sex)
+  // @@protoc_insertion_point(field_get:TheDead.sex)
   return sex_;
 }
 inline void TheDead::set_sex(::google::protobuf::int64 value) {
   
   sex_ = value;
-  // @@protoc_insertion_point(field_set:identity.TheDead.sex)
+  // @@protoc_insertion_point(field_set:TheDead.sex)
 }
 
 // string born_timestamp = 4;
@@ -437,41 +434,41 @@ inline void TheDead::clear_born_timestamp() {
   born_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::born_timestamp() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_get:TheDead.born_timestamp)
   return born_timestamp_.GetNoArena();
 }
 inline void TheDead::set_born_timestamp(const ::std::string& value) {
   
   born_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_set:TheDead.born_timestamp)
 }
 #if LANG_CXX11
 inline void TheDead::set_born_timestamp(::std::string&& value) {
   
   born_timestamp_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.born_timestamp)
 }
 #endif
 inline void TheDead::set_born_timestamp(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   born_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_set_char:TheDead.born_timestamp)
 }
 inline void TheDead::set_born_timestamp(const char* value, size_t size) {
   
   born_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.born_timestamp)
 }
 inline ::std::string* TheDead::mutable_born_timestamp() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_mutable:TheDead.born_timestamp)
   return born_timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_born_timestamp() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_release:TheDead.born_timestamp)
   
   return born_timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -482,7 +479,7 @@ inline void TheDead::set_allocated_born_timestamp(::std::string* born_timestamp)
     
   }
   born_timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), born_timestamp);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.born_timestamp)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.born_timestamp)
 }
 
 // string born_address = 5;
@@ -490,41 +487,41 @@ inline void TheDead::clear_born_address() {
   born_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::born_address() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_get:TheDead.born_address)
   return born_address_.GetNoArena();
 }
 inline void TheDead::set_born_address(const ::std::string& value) {
   
   born_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_set:TheDead.born_address)
 }
 #if LANG_CXX11
 inline void TheDead::set_born_address(::std::string&& value) {
   
   born_address_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.born_address)
 }
 #endif
 inline void TheDead::set_born_address(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   born_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_set_char:TheDead.born_address)
 }
 inline void TheDead::set_born_address(const char* value, size_t size) {
   
   born_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.born_address)
 }
 inline ::std::string* TheDead::mutable_born_address() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_mutable:TheDead.born_address)
   return born_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_born_address() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_release:TheDead.born_address)
   
   return born_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -535,7 +532,7 @@ inline void TheDead::set_allocated_born_address(::std::string* born_address) {
     
   }
   born_address_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), born_address);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.born_address)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.born_address)
 }
 
 // string dead_timestamp = 6;
@@ -543,41 +540,41 @@ inline void TheDead::clear_dead_timestamp() {
   dead_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::dead_timestamp() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_get:TheDead.dead_timestamp)
   return dead_timestamp_.GetNoArena();
 }
 inline void TheDead::set_dead_timestamp(const ::std::string& value) {
   
   dead_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_set:TheDead.dead_timestamp)
 }
 #if LANG_CXX11
 inline void TheDead::set_dead_timestamp(::std::string&& value) {
   
   dead_timestamp_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.dead_timestamp)
 }
 #endif
 inline void TheDead::set_dead_timestamp(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   dead_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_set_char:TheDead.dead_timestamp)
 }
 inline void TheDead::set_dead_timestamp(const char* value, size_t size) {
   
   dead_timestamp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.dead_timestamp)
 }
 inline ::std::string* TheDead::mutable_dead_timestamp() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_mutable:TheDead.dead_timestamp)
   return dead_timestamp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_dead_timestamp() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_release:TheDead.dead_timestamp)
   
   return dead_timestamp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -588,7 +585,7 @@ inline void TheDead::set_allocated_dead_timestamp(::std::string* dead_timestamp)
     
   }
   dead_timestamp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), dead_timestamp);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.dead_timestamp)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.dead_timestamp)
 }
 
 // string dead_address = 7;
@@ -596,41 +593,41 @@ inline void TheDead::clear_dead_address() {
   dead_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::dead_address() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_get:TheDead.dead_address)
   return dead_address_.GetNoArena();
 }
 inline void TheDead::set_dead_address(const ::std::string& value) {
   
   dead_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_set:TheDead.dead_address)
 }
 #if LANG_CXX11
 inline void TheDead::set_dead_address(::std::string&& value) {
   
   dead_address_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.dead_address)
 }
 #endif
 inline void TheDead::set_dead_address(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   dead_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_set_char:TheDead.dead_address)
 }
 inline void TheDead::set_dead_address(const char* value, size_t size) {
   
   dead_address_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.dead_address)
 }
 inline ::std::string* TheDead::mutable_dead_address() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_mutable:TheDead.dead_address)
   return dead_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_dead_address() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_release:TheDead.dead_address)
   
   return dead_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -641,7 +638,7 @@ inline void TheDead::set_allocated_dead_address(::std::string* dead_address) {
     
   }
   dead_address_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), dead_address);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.dead_address)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.dead_address)
 }
 
 // string idcard = 8;
@@ -649,41 +646,41 @@ inline void TheDead::clear_idcard() {
   idcard_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::idcard() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_get:TheDead.idcard)
   return idcard_.GetNoArena();
 }
 inline void TheDead::set_idcard(const ::std::string& value) {
   
   idcard_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_set:TheDead.idcard)
 }
 #if LANG_CXX11
 inline void TheDead::set_idcard(::std::string&& value) {
   
   idcard_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.idcard)
 }
 #endif
 inline void TheDead::set_idcard(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   idcard_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_set_char:TheDead.idcard)
 }
 inline void TheDead::set_idcard(const char* value, size_t size) {
   
   idcard_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.idcard)
 }
 inline ::std::string* TheDead::mutable_idcard() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_mutable:TheDead.idcard)
   return idcard_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_idcard() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_release:TheDead.idcard)
   
   return idcard_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -694,7 +691,7 @@ inline void TheDead::set_allocated_idcard(::std::string* idcard) {
     
   }
   idcard_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), idcard);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.idcard)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.idcard)
 }
 
 // string otherid = 9;
@@ -702,41 +699,41 @@ inline void TheDead::clear_otherid() {
   otherid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::otherid() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_get:TheDead.otherid)
   return otherid_.GetNoArena();
 }
 inline void TheDead::set_otherid(const ::std::string& value) {
   
   otherid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_set:TheDead.otherid)
 }
 #if LANG_CXX11
 inline void TheDead::set_otherid(::std::string&& value) {
   
   otherid_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.otherid)
 }
 #endif
 inline void TheDead::set_otherid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   otherid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_set_char:TheDead.otherid)
 }
 inline void TheDead::set_otherid(const char* value, size_t size) {
   
   otherid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.otherid)
 }
 inline ::std::string* TheDead::mutable_otherid() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_mutable:TheDead.otherid)
   return otherid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_otherid() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_release:TheDead.otherid)
   
   return otherid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -747,7 +744,7 @@ inline void TheDead::set_allocated_otherid(::std::string* otherid) {
     
   }
   otherid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), otherid);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.otherid)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.otherid)
 }
 
 // string desc = 10;
@@ -755,41 +752,41 @@ inline void TheDead::clear_desc() {
   desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& TheDead::desc() const {
-  // @@protoc_insertion_point(field_get:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_get:TheDead.desc)
   return desc_.GetNoArena();
 }
 inline void TheDead::set_desc(const ::std::string& value) {
   
   desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_set:TheDead.desc)
 }
 #if LANG_CXX11
 inline void TheDead::set_desc(::std::string&& value) {
   
   desc_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_set_rvalue:TheDead.desc)
 }
 #endif
 inline void TheDead::set_desc(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_set_char:TheDead.desc)
 }
 inline void TheDead::set_desc(const char* value, size_t size) {
   
   desc_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_set_pointer:TheDead.desc)
 }
 inline ::std::string* TheDead::mutable_desc() {
   
-  // @@protoc_insertion_point(field_mutable:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_mutable:TheDead.desc)
   return desc_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* TheDead::release_desc() {
-  // @@protoc_insertion_point(field_release:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_release:TheDead.desc)
   
   return desc_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -800,7 +797,7 @@ inline void TheDead::set_allocated_desc(::std::string* desc) {
     
   }
   desc_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), desc);
-  // @@protoc_insertion_point(field_set_allocated:identity.TheDead.desc)
+  // @@protoc_insertion_point(field_set_allocated:TheDead.desc)
 }
 
 #ifdef __GNUC__
@@ -809,7 +806,6 @@ inline void TheDead::set_allocated_desc(::std::string* desc) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace identity
 
 // @@protoc_insertion_point(global_scope)
 

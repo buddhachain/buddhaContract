@@ -46,22 +46,19 @@ struct TableStruct_identity_2eproto {
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-namespace identity {
 class Identity;
 class IdentityDefaultTypeInternal;
 extern IdentityDefaultTypeInternal _Identity_default_instance_;
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> ::identity::Identity* Arena::CreateMaybeMessage<::identity::Identity>(Arena*);
+template<> ::Identity* Arena::CreateMaybeMessage<::Identity>(Arena*);
 }  // namespace protobuf
 }  // namespace google
-namespace identity {
 
 // ===================================================================
 
 class Identity :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:identity.Identity) */ {
+    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:Identity) */ {
  public:
   Identity();
   virtual ~Identity();
@@ -171,7 +168,7 @@ class Identity :
   ::google::protobuf::int64 type() const;
   void set_type(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:identity.Identity)
+  // @@protoc_insertion_point(class_scope:Identity)
  private:
   class HasBitSetters;
 
@@ -197,41 +194,41 @@ inline void Identity::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& Identity::id() const {
-  // @@protoc_insertion_point(field_get:identity.Identity.id)
+  // @@protoc_insertion_point(field_get:Identity.id)
   return id_.GetNoArena();
 }
 inline void Identity::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:identity.Identity.id)
+  // @@protoc_insertion_point(field_set:Identity.id)
 }
 #if LANG_CXX11
 inline void Identity::set_id(::std::string&& value) {
   
   id_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:identity.Identity.id)
+  // @@protoc_insertion_point(field_set_rvalue:Identity.id)
 }
 #endif
 inline void Identity::set_id(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:identity.Identity.id)
+  // @@protoc_insertion_point(field_set_char:Identity.id)
 }
 inline void Identity::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:identity.Identity.id)
+  // @@protoc_insertion_point(field_set_pointer:Identity.id)
 }
 inline ::std::string* Identity::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:identity.Identity.id)
+  // @@protoc_insertion_point(field_mutable:Identity.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Identity::release_id() {
-  // @@protoc_insertion_point(field_release:identity.Identity.id)
+  // @@protoc_insertion_point(field_release:Identity.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -242,7 +239,7 @@ inline void Identity::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:identity.Identity.id)
+  // @@protoc_insertion_point(field_set_allocated:Identity.id)
 }
 
 // int64 type = 2;
@@ -250,13 +247,13 @@ inline void Identity::clear_type() {
   type_ = PROTOBUF_LONGLONG(0);
 }
 inline ::google::protobuf::int64 Identity::type() const {
-  // @@protoc_insertion_point(field_get:identity.Identity.type)
+  // @@protoc_insertion_point(field_get:Identity.type)
   return type_;
 }
 inline void Identity::set_type(::google::protobuf::int64 value) {
   
   type_ = value;
-  // @@protoc_insertion_point(field_set:identity.Identity.type)
+  // @@protoc_insertion_point(field_set:Identity.type)
 }
 
 #ifdef __GNUC__
@@ -265,7 +262,6 @@ inline void Identity::set_type(::google::protobuf::int64 value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace identity
 
 // @@protoc_insertion_point(global_scope)
 

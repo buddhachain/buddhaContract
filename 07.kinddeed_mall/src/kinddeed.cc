@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json kinddeed::to_json() {
+xchain::json BKinddeed::to_json() {
     xchain::json j = {
         {"id", id()},
         {"name", name()},
@@ -22,7 +22,7 @@ xchain::json kinddeed::to_json() {
     return j;
 }
 
-xchain::json kinddeeddetail::to_json() {
+xchain::json BKinddeedDetail::to_json() {
     xchain::json j = {
         {"kdid", kdid()},
         {"sequence", sequence()},
@@ -32,7 +32,7 @@ xchain::json kinddeeddetail::to_json() {
     return j;
 }
 
-xchain::json kinddeedspec::to_json() {
+xchain::json BKinddeedSpec::to_json() {
     xchain::json j = {
         {"kdid", kdid()},
         {"sequence", sequence()},
@@ -44,14 +44,14 @@ xchain::json kinddeedspec::to_json() {
 }
 
 
-bool Buddha::_is_kinddeed_exist(kinddeed& ent, const string& id) {
+bool Main::_is_kinddeed_exist(kinddeed& ent, const string& id) {
     if (!get_kinddeed_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_kinddeeddetail_exist(kinddeeddetail& ent,
+bool Main::_is_kinddeeddetail_exist(kinddeeddetail& ent,
                                       const string& kdid,
                                       const string& seq) {
     if (!get_kinddeeddetail_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
@@ -60,7 +60,7 @@ bool Buddha::_is_kinddeeddetail_exist(kinddeeddetail& ent,
     return true;
 }
 
-bool Buddha::_is_kinddeedspec_exist(kinddeedspec& ent,
+bool Main::_is_kinddeedspec_exist(kinddeedspec& ent,
                                     const string& kdid,
                                     const string& seq) {
     if (!get_kinddeedspec_table().find({{"kdid", kdid},{"sequence",seq}}, &ent))
@@ -69,7 +69,7 @@ bool Buddha::_is_kinddeedspec_exist(kinddeedspec& ent,
     return true;
 }
 
-bool Buddha::_is_kinddeed_online(const string& id){
+bool Main::_is_kinddeed_online(const string& id){
     kinddeed ent;
     if (!get_kinddeed_table().find({{"id", id}}, &ent) ) {
         mycout << "kinddeed " << id << " is not exist ." << endl;
@@ -85,7 +85,7 @@ bool Buddha::_is_kinddeed_online(const string& id){
 
 }
 
-bool Buddha::_scan_kinddeed_by_id(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeed_by_id(xchain::json& ja, const string& cond) {
     auto it = get_kinddeed_table().scan({{"id",cond}});
     while(it->next() ) {
         kinddeed ent;
@@ -100,7 +100,7 @@ bool Buddha::_scan_kinddeed_by_id(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_scan_kinddeed_by_owner(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeed_by_owner(xchain::json& ja, const string& cond) {
     auto it = get_kinddeed_table().scan({{"owner",cond}});
     while(it->next() ) {
         kinddeed ent;
@@ -115,7 +115,7 @@ bool Buddha::_scan_kinddeed_by_owner(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_scan_kinddeeddetail(vector<kinddeeddetail>& v, const string& cond) {
+bool Main::_scan_kinddeeddetail(vector<kinddeeddetail>& v, const string& cond) {
     auto it = get_kinddeeddetail_table().scan({{"kdid",cond}});
     while(it->next() ) {
         kinddeeddetail ent;
@@ -138,7 +138,7 @@ bool Buddha::_scan_kinddeeddetail(vector<kinddeeddetail>& v, const string& cond)
     return true;
 }
 
-bool Buddha::_scan_kinddeeddetail(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeeddetail(xchain::json& ja, const string& cond) {
     auto it = get_kinddeeddetail_table().scan({{"kdid",cond}});
     while(it->next() ) {
         kinddeeddetail ent;
@@ -153,7 +153,7 @@ bool Buddha::_scan_kinddeeddetail(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_scan_kinddeedspec(vector<kinddeedspec>& v, const string& cond) {
+bool Main::_scan_kinddeedspec(vector<kinddeedspec>& v, const string& cond) {
     auto it = get_kinddeedspec_table().scan({{"kdid",cond}});
     while(it->next() ) {
         kinddeedspec ent;
@@ -174,7 +174,7 @@ bool Buddha::_scan_kinddeedspec(vector<kinddeedspec>& v, const string& cond) {
 }
 
 
-bool Buddha::_scan_kinddeedspec(xchain::json& ja, const string& cond) {
+bool Main::_scan_kinddeedspec(xchain::json& ja, const string& cond) {
     auto it = get_kinddeedspec_table().scan({{"kdid",cond}});
     while(it->next() ) {
         kinddeedspec ent;
@@ -189,7 +189,7 @@ bool Buddha::_scan_kinddeedspec(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_kinddeed_record(const string& id) {
+bool Main::_delete_kinddeed_record(const string& id) {
     kinddeed ent;
     if (!_is_kinddeed_exist(ent, id)){
         mycout << "kinddeed " << id << " is not exist ." << endl ;
@@ -217,7 +217,7 @@ bool Buddha::_delete_kinddeed_record(const string& id) {
     return true;
 }
 
-bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& sequence ) {
+bool Main::_delete_kinddeeddetail_record(const string& id, const string& sequence ) {
     if( sequence.empty() ) {
 
         auto it = get_kinddeeddetail_table().scan({{"kdid",id}});
@@ -255,7 +255,7 @@ bool Buddha::_delete_kinddeeddetail_record(const string& id, const string& seque
     return true;
 }
 
-bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequence ) {
+bool Main::_delete_kinddeedspec_record(const string& id, const string& sequence ) {
     if( sequence.empty() ) {
         auto it = get_kinddeedspec_table().scan({{"kdid",id}});
         while(it->next() ) {
@@ -292,7 +292,7 @@ bool Buddha::_delete_kinddeedspec_record(const string& id, const string& sequenc
     return true;
 }
 
-bool Buddha::_add_kinddeeddetail(const string& kdid,
+bool Main::_add_kinddeeddetail(const string& kdid,
                                  const string& sequence,
                                  const string& hash) {
 
@@ -329,7 +329,7 @@ bool Buddha::_add_kinddeeddetail(const string& kdid,
     return true ;
 }
 
-bool Buddha::_add_kinddeedspec(const string& kdid,
+bool Main::_add_kinddeedspec(const string& kdid,
                                const string& sequence,
                                const string& desc,
                                const string& price) {
@@ -378,7 +378,7 @@ bool Buddha::_add_kinddeedspec(const string& kdid,
 
 namespace 分界线{}
 
-void Buddha::add_kinddeeddetail() {
+void Main::add_kinddeeddetail() {
     const string& kinddeed = ctx->arg("kinddeed");
     const string& sequence = ctx->arg("sequence");
     const string& hash = ctx->arg("hash");
@@ -406,7 +406,7 @@ void Buddha::add_kinddeeddetail() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create");
 }
 
-void Buddha::delete_kinddeeddetail() {
+void Main::delete_kinddeeddetail() {
     const string& kinddeed = ctx->arg("kinddeed");
     if( kinddeed.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed is empty .");
@@ -438,7 +438,7 @@ void Buddha::delete_kinddeeddetail() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ja);
 }
 
-void Buddha::list_kinddeeddetail() {
+void Main::list_kinddeeddetail() {
     //身份检查，部署者，基金会成员，寺院，法师具有权限
     if( !is_deployer() &&
         !is_founder() &&
@@ -457,7 +457,7 @@ void Buddha::list_kinddeeddetail() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-void Buddha::add_kinddeedspec() {
+void Main::add_kinddeedspec() {
     const string& kinddeed = ctx->arg("kinddeed");    
     const string& sequence = ctx->arg("sequence");
     const string& desc = ctx->arg("desc");
@@ -491,7 +491,7 @@ void Buddha::add_kinddeedspec() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "create");
 }
 
-void Buddha::delete_kinddeedspec() {
+void Main::delete_kinddeedspec() {
     const string& kinddeed = ctx->arg("kinddeed");
     if( kinddeed.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed is empty .");
@@ -523,7 +523,7 @@ void Buddha::delete_kinddeedspec() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ja);
 }
 
-void Buddha::list_kinddeedspec() {
+void Main::list_kinddeedspec() {
     //身份检查，部署者，基金会成员，寺院，法师具有权限
     if( !is_deployer() &&
         !is_founder() &&
@@ -542,7 +542,7 @@ void Buddha::list_kinddeedspec() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-void Buddha::add_kinddeed() {
+void Main::add_kinddeed() {
     const string& id = ctx->arg("id");
     const string& name = ctx->arg("name");
     const string& owner = ctx->initiator();
@@ -675,7 +675,7 @@ void Buddha::add_kinddeed() {
     // _log_ok(__FILE__, __FUNCTION__, __LINE__, "create", ent.to_json());
 }
 
-void Buddha::delete_kinddeed() {
+void Main::delete_kinddeed() {
 
     const string& id = ctx->arg("id");
     if( id.empty() ) {
@@ -713,7 +713,7 @@ void Buddha::delete_kinddeed() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json());
 }
 
-void Buddha::update_kinddeed() {
+void Main::update_kinddeed() {
     const string& id = ctx->arg("id");
     const string& name = ctx->arg("name");
     const string& owner = ctx->initiator();
@@ -859,7 +859,7 @@ void Buddha::update_kinddeed() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "update", ent.to_json());
 }
 
-void Buddha::offline_kinddeed() {
+void Main::offline_kinddeed() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
@@ -899,7 +899,7 @@ void Buddha::offline_kinddeed() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "offline kinddeed " + id + " success .", ent.to_json() );
 }
 
-void Buddha::is_kinddeed_online() {
+void Main::is_kinddeed_online() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed id is empty .");
@@ -920,7 +920,7 @@ void Buddha::is_kinddeed_online() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "kinddeed " + id  + " is online .");
 }    
 
-void Buddha::find_kinddeed() {
+void Main::find_kinddeed() {
 
     const string& id = ctx->arg("id");
     if( id.empty() ) {
@@ -959,7 +959,7 @@ void Buddha::find_kinddeed() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "find", j);
 }
 
-void Buddha::list_kinddeed() {        
+void Main::list_kinddeed() {        
     //身份检查，部署者和基金会成员可以查看所有善举凭证
     //善举过多时，此时不安全，尽可能少调用
     if( is_deployer() ||

@@ -13,27 +13,24 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-namespace identity {
 class VisitorDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<Visitor> _instance;
 } _Visitor_default_instance_;
-}  // namespace identity
 static void InitDefaultsVisitor_visitor_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::identity::_Visitor_default_instance_;
-    new (ptr) ::identity::Visitor();
+    void* ptr = &::_Visitor_default_instance_;
+    new (ptr) ::Visitor();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::identity::Visitor::InitAsDefaultInstance();
+  ::Visitor::InitAsDefaultInstance();
 }
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_Visitor_visitor_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsVisitor_visitor_2eproto}, {}};
 
-namespace identity {
 
 // ===================================================================
 
@@ -52,7 +49,7 @@ const int Visitor::kWechatFieldNumber;
 Visitor::Visitor()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:identity.Visitor)
+  // @@protoc_insertion_point(constructor:Visitor)
 }
 Visitor::Visitor(const Visitor& from)
   : ::google::protobuf::MessageLite(),
@@ -67,7 +64,7 @@ Visitor::Visitor(const Visitor& from)
     nickname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.nickname_);
   }
   wechat_ = from.wechat_;
-  // @@protoc_insertion_point(copy_constructor:identity.Visitor)
+  // @@protoc_insertion_point(copy_constructor:Visitor)
 }
 
 void Visitor::SharedCtor() {
@@ -79,7 +76,7 @@ void Visitor::SharedCtor() {
 }
 
 Visitor::~Visitor() {
-  // @@protoc_insertion_point(destructor:identity.Visitor)
+  // @@protoc_insertion_point(destructor:Visitor)
   SharedDtor();
 }
 
@@ -98,7 +95,7 @@ const Visitor& Visitor::default_instance() {
 
 
 void Visitor::Clear() {
-// @@protoc_insertion_point(message_clear_start:identity.Visitor)
+// @@protoc_insertion_point(message_clear_start:Visitor)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -195,7 +192,7 @@ bool Visitor::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:identity.Visitor)
+  // @@protoc_insertion_point(parse_start:Visitor)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -209,7 +206,7 @@ bool Visitor::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Visitor.id"));
+            "Visitor.id"));
         } else {
           goto handle_unusual;
         }
@@ -224,7 +221,7 @@ bool Visitor::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->nickname().data(), static_cast<int>(this->nickname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "identity.Visitor.nickname"));
+            "Visitor.nickname"));
         } else {
           goto handle_unusual;
         }
@@ -256,10 +253,10 @@ bool Visitor::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:identity.Visitor)
+  // @@protoc_insertion_point(parse_success:Visitor)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:identity.Visitor)
+  // @@protoc_insertion_point(parse_failure:Visitor)
   return false;
 #undef DO_
 }
@@ -267,7 +264,7 @@ failure:
 
 void Visitor::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:identity.Visitor)
+  // @@protoc_insertion_point(serialize_start:Visitor)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -276,7 +273,7 @@ void Visitor::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Visitor.id");
+      "Visitor.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -286,7 +283,7 @@ void Visitor::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->nickname().data(), static_cast<int>(this->nickname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "identity.Visitor.nickname");
+      "Visitor.nickname");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->nickname(), output);
   }
@@ -298,11 +295,11 @@ void Visitor::SerializeWithCachedSizes(
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:identity.Visitor)
+  // @@protoc_insertion_point(serialize_end:Visitor)
 }
 
 size_t Visitor::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:identity.Visitor)
+// @@protoc_insertion_point(message_byte_size_start:Visitor)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -343,7 +340,7 @@ void Visitor::CheckTypeAndMergeFrom(
 }
 
 void Visitor::MergeFrom(const Visitor& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:identity.Visitor)
+// @@protoc_insertion_point(class_specific_merge_from_start:Visitor)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -363,7 +360,7 @@ void Visitor::MergeFrom(const Visitor& from) {
 }
 
 void Visitor::CopyFrom(const Visitor& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:identity.Visitor)
+// @@protoc_insertion_point(class_specific_copy_from_start:Visitor)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -388,16 +385,15 @@ void Visitor::InternalSwap(Visitor* other) {
 }
 
 ::std::string Visitor::GetTypeName() const {
-  return "identity.Visitor";
+  return "Visitor";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace identity
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::identity::Visitor* Arena::CreateMaybeMessage< ::identity::Visitor >(Arena* arena) {
-  return Arena::CreateInternal< ::identity::Visitor >(arena);
+template<> PROTOBUF_NOINLINE ::Visitor* Arena::CreateMaybeMessage< ::Visitor >(Arena* arena) {
+  return Arena::CreateInternal< ::Visitor >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

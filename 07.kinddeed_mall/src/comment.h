@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-class commentlabel: public buddha::CommentLabel {
+class BCommentLabel: public buddha::CommentLabel {
     DEFINE_ROWKEY(id);          //主键
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
@@ -18,7 +18,7 @@ class commentlabel: public buddha::CommentLabel {
     xchain::json to_json();
 };
 
-class beforecomment: public buddha::BeforeComment {
+class BBeforeComment: public buddha::BeforeComment {
     DEFINE_ROWKEY(kdid,owner);      //联合主键
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, kdid)   //非主键不能find，支持scan
@@ -28,7 +28,7 @@ class beforecomment: public buddha::BeforeComment {
     xchain::json to_json();
 };
 
-class aftercomment: public buddha::AfterComment {
+class BAfterComment: public buddha::AfterComment {
     DEFINE_ROWKEY(orderid, owner);      //联合主键
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, orderid)    //非主键不能find，支持scan
