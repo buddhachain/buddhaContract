@@ -13,65 +13,65 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 
-class UserDefaultTypeInternal {
+class Identity_UserDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<User> _instance;
-} _User_default_instance_;
-static void InitDefaultsUser_identity_5fuser_2eproto() {
+  ::google::protobuf::internal::ExplicitlyConstructed<Identity_User> _instance;
+} _Identity_User_default_instance_;
+static void InitDefaultsIdentity_User_identity_5fuser_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::_User_default_instance_;
-    new (ptr) ::User();
+    void* ptr = &::_Identity_User_default_instance_;
+    new (ptr) ::Identity_User();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::User::InitAsDefaultInstance();
+  ::Identity_User::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_User_identity_5fuser_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsUser_identity_5fuser_2eproto}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_Identity_User_identity_5fuser_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsIdentity_User_identity_5fuser_2eproto}, {}};
 
 
 // ===================================================================
 
-void User::InitAsDefaultInstance() {
+void Identity_User::InitAsDefaultInstance() {
 }
-class User::HasBitSetters {
+class Identity_User::HasBitSetters {
  public:
 };
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int User::kIdFieldNumber;
-const int User::kNicknameFieldNumber;
-const int User::kHeadHashFieldNumber;
-const int User::kNameFieldNumber;
-const int User::kSexFieldNumber;
-const int User::kPhoneFieldNumber;
-const int User::kWechatFieldNumber;
-const int User::kEmailFieldNumber;
-const int User::kHomeAddressFieldNumber;
-const int User::kBornTimestampFieldNumber;
-const int User::kIdcardFieldNumber;
-const int User::kOtheridFieldNumber;
-const int User::kPhotoFieldNumber;
-const int User::kDescFieldNumber;
-const int User::kDegreeFieldNumber;
-const int User::kJobFieldNumber;
-const int User::kIncomeFieldNumber;
-const int User::kMarryFieldNumber;
-const int User::kHobyyFieldNumber;
-const int User::kRecommenderFieldNumber;
-const int User::kBeliefFieldNumber;
-const int User::kIdnameFieldNumber;
-const int User::kApprovedFieldNumber;
+const int Identity_User::kIdFieldNumber;
+const int Identity_User::kNicknameFieldNumber;
+const int Identity_User::kHeadHashFieldNumber;
+const int Identity_User::kNameFieldNumber;
+const int Identity_User::kSexFieldNumber;
+const int Identity_User::kPhoneFieldNumber;
+const int Identity_User::kWechatFieldNumber;
+const int Identity_User::kEmailFieldNumber;
+const int Identity_User::kHomeAddressFieldNumber;
+const int Identity_User::kBornTimestampFieldNumber;
+const int Identity_User::kIdcardFieldNumber;
+const int Identity_User::kOtheridFieldNumber;
+const int Identity_User::kPhotoFieldNumber;
+const int Identity_User::kDescFieldNumber;
+const int Identity_User::kDegreeFieldNumber;
+const int Identity_User::kJobFieldNumber;
+const int Identity_User::kIncomeFieldNumber;
+const int Identity_User::kMarryFieldNumber;
+const int Identity_User::kHobyyFieldNumber;
+const int Identity_User::kRecommenderFieldNumber;
+const int Identity_User::kBeliefFieldNumber;
+const int Identity_User::kIdnameFieldNumber;
+const int Identity_User::kApprovedFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-User::User()
+Identity_User::Identity_User()
   : ::google::protobuf::MessageLite(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:User)
+  // @@protoc_insertion_point(constructor:Identity_User)
 }
-User::User(const User& from)
+Identity_User::Identity_User(const Identity_User& from)
   : ::google::protobuf::MessageLite(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -158,12 +158,12 @@ User::User(const User& from)
   ::memcpy(&sex_, &from.sex_,
     static_cast<size_t>(reinterpret_cast<char*>(&approved_) -
     reinterpret_cast<char*>(&sex_)) + sizeof(approved_));
-  // @@protoc_insertion_point(copy_constructor:User)
+  // @@protoc_insertion_point(copy_constructor:Identity_User)
 }
 
-void User::SharedCtor() {
+void Identity_User::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
-      &scc_info_User_identity_5fuser_2eproto.base);
+      &scc_info_Identity_User_identity_5fuser_2eproto.base);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   head_hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -189,12 +189,12 @@ void User::SharedCtor() {
       reinterpret_cast<char*>(&sex_)) + sizeof(approved_));
 }
 
-User::~User() {
-  // @@protoc_insertion_point(destructor:User)
+Identity_User::~Identity_User() {
+  // @@protoc_insertion_point(destructor:Identity_User)
   SharedDtor();
 }
 
-void User::SharedDtor() {
+void Identity_User::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   head_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -217,17 +217,17 @@ void User::SharedDtor() {
   idname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void User::SetCachedSize(int size) const {
+void Identity_User::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const User& User::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_User_identity_5fuser_2eproto.base);
+const Identity_User& Identity_User::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_Identity_User_identity_5fuser_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void User::Clear() {
-// @@protoc_insertion_point(message_clear_start:User)
+void Identity_User::Clear() {
+// @@protoc_insertion_point(message_clear_start:Identity_User)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -259,9 +259,9 @@ void User::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* User::_InternalParse(const char* begin, const char* end, void* object,
+const char* Identity_User::_InternalParse(const char* begin, const char* end, void* object,
                   ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<User*>(object);
+  auto msg = static_cast<Identity_User*>(object);
   ::google::protobuf::int32 size; (void)size;
   int depth; (void)depth;
   ::google::protobuf::uint32 tag;
@@ -636,7 +636,7 @@ len_delim_till_end:
                                {parser_till_end, object}, size);
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool User::MergePartialFromCodedStream(
+bool Identity_User::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
@@ -646,7 +646,7 @@ bool User::MergePartialFromCodedStream(
       unknown_fields_setter.buffer());
   ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
       &unknown_fields_output, false);
-  // @@protoc_insertion_point(parse_start:User)
+  // @@protoc_insertion_point(parse_start:Identity_User)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
@@ -660,7 +660,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), static_cast<int>(this->id().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.id"));
+            "Identity_User.id"));
         } else {
           goto handle_unusual;
         }
@@ -675,7 +675,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->nickname().data(), static_cast<int>(this->nickname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.nickname"));
+            "Identity_User.nickname"));
         } else {
           goto handle_unusual;
         }
@@ -690,7 +690,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->head_hash().data(), static_cast<int>(this->head_hash().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.head_hash"));
+            "Identity_User.head_hash"));
         } else {
           goto handle_unusual;
         }
@@ -705,7 +705,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->name().data(), static_cast<int>(this->name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.name"));
+            "Identity_User.name"));
         } else {
           goto handle_unusual;
         }
@@ -733,7 +733,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->phone().data(), static_cast<int>(this->phone().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.phone"));
+            "Identity_User.phone"));
         } else {
           goto handle_unusual;
         }
@@ -761,7 +761,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->email().data(), static_cast<int>(this->email().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.email"));
+            "Identity_User.email"));
         } else {
           goto handle_unusual;
         }
@@ -776,7 +776,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->home_address().data(), static_cast<int>(this->home_address().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.home_address"));
+            "Identity_User.home_address"));
         } else {
           goto handle_unusual;
         }
@@ -791,7 +791,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->born_timestamp().data(), static_cast<int>(this->born_timestamp().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.born_timestamp"));
+            "Identity_User.born_timestamp"));
         } else {
           goto handle_unusual;
         }
@@ -806,7 +806,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->idcard().data(), static_cast<int>(this->idcard().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.idcard"));
+            "Identity_User.idcard"));
         } else {
           goto handle_unusual;
         }
@@ -821,7 +821,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->otherid().data(), static_cast<int>(this->otherid().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.otherid"));
+            "Identity_User.otherid"));
         } else {
           goto handle_unusual;
         }
@@ -836,7 +836,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->photo().data(), static_cast<int>(this->photo().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.photo"));
+            "Identity_User.photo"));
         } else {
           goto handle_unusual;
         }
@@ -851,7 +851,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->desc().data(), static_cast<int>(this->desc().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.desc"));
+            "Identity_User.desc"));
         } else {
           goto handle_unusual;
         }
@@ -866,7 +866,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->degree().data(), static_cast<int>(this->degree().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.degree"));
+            "Identity_User.degree"));
         } else {
           goto handle_unusual;
         }
@@ -881,7 +881,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->job().data(), static_cast<int>(this->job().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.job"));
+            "Identity_User.job"));
         } else {
           goto handle_unusual;
         }
@@ -896,7 +896,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->income().data(), static_cast<int>(this->income().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.income"));
+            "Identity_User.income"));
         } else {
           goto handle_unusual;
         }
@@ -911,7 +911,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->marry().data(), static_cast<int>(this->marry().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.marry"));
+            "Identity_User.marry"));
         } else {
           goto handle_unusual;
         }
@@ -926,7 +926,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->hobyy().data(), static_cast<int>(this->hobyy().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.hobyy"));
+            "Identity_User.hobyy"));
         } else {
           goto handle_unusual;
         }
@@ -941,7 +941,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->recommender().data(), static_cast<int>(this->recommender().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.recommender"));
+            "Identity_User.recommender"));
         } else {
           goto handle_unusual;
         }
@@ -956,7 +956,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->belief().data(), static_cast<int>(this->belief().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.belief"));
+            "Identity_User.belief"));
         } else {
           goto handle_unusual;
         }
@@ -971,7 +971,7 @@ bool User::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->idname().data(), static_cast<int>(this->idname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.idname"));
+            "Identity_User.idname"));
         } else {
           goto handle_unusual;
         }
@@ -1003,18 +1003,18 @@ bool User::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:User)
+  // @@protoc_insertion_point(parse_success:Identity_User)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:User)
+  // @@protoc_insertion_point(parse_failure:Identity_User)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void User::SerializeWithCachedSizes(
+void Identity_User::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:User)
+  // @@protoc_insertion_point(serialize_start:Identity_User)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1023,7 +1023,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), static_cast<int>(this->id().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.id");
+      "Identity_User.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->id(), output);
   }
@@ -1033,7 +1033,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->nickname().data(), static_cast<int>(this->nickname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.nickname");
+      "Identity_User.nickname");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->nickname(), output);
   }
@@ -1043,7 +1043,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->head_hash().data(), static_cast<int>(this->head_hash().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.head_hash");
+      "Identity_User.head_hash");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->head_hash(), output);
   }
@@ -1053,7 +1053,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.name");
+      "Identity_User.name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->name(), output);
   }
@@ -1068,7 +1068,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->phone().data(), static_cast<int>(this->phone().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.phone");
+      "Identity_User.phone");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->phone(), output);
   }
@@ -1083,7 +1083,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->email().data(), static_cast<int>(this->email().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.email");
+      "Identity_User.email");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       8, this->email(), output);
   }
@@ -1093,7 +1093,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->home_address().data(), static_cast<int>(this->home_address().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.home_address");
+      "Identity_User.home_address");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       9, this->home_address(), output);
   }
@@ -1103,7 +1103,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->born_timestamp().data(), static_cast<int>(this->born_timestamp().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.born_timestamp");
+      "Identity_User.born_timestamp");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       10, this->born_timestamp(), output);
   }
@@ -1113,7 +1113,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->idcard().data(), static_cast<int>(this->idcard().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.idcard");
+      "Identity_User.idcard");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       11, this->idcard(), output);
   }
@@ -1123,7 +1123,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->otherid().data(), static_cast<int>(this->otherid().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.otherid");
+      "Identity_User.otherid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       12, this->otherid(), output);
   }
@@ -1133,7 +1133,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->photo().data(), static_cast<int>(this->photo().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.photo");
+      "Identity_User.photo");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       13, this->photo(), output);
   }
@@ -1143,7 +1143,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->desc().data(), static_cast<int>(this->desc().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.desc");
+      "Identity_User.desc");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       14, this->desc(), output);
   }
@@ -1153,7 +1153,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->degree().data(), static_cast<int>(this->degree().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.degree");
+      "Identity_User.degree");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       15, this->degree(), output);
   }
@@ -1163,7 +1163,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->job().data(), static_cast<int>(this->job().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.job");
+      "Identity_User.job");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       16, this->job(), output);
   }
@@ -1173,7 +1173,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->income().data(), static_cast<int>(this->income().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.income");
+      "Identity_User.income");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       17, this->income(), output);
   }
@@ -1183,7 +1183,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->marry().data(), static_cast<int>(this->marry().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.marry");
+      "Identity_User.marry");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       18, this->marry(), output);
   }
@@ -1193,7 +1193,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->hobyy().data(), static_cast<int>(this->hobyy().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.hobyy");
+      "Identity_User.hobyy");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       19, this->hobyy(), output);
   }
@@ -1203,7 +1203,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->recommender().data(), static_cast<int>(this->recommender().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.recommender");
+      "Identity_User.recommender");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       20, this->recommender(), output);
   }
@@ -1213,7 +1213,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->belief().data(), static_cast<int>(this->belief().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.belief");
+      "Identity_User.belief");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       21, this->belief(), output);
   }
@@ -1223,7 +1223,7 @@ void User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->idname().data(), static_cast<int>(this->idname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.idname");
+      "Identity_User.idname");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       22, this->idname(), output);
   }
@@ -1235,11 +1235,11 @@ void User::SerializeWithCachedSizes(
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
                    static_cast<int>(_internal_metadata_.unknown_fields().size()));
-  // @@protoc_insertion_point(serialize_end:User)
+  // @@protoc_insertion_point(serialize_end:Identity_User)
 }
 
-size_t User::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:User)
+size_t Identity_User::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Identity_User)
   size_t total_size = 0;
 
   total_size += _internal_metadata_.unknown_fields().size();
@@ -1412,13 +1412,13 @@ size_t User::ByteSizeLong() const {
   return total_size;
 }
 
-void User::CheckTypeAndMergeFrom(
+void Identity_User::CheckTypeAndMergeFrom(
     const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const User*>(&from));
+  MergeFrom(*::google::protobuf::down_cast<const Identity_User*>(&from));
 }
 
-void User::MergeFrom(const User& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:User)
+void Identity_User::MergeFrom(const Identity_User& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Identity_User)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -1515,22 +1515,22 @@ void User::MergeFrom(const User& from) {
   }
 }
 
-void User::CopyFrom(const User& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:User)
+void Identity_User::CopyFrom(const Identity_User& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Identity_User)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool User::IsInitialized() const {
+bool Identity_User::IsInitialized() const {
   return true;
 }
 
-void User::Swap(User* other) {
+void Identity_User::Swap(Identity_User* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void User::InternalSwap(User* other) {
+void Identity_User::InternalSwap(Identity_User* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -1578,16 +1578,16 @@ void User::InternalSwap(User* other) {
   swap(approved_, other->approved_);
 }
 
-::std::string User::GetTypeName() const {
-  return "User";
+::std::string Identity_User::GetTypeName() const {
+  return "Identity_User";
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 namespace google {
 namespace protobuf {
-template<> PROTOBUF_NOINLINE ::User* Arena::CreateMaybeMessage< ::User >(Arena* arena) {
-  return Arena::CreateInternal< ::User >(arena);
+template<> PROTOBUF_NOINLINE ::Identity_User* Arena::CreateMaybeMessage< ::Identity_User >(Arena* arena) {
+  return Arena::CreateInternal< ::Identity_User >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

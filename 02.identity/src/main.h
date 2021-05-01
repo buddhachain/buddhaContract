@@ -11,6 +11,7 @@
 #include "identity_user.h"
 #include "master.h"
 #include "temple.h"
+#include "thedead.h"
 
 #include <string>
 using namespace std;
@@ -22,9 +23,14 @@ public:
     Main();
 
 private:
-    xchain::cdt::Table<identity>     _identity_table;
-    xchain::cdt::Table<visitor>       _visitor_table;
-    xchain::cdt::Table<user>        _user_table;
+    xchain::cdt::Table<BIdentity>      _identity_table;
+    xchain::cdt::Table<BVisitor>       _visitor_table;
+    xchain::cdt::Table<BUser>          _user_table;
+    xchain::cdt::Table<BIdentityUser>  _identity_user_table;
+    xchain::cdt::Table<BMaster>        _master_table;
+    xchain::cdt::Table<BTemple>        _temple_table;
+    xchain::cdt::Table<BTempleMaster>  _templemaster_table;
+    xchain::cdt::Table<BDead>          _dead_table;
 
     xchain::Context* ctx;
 
@@ -75,13 +81,20 @@ private:
     bool _is_temple(const string&);
     bool _is_thedead(const string&);
 
-    bool _is_identity_exist(identity&, const string&);
-    bool _is_visitor_exist(user&, const string&);
-    bool _is_user_exist(user&, const string&);
-    bool _is_identity_user_exist(user&, const string&);
-    bool _is_master_exist(user&, const string&);
-    bool _is_temple_exist(user&, const string&);
-    bool _is_the_dead_exist(user&, const string&);
+    bool _is_identity_exist(BIdentity&, const string&);
+    bool _is_visitor_exist(BVisitor&, const string&);
+    bool _is_user_exist(BUser&, const string&);
+    bool _is_identity_user_exist(BUser&, const string&);
+    bool _is_master_exist(BMaster&, const string&);
+    bool _is_master_exist_by_proof(BMaster&, const string&);
+    bool _is_temple_exist(BTemple&, const string&);
+    bool _is_temple_exist_by_unit(BTemple&, const string&);
+    bool _is_temple_exist_by_creditcode(BTemple&, const string&);
+    bool _is_temple_exist_by_address(BTemple&, const string&);
+    bool _is_temple_exist_by_proof(BTemple&, const string&);
+    bool _is_templemaster_exist(BTempleMaster&, const string&, const string&);
+    bool _is_in_temple(BTempleMaster&, const string&, const string&);
+    bool _is_the_dead_exist(BTheDead&, const string&);
 
     bool _scan_identity(xchain::json&, const string& ="");
     bool _scan_visitor(xchain::json&, const string& ="");
@@ -89,6 +102,8 @@ private:
     bool _scan_identity_user(xchain::json&, const string& ="");
     bool _scan_master(xchain::json&, const string& ="");
     bool _scan_temple(xchain::json&, const string& ="");
+    bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
+    bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
     bool _scan_the_dead(xchain::json&, const string& ="");
 
     bool _add_identity(const string&,const string&,const string&);
@@ -105,6 +120,7 @@ private:
     bool _delete_identity_user_record(const string&);
     bool _delete_master_record(const string&);
     bool _delete_temple_record(const string&);
+    bool _delete_templemaster_record(const string&, const string&);
     bool _delete_the_dead_record(const string&);
 
     bool _clear_identity();
@@ -113,6 +129,7 @@ private:
     bool _clear_identity_user();
     bool _clear_master();
     bool _clear_temple();
+    bool _clear_templemaster();
     bool _clear_the_dead();
 
     bool _transfer(const string&,const string&);
@@ -146,7 +163,7 @@ public:
     bool is_temple();               //任意身份
     void list_temple();             //基金会成员
 
-    bool is_d_the_dead();           //任意身份
+    bool is_the_dead();           //任意身份
     void list_the_dead();           //基金会成员
 
     //添加游客

@@ -20,13 +20,13 @@ xchain::json BVisitor::to_json() {
 }
 
 bool Main::_is_visitor_exist(BVisitor& ent, const string& id){
-    BIdentity id_ent;
-    if (!get_identity_table().find({{"id", id}}, &id_ent))
+    BVisitor id_ent;
+    if (!get_visitor_table().find({{"id", id}}, &id_ent))
         return false;
 
     if (!get_visitor_table().find({{"id", id}}, &ent)) {
-        if( !get_identity_table().del(id_ent) )
-            mycout << "delete identity " << id_ent.to_json().dump() << " failure ." << endl ;
+        if( !get_visitor_table().del(id_ent) )
+            mycout << "delete visitor " << id_ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 

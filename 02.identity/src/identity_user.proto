@@ -1,7 +1,7 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-message User {
+message Identity_User {
     string id           = 1; //日志id，唯一
     string nickname     = 2; //昵称
     string head_hash    = 3; //头像哈希

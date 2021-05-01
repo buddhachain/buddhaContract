@@ -31,9 +31,6 @@ public:
 private:
     xchain::cdt::Table<founder>         _founder_table;
     xchain::cdt::Table<proposal>        _proposal_table;
-    xchain::cdt::Table<temple>          _temple_table;
-    xchain::cdt::Table<master>          _master_table;
-    xchain::cdt::Table<templemaster>    _templemaster_table;
     xchain::cdt::Table<kinddeedtype>    _kinddeedtype_table;
     xchain::cdt::Table<kinddeed>        _kinddeed_table;
     xchain::cdt::Table<kinddeeddetail>  _kinddeeddetail_table;
@@ -60,17 +57,6 @@ public:
         return _proposal_table;
     }
 
-    decltype(_temple_table)& get_temple_table() {
-        return _temple_table;
-    }
-
-    decltype(_master_table)& get_master_table() {
-        return _master_table;
-    }
-
-    decltype(_templemaster_table)& get_templemaster_table() {
-        return _templemaster_table;
-    }
 
     decltype(_kinddeed_table)& get_kinddeed_table() {
         return _kinddeed_table;
@@ -138,14 +124,6 @@ private:
 
     bool _is_founder_exist(founder&, const string&);
     bool _is_proposal_exist(proposal&, const string&);
-    bool _is_temple_exist(temple&, const string&);
-    bool _is_temple_exist_by_unit(temple&, const string&);
-    bool _is_temple_exist_by_creditcode(temple&, const string&);
-    bool _is_temple_exist_by_address(temple&, const string&);
-    bool _is_temple_exist_by_proof(temple&, const string&);
-    bool _is_master_exist(master&, const string&);
-    bool _is_master_exist_by_proof(master&, const string&);
-    bool _is_templemaster_exist(templemaster&, const string&, const string&);
     bool _is_kinddeedtype_exist(kinddeedtype&, const string&);
     bool _is_kinddeed_exist(kinddeed&, const string&);
     bool _is_kinddeeddetail_exist(kinddeeddetail&, const string&, const string&);
@@ -164,17 +142,9 @@ private:
 
     bool _is_deployer(const string&);
     bool _is_founder(const string&);
-    bool _is_temple(const string&);
-    bool _is_master(const string&);
-    bool _is_in_temple(templemaster&, const string&, const string&);
-    bool _is_user(const string&);
 
     bool _scan_founder(xchain::json&, const string& ="");
     bool _scan_proposal(xchain::json&, const string& ="");
-    bool _scan_temple(xchain::json&, const string& ="");
-    bool _scan_master(xchain::json&, const string& ="");
-    bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
-    bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
     bool _scan_kinddeedtype(xchain::json&, const string& ="");
     bool _scan_kinddeed_by_id(xchain::json&, const string& ="");
     bool _scan_kinddeed_by_owner(xchain::json&, const string& ="");
@@ -207,9 +177,6 @@ private:
 
     bool _delete_founder_record(const string&);
     bool _delete_proposal_record(const string&);
-    bool _delete_temple_record(const string&);
-    bool _delete_master_record(const string&);
-    bool _delete_templemaster_record(const string&, const string&);
     bool _delete_kinddeedtype_record(const string&);
     bool _delete_kinddeed_record(const string&);
     bool _delete_kinddeeddetail_record(const string&, const string& ="");
