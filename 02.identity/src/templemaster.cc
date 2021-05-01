@@ -261,8 +261,8 @@ void Main::list_temple_master() {
 }
 
 
-DEFINE_METHOD(Buddha, apply_join_temple)        { self.apply_join_temple();         }
-DEFINE_METHOD(Buddha, approve_join_temple)      { self.approve_join_temple();       }
-DEFINE_METHOD(Buddha, recusal_join_temple)      { self.recusal_join_temple();       }
-DEFINE_METHOD(Buddha, is_in_temple)             { self.is_in_temple();              }
-DEFINE_METHOD(Buddha, list_temple_master)       { self.list_temple_master();        }
+DEFINE_METHOD(Main, apply_join_temple)        { self.apply_join_temple();         }
+DEFINE_METHOD(Main, approve_join_temple)      { self.approve_join_temple();       }
+DEFINE_METHOD(Main, recusal_join_temple)      { self.recusal_join_temple();       }
+DEFINE_METHOD(Main, is_in_temple)             { self.is_in_temple();              }
+DEFINE_METHOD(Main, list_temple_master)       { self.list_temple_master();        }

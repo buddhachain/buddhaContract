@@ -322,8 +322,8 @@ void Main::list_beforecomment() {
 }
 
 
-DEFINE_METHOD(Buddha, add_beforecomment)        { self.add_beforecomment();         }
-DEFINE_METHOD(Buddha, delete_beforecomment)     { self.delete_beforecomment();      }
-DEFINE_METHOD(Buddha, update_beforecomment)     { self.update_beforecomment();      }
-DEFINE_METHOD(Buddha, find_beforecomment)       { self.find_beforecomment();        }
-DEFINE_METHOD(Buddha, list_beforecomment)       { self.list_beforecomment();        }
+DEFINE_METHOD(Main, add_beforecomment)        { self.add_beforecomment();         }
+DEFINE_METHOD(Main, delete_beforecomment)     { self.delete_beforecomment();      }
+DEFINE_METHOD(Main, update_beforecomment)     { self.update_beforecomment();      }
+DEFINE_METHOD(Main, find_beforecomment)       { self.find_beforecomment();        }
+DEFINE_METHOD(Main, list_beforecomment)       { self.list_beforecomment();        }

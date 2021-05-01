@@ -286,8 +286,8 @@ bool Main::is_user() {
 }
 
 
-DEFINE_METHOD(Buddha, pray_kinddeed)            { self.pray_kinddeed();             }
-DEFINE_METHOD(Buddha, delete_pray_kinddeed)     { self.delete_pray_kinddeed();      }
-DEFINE_METHOD(Buddha, find_pray_kinddeed)       { self.find_pray_kinddeed();        }
-DEFINE_METHOD(Buddha, list_pray_kinddeed)       { self.list_pray_kinddeed();        }
-DEFINE_METHOD(Buddha, is_user)                  { self.is_user();                   }
+DEFINE_METHOD(Main, pray_kinddeed)            { self.pray_kinddeed();             }
+DEFINE_METHOD(Main, delete_pray_kinddeed)     { self.delete_pray_kinddeed();      }
+DEFINE_METHOD(Main, find_pray_kinddeed)       { self.find_pray_kinddeed();        }
+DEFINE_METHOD(Main, list_pray_kinddeed)       { self.list_pray_kinddeed();        }
+DEFINE_METHOD(Main, is_user)                  { self.is_user();                   }

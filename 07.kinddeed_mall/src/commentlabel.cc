@@ -207,8 +207,8 @@ void Main::list_commentlabel() {
 }
 
 
-DEFINE_METHOD(Buddha, add_commentlabel)         { self.add_commentlabel();          }
-DEFINE_METHOD(Buddha, delete_commentlabel)      { self.delete_commentlabel();       }
-DEFINE_METHOD(Buddha, update_commentlabel)      { self.update_commentlabel();       }
-DEFINE_METHOD(Buddha, find_commentlabel)        { self.find_commentlabel();         }
-DEFINE_METHOD(Buddha, list_commentlabel)        { self.list_commentlabel();         }
+DEFINE_METHOD(Main, add_commentlabel)         { self.add_commentlabel();          }
+DEFINE_METHOD(Main, delete_commentlabel)      { self.delete_commentlabel();       }
+DEFINE_METHOD(Main, update_commentlabel)      { self.update_commentlabel();       }
+DEFINE_METHOD(Main, find_commentlabel)        { self.find_commentlabel();         }
+DEFINE_METHOD(Main, list_commentlabel)        { self.list_commentlabel();         }

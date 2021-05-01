@@ -194,9 +194,9 @@ void Main::list_kinddeedtype() {
 
 
 
-DEFINE_METHOD(Buddha, add_kinddeedtype)         { self.add_kinddeedtype();          }
-DEFINE_METHOD(Buddha, delete_kinddeedtype)      { self.delete_kinddeedtype();       }
-DEFINE_METHOD(Buddha, update_kinddeedtype)      { self.update_kinddeedtype();       }
-DEFINE_METHOD(Buddha, find_kinddeedtype)        { self.find_kinddeedtype();         }
-DEFINE_METHOD(Buddha, list_kinddeedtype)        { self.list_kinddeedtype();         }
+DEFINE_METHOD(Main, add_kinddeedtype)         { self.add_kinddeedtype();          }
+DEFINE_METHOD(Main, delete_kinddeedtype)      { self.delete_kinddeedtype();       }
+DEFINE_METHOD(Main, update_kinddeedtype)      { self.update_kinddeedtype();       }
+DEFINE_METHOD(Main, find_kinddeedtype)        { self.find_kinddeedtype();         }
+DEFINE_METHOD(Main, list_kinddeedtype)        { self.list_kinddeedtype();         }
 

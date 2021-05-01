@@ -194,5 +194,5 @@ void Main::list_creditranking() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Buddha, get_creditranking)              { self.get_creditranking();          }
-DEFINE_METHOD(Buddha, list_creditranking)             { self.list_creditranking();         }
+DEFINE_METHOD(Main, get_creditranking)              { self.get_creditranking();          }
+DEFINE_METHOD(Main, list_creditranking)             { self.list_creditranking();         }

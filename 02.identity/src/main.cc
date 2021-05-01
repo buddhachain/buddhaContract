@@ -11,7 +11,12 @@ using namespace std;
 Main::Main() :
     _identity_table(   context(), "identity"    ),
     _visitor_table(     context(), "visitor"      ),
-    _user_table(      context(), "user"       ),
+    // _user_table(      context(), "user"       ),
+    // _identity_user_table(      context(), "user"       ),
+    _master_table(      context(), "master"       ),
+    // _temple_table(      context(), "user"       ),
+    // _templemaster_table(      context(), "user"       ),
+    // _thedead_table(      context(), "user"       ),
 
     ctx(context())
 {
@@ -58,3 +63,31 @@ void Main::_log_ok(const string& file, const string& fun, const int line, const 
 
     ctx->ok(ret.dump());
 }
+
+bool Main::_is_founder(const string& id) {
+    xchain::Response resp;
+    bool ret = ctx->call("wasm", "founder", "is_founder", ctx->args(), &resp);
+    if (!ret) {
+        ctx->error("call failed");
+        return false;
+    }
+    
+    *ctx->mutable_response() = resp;
+    mycout << "resp.message=" << resp.message << endl ;
+    mycout << "resp.body=" << resp.body << endl ;
+    mycout << "resp.status=" << to_string(resp.status) << endl ;
+    
+    return resp.status;
+}
+
+
+bool Main::is_founder() {
+    if (!_is_founder(ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not founder .") ;
+        return false;
+    }
+    
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is founder .") ;
+    return true;
+}
+

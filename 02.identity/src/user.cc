@@ -157,7 +157,7 @@ void Main::list_user() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Buddha, is_user)              { self.is_user();              }
-DEFINE_METHOD(Buddha, list_user)            { self.list_user();            }
-DEFINE_METHOD(Buddha, add_user)             { self.add_user();             }
+DEFINE_METHOD(Main, is_user)              { self.is_user();              }
+DEFINE_METHOD(Main, list_user)            { self.list_user();            }
+DEFINE_METHOD(Main, add_user)             { self.add_user();             }
 

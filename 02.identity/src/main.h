@@ -9,7 +9,7 @@
 #include "visitor.h"
 // #include "user.h"
 // #include "identity_user.h"
-// #include "master.h"
+#include "master.h"
 // #include "temple.h"
 // #include "thedead.h"
 
@@ -27,7 +27,7 @@ private:
     xchain::cdt::Table<BVisitor>       _visitor_table;
     // xchain::cdt::Table<BUser>          _user_table;
     // xchain::cdt::Table<BIdentityUser>  _identity_user_table;
-    // xchain::cdt::Table<BMaster>        _master_table;
+    xchain::cdt::Table<BMaster>        _master_table;
     // xchain::cdt::Table<BTemple>        _temple_table;
     // xchain::cdt::Table<BTempleMaster>  _templemaster_table;
     // xchain::cdt::Table<BDead>          _dead_table;
@@ -52,9 +52,9 @@ public:
     //     return _identity_user_table;
     // }
 
-    // decltype(_master_table)& get_master_table() {
-    //     return _masterr_table;
-    // }
+    decltype(_master_table)& get_master_table() {
+        return _master_table;
+    }
 
     // decltype(_temple_table)& get_temple_table() {
     //     return _temple_table;
@@ -77,7 +77,7 @@ private:
     bool _is_visitor(const string&);
     // bool _is_user(const string&);
     // bool _is_identity_user(const string&);
-    // bool _is_master(const string&);
+    bool _is_master(const string&);
     // bool _is_temple(const string&);
     // bool _is_thedead(const string&);
 
@@ -85,8 +85,8 @@ private:
     bool _is_visitor_exist(BVisitor&, const string&);
     // bool _is_user_exist(BUser&, const string&);
     // bool _is_identity_user_exist(BUser&, const string&);
-    // bool _is_master_exist(BMaster&, const string&);
-    // bool _is_master_exist_by_proof(BMaster&, const string&);
+    bool _is_master_exist(BMaster&, const string&);
+    bool _is_master_exist_by_proof(BMaster&, const string&);
     // bool _is_temple_exist(BTemple&, const string&);
     // bool _is_temple_exist_by_unit(BTemple&, const string&);
     // bool _is_temple_exist_by_creditcode(BTemple&, const string&);
@@ -106,7 +106,7 @@ private:
 
     // bool _scan_user(xchain::json&, const string& ="");
     // bool _scan_identity_user(xchain::json&, const string& ="");
-    // bool _scan_master(xchain::json&, const string& ="");
+    bool _scan_master(xchain::json&, const string& ="");
     // bool _scan_temple(xchain::json&, const string& ="");
     // bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
     // bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
@@ -116,7 +116,7 @@ private:
     bool _add_visitor(const string&,const string&,const string&,const string&);
     // bool _add_user(const string&,const string&,const string&,const string&);
     // bool _add_identity_user(const string&,const string&,const string&,const string&);
-    // bool _add_master(const string&,const string&,const string&,const string&);
+    bool _add_master(const string&,const string&,const string&,const string&);
     // bool _add_temple(const string&,const string&,const string&,const string&);
     // bool _add_the_dead(const string&,const string&,const string&,const string&);
 
@@ -124,16 +124,16 @@ private:
     bool _delete_visitor_record(const string&);
     // bool _delete_user_record(const string&);
     // bool _delete_identity_user_record(const string&);
-    // bool _delete_master_record(const string&);
+    bool _delete_master_record(const string&);
     // bool _delete_temple_record(const string&);
     // bool _delete_templemaster_record(const string&, const string&);
     // bool _delete_the_dead_record(const string&);
 
     bool _clear_identity();
-    // bool _clear_visitor();
+    bool _clear_visitor();
     // bool _clear_user();
     // bool _clear_identity_user();
-    // bool _clear_master();
+    bool _clear_master();
     // bool _clear_temple();
     // bool _clear_templemaster();
     // bool _clear_the_dead();
@@ -146,6 +146,8 @@ public:
     void initialize();              //合约部署者
     void get_deployer();            //合约部署者，基金会成员。
     bool is_deployer();             //任意身份，判断自己是否是合约部署者
+
+    bool is_founder();              //所有角色，判断自己是否是基金会成员
 
     //update无对应函数
 
@@ -163,8 +165,8 @@ public:
     // bool is_identity_user();        //任意身份
     // void list_identity_user();      //基金会成员
 
-    // bool is_master();               //任意身份
-    // void list_master();             //基金会成员
+    bool is_master();               //任意身份
+    void list_master();             //基金会成员
 
     // bool is_temple();               //任意身份
     // void list_temple();             //基金会成员
@@ -183,10 +185,10 @@ public:
     // void approve_identify_user();   //基金会成员
     // void recusal_identify_user();   //基金会成员
 
-    // //申请成为法师
-    // void apply_master();            //用户
-    // void approve_master();          //基金会成员
-    // void recusal_master();          //基金会成员
+    //申请成为法师
+    void apply_master();            //用户
+    void approve_master();          //基金会成员
+    void recusal_master();          //基金会成员
 
     // //申请成为寺院
     // void apply_temple();            //用户,法师

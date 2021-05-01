@@ -994,18 +994,18 @@ void Main::list_kinddeed() {
 
 
 
-DEFINE_METHOD(Buddha, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
-DEFINE_METHOD(Buddha, delete_kinddeeddetail)    { self.delete_kinddeeddetail();     }
-DEFINE_METHOD(Buddha, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
+DEFINE_METHOD(Main, add_kinddeeddetail)       { self.add_kinddeeddetail();        }
+DEFINE_METHOD(Main, delete_kinddeeddetail)    { self.delete_kinddeeddetail();     }
+DEFINE_METHOD(Main, list_kinddeeddetail)      { self.list_kinddeeddetail();       }
 
-DEFINE_METHOD(Buddha, add_kinddeedspec)         { self.add_kinddeedspec();          }
-DEFINE_METHOD(Buddha, delete_kinddeedspec)      { self.delete_kinddeedspec();       }
-DEFINE_METHOD(Buddha, list_kinddeedspec)        { self.list_kinddeedspec();         }
+DEFINE_METHOD(Main, add_kinddeedspec)         { self.add_kinddeedspec();          }
+DEFINE_METHOD(Main, delete_kinddeedspec)      { self.delete_kinddeedspec();       }
+DEFINE_METHOD(Main, list_kinddeedspec)        { self.list_kinddeedspec();         }
 
-DEFINE_METHOD(Buddha, add_kinddeed)             { self.add_kinddeed();              }
-DEFINE_METHOD(Buddha, update_kinddeed)          { self.update_kinddeed();           }
-DEFINE_METHOD(Buddha, delete_kinddeed)          { self.delete_kinddeed();           }
-DEFINE_METHOD(Buddha, offline_kinddeed)         { self.offline_kinddeed();          }
-DEFINE_METHOD(Buddha, is_kinddeed_online)       { self.is_kinddeed_online();        }
-DEFINE_METHOD(Buddha, find_kinddeed)            { self.find_kinddeed();             }
-DEFINE_METHOD(Buddha, list_kinddeed)            { self.list_kinddeed();             }
+DEFINE_METHOD(Main, add_kinddeed)             { self.add_kinddeed();              }
+DEFINE_METHOD(Main, update_kinddeed)          { self.update_kinddeed();           }
+DEFINE_METHOD(Main, delete_kinddeed)          { self.delete_kinddeed();           }
+DEFINE_METHOD(Main, offline_kinddeed)         { self.offline_kinddeed();          }
+DEFINE_METHOD(Main, is_kinddeed_online)       { self.is_kinddeed_online();        }
+DEFINE_METHOD(Main, find_kinddeed)            { self.find_kinddeed();             }
+DEFINE_METHOD(Main, list_kinddeed)            { self.list_kinddeed();             }

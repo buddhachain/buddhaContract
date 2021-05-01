@@ -407,8 +407,8 @@ void Main::list_kinddeedproof() {
 }
 
 
-DEFINE_METHOD(Buddha, upload_kinddeedproof)     { self.upload_kinddeedproof();      }
-DEFINE_METHOD(Buddha, approve_kinddeedproof)    { self.approve_kinddeedproof();     }
-DEFINE_METHOD(Buddha, refuse_kinddeedproof)     { self.refuse_kinddeedproof();      }
-DEFINE_METHOD(Buddha, find_kinddeedproof)       { self.find_kinddeedproof();        }
-DEFINE_METHOD(Buddha, list_kinddeedproof)       { self.list_kinddeedproof();        }
+DEFINE_METHOD(Main, upload_kinddeedproof)     { self.upload_kinddeedproof();      }
+DEFINE_METHOD(Main, approve_kinddeedproof)    { self.approve_kinddeedproof();     }
+DEFINE_METHOD(Main, refuse_kinddeedproof)     { self.refuse_kinddeedproof();      }
+DEFINE_METHOD(Main, find_kinddeedproof)       { self.find_kinddeedproof();        }
+DEFINE_METHOD(Main, list_kinddeedproof)       { self.list_kinddeedproof();        }

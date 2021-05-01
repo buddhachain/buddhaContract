@@ -3,8 +3,8 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "buddha.pb.h"
-#include "buddha.h"
+#include "master.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -218,8 +218,8 @@ void Main::list_master() {
 }
 
 
-DEFINE_METHOD(Buddha, apply_master)             { self.apply_master();              }
-DEFINE_METHOD(Buddha, approve_master)           { self.approve_master();            }
-DEFINE_METHOD(Buddha, recusal_master)           { self.recusal_master();            }
-DEFINE_METHOD(Buddha, is_master)                { self.is_master();                 }
-DEFINE_METHOD(Buddha, list_master)              { self.list_master();               }
+DEFINE_METHOD(Main, apply_master)             { self.apply_master();              }
+DEFINE_METHOD(Main, approve_master)           { self.approve_master();            }
+DEFINE_METHOD(Main, recusal_master)           { self.recusal_master();            }
+DEFINE_METHOD(Main, is_master)                { self.is_master();                 }
+DEFINE_METHOD(Main, list_master)              { self.list_master();               }

@@ -143,7 +143,7 @@ void Main::list_visitor() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Buddha, is_visitor)              { self.is_visitor();              }
-DEFINE_METHOD(Buddha, list_visitor)            { self.list_visitor();            }
-DEFINE_METHOD(Buddha, add_visitor)             { self.add_visitor();             }
+DEFINE_METHOD(Main, is_visitor)              { self.is_visitor();              }
+DEFINE_METHOD(Main, list_visitor)            { self.list_visitor();            }
+DEFINE_METHOD(Main, add_visitor)             { self.add_visitor();             }
 

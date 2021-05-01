@@ -20,21 +20,21 @@ xchain::json master::to_json() {
     return j;
 }
 
-bool Buddha::_is_master_exist(master& ent, const string& id){
+bool Main::_is_master_exist(master& ent, const string& id){
     if (!get_master_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_master_exist_by_proof(master& ent, const string& proof){
+bool Main::_is_master_exist_by_proof(master& ent, const string& proof){
     if (!get_master_table().find({{"proof", proof}}, &ent))
         return false;
 
     return true;
 }
 
-bool Buddha::_is_master(const string& id) {
+bool Main::_is_master(const string& id) {
     master ent;
     if (!_is_master_exist(ent, id))
         return false;
@@ -42,7 +42,7 @@ bool Buddha::_is_master(const string& id) {
     return ent.approved();
 }
 
-bool Buddha::_scan_master(xchain::json& ja, const string& cond) {
+bool Main::_scan_master(xchain::json& ja, const string& cond) {
     auto it = get_master_table().scan({{"id",cond}});
     while(it->next() ) {
         master ent;
@@ -57,7 +57,7 @@ bool Buddha::_scan_master(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Buddha::_delete_master_record(const string& id) {
+bool Main::_delete_master_record(const string& id) {
     master ent;
     if (!_is_master_exist(ent, id)){
         mycout << "master " << id << " is not exist ." << endl ;
@@ -75,7 +75,7 @@ bool Buddha::_delete_master_record(const string& id) {
 
 namespace 分界线{}
 
-void Buddha::apply_master(){
+void Main::apply_master(){
     const string& creditcode = ctx->arg("creditcode");
     if( creditcode.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "creditcode is empty .");
@@ -119,7 +119,7 @@ void Buddha::apply_master(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply master over, please wait for approve .");
 }
 
-void Buddha::approve_master() {
+void Main::approve_master() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
@@ -161,7 +161,7 @@ void Buddha::approve_master() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve master " + id + " success .", ent.to_json() );
 }
 
-void Buddha::recusal_master() {
+void Main::recusal_master() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
@@ -190,7 +190,7 @@ void Buddha::recusal_master() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Buddha::is_master() {
+bool Main::is_master() {
     if (!_is_master(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not master .") ;
         return false;
@@ -200,7 +200,7 @@ bool Buddha::is_master() {
     return true;
 }
 
-void Buddha::list_master() {
+void Main::list_master() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {
@@ -218,8 +218,8 @@ void Buddha::list_master() {
 }
 
 
-DEFINE_METHOD(Buddha, apply_master)             { self.apply_master();              }
-DEFINE_METHOD(Buddha, approve_master)           { self.approve_master();            }
-DEFINE_METHOD(Buddha, recusal_master)           { self.recusal_master();            }
-DEFINE_METHOD(Buddha, is_master)                { self.is_master();                 }
-DEFINE_METHOD(Buddha, list_master)              { self.list_master();               }
+DEFINE_METHOD(Main, apply_master)             { self.apply_master();              }
+DEFINE_METHOD(Main, approve_master)           { self.approve_master();            }
+DEFINE_METHOD(Main, recusal_master)           { self.recusal_master();            }
+DEFINE_METHOD(Main, is_master)                { self.is_master();                 }
+DEFINE_METHOD(Main, list_master)              { self.list_master();               }

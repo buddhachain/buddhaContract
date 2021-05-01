@@ -141,5 +141,5 @@ void Main::list_credit() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Buddha, find_credit)             { self.find_credit();              }
-DEFINE_METHOD(Buddha, list_credit)             { self.list_credit();              }
+DEFINE_METHOD(Main, find_credit)             { self.find_credit();              }
+DEFINE_METHOD(Main, list_credit)             { self.list_credit();              }

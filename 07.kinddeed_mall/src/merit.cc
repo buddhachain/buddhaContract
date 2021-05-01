@@ -141,5 +141,5 @@ void Main::list_merit() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Buddha, find_merit)             { self.find_merit();              }
-DEFINE_METHOD(Buddha, list_merit)             { self.list_merit();              }
+DEFINE_METHOD(Main, find_merit)             { self.find_merit();              }
+DEFINE_METHOD(Main, list_merit)             { self.list_merit();              }

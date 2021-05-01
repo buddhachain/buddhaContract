@@ -282,9 +282,9 @@ void Main::list_aftercomment() {
 }
 
 
-DEFINE_METHOD(Buddha, add_aftercomment)         { self.add_aftercomment();          }
-DEFINE_METHOD(Buddha, delete_aftercomment)      { self.delete_aftercomment();       }
-DEFINE_METHOD(Buddha, update_aftercomment)      { self.update_aftercomment();       }
-DEFINE_METHOD(Buddha, find_aftercomment)        { self.find_aftercomment();         }
-DEFINE_METHOD(Buddha, list_aftercomment)        { self.list_aftercomment();         }
+DEFINE_METHOD(Main, add_aftercomment)         { self.add_aftercomment();          }
+DEFINE_METHOD(Main, delete_aftercomment)      { self.delete_aftercomment();       }
+DEFINE_METHOD(Main, update_aftercomment)      { self.update_aftercomment();       }
+DEFINE_METHOD(Main, find_aftercomment)        { self.find_aftercomment();         }
+DEFINE_METHOD(Main, list_aftercomment)        { self.list_aftercomment();         }
 

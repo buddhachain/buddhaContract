@@ -258,8 +258,8 @@ void Main::list_temple() {
 
 
 
-DEFINE_METHOD(Buddha, apply_temple)             { self.apply_temple();              }
-DEFINE_METHOD(Buddha, approve_temple)           { self.approve_temple();            }
-DEFINE_METHOD(Buddha, recusal_temple)           { self.recusal_temple();            }
-DEFINE_METHOD(Buddha, is_temple)                { self.is_temple();                 }
-DEFINE_METHOD(Buddha, list_temple)              { self.list_temple();               }
+DEFINE_METHOD(Main, apply_temple)             { self.apply_temple();              }
+DEFINE_METHOD(Main, approve_temple)           { self.approve_temple();            }
+DEFINE_METHOD(Main, recusal_temple)           { self.recusal_temple();            }
+DEFINE_METHOD(Main, is_temple)                { self.is_temple();                 }
+DEFINE_METHOD(Main, list_temple)              { self.list_temple();               }

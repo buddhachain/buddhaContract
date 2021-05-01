@@ -210,5 +210,5 @@ void Main::list_meritranking() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Buddha, get_meritranking)              { self.get_meritranking();          }
-DEFINE_METHOD(Buddha, list_meritranking)             { self.list_meritranking();         }
+DEFINE_METHOD(Main, get_meritranking)              { self.get_meritranking();          }
+DEFINE_METHOD(Main, list_meritranking)             { self.list_meritranking();         }

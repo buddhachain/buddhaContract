@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-class BTempleMaster: public identity::TempleMaster {
+class BTempleMaster: public TempleMaster {
     DEFINE_ROWKEY(templeid, masterid);  //联合主键
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, templeid)   //非主键不能find，支持scan
