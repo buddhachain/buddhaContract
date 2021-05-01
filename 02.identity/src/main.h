@@ -86,7 +86,6 @@ private:
     // bool _is_user_exist(BUser&, const string&);
     // bool _is_identity_user_exist(BUser&, const string&);
     bool _is_master_exist(BMaster&, const string&);
-    bool _is_master_exist_by_proof(BMaster&, const string&);
     // bool _is_temple_exist(BTemple&, const string&);
     // bool _is_temple_exist_by_unit(BTemple&, const string&);
     // bool _is_temple_exist_by_creditcode(BTemple&, const string&);
@@ -106,7 +105,11 @@ private:
 
     // bool _scan_user(xchain::json&, const string& ="");
     // bool _scan_identity_user(xchain::json&, const string& ="");
-    bool _scan_master(xchain::json&, const string& ="");
+    bool _scan_master(xchain::json&,
+                      const string& ="",
+                      const string& ="",
+                      const string& ="",
+                      const string& ="");
     // bool _scan_temple(xchain::json&, const string& ="");
     // bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
     // bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");

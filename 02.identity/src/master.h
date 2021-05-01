@@ -10,11 +10,9 @@
 using namespace std;
 
 class BMaster: public Master {
-    DEFINE_ROWKEY(id);                  //主键
-    DEFINE_INDEX_BEGIN(3)
-        DEFINE_INDEX_ADD(0, id)         //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, creditcode) //非主键不能find，只支持scan
-        DEFINE_INDEX_ADD(2, proof)      //非主键不能find，只支持scan
+    DEFINE_ROWKEY(id);
+    DEFINE_INDEX_BEGIN(1)
+        DEFINE_INDEX_ADD(0, id, buddhist_name, creditcode, proof )
     DEFINE_INDEX_END();
 
     xchain::json to_json();

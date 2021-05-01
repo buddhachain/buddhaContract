@@ -9,14 +9,14 @@
 using namespace std;
 
 Main::Main() :
-    _identity_table(   context(), "identity"    ),
-    _visitor_table(     context(), "visitor"      ),
-    // _user_table(      context(), "user"       ),
-    // _identity_user_table(      context(), "user"       ),
-    _master_table(      context(), "master"       ),
-    // _temple_table(      context(), "user"       ),
-    // _templemaster_table(      context(), "user"       ),
-    // _thedead_table(      context(), "user"       ),
+    _identity_table(        context(), "identity"       ),
+    _visitor_table(         context(), "visitor"        ),
+    _user_table(            context(), "user"           ),
+    _identity_user_table(   context(), "identity_user"  ),
+    _master_table(          context(), "master"         ),
+    _temple_table(          context(), "temple"         ),
+    _templemaster_table(    context(), "templemaster"   ),
+    _thedead_table(         context(), "thedead"        ),
 
     ctx(context())
 {

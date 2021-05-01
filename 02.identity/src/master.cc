@@ -27,13 +27,6 @@ bool Main::_is_master_exist(BMaster& ent, const string& id){
     return true;
 }
 
-bool Main::_is_master_exist_by_proof(BMaster& ent, const string& proof){
-    if (!get_master_table().find({{"proof", proof}}, &ent))
-        return false;
-
-    return true;
-}
-
 bool Main::_is_master(const string& id) {
     BMaster ent;
     if (!_is_master_exist(ent, id))
@@ -42,8 +35,15 @@ bool Main::_is_master(const string& id) {
     return ent.approved();
 }
 
-bool Main::_scan_master(xchain::json& ja, const string& cond) {
-    auto it = get_master_table().scan({{"id",cond}});
+bool Main::_scan_master(xchain::json& ja,
+                        const string& id,
+                        const string& buddhist_name,
+                        const string& creditcode,
+                        const string& proof) {
+    auto it = get_master_table().scan({{"id",id},
+                                       {"buddhist_name",buddhist_name},
+                                       {"creditcode",creditcode},
+                                       {"proof",proof}});
     while(it->next() ) {
         BMaster ent;
         if (!it->get(&ent) ) {
@@ -209,7 +209,11 @@ void Main::list_master() {
     }
 
     xchain::json ja ;
-    if(!_scan_master(ja, ctx->arg("id")) ) {
+    if(!_scan_master(ja, 
+                     ctx->arg("id"),
+                     ctx->arg("buddhist_name"),
+                     ctx->arg("creditcode"),
+                     ctx->arg("proof")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
