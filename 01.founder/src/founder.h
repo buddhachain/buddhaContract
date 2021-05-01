@@ -4,12 +4,15 @@
 #include "xchain/table/types.h"
 #include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
-#include "buddha.pb.h"
+#include "founder.pb.h"
 
 #include <string>
 using namespace std;
 
-class BFounder: public buddha::Founder {
+const int64_t MEMBER    = 1;
+const int64_t PRESIDENT = 2;
+
+class BFounder: public Founder {
     DEFINE_ROWKEY(id);          //主键
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan

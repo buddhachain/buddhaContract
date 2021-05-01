@@ -3,8 +3,8 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "buddha.pb.h"
-#include "buddha.h"
+#include "proposal.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -27,7 +27,7 @@ xchain::json BProposal::to_json() {
     return j;
 }
 
-bool Main::_is_proposal_exist(proposal& ent, const string& key) {
+bool Main::_is_proposal_exist(BProposal& ent, const string& key) {
     if (!get_proposal_table().find({{"key", key}}, &ent))
         return false;
 
@@ -37,7 +37,7 @@ bool Main::_is_proposal_exist(proposal& ent, const string& key) {
 bool Main::_scan_proposal(xchain::json& ja, const string& cond) {
     auto it = get_proposal_table().scan({{"key",cond}});
     while(it->next() ) {
-        proposal ent;
+        BProposal ent;
         if (!it->get(&ent) ) {
             mycout << "proposal table get failure : " << it->error(true) << endl;
             return false;
@@ -50,7 +50,7 @@ bool Main::_scan_proposal(xchain::json& ja, const string& cond) {
 }
 
 bool Main::_delete_proposal_record(const string& key) {
-    proposal ent;
+    BProposal ent;
     if (!_is_proposal_exist(ent, key)){
         mycout << "proposal " << key << " is not exist ." << endl ;
         return false;
@@ -99,7 +99,7 @@ void Main::make_proposal(){
     }
 
     //判断是否已经存在这个提案
-    proposal ent;
+    BProposal ent;
     if(_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is exist .", ent.to_json() );
         return ;
@@ -181,7 +181,7 @@ void Main::delete_proposal(){
     }
 
     //判断是否已经存在这个提案
-    proposal ent;
+    BProposal ent;
     if(!_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
         return ;
@@ -281,7 +281,7 @@ void Main::update_proposal(){
     }
 
     //判断是否已经存在这个提案
-    proposal ent;
+    BProposal ent;
     if(!_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
         return ;
@@ -375,7 +375,7 @@ void Main::approve_proposal(){
     }
 
     //判断是否已经存在这个提案
-    proposal ent;
+    BProposal ent;
     if(!_is_proposal_exist(ent, key) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist ." );
         return ;
@@ -533,7 +533,7 @@ void Main::find_proposal(){
     }
 
     // //判断提案是否存在
-    proposal ent;
+    BProposal ent;
     if (!_is_proposal_exist(ent, key))  {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal " + key + " is not exist .");
         return ;
@@ -562,10 +562,10 @@ void Main::list_proposal(){
 
 
 
-DEFINE_METHOD(Buddha, make_proposal)            { self.make_proposal();             }
-DEFINE_METHOD(Buddha, delete_proposal)          { self.delete_proposal();           }
-DEFINE_METHOD(Buddha, update_proposal)          { self.update_proposal();           }
-DEFINE_METHOD(Buddha, approve_proposal)         { self.approve_proposal();          }
-// DEFINE_METHOD(Buddha, recusal_proposal)         { self.recusal_proposal();          }
-DEFINE_METHOD(Buddha, find_proposal)            { self.find_proposal();             }
-DEFINE_METHOD(Buddha, list_proposal)            { self.list_proposal();             }
+DEFINE_METHOD(Main, make_proposal)            { self.make_proposal();             }
+DEFINE_METHOD(Main, delete_proposal)          { self.delete_proposal();           }
+DEFINE_METHOD(Main, update_proposal)          { self.update_proposal();           }
+DEFINE_METHOD(Main, approve_proposal)         { self.approve_proposal();          }
+// DEFINE_METHOD(Main, recusal_proposal)         { self.recusal_proposal();          }
+DEFINE_METHOD(Main, find_proposal)            { self.find_proposal();             }
+DEFINE_METHOD(Main, list_proposal)            { self.list_proposal();             }

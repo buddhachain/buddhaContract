@@ -3,6 +3,7 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
+#include "identity.h"
 #include "visitor.pb.h"
 #include "visitor.h"
 
@@ -20,13 +21,13 @@ xchain::json BVisitor::to_json() {
 }
 
 bool Main::_is_visitor_exist(BVisitor& ent, const string& id){
-    BVisitor id_ent;
-    if (!get_visitor_table().find({{"id", id}}, &id_ent))
+    BIdentity id_ent;
+    if (!_is_identity_exist(id_ent, id))
         return false;
 
     if (!get_visitor_table().find({{"id", id}}, &ent)) {
-        if( !get_visitor_table().del(id_ent) )
-            mycout << "delete visitor " << id_ent.to_json().dump() << " failure ." << endl ;
+        if( !get_identity_table().del(id_ent) )
+            mycout << "delete identity " << id_ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
@@ -41,7 +42,10 @@ bool Main::_is_visitor(const string& id) {
     return true;
 }
 
-bool Main::_scan_visitor(xchain::json& ja, const string& cond) {
+bool Main::_scan_visitor(xchain::json& ja,
+                         const string& id,
+                         const string& nickname,
+                         const string& wechat) {
     auto it = get_visitor_table().scan({{"id",cond}});
     while(it->next() ) {
         BVisitor ent;

@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
-class BKinddeedType : public buddha::KinddeedType {
+class BKinddeedType : public KinddeedType {
     DEFINE_ROWKEY(id);          //主键
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
@@ -19,7 +19,7 @@ class BKinddeedType : public buddha::KinddeedType {
     xchain::json to_json();
 };
 
-class BKinddeed: public buddha::Kinddeed {
+class BKinddeed: public Kinddeed {
     DEFINE_ROWKEY(id);              //主键
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, id)     //只主键能find，也支持scan
@@ -29,7 +29,7 @@ class BKinddeed: public buddha::Kinddeed {
     xchain::json to_json();
 };
 
-class BKinddeedDetail: public buddha::KinddeedDetail {
+class BKinddeedDetail: public KinddeedDetail {
     DEFINE_ROWKEY(kdid,sequence);   //联合主键
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, kdid)   //非主键不能find，支持scan
@@ -38,7 +38,7 @@ class BKinddeedDetail: public buddha::KinddeedDetail {
     xchain::json to_json();
 };
 
-class BKinddeedSpec: public buddha::KinddeedSpec {
+class BKinddeedSpec: public KinddeedSpec {
     DEFINE_ROWKEY(kdid,sequence);   //联合主键
     DEFINE_INDEX_BEGIN(1)
         DEFINE_INDEX_ADD(0, kdid)   //非主键不能find，支持scan

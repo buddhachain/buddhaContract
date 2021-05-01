@@ -3,31 +3,6 @@ option optimize_for = LITE_RUNTIME;
 
 package buddha;
 
-//基金会成员表。
-message Founder {
-    string id           = 1; //基金会名称，唯一
-    string desc         = 2; //基金会描述
-    string address      = 3; //地址
-    string timestamp    = 4; //申请时间
-    int64  guaranty     = 5; //抵押数量
-    bool   approved     = 6; //是否已经批准是基金会成员，0尚未批准，1已经批准
-}
-
-//提案表
-message Proposal {
-    string key          = 1; //配置的键,唯一
-    string value        = 2; //配置的正在使用的键值
-    string owner        = 3; //提案发起者，必须基金会成员才能发起提案
-    string newvalue     = 4; //提案发起的新键值
-    string operate      = 5; //make 0, delete 1, update 2；如果delete，最后一个基金会成员通过后，直接删除这个记录。
-    string timestamp    = 6; //提案发起日期
-    string expire       = 7; //最晚提案确认时间
-    int64  count        = 8; //发起提案时的基金会成员个数
-    string founders     = 9; //发起提案时的基金会成员列表[founder1,founder2,founder3]
-    string results      = 10;//提案结论，各个基金会成员是否都通过的标识,0未参加，1通过，2未通过[0,1,2]
-    string timestamps   = 11;//提案结论时间，各个基金会成员设置是否通过时的时间,[xxx,xxx,xxx]
-}
-
 //善举类型表
 message KinddeedType {
     int64 id            = 1;    //善举类型序号，0,1,2,3..，唯一

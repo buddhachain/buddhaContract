@@ -6,6 +6,11 @@
   },
   {
     "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/43/438738cb2c208b8e.o /root/buddhaContract/02.identity/src/identity.cc",
+    "file": "/root/buddhaContract/02.identity/src/identity.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/52/52a72f26b6595b16.o /root/buddhaContract/02.identity/src/identity.pb.cc",
     "file": "/root/buddhaContract/02.identity/src/identity.pb.cc"
   },
@@ -13,11 +18,6 @@
     "directory": "/root/buddhaContract/02.identity",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/fc/fcfbce83eba97f2c.o /root/buddhaContract/02.identity/src/identity_user.pb.cc",
     "file": "/root/buddhaContract/02.identity/src/identity_user.pb.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/02.identity",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/c8/c83f9f943e5da0dc.o /root/buddhaContract/02.identity/src/identiy.cc",
-    "file": "/root/buddhaContract/02.identity/src/identiy.cc"
   },
   {
     "directory": "/root/buddhaContract/02.identity",
@@ -53,6 +53,11 @@
     "directory": "/root/buddhaContract/02.identity",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a6/a6e779cc6ca7a47e.o /root/buddhaContract/02.identity/src/the_dead.pb.cc",
     "file": "/root/buddhaContract/02.identity/src/the_dead.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/ef/ef9408f01e297d51.o /root/buddhaContract/02.identity/src/user.cc",
+    "file": "/root/buddhaContract/02.identity/src/user.cc"
   },
   {
     "directory": "/root/buddhaContract/02.identity",

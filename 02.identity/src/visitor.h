@@ -11,10 +11,8 @@ using namespace std;
 
 class BVisitor: public Visitor {
     DEFINE_ROWKEY(id);                  //主键
-    DEFINE_INDEX_BEGIN(3)
-        DEFINE_INDEX_ADD(0, id)         //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, nickname)   //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(2, wechat)     //非主键不能find，支持scan
+    DEFINE_INDEX_BEGIN(1)
+        DEFINE_INDEX_ADD(0, id, nickname, wechat)   //只主键能find，也支持scan
     DEFINE_INDEX_END();
 
     xchain::json to_json();

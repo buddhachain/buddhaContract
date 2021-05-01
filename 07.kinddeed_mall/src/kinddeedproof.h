@@ -9,7 +9,7 @@
 #include <string>
 using namespace std;
 
-class BKinddeedProof: public buddha::KinddeedProof {
+class BKinddeedProof: public KinddeedProof {
     DEFINE_ROWKEY(orderid);             //主键
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, orderid)    //只主键能find，也支持scan

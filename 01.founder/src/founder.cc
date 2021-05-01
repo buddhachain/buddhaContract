@@ -3,8 +3,8 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "buddha.pb.h"
-#include "buddha.h"
+#include "founder.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -12,6 +12,7 @@ using namespace std;
 xchain::json BFounder::to_json() {
     xchain::json j = {
         {"id", id()},
+        {"type", type()},
         {"desc", desc()},
         {"address", address()},
         {"timestamp", timestamp()},
@@ -22,7 +23,7 @@ xchain::json BFounder::to_json() {
     return j;
 }
 
-bool Main::_is_founder_exist(founder& ent, const string& id) {
+bool Main::_is_founder_exist(BFounder& ent, const string& id) {
     if (!get_founder_table().find({{"id", id}}, &ent))
         return false;
 
@@ -30,17 +31,30 @@ bool Main::_is_founder_exist(founder& ent, const string& id) {
 }
 
 bool Main::_is_founder(const string& id) {
-    founder ent;
+    BFounder ent;
     if (!_is_founder_exist(ent, id))
         return false;
     
     return ent.approved();
 }
 
-bool Main::_scan_founder(xchain::json& ja, const string& cond) {
-    auto it = get_founder_table().scan({{"id",cond}});
+bool Main::_is_president(const string& id) {
+    BFounder ent;
+    if (!_is_founder_exist(ent, id))
+        return false;
+
+    if(ent.type() != PRESIDENT) {
+        mycout << id << " is not prisident ." << endl ;
+        return false ;
+    }    
+
+    return ent.approved();
+}
+
+bool Main::_scan_founder(xchain::json& ja, const string& id) {
+    auto it = get_founder_table().scan({{"id", id}});
     while(it->next() ) {
-        founder ent;
+        BFounder ent;
         if (!it->get(&ent) ) {
             mycout << "founder table get failure : " << it->error(true) << endl;
             return false;
@@ -53,7 +67,7 @@ bool Main::_scan_founder(xchain::json& ja, const string& cond) {
 }
 
 bool Main::_delete_founder_record(const string& id) {
-    founder ent;
+    BFounder ent;
     if (!_is_founder_exist(ent, id)){
         mycout << "founder " << id << " is not exist ." << endl ;
         return false;
@@ -102,13 +116,14 @@ void Main::apply_founder(){
     }
 
     //判断此基金会成员是否存在
-    founder ent;
+    BFounder ent;
     if( _is_founder_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "founder " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
 
     ent.set_id(ctx->initiator());
+    ent.set_type(MEMBER);
     ent.set_desc(desc);
     ent.set_address(address);
     ent.set_timestamp(timestamp);
@@ -136,7 +151,7 @@ void Main::approve_founder() {
     }
 
     //判断此基金会成员是否存在
-    founder ent;
+    BFounder ent;
     if( !_is_founder_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
@@ -178,7 +193,7 @@ void Main::recusal_founder() {
     }
 
     //判断此基金会成员是否存在
-    founder ent;
+    BFounder ent;
     if( !_is_founder_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "founder " + id + " is not exist .");
         return ;
@@ -210,6 +225,17 @@ bool Main::is_founder() {
     return true;
 }
 
+
+bool Main::is_president() {
+    if (!_is_president(ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not president .") ;
+        return false;
+    }
+    
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is president .") ;
+    return true;
+}
+
 void Main::list_founder() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
@@ -230,8 +256,9 @@ void Main::list_founder() {
 
 
 
-DEFINE_METHOD(Buddha, apply_founder)            { self.apply_founder();             }
-DEFINE_METHOD(Buddha, approve_founder)          { self.approve_founder();           }
-DEFINE_METHOD(Buddha, recusal_founder)          { self.recusal_founder();           }
-DEFINE_METHOD(Buddha, is_founder)               { self.is_founder();                }
-DEFINE_METHOD(Buddha, list_founder)             { self.list_founder();              }
+DEFINE_METHOD(Main, apply_founder)            { self.apply_founder();             }
+DEFINE_METHOD(Main, approve_founder)          { self.approve_founder();           }
+DEFINE_METHOD(Main, recusal_founder)          { self.recusal_founder();           }
+DEFINE_METHOD(Main, is_founder)               { self.is_founder();                }
+DEFINE_METHOD(Main, is_president)             { self.is_president();              }
+DEFINE_METHOD(Main, list_founder)             { self.list_founder();              }

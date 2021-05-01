@@ -3,15 +3,14 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "otc.pb.h"
-#include "otc.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
 
-Main::Buddha() :
-    _guaranty_table(          context(), "guaranty"                 ),
-    _log_table(          context(), "log"                 ),
+Main::Main() :
+    _founder_table(   context(), "founder"    ),
+    _proposal_table(     context(), "proposal"      ),
 
     ctx(context())
 {

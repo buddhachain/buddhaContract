@@ -68,6 +68,6 @@ bool Main::is_deployer() {
 }
 
 
-DEFINE_METHOD(Buddha, initialize)               { self.initialize();                }
-DEFINE_METHOD(Buddha, get_deployer)             { self.get_deployer();              }
-DEFINE_METHOD(Buddha, is_deployer)              { self.is_deployer();               }
+DEFINE_METHOD(Main, initialize)               { self.initialize();                }
+DEFINE_METHOD(Main, get_deployer)             { self.get_deployer();              }
+DEFINE_METHOD(Main, is_deployer)              { self.is_deployer();               }

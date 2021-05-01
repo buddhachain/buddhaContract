@@ -38,12 +38,12 @@ xchain::json BUser::to_json() {
 }
 
 bool Main::_is_user_exist(BUser& ent, const string& id){
-    BUser id_ent;
-    if (!get_user_table().find({{"id", id}}, &id_ent))
+    BIdentity id_ent;
+    if (!_is_identity_exist(id_ent, id))
         return false;
 
     if (!get_user_table().find({{"id", id}}, &ent)) {
-        if( !get_user_table().del(id_ent) )
+        if( !get_identity_table().del(id_ent) )
             mycout << "delete user " << id_ent.to_json().dump() << " failure ." << endl ;
         return false;
     }

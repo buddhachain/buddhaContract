@@ -1,0 +1,14 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+
+//基金会成员表。
+message Founder {
+    string id           = 1; //基金会名称，唯一
+    int64  type         = 2; //类型， [1普通会员，2会长]
+    string desc         = 3; //基金会描述
+    string address      = 4; //地址
+    string timestamp    = 5; //申请时间
+    int64  guaranty     = 6; //抵押数量
+    bool   approved     = 7; //是否已经批准是基金会成员，0尚未批准，1已经批准
+}

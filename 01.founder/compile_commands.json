@@ -1,61 +1,76 @@
 [
   {
-    "directory": "/root/buddhaContract/09.otc",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/5c/5c30df26f833d52f.o /root/buddhaContract/09.otc/src/deployer.cc",
-    "file": "/root/buddhaContract/09.otc/src/deployer.cc"
+    "directory": "/root/buddhaContract/01.founder",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/fd/fddf371ecddb080c.o /root/buddhaContract/01.founder/src/deployer.cc",
+    "file": "/root/buddhaContract/01.founder/src/deployer.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/d5/d59047d9d645fa7d.o /root/buddhaContract/09.otc/src/otc.cc",
-    "file": "/root/buddhaContract/09.otc/src/otc.cc"
+    "directory": "/root/buddhaContract/01.founder",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a8/a811719e3c7f1581.o /root/buddhaContract/01.founder/src/founder.cc",
+    "file": "/root/buddhaContract/01.founder/src/founder.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/88/883b1c7557274a1f.o /root/buddhaContract/09.otc/src/otc.pb.cc",
-    "file": "/root/buddhaContract/09.otc/src/otc.pb.cc"
+    "directory": "/root/buddhaContract/01.founder",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/32/3232cb99cc1efe33.o /root/buddhaContract/01.founder/src/founder.pb.cc",
+    "file": "/root/buddhaContract/01.founder/src/founder.pb.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/6c/6ceb2e4a603f2763.o /root/buddhaContract/01.founder/src/main.cc",
+    "file": "/root/buddhaContract/01.founder/src/main.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/01.founder",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/85/85d724a166bb95da.o /root/buddhaContract/01.founder/src/proposal.cc",
+    "file": "/root/buddhaContract/01.founder/src/proposal.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/01.founder",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/d6/d64daf7417f5c7f2.o /root/buddhaContract/01.founder/src/proposal.pb.cc",
+    "file": "/root/buddhaContract/01.founder/src/proposal.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f7/f7a346506baf3c18.o /root/xuperchain/core/contractsdk/cpp/src/xchain/account.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/account.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a4/a40f048dee03eaf8.o /root/xuperchain/core/contractsdk/cpp/src/xchain/basic_iterator.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/basic_iterator.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/9c/9cfcfca62a9662f6.o /root/xuperchain/core/contractsdk/cpp/src/xchain/block.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/block.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/ec/ecbb5cc223f25341.o /root/xuperchain/core/contractsdk/cpp/src/xchain/context_impl.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/context_impl.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/83/832fb0a0f7ba0e99.o /root/xuperchain/core/contractsdk/cpp/src/xchain/contract.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/contract.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/58/586638b75bfd932b.o /root/xuperchain/core/contractsdk/cpp/src/xchain/contract.pb.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/contract.pb.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f2/f2a8cc87f3c8b6d4.o /root/xuperchain/core/contractsdk/cpp/src/xchain/crypto.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/crypto.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e6/e680c780ff7430ae.o /root/xuperchain/core/contractsdk/cpp/src/xchain/syscall.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/syscall.cc"
   },
   {
-    "directory": "/root/buddhaContract/09.otc",
+    "directory": "/root/buddhaContract/01.founder",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/41/41ad0191c39ce959.o /root/xuperchain/core/contractsdk/cpp/src/xchain/transaction.cc",
     "file": "/root/xuperchain/core/contractsdk/cpp/src/xchain/transaction.cc"
   }

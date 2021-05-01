@@ -5,6 +5,7 @@
 #include "xchain/syscall.h"
 #include "identity.pb.h"
 #include "identity.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -58,13 +59,49 @@ bool Main::_delete_identity_record(const string& id) {
 
 namespace 分界线{}
 
-bool Main::is_identity() {
-    if (!_is_identity(ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not identity .") ;
+bool Main::find_identity() {
+    BIdentity id_ent;
+
+    string id = ctx->arg("id");
+    if( id.empty() )
+        id = ctx->initiator();
+
+    if (!_is_identity_exist(id_ent, id)){
+        _log_error(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not in identity table .") ;
         return false;
     }
     
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is identity .") ;
+    switch( id_ent.type() ) {
+        case VISITOR : {
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is visitor .") ;
+            break;
+        }
+        case USER : {
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is user .") ;
+            break;
+        }
+        case IDENTITY_USER : {
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is identity user .") ;
+            break;
+        }
+        case MASTER : {
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is master .") ;
+            break;
+        }
+        case TEMPLE : {
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is temple .") ;
+            break;
+        }
+        case THEDEAD : {
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is the dead .") ;
+            break;
+        }
+        default : {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " type is error .") ;
+            return false;
+        }
+    }
+
     return true;
 }
 
@@ -86,5 +123,5 @@ void Main::list_identity() {
 }
 
 
-DEFINE_METHOD(Main, apply_identity)             { self.find_identity();              }
-DEFINE_METHOD(Main, approve_identity)           { self.list_identity();            }
+DEFINE_METHOD(Main, find_identity)              { self.find_identity();              }
+DEFINE_METHOD(Main, list_identity)              { self.list_identity();            }
