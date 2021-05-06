@@ -116,7 +116,7 @@ private:
     bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
     bool _scan_thedead(xchain::json&, const string& ="");
 
-    bool _add_identity(const string&,const string&,const string&);
+    bool _add_identity(const string&,const string&);
     bool _add_visitor(const string&,const string&,const string&,const string&);
     bool _add_user(const string&,const string&,const string&,const string&);
     bool _add_identifyuser(const string&,const string&,const string&,const string&);
@@ -177,6 +177,10 @@ public:
 
     bool is_thedead();           //任意身份
     void list_thedead();           //基金会成员
+
+
+    //添加身份
+    void add_identity();             //任意身份
 
     //添加游客
     void add_visitor();             //任意身份

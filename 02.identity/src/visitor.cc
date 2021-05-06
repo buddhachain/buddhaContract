@@ -97,7 +97,7 @@ void Main::add_visitor(){
         return ;
     }
 
-    //判断此寺院是否存在
+    //判断此游客是否存在
     BVisitor ent;
     if( _is_visitor_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "visitor " + ctx->initiator() + " is applying .", ent.to_json() );
@@ -112,7 +112,7 @@ void Main::add_visitor(){
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply visitor over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " add visitor over .");
 }
 
 bool Main::is_visitor() {

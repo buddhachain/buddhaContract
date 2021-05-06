@@ -102,7 +102,7 @@ void Otc::apply_guaranty(){
         return ;
     }
 
-    //判断此寺院是否存在
+    //判断此抵押是否存在
     guaranty ent;
     if( _is_guaranty_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "guaranty " + ctx->initiator() + " is applying .", ent.to_json() );

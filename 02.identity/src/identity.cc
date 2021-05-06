@@ -19,6 +19,31 @@ xchain::json BIdentity::to_json() {
     return j;
 }
 
+bool Main::_add_identity(const string& id, const string& type) {
+    //判断此身份是否存在
+    BIdentity ent;
+    if( _is_identity_exist(ent, id) ) {
+        mycout << id << " BIdentity is exist ." << ent.to_json() << endl;
+
+        //删除旧数据
+        if( !_delete_identity_record(id) ) {
+            mycout << "delete failure ." << ent.to_json() << endl;
+            return false;
+        }
+    }
+
+    ent.set_id(id);
+    ent.set_type(std::stoll(type));
+    if (!get_identity_table().put(ent) ) {
+        mycout << "table put failure ." << ent.to_json() << endl;
+        return false;
+    }
+
+    mycout << "table put success ." << ent.to_json() << endl;
+    return true ;
+}
+
+
 bool Main::_is_identity_exist(BIdentity& ent, const string& id){
     if (!get_identity_table().find({{"id", id}}, &ent))
         return false;
@@ -26,8 +51,8 @@ bool Main::_is_identity_exist(BIdentity& ent, const string& id){
     return true;
 }
 
-bool Main::_scan_identity(xchain::json& ja, const string& cond) {
-    auto it = get_identity_table().scan({{"type",cond}});
+bool Main::_scan_identity(xchain::json& ja, const string& type) {
+    auto it = get_identity_table().scan({{"type", type}});
     while(it->next() ) {
         BIdentity ent;
         if (!it->get(&ent) ) {
@@ -73,7 +98,7 @@ bool Main::find_identity() {
     
     switch( id_ent.type() ) {
         case VISITOR : {
-            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is visitor .") ;
+            _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is identity .") ;
             break;
         }
         case USER : {
