@@ -5,6 +5,7 @@
 #include "xchain/syscall.h"
 #include "identity.h"
 #include "thedead.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -12,7 +13,7 @@ using namespace std;
 xchain::json BTheDead::to_json() {
     xchain::json j = {
         {"id", id()},
-        {"nickname", nickname()},
+        {"name", name()},
         {"sex", sex()},
         {"born_timestamp", born_timestamp()},
         {"born_address", born_address()},
@@ -49,10 +50,8 @@ bool Main::_is_thedead(const string& id) {
 }
 
 bool Main::_scan_thedead(xchain::json& ja,
-                         const string& id,
-                         const string& nickname,
-                         const string& wechat) {
-    auto it = get_thedead_table().scan({{"id",cond}});
+                         const string& id) {
+    auto it = get_thedead_table().scan({{"id",id}});
     while(it->next() ) {
         BTheDead ent;
         if (!it->get(&ent) ) {
@@ -85,25 +84,19 @@ bool Main::_delete_thedead_record(const string& id) {
 namespace 分界线{}
 
 void Main::add_thedead(){
-    const string& nickname = ctx->arg("nickname");
-    if( nickname.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "nickname is empty .");
+    const string& name = ctx->arg("name");
+    if( name.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "name is empty .");
         return ;
     }
 
-    const string& wechat = ctx->arg("wechat");
-    if( wechat.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "wechat is empty .");
-        return ;
-    }
-
-    //判断是否已经是游客
+    //判断是否已经是逝者
     if( is_thedead() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already thedead .");
         return ;
     }
 
-    //判断此寺院是否存在
+    //判断此逝者是否存在
     BTheDead ent;
     if( _is_thedead_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "thedead " + ctx->initiator() + " is applying .", ent.to_json() );
@@ -111,9 +104,7 @@ void Main::add_thedead(){
     }
 
     ent.set_id(ctx->initiator());
-    ent.set_nickname(nickname);
-    ent.set_wechat(wechat);
-    ent.set_approved(false);
+    ent.set_name(name);
     if (!get_thedead_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;

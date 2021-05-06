@@ -104,13 +104,13 @@ void Main::add_user(){
         return ;
     }
 
-    //判断是否已经是游客
+    //判断是否已经是用户
     if( is_user() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already user .");
         return ;
     }
 
-    //判断此寺院是否存在
+    //判断此用户是否存在
     BUser ent;
     if( _is_user_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "user " + ctx->initiator() + " is applying .", ent.to_json() );

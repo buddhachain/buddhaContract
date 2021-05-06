@@ -3,8 +3,8 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "buddha.pb.h"
-#include "buddha.h"
+#include "templemaster.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -19,7 +19,7 @@ xchain::json BTempleMaster::to_json() {
     return j;
 }
 
-bool Main::_is_templemaster_exist(templemaster& ent,
+bool Main::_is_templemaster_exist(BTempleMaster& ent,
                                     const string& templeid,
                                     const string& masterid){
     if (!get_templemaster_table().find({{"templeid", templeid},{"masterid", masterid}}, &ent))
@@ -28,7 +28,7 @@ bool Main::_is_templemaster_exist(templemaster& ent,
     return true;
 }
 
-bool Main::_is_in_temple(templemaster& ent,
+bool Main::_is_in_temple(BTempleMaster& ent,
                            const string& templeid,
                            const string& masterid){
     if (!get_templemaster_table().find({{"templeid", templeid},{"masterid", masterid}}, &ent))
@@ -40,7 +40,7 @@ bool Main::_is_in_temple(templemaster& ent,
 bool Main::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) {
     auto it = get_templemaster_table().scan({{"templeid",cond}});
     while(it->next() ) {
-        templemaster ent;
+        BTempleMaster ent;
         if (!it->get(&ent) ) {
             mycout << "templemaster table get failure : " << it->error(true) << endl;
             return false;
@@ -55,7 +55,7 @@ bool Main::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) 
 bool Main::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) {
     auto it = get_templemaster_table().scan({{"masterid",cond}});
     while(it->next() ) {
-        templemaster ent;
+        BTempleMaster ent;
         if (!it->get(&ent) ) {
             mycout << "templemaster table get failure : " << it->error(true) << endl;
             return false;
@@ -69,7 +69,7 @@ bool Main::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) 
 
 bool Main::_delete_templemaster_record(const string& templeid,
                                          const string& masterid) {
-    templemaster ent;
+    BTempleMaster ent;
     if (!_is_templemaster_exist(ent, templeid, masterid)){
         mycout << "temple " << templeid << ", master " << masterid << " is not exist ." << endl ;
         return false;
@@ -108,7 +108,7 @@ void Main::apply_join_temple(){
         return ;
     }
 
-    templemaster ent;
+    BTempleMaster ent;
 
     //判断是否法师是否已经入驻此寺院
     if( _is_in_temple(ent, templeid, masterid) ) {
@@ -149,7 +149,7 @@ void Main::approve_join_temple() {
     const string& templeid = ctx->initiator();
 
     //判断是否法师是否已经入驻此寺院
-    templemaster ent;
+    BTempleMaster ent;
     if( _is_in_temple(ent, templeid, masterid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, masterid + " is already join temple .", ent.to_json() );
         return ;
@@ -181,7 +181,7 @@ void Main::recusal_join_temple() {
     const string& templeid = ctx->initiator();
 
     //判断寺院法师记录是否存在
-    templemaster ent;
+    BTempleMaster ent;
     if( !_is_templemaster_exist(ent, templeid, masterid) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple " + templeid + ", master " + masterid + " is not exist .");
         return ;
@@ -218,7 +218,7 @@ bool Main::is_in_temple() {
     }
 
     //判断是否法师是否已经入驻此寺院
-    templemaster ent;
+    BTempleMaster ent;
     if (!_is_in_temple(ent, templeid, masterid) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, masterid + " is not join temple .") ;
         return false;

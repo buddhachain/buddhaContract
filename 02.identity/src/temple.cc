@@ -3,8 +3,8 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "buddha.pb.h"
-#include "buddha.h"
+#include "temple.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -22,43 +22,15 @@ xchain::json BTemple::to_json() {
     return j;
 }
 
-bool Main::_is_temple_exist(temple& ent, const string& id){
+bool Main::_is_temple_exist(BTemple& ent, const string& id){
     if (!get_temple_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Main::_is_temple_exist_by_unit(temple& ent, const string& unit){
-    if (!get_temple_table().find({{"unit", unit}}, &ent))
-        return false;
-
-    return true;
-}
-
-bool Main::_is_temple_exist_by_creditcode(temple& ent, const string& creditcode){
-    if (!get_temple_table().find({{"creditcode", creditcode}}, &ent))
-        return false;
-
-    return true;
-}
-
-bool Main::_is_temple_exist_by_address(temple& ent, const string& address){
-    if (!get_temple_table().find({{"address", address}}, &ent))
-        return false;
-
-    return true;
-}
-
-bool Main::_is_temple_exist_by_proof(temple& ent, const string& proof){
-    if (!get_temple_table().find({{"proof", proof}}, &ent))
-        return false;
-
-    return true;
-}
-
 bool Main::_is_temple(const string& id) {
-    temple ent;
+    BTemple ent;
     if (!_is_temple_exist(ent, id))
         return false;
     
@@ -68,7 +40,7 @@ bool Main::_is_temple(const string& id) {
 bool Main::_scan_temple(xchain::json& ja, const string& cond) {
     auto it = get_temple_table().scan({{"id",cond}});
     while(it->next() ) {
-        temple ent;
+        BTemple ent;
         if (!it->get(&ent) ) {
             mycout << "temple table get failure : " << it->error(true) << endl;
             return false;
@@ -81,7 +53,7 @@ bool Main::_scan_temple(xchain::json& ja, const string& cond) {
 }
 
 bool Main::_delete_temple_record(const string& id) {
-    temple ent;
+    BTemple ent;
     if (!_is_temple_exist(ent, id)){
         mycout << "temple " << id << " is not exist ." << endl ;
         return false;
@@ -137,7 +109,7 @@ void Main::apply_temple(){
     }
 
     //判断此寺院是否存在
-    temple ent;
+    BTemple ent;
     if( _is_temple_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "temple " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
@@ -171,7 +143,7 @@ void Main::approve_temple() {
     }
 
     //判断此寺院是否存在
-    temple ent;
+    BTemple ent;
     if( !_is_temple_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple " + id + " is not exist .");
         return ;
@@ -213,7 +185,7 @@ void Main::recusal_temple() {
     }
 
     //判断此寺院是否存在
-    temple ent;
+    BTemple ent;
     if( !_is_temple_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "temple " + id + " is not exist .");
         return ;

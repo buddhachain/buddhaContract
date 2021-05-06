@@ -6,6 +6,16 @@
   },
   {
     "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/0f/0ff074f9886df64d.o /root/buddhaContract/02.identity/src/identifyuser.cc",
+    "file": "/root/buddhaContract/02.identity/src/identifyuser.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/88/88bb5bedb798dc6f.o /root/buddhaContract/02.identity/src/identifyuser.pb.cc",
+    "file": "/root/buddhaContract/02.identity/src/identifyuser.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/43/438738cb2c208b8e.o /root/buddhaContract/02.identity/src/identity.cc",
     "file": "/root/buddhaContract/02.identity/src/identity.cc"
   },
@@ -13,16 +23,6 @@
     "directory": "/root/buddhaContract/02.identity",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/52/52a72f26b6595b16.o /root/buddhaContract/02.identity/src/identity.pb.cc",
     "file": "/root/buddhaContract/02.identity/src/identity.pb.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/02.identity",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/20/20ec27dd133b071b.o /root/buddhaContract/02.identity/src/identityuser.cc",
-    "file": "/root/buddhaContract/02.identity/src/identityuser.cc"
-  },
-  {
-    "directory": "/root/buddhaContract/02.identity",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/99/994b0c2f261f3789.o /root/buddhaContract/02.identity/src/identityuser.pb.cc",
-    "file": "/root/buddhaContract/02.identity/src/identityuser.pb.cc"
   },
   {
     "directory": "/root/buddhaContract/02.identity",

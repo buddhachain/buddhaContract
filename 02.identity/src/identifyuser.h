@@ -1,15 +1,15 @@
-#ifndef _IDENTITY_USER_H_
-#define _IDENTITY_USER_H_
+#ifndef _IDENTIFY_USER_H_
+#define _IDENTIFY_USER_H_
 
 #include "xchain/table/types.h"
 #include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
-#include "identityuser.pb.h"
+#include "identifyuser.pb.h"
 
 #include <string>
 using namespace std;
 
-class BIdentityUser: public IdentityUser {
+class BIdentifyUser: public IdentifyUser {
     DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(5)
         DEFINE_INDEX_ADD(0, id)
@@ -23,4 +23,4 @@ class BIdentityUser: public IdentityUser {
 };
 
 
-#endif // _IDENTITY_USER_H_
+#endif // _IDENTIFY_USER_H_

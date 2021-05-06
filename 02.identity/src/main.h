@@ -8,7 +8,7 @@
 #include "identity.h"
 #include "visitor.h"
 #include "user.h"
-#include "identityuser.h"
+#include "identifyuser.h"
 #include "master.h"
 #include "temple.h"
 #include "templemaster.h"
@@ -27,7 +27,7 @@ private:
     xchain::cdt::Table<BIdentity>      _identity_table;
     xchain::cdt::Table<BVisitor>       _visitor_table;
     xchain::cdt::Table<BUser>          _user_table;
-    xchain::cdt::Table<BIdentityUser>  _identityuser_table;
+    xchain::cdt::Table<BIdentifyUser>  _identifyuser_table;
     xchain::cdt::Table<BMaster>        _master_table;
     xchain::cdt::Table<BTemple>        _temple_table;
     xchain::cdt::Table<BTempleMaster>  _templemaster_table;
@@ -49,8 +49,8 @@ public:
         return _user_table;
     }
 
-    decltype(_identityuser_table)& get_identityuser_table() {
-        return _identityuser_table;
+    decltype(_identifyuser_table)& get_identifyuser_table() {
+        return _identifyuser_table;
     }
 
     decltype(_master_table)& get_master_table() {
@@ -81,7 +81,7 @@ private:
     bool _is_founder(const string&);
     bool _is_visitor(const string&);
     bool _is_user(const string&);
-    bool _is_identityuser(const string&);
+    bool _is_identifyuser(const string&);
     bool _is_master(const string&);
     bool _is_temple(const string&);
     bool _is_thedead(const string&);
@@ -89,7 +89,7 @@ private:
     bool _is_identity_exist(BIdentity&, const string&);
     bool _is_visitor_exist(BVisitor&, const string&);
     bool _is_user_exist(BUser&, const string&);
-    bool _is_identityuser_exist(BIdentityUser&, const string&);
+    bool _is_identifyuser_exist(BIdentifyUser&, const string&);
     bool _is_master_exist(BMaster&, const string&);
     bool _is_temple_exist(BTemple&, const string&);
     bool _is_templemaster_exist(BTempleMaster&, const string&, const string&);
@@ -105,7 +105,7 @@ private:
                        const string& ="");
 
     bool _scan_user(xchain::json&, const string& ="");
-    bool _scan_identityuser(xchain::json&, const string& ="");
+    bool _scan_identifyuser(xchain::json&, const string& ="");
     bool _scan_master(xchain::json&,
                       const string& ="",
                       const string& ="",
@@ -119,7 +119,7 @@ private:
     bool _add_identity(const string&,const string&,const string&);
     bool _add_visitor(const string&,const string&,const string&,const string&);
     bool _add_user(const string&,const string&,const string&,const string&);
-    bool _add_identityuser(const string&,const string&,const string&,const string&);
+    bool _add_identifyuser(const string&,const string&,const string&,const string&);
     bool _add_master(const string&,const string&,const string&,const string&);
     bool _add_temple(const string&,const string&,const string&,const string&);
     bool _add_thedead(const string&,const string&,const string&,const string&);
@@ -127,7 +127,7 @@ private:
     bool _delete_identity_record(const string&);
     bool _delete_visitor_record(const string&);
     bool _delete_user_record(const string&);
-    bool _delete_identityuser_record(const string&);
+    bool _delete_identifyuser_record(const string&);
     bool _delete_master_record(const string&);
     bool _delete_temple_record(const string&);
     bool _delete_templemaster_record(const string&, const string&);
@@ -136,7 +136,7 @@ private:
     bool _clear_identity();
     bool _clear_visitor();
     bool _clear_user();
-    bool _clear_identityuser();
+    bool _clear_identifyuser();
     bool _clear_master();
     bool _clear_temple();
     bool _clear_templemaster();
@@ -166,8 +166,8 @@ public:
     bool is_user();                 //任意身份
     void list_user();               //基金会成员
 
-    bool is_identityuser();        //任意身份
-    void list_identityuser();      //基金会成员
+    bool is_identifyuser();        //任意身份
+    void list_identifyuser();      //基金会成员
 
     bool is_master();               //任意身份
     void list_master();             //基金会成员
@@ -185,9 +185,9 @@ public:
     void add_user();                //任意身份
 
     //申请成为认证用户
-    void apply_identify_user();     //用户，游客
-    void approve_identify_user();   //基金会成员
-    void recusal_identify_user();   //基金会成员
+    void apply_identifyuser();     //用户，游客
+    void approve_identifyuser();   //基金会成员
+    void recusal_identifyuser();   //基金会成员
 
     //申请成为法师
     void apply_master();            //用户
@@ -206,6 +206,8 @@ public:
     bool is_in_temple();            //法师
     void list_my_master();          //寺院
     void list_temple_master();      //基金会成员
-
+    
+    //添加逝者
+    void add_thedead();                //任意身份
 };
 #endif // _MAIN_H_

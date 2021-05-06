@@ -47,7 +47,7 @@ private:
     bool _is_founder(const string&);
     bool _is_visitor(const string&);
     bool _is_user(const string&);
-    bool _is_identityuser(const string&);
+    bool _is_identifyuser(const string&);
     bool _is_master(const string&);
     bool _is_temple(const string&);
     bool _is_thedead(const string&);
