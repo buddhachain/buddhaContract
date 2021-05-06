@@ -13,9 +13,10 @@ const int64_t MEMBER    = 1;
 const int64_t PRESIDENT = 2;
 
 class BFounder: public Founder {
-    DEFINE_ROWKEY(id);          //主键
-    DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
+    DEFINE_ROWKEY(id);
+    DEFINE_INDEX_BEGIN(2)
+        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(1, approved)
     DEFINE_INDEX_END();
 
     xchain::json to_json();

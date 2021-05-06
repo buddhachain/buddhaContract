@@ -3,12 +3,13 @@
 #include "xchain/account.h"
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
-#include "user.h"
+#include "identityuser.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
 
-xchain::json BUser::to_json() {
+xchain::json BIdentityUser::to_json() {
     xchain::json j = {
         {"id", id()},
         {"nickname", nickname()},
@@ -21,6 +22,7 @@ xchain::json BUser::to_json() {
         {"home_address", home_address()},
         {"born_timestamp", born_timestamp()},
         {"idcard", idcard()},
+        {"idname", idname()},
         {"otherid", otherid()},
         {"photos", photos()},
         {"desc", desc()},
@@ -31,39 +33,40 @@ xchain::json BUser::to_json() {
         {"hobyy", hobyy()},
         {"recommender", recommender()},
         {"belief", belief()},
+        {"approved", approved()},
     };
 
     return j;
 }
 
-bool Main::_is_user_exist(BUser& ent, const string& id){
+bool Main::_is_identityuser_exist(BIdentityUser& ent, const string& id){
     BIdentity id_ent;
     if (!_is_identity_exist(id_ent, id))
         return false;
 
-    if (!get_user_table().find({{"id", id}}, &ent)) {
+    if (!get_identityuser_table().find({{"id", id}}, &ent)) {
         if( !get_identity_table().del(id_ent) )
-            mycout << "delete user " << id_ent.to_json().dump() << " failure ." << endl ;
+            mycout << "delete identity user " << id_ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
     return true;
 }
 
-bool Main::_is_user(const string& id) {
-    BUser ent;
-    if (!_is_user_exist(ent, id))
+bool Main::_is_identityuser(const string& id) {
+    BIdentityUser ent;
+    if (!_is_identityuser_exist(ent, id))
         return false;
 
     return true;
 }
 
-bool Main::_scan_user(xchain::json& ja, const string& cond) {
-    auto it = get_user_table().scan({{"id",cond}});
+bool Main::_scan_identityuser(xchain::json& ja, const string& cond) {
+    auto it = get_identityuser_table().scan({{"id",cond}});
     while(it->next() ) {
-        BUser ent;
+        BIdentityUser ent;
         if (!it->get(&ent) ) {
-            mycout << "user table get failure : " << it->error(true) << endl;
+            mycout << "identity user table get failure : " << it->error(true) << endl;
             return false;
         }
 
@@ -73,25 +76,25 @@ bool Main::_scan_user(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Main::_delete_user_record(const string& id) {
-    BUser ent;
-    if (!_is_user_exist(ent, id)){
-        mycout << "user " << id << " is not exist ." << endl ;
+bool Main::_delete_identityuser_record(const string& id) {
+    BIdentityUser ent;
+    if (!_is_identityuser_exist(ent, id)){
+        mycout << "identity user " << id << " is not exist ." << endl ;
         return false;
     }
 
-    if( !get_user_table().del(ent) ) {
-        mycout << "delete user " << ent.to_json().dump() << " failure ." << endl ;
+    if( !get_identityuser_table().del(ent) ) {
+        mycout << "delete identity user " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete user " << ent.to_json().dump() << " success ." << endl ;
+    mycout << "delete identity user " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
 namespace 分界线{}
 
-void Main::add_user(){
+void Main::add_identityuser(){
     const string& nickname = ctx->arg("nickname");
     if( nickname.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "nickname is empty .");
@@ -105,15 +108,15 @@ void Main::add_user(){
     }
 
     //判断是否已经是游客
-    if( is_user() ) {
+    if( is_identityuser() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already user .");
         return ;
     }
 
     //判断此寺院是否存在
-    BUser ent;
-    if( _is_user_exist(ent, ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "user " + ctx->initiator() + " is applying .", ent.to_json() );
+    BIdentityUser ent;
+    if( _is_identityuser_exist(ent, ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "identity user " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
 
@@ -121,25 +124,25 @@ void Main::add_user(){
     ent.set_nickname(nickname);
     ent.set_wechat(wechat);
     ent.set_approved(false);
-    if (!get_user_table().put(ent) ) {
+    if (!get_identityuser_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply user over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply identity user over, please wait for approve .");
 }
 
-bool Main::is_user() {
-    if (!_is_user(ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not user .") ;
+bool Main::is_identityuser() {
+    if (!_is_identityuser(ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not identity user .") ;
         return false;
     }
     
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is user .") ;
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is identity user .") ;
     return true;
 }
 
-void Main::list_user() {
+void Main::list_identityuser() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {
@@ -148,7 +151,7 @@ void Main::list_user() {
     }
 
     xchain::json ja ;
-    if(!_scan_user(ja, ctx->arg("id")) ) {
+    if(!_scan_identityuser(ja, ctx->arg("id")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
@@ -156,7 +159,7 @@ void Main::list_user() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
-DEFINE_METHOD(Main, is_user)              { self.is_user();              }
-DEFINE_METHOD(Main, list_user)            { self.list_user();            }
-DEFINE_METHOD(Main, add_user)             { self.add_user();             }
+DEFINE_METHOD(Main, is_identityuser)              { self.is_identityuser();              }
+DEFINE_METHOD(Main, list_identityuser)            { self.list_identityuser();            }
+DEFINE_METHOD(Main, add_identityuser)             { self.add_identityuser();             }
 

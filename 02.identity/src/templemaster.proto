@@ -1,0 +1,8 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+message TempleMaster {
+    string templeid     = 1; //寺院,前二者联合唯一
+    string masterid     = 2; //法师
+    bool   approved     = 3; //是否已经批准法师，0尚未批准，1已经批准
+}

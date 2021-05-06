@@ -10,25 +10,20 @@
 using namespace std;
 
 class fend: public video::Fend {
-    DEFINE_ROWKEY(id);                  //主键
-    DEFINE_INDEX_BEGIN(4)
-        DEFINE_INDEX_ADD(0, id)         //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, author_id)  //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(2, room_id)    //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(3, audience_id)//非主键不能find，支持scan
+    DEFINE_ROWKEY(id);
+    DEFINE_INDEX_BEGIN(2)
+        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(1, author_id, room_id, audience_id)
     DEFINE_INDEX_END();
 
     xchain::json to_json();
 };
 
 class fendlog: public video::FendLog {
-    DEFINE_ROWKEY(id);                  //主键
-    DEFINE_INDEX_BEGIN(5)
-        DEFINE_INDEX_ADD(0, id)         //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, fend_id)    //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(2, room_id)    //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(3, audience_id)//非主键不能find，支持scan
-        DEFINE_INDEX_ADD(4, goods_id)   //非主键不能find，支持scan
+    DEFINE_ROWKEY(id);
+    DEFINE_INDEX_BEGIN(2)
+        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(1, fend_id, room_id, audience_id, goods_id)
     DEFINE_INDEX_END();
 
     xchain::json to_json();

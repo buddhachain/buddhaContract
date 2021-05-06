@@ -176,19 +176,19 @@ class User :
   ::std::string* release_nickname();
   void set_allocated_nickname(::std::string* nickname);
 
-  // string head_photo = 3;
-  void clear_head_photo();
-  static const int kHeadPhotoFieldNumber = 3;
-  const ::std::string& head_photo() const;
-  void set_head_photo(const ::std::string& value);
+  // string photo = 3;
+  void clear_photo();
+  static const int kPhotoFieldNumber = 3;
+  const ::std::string& photo() const;
+  void set_photo(const ::std::string& value);
   #if LANG_CXX11
-  void set_head_photo(::std::string&& value);
+  void set_photo(::std::string&& value);
   #endif
-  void set_head_photo(const char* value);
-  void set_head_photo(const char* value, size_t size);
-  ::std::string* mutable_head_photo();
-  ::std::string* release_head_photo();
-  void set_allocated_head_photo(::std::string* head_photo);
+  void set_photo(const char* value);
+  void set_photo(const char* value, size_t size);
+  ::std::string* mutable_photo();
+  ::std::string* release_photo();
+  void set_allocated_photo(::std::string* photo);
 
   // string name = 4;
   void clear_name();
@@ -288,19 +288,19 @@ class User :
   ::std::string* release_otherid();
   void set_allocated_otherid(::std::string* otherid);
 
-  // string photo = 13;
-  void clear_photo();
-  static const int kPhotoFieldNumber = 13;
-  const ::std::string& photo() const;
-  void set_photo(const ::std::string& value);
+  // string photos = 13;
+  void clear_photos();
+  static const int kPhotosFieldNumber = 13;
+  const ::std::string& photos() const;
+  void set_photos(const ::std::string& value);
   #if LANG_CXX11
-  void set_photo(::std::string&& value);
+  void set_photos(::std::string&& value);
   #endif
-  void set_photo(const char* value);
-  void set_photo(const char* value, size_t size);
-  ::std::string* mutable_photo();
-  ::std::string* release_photo();
-  void set_allocated_photo(::std::string* photo);
+  void set_photos(const char* value);
+  void set_photos(const char* value, size_t size);
+  ::std::string* mutable_photos();
+  ::std::string* release_photos();
+  void set_allocated_photos(::std::string* photos);
 
   // string desc = 14;
   void clear_desc();
@@ -433,7 +433,7 @@ class User :
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr nickname_;
-  ::google::protobuf::internal::ArenaStringPtr head_photo_;
+  ::google::protobuf::internal::ArenaStringPtr photo_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr phone_;
   ::google::protobuf::internal::ArenaStringPtr email_;
@@ -441,7 +441,7 @@ class User :
   ::google::protobuf::internal::ArenaStringPtr born_timestamp_;
   ::google::protobuf::internal::ArenaStringPtr idcard_;
   ::google::protobuf::internal::ArenaStringPtr otherid_;
-  ::google::protobuf::internal::ArenaStringPtr photo_;
+  ::google::protobuf::internal::ArenaStringPtr photos_;
   ::google::protobuf::internal::ArenaStringPtr desc_;
   ::google::protobuf::internal::ArenaStringPtr degree_;
   ::google::protobuf::internal::ArenaStringPtr job_;
@@ -572,57 +572,57 @@ inline void User::set_allocated_nickname(::std::string* nickname) {
   // @@protoc_insertion_point(field_set_allocated:User.nickname)
 }
 
-// string head_photo = 3;
-inline void User::clear_head_photo() {
-  head_photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string photo = 3;
+inline void User::clear_photo() {
+  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& User::head_photo() const {
-  // @@protoc_insertion_point(field_get:User.head_photo)
-  return head_photo_.GetNoArena();
+inline const ::std::string& User::photo() const {
+  // @@protoc_insertion_point(field_get:User.photo)
+  return photo_.GetNoArena();
 }
-inline void User::set_head_photo(const ::std::string& value) {
+inline void User::set_photo(const ::std::string& value) {
   
-  head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:User.head_photo)
+  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:User.photo)
 }
 #if LANG_CXX11
-inline void User::set_head_photo(::std::string&& value) {
+inline void User::set_photo(::std::string&& value) {
   
-  head_photo_.SetNoArena(
+  photo_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:User.head_photo)
+  // @@protoc_insertion_point(field_set_rvalue:User.photo)
 }
 #endif
-inline void User::set_head_photo(const char* value) {
+inline void User::set_photo(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:User.head_photo)
+  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:User.photo)
 }
-inline void User::set_head_photo(const char* value, size_t size) {
+inline void User::set_photo(const char* value, size_t size) {
   
-  head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:User.head_photo)
+  // @@protoc_insertion_point(field_set_pointer:User.photo)
 }
-inline ::std::string* User::mutable_head_photo() {
+inline ::std::string* User::mutable_photo() {
   
-  // @@protoc_insertion_point(field_mutable:User.head_photo)
-  return head_photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:User.photo)
+  return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* User::release_head_photo() {
-  // @@protoc_insertion_point(field_release:User.head_photo)
+inline ::std::string* User::release_photo() {
+  // @@protoc_insertion_point(field_release:User.photo)
   
-  return head_photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void User::set_allocated_head_photo(::std::string* head_photo) {
-  if (head_photo != nullptr) {
+inline void User::set_allocated_photo(::std::string* photo) {
+  if (photo != nullptr) {
     
   } else {
     
   }
-  head_photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), head_photo);
-  // @@protoc_insertion_point(field_set_allocated:User.head_photo)
+  photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
+  // @@protoc_insertion_point(field_set_allocated:User.photo)
 }
 
 // string name = 4;
@@ -1024,57 +1024,57 @@ inline void User::set_allocated_otherid(::std::string* otherid) {
   // @@protoc_insertion_point(field_set_allocated:User.otherid)
 }
 
-// string photo = 13;
-inline void User::clear_photo() {
-  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string photos = 13;
+inline void User::clear_photos() {
+  photos_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& User::photo() const {
-  // @@protoc_insertion_point(field_get:User.photo)
-  return photo_.GetNoArena();
+inline const ::std::string& User::photos() const {
+  // @@protoc_insertion_point(field_get:User.photos)
+  return photos_.GetNoArena();
 }
-inline void User::set_photo(const ::std::string& value) {
+inline void User::set_photos(const ::std::string& value) {
   
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:User.photo)
+  photos_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:User.photos)
 }
 #if LANG_CXX11
-inline void User::set_photo(::std::string&& value) {
+inline void User::set_photos(::std::string&& value) {
   
-  photo_.SetNoArena(
+  photos_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:User.photo)
+  // @@protoc_insertion_point(field_set_rvalue:User.photos)
 }
 #endif
-inline void User::set_photo(const char* value) {
+inline void User::set_photos(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:User.photo)
+  photos_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:User.photos)
 }
-inline void User::set_photo(const char* value, size_t size) {
+inline void User::set_photos(const char* value, size_t size) {
   
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  photos_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:User.photo)
+  // @@protoc_insertion_point(field_set_pointer:User.photos)
 }
-inline ::std::string* User::mutable_photo() {
+inline ::std::string* User::mutable_photos() {
   
-  // @@protoc_insertion_point(field_mutable:User.photo)
-  return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:User.photos)
+  return photos_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* User::release_photo() {
-  // @@protoc_insertion_point(field_release:User.photo)
+inline ::std::string* User::release_photos() {
+  // @@protoc_insertion_point(field_release:User.photos)
   
-  return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return photos_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void User::set_allocated_photo(::std::string* photo) {
-  if (photo != nullptr) {
+inline void User::set_allocated_photos(::std::string* photos) {
+  if (photos != nullptr) {
     
   } else {
     
   }
-  photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
-  // @@protoc_insertion_point(field_set_allocated:User.photo)
+  photos_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photos);
+  // @@protoc_insertion_point(field_set_allocated:User.photos)
 }
 
 // string desc = 14;

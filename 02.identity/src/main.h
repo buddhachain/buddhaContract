@@ -7,11 +7,12 @@
 
 #include "identity.h"
 #include "visitor.h"
-// #include "user.h"
-// #include "identity_user.h"
+#include "user.h"
+#include "identityuser.h"
 #include "master.h"
-// #include "temple.h"
-// #include "thedead.h"
+#include "temple.h"
+#include "templemaster.h"
+#include "thedead.h"
 
 #include <string>
 using namespace std;
@@ -25,12 +26,12 @@ public:
 private:
     xchain::cdt::Table<BIdentity>      _identity_table;
     xchain::cdt::Table<BVisitor>       _visitor_table;
-    // xchain::cdt::Table<BUser>          _user_table;
-    // xchain::cdt::Table<BIdentityUser>  _identity_user_table;
+    xchain::cdt::Table<BUser>          _user_table;
+    xchain::cdt::Table<BIdentityUser>  _identityuser_table;
     xchain::cdt::Table<BMaster>        _master_table;
-    // xchain::cdt::Table<BTemple>        _temple_table;
-    // xchain::cdt::Table<BTempleMaster>  _templemaster_table;
-    // xchain::cdt::Table<BDead>          _dead_table;
+    xchain::cdt::Table<BTemple>        _temple_table;
+    xchain::cdt::Table<BTempleMaster>  _templemaster_table;
+    xchain::cdt::Table<BTheDead>       _thedead_table;
 
     xchain::Context* ctx;
 
@@ -44,25 +45,29 @@ public:
         return _visitor_table;
     }
 
-    // decltype(_user_table)& get_user_table() {
-    //     return _user_table;
-    // }
+    decltype(_user_table)& get_user_table() {
+        return _user_table;
+    }
 
-    // decltype(_identity_user_table)& get_identity_user_table() {
-    //     return _identity_user_table;
-    // }
+    decltype(_identityuser_table)& get_identityuser_table() {
+        return _identityuser_table;
+    }
 
     decltype(_master_table)& get_master_table() {
         return _master_table;
     }
 
-    // decltype(_temple_table)& get_temple_table() {
-    //     return _temple_table;
-    // }
+    decltype(_temple_table)& get_temple_table() {
+        return _temple_table;
+    }
 
-    // decltype(_templemaster_table)& get_templemaster_table() {
-    //     return _templemaster_table;
-    // }
+    decltype(_templemaster_table)& get_templemaster_table() {
+        return _templemaster_table;
+    }
+
+    decltype(_thedead_table)& get_thedead_table() {
+        return _thedead_table;
+    }
 
 private:
     //辅助函数
@@ -75,25 +80,21 @@ private:
     bool _is_deployer(const string&);
     bool _is_founder(const string&);
     bool _is_visitor(const string&);
-    // bool _is_user(const string&);
-    // bool _is_identity_user(const string&);
+    bool _is_user(const string&);
+    bool _is_identityuser(const string&);
     bool _is_master(const string&);
-    // bool _is_temple(const string&);
-    // bool _is_thedead(const string&);
+    bool _is_temple(const string&);
+    bool _is_thedead(const string&);
 
     bool _is_identity_exist(BIdentity&, const string&);
     bool _is_visitor_exist(BVisitor&, const string&);
-    // bool _is_user_exist(BUser&, const string&);
-    // bool _is_identity_user_exist(BUser&, const string&);
+    bool _is_user_exist(BUser&, const string&);
+    bool _is_identityuser_exist(BIdentityUser&, const string&);
     bool _is_master_exist(BMaster&, const string&);
-    // bool _is_temple_exist(BTemple&, const string&);
-    // bool _is_temple_exist_by_unit(BTemple&, const string&);
-    // bool _is_temple_exist_by_creditcode(BTemple&, const string&);
-    // bool _is_temple_exist_by_address(BTemple&, const string&);
-    // bool _is_temple_exist_by_proof(BTemple&, const string&);
-    // bool _is_templemaster_exist(BTempleMaster&, const string&, const string&);
-    // bool _is_in_temple(BTempleMaster&, const string&, const string&);
-    // bool _is_the_dead_exist(BTheDead&, const string&);
+    bool _is_temple_exist(BTemple&, const string&);
+    bool _is_templemaster_exist(BTempleMaster&, const string&, const string&);
+    bool _is_in_temple(BTempleMaster&, const string&, const string&);
+    bool _is_thedead_exist(BTheDead&, const string&);
 
     bool _scan_identity(xchain::json&,
                         const string& ="");
@@ -103,43 +104,43 @@ private:
                        const string& ="",
                        const string& ="");
 
-    // bool _scan_user(xchain::json&, const string& ="");
-    // bool _scan_identity_user(xchain::json&, const string& ="");
+    bool _scan_user(xchain::json&, const string& ="");
+    bool _scan_identityuser(xchain::json&, const string& ="");
     bool _scan_master(xchain::json&,
                       const string& ="",
                       const string& ="",
                       const string& ="",
                       const string& ="");
-    // bool _scan_temple(xchain::json&, const string& ="");
-    // bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
-    // bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
-    // bool _scan_the_dead(xchain::json&, const string& ="");
+    bool _scan_temple(xchain::json&, const string& ="");
+    bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
+    bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
+    bool _scan_thedead(xchain::json&, const string& ="");
 
     bool _add_identity(const string&,const string&,const string&);
     bool _add_visitor(const string&,const string&,const string&,const string&);
-    // bool _add_user(const string&,const string&,const string&,const string&);
-    // bool _add_identity_user(const string&,const string&,const string&,const string&);
+    bool _add_user(const string&,const string&,const string&,const string&);
+    bool _add_identityuser(const string&,const string&,const string&,const string&);
     bool _add_master(const string&,const string&,const string&,const string&);
-    // bool _add_temple(const string&,const string&,const string&,const string&);
-    // bool _add_the_dead(const string&,const string&,const string&,const string&);
+    bool _add_temple(const string&,const string&,const string&,const string&);
+    bool _add_thedead(const string&,const string&,const string&,const string&);
 
     bool _delete_identity_record(const string&);
     bool _delete_visitor_record(const string&);
-    // bool _delete_user_record(const string&);
-    // bool _delete_identity_user_record(const string&);
+    bool _delete_user_record(const string&);
+    bool _delete_identityuser_record(const string&);
     bool _delete_master_record(const string&);
-    // bool _delete_temple_record(const string&);
-    // bool _delete_templemaster_record(const string&, const string&);
-    // bool _delete_the_dead_record(const string&);
+    bool _delete_temple_record(const string&);
+    bool _delete_templemaster_record(const string&, const string&);
+    bool _delete_thedead_record(const string&);
 
     bool _clear_identity();
     bool _clear_visitor();
-    // bool _clear_user();
-    // bool _clear_identity_user();
+    bool _clear_user();
+    bool _clear_identityuser();
     bool _clear_master();
-    // bool _clear_temple();
-    // bool _clear_templemaster();
-    // bool _clear_the_dead();
+    bool _clear_temple();
+    bool _clear_templemaster();
+    bool _clear_thedead();
 
     bool _transfer(const string&,const string&);
 
@@ -162,49 +163,49 @@ public:
     bool is_visitor();              //任意身份
     void list_visitor();            //基金会成员
 
-    // bool is_user();                 //任意身份
-    // void list_user();               //基金会成员
+    bool is_user();                 //任意身份
+    void list_user();               //基金会成员
 
-    // bool is_identity_user();        //任意身份
-    // void list_identity_user();      //基金会成员
+    bool is_identityuser();        //任意身份
+    void list_identityuser();      //基金会成员
 
     bool is_master();               //任意身份
     void list_master();             //基金会成员
 
-    // bool is_temple();               //任意身份
-    // void list_temple();             //基金会成员
+    bool is_temple();               //任意身份
+    void list_temple();             //基金会成员
 
-    // bool is_the_dead();           //任意身份
-    // void list_the_dead();           //基金会成员
+    bool is_thedead();           //任意身份
+    void list_thedead();           //基金会成员
 
     //添加游客
     void add_visitor();             //任意身份
     
-    // //添加用户
-    // void add_user();                //任意身份
+    //添加用户
+    void add_user();                //任意身份
 
-    // //申请成为认证用户
-    // void apply_identify_user();     //用户，游客
-    // void approve_identify_user();   //基金会成员
-    // void recusal_identify_user();   //基金会成员
+    //申请成为认证用户
+    void apply_identify_user();     //用户，游客
+    void approve_identify_user();   //基金会成员
+    void recusal_identify_user();   //基金会成员
 
     //申请成为法师
     void apply_master();            //用户
     void approve_master();          //基金会成员
     void recusal_master();          //基金会成员
 
-    // //申请成为寺院
-    // void apply_temple();            //用户,法师
-    // void approve_temple();          //基金会成员
-    // void recusal_temple();          //基金会成员
+    //申请成为寺院
+    void apply_temple();            //用户,法师
+    void approve_temple();          //基金会成员
+    void recusal_temple();          //基金会成员
 
-    // //法师申请加入寺院
-    // void apply_join_temple();       //法师
-    // void approve_join_temple();     //基金会成员
-    // void recusal_join_temple();     //基金会成员
-    // bool is_in_temple();            //法师
-    // void list_my_master();          //寺院
-    // void list_temple_master();      //基金会成员
+    //法师申请加入寺院
+    void apply_join_temple();       //法师
+    void approve_join_temple();     //基金会成员
+    void recusal_join_temple();     //基金会成员
+    bool is_in_temple();            //法师
+    void list_my_master();          //寺院
+    void list_temple_master();      //基金会成员
 
 };
 #endif // _MAIN_H_

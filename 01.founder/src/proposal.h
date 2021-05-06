@@ -10,9 +10,9 @@
 using namespace std;
 
 class BProposal: public Proposal {
-    DEFINE_ROWKEY(key);          //主键
+    DEFINE_ROWKEY(key);
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, key) //只主键能find，也支持scan
+        DEFINE_INDEX_ADD(0, key)
     DEFINE_INDEX_END();
 
     xchain::json to_json();

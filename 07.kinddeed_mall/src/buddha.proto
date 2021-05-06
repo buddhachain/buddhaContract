@@ -1,8 +1,6 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-package buddha;
-
 //善举类型表
 message KinddeedType {
     int64 id            = 1;    //善举类型序号，0,1,2,3..，唯一

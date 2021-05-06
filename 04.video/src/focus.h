@@ -12,8 +12,8 @@ using namespace std;
 class focus: public video::Focus {
     DEFINE_ROWKEY(room_id, audience_id);   //联合主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, room_id)     //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(1, audience_id) //非主键不能find，支持scan
+        DEFINE_INDEX_ADD(0, room_id)  
+        DEFINE_INDEX_ADD(1, audience_id)
     DEFINE_INDEX_END();
 
     xchain::json to_json();

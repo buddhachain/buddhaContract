@@ -10,10 +10,10 @@
 using namespace std;
 
 class BKinddeedProof: public KinddeedProof {
-    DEFINE_ROWKEY(orderid);             //主键
+    DEFINE_ROWKEY(orderid);   
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, orderid)    //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, owner)      //非主键不能find，支持scan
+        DEFINE_INDEX_ADD(0, orderid)   
+        DEFINE_INDEX_ADD(1, owner)   
     DEFINE_INDEX_END();
 
     xchain::json to_json();

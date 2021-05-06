@@ -1,0 +1,9 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+//关注表
+message Focus {
+    string room_id      = 1; //房间id, 前二者联合唯一
+    string audience_id  = 2; //观众id
+    string timestamp    = 3; //时间戳
+}

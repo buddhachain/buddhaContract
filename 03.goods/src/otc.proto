@@ -1,7 +1,6 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-package otc;
 
 //抵押表
 message Guaranty {

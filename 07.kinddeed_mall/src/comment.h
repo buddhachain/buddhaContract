@@ -10,9 +10,9 @@
 using namespace std;
 
 class BCommentLabel: public CommentLabel {
-    DEFINE_ROWKEY(id);          //主键
+    DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(1)
-        DEFINE_INDEX_ADD(0, id) //只主键能find，也支持scan
+        DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
     xchain::json to_json();
@@ -21,8 +21,8 @@ class BCommentLabel: public CommentLabel {
 class BBeforeComment: public BeforeComment {
     DEFINE_ROWKEY(kdid,owner);      //联合主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, kdid)   //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(1, owner)  //非主键不能find，支持scan
+        DEFINE_INDEX_ADD(0, kdid)
+        DEFINE_INDEX_ADD(1, owner) 
     DEFINE_INDEX_END();
 
     xchain::json to_json();
@@ -31,8 +31,8 @@ class BBeforeComment: public BeforeComment {
 class BAfterComment: public AfterComment {
     DEFINE_ROWKEY(orderid, owner);      //联合主键
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, orderid)    //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(1, owner)      //非主键不能find，支持scan
+        DEFINE_INDEX_ADD(0, orderid) 
+        DEFINE_INDEX_ADD(1, owner)   
     DEFINE_INDEX_END();
 
     xchain::json to_json();

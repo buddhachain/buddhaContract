@@ -18,10 +18,10 @@ const int64_t THEDEAD         = 6;
 
 
 class BIdentity: public Identity {
-    DEFINE_ROWKEY(id);              //主键
+    DEFINE_ROWKEY(id);    
     DEFINE_INDEX_BEGIN(2)
-        DEFINE_INDEX_ADD(0, id)     //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, type)   //非主键不能find，支持scan
+        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(1, type)
     DEFINE_INDEX_END();
 
     xchain::json to_json();

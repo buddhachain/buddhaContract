@@ -1,8 +1,6 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-package otc;
-
 //赎回表
 message Redeem {
     string id           = 1; //赎回id，唯一

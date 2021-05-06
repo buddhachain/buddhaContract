@@ -16,8 +16,13 @@
   },
   {
     "directory": "/root/buddhaContract/02.identity",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/fc/fcfbce83eba97f2c.o /root/buddhaContract/02.identity/src/identity_user.pb.cc",
-    "file": "/root/buddhaContract/02.identity/src/identity_user.pb.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/20/20ec27dd133b071b.o /root/buddhaContract/02.identity/src/identityuser.cc",
+    "file": "/root/buddhaContract/02.identity/src/identityuser.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/99/994b0c2f261f3789.o /root/buddhaContract/02.identity/src/identityuser.pb.cc",
+    "file": "/root/buddhaContract/02.identity/src/identityuser.pb.cc"
   },
   {
     "directory": "/root/buddhaContract/02.identity",
@@ -51,8 +56,18 @@
   },
   {
     "directory": "/root/buddhaContract/02.identity",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a6/a6e779cc6ca7a47e.o /root/buddhaContract/02.identity/src/the_dead.pb.cc",
-    "file": "/root/buddhaContract/02.identity/src/the_dead.pb.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/e3/e368b5f76bd005d7.o /root/buddhaContract/02.identity/src/templemaster.pb.cc",
+    "file": "/root/buddhaContract/02.identity/src/templemaster.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/a3/a38edcb2a8df9a0b.o /root/buddhaContract/02.identity/src/thedead.cc",
+    "file": "/root/buddhaContract/02.identity/src/thedead.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/02.identity",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/f6/f6075284f2c45b39.o /root/buddhaContract/02.identity/src/thedead.pb.cc",
+    "file": "/root/buddhaContract/02.identity/src/thedead.pb.cc"
   },
   {
     "directory": "/root/buddhaContract/02.identity",

@@ -40,7 +40,7 @@ struct TableStruct_temple_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[2]
+  static const ::google::protobuf::internal::ParseTable schema[1]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -49,13 +49,9 @@ struct TableStruct_temple_2eproto {
 class Temple;
 class TempleDefaultTypeInternal;
 extern TempleDefaultTypeInternal _Temple_default_instance_;
-class TempleMaster;
-class TempleMasterDefaultTypeInternal;
-extern TempleMasterDefaultTypeInternal _TempleMaster_default_instance_;
 namespace google {
 namespace protobuf {
 template<> ::Temple* Arena::CreateMaybeMessage<::Temple>(Arena*);
-template<> ::TempleMaster* Arena::CreateMaybeMessage<::TempleMaster>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 
@@ -283,144 +279,6 @@ class Temple :
   ::google::protobuf::internal::ArenaStringPtr address_;
   ::google::protobuf::internal::ArenaStringPtr sect_;
   ::google::protobuf::internal::ArenaStringPtr proof_;
-  bool approved_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_temple_2eproto;
-};
-// -------------------------------------------------------------------
-
-class TempleMaster :
-    public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:TempleMaster) */ {
- public:
-  TempleMaster();
-  virtual ~TempleMaster();
-
-  TempleMaster(const TempleMaster& from);
-
-  inline TempleMaster& operator=(const TempleMaster& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  TempleMaster(TempleMaster&& from) noexcept
-    : TempleMaster() {
-    *this = ::std::move(from);
-  }
-
-  inline TempleMaster& operator=(TempleMaster&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const TempleMaster& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const TempleMaster* internal_default_instance() {
-    return reinterpret_cast<const TempleMaster*>(
-               &_TempleMaster_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
-
-  void Swap(TempleMaster* other);
-  friend void swap(TempleMaster& a, TempleMaster& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline TempleMaster* New() const final {
-    return CreateMaybeMessage<TempleMaster>(nullptr);
-  }
-
-  TempleMaster* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<TempleMaster>(arena);
-  }
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
-    final;
-  void CopyFrom(const TempleMaster& from);
-  void MergeFrom(const TempleMaster& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
-  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
-  #else
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  void DiscardUnknownFields();
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(TempleMaster* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::std::string GetTypeName() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // string templeid = 1;
-  void clear_templeid();
-  static const int kTempleidFieldNumber = 1;
-  const ::std::string& templeid() const;
-  void set_templeid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_templeid(::std::string&& value);
-  #endif
-  void set_templeid(const char* value);
-  void set_templeid(const char* value, size_t size);
-  ::std::string* mutable_templeid();
-  ::std::string* release_templeid();
-  void set_allocated_templeid(::std::string* templeid);
-
-  // string masterid = 2;
-  void clear_masterid();
-  static const int kMasteridFieldNumber = 2;
-  const ::std::string& masterid() const;
-  void set_masterid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_masterid(::std::string&& value);
-  #endif
-  void set_masterid(const char* value);
-  void set_masterid(const char* value, size_t size);
-  ::std::string* mutable_masterid();
-  ::std::string* release_masterid();
-  void set_allocated_masterid(::std::string* masterid);
-
-  // bool approved = 3;
-  void clear_approved();
-  static const int kApprovedFieldNumber = 3;
-  bool approved() const;
-  void set_approved(bool value);
-
-  // @@protoc_insertion_point(class_scope:TempleMaster)
- private:
-  class HasBitSetters;
-
-  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr templeid_;
-  ::google::protobuf::internal::ArenaStringPtr masterid_;
   bool approved_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_temple_2eproto;
@@ -874,135 +732,9 @@ inline void Temple::set_approved(bool value) {
   // @@protoc_insertion_point(field_set:Temple.approved)
 }
 
-// -------------------------------------------------------------------
-
-// TempleMaster
-
-// string templeid = 1;
-inline void TempleMaster::clear_templeid() {
-  templeid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& TempleMaster::templeid() const {
-  // @@protoc_insertion_point(field_get:TempleMaster.templeid)
-  return templeid_.GetNoArena();
-}
-inline void TempleMaster::set_templeid(const ::std::string& value) {
-  
-  templeid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:TempleMaster.templeid)
-}
-#if LANG_CXX11
-inline void TempleMaster::set_templeid(::std::string&& value) {
-  
-  templeid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:TempleMaster.templeid)
-}
-#endif
-inline void TempleMaster::set_templeid(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  templeid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:TempleMaster.templeid)
-}
-inline void TempleMaster::set_templeid(const char* value, size_t size) {
-  
-  templeid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:TempleMaster.templeid)
-}
-inline ::std::string* TempleMaster::mutable_templeid() {
-  
-  // @@protoc_insertion_point(field_mutable:TempleMaster.templeid)
-  return templeid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* TempleMaster::release_templeid() {
-  // @@protoc_insertion_point(field_release:TempleMaster.templeid)
-  
-  return templeid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void TempleMaster::set_allocated_templeid(::std::string* templeid) {
-  if (templeid != nullptr) {
-    
-  } else {
-    
-  }
-  templeid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), templeid);
-  // @@protoc_insertion_point(field_set_allocated:TempleMaster.templeid)
-}
-
-// string masterid = 2;
-inline void TempleMaster::clear_masterid() {
-  masterid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& TempleMaster::masterid() const {
-  // @@protoc_insertion_point(field_get:TempleMaster.masterid)
-  return masterid_.GetNoArena();
-}
-inline void TempleMaster::set_masterid(const ::std::string& value) {
-  
-  masterid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:TempleMaster.masterid)
-}
-#if LANG_CXX11
-inline void TempleMaster::set_masterid(::std::string&& value) {
-  
-  masterid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:TempleMaster.masterid)
-}
-#endif
-inline void TempleMaster::set_masterid(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  masterid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:TempleMaster.masterid)
-}
-inline void TempleMaster::set_masterid(const char* value, size_t size) {
-  
-  masterid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:TempleMaster.masterid)
-}
-inline ::std::string* TempleMaster::mutable_masterid() {
-  
-  // @@protoc_insertion_point(field_mutable:TempleMaster.masterid)
-  return masterid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* TempleMaster::release_masterid() {
-  // @@protoc_insertion_point(field_release:TempleMaster.masterid)
-  
-  return masterid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void TempleMaster::set_allocated_masterid(::std::string* masterid) {
-  if (masterid != nullptr) {
-    
-  } else {
-    
-  }
-  masterid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), masterid);
-  // @@protoc_insertion_point(field_set_allocated:TempleMaster.masterid)
-}
-
-// bool approved = 3;
-inline void TempleMaster::clear_approved() {
-  approved_ = false;
-}
-inline bool TempleMaster::approved() const {
-  // @@protoc_insertion_point(field_get:TempleMaster.approved)
-  return approved_;
-}
-inline void TempleMaster::set_approved(bool value) {
-  
-  approved_ = value;
-  // @@protoc_insertion_point(field_set:TempleMaster.approved)
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 

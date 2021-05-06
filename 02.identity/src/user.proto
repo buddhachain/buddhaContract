@@ -4,7 +4,7 @@ option optimize_for = LITE_RUNTIME;
 message User {
     string id           = 1; //日志id，唯一
     string nickname     = 2; //昵称
-    string head_photo   = 3; //头像哈希
+    string photo   = 3; //头像哈希
     string name         = 4; //姓名    
     int64  sex          = 5; //性别 1男，2女
     string phone        = 6; //手机号
@@ -14,7 +14,7 @@ message User {
     string born_timestamp   = 10; //出生年月日
     string idcard       = 11; //身份证
     string otherid      = 12; //其他证件
-    string photo        = 13; //照片哈希 [111,222,333]
+    string photos       = 13; //照片哈希 [111,222,333]
     string desc         = 14; //简介哈希
     string degree       = 15; //学历
     string job          = 16; //职业

@@ -4,7 +4,7 @@
 #include "xchain/table/types.h"
 #include "xchain/json/json.h"
 #include "xchain/table/table.tpl.h"
-#include "buddha.pb.h"
+#include "templemaster.pb.h"
 
 #include <string>
 using namespace std;

@@ -162,19 +162,19 @@ class Master :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // string head_photo = 2;
-  void clear_head_photo();
-  static const int kHeadPhotoFieldNumber = 2;
-  const ::std::string& head_photo() const;
-  void set_head_photo(const ::std::string& value);
+  // string photo = 2;
+  void clear_photo();
+  static const int kPhotoFieldNumber = 2;
+  const ::std::string& photo() const;
+  void set_photo(const ::std::string& value);
   #if LANG_CXX11
-  void set_head_photo(::std::string&& value);
+  void set_photo(::std::string&& value);
   #endif
-  void set_head_photo(const char* value);
-  void set_head_photo(const char* value, size_t size);
-  ::std::string* mutable_head_photo();
-  ::std::string* release_head_photo();
-  void set_allocated_head_photo(::std::string* head_photo);
+  void set_photo(const char* value);
+  void set_photo(const char* value, size_t size);
+  ::std::string* mutable_photo();
+  ::std::string* release_photo();
+  void set_allocated_photo(::std::string* photo);
 
   // string buddhist_name = 3;
   void clear_buddhist_name();
@@ -244,7 +244,7 @@ class Master :
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
-  ::google::protobuf::internal::ArenaStringPtr head_photo_;
+  ::google::protobuf::internal::ArenaStringPtr photo_;
   ::google::protobuf::internal::ArenaStringPtr buddhist_name_;
   ::google::protobuf::internal::ArenaStringPtr sect_;
   ::google::protobuf::internal::ArenaStringPtr creditcode_;
@@ -317,57 +317,57 @@ inline void Master::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:Master.id)
 }
 
-// string head_photo = 2;
-inline void Master::clear_head_photo() {
-  head_photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string photo = 2;
+inline void Master::clear_photo() {
+  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Master::head_photo() const {
-  // @@protoc_insertion_point(field_get:Master.head_photo)
-  return head_photo_.GetNoArena();
+inline const ::std::string& Master::photo() const {
+  // @@protoc_insertion_point(field_get:Master.photo)
+  return photo_.GetNoArena();
 }
-inline void Master::set_head_photo(const ::std::string& value) {
+inline void Master::set_photo(const ::std::string& value) {
   
-  head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Master.head_photo)
+  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Master.photo)
 }
 #if LANG_CXX11
-inline void Master::set_head_photo(::std::string&& value) {
+inline void Master::set_photo(::std::string&& value) {
   
-  head_photo_.SetNoArena(
+  photo_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Master.head_photo)
+  // @@protoc_insertion_point(field_set_rvalue:Master.photo)
 }
 #endif
-inline void Master::set_head_photo(const char* value) {
+inline void Master::set_photo(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Master.head_photo)
+  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Master.photo)
 }
-inline void Master::set_head_photo(const char* value, size_t size) {
+inline void Master::set_photo(const char* value, size_t size) {
   
-  head_photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Master.head_photo)
+  // @@protoc_insertion_point(field_set_pointer:Master.photo)
 }
-inline ::std::string* Master::mutable_head_photo() {
+inline ::std::string* Master::mutable_photo() {
   
-  // @@protoc_insertion_point(field_mutable:Master.head_photo)
-  return head_photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:Master.photo)
+  return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Master::release_head_photo() {
-  // @@protoc_insertion_point(field_release:Master.head_photo)
+inline ::std::string* Master::release_photo() {
+  // @@protoc_insertion_point(field_release:Master.photo)
   
-  return head_photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Master::set_allocated_head_photo(::std::string* head_photo) {
-  if (head_photo != nullptr) {
+inline void Master::set_allocated_photo(::std::string* photo) {
+  if (photo != nullptr) {
     
   } else {
     
   }
-  head_photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), head_photo);
-  // @@protoc_insertion_point(field_set_allocated:Master.head_photo)
+  photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
+  // @@protoc_insertion_point(field_set_allocated:Master.photo)
 }
 
 // string buddhist_name = 3;

@@ -43,7 +43,7 @@ class User::HasBitSetters {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int User::kIdFieldNumber;
 const int User::kNicknameFieldNumber;
-const int User::kHeadPhotoFieldNumber;
+const int User::kPhotoFieldNumber;
 const int User::kNameFieldNumber;
 const int User::kSexFieldNumber;
 const int User::kPhoneFieldNumber;
@@ -53,7 +53,7 @@ const int User::kHomeAddressFieldNumber;
 const int User::kBornTimestampFieldNumber;
 const int User::kIdcardFieldNumber;
 const int User::kOtheridFieldNumber;
-const int User::kPhotoFieldNumber;
+const int User::kPhotosFieldNumber;
 const int User::kDescFieldNumber;
 const int User::kDegreeFieldNumber;
 const int User::kJobFieldNumber;
@@ -81,9 +81,9 @@ User::User(const User& from)
   if (from.nickname().size() > 0) {
     nickname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.nickname_);
   }
-  head_photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.head_photo().size() > 0) {
-    head_photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.head_photo_);
+  photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.photo().size() > 0) {
+    photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photo_);
   }
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.name().size() > 0) {
@@ -113,9 +113,9 @@ User::User(const User& from)
   if (from.otherid().size() > 0) {
     otherid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.otherid_);
   }
-  photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.photo().size() > 0) {
-    photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photo_);
+  photos_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.photos().size() > 0) {
+    photos_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photos_);
   }
   desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.desc().size() > 0) {
@@ -160,7 +160,7 @@ void User::SharedCtor() {
       &scc_info_User_user_2eproto.base);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  head_photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phone_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -168,7 +168,7 @@ void User::SharedCtor() {
   born_timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   idcard_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   otherid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  photos_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   degree_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   job_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -190,7 +190,7 @@ User::~User() {
 void User::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  head_photo_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  photo_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phone_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   email_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -198,7 +198,7 @@ void User::SharedDtor() {
   born_timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   idcard_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   otherid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  photo_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  photos_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   degree_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   job_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -226,7 +226,7 @@ void User::Clear() {
 
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  head_photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phone_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -234,7 +234,7 @@ void User::Clear() {
   born_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   idcard_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   otherid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  photos_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   degree_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   job_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -294,13 +294,13 @@ const char* User::_InternalParse(const char* begin, const char* end, void* objec
         ptr += size;
         break;
       }
-      // string head_photo = 3;
+      // string photo = 3;
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_head_photo();
+        object = msg->mutable_photo();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -436,13 +436,13 @@ const char* User::_InternalParse(const char* begin, const char* end, void* objec
         ptr += size;
         break;
       }
-      // string photo = 13;
+      // string photos = 13;
       case 13: {
         if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_photo();
+        object = msg->mutable_photos();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -650,15 +650,15 @@ bool User::MergePartialFromCodedStream(
         break;
       }
 
-      // string head_photo = 3;
+      // string photo = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_head_photo()));
+                input, this->mutable_photo()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->head_photo().data(), static_cast<int>(this->head_photo().length()),
+            this->photo().data(), static_cast<int>(this->photo().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.head_photo"));
+            "User.photo"));
         } else {
           goto handle_unusual;
         }
@@ -796,15 +796,15 @@ bool User::MergePartialFromCodedStream(
         break;
       }
 
-      // string photo = 13;
+      // string photos = 13;
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (106 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_photo()));
+                input, this->mutable_photos()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->photo().data(), static_cast<int>(this->photo().length()),
+            this->photos().data(), static_cast<int>(this->photos().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "User.photo"));
+            "User.photos"));
         } else {
           goto handle_unusual;
         }
@@ -978,14 +978,14 @@ void User::SerializeWithCachedSizes(
       2, this->nickname(), output);
   }
 
-  // string head_photo = 3;
-  if (this->head_photo().size() > 0) {
+  // string photo = 3;
+  if (this->photo().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->head_photo().data(), static_cast<int>(this->head_photo().length()),
+      this->photo().data(), static_cast<int>(this->photo().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.head_photo");
+      "User.photo");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->head_photo(), output);
+      3, this->photo(), output);
   }
 
   // string name = 4;
@@ -1068,14 +1068,14 @@ void User::SerializeWithCachedSizes(
       12, this->otherid(), output);
   }
 
-  // string photo = 13;
-  if (this->photo().size() > 0) {
+  // string photos = 13;
+  if (this->photos().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->photo().data(), static_cast<int>(this->photo().length()),
+      this->photos().data(), static_cast<int>(this->photos().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "User.photo");
+      "User.photos");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      13, this->photo(), output);
+      13, this->photos(), output);
   }
 
   // string desc = 14;
@@ -1187,11 +1187,11 @@ size_t User::ByteSizeLong() const {
         this->nickname());
   }
 
-  // string head_photo = 3;
-  if (this->head_photo().size() > 0) {
+  // string photo = 3;
+  if (this->photo().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->head_photo());
+        this->photo());
   }
 
   // string name = 4;
@@ -1243,11 +1243,11 @@ size_t User::ByteSizeLong() const {
         this->otherid());
   }
 
-  // string photo = 13;
-  if (this->photo().size() > 0) {
+  // string photos = 13;
+  if (this->photos().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->photo());
+        this->photos());
   }
 
   // string desc = 14;
@@ -1345,9 +1345,9 @@ void User::MergeFrom(const User& from) {
 
     nickname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.nickname_);
   }
-  if (from.head_photo().size() > 0) {
+  if (from.photo().size() > 0) {
 
-    head_photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.head_photo_);
+    photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photo_);
   }
   if (from.name().size() > 0) {
 
@@ -1377,9 +1377,9 @@ void User::MergeFrom(const User& from) {
 
     otherid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.otherid_);
   }
-  if (from.photo().size() > 0) {
+  if (from.photos().size() > 0) {
 
-    photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photo_);
+    photos_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photos_);
   }
   if (from.desc().size() > 0) {
 
@@ -1443,7 +1443,7 @@ void User::InternalSwap(User* other) {
     GetArenaNoVirtual());
   nickname_.Swap(&other->nickname_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  head_photo_.Swap(&other->head_photo_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  photo_.Swap(&other->photo_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
@@ -1459,7 +1459,7 @@ void User::InternalSwap(User* other) {
     GetArenaNoVirtual());
   otherid_.Swap(&other->otherid_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  photo_.Swap(&other->photo_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  photos_.Swap(&other->photos_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   desc_.Swap(&other->desc_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());

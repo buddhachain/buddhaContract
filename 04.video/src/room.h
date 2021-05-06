@@ -10,13 +10,13 @@
 using namespace std;
 
 class room: public video::Room {
-    DEFINE_ROWKEY(id);                  //主键
+    DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(5)
-        DEFINE_INDEX_ADD(0, id)         //只主键能find，也支持scan
-        DEFINE_INDEX_ADD(1, author_id)  //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(2, title)      //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(3, desc)       //非主键不能find，支持scan
-        DEFINE_INDEX_ADD(4, type)       //非主键不能find，支持scan
+        DEFINE_INDEX_ADD(0, id)
+        DEFINE_INDEX_ADD(1, author_id) 
+        DEFINE_INDEX_ADD(2, title)   
+        DEFINE_INDEX_ADD(3, desc)    
+        DEFINE_INDEX_ADD(4, type)    
     DEFINE_INDEX_END();
 
     xchain::json to_json();

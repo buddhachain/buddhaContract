@@ -1,0 +1,23 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+//供养表
+message Fend {
+    string id           = 1; //供养id，唯一
+    string author_id    = 2; //主播id
+    string room_id      = 3; //房间id
+    string audience_id  = 4; //用户id
+    int64  value        = 5; //供养值
+}
+
+//供养日志表
+message FendLog {
+    string id           = 1; //日志id，唯一
+    string fend_id      = 2; //供养id
+    string room_id      = 3; //房间id
+    string audience_id  = 4; //用户id
+    string goods_id     = 5; //产品id
+    int64  goods_size   = 6; //产品数量
+    int64  value        = 7; //供养值
+    string timestamp    = 8; //时间戳
+}
