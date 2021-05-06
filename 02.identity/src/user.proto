@@ -8,7 +8,7 @@ message User {
     string name         = 4; //姓名    
     int64  sex          = 5; //性别 1男，2女
     string phone        = 6; //手机号
-    int64  wechat       = 7; //微信号
+    string wechat       = 7; //微信号
     string email        = 8; //邮箱
     string home_address = 9; //家庭地址
     string born_timestamp   = 10; //出生年月日

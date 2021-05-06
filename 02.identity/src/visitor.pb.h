@@ -176,11 +176,19 @@ class Visitor :
   ::std::string* release_nickname();
   void set_allocated_nickname(::std::string* nickname);
 
-  // int64 wechat = 3;
+  // string wechat = 3;
   void clear_wechat();
   static const int kWechatFieldNumber = 3;
-  ::google::protobuf::int64 wechat() const;
-  void set_wechat(::google::protobuf::int64 value);
+  const ::std::string& wechat() const;
+  void set_wechat(const ::std::string& value);
+  #if LANG_CXX11
+  void set_wechat(::std::string&& value);
+  #endif
+  void set_wechat(const char* value);
+  void set_wechat(const char* value, size_t size);
+  ::std::string* mutable_wechat();
+  ::std::string* release_wechat();
+  void set_allocated_wechat(::std::string* wechat);
 
   // @@protoc_insertion_point(class_scope:Visitor)
  private:
@@ -189,7 +197,7 @@ class Visitor :
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr nickname_;
-  ::google::protobuf::int64 wechat_;
+  ::google::protobuf::internal::ArenaStringPtr wechat_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_visitor_2eproto;
 };
@@ -310,18 +318,57 @@ inline void Visitor::set_allocated_nickname(::std::string* nickname) {
   // @@protoc_insertion_point(field_set_allocated:Visitor.nickname)
 }
 
-// int64 wechat = 3;
+// string wechat = 3;
 inline void Visitor::clear_wechat() {
-  wechat_ = PROTOBUF_LONGLONG(0);
+  wechat_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::int64 Visitor::wechat() const {
+inline const ::std::string& Visitor::wechat() const {
   // @@protoc_insertion_point(field_get:Visitor.wechat)
-  return wechat_;
+  return wechat_.GetNoArena();
 }
-inline void Visitor::set_wechat(::google::protobuf::int64 value) {
+inline void Visitor::set_wechat(const ::std::string& value) {
   
-  wechat_ = value;
+  wechat_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Visitor.wechat)
+}
+#if LANG_CXX11
+inline void Visitor::set_wechat(::std::string&& value) {
+  
+  wechat_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Visitor.wechat)
+}
+#endif
+inline void Visitor::set_wechat(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  wechat_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Visitor.wechat)
+}
+inline void Visitor::set_wechat(const char* value, size_t size) {
+  
+  wechat_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Visitor.wechat)
+}
+inline ::std::string* Visitor::mutable_wechat() {
+  
+  // @@protoc_insertion_point(field_mutable:Visitor.wechat)
+  return wechat_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Visitor::release_wechat() {
+  // @@protoc_insertion_point(field_release:Visitor.wechat)
+  
+  return wechat_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Visitor::set_allocated_wechat(::std::string* wechat) {
+  if (wechat != nullptr) {
+    
+  } else {
+    
+  }
+  wechat_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), wechat);
+  // @@protoc_insertion_point(field_set_allocated:Visitor.wechat)
 }
 
 #ifdef __GNUC__

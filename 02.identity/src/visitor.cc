@@ -4,7 +4,7 @@
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
 #include "identity.h"
-#include "visitor.pb.h"
+#include "main.h"
 #include "visitor.h"
 
 #include <iostream>
@@ -46,7 +46,7 @@ bool Main::_scan_visitor(xchain::json& ja,
                          const string& id,
                          const string& nickname,
                          const string& wechat) {
-    auto it = get_visitor_table().scan({{"id",cond}});
+    auto it = get_visitor_table().scan({{"id",id}});
     while(it->next() ) {
         BVisitor ent;
         if (!it->get(&ent) ) {
@@ -107,7 +107,6 @@ void Main::add_visitor(){
     ent.set_id(ctx->initiator());
     ent.set_nickname(nickname);
     ent.set_wechat(wechat);
-    ent.set_approved(false);
     if (!get_visitor_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;

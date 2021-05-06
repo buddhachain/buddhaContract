@@ -4,5 +4,5 @@ option optimize_for = LITE_RUNTIME;
 message Visitor {
     string id           = 1; //游客id，唯一
     string nickname     = 2; //昵称
-    int64  wechat       = 3; //微信号
+    string wechat       = 3; //微信号
 }

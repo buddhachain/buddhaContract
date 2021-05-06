@@ -93,6 +93,10 @@ User::User(const User& from)
   if (from.phone().size() > 0) {
     phone_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.phone_);
   }
+  wechat_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.wechat().size() > 0) {
+    wechat_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.wechat_);
+  }
   email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.email().size() > 0) {
     email_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.email_);
@@ -149,9 +153,7 @@ User::User(const User& from)
   if (from.belief().size() > 0) {
     belief_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.belief_);
   }
-  ::memcpy(&sex_, &from.sex_,
-    static_cast<size_t>(reinterpret_cast<char*>(&wechat_) -
-    reinterpret_cast<char*>(&sex_)) + sizeof(wechat_));
+  sex_ = from.sex_;
   // @@protoc_insertion_point(copy_constructor:User)
 }
 
@@ -163,6 +165,7 @@ void User::SharedCtor() {
   photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phone_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  wechat_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   home_address_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   born_timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -177,9 +180,7 @@ void User::SharedCtor() {
   hobyy_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   recommender_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   belief_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&sex_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&wechat_) -
-      reinterpret_cast<char*>(&sex_)) + sizeof(wechat_));
+  sex_ = PROTOBUF_LONGLONG(0);
 }
 
 User::~User() {
@@ -193,6 +194,7 @@ void User::SharedDtor() {
   photo_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phone_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  wechat_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   email_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   home_address_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   born_timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -229,6 +231,7 @@ void User::Clear() {
   photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phone_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  wechat_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   home_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   born_timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -243,9 +246,7 @@ void User::Clear() {
   hobyy_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   recommender_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   belief_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&sex_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&wechat_) -
-      reinterpret_cast<char*>(&sex_)) + sizeof(wechat_));
+  sex_ = PROTOBUF_LONGLONG(0);
   _internal_metadata_.Clear();
 }
 
@@ -349,11 +350,20 @@ const char* User::_InternalParse(const char* begin, const char* end, void* objec
         ptr += size;
         break;
       }
-      // int64 wechat = 7;
+      // string wechat = 7;
       case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
-        msg->set_wechat(::google::protobuf::internal::ReadVarint(&ptr));
+        if (static_cast<::google::protobuf::uint8>(tag) != 58) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_wechat();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
         break;
       }
       // string email = 8;
@@ -708,13 +718,15 @@ bool User::MergePartialFromCodedStream(
         break;
       }
 
-      // int64 wechat = 7;
+      // string wechat = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &wechat_)));
+        if (static_cast< ::google::protobuf::uint8>(tag) == (58 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_wechat()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->wechat().data(), static_cast<int>(this->wechat().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "User.wechat"));
         } else {
           goto handle_unusual;
         }
@@ -1013,9 +1025,14 @@ void User::SerializeWithCachedSizes(
       6, this->phone(), output);
   }
 
-  // int64 wechat = 7;
-  if (this->wechat() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(7, this->wechat(), output);
+  // string wechat = 7;
+  if (this->wechat().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->wechat().data(), static_cast<int>(this->wechat().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "User.wechat");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->wechat(), output);
   }
 
   // string email = 8;
@@ -1208,6 +1225,13 @@ size_t User::ByteSizeLong() const {
         this->phone());
   }
 
+  // string wechat = 7;
+  if (this->wechat().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->wechat());
+  }
+
   // string email = 8;
   if (this->email().size() > 0) {
     total_size += 1 +
@@ -1313,13 +1337,6 @@ size_t User::ByteSizeLong() const {
         this->sex());
   }
 
-  // int64 wechat = 7;
-  if (this->wechat() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->wechat());
-  }
-
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -1356,6 +1373,10 @@ void User::MergeFrom(const User& from) {
   if (from.phone().size() > 0) {
 
     phone_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.phone_);
+  }
+  if (from.wechat().size() > 0) {
+
+    wechat_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.wechat_);
   }
   if (from.email().size() > 0) {
 
@@ -1416,9 +1437,6 @@ void User::MergeFrom(const User& from) {
   if (from.sex() != 0) {
     set_sex(from.sex());
   }
-  if (from.wechat() != 0) {
-    set_wechat(from.wechat());
-  }
 }
 
 void User::CopyFrom(const User& from) {
@@ -1449,6 +1467,8 @@ void User::InternalSwap(User* other) {
     GetArenaNoVirtual());
   phone_.Swap(&other->phone_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  wechat_.Swap(&other->wechat_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   email_.Swap(&other->email_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   home_address_.Swap(&other->home_address_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -1478,7 +1498,6 @@ void User::InternalSwap(User* other) {
   belief_.Swap(&other->belief_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(sex_, other->sex_);
-  swap(wechat_, other->wechat_);
 }
 
 ::std::string User::GetTypeName() const {

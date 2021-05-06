@@ -218,6 +218,20 @@ class User :
   ::std::string* release_phone();
   void set_allocated_phone(::std::string* phone);
 
+  // string wechat = 7;
+  void clear_wechat();
+  static const int kWechatFieldNumber = 7;
+  const ::std::string& wechat() const;
+  void set_wechat(const ::std::string& value);
+  #if LANG_CXX11
+  void set_wechat(::std::string&& value);
+  #endif
+  void set_wechat(const char* value);
+  void set_wechat(const char* value, size_t size);
+  ::std::string* mutable_wechat();
+  ::std::string* release_wechat();
+  void set_allocated_wechat(::std::string* wechat);
+
   // string email = 8;
   void clear_email();
   static const int kEmailFieldNumber = 8;
@@ -420,12 +434,6 @@ class User :
   ::google::protobuf::int64 sex() const;
   void set_sex(::google::protobuf::int64 value);
 
-  // int64 wechat = 7;
-  void clear_wechat();
-  static const int kWechatFieldNumber = 7;
-  ::google::protobuf::int64 wechat() const;
-  void set_wechat(::google::protobuf::int64 value);
-
   // @@protoc_insertion_point(class_scope:User)
  private:
   class HasBitSetters;
@@ -436,6 +444,7 @@ class User :
   ::google::protobuf::internal::ArenaStringPtr photo_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr phone_;
+  ::google::protobuf::internal::ArenaStringPtr wechat_;
   ::google::protobuf::internal::ArenaStringPtr email_;
   ::google::protobuf::internal::ArenaStringPtr home_address_;
   ::google::protobuf::internal::ArenaStringPtr born_timestamp_;
@@ -451,7 +460,6 @@ class User :
   ::google::protobuf::internal::ArenaStringPtr recommender_;
   ::google::protobuf::internal::ArenaStringPtr belief_;
   ::google::protobuf::int64 sex_;
-  ::google::protobuf::int64 wechat_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_user_2eproto;
 };
@@ -745,18 +753,57 @@ inline void User::set_allocated_phone(::std::string* phone) {
   // @@protoc_insertion_point(field_set_allocated:User.phone)
 }
 
-// int64 wechat = 7;
+// string wechat = 7;
 inline void User::clear_wechat() {
-  wechat_ = PROTOBUF_LONGLONG(0);
+  wechat_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::int64 User::wechat() const {
+inline const ::std::string& User::wechat() const {
   // @@protoc_insertion_point(field_get:User.wechat)
-  return wechat_;
+  return wechat_.GetNoArena();
 }
-inline void User::set_wechat(::google::protobuf::int64 value) {
+inline void User::set_wechat(const ::std::string& value) {
   
-  wechat_ = value;
+  wechat_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:User.wechat)
+}
+#if LANG_CXX11
+inline void User::set_wechat(::std::string&& value) {
+  
+  wechat_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:User.wechat)
+}
+#endif
+inline void User::set_wechat(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  wechat_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:User.wechat)
+}
+inline void User::set_wechat(const char* value, size_t size) {
+  
+  wechat_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:User.wechat)
+}
+inline ::std::string* User::mutable_wechat() {
+  
+  // @@protoc_insertion_point(field_mutable:User.wechat)
+  return wechat_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* User::release_wechat() {
+  // @@protoc_insertion_point(field_release:User.wechat)
+  
+  return wechat_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void User::set_allocated_wechat(::std::string* wechat) {
+  if (wechat != nullptr) {
+    
+  } else {
+    
+  }
+  wechat_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), wechat);
+  // @@protoc_insertion_point(field_set_allocated:User.wechat)
 }
 
 // string email = 8;

@@ -63,7 +63,10 @@ Visitor::Visitor(const Visitor& from)
   if (from.nickname().size() > 0) {
     nickname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.nickname_);
   }
-  wechat_ = from.wechat_;
+  wechat_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.wechat().size() > 0) {
+    wechat_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.wechat_);
+  }
   // @@protoc_insertion_point(copy_constructor:Visitor)
 }
 
@@ -72,7 +75,7 @@ void Visitor::SharedCtor() {
       &scc_info_Visitor_visitor_2eproto.base);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  wechat_ = PROTOBUF_LONGLONG(0);
+  wechat_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Visitor::~Visitor() {
@@ -83,6 +86,7 @@ Visitor::~Visitor() {
 void Visitor::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  wechat_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Visitor::SetCachedSize(int size) const {
@@ -102,7 +106,7 @@ void Visitor::Clear() {
 
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  wechat_ = PROTOBUF_LONGLONG(0);
+  wechat_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -151,11 +155,20 @@ const char* Visitor::_InternalParse(const char* begin, const char* end, void* ob
         ptr += size;
         break;
       }
-      // int64 wechat = 3;
+      // string wechat = 3;
       case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        msg->set_wechat(::google::protobuf::internal::ReadVarint(&ptr));
+        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName(nullptr);
+        object = msg->mutable_wechat();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
         break;
       }
       default: {
@@ -228,13 +241,15 @@ bool Visitor::MergePartialFromCodedStream(
         break;
       }
 
-      // int64 wechat = 3;
+      // string wechat = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &wechat_)));
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_wechat()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->wechat().data(), static_cast<int>(this->wechat().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "Visitor.wechat"));
         } else {
           goto handle_unusual;
         }
@@ -288,9 +303,14 @@ void Visitor::SerializeWithCachedSizes(
       2, this->nickname(), output);
   }
 
-  // int64 wechat = 3;
-  if (this->wechat() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->wechat(), output);
+  // string wechat = 3;
+  if (this->wechat().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->wechat().data(), static_cast<int>(this->wechat().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "Visitor.wechat");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->wechat(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -322,10 +342,10 @@ size_t Visitor::ByteSizeLong() const {
         this->nickname());
   }
 
-  // int64 wechat = 3;
-  if (this->wechat() != 0) {
+  // string wechat = 3;
+  if (this->wechat().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->wechat());
   }
 
@@ -354,8 +374,9 @@ void Visitor::MergeFrom(const Visitor& from) {
 
     nickname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.nickname_);
   }
-  if (from.wechat() != 0) {
-    set_wechat(from.wechat());
+  if (from.wechat().size() > 0) {
+
+    wechat_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.wechat_);
   }
 }
 
@@ -381,7 +402,8 @@ void Visitor::InternalSwap(Visitor* other) {
     GetArenaNoVirtual());
   nickname_.Swap(&other->nickname_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  swap(wechat_, other->wechat_);
+  wechat_.Swap(&other->wechat_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
 }
 
 ::std::string Visitor::GetTypeName() const {

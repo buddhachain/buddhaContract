@@ -4,6 +4,7 @@
 #include "xchain/contract.pb.h"
 #include "xchain/syscall.h"
 #include "user.h"
+#include "main.h"
 
 #include <iostream>
 using namespace std;
@@ -120,7 +121,6 @@ void Main::add_user(){
     ent.set_id(ctx->initiator());
     ent.set_nickname(nickname);
     ent.set_wechat(wechat);
-    ent.set_approved(false);
     if (!get_user_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
         return;
