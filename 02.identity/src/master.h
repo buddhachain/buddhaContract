@@ -17,7 +17,7 @@ class BMaster: public Master {
         DEFINE_INDEX_ADD(2, approved)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

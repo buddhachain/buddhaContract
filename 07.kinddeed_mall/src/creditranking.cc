@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BCreditRanking::to_json() {
+xchain::json BCreditRanking::to_json() const {
     xchain::json j = {
         {"ranking", ranking()},
         {"id", id()},
@@ -109,7 +109,7 @@ bool Main::_add_creditranking(const string& id, const int64_t value ) {
 
         //存入表中
         if (!get_creditranking_table().put(o) ) {
-            mycout << "table put failure ." << o.to_json() << endl;
+            mycout << "creditranking table put failure ." << o.to_json() << endl;
             return false;
         }
     }

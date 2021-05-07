@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BKinddeed::to_json() {
+xchain::json BKinddeed::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"name", name()},
@@ -22,7 +22,7 @@ xchain::json BKinddeed::to_json() {
     return j;
 }
 
-xchain::json BKinddeedDetail::to_json() {
+xchain::json BKinddeedDetail::to_json() const {
     xchain::json j = {
         {"kdid", kdid()},
         {"sequence", sequence()},
@@ -32,7 +32,7 @@ xchain::json BKinddeedDetail::to_json() {
     return j;
 }
 
-xchain::json BKinddeedSpec::to_json() {
+xchain::json BKinddeedSpec::to_json() const {
     xchain::json j = {
         {"kdid", kdid()},
         {"sequence", sequence()},
@@ -667,7 +667,7 @@ void Main::add_kinddeed() {
     // ent.set_online(true);
 
     // if (!get_kinddeed_table().put(ent) ) {
-    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+    //     _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed table put failure .", ent.to_json());
     //     return;
     // }
 
@@ -820,7 +820,7 @@ void Main::update_kinddeed() {
         ent.set_hash(hash);
 
         if (!get_kinddeeddetail_table().put(ent) ) {
-            _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeeddetail table put failure .", ent.to_json());
             return;
         }
     }
@@ -838,7 +838,7 @@ void Main::update_kinddeed() {
         ent.set_price(price);
 
         if (!get_kinddeedspec_table().put(ent) ) {
-            _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedspec table put failure .", ent.to_json());
             return;
         }
     }
@@ -852,7 +852,7 @@ void Main::update_kinddeed() {
     ent.set_online(true);
 
     if (!get_kinddeed_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed table put failure .", ent.to_json());
         return;
     }
 
@@ -892,7 +892,7 @@ void Main::offline_kinddeed() {
 
     ent.set_online(false);
     if (!get_kinddeed_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeed table put failure .", ent.to_json());
         return;
     }
 

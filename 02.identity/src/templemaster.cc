@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BTempleMaster::to_json() {
+xchain::json BTempleMaster::to_json() const {
     xchain::json j = {
         {"templeid", templeid()},
         {"masterid", masterid()},
@@ -67,8 +67,18 @@ bool Main::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) 
     return true;
 }
 
-bool Main::_delete_templemaster_record(const string& templeid,
-                                         const string& masterid) {
+bool Main::_delete_templemaster_record(const BTempleMaster& ent) {
+    if( !get_templemaster_table().del(ent) ) {
+        mycout << "delete templemaster " << ent.to_json().dump() << " failure ." << endl ;
+        return false;
+    }
+
+    mycout << "delete templemaster " << ent.to_json().dump() << " success ." << endl ;
+    return true;
+}
+
+bool Main::_delete_templemaster(const string& templeid,
+                                const string& masterid) {
     BTempleMaster ent;
     if (!_is_templemaster_exist(ent, templeid, masterid)){
         mycout << "temple " << templeid << ", master " << masterid << " is not exist ." << endl ;
@@ -126,7 +136,7 @@ void Main::apply_join_temple(){
     ent.set_masterid(masterid);
     ent.set_approved(false);
     if (!get_templemaster_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "templemaster table put failure .", ent.to_json());
         return;
     }
 
@@ -156,7 +166,7 @@ void Main::approve_join_temple() {
     }
 
     //删除此寺院法师记录
-    if( !_delete_templemaster_record(templeid, masterid) ) {
+    if( !_delete_templemaster_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
@@ -164,7 +174,7 @@ void Main::approve_join_temple() {
     //授权
     ent.set_approved(true);
     if (!get_templemaster_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "templemaster table put failure .", ent.to_json());
         return;
     }
 
@@ -188,7 +198,7 @@ void Main::recusal_join_temple() {
     }
 
     //删除此寺院法师记录
-    if( !_delete_templemaster_record(templeid, masterid) ) {
+    if( !_delete_templemaster_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }

@@ -24,7 +24,7 @@ class BIdentity: public Identity {
         DEFINE_INDEX_ADD(1, type)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

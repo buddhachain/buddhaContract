@@ -16,7 +16,7 @@ class BVisitor: public Visitor {
         DEFINE_INDEX_ADD(1, nickname, wechat)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

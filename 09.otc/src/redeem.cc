@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BMaster::to_json() {
+xchain::json BMaster::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"creditcode", creditcode()},
@@ -20,34 +20,34 @@ xchain::json BMaster::to_json() {
     return j;
 }
 
-bool Main::_is_master_exist(BMaster& ent, const string& id){
-    if (!get_master_table().find({{"id", id}}, &ent))
+bool Main::_is_redeem_exist(BMaster& ent, const string& id){
+    if (!get_redeem_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Main::_is_master_exist_by_proof(BMaster& ent, const string& proof){
-    if (!get_master_table().find({{"proof", proof}}, &ent))
+bool Main::_is_redeem_exist_by_proof(BMaster& ent, const string& proof){
+    if (!get_redeem_table().find({{"proof", proof}}, &ent))
         return false;
 
     return true;
 }
 
-bool Main::_is_master(const string& id) {
+bool Main::_is_redeem(const string& id) {
     BMaster ent;
-    if (!_is_master_exist(ent, id))
+    if (!_is_redeem_exist(ent, id))
         return false;
 
     return ent.approved();
 }
 
-bool Main::_scan_master(xchain::json& ja, const string& cond) {
-    auto it = get_master_table().scan({{"id",cond}});
+bool Main::_scan_redeem(xchain::json& ja, const string& cond) {
+    auto it = get_redeem_table().scan({{"id",cond}});
     while(it->next() ) {
         BMaster ent;
         if (!it->get(&ent) ) {
-            mycout << "master table get failure : " << it->error(true) << endl;
+            mycout << "redeem table get failure : " << it->error(true) << endl;
             return false;
         }
 
@@ -57,25 +57,25 @@ bool Main::_scan_master(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Main::_delete_master_record(const string& id) {
+bool Main::_delete_redeem_record(const string& id) {
     BMaster ent;
-    if (!_is_master_exist(ent, id)){
-        mycout << "master " << id << " is not exist ." << endl ;
+    if (!_is_redeem_exist(ent, id)){
+        mycout << "redeem " << id << " is not exist ." << endl ;
         return false;
     }
 
-    if( !get_master_table().del(ent) ) {
-        mycout << "delete master " << ent.to_json().dump() << " failure ." << endl ;
+    if( !get_redeem_table().del(ent) ) {
+        mycout << "delete redeem " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
 
-    mycout << "delete master " << ent.to_json().dump() << " success ." << endl ;
+    mycout << "delete redeem " << ent.to_json().dump() << " success ." << endl ;
     return true;
 }
 
 namespace 分界线{}
 
-void Main::apply_master(){
+void Main::apply_redeem(){
     const string& creditcode = ctx->arg("creditcode");
     if( creditcode.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "creditcode is empty .");
@@ -90,20 +90,20 @@ void Main::apply_master(){
 
     //身份检查，只有用户才能申请成为法师
     if( !is_user() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  redeem .");
         return ;
     }
 
     //判断是否已经是法师
-    if( is_master() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already master .");
+    if( is_redeem() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already redeem .");
         return ;
     }
 
     //判断此赎回是否存在
     BMaster ent;
-    if( _is_master_exist(ent, ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "master " + ctx->initiator() + " is applying .", ent.to_json() );
+    if( _is_redeem_exist(ent, ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "redeem " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
 
@@ -111,78 +111,78 @@ void Main::apply_master(){
     ent.set_creditcode(creditcode);
     ent.set_proof(proof);
     ent.set_approved(false);
-    if (!get_master_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+    if (!get_redeem_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply master over, please wait for approve .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply redeem over, please wait for approve .");
 }
 
-void Main::approve_master() {
+void Main::approve_redeem() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem id is empty .");
         return ;
     }
 
     //判断是否是基金会成员
     if( !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to approve redeem .");
         return ;
     }
 
     //判断此法师是否存在
     BMaster ent;
-    if( !_is_master_exist(ent, id) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master " + id + " is not exist .");
+    if( !_is_redeem_exist(ent, id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem " + id + " is not exist .");
         return ;
     }
 
     //判断是否是法师
-    if( _is_master(id) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already master .", ent.to_json() );
+    if( _is_redeem(id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already redeem .", ent.to_json() );
         return ;
     }
 
     //删除此法师
-    if( !_delete_master_record(id) ) {
+    if( !_delete_redeem_record(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     //授权
     ent.set_approved(true);
-    if (!get_master_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+    if (!get_redeem_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve master " + id + " success .", ent.to_json() );
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve redeem " + id + " success .", ent.to_json() );
 }
 
-void Main::recusal_master() {
+void Main::recusal_redeem() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master id is empty .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem id is empty .");
         return ;
     }
 
     //判断是否是基金会成员
     if( !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not founder, have no authority to recusal redeem .");
         return ;
     }
 
     //判断此法师是否存在
     BMaster ent;
-    if( !_is_master_exist(ent, id) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "master " + id + " is not exist .");
+    if( !_is_redeem_exist(ent, id) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem " + id + " is not exist .");
         return ;
     }
 
     //删除此法师
-    if( !_delete_master_record(id) ) {
+    if( !_delete_redeem_record(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
@@ -190,26 +190,26 @@ void Main::recusal_master() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Main::is_master() {
-    if (!_is_master(ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not master .") ;
+bool Main::is_redeem() {
+    if (!_is_redeem(ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not redeem .") ;
         return false;
     }
     
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is master .") ;
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is redeem .") ;
     return true;
 }
 
-void Main::list_master() {
+void Main::list_redeem() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list master .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not deployer nor founder, have no authority to list redeem .");
         return ;
     }
 
     xchain::json ja ;
-    if(!_scan_master(ja, ctx->arg("id")) ) {
+    if(!_scan_redeem(ja, ctx->arg("id")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
@@ -218,8 +218,8 @@ void Main::list_master() {
 }
 
 
-DEFINE_METHOD(Main, apply_master)             { self.apply_master();              }
-DEFINE_METHOD(Main, approve_master)           { self.approve_master();            }
-DEFINE_METHOD(Main, recusal_master)           { self.recusal_master();            }
-DEFINE_METHOD(Main, is_master)                { self.is_master();                 }
-DEFINE_METHOD(Main, list_master)              { self.list_master();               }
+DEFINE_METHOD(Main, apply_redeem)             { self.apply_redeem();              }
+DEFINE_METHOD(Main, approve_redeem)           { self.approve_redeem();            }
+DEFINE_METHOD(Main, recusal_redeem)           { self.recusal_redeem();            }
+DEFINE_METHOD(Main, is_redeem)                { self.is_redeem();                 }
+DEFINE_METHOD(Main, list_redeem)              { self.list_redeem();               }

@@ -15,7 +15,7 @@ class BCredit: public Credit {
         DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 #endif // _CREDIT_H_

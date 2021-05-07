@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BVisitor::to_json() {
+xchain::json BVisitor::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"nickname", nickname()},
@@ -21,23 +21,28 @@ xchain::json BVisitor::to_json() {
 }
 
 bool Main::_is_visitor_exist(BVisitor& ent, const string& id){
-    BIdentity id_ent;
-    if (!_is_identity_exist(id_ent, id))
+    if (!get_visitor_table().find({{"id", id}}, &ent))
         return false;
-
-    if (!get_visitor_table().find({{"id", id}}, &ent)) {
-        if( !get_identity_table().del(id_ent) )
-            mycout << "delete identity " << id_ent.to_json().dump() << " failure ." << endl ;
-        return false;
-    }
 
     return true;
 }
 
 bool Main::_is_visitor(const string& id) {
+    BIdentity id_ent;
     BVisitor ent;
-    if (!_is_visitor_exist(ent, id))
+
+    if (!_is_identity_exist(id_ent, id) && !_is_visitor_exist(ent, id)) 
+        return false ;
+    
+    if (_is_identity_exist(id_ent, id) && !_is_visitor_exist(ent, id)) {
+        _delete_identity_record(id_ent);
         return false;
+    }
+
+    if (!_is_identity_exist(id_ent, id) && _is_visitor_exist(ent, id) ) {
+        _delete_visitor_record(ent);
+        return false;
+    }
 
     return true;
 }
@@ -60,13 +65,7 @@ bool Main::_scan_visitor(xchain::json& ja,
     return true;
 }
 
-bool Main::_delete_visitor_record(const string& id) {
-    BVisitor ent;
-    if (!_is_visitor_exist(ent, id)){
-        mycout << "visitor " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_visitor_record(const BVisitor& ent) {
     if( !get_visitor_table().del(ent) ) {
         mycout << "delete visitor " << ent.to_json().dump() << " failure ." << endl ;
         return false;
@@ -74,6 +73,22 @@ bool Main::_delete_visitor_record(const string& id) {
 
     mycout << "delete visitor " << ent.to_json().dump() << " success ." << endl ;
     return true;
+}
+
+bool Main::_delete_visitor(const string& id) {
+    BIdentity id_ent;
+    BVisitor ent;
+
+    if (!_is_identity_exist(id_ent, id) && !_is_visitor_exist(ent, id)) 
+        return true ;
+    
+    if (_is_identity_exist(id_ent, id) && !_is_visitor_exist(ent, id))
+        return _delete_identity_record(id_ent);
+
+    if (!_is_identity_exist(id_ent, id) && _is_visitor_exist(ent, id) )
+        return _delete_visitor_record(ent);
+
+    return _delete_visitor_record(ent) & _delete_identity_record(id_ent);
 }
 
 namespace 分界线{}
@@ -97,22 +112,22 @@ void Main::add_visitor(){
         return ;
     }
 
-    //判断此游客是否存在
     BVisitor ent;
-    if( _is_visitor_exist(ent, ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "visitor " + ctx->initiator() + " is applying .", ent.to_json() );
-        return ;
-    }
-
     ent.set_id(ctx->initiator());
     ent.set_nickname(nickname);
     ent.set_wechat(wechat);
     if (!get_visitor_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "visitor table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " add visitor over .");
+    if(!_add_identity(ctx->initiator(), VISITOR)) {
+        _delete_visitor_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identify table put failure .", ent.to_json());
+        return ;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " add visitor success .");
 }
 
 bool Main::is_visitor() {

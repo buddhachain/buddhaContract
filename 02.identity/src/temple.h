@@ -17,7 +17,7 @@ class BTemple: public Temple {
         DEFINE_INDEX_ADD(2, approved)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 #endif // _TEMPLE_H_

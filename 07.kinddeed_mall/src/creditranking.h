@@ -16,7 +16,7 @@ class BCreditRanking: public CreditRanking {
         DEFINE_INDEX_ADD(1, id)   
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 #endif // _CREDIT_RANKING_H_

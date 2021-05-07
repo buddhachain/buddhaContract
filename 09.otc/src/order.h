@@ -18,7 +18,7 @@ class BOrder: public otc::Order {
         DEFINE_INDEX_ADD(3, state)   
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

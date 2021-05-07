@@ -16,7 +16,7 @@ class BRedeem: public otc::Redeem {
         DEFINE_INDEX_ADD(1, guaranty_id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

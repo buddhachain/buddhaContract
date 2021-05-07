@@ -16,7 +16,7 @@ class fend: public video::Fend {
         DEFINE_INDEX_ADD(1, author_id, room_id, audience_id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 class fendlog: public video::FendLog {
@@ -26,7 +26,7 @@ class fendlog: public video::FendLog {
         DEFINE_INDEX_ADD(1, fend_id, room_id, audience_id, goods_id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

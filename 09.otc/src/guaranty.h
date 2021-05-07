@@ -16,7 +16,7 @@ class BGuaranty: public otc::Guaranty {
         DEFINE_INDEX_ADD(1, seller)  
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

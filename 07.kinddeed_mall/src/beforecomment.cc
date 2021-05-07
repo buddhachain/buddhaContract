@@ -10,7 +10,7 @@
 using namespace std;
 
 
-xchain::json BBeforeComment::to_json() {
+xchain::json BBeforeComment::to_json() const {
     xchain::json j = {
         {"owner", owner()},
         {"kdid", kdid()},
@@ -125,7 +125,7 @@ void Main::add_beforecomment() {
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
     if (!get_beforecomment_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment table put failure .", ent.to_json());
         return;
     }
 
@@ -235,7 +235,7 @@ void Main::update_beforecomment() {
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
     if (!get_beforecomment_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "beforecomment table put failure .", ent.to_json());
         return;
     }
 

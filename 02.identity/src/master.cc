@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BMaster::to_json() {
+xchain::json BMaster::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"creditcode", creditcode()},
@@ -57,13 +57,7 @@ bool Main::_scan_master(xchain::json& ja,
     return true;
 }
 
-bool Main::_delete_master_record(const string& id) {
-    BMaster ent;
-    if (!_is_master_exist(ent, id)){
-        mycout << "master " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_master_record(const BMaster& ent) {
     if( !get_master_table().del(ent) ) {
         mycout << "delete master " << ent.to_json().dump() << " failure ." << endl ;
         return false;
@@ -112,7 +106,7 @@ void Main::apply_master(){
     ent.set_proof(proof);
     ent.set_approved(false);
     if (!get_master_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "master table put failure .", ent.to_json());
         return;
     }
 
@@ -146,7 +140,7 @@ void Main::approve_master() {
     }
 
     //删除此法师
-    if( !_delete_master_record(id) ) {
+    if( !_delete_master_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
@@ -154,7 +148,7 @@ void Main::approve_master() {
     //授权
     ent.set_approved(true);
     if (!get_master_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "master table put failure .", ent.to_json());
         return;
     }
 
@@ -182,7 +176,7 @@ void Main::recusal_master() {
     }
 
     //删除此法师
-    if( !_delete_master_record(id) ) {
+    if( !_delete_master_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }

@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BOrder::to_json() {
+xchain::json BOrder::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"owner", owner()},
@@ -178,7 +178,7 @@ void Main::pray_kinddeed() {
     od.set_amount(calced_amount);
     od.set_timestamp(timestamp);
     if (!get_order_table().put(od) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", od.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "order table put failure .", od.to_json());
         return;
     }
     

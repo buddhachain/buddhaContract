@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BFounder::to_json() {
+xchain::json BFounder::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"type", type()},
@@ -130,7 +130,7 @@ void Main::apply_founder(){
     ent.set_guaranty(ent.guaranty() + stoll(guaranty));
     ent.set_approved(false);
     if (!get_founder_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "founder table put failure .", ent.to_json());
         return;
     }
 
@@ -172,7 +172,7 @@ void Main::approve_founder() {
     //授权
     ent.set_approved(true);
     if (!get_founder_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "founder table put failure .", ent.to_json());
         return;
     }
 

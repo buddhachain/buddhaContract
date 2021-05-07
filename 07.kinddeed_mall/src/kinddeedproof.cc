@@ -17,7 +17,7 @@ static int64_t ratio_for_some_contract  = 10 ; //默认给某合约账户的比�
 static string some_contract             = "buddha"; //某个默认的收款合约账户
 
 
-xchain::json BKinddeedProof::to_json() {
+xchain::json BKinddeedProof::to_json() const {
     xchain::json j = {
         {"orderid", orderid()},
         {"owner", owner()},

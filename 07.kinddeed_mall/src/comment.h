@@ -15,7 +15,7 @@ class BCommentLabel: public CommentLabel {
         DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 class BBeforeComment: public BeforeComment {
@@ -25,7 +25,7 @@ class BBeforeComment: public BeforeComment {
         DEFINE_INDEX_ADD(1, owner) 
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 class BAfterComment: public AfterComment {
@@ -35,7 +35,7 @@ class BAfterComment: public AfterComment {
         DEFINE_INDEX_ADD(1, owner)   
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BCommentLabel::to_json() {
+xchain::json BCommentLabel::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"desc", desc()},
@@ -101,7 +101,7 @@ void Main::add_commentlabel() {
     ent.set_id(stoll(id));
     ent.set_desc(desc);
     if (!get_commentlabel_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel table put failure .", ent.to_json());
         return;
     }
 
@@ -172,7 +172,7 @@ void Main::update_commentlabel() {
     ent.set_id(stoll(id));
     ent.set_desc(desc);
     if (!get_commentlabel_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "commentlabel table put failure .", ent.to_json());
         return;
     }
 

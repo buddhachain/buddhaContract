@@ -16,7 +16,7 @@ class BTempleMaster: public TempleMaster {
         DEFINE_INDEX_ADD(1, masterid)   //非主键不能find，支持scan
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

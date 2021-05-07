@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BAfterComment::to_json() {
+xchain::json BAfterComment::to_json() const {
     xchain::json j = {
         {"orderid", orderid()},
         {"owner", owner()},
@@ -108,7 +108,7 @@ void Main::add_aftercomment() {
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
     if (!get_aftercomment_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment table put failure .", ent.to_json());
         return;
     }
 
@@ -205,7 +205,7 @@ void Main::update_aftercomment() {
     ent.set_comment(comment);
     ent.set_timestamp(timestamp);
     if (!get_aftercomment_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "aftercomment table put failure .", ent.to_json());
         return;
     }
 

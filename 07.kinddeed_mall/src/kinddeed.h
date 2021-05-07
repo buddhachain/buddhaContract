@@ -16,7 +16,7 @@ class BKinddeedType : public KinddeedType {
         DEFINE_INDEX_ADD(0, id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 class BKinddeed: public Kinddeed {
@@ -26,7 +26,7 @@ class BKinddeed: public Kinddeed {
         DEFINE_INDEX_ADD(1, owner) 
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 class BKinddeedDetail: public KinddeedDetail {
@@ -35,7 +35,7 @@ class BKinddeedDetail: public KinddeedDetail {
         DEFINE_INDEX_ADD(0, kdid)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 class BKinddeedSpec: public KinddeedSpec {
@@ -44,7 +44,7 @@ class BKinddeedSpec: public KinddeedSpec {
         DEFINE_INDEX_ADD(0, kdid)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

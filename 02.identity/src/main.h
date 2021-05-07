@@ -116,7 +116,7 @@ private:
     bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");
     bool _scan_thedead(xchain::json&, const string& ="");
 
-    bool _add_identity(const string&,const string&);
+    bool _add_identity(const string&,const int64_t);
     bool _add_visitor(const string&,const string&,const string&,const string&);
     bool _add_user(const string&,const string&,const string&,const string&);
     bool _add_identifyuser(const string&,const string&,const string&,const string&);
@@ -124,14 +124,22 @@ private:
     bool _add_temple(const string&,const string&,const string&,const string&);
     bool _add_thedead(const string&,const string&,const string&,const string&);
 
-    bool _delete_identity_record(const string&);
-    bool _delete_visitor_record(const string&);
-    bool _delete_user_record(const string&);
-    bool _delete_identifyuser_record(const string&);
-    bool _delete_master_record(const string&);
-    bool _delete_temple_record(const string&);
-    bool _delete_templemaster_record(const string&, const string&);
-    bool _delete_thedead_record(const string&);
+    bool _delete_identity_record(const BIdentity&);
+    bool _delete_visitor_record(const BVisitor&);
+    bool _delete_user_record(const BUser&);
+    bool _delete_identifyuser_record(const BIdentifyUser&);
+    bool _delete_master_record(const BMaster&);
+    bool _delete_temple_record(const BTemple&);
+    bool _delete_templemaster_record(const BTempleMaster&);
+    bool _delete_thedead_record(const BTheDead&);
+
+    bool _delete_visitor(const string&);
+    bool _delete_user(const string&);
+    bool _delete_identifyuser(const string&);
+    bool _delete_master(const string&);
+    bool _delete_temple(const string&);
+    bool _delete_templemaster(const string&, const string&);
+    bool _delete_thedead(const string&);
 
     bool _clear_identity();
     bool _clear_visitor();

@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
     
-xchain::json BGuaranty::to_json() {
+xchain::json BGuaranty::to_json() const {
     xchain::json j = {
         { "id",          id()        },
         { "seller",      seller()    },
@@ -114,7 +114,7 @@ void Otc::apply_guaranty(){
     ent.set_amount(amount);
     ent.set_left(false);
     if (!get_guaranty_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty table put failure .", ent.to_json());
         return;
     }
 
@@ -156,7 +156,7 @@ void Otc::approve_guaranty() {
     //授权
     ent.set_left(true);
     if (!get_guaranty_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "guaranty table put failure .", ent.to_json());
         return;
     }
 

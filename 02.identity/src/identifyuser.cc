@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BIdentifyUser::to_json() {
+xchain::json BIdentifyUser::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"nickname", nickname()},
@@ -76,13 +76,7 @@ bool Main::_scan_identifyuser(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Main::_delete_identifyuser_record(const string& id) {
-    BIdentifyUser ent;
-    if (!_is_identifyuser_exist(ent, id)){
-        mycout << "identity user " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_identifyuser_record(const BIdentifyUser& ent) {
     if( !get_identifyuser_table().del(ent) ) {
         mycout << "delete identity user " << ent.to_json().dump() << " failure ." << endl ;
         return false;
@@ -131,7 +125,7 @@ void Main::apply_identifyuser(){
     ent.set_wechat(wechat);
     ent.set_approved(false);
     if (!get_identifyuser_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identifyuser table put failure .", ent.to_json());
         return;
     }
 
@@ -165,7 +159,7 @@ void Main::approve_identifyuser() {
     }
 
     //删除此认证用户
-    if( !_delete_identifyuser_record(id) ) {
+    if( !_delete_identifyuser_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
@@ -173,7 +167,7 @@ void Main::approve_identifyuser() {
     //授权
     ent.set_approved(true);
     if (!get_identifyuser_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identifyuser table put failure .", ent.to_json());
         return;
     }
 
@@ -201,7 +195,7 @@ void Main::recusal_identifyuser() {
     }
 
     //删除此认证用户
-    if( !_delete_identifyuser_record(id) ) {
+    if( !_delete_identifyuser_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }

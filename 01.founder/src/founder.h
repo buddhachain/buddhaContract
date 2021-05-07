@@ -19,7 +19,7 @@ class BFounder: public Founder {
         DEFINE_INDEX_ADD(1, approved)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 #endif // _FOUNDER_H_

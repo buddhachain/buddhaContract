@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BCredit::to_json() {
+xchain::json BCredit::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"value", value()},
@@ -59,7 +59,7 @@ bool Main::_add_credit(const string& id, const int64_t value, int64_t& total_val
     ent.set_id(id);
     ent.set_value(total_value);
     if (!get_credit_table().put(ent) ) {
-        mycout << "table put failure ." << ent.to_json() << endl;
+        mycout << "commentlabel table put failure ." << ent.to_json() << endl;
         return false;
     }
 

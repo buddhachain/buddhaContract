@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BTheDead::to_json() {
+xchain::json BTheDead::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"name", name()},
@@ -65,13 +65,7 @@ bool Main::_scan_thedead(xchain::json& ja,
     return true;
 }
 
-bool Main::_delete_thedead_record(const string& id) {
-    BTheDead ent;
-    if (!_is_thedead_exist(ent, id)){
-        mycout << "thedead " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_thedead_record(const BTheDead& ent) {
     if( !get_thedead_table().del(ent) ) {
         mycout << "delete thedead " << ent.to_json().dump() << " failure ." << endl ;
         return false;
@@ -106,7 +100,7 @@ void Main::add_thedead(){
     ent.set_id(ctx->initiator());
     ent.set_name(name);
     if (!get_thedead_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "thedead table put failure .", ent.to_json());
         return;
     }
 

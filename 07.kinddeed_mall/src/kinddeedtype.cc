@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BKinddeedType::to_json() {
+xchain::json BKinddeedType::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"desc", desc()},
@@ -88,7 +88,7 @@ void Main::add_kinddeedtype() {
     ent.set_id(stoll(id));
     ent.set_desc(desc);
     if (!get_kinddeedtype_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype table put failure .", ent.to_json());
         return;
     }
 
@@ -159,7 +159,7 @@ void Main::update_kinddeedtype() {
     ent.set_id(stoll(id));
     ent.set_desc(desc);
     if (!get_kinddeedtype_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "kinddeedtype table put failure .", ent.to_json());
         return;
     }
 

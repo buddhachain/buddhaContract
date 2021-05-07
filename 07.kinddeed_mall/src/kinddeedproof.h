@@ -16,7 +16,7 @@ class BKinddeedProof: public KinddeedProof {
         DEFINE_INDEX_ADD(1, owner)   
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 #endif // _KINDDEED_PROOF_H_

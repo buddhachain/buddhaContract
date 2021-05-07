@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BIdentity::to_json() {
+xchain::json BIdentity::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"type", type()},
@@ -19,23 +19,21 @@ xchain::json BIdentity::to_json() {
     return j;
 }
 
-bool Main::_add_identity(const string& id, const string& type) {
+bool Main::_add_identity(const string& id, const int64_t type) {
     //判断此身份是否存在
     BIdentity ent;
     if( _is_identity_exist(ent, id) ) {
         mycout << id << " BIdentity is exist ." << ent.to_json() << endl;
 
         //删除旧数据
-        if( !_delete_identity_record(id) ) {
-            mycout << "delete failure ." << ent.to_json() << endl;
+        if( !_delete_identity_record(ent) )
             return false;
-        }
     }
 
     ent.set_id(id);
-    ent.set_type(std::stoll(type));
+    ent.set_type(type);
     if (!get_identity_table().put(ent) ) {
-        mycout << "table put failure ." << ent.to_json() << endl;
+        mycout << "identify table put failure ." << ent.to_json() << endl;
         return false;
     }
 
@@ -66,13 +64,7 @@ bool Main::_scan_identity(xchain::json& ja, const string& type) {
     return true;
 }
 
-bool Main::_delete_identity_record(const string& id) {
-    BIdentity ent;
-    if (!_is_identity_exist(ent, id)){
-        mycout << "identity " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_identity_record(const BIdentity& ent) {
     if( !get_identity_table().del(ent) ) {
         mycout << "delete identity " << ent.to_json().dump() << " failure ." << endl ;
         return false;

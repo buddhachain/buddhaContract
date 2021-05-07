@@ -15,7 +15,7 @@ class BProposal: public Proposal {
         DEFINE_INDEX_ADD(0, key)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 #endif // _PROPOSAL_H_

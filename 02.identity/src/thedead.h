@@ -18,7 +18,7 @@ class BTheDead: public TheDead {
         DEFINE_INDEX_ADD(3, idcard, otherid)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

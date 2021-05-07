@@ -19,7 +19,7 @@ class BIdentifyUser: public IdentifyUser {
         DEFINE_INDEX_ADD(4, approved)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

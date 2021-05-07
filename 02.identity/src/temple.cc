@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BTemple::to_json() {
+xchain::json BTemple::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"unit", unit()},
@@ -52,13 +52,7 @@ bool Main::_scan_temple(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Main::_delete_temple_record(const string& id) {
-    BTemple ent;
-    if (!_is_temple_exist(ent, id)){
-        mycout << "temple " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_temple_record(const BTemple& ent) {
     if( !get_temple_table().del(ent) ) {
         mycout << "delete temple " << ent.to_json().dump() << " failure ." << endl ;
         return false;
@@ -122,7 +116,7 @@ void Main::apply_temple(){
     ent.set_proof(proof);
     ent.set_approved(false);
     if (!get_temple_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "temple table put failure .", ent.to_json());
         return;
     }
 
@@ -156,7 +150,7 @@ void Main::approve_temple() {
     }
 
     //删除此寺院
-    if( !_delete_temple_record(id) ) {
+    if( !_delete_temple_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
@@ -164,7 +158,7 @@ void Main::approve_temple() {
     //授权
     ent.set_approved(true);
     if (!get_temple_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "temple table put failure .", ent.to_json());
         return;
     }
 
@@ -192,7 +186,7 @@ void Main::recusal_temple() {
     }
 
     //删除此寺院
-    if( !_delete_temple_record(id) ) {
+    if( !_delete_temple_record(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }

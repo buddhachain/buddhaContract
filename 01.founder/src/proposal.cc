@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BProposal::to_json() {
+xchain::json BProposal::to_json() const {
     xchain::json j = {
         {"key", key()},
         {"value", value()},
@@ -142,7 +142,7 @@ void Main::make_proposal(){
     ent.set_timestamps(jatimestamp.dump()); //设置各个基金会成员对提案的操作时间
 
     if (!get_proposal_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal  table put failure .", ent.to_json());
         return;
     }
 
@@ -236,7 +236,7 @@ void Main::delete_proposal(){
     ent.set_timestamps(jatimestamp.dump()); //设置各个基金会成员对提案的操作时间
 
     if (!get_proposal_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal  table put failure .", ent.to_json());
         return;
     }
 
@@ -342,7 +342,7 @@ void Main::update_proposal(){
     ent.set_timestamps(jatimestamp.dump()); //设置各个基金会成员对提案的操作时间
 
     if (!get_proposal_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal  table put failure .", ent.to_json());
         return;
     }
 
@@ -513,7 +513,7 @@ void Main::approve_proposal(){
     }
     
     if (!get_proposal_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "proposal  table put failure .", ent.to_json());
         return;
     }
 

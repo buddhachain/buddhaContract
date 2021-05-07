@@ -16,7 +16,7 @@ class BOrder: public Order {
         DEFINE_INDEX_ADD(1, kdowner) 
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

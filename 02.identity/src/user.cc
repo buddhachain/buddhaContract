@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BUser::to_json() {
+xchain::json BUser::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"nickname", nickname()},
@@ -52,9 +52,21 @@ bool Main::_is_user_exist(BUser& ent, const string& id){
 }
 
 bool Main::_is_user(const string& id) {
+    BIdentity id_ent;
     BUser ent;
-    if (!_is_user_exist(ent, id))
+
+    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+        return false ;
+    
+    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) {
+        _delete_identity_record(id_ent);
         return false;
+    }
+
+    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) ) {
+        _delete_user_record(ent);
+        return false;
+    }
 
     return true;
 }
@@ -74,13 +86,7 @@ bool Main::_scan_user(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Main::_delete_user_record(const string& id) {
-    BUser ent;
-    if (!_is_user_exist(ent, id)){
-        mycout << "user " << id << " is not exist ." << endl ;
-        return false;
-    }
-
+bool Main::_delete_user_record(const BUser& ent) {
     if( !get_user_table().del(ent) ) {
         mycout << "delete user " << ent.to_json().dump() << " failure ." << endl ;
         return false;
@@ -88,6 +94,22 @@ bool Main::_delete_user_record(const string& id) {
 
     mycout << "delete user " << ent.to_json().dump() << " success ." << endl ;
     return true;
+}
+
+bool Main::_delete_user(const string& id) {
+    BIdentity id_ent;
+    BUser ent;
+
+    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+        return true ;
+    
+    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id))
+        return _delete_identity_record(id_ent);
+
+    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) )
+        return _delete_user_record(ent);
+
+    return _delete_user_record(ent) & _delete_identity_record(id_ent);
 }
 
 namespace 分界线{}
@@ -111,22 +133,22 @@ void Main::add_user(){
         return ;
     }
 
-    //判断此用户是否存在
     BUser ent;
-    if( _is_user_exist(ent, ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "user " + ctx->initiator() + " is applying .", ent.to_json() );
-        return ;
-    }
-
     ent.set_id(ctx->initiator());
     ent.set_nickname(nickname);
     ent.set_wechat(wechat);
     if (!get_user_table().put(ent) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "user table put failure .", ent.to_json());
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply user over, please wait for approve .");
+    if(!_add_identity(ctx->initiator(), USER)) {
+        _delete_user_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identify table put failure .", ent.to_json());
+        return ;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " add user success .");
 }
 
 bool Main::is_user() {

@@ -19,7 +19,7 @@ class room: public video::Room {
         DEFINE_INDEX_ADD(4, type)    
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

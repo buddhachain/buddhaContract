@@ -18,7 +18,7 @@ class BUser: public User {
         DEFINE_INDEX_ADD(3, idcard, otherid, recommender)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

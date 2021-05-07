@@ -16,7 +16,7 @@ class focus: public video::Focus {
         DEFINE_INDEX_ADD(1, audience_id)
     DEFINE_INDEX_END();
 
-    xchain::json to_json();
+    xchain::json to_json() const;
 };
 
 

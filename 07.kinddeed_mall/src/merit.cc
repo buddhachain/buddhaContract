@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-xchain::json BMerit::to_json() {
+xchain::json BMerit::to_json() const {
     xchain::json j = {
         {"id", id()},
         {"value", value()},
@@ -59,7 +59,7 @@ bool Main::_add_merit(const string& id, const int64_t value, int64_t& total_valu
     ent.set_id(id);
     ent.set_value(total_value);
     if (!get_merit_table().put(ent) ) {
-        mycout << "table put failure ." << ent.to_json() << endl;
+        mycout << "merit table put failure ." << ent.to_json() << endl;
         return false;
     }
 
