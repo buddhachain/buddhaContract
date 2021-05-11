@@ -54,10 +54,21 @@ bool Main::_is_identifyuser_exist(BIdentifyUser& ent, const string& id){
 }
 
 bool Main::_is_identifyuser(const string& id) {
+    BIdentity id_ent;
     BIdentifyUser ent;
-    if (!_is_identifyuser_exist(ent, id))
-        return false;
 
+    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+        return false ;
+    
+    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) {
+        _delete_identity_record(id_ent);
+        return false;
+    }
+
+    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) ) {
+        _delete_user_record(ent);
+        return false;
+    }
     return true;
 }
 
@@ -84,6 +95,22 @@ bool Main::_delete_identifyuser_record(const BIdentifyUser& ent) {
 
     mycout << "delete identity user " << ent.to_json().dump() << " success ." << endl ;
     return true;
+}
+
+bool Main::_delete_user(const string& id) {
+    BIdentity id_ent;
+    BUser ent;
+
+    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+        return true ;
+    
+    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id))
+        return _delete_identity_record(id_ent);
+
+    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) )
+        return _delete_user_record(ent);
+
+    return _delete_user_record(ent) & _delete_identity_record(id_ent);
 }
 
 namespace 分界线{}
@@ -113,13 +140,7 @@ void Main::apply_identifyuser(){
         return ;
     }
 
-    //判断此认证用户是否存在
     BIdentifyUser ent;
-    if( _is_identifyuser_exist(ent, ctx->initiator()) ) {
-        _log_ok(__FILE__, __FUNCTION__, __LINE__, "identifyuser " + ctx->initiator() + " is applying .", ent.to_json() );
-        return ;
-    }
-
     ent.set_id(ctx->initiator());
     ent.set_nickname(nickname);
     ent.set_wechat(wechat);
@@ -129,7 +150,14 @@ void Main::apply_identifyuser(){
         return;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply identifyuser over, please wait for approve .");
+    if(!_add_identity(ctx->initiator(), IDENTIFYUSER)) {
+        _delete_identifyuser_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identity table put failure .", ent.to_json());
+        return ;
+    }
+
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply identify user over, please wait for approve .");
 }
 
 void Main::approve_identifyuser() {

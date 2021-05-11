@@ -123,7 +123,7 @@ void Main::add_visitor(){
 
     if(!_add_identity(ctx->initiator(), VISITOR)) {
         _delete_visitor_record(ent);
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "identify table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identity table put failure .", ent.to_json());
         return ;
     }
 
@@ -178,7 +178,7 @@ void Main::update_visitor(){
 
     if(!_add_identity(ctx->initiator(), VISITOR)) {
         _delete_visitor_record(ent);
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "identify table put failure .", ent.to_json());
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identity table put failure .", ent.to_json());
         return ;
     }
 
