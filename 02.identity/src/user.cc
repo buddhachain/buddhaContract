@@ -156,7 +156,7 @@ void Main::update_user(){
         _log_error(__FILE__, __FUNCTION__, __LINE__, "nickname is empty .");
         return ;
     }
-
+    mycout << "nickname" << nickname << endl;
     const string& wechat = ctx->arg("wechat");
     if( wechat.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "wechat is empty .");
@@ -185,6 +185,7 @@ void Main::update_user(){
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete user " + id + " failure .");
         return ;
     }
+    mycout << "nickname" << nickname << endl;
 
     //获取用户信息
     BUser ent;
@@ -195,6 +196,7 @@ void Main::update_user(){
         _log_error(__FILE__, __FUNCTION__, __LINE__, "user table put failure .", ent.to_json());
         return;
     }
+    mycout << "ent.to_json()" << ent.to_json() << endl;
 
     if(!_add_identity(ctx->initiator(), USER)) {
         _delete_user_record(ent);
