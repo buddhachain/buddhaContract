@@ -140,5 +140,5 @@ void Main::list_identity() {
 }
 
 
-DEFINE_METHOD(Main, find_identity)              { self.find_identity();              }
+DEFINE_METHOD(Main, find_identity)              { self.find_identity();            }
 DEFINE_METHOD(Main, list_identity)              { self.list_identity();            }

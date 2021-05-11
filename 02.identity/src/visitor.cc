@@ -127,8 +127,64 @@ void Main::add_visitor(){
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " add visitor success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "add visitor success .", ent.to_json());
 }
+
+void Main::update_visitor(){
+    const string& nickname = ctx->arg("nickname");
+    if( nickname.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "nickname is empty .");
+        return ;
+    }
+
+    const string& wechat = ctx->arg("wechat");
+    if( wechat.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "wechat is empty .");
+        return ;
+    }
+
+    string id;
+
+    //身份检查，部署者和基金会成员具有权限
+    if( is_deployer() ||
+        is_founder() ) {
+        if( id.empty() ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "id is empty .");
+            return ;
+        }
+
+        id = ctx->arg("id");
+    } else if( is_visitor() ) { //判断是否是游客
+        id = ctx->initiator();
+    } else {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not visitor, deployer, founder .");
+        return ;
+    }
+
+    if(!_delete_visitor(id)){
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete visitor " + id + " failure .");
+        return ;
+    }
+
+    //获取游客信息
+    BVisitor ent;
+    ent.set_id(id);
+    ent.set_nickname(nickname);
+    ent.set_wechat(wechat);
+    if (!get_visitor_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "visitor table put failure .", ent.to_json());
+        return;
+    }
+
+    if(!_add_identity(ctx->initiator(), VISITOR)) {
+        _delete_visitor_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identify table put failure .", ent.to_json());
+        return ;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "update visitor success .", ent.to_json());
+}
+
 
 bool Main::is_visitor() {
     if (!_is_visitor(ctx->initiator()) ) {
@@ -157,7 +213,8 @@ void Main::list_visitor() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "scan", ja);
 }
 
+DEFINE_METHOD(Main, add_visitor)             { self.add_visitor();             }
+DEFINE_METHOD(Main, update_visitor)          { self.update_visitor();          }
 DEFINE_METHOD(Main, is_visitor)              { self.is_visitor();              }
 DEFINE_METHOD(Main, list_visitor)            { self.list_visitor();            }
-DEFINE_METHOD(Main, add_visitor)             { self.add_visitor();             }
 

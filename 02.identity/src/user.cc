@@ -148,7 +148,61 @@ void Main::add_user(){
         return ;
     }
 
-    _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " add user success .");
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "add user success .", ent.to_json());
+}
+void Main::update_user(){
+    const string& nickname = ctx->arg("nickname");
+    if( nickname.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "nickname is empty .");
+        return ;
+    }
+
+    const string& wechat = ctx->arg("wechat");
+    if( wechat.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "wechat is empty .");
+        return ;
+    }
+
+    string id;
+
+    //身份检查，部署者和基金会成员具有权限
+    if( is_deployer() ||
+        is_founder() ) {
+        if( id.empty() ) {
+            _log_error(__FILE__, __FUNCTION__, __LINE__, "id is empty .");
+            return ;
+        }
+
+        id = ctx->arg("id");
+    } else if( is_user() ) { //判断是否是用户
+        id = ctx->initiator();
+    } else {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, deployer, founder .");
+        return ;
+    }
+
+    if(!_delete_user(id)){
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "delete user " + id + " failure .");
+        return ;
+    }
+
+    //获取用户信息
+    BUser ent;
+    ent.set_id(id);
+    ent.set_nickname(nickname);
+    ent.set_wechat(wechat);
+    if (!get_user_table().put(ent) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "user table put failure .", ent.to_json());
+        return;
+    }
+
+    if(!_add_identity(ctx->initiator(), USER)) {
+        _delete_user_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identify table put failure .", ent.to_json());
+        return ;
+    }
+
+    _log_ok(__FILE__, __FUNCTION__, __LINE__, "update user success .", ent.to_json());
 }
 
 bool Main::is_user() {
@@ -181,4 +235,5 @@ void Main::list_user() {
 DEFINE_METHOD(Main, is_user)              { self.is_user();              }
 DEFINE_METHOD(Main, list_user)            { self.list_user();            }
 DEFINE_METHOD(Main, add_user)             { self.add_user();             }
+DEFINE_METHOD(Main, update_user)          { self.update_user();          }
 

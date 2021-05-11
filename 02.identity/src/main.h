@@ -192,9 +192,11 @@ public:
 
     //添加游客
     void add_visitor();             //任意身份
-    
+    void update_visitor();          //本身，基金会成员
+
     //添加用户
     void add_user();                //任意身份
+    void update_user();          //本身，基金会成员
 
     //申请成为认证用户
     void apply_identifyuser();     //用户，游客
@@ -221,5 +223,6 @@ public:
     
     //添加逝者
     void add_thedead();                //任意身份
+    void update_thedead();             //基金会成员
 };
 #endif // _MAIN_H_
