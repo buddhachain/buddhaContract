@@ -47,7 +47,8 @@ bool Main::_is_identifyuser(const string& id) {
         _delete_identifyuser_record(ent);
         return false;
     }
-    return true;
+
+    return ent.approved();
 }
 
 bool Main::_scan_identifyuser(xchain::json& ja, const string& cond) {
