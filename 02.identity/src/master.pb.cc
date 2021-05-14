@@ -42,7 +42,6 @@ class Master::HasBitSetters {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Master::kIdFieldNumber;
-const int Master::kPhotoFieldNumber;
 const int Master::kBuddhistNameFieldNumber;
 const int Master::kSectFieldNumber;
 const int Master::kCreditcodeFieldNumber;
@@ -62,10 +61,6 @@ Master::Master(const Master& from)
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.id().size() > 0) {
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
-  }
-  photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.photo().size() > 0) {
-    photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photo_);
   }
   buddhist_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.buddhist_name().size() > 0) {
@@ -91,7 +86,6 @@ void Master::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_Master_master_2eproto.base);
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  photo_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   buddhist_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sect_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -106,7 +100,6 @@ Master::~Master() {
 
 void Master::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  photo_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   buddhist_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sect_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -129,7 +122,6 @@ void Master::Clear() {
   (void) cached_has_bits;
 
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   buddhist_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -167,25 +159,9 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // string photo = 2;
+      // string buddhist_name = 2;
       case 2: {
         if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName(nullptr);
-        object = msg->mutable_photo();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
-      // string buddhist_name = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
@@ -199,9 +175,9 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // string sect = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
+      // string sect = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
@@ -215,9 +191,9 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // string creditcode = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
+      // string creditcode = 4;
+      case 4: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
@@ -231,9 +207,9 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // string proof = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
+      // string proof = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
         ptr = ::google::protobuf::io::ReadSize(ptr, &size);
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName(nullptr);
@@ -247,9 +223,9 @@ const char* Master::_InternalParse(const char* begin, const char* end, void* obj
         ptr += size;
         break;
       }
-      // bool approved = 7;
-      case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
+      // bool approved = 6;
+      case 6: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
         msg->set_approved(::google::protobuf::internal::ReadVarint(&ptr));
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
@@ -309,24 +285,9 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // string photo = 2;
+      // string buddhist_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_photo()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->photo().data(), static_cast<int>(this->photo().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Master.photo"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string buddhist_name = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_buddhist_name()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -339,9 +300,9 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // string sect = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
+      // string sect = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_sect()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -354,9 +315,9 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // string creditcode = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+      // string creditcode = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_creditcode()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -369,9 +330,9 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // string proof = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
+      // string proof = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_proof()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -384,9 +345,9 @@ bool Master::MergePartialFromCodedStream(
         break;
       }
 
-      // bool approved = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
+      // bool approved = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -434,59 +395,49 @@ void Master::SerializeWithCachedSizes(
       1, this->id(), output);
   }
 
-  // string photo = 2;
-  if (this->photo().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->photo().data(), static_cast<int>(this->photo().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Master.photo");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->photo(), output);
-  }
-
-  // string buddhist_name = 3;
+  // string buddhist_name = 2;
   if (this->buddhist_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->buddhist_name().data(), static_cast<int>(this->buddhist_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "Master.buddhist_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->buddhist_name(), output);
+      2, this->buddhist_name(), output);
   }
 
-  // string sect = 4;
+  // string sect = 3;
   if (this->sect().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->sect().data(), static_cast<int>(this->sect().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "Master.sect");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->sect(), output);
+      3, this->sect(), output);
   }
 
-  // string creditcode = 5;
+  // string creditcode = 4;
   if (this->creditcode().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->creditcode().data(), static_cast<int>(this->creditcode().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "Master.creditcode");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->creditcode(), output);
+      4, this->creditcode(), output);
   }
 
-  // string proof = 6;
+  // string proof = 5;
   if (this->proof().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->proof().data(), static_cast<int>(this->proof().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "Master.proof");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      6, this->proof(), output);
+      5, this->proof(), output);
   }
 
-  // bool approved = 7;
+  // bool approved = 6;
   if (this->approved() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->approved(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->approved(), output);
   }
 
   output->WriteRaw(_internal_metadata_.unknown_fields().data(),
@@ -511,42 +462,35 @@ size_t Master::ByteSizeLong() const {
         this->id());
   }
 
-  // string photo = 2;
-  if (this->photo().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->photo());
-  }
-
-  // string buddhist_name = 3;
+  // string buddhist_name = 2;
   if (this->buddhist_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->buddhist_name());
   }
 
-  // string sect = 4;
+  // string sect = 3;
   if (this->sect().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->sect());
   }
 
-  // string creditcode = 5;
+  // string creditcode = 4;
   if (this->creditcode().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->creditcode());
   }
 
-  // string proof = 6;
+  // string proof = 5;
   if (this->proof().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->proof());
   }
 
-  // bool approved = 7;
+  // bool approved = 6;
   if (this->approved() != 0) {
     total_size += 1 + 1;
   }
@@ -571,10 +515,6 @@ void Master::MergeFrom(const Master& from) {
   if (from.id().size() > 0) {
 
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
-  }
-  if (from.photo().size() > 0) {
-
-    photo_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.photo_);
   }
   if (from.buddhist_name().size() > 0) {
 
@@ -616,8 +556,6 @@ void Master::InternalSwap(Master* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   id_.Swap(&other->id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  photo_.Swap(&other->photo_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   buddhist_name_.Swap(&other->buddhist_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());

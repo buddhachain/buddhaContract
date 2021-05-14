@@ -162,37 +162,9 @@ class Temple :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // string photo = 2;
-  void clear_photo();
-  static const int kPhotoFieldNumber = 2;
-  const ::std::string& photo() const;
-  void set_photo(const ::std::string& value);
-  #if LANG_CXX11
-  void set_photo(::std::string&& value);
-  #endif
-  void set_photo(const char* value);
-  void set_photo(const char* value, size_t size);
-  ::std::string* mutable_photo();
-  ::std::string* release_photo();
-  void set_allocated_photo(::std::string* photo);
-
-  // string buddhist_name = 3;
-  void clear_buddhist_name();
-  static const int kBuddhistNameFieldNumber = 3;
-  const ::std::string& buddhist_name() const;
-  void set_buddhist_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_buddhist_name(::std::string&& value);
-  #endif
-  void set_buddhist_name(const char* value);
-  void set_buddhist_name(const char* value, size_t size);
-  ::std::string* mutable_buddhist_name();
-  ::std::string* release_buddhist_name();
-  void set_allocated_buddhist_name(::std::string* buddhist_name);
-
-  // string unit = 4;
+  // string unit = 2;
   void clear_unit();
-  static const int kUnitFieldNumber = 4;
+  static const int kUnitFieldNumber = 2;
   const ::std::string& unit() const;
   void set_unit(const ::std::string& value);
   #if LANG_CXX11
@@ -204,9 +176,9 @@ class Temple :
   ::std::string* release_unit();
   void set_allocated_unit(::std::string* unit);
 
-  // string creditcode = 5;
+  // string creditcode = 3;
   void clear_creditcode();
-  static const int kCreditcodeFieldNumber = 5;
+  static const int kCreditcodeFieldNumber = 3;
   const ::std::string& creditcode() const;
   void set_creditcode(const ::std::string& value);
   #if LANG_CXX11
@@ -218,9 +190,9 @@ class Temple :
   ::std::string* release_creditcode();
   void set_allocated_creditcode(::std::string* creditcode);
 
-  // string address = 6;
+  // string address = 4;
   void clear_address();
-  static const int kAddressFieldNumber = 6;
+  static const int kAddressFieldNumber = 4;
   const ::std::string& address() const;
   void set_address(const ::std::string& value);
   #if LANG_CXX11
@@ -232,9 +204,9 @@ class Temple :
   ::std::string* release_address();
   void set_allocated_address(::std::string* address);
 
-  // string sect = 7;
+  // string sect = 5;
   void clear_sect();
-  static const int kSectFieldNumber = 7;
+  static const int kSectFieldNumber = 5;
   const ::std::string& sect() const;
   void set_sect(const ::std::string& value);
   #if LANG_CXX11
@@ -246,9 +218,9 @@ class Temple :
   ::std::string* release_sect();
   void set_allocated_sect(::std::string* sect);
 
-  // string proof = 8;
+  // string proof = 6;
   void clear_proof();
-  static const int kProofFieldNumber = 8;
+  static const int kProofFieldNumber = 6;
   const ::std::string& proof() const;
   void set_proof(const ::std::string& value);
   #if LANG_CXX11
@@ -260,9 +232,9 @@ class Temple :
   ::std::string* release_proof();
   void set_allocated_proof(::std::string* proof);
 
-  // bool approved = 9;
+  // bool approved = 7;
   void clear_approved();
-  static const int kApprovedFieldNumber = 9;
+  static const int kApprovedFieldNumber = 7;
   bool approved() const;
   void set_approved(bool value);
 
@@ -272,8 +244,6 @@ class Temple :
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
-  ::google::protobuf::internal::ArenaStringPtr photo_;
-  ::google::protobuf::internal::ArenaStringPtr buddhist_name_;
   ::google::protobuf::internal::ArenaStringPtr unit_;
   ::google::protobuf::internal::ArenaStringPtr creditcode_;
   ::google::protobuf::internal::ArenaStringPtr address_;
@@ -347,113 +317,7 @@ inline void Temple::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:Temple.id)
 }
 
-// string photo = 2;
-inline void Temple::clear_photo() {
-  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Temple::photo() const {
-  // @@protoc_insertion_point(field_get:Temple.photo)
-  return photo_.GetNoArena();
-}
-inline void Temple::set_photo(const ::std::string& value) {
-  
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Temple.photo)
-}
-#if LANG_CXX11
-inline void Temple::set_photo(::std::string&& value) {
-  
-  photo_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Temple.photo)
-}
-#endif
-inline void Temple::set_photo(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Temple.photo)
-}
-inline void Temple::set_photo(const char* value, size_t size) {
-  
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Temple.photo)
-}
-inline ::std::string* Temple::mutable_photo() {
-  
-  // @@protoc_insertion_point(field_mutable:Temple.photo)
-  return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Temple::release_photo() {
-  // @@protoc_insertion_point(field_release:Temple.photo)
-  
-  return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Temple::set_allocated_photo(::std::string* photo) {
-  if (photo != nullptr) {
-    
-  } else {
-    
-  }
-  photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
-  // @@protoc_insertion_point(field_set_allocated:Temple.photo)
-}
-
-// string buddhist_name = 3;
-inline void Temple::clear_buddhist_name() {
-  buddhist_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Temple::buddhist_name() const {
-  // @@protoc_insertion_point(field_get:Temple.buddhist_name)
-  return buddhist_name_.GetNoArena();
-}
-inline void Temple::set_buddhist_name(const ::std::string& value) {
-  
-  buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Temple.buddhist_name)
-}
-#if LANG_CXX11
-inline void Temple::set_buddhist_name(::std::string&& value) {
-  
-  buddhist_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Temple.buddhist_name)
-}
-#endif
-inline void Temple::set_buddhist_name(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Temple.buddhist_name)
-}
-inline void Temple::set_buddhist_name(const char* value, size_t size) {
-  
-  buddhist_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Temple.buddhist_name)
-}
-inline ::std::string* Temple::mutable_buddhist_name() {
-  
-  // @@protoc_insertion_point(field_mutable:Temple.buddhist_name)
-  return buddhist_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Temple::release_buddhist_name() {
-  // @@protoc_insertion_point(field_release:Temple.buddhist_name)
-  
-  return buddhist_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Temple::set_allocated_buddhist_name(::std::string* buddhist_name) {
-  if (buddhist_name != nullptr) {
-    
-  } else {
-    
-  }
-  buddhist_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), buddhist_name);
-  // @@protoc_insertion_point(field_set_allocated:Temple.buddhist_name)
-}
-
-// string unit = 4;
+// string unit = 2;
 inline void Temple::clear_unit() {
   unit_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -506,7 +370,7 @@ inline void Temple::set_allocated_unit(::std::string* unit) {
   // @@protoc_insertion_point(field_set_allocated:Temple.unit)
 }
 
-// string creditcode = 5;
+// string creditcode = 3;
 inline void Temple::clear_creditcode() {
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -559,7 +423,7 @@ inline void Temple::set_allocated_creditcode(::std::string* creditcode) {
   // @@protoc_insertion_point(field_set_allocated:Temple.creditcode)
 }
 
-// string address = 6;
+// string address = 4;
 inline void Temple::clear_address() {
   address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -612,7 +476,7 @@ inline void Temple::set_allocated_address(::std::string* address) {
   // @@protoc_insertion_point(field_set_allocated:Temple.address)
 }
 
-// string sect = 7;
+// string sect = 5;
 inline void Temple::clear_sect() {
   sect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -665,7 +529,7 @@ inline void Temple::set_allocated_sect(::std::string* sect) {
   // @@protoc_insertion_point(field_set_allocated:Temple.sect)
 }
 
-// string proof = 8;
+// string proof = 6;
 inline void Temple::clear_proof() {
   proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -718,7 +582,7 @@ inline void Temple::set_allocated_proof(::std::string* proof) {
   // @@protoc_insertion_point(field_set_allocated:Temple.proof)
 }
 
-// bool approved = 9;
+// bool approved = 7;
 inline void Temple::clear_approved() {
   approved_ = false;
 }

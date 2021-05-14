@@ -12,8 +12,6 @@ using namespace std;
 xchain::json BTemple::to_json() const {
     xchain::json j = {
         {"id", id()},
-        {"photo", photo()},
-        {"buddhist_name", buddhist_name()},
         {"unit", unit()},
         {"creditcode", creditcode()},
         {"address", address()},

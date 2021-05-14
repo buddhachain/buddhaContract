@@ -162,23 +162,9 @@ class Master :
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // string photo = 2;
-  void clear_photo();
-  static const int kPhotoFieldNumber = 2;
-  const ::std::string& photo() const;
-  void set_photo(const ::std::string& value);
-  #if LANG_CXX11
-  void set_photo(::std::string&& value);
-  #endif
-  void set_photo(const char* value);
-  void set_photo(const char* value, size_t size);
-  ::std::string* mutable_photo();
-  ::std::string* release_photo();
-  void set_allocated_photo(::std::string* photo);
-
-  // string buddhist_name = 3;
+  // string buddhist_name = 2;
   void clear_buddhist_name();
-  static const int kBuddhistNameFieldNumber = 3;
+  static const int kBuddhistNameFieldNumber = 2;
   const ::std::string& buddhist_name() const;
   void set_buddhist_name(const ::std::string& value);
   #if LANG_CXX11
@@ -190,9 +176,9 @@ class Master :
   ::std::string* release_buddhist_name();
   void set_allocated_buddhist_name(::std::string* buddhist_name);
 
-  // string sect = 4;
+  // string sect = 3;
   void clear_sect();
-  static const int kSectFieldNumber = 4;
+  static const int kSectFieldNumber = 3;
   const ::std::string& sect() const;
   void set_sect(const ::std::string& value);
   #if LANG_CXX11
@@ -204,9 +190,9 @@ class Master :
   ::std::string* release_sect();
   void set_allocated_sect(::std::string* sect);
 
-  // string creditcode = 5;
+  // string creditcode = 4;
   void clear_creditcode();
-  static const int kCreditcodeFieldNumber = 5;
+  static const int kCreditcodeFieldNumber = 4;
   const ::std::string& creditcode() const;
   void set_creditcode(const ::std::string& value);
   #if LANG_CXX11
@@ -218,9 +204,9 @@ class Master :
   ::std::string* release_creditcode();
   void set_allocated_creditcode(::std::string* creditcode);
 
-  // string proof = 6;
+  // string proof = 5;
   void clear_proof();
-  static const int kProofFieldNumber = 6;
+  static const int kProofFieldNumber = 5;
   const ::std::string& proof() const;
   void set_proof(const ::std::string& value);
   #if LANG_CXX11
@@ -232,9 +218,9 @@ class Master :
   ::std::string* release_proof();
   void set_allocated_proof(::std::string* proof);
 
-  // bool approved = 7;
+  // bool approved = 6;
   void clear_approved();
-  static const int kApprovedFieldNumber = 7;
+  static const int kApprovedFieldNumber = 6;
   bool approved() const;
   void set_approved(bool value);
 
@@ -244,7 +230,6 @@ class Master :
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
-  ::google::protobuf::internal::ArenaStringPtr photo_;
   ::google::protobuf::internal::ArenaStringPtr buddhist_name_;
   ::google::protobuf::internal::ArenaStringPtr sect_;
   ::google::protobuf::internal::ArenaStringPtr creditcode_;
@@ -317,60 +302,7 @@ inline void Master::set_allocated_id(::std::string* id) {
   // @@protoc_insertion_point(field_set_allocated:Master.id)
 }
 
-// string photo = 2;
-inline void Master::clear_photo() {
-  photo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Master::photo() const {
-  // @@protoc_insertion_point(field_get:Master.photo)
-  return photo_.GetNoArena();
-}
-inline void Master::set_photo(const ::std::string& value) {
-  
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Master.photo)
-}
-#if LANG_CXX11
-inline void Master::set_photo(::std::string&& value) {
-  
-  photo_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Master.photo)
-}
-#endif
-inline void Master::set_photo(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Master.photo)
-}
-inline void Master::set_photo(const char* value, size_t size) {
-  
-  photo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Master.photo)
-}
-inline ::std::string* Master::mutable_photo() {
-  
-  // @@protoc_insertion_point(field_mutable:Master.photo)
-  return photo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Master::release_photo() {
-  // @@protoc_insertion_point(field_release:Master.photo)
-  
-  return photo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Master::set_allocated_photo(::std::string* photo) {
-  if (photo != nullptr) {
-    
-  } else {
-    
-  }
-  photo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), photo);
-  // @@protoc_insertion_point(field_set_allocated:Master.photo)
-}
-
-// string buddhist_name = 3;
+// string buddhist_name = 2;
 inline void Master::clear_buddhist_name() {
   buddhist_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -423,7 +355,7 @@ inline void Master::set_allocated_buddhist_name(::std::string* buddhist_name) {
   // @@protoc_insertion_point(field_set_allocated:Master.buddhist_name)
 }
 
-// string sect = 4;
+// string sect = 3;
 inline void Master::clear_sect() {
   sect_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -476,7 +408,7 @@ inline void Master::set_allocated_sect(::std::string* sect) {
   // @@protoc_insertion_point(field_set_allocated:Master.sect)
 }
 
-// string creditcode = 5;
+// string creditcode = 4;
 inline void Master::clear_creditcode() {
   creditcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -529,7 +461,7 @@ inline void Master::set_allocated_creditcode(::std::string* creditcode) {
   // @@protoc_insertion_point(field_set_allocated:Master.creditcode)
 }
 
-// string proof = 6;
+// string proof = 5;
 inline void Master::clear_proof() {
   proof_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -582,7 +514,7 @@ inline void Master::set_allocated_proof(::std::string* proof) {
   // @@protoc_insertion_point(field_set_allocated:Master.proof)
 }
 
-// bool approved = 7;
+// bool approved = 6;
 inline void Master::clear_approved() {
   approved_ = false;
 }
