@@ -12,6 +12,9 @@ using namespace std;
 xchain::json BMaster::to_json() const {
     xchain::json j = {
         {"id", id()},
+        {"photo", photo()},
+        {"buddhist_name", buddhist_name()},
+        {"sect", sect()},
         {"creditcode", creditcode()},
         {"proof", proof()},
         {"approved", approved()},
