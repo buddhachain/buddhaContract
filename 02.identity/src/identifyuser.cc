@@ -34,16 +34,17 @@ bool Main::_is_identifyuser(const string& id) {
     BUser userEntry;
     BIdentifyUser ent;
 
-    if (!_is_user_exist(userEntry, id)
-         && !_is_identifyuser_exist(ent, id)) 
+    if ( !_is_user_exist(userEntry, id) &&
+         !_is_identifyuser_exist(ent, id)) 
         return false ;
     
-    if (_is_user_exist(userEntry, id) && !_is_identifyuser_exist(ent, id)) {
-        _delete_user(id);
+    if ( _is_user_exist(userEntry, id) &&
+         !_is_identifyuser_exist(ent, id)) {
         return false;
     }
 
-    if (!_is_user_exist(userEntry, id) && _is_identifyuser_exist(ent, id) ) {
+    if ( !_is_user_exist(userEntry, id) &&
+         _is_identifyuser_exist(ent, id) ) {
         _delete_identifyuser_record(ent);
         return false;
     }
