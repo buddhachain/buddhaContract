@@ -24,29 +24,43 @@ xchain::json BMaster::to_json() const {
 }
 
 bool Main::_is_master_exist(BMaster& ent, const string& id){
+    BIdentity id_ent;
+    if (!_is_identity_exist(id_ent, id))
+        return false;
+
     if (!get_master_table().find({{"id", id}}, &ent))
+        if( !get_identity_table().del(id_ent) )
+            mycout << "delete master " << id_ent.to_json().dump() << " failure ." << endl ;
         return false;
 
     return true;
 }
 
 bool Main::_is_master(const string& id) {
+    BIdentity id_ent;
     BMaster ent;
-    if (!_is_master_exist(ent, id))
-        return false;
 
+    if ( !_is_identity_exist(id_ent, id) &&
+         !_is_master_exist(ent, id)) 
+        return false ;
+    
+    if ( _is_identity_exist(id_ent, id) &&
+         !_is_master_exist(ent, id)) {
+        _delete_identity_record(id_ent);
+        return false;
+    }
+
+    if ( !_is_identity_exist(id_ent, id) &&
+         _is_master_exist(ent, id) ) {
+        _delete_master_record(ent);
+        return false;
+    }
+	
     return ent.approved();
 }
 
-bool Main::_scan_master(xchain::json& ja,
-                        const string& id,
-                        const string& buddhist_name,
-                        const string& creditcode,
-                        const string& proof) {
-    auto it = get_master_table().scan({{"id",id},
-                                       {"buddhist_name",buddhist_name},
-                                       {"creditcode",creditcode},
-                                       {"proof",proof}});
+bool Main::_scan_master(xchain::json& ja, const string& id) {
+    auto it = get_master_table().scan({{"id",id});
     while(it->next() ) {
         BMaster ent;
         if (!it->get(&ent) ) {
@@ -68,6 +82,25 @@ bool Main::_delete_master_record(const BMaster& ent) {
 
     mycout << "delete master " << ent.to_json().dump() << " success ." << endl ;
     return true;
+}
+
+bool Main::_delete_master(const string& id) {
+    BIdentity id_ent;
+    BMaster ent;
+
+    if ( !_is_identity_exist(id_ent, id) &&
+	     !_is_master_exist(ent, id)) 
+        return true ;
+    
+    if ( _is_identity_exist(id_ent, id) &&
+	     !_is_master_exist(ent, id))
+        return _delete_identity_record(id_ent);
+
+    if ( !_is_identity_exist(id_ent, id) &&
+	     _is_master_exist(ent, id) )
+        return _delete_master_record(ent);
+
+    return _delete_master_record(ent) & _delete_identity_record(id_ent);
 }
 
 namespace 分界线{}
@@ -112,6 +145,13 @@ void Main::apply_master(){
         _log_error(__FILE__, __FUNCTION__, __LINE__, "master table put failure .", ent.to_json());
         return;
     }
+
+    if(!_add_identity(ctx->initiator(), MASTER)) {
+        _delete_master_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identity table put failure .", ent.to_json());
+        return ;
+    }
+
 
     _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply master over, please wait for approve .");
 }
@@ -207,11 +247,9 @@ void Main::list_master() {
 
     xchain::json ja ;
     if(!_scan_master(ja, 
-                     ctx->arg("id"),
-                     ctx->arg("buddhist_name"),
-                     ctx->arg("creditcode"),
-                     ctx->arg("proof")) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
+                     ctx->arg("id")
+                     ) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan master table failure .");
         return;
     }
 

@@ -74,8 +74,8 @@ bool Main::_is_user(const string& id) {
     return true;
 }
 
-bool Main::_scan_user(xchain::json& ja, const string& cond) {
-    auto it = get_user_table().scan({{"id",cond}});
+bool Main::_scan_user(xchain::json& ja, const string& id) {
+    auto it = get_user_table().scan({{"id",id}});
     while(it->next() ) {
         BUser ent;
         if (!it->get(&ent) ) {
