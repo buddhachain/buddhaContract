@@ -37,8 +37,8 @@ bool Main::_is_in_temple(BTempleMaster& ent,
     return ent.approved();
 }
 
-bool Main::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) {
-    auto it = get_templemaster_table().scan({{"templeid",cond}});
+bool Main::_scan_templemaster_by_templeid(xchain::json& ja, const string& templeid) {
+    auto it = get_templemaster_table().scan({{"templeid", templeid}});
     while(it->next() ) {
         BTempleMaster ent;
         if (!it->get(&ent) ) {
@@ -52,8 +52,8 @@ bool Main::_scan_templemaster_by_templeid(xchain::json& ja, const string& cond) 
     return true;
 }
 
-bool Main::_scan_templemaster_by_masterid(xchain::json& ja, const string& cond) {
-    auto it = get_templemaster_table().scan({{"masterid",cond}});
+bool Main::_scan_templemaster_by_masterid(xchain::json& ja, const string& masterid) {
+    auto it = get_templemaster_table().scan({{"masterid", masterid}});
     while(it->next() ) {
         BTempleMaster ent;
         if (!it->get(&ent) ) {
