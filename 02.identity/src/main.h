@@ -106,11 +106,7 @@ private:
 
     bool _scan_user(xchain::json&, const string& ="");
     bool _scan_identifyuser(xchain::json&, const string& ="");
-    bool _scan_master(xchain::json&,
-                      const string& ="",
-                      const string& ="",
-                      const string& ="",
-                      const string& ="");
+    bool _scan_master(xchain::json&, const string& ="");
     bool _scan_temple(xchain::json&, const string& ="");
     bool _scan_templemaster_by_templeid(xchain::json&, const string& ="");
     bool _scan_templemaster_by_masterid(xchain::json&, const string& ="");

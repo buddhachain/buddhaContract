@@ -45,10 +45,8 @@ bool Main::_is_master(const string& id) {
         return false ;
     
     if ( _is_identity_exist(id_ent, id) &&
-         !_is_master_exist(ent, id)) {
-        _delete_identity_record(id_ent);
+         !_is_master_exist(ent, id))
         return false;
-    }
 
     if ( !_is_identity_exist(id_ent, id) &&
          _is_master_exist(ent, id) ) {
@@ -60,7 +58,7 @@ bool Main::_is_master(const string& id) {
 }
 
 bool Main::_scan_master(xchain::json& ja, const string& id) {
-    auto it = get_master_table().scan({{"id",id});
+    auto it = get_master_table().scan({{"id",id}});
     while(it->next() ) {
         BMaster ent;
         if (!it->get(&ent) ) {

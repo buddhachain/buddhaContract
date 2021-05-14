@@ -3,12 +3,10 @@ option optimize_for = LITE_RUNTIME;
 
 message Temple {
     string id           = 1; //寺院id，唯一
-    string photo        = 2; //图片哈希
-    string buddhist_name= 3; //法号
-    string unit         = 4; //寺院单位名称，唯一
-    string creditcode   = 5; //社会信用代码，登记编号，唯一
-    string address      = 6; //寺院地址，唯一
-    string sect         = 7; //宗派
-    string proof        = 8; //登记证hash，唯一
-    bool   approved     = 9; //是否已经批准法师，0尚未批准，1已经批准
+    string unit         = 2; //寺院单位名称，唯一
+    string creditcode   = 3; //社会信用代码，登记编号，唯一
+    string address      = 4; //寺院地址，唯一
+    string sect         = 5; //宗派
+    string proof        = 6; //登记证hash，唯一
+    bool   approved     = 7; //是否已经批准法师，0尚未批准，1已经批准
 }

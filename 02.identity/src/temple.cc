@@ -46,10 +46,8 @@ bool Main::_is_temple(const string& id) {
         return false;
     
     if ( _is_identity_exist(id_ent, id) &&
-         !_is_temple_exist(ent, id)) {
-        _delete_identity_record(id_ent);
+         !_is_temple_exist(ent, id))
         return false;
-    }
 
     if ( !_is_identity_exist(id_ent, id) &&
          _is_temple_exist(ent, id) ) {
@@ -262,7 +260,7 @@ void Main::list_temple() {
 
     //获取所有的寺院
     xchain::json ja;
-    if(!_scan_temple(ja
+    if(!_scan_temple(ja,
                      ctx->arg("id")
                      ) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan temple table failure .");
