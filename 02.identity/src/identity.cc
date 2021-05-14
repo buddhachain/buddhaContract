@@ -97,7 +97,7 @@ bool Main::find_identity() {
             _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is user .") ;
             break;
         }
-        case IDENTITY_USER : {
+        case IDENTIFYUSER : {
             _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is identity user .") ;
             break;
         }

@@ -57,16 +57,16 @@ bool Main::_is_identifyuser(const string& id) {
     BIdentity id_ent;
     BIdentifyUser ent;
 
-    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+    if (!_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id)) 
         return false ;
     
-    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) {
+    if (_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id)) {
         _delete_identity_record(id_ent);
         return false;
     }
 
-    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) ) {
-        _delete_user_record(ent);
+    if (!_is_identity_exist(id_ent, id) && _is_identifyuser_exist(ent, id) ) {
+        _delete_identifyuser_record(ent);
         return false;
     }
     return true;
@@ -97,20 +97,20 @@ bool Main::_delete_identifyuser_record(const BIdentifyUser& ent) {
     return true;
 }
 
-bool Main::_delete_user(const string& id) {
+bool Main::_delete_identifyuser(const string& id) {
     BIdentity id_ent;
-    BUser ent;
+    BIdentifyUser ent;
 
-    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+    if (!_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id)) 
         return true ;
     
-    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id))
+    if (_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id))
         return _delete_identity_record(id_ent);
 
-    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) )
-        return _delete_user_record(ent);
+    if (!_is_identity_exist(id_ent, id) && _is_identifyuser_exist(ent, id) )
+        return _delete_identifyuser_record(ent);
 
-    return _delete_user_record(ent) & _delete_identity_record(id_ent);
+    return _delete_identifyuser_record(ent) & _delete_identity_record(id_ent);
 }
 
 namespace 分界线{}
@@ -129,7 +129,7 @@ void Main::apply_identifyuser(){
     }
 
     //身份检查，只有用户才能申请成为认证用户
-    if( !is_user() ) {
+    if( !is_identifyuser() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  identifyuser .");
         return ;
     }

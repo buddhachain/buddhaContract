@@ -11,7 +11,7 @@ using namespace std;
 
 const int64_t VISITOR         = 1;
 const int64_t USER            = 2;
-const int64_t IDENTITY_USER   = 3;
+const int64_t IDENTIFYUSER    = 3;
 const int64_t MASTER          = 4;
 const int64_t TEMPLE          = 5;
 const int64_t THEDEAD         = 6;
