@@ -26,22 +26,42 @@ xchain::json BTemple::to_json() const {
 }
 
 bool Main::_is_temple_exist(BTemple& ent, const string& id){
+    BIdentity id_ent;
+    if (!_is_identity_exist(id_ent, id))
+        return false;
+
     if (!get_temple_table().find({{"id", id}}, &ent))
+        if( !get_identity_table().del(id_ent) )
+            mycout << "delete temple " << id_ent.to_json().dump() << " failure ." << endl ;
         return false;
 
     return true;
 }
 
 bool Main::_is_temple(const string& id) {
+    BIdentity id_ent;
     BTemple ent;
-    if (!_is_temple_exist(ent, id))
+    if ( !_is_identity_exist(id_ent, id) &&
+	     !_is_temple_exist(ent, id))
         return false;
     
+    if ( _is_identity_exist(id_ent, id) &&
+         !_is_temple_exist(ent, id)) {
+        _delete_identity_record(id_ent);
+        return false;
+    }
+
+    if ( !_is_identity_exist(id_ent, id) &&
+         _is_temple_exist(ent, id) ) {
+        _delete_temple_record(ent);
+        return false;
+    }
+	
     return ent.approved();
 }
 
-bool Main::_scan_temple(xchain::json& ja, const string& cond) {
-    auto it = get_temple_table().scan({{"id",cond}});
+bool Main::_scan_temple(xchain::json& ja, const string& id) {
+    auto it = get_temple_table().scan({{"id", id}});
     while(it->next() ) {
         BTemple ent;
         if (!it->get(&ent) ) {
@@ -63,6 +83,25 @@ bool Main::_delete_temple_record(const BTemple& ent) {
 
     mycout << "delete temple " << ent.to_json().dump() << " success ." << endl ;
     return true;
+}
+
+bool Main::_delete_temple(const string& id) {
+    BIdentity id_ent;
+    BTemple ent;
+
+    if ( !_is_identity_exist(id_ent, id) &&
+	     !_is_temple_exist(ent, id)) 
+        return true ;
+    
+    if ( _is_identity_exist(id_ent, id) &&
+	     !_is_temple_exist(ent, id))
+        return _delete_identity_record(id_ent);
+
+    if ( !_is_identity_exist(id_ent, id) &&
+	     _is_temple_exist(ent, id) )
+        return _delete_temple_record(ent);
+
+    return _delete_temple_record(ent) & _delete_identity_record(id_ent);
 }
 
 namespace 分界线{}
@@ -123,6 +162,12 @@ void Main::apply_temple(){
         return;
     }
 
+
+    if(!_add_identity(ctx->initiator(), TEMPLE)) {
+        _delete_temple_record(ent);
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "identity table put failure .", ent.to_json());
+        return ;
+    }
     _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply temple over, please wait for approve .", ent.to_json() );
 }
 
@@ -217,8 +262,10 @@ void Main::list_temple() {
 
     //获取所有的寺院
     xchain::json ja;
-    if(!_scan_temple(ja) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan temple failure .");
+    if(!_scan_temple(ja
+                     ctx->arg("id")
+                     ) ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan temple table failure .");
         return;
     }
 

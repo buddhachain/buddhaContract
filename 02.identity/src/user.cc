@@ -55,18 +55,18 @@ bool Main::_is_user(const string& id) {
     BIdentity id_ent;
     BUser ent;
 
-    if (!_is_identity_exist(id_ent, id) &&
-        !_is_user_exist(ent, id)) 
+    if ( !_is_identity_exist(id_ent, id) &&
+         !_is_user_exist(ent, id)) 
         return false ;
     
-    if (_is_identity_exist(id_ent, id) &&
-        !_is_user_exist(ent, id)) {
+    if ( _is_identity_exist(id_ent, id) &&
+         !_is_user_exist(ent, id)) {
         _delete_identity_record(id_ent);
         return false;
     }
 
-    if (!_is_identity_exist(id_ent, id) &&
-        _is_user_exist(ent, id) ) {
+    if ( !_is_identity_exist(id_ent, id) &&
+         _is_user_exist(ent, id) ) {
         _delete_user_record(ent);
         return false;
     }
@@ -103,13 +103,16 @@ bool Main::_delete_user(const string& id) {
     BIdentity id_ent;
     BUser ent;
 
-    if (!_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id)) 
+    if ( !_is_identity_exist(id_ent, id) &&
+	     !_is_user_exist(ent, id)) 
         return true ;
     
-    if (_is_identity_exist(id_ent, id) && !_is_user_exist(ent, id))
+    if ( _is_identity_exist(id_ent, id) &&
+	     !_is_user_exist(ent, id))
         return _delete_identity_record(id_ent);
 
-    if (!_is_identity_exist(id_ent, id) && _is_user_exist(ent, id) )
+    if ( !_is_identity_exist(id_ent, id) &&
+	     _is_user_exist(ent, id) )
         return _delete_user_record(ent);
 
     return _delete_user_record(ent) & _delete_identity_record(id_ent);

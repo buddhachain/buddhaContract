@@ -52,8 +52,8 @@ bool Main::_is_identifyuser(const string& id) {
     return ent.approved();
 }
 
-bool Main::_scan_identifyuser(xchain::json& ja, const string& cond) {
-    auto it = get_identifyuser_table().scan({{"id",cond}});
+bool Main::_scan_identifyuser(xchain::json& ja, const string& id) {
+    auto it = get_identifyuser_table().scan({{"id", id}});
     while(it->next() ) {
         BIdentifyUser ent;
         if (!it->get(&ent) ) {
@@ -111,7 +111,14 @@ void Main::apply_identifyuser(){
         return ;
     }
 
+
+    //判断此认证用户是否存在
     BIdentifyUser ent;
+    if( _is_identifyuser_exist(ent, ctx->initiator()) ) {
+        _log_ok(__FILE__, __FUNCTION__, __LINE__, "identifyuser " + ctx->initiator() + " is applying .", ent.to_json() );
+        return ;
+    }
+	
     ent.set_id(ctx->initiator());
     ent.set_approved(false);
     if (!get_identifyuser_table().put(ent) ) {
@@ -218,11 +225,12 @@ void Main::list_identifyuser() {
         return ;
     }
 
+    //获取所有的认证用户
     xchain::json ja ;
     if(!_scan_identifyuser(ja, 
                      ctx->arg("id")
                      ) ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "scan identifyuser table failure .");
         return;
     }
 
