@@ -5,34 +5,14 @@
 #include "xchain/syscall.h"
 #include "identifyuser.h"
 #include "main.h"
+#include "user.h"
 
 #include <iostream>
 using namespace std;
 
-xchain::json BIdentifyUser::to_json() const {
+xchain::json BIdentifyUser::to_json() const {    
     xchain::json j = {
         {"id", id()},
-        {"nickname", nickname()},
-        {"wechat", wechat()},
-        {"photo", photo()},
-        {"name", name()},
-        {"sex", sex()},
-        {"phone", phone()},
-        {"email", email()},
-        {"home_address", home_address()},
-        {"born_timestamp", born_timestamp()},
-        {"idcard", idcard()},
-        {"idname", idname()},
-        {"otherid", otherid()},
-        {"photos", photos()},
-        {"desc", desc()},
-        {"degree", degree()},
-        {"job", job()},
-        {"income", income()},
-        {"marry", marry()},
-        {"hobyy", hobyy()},
-        {"recommender", recommender()},
-        {"belief", belief()},
         {"approved", approved()},
     };
 
@@ -40,32 +20,30 @@ xchain::json BIdentifyUser::to_json() const {
 }
 
 bool Main::_is_identifyuser_exist(BIdentifyUser& ent, const string& id){
-    BIdentity id_ent;
-    if (!_is_identity_exist(id_ent, id))
+    BUser userEntry;
+    if (!_is_user_exist(userEntry, id) )
         return false;
 
-    if (!get_identifyuser_table().find({{"id", id}}, &ent)) {
-        if( !get_identity_table().del(id_ent) )
-            mycout << "delete identity user " << id_ent.to_json().dump() << " failure ." << endl ;
+    if (!get_identifyuser_table().find({{"id", id}}, &ent))
         return false;
-    }
 
     return true;
 }
 
 bool Main::_is_identifyuser(const string& id) {
-    BIdentity id_ent;
+    BUser userEntry;
     BIdentifyUser ent;
 
-    if (!_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id)) 
+    if (!_is_user_exist(userEntry, id)
+         && !_is_identifyuser_exist(ent, id)) 
         return false ;
     
-    if (_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id)) {
-        _delete_identity_record(id_ent);
+    if (_is_user_exist(userEntry, id) && !_is_identifyuser_exist(ent, id)) {
+        _delete_user(id);
         return false;
     }
 
-    if (!_is_identity_exist(id_ent, id) && _is_identifyuser_exist(ent, id) ) {
+    if (!_is_user_exist(userEntry, id) && _is_identifyuser_exist(ent, id) ) {
         _delete_identifyuser_record(ent);
         return false;
     }
@@ -98,39 +76,30 @@ bool Main::_delete_identifyuser_record(const BIdentifyUser& ent) {
 }
 
 bool Main::_delete_identifyuser(const string& id) {
-    BIdentity id_ent;
+    BUser userEntry;
     BIdentifyUser ent;
 
-    if (!_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id)) 
+    if (!_is_user_exist(userEntry, id) &&
+        !_is_identifyuser_exist(ent, id)) 
         return true ;
     
-    if (_is_identity_exist(id_ent, id) && !_is_identifyuser_exist(ent, id))
-        return _delete_identity_record(id_ent);
+    if (_is_user_exist(userEntry, id) &&
+        !_is_identifyuser_exist(ent, id))
+        return _delete_user(id);
 
-    if (!_is_identity_exist(id_ent, id) && _is_identifyuser_exist(ent, id) )
+    if (!_is_user_exist(userEntry, id) &&
+        _is_identifyuser_exist(ent, id) )
         return _delete_identifyuser_record(ent);
 
-    return _delete_identifyuser_record(ent) & _delete_identity_record(id_ent);
+    return _delete_identifyuser_record(ent) & _delete_user(id);
 }
 
 namespace 分界线{}
 
 void Main::apply_identifyuser(){
-    const string& nickname = ctx->arg("nickname");
-    if( nickname.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "nickname is empty .");
-        return ;
-    }
-
-    const string& wechat = ctx->arg("wechat");
-    if( wechat.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "wechat is empty .");
-        return ;
-    }
-
     //身份检查，只有用户才能申请成为认证用户
-    if( !is_identifyuser() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply  identifyuser .");
+    if( !is_user() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is not user, have no authority to apply identifyuser .");
         return ;
     }
 
@@ -142,8 +111,6 @@ void Main::apply_identifyuser(){
 
     BIdentifyUser ent;
     ent.set_id(ctx->initiator());
-    ent.set_nickname(nickname);
-    ent.set_wechat(wechat);
     ent.set_approved(false);
     if (!get_identifyuser_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "identifyuser table put failure .", ent.to_json());

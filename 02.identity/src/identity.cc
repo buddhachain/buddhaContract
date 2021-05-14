@@ -41,7 +41,6 @@ bool Main::_add_identity(const string& id, const int64_t type) {
     return true ;
 }
 
-
 bool Main::_is_identity_exist(BIdentity& ent, const string& id){
     if (!get_identity_table().find({{"id", id}}, &ent))
         return false;
