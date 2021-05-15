@@ -13,7 +13,7 @@ class BBSell: public Sell {
     DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(2)
         DEFINE_INDEX_ADD(0, id)
-        DEFINE_INDEX_ADD(1, seller)  
+        DEFINE_INDEX_ADD(1, account)  
     DEFINE_INDEX_END();
 
     xchain::json to_json() const;

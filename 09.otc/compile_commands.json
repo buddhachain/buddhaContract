@@ -1,18 +1,68 @@
 [
   {
     "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/6a/6a99b3a37a9fdacb.o /root/buddhaContract/09.otc/src/buy.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/buy.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/9b/9b09c8929e9bc690.o /root/buddhaContract/09.otc/src/buy_order.cc",
+    "file": "/root/buddhaContract/09.otc/src/buy_order.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/04/04807de855edbc44.o /root/buddhaContract/09.otc/src/buy_order.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/buy_order.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
     "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/5c/5c30df26f833d52f.o /root/buddhaContract/09.otc/src/deployer.cc",
     "file": "/root/buddhaContract/09.otc/src/deployer.cc"
   },
   {
     "directory": "/root/buddhaContract/09.otc",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/d5/d59047d9d645fa7d.o /root/buddhaContract/09.otc/src/otc.cc",
-    "file": "/root/buddhaContract/09.otc/src/otc.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/6e/6eae76a1bfa213b4.o /root/buddhaContract/09.otc/src/main.cc",
+    "file": "/root/buddhaContract/09.otc/src/main.cc"
   },
   {
     "directory": "/root/buddhaContract/09.otc",
-    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/88/883b1c7557274a1f.o /root/buddhaContract/09.otc/src/otc.pb.cc",
-    "file": "/root/buddhaContract/09.otc/src/otc.pb.cc"
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/73/73159a997fabd2f3.o /root/buddhaContract/09.otc/src/recusal_buy.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/recusal_buy.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/5c/5cece0720012076c.o /root/buddhaContract/09.otc/src/recusal_buy_order.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/recusal_buy_order.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/d7/d7a30efa81be25c2.o /root/buddhaContract/09.otc/src/recusal_sell_order.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/recusal_sell_order.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/81/81b2f4aa6dfe6fad.o /root/buddhaContract/09.otc/src/redeem_sell.c",
+    "file": "/root/buddhaContract/09.otc/src/redeem_sell.c"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/42/42edafb1047f58a2.o /root/buddhaContract/09.otc/src/redeem_sell.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/redeem_sell.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/69/692dc80d5595651b.o /root/buddhaContract/09.otc/src/sell.cc",
+    "file": "/root/buddhaContract/09.otc/src/sell.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/bf/bfd03743f3c00189.o /root/buddhaContract/09.otc/src/sell.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/sell.pb.cc"
+  },
+  {
+    "directory": "/root/buddhaContract/09.otc",
+    "command": "g++ -std=c++11 -Os -I/usr/local/include -Isrc -Werror=vla -I/root/xuperchain/core/contractsdk/cpp/src -c -o/root/.xdev-cache/45/45ba1ed6676aafda.o /root/buddhaContract/09.otc/src/sell_order.pb.cc",
+    "file": "/root/buddhaContract/09.otc/src/sell_order.pb.cc"
   },
   {
     "directory": "/root/buddhaContract/09.otc",

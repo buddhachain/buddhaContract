@@ -22,21 +22,21 @@ xchain::json BSell::to_json() const {
     return j;
 }
 
-bool Otc::_is_sell_exist(sell& ent, const string& id){
+bool Main::_is_sell_exist(BBSell& ent, const string& id){
     if (!get_sell_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Otc::_is_sell_exist_by_amount(sell& ent, const string& amount){
+bool Main::_is_sell_exist_by_amount(BBSell& ent, const string& amount){
     if (!get_sell_table().find({{"amount", amount}}, &ent))
         return false;
 
     return true;
 }
 
-bool Otc::_is_sell(const string& id) {
+bool Main::_is_sell(const string& id) {
     sell ent;
     if (!_is_sell_exist(ent, id))
         return false;
@@ -44,7 +44,7 @@ bool Otc::_is_sell(const string& id) {
     return ent.left();
 }
 
-bool Otc::_scan_sell(xchain::json& ja, const string& cond) {
+bool Main::_scan_sell(xchain::json& ja, const string& cond) {
     auto it = get_sell_table().scan({{"id",cond}});
     while(it->next() ) {
         sell ent;
@@ -59,7 +59,7 @@ bool Otc::_scan_sell(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Otc::_delete_sell_record(const string& id) {
+bool Main::_delete_sell_record(const string& id) {
     sell ent;
     if (!_is_sell_exist(ent, id)){
         mycout << "sell " << id << " is not exist ." << endl ;
@@ -77,7 +77,7 @@ bool Otc::_delete_sell_record(const string& id) {
 
 namespace 分界线{}
 
-void Otc::apply_sell(){
+void Main::apply_sell(){
     const string& seller = ctx->arg("seller");
     if( seller.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "seller is empty .");
@@ -121,7 +121,7 @@ void Otc::apply_sell(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply sell over, please wait for approve .");
 }
 
-void Otc::approve_sell() {
+void Main::approve_sell() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "sell id is empty .");
@@ -163,7 +163,7 @@ void Otc::approve_sell() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve sell " + id + " success .", ent.to_json() );
 }
 
-void Otc::recusal_sell() {
+void Main::recusal_sell() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "sell id is empty .");
@@ -192,7 +192,7 @@ void Otc::recusal_sell() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Otc::is_sell() {
+bool Main::is_sell() {
     if (!_is_sell(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not sell .") ;
         return false;
@@ -202,7 +202,7 @@ bool Otc::is_sell() {
     return true;
 }
 
-void Otc::list_sell() {
+void Main::list_sell() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {
@@ -220,8 +220,8 @@ void Otc::list_sell() {
 }
 
 
-DEFINE_METHOD(Otc, apply_sell)             { self.apply_sell();              }
-DEFINE_METHOD(Otc, approve_sell)           { self.approve_sell();            }
-DEFINE_METHOD(Otc, recusal_sell)           { self.recusal_sell();            }
-DEFINE_METHOD(Otc, is_sell)                { self.is_sell();                 }
-DEFINE_METHOD(Otc, list_sell)              { self.list_sell();               }
+DEFINE_METHOD(Main, apply_sell)             { self.apply_sell();              }
+DEFINE_METHOD(Main, approve_sell)           { self.approve_sell();            }
+DEFINE_METHOD(Main, recusal_sell)           { self.recusal_sell();            }
+DEFINE_METHOD(Main, is_sell)                { self.is_sell();                 }
+DEFINE_METHOD(Main, list_sell)              { self.list_sell();               }

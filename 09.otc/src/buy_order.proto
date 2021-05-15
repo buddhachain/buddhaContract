@@ -3,11 +3,10 @@ option optimize_for = LITE_RUNTIME;
 
 message BuyOrder {
     string id           = 1; //订单id，唯一
-    string sell_id      = 2; //卖单id
+    string sellid       = 2; //卖单id
     string buyer        = 3; //买家id
     int64  amount       = 4; //数量
-    int64  price        = 5; //单价
-    int64  state        = 6; //当前状态:1发起,2确认
-    string start_timestamp    = 7; //发起时间
-    string confirm_timestamp  = 8; //确认时间
+    int64  state        = 5; //当前状态:1发起,2确认
+    string start_timestamp    = 6; //发起时间
+    string confirm_timestamp  = 7; //确认时间
 }

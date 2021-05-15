@@ -4,7 +4,7 @@ option optimize_for = LITE_RUNTIME;
 //商家赎回表
 message RedeemSell {
     string id           = 1; //赎回id，唯一
-    string sell_id      = 2; //出售id
+    string sellid      = 2; //出售id
     int64  amount       = 3; //数量
     string timestamp    = 4; //时间戳 
 }

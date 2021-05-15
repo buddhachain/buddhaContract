@@ -9,11 +9,14 @@
 #include <string>
 using namespace std;
 
+const int64_t START         = 1;
+const int64_t CONFIRM       = 2;
+
 class BCBuyOrder: public BuyOrder {
     DEFINE_ROWKEY(id);
     DEFINE_INDEX_BEGIN(3)
         DEFINE_INDEX_ADD(0, id)
-        DEFINE_INDEX_ADD(1, sell_id, buyer)
+        DEFINE_INDEX_ADD(1, sellid, buyer)
         DEFINE_INDEX_ADD(2, state)   
     DEFINE_INDEX_END();
 

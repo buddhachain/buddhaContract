@@ -12,8 +12,8 @@ using namespace std;
 xchain::json BMaster::to_json() const {
     xchain::json j = {
         {"id", id()},
-        {"creditcode", creditcode()},
-        {"proof", proof()},
+        {"id", id()},
+        {"sellid", sellid()},
         {"approved", approved()},
     };
 
@@ -27,14 +27,14 @@ bool Main::_is_redeemsell_exist(BMaster& ent, const string& id){
     return true;
 }
 
-bool Main::_is_redeemsell_exist_by_proof(BMaster& ent, const string& proof){
-    if (!get_redeemsell_table().find({{"proof", proof}}, &ent))
+bool Main::_is_redeemsell_exist_by_proof(BMaster& ent, const string& sellid){
+    if (!get_redeemsell_table().find({{"sellid", sellid}}, &ent))
         return false;
 
     return true;
 }
 
-bool Main::_is_redeem(const string& id) {
+bool Main::_is_redeemsell(const string& id) {
     BMaster ent;
     if (!_is_redeemsell_exist(ent, id))
         return false;
@@ -42,7 +42,7 @@ bool Main::_is_redeem(const string& id) {
     return ent.approved();
 }
 
-bool Main::_scan_redeem(xchain::json& ja, const string& cond) {
+bool Main::_scan_redeemsell(xchain::json& ja, const string& cond) {
     auto it = get_redeemsell_table().scan({{"id",cond}});
     while(it->next() ) {
         BMaster ent;
@@ -75,16 +75,16 @@ bool Main::_delete_redeemsell_record(const string& id) {
 
 namespace 分界线{}
 
-void Main::apply_redeem(){
-    const string& creditcode = ctx->arg("creditcode");
-    if( creditcode.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "creditcode is empty .");
+void Main::apply_redeemsell(){
+    const string& id = ctx->arg("id");
+    if( id.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "id is empty .");
         return ;
     }
 
-    const string& proof = ctx->arg("proof");
-    if( proof.empty() ) {
-        _log_error(__FILE__, __FUNCTION__, __LINE__, "proof is empty .");
+    const string& sellid = ctx->arg("sellid");
+    if( sellid.empty() ) {
+        _log_error(__FILE__, __FUNCTION__, __LINE__, "sellid is empty .");
         return ;
     }
 
@@ -95,7 +95,7 @@ void Main::apply_redeem(){
     }
 
     //判断是否已经是法师
-    if( is_redeem() ) {
+    if( is_redeemsell() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__,ctx->initiator() + " is already redeem .");
         return ;
     }
@@ -108,8 +108,8 @@ void Main::apply_redeem(){
     }
 
     ent.set_id(ctx->initiator());
-    ent.set_creditcode(creditcode);
-    ent.set_proof(proof);
+    ent.set_id(id);
+    ent.set_proof(sellid);
     ent.set_approved(false);
     if (!get_redeemsell_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem table put failure .", ent.to_json());
@@ -119,7 +119,7 @@ void Main::apply_redeem(){
     _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " apply redeem over, please wait for approve .");
 }
 
-void Main::approve_redeem() {
+void Main::approve_redeemsell() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem id is empty .");
@@ -140,7 +140,7 @@ void Main::approve_redeem() {
     }
 
     //判断是否是法师
-    if( _is_redeem(id) ) {
+    if( _is_redeemsell(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, id + " is already redeem .", ent.to_json() );
         return ;
     }
@@ -161,7 +161,7 @@ void Main::approve_redeem() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "approve redeem " + id + " success .", ent.to_json() );
 }
 
-void Main::recusal_redeem() {
+void Main::recusal_redeemsell() {
     const string& id = ctx->arg("id");
     if( id.empty() ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem id is empty .");
@@ -190,8 +190,8 @@ void Main::recusal_redeem() {
     _log_ok(__FILE__, __FUNCTION__, __LINE__, "delete", ent.to_json() );
 }
 
-bool Main::is_redeem() {
-    if (!_is_redeem(ctx->initiator()) ) {
+bool Main::is_redeemsell() {
+    if (!_is_redeemsell(ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, ctx->initiator() + " is not redeem .") ;
         return false;
     }
@@ -200,7 +200,7 @@ bool Main::is_redeem() {
     return true;
 }
 
-void Main::list_redeem() {
+void Main::list_redeemsell() {
     //身份检查，部署者和基金会成员具有权限
     if( !is_deployer() &&
         !is_founder() ) {
@@ -209,7 +209,7 @@ void Main::list_redeem() {
     }
 
     xchain::json ja ;
-    if(!_scan_redeem(ja, ctx->arg("id")) ) {
+    if(!_scan_redeemsell(ja, ctx->arg("id")) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "scan table failure .");
         return;
     }
@@ -218,8 +218,8 @@ void Main::list_redeem() {
 }
 
 
-DEFINE_METHOD(Main, apply_redeem)             { self.apply_redeem();              }
-DEFINE_METHOD(Main, approve_redeem)           { self.approve_redeem();            }
-DEFINE_METHOD(Main, recusal_redeem)           { self.recusal_redeem();            }
-DEFINE_METHOD(Main, is_redeem)                { self.is_redeem();                 }
-DEFINE_METHOD(Main, list_redeem)              { self.list_redeem();               }
+DEFINE_METHOD(Main, apply_redeem)             { self.apply_redeemsell();              }
+DEFINE_METHOD(Main, approve_redeem)           { self.approve_redeemsell();            }
+DEFINE_METHOD(Main, recusal_redeem)           { self.recusal_redeemsell();            }
+DEFINE_METHOD(Main, is_redeem)                { self.is_redeemsell();                 }
+DEFINE_METHOD(Main, list_redeem)              { self.list_redeemsell();               }
