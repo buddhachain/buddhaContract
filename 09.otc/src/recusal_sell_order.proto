@@ -1,0 +1,10 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+message RecusalSellOrder {
+    string id                   = 1; //撤销id，唯一
+    string order_id             = 2; //订单id
+    int64  state                = 3; //当前状态:1发起,2确认
+    string start_timestamp      = 4; //发起时间
+    string confirm_timestamp    = 5; //确认时间
+}

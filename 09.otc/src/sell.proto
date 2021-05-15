@@ -1,0 +1,12 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+//商家卖单表
+message Sell {
+    string id           = 1; //卖单id，唯一
+    string account      = 2; //卖家id
+    int64  amount       = 3; //数量
+    int64  left         = 4; //剩余数量
+    int64  price        = 5; //单价
+    string timestamp    = 6; //发布时间戳
+}

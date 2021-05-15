@@ -10,8 +10,8 @@
 using namespace std;
 
 Otc::Otc() :
-    _guaranty_table(   context(), "guaranty"    ),
-    _redeem_table(     context(), "redeem"      ),
+    _sell_table(   context(), "sell"    ),
+    _redeemsell_table(     context(), "redeem"      ),
     _order_table(      context(), "order"       ),
 
     ctx(context())

@@ -20,15 +20,15 @@ xchain::json BMaster::to_json() const {
     return j;
 }
 
-bool Main::_is_redeem_exist(BMaster& ent, const string& id){
-    if (!get_redeem_table().find({{"id", id}}, &ent))
+bool Main::_is_redeemsell_exist(BMaster& ent, const string& id){
+    if (!get_redeemsell_table().find({{"id", id}}, &ent))
         return false;
 
     return true;
 }
 
-bool Main::_is_redeem_exist_by_proof(BMaster& ent, const string& proof){
-    if (!get_redeem_table().find({{"proof", proof}}, &ent))
+bool Main::_is_redeemsell_exist_by_proof(BMaster& ent, const string& proof){
+    if (!get_redeemsell_table().find({{"proof", proof}}, &ent))
         return false;
 
     return true;
@@ -36,14 +36,14 @@ bool Main::_is_redeem_exist_by_proof(BMaster& ent, const string& proof){
 
 bool Main::_is_redeem(const string& id) {
     BMaster ent;
-    if (!_is_redeem_exist(ent, id))
+    if (!_is_redeemsell_exist(ent, id))
         return false;
 
     return ent.approved();
 }
 
 bool Main::_scan_redeem(xchain::json& ja, const string& cond) {
-    auto it = get_redeem_table().scan({{"id",cond}});
+    auto it = get_redeemsell_table().scan({{"id",cond}});
     while(it->next() ) {
         BMaster ent;
         if (!it->get(&ent) ) {
@@ -57,14 +57,14 @@ bool Main::_scan_redeem(xchain::json& ja, const string& cond) {
     return true;
 }
 
-bool Main::_delete_redeem_record(const string& id) {
+bool Main::_delete_redeemsell_record(const string& id) {
     BMaster ent;
-    if (!_is_redeem_exist(ent, id)){
+    if (!_is_redeemsell_exist(ent, id)){
         mycout << "redeem " << id << " is not exist ." << endl ;
         return false;
     }
 
-    if( !get_redeem_table().del(ent) ) {
+    if( !get_redeemsell_table().del(ent) ) {
         mycout << "delete redeem " << ent.to_json().dump() << " failure ." << endl ;
         return false;
     }
@@ -102,7 +102,7 @@ void Main::apply_redeem(){
 
     //判断此赎回是否存在
     BMaster ent;
-    if( _is_redeem_exist(ent, ctx->initiator()) ) {
+    if( _is_redeemsell_exist(ent, ctx->initiator()) ) {
         _log_ok(__FILE__, __FUNCTION__, __LINE__, "redeem " + ctx->initiator() + " is applying .", ent.to_json() );
         return ;
     }
@@ -111,7 +111,7 @@ void Main::apply_redeem(){
     ent.set_creditcode(creditcode);
     ent.set_proof(proof);
     ent.set_approved(false);
-    if (!get_redeem_table().put(ent) ) {
+    if (!get_redeemsell_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem table put failure .", ent.to_json());
         return;
     }
@@ -134,7 +134,7 @@ void Main::approve_redeem() {
 
     //判断此法师是否存在
     BMaster ent;
-    if( !_is_redeem_exist(ent, id) ) {
+    if( !_is_redeemsell_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem " + id + " is not exist .");
         return ;
     }
@@ -146,14 +146,14 @@ void Main::approve_redeem() {
     }
 
     //删除此法师
-    if( !_delete_redeem_record(id) ) {
+    if( !_delete_redeemsell_record(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }
 
     //授权
     ent.set_approved(true);
-    if (!get_redeem_table().put(ent) ) {
+    if (!get_redeemsell_table().put(ent) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem table put failure .", ent.to_json());
         return;
     }
@@ -176,13 +176,13 @@ void Main::recusal_redeem() {
 
     //判断此法师是否存在
     BMaster ent;
-    if( !_is_redeem_exist(ent, id) ) {
+    if( !_is_redeemsell_exist(ent, id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "redeem " + id + " is not exist .");
         return ;
     }
 
     //删除此法师
-    if( !_delete_redeem_record(id) ) {
+    if( !_delete_redeemsell_record(id) ) {
         _log_error(__FILE__, __FUNCTION__, __LINE__, "delete failure .", ent.to_json());
         return;
     }

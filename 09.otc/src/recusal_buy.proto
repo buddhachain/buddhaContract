@@ -1,0 +1,10 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+//商家撤销买单表
+message RecusalBuy {
+    string id           = 1; //撤销id，唯一
+    string buy_id       = 2; //购买id
+    int64  amount       = 3; //数量
+    string timestamp    = 4; //时间戳 
+}

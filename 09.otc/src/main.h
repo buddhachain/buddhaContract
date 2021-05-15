@@ -1,9 +1,11 @@
-#ifndef _OTC_H_
-#define _OTC_H_
+#ifndef _MAIN_H_
+#define _MAIN_H_
 
 #include "xchain/xchain.h"
 #include "xchain/json/json.h"
 #include "xchain/contract.pb.h"
+
+#include "sell.h"
 
 #include <string>
 using namespace std;
@@ -15,20 +17,20 @@ public:
     Main();
 
 private:
-    xchain::cdt::Table<guaranty>     _guaranty_table;
-    xchain::cdt::Table<redeem>       _redeem_table;
+    xchain::cdt::Table<BBSell>          _sell_table;
+    xchain::cdt::Table<BBRedeemSell>    _redeemsell_table;
     xchain::cdt::Table<order>        _order_table;
 
     xchain::Context* ctx;
 
 public:
 
-    decltype(_guaranty_table)& get_guaranty_table() {
-        return _guaranty_table;
+    decltype(_sell_table)& get_sell_table() {
+        return _sell_table;
     }
 
-    decltype(_redeem_table)& get_redeem_table() {
-        return _redeem_table;
+    decltype(_redeemsell_table)& get_redeemsell_table() {
+        return _redeemsell_table;
     }
 
     decltype(_order_table)& get_order_table() {
@@ -52,23 +54,23 @@ private:
     bool _is_temple(const string&);
     bool _is_thedead(const string&);
 
-    bool _is_guaranty_exist(guaranty&, const string&);
-    bool _is_redeem_exist(order&, const string&);
+    bool _is_sell_exist(sell&, const string&);
+    bool _is_redeemsell_exist(order&, const string&);
     bool _is_order_exist(order&, const string&);
 
-    bool _scan_guaranty(xchain::json&, const string& ="");
+    bool _scan_sell(xchain::json&, const string& ="");
     bool _scan_redeem(xchain::json&, const string& ="");
     bool _scan_order(xchain::json&, const string& ="");
 
-    bool _add_guaranty(const string&,const string&,const string&);
+    bool _add_sell(const string&,const string&,const string&);
     bool _add_redeem(const string&,const string&,const string&,const string&);
     bool _add_order(const string&,const string&,const string&,const string&);
 
-    bool _delete_guaranty_record(const string&);
-    bool _delete_redeem_record(const string&);
+    bool _delete_sell_record(const string&);
+    bool _delete_redeemsell_record(const string&);
     bool _delete_order_record(const string&);
 
-    bool _clear_guaranty();
+    bool _clear_sell();
     bool _clear_redeem();
     bool _clear_order();
 
@@ -89,8 +91,8 @@ public:
     void buy();                     //买家账户，任意身份
     void comfirm();                 //卖家账户，任意身份
 
-    void find_guaranty();           //任意身份
-    void list_guaranty();           //任意身份，根据身份id查所有，id可为空，安全
+    void find_sell();           //任意身份
+    void list_sell();           //任意身份，根据身份id查所有，id可为空，安全
 
     bool find_redeem();             //任意身份
     void list_redeem();             //任意身份，根据身份id查所有，id可为空，安全
@@ -98,4 +100,4 @@ public:
     bool find_order();              //任意身份
     void list_order();              //任意身份，根据身份id查所有，id可为空，安全
 };
-#endif // _OTC_H_
+#endif // _MAIN_H_

@@ -1,11 +1,11 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-message Order {
+message SellOrder {
     string id           = 1; //订单id，唯一
-    string guaranty_id  = 2; //抵押id
-    string buyer        = 3; //买家id
-    int64  amount       = 4; //购买数量
+    string buy_id       = 2; //买单id
+    string seller       = 3; //卖家id
+    int64  amount       = 4; //数量
     int64  price        = 5; //单价
     int64  state        = 6; //当前状态:1发起,2确认
     string start_timestamp    = 7; //发起时间
